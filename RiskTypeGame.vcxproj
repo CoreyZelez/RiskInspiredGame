@@ -163,11 +163,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Army.cpp" />
+    <ClCompile Include="Barony.cpp" />
+    <ClCompile Include="Fief.cpp" />
+    <ClCompile Include="LandArmy.cpp" />
+    <ClCompile Include="LandTerritory.cpp" />
+    <ClCompile Include="NavalArmy.cpp" />
+    <ClCompile Include="NavalTerritory.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="RiskTypeGame.cpp" />
+    <ClCompile Include="Territory.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Army.h" />
+    <ClInclude Include="Barony.h" />
+    <ClInclude Include="Fief.h" />
+    <ClInclude Include="IDrawable.h" />
+    <ClInclude Include="LandArmy.h" />
+    <ClInclude Include="LandTerritory.h" />
+    <ClInclude Include="NavalArmy.h" />
+    <ClInclude Include="NavalTerritory.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Territory.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Title.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

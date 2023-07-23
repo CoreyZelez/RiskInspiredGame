@@ -16,7 +16,7 @@ bool TextureManager::loadTexture(const std::string& id, const std::string& filen
 	{
 		return false;
 	}
-	assert(textures.find(id) == textures.end());  // ID should not already exist.
+	assert(!textureExists(id));  // id should not already exist.
 	textures[id] = texture;
 	return true;
 }

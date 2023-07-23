@@ -13,18 +13,105 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Military">
+      <UniqueIdentifier>{d10f13d7-498f-4aea-b3d7-c602ba0a54a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Military">
+      <UniqueIdentifier>{12a233ce-15e8-4ac7-849d-3a02d7b5e3a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Territory">
+      <UniqueIdentifier>{389c53ad-9a93-40e1-a0fd-7ff4a3ee8b77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Titles and Fiefs">
+      <UniqueIdentifier>{8c90837f-30d2-4da4-b42d-f155e8d9aa78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Titles and Fiefs">
+      <UniqueIdentifier>{cfe3e379-6e62-441e-a859-344e8d03fde4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Territory">
+      <UniqueIdentifier>{74d7b4e6-482b-44f0-9669-7572825d6690}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{f3a1062f-0d69-4e53-aa79-b8d671cc8999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Managers">
+      <UniqueIdentifier>{e57cad2d-d1c8-4771-aebf-611eb2c335dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interfaces">
+      <UniqueIdentifier>{04f9fdb0-dcc0-46e4-93c7-246633334de1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RiskTypeGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
+    <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LandArmy.cpp">
+      <Filter>Source Files\Military</Filter>
+    </ClCompile>
+    <ClCompile Include="NavalArmy.cpp">
+      <Filter>Source Files\Military</Filter>
+    </ClCompile>
+    <ClCompile Include="Army.cpp">
+      <Filter>Source Files\Military</Filter>
+    </ClCompile>
+    <ClCompile Include="Fief.cpp">
+      <Filter>Source Files\Titles and Fiefs</Filter>
+    </ClCompile>
+    <ClCompile Include="Barony.cpp">
+      <Filter>Source Files\Titles and Fiefs</Filter>
+    </ClCompile>
+    <ClCompile Include="Territory.cpp">
+      <Filter>Source Files\Territory</Filter>
+    </ClCompile>
+    <ClCompile Include="LandTerritory.cpp">
+      <Filter>Source Files\Territory</Filter>
+    </ClCompile>
+    <ClCompile Include="NavalTerritory.cpp">
+      <Filter>Source Files\Territory</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TextureManager.h">
+    <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Army.h">
+      <Filter>Header Files\Military</Filter>
+    </ClInclude>
+    <ClInclude Include="LandArmy.h">
+      <Filter>Header Files\Military</Filter>
+    </ClInclude>
+    <ClInclude Include="NavalArmy.h">
+      <Filter>Header Files\Military</Filter>
+    </ClInclude>
+    <ClInclude Include="NavalTerritory.h">
+      <Filter>Header Files\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="LandTerritory.h">
+      <Filter>Header Files\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="Territory.h">
+      <Filter>Header Files\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>Header Files\Titles and Fiefs</Filter>
+    </ClInclude>
+    <ClInclude Include="Fief.h">
+      <Filter>Header Files\Titles and Fiefs</Filter>
+    </ClInclude>
+    <ClInclude Include="Barony.h">
+      <Filter>Header Files\Titles and Fiefs</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="IDrawable.h">
+      <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
