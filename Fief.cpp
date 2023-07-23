@@ -1,7 +1,7 @@
 #include "Fief.h"
 #include <assert.h>
 
-Fief::Fief(Title title, Player *ruler)
+Fief::Fief(Title title, const Player *ruler)
 	: title(title), ruler(ruler)
 {
 }
