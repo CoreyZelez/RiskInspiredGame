@@ -51,12 +51,6 @@
     <ClCompile Include="LandArmy.cpp">
       <Filter>Source Files\Military</Filter>
     </ClCompile>
-    <ClCompile Include="NavalArmy.cpp">
-      <Filter>Source Files\Military</Filter>
-    </ClCompile>
-    <ClCompile Include="Army.cpp">
-      <Filter>Source Files\Military</Filter>
-    </ClCompile>
     <ClCompile Include="Fief.cpp">
       <Filter>Source Files\Titles and Fiefs</Filter>
     </ClCompile>
@@ -75,18 +69,21 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="CoastalTerritory.cpp">
+      <Filter>Source Files\Territory</Filter>
+    </ClCompile>
+    <ClCompile Include="NavalFleet.cpp">
+      <Filter>Source Files\Military</Filter>
+    </ClCompile>
+    <ClCompile Include="MilitaryForce.cpp">
+      <Filter>Source Files\Military</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Army.h">
-      <Filter>Header Files\Military</Filter>
-    </ClInclude>
     <ClInclude Include="LandArmy.h">
-      <Filter>Header Files\Military</Filter>
-    </ClInclude>
-    <ClInclude Include="NavalArmy.h">
       <Filter>Header Files\Military</Filter>
     </ClInclude>
     <ClInclude Include="NavalTerritory.h">
@@ -112,6 +109,15 @@
     </ClInclude>
     <ClInclude Include="IDrawable.h">
       <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="CoastalTerritory.h">
+      <Filter>Header Files\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="NavalFleet.h">
+      <Filter>Header Files\Military</Filter>
+    </ClInclude>
+    <ClInclude Include="MilitaryForce.h">
+      <Filter>Header Files\Military</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

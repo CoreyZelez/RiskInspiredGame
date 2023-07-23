@@ -1,10 +1,10 @@
 #pragma once
 #include "MilitaryForce.h"
 
-class LandArmy : public MilitaryForce
+class NavalFleet : public MilitaryForce
 {
 public:
-	LandArmy(const Player &owner, Territory *location, unsigned int strength);
+	NavalFleet(const Player &owner, Territory *location, unsigned int strength);
 
 protected:
 	virtual bool createThenOccupy(Territory *location, unsigned int strength) override;
@@ -12,4 +12,3 @@ protected:
 private:
 
 };
-

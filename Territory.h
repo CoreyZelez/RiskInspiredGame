@@ -1,13 +1,15 @@
 #pragma once
 
 class LandArmy;
-class NavalArmy;
+class NavalFleet;
 
 class Territory
 {
 public:
-	virtual bool transferArmy(LandArmy &army) = 0;
-	virtual bool transferArmy(NavalArmy &army) = 0;
+	// Army attempts to occupy this territory. Either peaceful or hostile.
+	virtual bool occupy(LandArmy &army);
+	// Army attempts to occupy this territory. Either peaceful or hostile.
+	virtual bool occupy(NavalFleet &fleet);
 
 private:
 
