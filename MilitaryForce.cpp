@@ -1,27 +1,10 @@
 #include "MilitaryForce.h"
 #include <assert.h>
 
-MilitaryForce::MilitaryForce(const Player &owner, Territory *location, unsigned int strength)
+MilitaryForce::MilitaryForce(const Player &owner, Territory *location, int strength)
 	: owner(owner), location(location), strength(strength)
 {
-}
-
-bool MilitaryForce::move(Territory* location, unsigned int strength)
-{
 	assert(strength > 0);
-	assert(strength <= getStrength());
-
-	// Create army and move to target location.
-	if(!createThenOccupy(location, strength))
-	{
-		return false;  // Return on transfer failure.
-	}
-
-	// Adjust strength of this military force.
-	const int16_t adjustment = -static_cast<int16_t>(strength);
-	assert(adjustment > 0);
-	adjustStrength(adjustment);
-	return true;
 }
 
 void MilitaryForce::adjustStrength(int amount)
@@ -37,7 +20,7 @@ void MilitaryForce::adjustStrength(int amount)
 	}
 }
 
-unsigned int MilitaryForce::getStrength() const
+int MilitaryForce::getStrength() const
 {
 	return strength;
 }
@@ -47,7 +30,17 @@ const Player& MilitaryForce::getOwner() const
 	return owner;
 }
 
+bool MilitaryForce::isDead() const
+{
+	return strength == 0;
+}
+
 Territory* MilitaryForce::getLocation() const
 {
 	return location;
+}
+
+void MilitaryForce::setLocation(Territory* location)
+{
+	this->location = location;
 }

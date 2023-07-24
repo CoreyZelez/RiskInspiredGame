@@ -78,6 +78,9 @@
     <ClCompile Include="MilitaryForce.cpp">
       <Filter>Source Files\Military</Filter>
     </ClCompile>
+    <ClCompile Include="MilitaryManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -118,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="MilitaryForce.h">
       <Filter>Header Files\Military</Filter>
+    </ClInclude>
+    <ClInclude Include="MilitaryManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

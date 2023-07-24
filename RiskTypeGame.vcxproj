@@ -169,6 +169,7 @@
     <ClCompile Include="Fief.cpp" />
     <ClCompile Include="LandArmy.cpp" />
     <ClCompile Include="LandTerritory.cpp" />
+    <ClCompile Include="MilitaryManager.cpp" />
     <ClCompile Include="NavalFleet.cpp" />
     <ClCompile Include="NavalTerritory.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="IDrawable.h" />
     <ClInclude Include="LandArmy.h" />
     <ClInclude Include="LandTerritory.h" />
+    <ClInclude Include="MilitaryManager.h" />
     <ClInclude Include="NavalFleet.h" />
     <ClInclude Include="NavalTerritory.h" />
     <ClInclude Include="Player.h" />

@@ -1,11 +1,16 @@
 #include "Territory.h"
 
-bool Territory::occupy(LandArmy &army)
+bool Territory::attemptOccupy(std::shared_ptr<LandArmy> &army)
 {
 	return false;
 }
 
-bool Territory::occupy(NavalFleet &fleet)
+bool Territory::attemptOccupy(std::shared_ptr<NavalFleet> &fleet)
 {
 	return false;
+}
+
+double Territory::getDefenceMultiplier() const
+{
+	return defenceMultiplier;
 }

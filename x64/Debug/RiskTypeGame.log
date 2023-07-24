@@ -1,2 +1,11 @@
-﻿  Player.cpp
+﻿  CoastalTerritory.cpp
+  LandArmy.cpp
+d:\projects\risktypegame\risktypegame\landarmy.cpp(42): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\landarmy.cpp(43): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  LandTerritory.cpp
+d:\projects\risktypegame\risktypegame\landterritory.cpp(16): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  NavalFleet.cpp
+  NavalTerritory.cpp
+  Territory.cpp
+  Generating Code...
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe

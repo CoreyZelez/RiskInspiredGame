@@ -7,23 +7,20 @@ class Territory;
 class MilitaryForce
 {
 public:
-	MilitaryForce(const Player &owner, Territory *location, unsigned int strength);
+	MilitaryForce(const Player &owner, Territory *location, int strength);
 
-	bool move(Territory *location, unsigned int strength);
+	virtual void move(Territory *location, int strength) = 0;
 
 	void adjustStrength(int amount);
-	unsigned int getStrength() const;
-
-protected:
-	// Create army with given strength then attempt to occupy location.
-	virtual bool createThenOccupy(Territory *location, unsigned int strength) = 0;  
-
+	int getStrength() const;
 	const Player &getOwner() const;
+	bool isDead() const;
 	Territory *getLocation() const;
+	void setLocation(Territory *location);
 
 private:
 	const Player &owner;
 	Territory *location;
-	uint16_t strength;
+	int strength;
 };
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 class LandArmy;
 class NavalFleet;
@@ -6,12 +7,14 @@ class NavalFleet;
 class Territory
 {
 public:
-	// Army attempts to occupy this territory. Either peaceful or hostile.
-	virtual bool occupy(LandArmy &army);
-	// Army attempts to occupy this territory. Either peaceful or hostile.
-	virtual bool occupy(NavalFleet &fleet);
+	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if occupy attempt is a success.
+	virtual bool attemptOccupy(std::shared_ptr<LandArmy> &army);
+	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if occupy attempt is valid.
+	virtual bool attemptOccupy(std::shared_ptr<NavalFleet> &fleet);
+
+	double getDefenceMultiplier() const;
 
 private:
-
+	double defenceMultiplier = 1.2;  // In future perhaps have complex virtual function to calculate this!
 };
 

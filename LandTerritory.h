@@ -1,14 +1,17 @@
 #pragma once
 #include "Territory.h"
-#include "LandArmy.h"
+#include <memory>
+
+class LandArmy;
 
 class LandTerritory : public Territory
 {
 public:
-	// Army attempts to occupy this territory. Either peaceful or hostile.
-	virtual bool occupy(LandArmy &army) override;
+	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if occupy attempt is a success.
+	virtual bool attemptOccupy(std::shared_ptr<LandArmy> &army) override;
 
 private:
-	LandArmy &army;  // army occupying territory.
+	std::shared_ptr<LandArmy> army;  // Army occupying territory. 
+	// In future above will probably be vector so multiple different occupants e.g. friendly nations or vassals.
 };
 
