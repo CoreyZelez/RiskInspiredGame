@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include "LandArmy.h"
+#include "Barony.h"
 
 int main()
 {
@@ -18,6 +20,9 @@ int main()
 		window.draw(shape);
 		window.display();
 	}
+
+	// TESTING
+
 
 	return 0;
 }

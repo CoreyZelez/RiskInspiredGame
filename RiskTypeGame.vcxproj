@@ -163,11 +163,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CoastalBarony.cpp" />
     <ClCompile Include="DirectEstate.cpp" />
     <ClCompile Include="MilitaryForce.cpp" />
     <ClCompile Include="Barony.cpp" />
-    <ClCompile Include="CoastalTerritory.cpp" />
     <ClCompile Include="Estate.cpp" />
     <ClCompile Include="LandArmy.cpp" />
     <ClCompile Include="LandTerritory.cpp" />
@@ -180,13 +178,10 @@
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CoastalBarony.h" />
     <ClInclude Include="DirectEstate.h" />
-    <ClInclude Include="IBarony.h" />
     <ClInclude Include="IOccupy.h" />
     <ClInclude Include="MilitaryForce.h" />
     <ClInclude Include="Barony.h" />
-    <ClInclude Include="CoastalTerritory.h" />
     <ClInclude Include="Estate.h" />
     <ClInclude Include="IDrawable.h" />
     <ClInclude Include="LandArmy.h" />

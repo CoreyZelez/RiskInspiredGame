@@ -6,10 +6,10 @@
 /*
  * DirectEstate refers to an estate with no lower titles. Necessarily associated with a territory.
  */
-template<class T> class DirectEstate : public Estate, public IOccupy
+class DirectEstate : public IOccupy
 {
 public:
-	DirectEstate(std::unique_ptr<T> territory)
+	DirectEstate(std::unique_ptr<LandTerritory> territory)
 		: territory(std::move(territory))
 	{}
 
@@ -23,12 +23,12 @@ public:
 		return territory.get()->attemptOccupy(fleet);
 	}
 
-	std::unique_ptr<T> &getTerritory()
+	std::unique_ptr<LandTerritory> &getTerritory()
 	{
 		return territory;
 	}
 
 private:
-	std::unique_ptr<T> territory;  
+	std::unique_ptr<LandTerritory> territory;  
 };
 

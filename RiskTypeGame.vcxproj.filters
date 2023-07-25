@@ -69,9 +69,6 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="CoastalTerritory.cpp">
-      <Filter>Source Files\Territory</Filter>
-    </ClCompile>
     <ClCompile Include="NavalFleet.cpp">
       <Filter>Source Files\Military</Filter>
     </ClCompile>
@@ -89,9 +86,6 @@
     </ClCompile>
     <ClCompile Include="MilitaryManager.cpp">
       <Filter>Source Files\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="CoastalBarony.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,9 +113,6 @@
     <ClInclude Include="IDrawable.h">
       <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="CoastalTerritory.h">
-      <Filter>Header Files\Territory</Filter>
-    </ClInclude>
     <ClInclude Include="NavalFleet.h">
       <Filter>Header Files\Military</Filter>
     </ClInclude>
@@ -141,12 +132,6 @@
       <Filter>Header Files\Player</Filter>
     </ClInclude>
     <ClInclude Include="IOccupy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IBarony.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CoastalBarony.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

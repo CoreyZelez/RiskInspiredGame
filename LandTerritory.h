@@ -12,6 +12,8 @@ public:
 	virtual bool attemptOccupy(std::shared_ptr<LandArmy> &army) override;
 	virtual bool attemptOccupy(std::shared_ptr<NavalFleet> &fleet) override;
 
+	bool isCoastal() const;
+
 private:
 	std::shared_ptr<LandArmy> army;  // Army occupying territory. 
 	// In future above will probably be vector so multiple different occupants e.g. friendly nations or vassals.
