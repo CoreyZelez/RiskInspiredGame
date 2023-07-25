@@ -22,12 +22,6 @@
     <Filter Include="Header Files\Territory">
       <UniqueIdentifier>{389c53ad-9a93-40e1-a0fd-7ff4a3ee8b77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Titles and Fiefs">
-      <UniqueIdentifier>{8c90837f-30d2-4da4-b42d-f155e8d9aa78}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Titles and Fiefs">
-      <UniqueIdentifier>{cfe3e379-6e62-441e-a859-344e8d03fde4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Territory">
       <UniqueIdentifier>{74d7b4e6-482b-44f0-9669-7572825d6690}</UniqueIdentifier>
     </Filter>
@@ -40,19 +34,28 @@
     <Filter Include="Header Files\Interfaces">
       <UniqueIdentifier>{04f9fdb0-dcc0-46e4-93c7-246633334de1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Estate">
+      <UniqueIdentifier>{8c90837f-30d2-4da4-b42d-f155e8d9aa78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Estate">
+      <UniqueIdentifier>{cfe3e379-6e62-441e-a859-344e8d03fde4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Player">
+      <UniqueIdentifier>{c55f7f18-6d0e-42f3-9e63-3b221474035a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Player">
+      <UniqueIdentifier>{984de3f9-6f2b-4ac2-8720-d4d6d025a6ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RiskTypeGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LandArmy.cpp">
       <Filter>Source Files\Military</Filter>
     </ClCompile>
     <ClCompile Include="Barony.cpp">
-      <Filter>Source Files\Titles and Fiefs</Filter>
+      <Filter>Source Files\Estate</Filter>
     </ClCompile>
     <ClCompile Include="Territory.cpp">
       <Filter>Source Files\Territory</Filter>
@@ -75,17 +78,23 @@
     <ClCompile Include="MilitaryForce.cpp">
       <Filter>Source Files\Military</Filter>
     </ClCompile>
-    <ClCompile Include="MilitaryManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Estate.cpp">
-      <Filter>Source Files\Titles and Fiefs</Filter>
+      <Filter>Source Files\Estate</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectEstate.cpp">
+      <Filter>Source Files\Estate</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MilitaryManager.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CoastalBarony.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LandArmy.h">
       <Filter>Header Files\Military</Filter>
     </ClInclude>
@@ -99,10 +108,10 @@
       <Filter>Header Files\Territory</Filter>
     </ClInclude>
     <ClInclude Include="Title.h">
-      <Filter>Header Files\Titles and Fiefs</Filter>
+      <Filter>Header Files\Estate</Filter>
     </ClInclude>
     <ClInclude Include="Barony.h">
-      <Filter>Header Files\Titles and Fiefs</Filter>
+      <Filter>Header Files\Estate</Filter>
     </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>Header Files\Managers</Filter>
@@ -119,11 +128,26 @@
     <ClInclude Include="MilitaryForce.h">
       <Filter>Header Files\Military</Filter>
     </ClInclude>
+    <ClInclude Include="Estate.h">
+      <Filter>Header Files\Estate</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectEstate.h">
+      <Filter>Header Files\Estate</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
     <ClInclude Include="MilitaryManager.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="IOccupy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Estate.h">
-      <Filter>Header Files\Titles and Fiefs</Filter>
+    <ClInclude Include="IBarony.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CoastalBarony.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

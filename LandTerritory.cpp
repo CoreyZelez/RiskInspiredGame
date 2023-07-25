@@ -25,6 +25,11 @@ bool LandTerritory::attemptOccupy(std::shared_ptr<LandArmy> &army)
 			return true;
 		}
 	}
-	return false;  // NOT POSSIBLE!!! PERHAPS IN FUTURE IS POSSIBLE!!!
+	return false;  
+}
+
+bool LandTerritory::attemptOccupy(std::shared_ptr<NavalFleet> &fleet)
+{
+	return false;  
 }
 
