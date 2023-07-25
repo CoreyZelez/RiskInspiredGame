@@ -1,10 +1,19 @@
 #include "LandTerritory.h"
 #include "LandArmy.h"
+#include <assert.h>
+#include <iostream>
 
 bool LandTerritory::attemptOccupy(std::shared_ptr<LandArmy> &army)
 {
+	assert(army.get() != nullptr);
+
 	// Case armies have same owner.
-	if(&(army.get()->getOwner()) == &(this->army.get()->getOwner()))
+	if(this->army.get() == nullptr)
+	{
+
+		return true;
+	}
+	else if(&(army.get()->getOwner()) == &(this->army.get()->getOwner()))
 	{
 		// Absorb strength of army into this->army.
 		const int armyStrength = army.get()->getStrength();
@@ -31,5 +40,20 @@ bool LandTerritory::attemptOccupy(std::shared_ptr<LandArmy> &army)
 bool LandTerritory::attemptOccupy(std::shared_ptr<NavalFleet> &fleet)
 {
 	return false;  
+}
+
+/// CAN THIS FUNCTION BE MOVED TO BASE CLASS!!!!
+void LandTerritory::putArmy(std::shared_ptr<LandArmy>& army)
+{
+	// this->army must have same owner as army or be nullptr.
+	assert(this->army.get() == nullptr || &this->army.get()->getOwner() == &army.get()->getOwner());
+	if(this->army.get() == nullptr)
+	{
+		this->army = army;
+	}
+}
+
+void LandTerritory::putFleet(std::shared_ptr<NavalFleet>& fleet)
+{
 }
 

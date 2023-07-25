@@ -1,34 +1,23 @@
 #pragma once
 #include "Estate.h"
 #include "Territory.h"
-#include "IOccupy.h"
+#include "LandTerritory.h"
 
 /*
  * DirectEstate refers to an estate with no lower titles. Necessarily associated with a territory.
  */
-class DirectEstate : public IOccupy
+class DirectEstate 
 {
 public:
-	DirectEstate(std::unique_ptr<LandTerritory> territory)
-		: territory(std::move(territory))
-	{}
+	DirectEstate(LandTerritory territory);
 
-	virtual bool attemptOccupy(std::shared_ptr<LandArmy> &army) override
-	{
-		return territory.get()->attemptOccupy(army);
-	}
+	virtual bool attemptOccupy(std::shared_ptr<LandArmy> &army);  // Attempt occupy of underlying territory and estate.
 
-	virtual bool attemptOccupy(std::shared_ptr<NavalFleet> &fleet) override
-	{
-		return territory.get()->attemptOccupy(fleet);
-	}
+	virtual bool attemptOccupy(std::shared_ptr<NavalFleet> &fleet);  // Attempt occupy of underlying coast (port???).
 
-	std::unique_ptr<LandTerritory> &getTerritory()
-	{
-		return territory;
-	}
+	LandTerritory &getTerritory();  // Perhaps should return base class type?!?!
 
 private:
-	std::unique_ptr<LandTerritory> territory;  
+	LandTerritory territory;  
 };
 

@@ -131,8 +131,5 @@
     <ClInclude Include="MilitaryManager.h">
       <Filter>Header Files\Player</Filter>
     </ClInclude>
-    <ClInclude Include="IOccupy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

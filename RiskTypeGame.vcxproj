@@ -179,7 +179,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectEstate.h" />
-    <ClInclude Include="IOccupy.h" />
     <ClInclude Include="MilitaryForce.h" />
     <ClInclude Include="Barony.h" />
     <ClInclude Include="Estate.h" />
