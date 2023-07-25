@@ -2,6 +2,7 @@
 #include "Territory.h"
 #include <assert.h>
 #include <random>
+#include <iostream>
 
 LandArmy::LandArmy(const Player &owner, Territory *location, int strength)
 	: MilitaryForce(owner, location, strength)
@@ -85,12 +86,12 @@ void LandArmy::move(Territory *location, int strength)
 	// Create army to be deployed at location (either hostile or non-hostile).
 	const int strengthAdjustment = -strength;
 	adjustStrength(strengthAdjustment);  // this->army loses strength of required to create deployedArmy.
+
+	/// IN FUTURE USE FACTORY TO CREATE ARMY!!! SHOULD AUTOMATICALLY STORE ARMY IN PLAYER MILITARYMANAGER!!!
 	std::shared_ptr<LandArmy> deployedArmy = std::make_shared<LandArmy>(getOwner(), getLocation(), strength);  // Land army attempting location occupation.
 
 	// Attempt occupation of location by deployed army.
 	bool occupySuccess = location->attemptOccupy(deployedArmy);
-	assert((!occupySuccess && (deployedArmy.get()->getLocation() == getLocation()))
-		|| (occupySuccess && (deployedArmy.get()->getLocation() == location)));
 
 	// Refund strength to this->army if deployedArmy is not able to occupy location
 	if(!occupySuccess)

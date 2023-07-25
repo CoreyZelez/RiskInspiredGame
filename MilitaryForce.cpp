@@ -9,7 +9,7 @@ MilitaryForce::MilitaryForce(const Player &owner, Territory *location, int stren
 
 void MilitaryForce::adjustStrength(int amount)
 {
-	if(strength <= amount)
+	if(strength <= -amount)
 	{
 		strength = 0;
 		// Handle death here?

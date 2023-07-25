@@ -39,8 +39,9 @@ int main()
 	land2.putArmy(army2);
 
 
+	// WHY IS DEFENDER WINNING IF NO DEFENDER BONUS??? INVESTIGATE!!!
 	std::cout << army1.get()->getStrength() << "  " << army2.get()->getStrength() << std::endl;
-	army1.get()->move(&land2, 5);
+	army1.get()->move(&land2, 8);
 	std::cout << army1.get()->getStrength() << "  " << army2.get()->getStrength() << std::endl;
 
 	//Barony

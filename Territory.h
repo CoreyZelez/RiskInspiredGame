@@ -7,9 +7,9 @@ class NavalFleet;
 class Territory 
 {
 public:
-	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if occupy attempt is a success.
+	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if attempt is valid.
 	virtual bool attemptOccupy(std::shared_ptr<LandArmy> &army) = 0;
-	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if occupy attempt is valid.
+	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if attempt is valid.
 	virtual bool attemptOccupy(std::shared_ptr<NavalFleet> &fleet) = 0;
 
 	// Put army on territory.
@@ -20,6 +20,6 @@ public:
 	double getDefenceMultiplier() const;
 
 private:
-	double defenceMultiplier = 1.2;  // In future perhaps have complex virtual function to calculate this!
+	double defenceMultiplier = 1;  // In future perhaps have complex virtual function to calculate this!
 };
 

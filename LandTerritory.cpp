@@ -7,12 +7,12 @@ bool LandTerritory::attemptOccupy(std::shared_ptr<LandArmy> &army)
 {
 	assert(army.get() != nullptr);
 
-	// Case armies have same owner.
 	if(this->army.get() == nullptr)
 	{
 
 		return true;
 	}
+	// Case armies have same owner.
 	else if(&(army.get()->getOwner()) == &(this->army.get()->getOwner()))
 	{
 		// Absorb strength of army into this->army.
@@ -30,11 +30,10 @@ bool LandTerritory::attemptOccupy(std::shared_ptr<LandArmy> &army)
 		if(this->army.get()->isDead() && !army.get()->isDead())
 		{
 			this->army = army;
-
-			return true;
 		}
+		return true;
 	}
-	return false;  
+	return false;  // WARNING CURRENTLY USELESS. IS THIS EVER NEEDED!!!
 }
 
 bool LandTerritory::attemptOccupy(std::shared_ptr<NavalFleet> &fleet)

@@ -8,9 +8,9 @@ class NavalFleet;
 class LandTerritory : public Territory
 {
 public:
-	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if occupy attempt is a success.
+	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if attempt is valid.
 	virtual bool attemptOccupy(std::shared_ptr<LandArmy> &army) override;
-	// Fleet attempts to occupy this territory. Either peaceful or hostile. Returns true if occupy attempt is a success.
+	// Fleet attempts to occupy this territory. Either peaceful or hostile. Returns true if attempt is valid.
 	virtual bool attemptOccupy(std::shared_ptr<NavalFleet> &fleet) override;
 
 	// Put army on territory.
