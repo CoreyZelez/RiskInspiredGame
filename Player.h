@@ -4,7 +4,7 @@
 #include <vector>
 #include <memory>
 
-class Fief;
+class Estate;
 class LandArmy;
 class NavalFleet;
 
@@ -15,7 +15,7 @@ public:
 
 private:
 	Title title;  // Official title of player.
-	std::vector<Fief*> fiefs;
+	std::vector<Estate*> fiefs;
 	Player *liege;
 	MilitaryManager militaryManager;
 

@@ -1,17 +1,6 @@
-﻿  MilitaryForce.cpp
-  Barony.cpp
-  CoastalTerritory.cpp
-  Fief.cpp
-  LandArmy.cpp
-d:\projects\risktypegame\risktypegame\landarmy.cpp(42): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\landarmy.cpp(43): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  LandTerritory.cpp
-d:\projects\risktypegame\risktypegame\landterritory.cpp(19): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  MilitaryManager.cpp
-  NavalFleet.cpp
-  NavalTerritory.cpp
+﻿  Barony.cpp
+  Estate.cpp
   Player.cpp
-  Territory.cpp
   Generating code
   0 of 7 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation

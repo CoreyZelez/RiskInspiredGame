@@ -51,9 +51,6 @@
     <ClCompile Include="LandArmy.cpp">
       <Filter>Source Files\Military</Filter>
     </ClCompile>
-    <ClCompile Include="Fief.cpp">
-      <Filter>Source Files\Titles and Fiefs</Filter>
-    </ClCompile>
     <ClCompile Include="Barony.cpp">
       <Filter>Source Files\Titles and Fiefs</Filter>
     </ClCompile>
@@ -81,6 +78,9 @@
     <ClCompile Include="MilitaryManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Estate.cpp">
+      <Filter>Source Files\Titles and Fiefs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -99,9 +99,6 @@
       <Filter>Header Files\Territory</Filter>
     </ClInclude>
     <ClInclude Include="Title.h">
-      <Filter>Header Files\Titles and Fiefs</Filter>
-    </ClInclude>
-    <ClInclude Include="Fief.h">
       <Filter>Header Files\Titles and Fiefs</Filter>
     </ClInclude>
     <ClInclude Include="Barony.h">
@@ -124,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="MilitaryManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Estate.h">
+      <Filter>Header Files\Titles and Fiefs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,13 +1,11 @@
 #pragma once
-#include "Fief.h"
+#include "DirectEstate.h"
 
-class LandTerritory;
-
-class Barony : public Fief
+class Barony : public DirectEstate
 {
 public:
 
 private:
-	const LandTerritory &territory;
+
 };
 

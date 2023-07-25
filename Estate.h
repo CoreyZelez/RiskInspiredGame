@@ -5,10 +5,10 @@
 
 class Player;
 
-class Fief
+class Estate
 {
 public:
-	Fief(Title title, const Player *ruler);
+	Estate(Title title, const Player *ruler);
 
 	//virtual LandArmy generateLandArmy() const;
 
@@ -16,7 +16,7 @@ public:
 
 private:
 	const Title title;
-	std::vector<Fief*> subFiefs;
+	std::vector<Estate*> subFiefs;
 	const Player *ruler;
 };
 
