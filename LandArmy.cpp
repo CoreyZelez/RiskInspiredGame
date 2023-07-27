@@ -91,14 +91,15 @@ void LandArmy::move(Territory *location, int strength)
 	std::shared_ptr<LandArmy> deployedArmy = std::make_shared<LandArmy>(getOwner(), getLocation(), strength);  // Land army attempting location occupation.
 
 	// Attempt occupation of location by deployed army.
-	bool occupySuccess = location->attemptOccupy(deployedArmy);
+	location->occupy(deployedArmy);
 
 	// Refund strength to this->army if deployedArmy is not able to occupy location
-	if(!occupySuccess)
+	if(deployedArmy.get()->getLocation() == getLocation())
 	{
-		const int strengthRefund = strength - deployedArmy.get()->getStrength();
+		const int strengthRefund = deployedArmy.get()->getStrength();
 		assert(strengthRefund >= 0);
 		adjustStrength(strengthRefund);  // this->army loses strength of required to create deployedArmy.
+		deployedArmy.reset();
 	}
 }
 

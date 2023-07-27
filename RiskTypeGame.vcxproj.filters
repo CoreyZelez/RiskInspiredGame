@@ -46,6 +46,12 @@
     <Filter Include="Header Files\Player">
       <UniqueIdentifier>{984de3f9-6f2b-4ac2-8720-d4d6d025a6ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Observer">
+      <UniqueIdentifier>{f04de439-0df4-4fd3-a8e6-a4c287ce1e5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Military\Observer">
+      <UniqueIdentifier>{30d01422-2b1a-49e7-bda8-6b5a74aba911}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RiskTypeGame.cpp">
@@ -86,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="MilitaryManager.cpp">
       <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>Source Files\Military\Observer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +139,15 @@
     </ClInclude>
     <ClInclude Include="MilitaryManager.h">
       <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Header Files\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>Header Files\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Message.h">
+      <Filter>Header Files\Observer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

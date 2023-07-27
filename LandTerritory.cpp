@@ -3,13 +3,16 @@
 #include <assert.h>
 #include <iostream>
 
-bool LandTerritory::attemptOccupy(std::shared_ptr<LandArmy> &army)
+bool LandTerritory::occupy(std::shared_ptr<LandArmy> &army)
 {
 	assert(army.get() != nullptr);
 
+	/// return false if territory of army not adjacent to this land territory!
+
 	if(this->army.get() == nullptr)
 	{
-
+		this->army = army;
+		army.get()->setLocation(this);
 		return true;
 	}
 	// Case armies have same owner.
@@ -18,7 +21,7 @@ bool LandTerritory::attemptOccupy(std::shared_ptr<LandArmy> &army)
 		// Absorb strength of army into this->army.
 		const int armyStrength = army.get()->getStrength();
 		this->army.get()->adjustStrength(army.get()->getStrength());  
-		army.get()->adjustStrength(-armyStrength);
+		army.get()->adjustStrength(-armyStrength);  // Sets strength 0.
 		return true;
 	}
 	// Case armies have different owner.
@@ -30,13 +33,14 @@ bool LandTerritory::attemptOccupy(std::shared_ptr<LandArmy> &army)
 		if(this->army.get()->isDead() && !army.get()->isDead())
 		{
 			this->army = army;
+			army.get()->setLocation(this);
+			return true;
 		}
-		return true;
 	}
 	return false;  // WARNING CURRENTLY USELESS. IS THIS EVER NEEDED!!!
 }
 
-bool LandTerritory::attemptOccupy(std::shared_ptr<NavalFleet> &fleet)
+bool LandTerritory::occupy(std::shared_ptr<NavalFleet> &fleet)
 {
 	return false;  
 }
@@ -55,4 +59,10 @@ void LandTerritory::putArmy(std::shared_ptr<LandArmy>& army)
 void LandTerritory::putFleet(std::shared_ptr<NavalFleet>& fleet)
 {
 }
+
+const std::shared_ptr<LandArmy>& LandTerritory::getArmy() const
+{
+	return army;
+}
+
 

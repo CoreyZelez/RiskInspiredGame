@@ -174,11 +174,15 @@
     <ClCompile Include="NavalTerritory.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RiskTypeGame.cpp" />
+    <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Territory.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectEstate.h" />
+    <ClInclude Include="Message.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="Subject.h" />
     <ClInclude Include="MilitaryForce.h" />
     <ClInclude Include="Barony.h" />
     <ClInclude Include="Estate.h" />

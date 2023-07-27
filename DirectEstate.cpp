@@ -7,7 +7,7 @@ DirectEstate::DirectEstate(LandTerritory territory)
 
 bool DirectEstate::attemptOccupy(std::shared_ptr<NavalFleet>& fleet)
 {
-	return territory.attemptOccupy(fleet);
+	return territory.occupy(fleet);
 }
 
 LandTerritory& DirectEstate::getTerritory()
@@ -17,5 +17,5 @@ LandTerritory& DirectEstate::getTerritory()
 
 bool DirectEstate::attemptOccupy(std::shared_ptr<LandArmy> &army)
 {
-	return territory.attemptOccupy(army);
+	return territory.occupy(army);
 }
