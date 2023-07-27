@@ -6,6 +6,7 @@ class Map
 {
 public:
 
+
 private:
 	TerritoryManager territoryManager;
 	EstateManager estateManager;

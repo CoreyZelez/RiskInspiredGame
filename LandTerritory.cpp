@@ -4,6 +4,12 @@
 #include <assert.h>
 #include <iostream>
 
+void LandTerritory::initEstate(const TerritoryEstate *estate)
+{
+	assert(this->estate == nullptr);
+	this->estate = estate;
+}
+
 bool LandTerritory::occupy(std::shared_ptr<LandArmy> &army)
 {
 	assert(army.get() != nullptr);
@@ -56,6 +62,11 @@ void LandTerritory::putArmy(std::shared_ptr<LandArmy>& army)
 	{
 		this->army = army;
 	}
+	else if(&this->army.get()->getOwner() == &army.get()->getOwner())
+	{
+		// Increment this->fleet strength by strength of fleet.
+		this->army.get()->adjustStrength(army.get()->getStrength());
+	}
 }
 
 void LandTerritory::putFleet(std::shared_ptr<NavalFleet>& fleet)
@@ -64,14 +75,10 @@ void LandTerritory::putFleet(std::shared_ptr<NavalFleet>& fleet)
 
 const Player& LandTerritory::getOccupant() const
 {
-	assert(army.get() != nullptr || fleet.get() != nullptr);
+	assert(army.get() != nullptr);
 	if(army.get() != nullptr)
 	{
 		return army.get()->getOwner();
-	}
-	else if(fleet.get() != nullptr)
-	{
-		return fleet.get()->getOwner();
 	}
 }
 

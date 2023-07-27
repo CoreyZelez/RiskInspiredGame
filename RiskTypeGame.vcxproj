@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CoastalTerritory.cpp" />
     <ClCompile Include="EstateManager.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapMaker.cpp" />
@@ -184,6 +185,7 @@
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CoastalTerritory.h" />
     <ClInclude Include="EstateManager.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapMaker.h" />

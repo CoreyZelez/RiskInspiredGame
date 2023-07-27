@@ -1,5 +1,10 @@
-﻿  Map.cpp
-  MapMaker.cpp
-  TerritoryManager.cpp
+﻿  CoastalTerritory.cpp
+  TerritoryEstate.cpp
+  Barony.cpp
+  LandTerritory.cpp
+d:\projects\risktypegame\risktypegame\landterritory.cpp(38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  RiskTypeGame.cpp
   Generating Code...
+d:\projects\risktypegame\risktypegame\landterritory.cpp(83): warning C4715: 'LandTerritory::getOccupant': not all control paths return a value
+d:\projects\risktypegame\risktypegame\coastalterritory.cpp(32): warning C4715: 'CoastalTerritory::getOccupant': not all control paths return a value
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe
