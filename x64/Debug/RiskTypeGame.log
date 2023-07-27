@@ -1,2 +1,5 @@
-﻿  Subject.cpp
+﻿  Map.cpp
+  MapMaker.cpp
+  TerritoryManager.cpp
+  Generating Code...
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe

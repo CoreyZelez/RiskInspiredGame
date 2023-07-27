@@ -2,14 +2,28 @@
 #include "Observer.h"
 #include <algorithm>
 
-void Subject::addObserver(Observer * observer)
+void Subject::addObserver(Observer *observer)
 {
 	observers.push_back(observer);
+	observer->setSubject(this);
 }
 
 void Subject::removeObserver(Observer *observer)
 {
-	observers.erase(std::remove(observers.begin(), observers.end(), observer), observers.end());
+	auto iter = observers.begin();
+
+	while(iter != observers.end())
+	{
+		if(*iter == observer) 
+		{
+
+			iter = observers.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
 }
 
 void Subject::notifyObservers(Message message)

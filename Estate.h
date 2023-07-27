@@ -14,6 +14,9 @@ public:
 
 	Title getTitle() const;
 
+protected:
+	void changeRuler(const Player *ruler);
+
 private:
 	const Title title;
 	std::vector<Estate*> subFiefs;

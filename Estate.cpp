@@ -10,3 +10,10 @@ Title Estate::getTitle() const
 {
 	return title;
 }
+
+void Estate::changeRuler(const Player *ruler)
+{
+	this->ruler = ruler;
+}
+
+

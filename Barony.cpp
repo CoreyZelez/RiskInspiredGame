@@ -1,7 +1,7 @@
 #include "Barony.h"
 #include "LandTerritory.h"
 
-Barony::Barony(LandTerritory territory)
-	: DirectEstate(territory)
+Barony::Barony(const Player *ruler, LandTerritory territory)
+	: TerritoryEstate(baron, ruler, territory)
 {
 }

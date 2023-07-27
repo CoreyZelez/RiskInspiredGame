@@ -163,7 +163,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DirectEstate.cpp" />
+    <ClCompile Include="EstateManager.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapMaker.cpp" />
+    <ClCompile Include="TerritoryEstate.cpp" />
     <ClCompile Include="MilitaryForce.cpp" />
     <ClCompile Include="Barony.cpp" />
     <ClCompile Include="Estate.cpp" />
@@ -172,14 +175,19 @@
     <ClCompile Include="MilitaryManager.cpp" />
     <ClCompile Include="NavalFleet.cpp" />
     <ClCompile Include="NavalTerritory.cpp" />
+    <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RiskTypeGame.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Territory.cpp" />
+    <ClCompile Include="TerritoryManager.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DirectEstate.h" />
+    <ClInclude Include="EstateManager.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="MapMaker.h" />
+    <ClInclude Include="TerritoryEstate.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Subject.h" />
@@ -194,6 +202,7 @@
     <ClInclude Include="NavalTerritory.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Territory.h" />
+    <ClInclude Include="TerritoryManager.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Title.h" />
   </ItemGroup>

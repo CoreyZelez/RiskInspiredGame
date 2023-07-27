@@ -1,12 +1,18 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 #include <memory>
+#include <vector>
 
 class LandArmy;
 class NavalFleet;
+class Player;
+class TerritoryEstate;
 
 class Territory 
 {
 public:
+	void initEstate(const TerritoryEstate *estate);
+
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
 	virtual bool occupy(std::shared_ptr<LandArmy> &army) = 0;
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
@@ -20,6 +26,9 @@ public:
 	double getDefenceMultiplier() const;
 
 private:
+	const TerritoryEstate *estate = nullptr;  // Estate this territory is associated with.
+	std::vector<sf::Vector2f> positions;  // Positions on map territory occupys.
+
 	double defenceMultiplier = 1;  // In future perhaps have complex virtual function to calculate this!
 };
 

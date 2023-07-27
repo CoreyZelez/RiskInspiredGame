@@ -4,7 +4,8 @@
 
 class Observer;
 
-class Subject {
+class Subject 
+{
 public:
 	virtual ~Subject() = default;
 

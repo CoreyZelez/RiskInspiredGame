@@ -1,5 +1,6 @@
 #include "LandTerritory.h"
 #include "LandArmy.h"
+#include "NavalFleet.h"
 #include <assert.h>
 #include <iostream>
 
@@ -34,6 +35,7 @@ bool LandTerritory::occupy(std::shared_ptr<LandArmy> &army)
 		{
 			this->army = army;
 			army.get()->setLocation(this);
+			notifyObservers(newOwner);
 			return true;
 		}
 	}
@@ -58,6 +60,19 @@ void LandTerritory::putArmy(std::shared_ptr<LandArmy>& army)
 
 void LandTerritory::putFleet(std::shared_ptr<NavalFleet>& fleet)
 {
+}
+
+const Player& LandTerritory::getOccupant() const
+{
+	assert(army.get() != nullptr || fleet.get() != nullptr);
+	if(army.get() != nullptr)
+	{
+		return army.get()->getOwner();
+	}
+	else if(fleet.get() != nullptr)
+	{
+		return fleet.get()->getOwner();
+	}
 }
 
 const std::shared_ptr<LandArmy>& LandTerritory::getArmy() const

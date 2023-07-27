@@ -49,8 +49,14 @@
     <Filter Include="Header Files\Observer">
       <UniqueIdentifier>{f04de439-0df4-4fd3-a8e6-a4c287ce1e5d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Military\Observer">
+    <Filter Include="Source Files\Observer">
       <UniqueIdentifier>{30d01422-2b1a-49e7-bda8-6b5a74aba911}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Map">
+      <UniqueIdentifier>{dbe296e0-38d3-4ead-adbe-550ef3f498ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Map">
+      <UniqueIdentifier>{c97bd290-8cf0-47f6-ac33-74ed288954a6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -84,9 +90,6 @@
     <ClCompile Include="Estate.cpp">
       <Filter>Source Files\Estate</Filter>
     </ClCompile>
-    <ClCompile Include="DirectEstate.cpp">
-      <Filter>Source Files\Estate</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Player</Filter>
     </ClCompile>
@@ -94,7 +97,25 @@
       <Filter>Source Files\Player</Filter>
     </ClCompile>
     <ClCompile Include="Subject.cpp">
-      <Filter>Source Files\Military\Observer</Filter>
+      <Filter>Source Files\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>Source Files\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="TerritoryEstate.cpp">
+      <Filter>Source Files\Estate</Filter>
+    </ClCompile>
+    <ClCompile Include="EstateManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="TerritoryManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="MapMaker.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,9 +152,6 @@
     <ClInclude Include="Estate.h">
       <Filter>Header Files\Estate</Filter>
     </ClInclude>
-    <ClInclude Include="DirectEstate.h">
-      <Filter>Header Files\Estate</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\Player</Filter>
     </ClInclude>
@@ -148,6 +166,21 @@
     </ClInclude>
     <ClInclude Include="Message.h">
       <Filter>Header Files\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="TerritoryEstate.h">
+      <Filter>Header Files\Estate</Filter>
+    </ClInclude>
+    <ClInclude Include="EstateManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="TerritoryManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="MapMaker.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
