@@ -3,6 +3,7 @@
 #include "LandTerritory.h"
 #include "Player.h"
 #include "LandArmy.h"
+#include "TerritoryManager.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <iostream>
@@ -37,7 +38,6 @@ int main()
 	land1.putArmy(army1);
 	std::shared_ptr<LandArmy> army2 = std::make_shared<LandArmy>(player2, &land2, 7);
 	land2.putArmy(army2);
-
 
 	std::cout << army1.get()->getStrength() << "  " << army2.get()->getStrength() << std::endl;
 	army1.get()->move(&land2, 30);

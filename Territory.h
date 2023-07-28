@@ -23,7 +23,8 @@ public:
 	double getDefenceMultiplier() const;
 
 private:
-	std::vector<sf::Vector2f> positions;  // Positions on map territory occupys.
+	double squareSize = 100;  // The size of one square of a territory on the map.
+	//std::vector<sf::Vector2f> squarePositions;  // Positions on map territory occupys.
 
 	double defenceMultiplier = 1;  // In future perhaps have complex virtual function to calculate this!
 };
