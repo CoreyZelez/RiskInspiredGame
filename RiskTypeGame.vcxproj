@@ -181,6 +181,7 @@
     <ClCompile Include="RiskTypeGame.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Territory.cpp" />
+    <ClCompile Include="TerritoryGraphics.cpp" />
     <ClCompile Include="TerritoryManager.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
@@ -204,6 +205,7 @@
     <ClInclude Include="NavalTerritory.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Territory.h" />
+    <ClInclude Include="TerritoryGraphics.h" />
     <ClInclude Include="TerritoryManager.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Title.h" />

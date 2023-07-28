@@ -1,11 +1,16 @@
 #include "Map.h"
 
-void Map::addLandTerritory(LandTerritory territory)
+void Map::drawTerritoryMap(sf::RenderWindow &window)
 {
-	territoryManager.addLandTerritory(territory);
+	territoryManager.draw(window);
 }
 
-void Map::removeLandTerritory(LandTerritory *territory)
+void Map::addLandTerritory(std::unique_ptr<LandTerritory> territory)
+{
+	territoryManager.addLandTerritory(std::move(territory));
+}
+
+void Map::removeLandTerritory(LandTerritory** territory)
 {
 	territoryManager.removeLandTerritory(territory);
 }
@@ -15,12 +20,12 @@ LandTerritory* Map::getLandTerritory(sf::Vector2f worldPosition)
 	return territoryManager.getLandTerritory(worldPosition);
 }
 
-void Map::addNavalTerritory(NavalTerritory territory)
+void Map::addNavalTerritory(std::unique_ptr<NavalTerritory> territory)
 {
-	territoryManager.addNavalTerritory(territory);
+	territoryManager.addNavalTerritory(std::move(territory));
 }
 
-void Map::removeNavalTerritory(NavalTerritory* territory)
+void Map::removeNavalTerritory(NavalTerritory** territory)
 {
 	territoryManager.removeNavalTerritory(territory);
 }

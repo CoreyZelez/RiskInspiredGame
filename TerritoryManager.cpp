@@ -1,24 +1,40 @@
 #include "TerritoryManager.h"
 #include <assert.h>
 
-void TerritoryManager::addLandTerritory(LandTerritory territory)
+void TerritoryManager::draw(sf::RenderWindow &window)
 {
-	landTerritories.push_back(territory);
+	// Draws land territories (including coastal territories).
+	for(const auto &territory : landTerritories)
+	{
+		territory.get()->draw(window);
+	}
+
+	// Draws naval territories.
+	for(const auto &territory : landTerritories)
+	{
+		territory.get()->draw(window);
+	}
 }
 
-void TerritoryManager::addNavalTerritory(NavalTerritory territory)
+void TerritoryManager::addLandTerritory(std::unique_ptr<LandTerritory> territory)
 {
-	navalTerritories.push_back(territory);
+	landTerritories.emplace_back(std::move(territory));
 }
 
-void TerritoryManager::removeLandTerritory(LandTerritory *territory)
+void TerritoryManager::addNavalTerritory(std::unique_ptr<NavalTerritory> territory)
+{
+	navalTerritories.emplace_back(std::move(territory));
+}
+
+void TerritoryManager::removeLandTerritory(LandTerritory **territory)
 {
 	auto iter = landTerritories.begin();
 	while(iter != landTerritories.end())
 	{
-		if(&(*iter) == territory)
+		if(iter->get() == *territory)
 		{
 			landTerritories.erase(iter);
+			*territory = nullptr;  // Invalidate future usage of pointer.
 			return;
 		}
       ++iter;
@@ -31,14 +47,15 @@ LandTerritory* TerritoryManager::getLandTerritory(sf::Vector2f worldPosition)
 	return nullptr;
 }
 
-void TerritoryManager::removeNavalTerritory(NavalTerritory *territory)
+void TerritoryManager::removeNavalTerritory(NavalTerritory **territory)
 {
 	auto iter = navalTerritories.begin();
 	while(iter != navalTerritories.end())
 	{
-		if(&(*iter) == territory)
+		if(iter->get() == *territory)
 		{
 			navalTerritories.erase(iter);
+			*territory = nullptr;  // Invalidate future usage of pointer.
 			return;
 		}
 		++iter;

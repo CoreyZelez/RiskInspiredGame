@@ -10,9 +10,16 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(1400, 1000), "SFML works!");
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
+
+	LandTerritory land;
+	land.addGridPosition(sf::Vector2f(0, 0));
+	land.addGridPosition(sf::Vector2f(1, 0));
+	land.addGridPosition(sf::Vector2f(2, 0));
+	land.addGridPosition(sf::Vector2f(2, 1));
+	land.addGridPosition(sf::Vector2f(5, 1));
 
 	while(window.isOpen())
 	{
@@ -23,7 +30,7 @@ int main()
 				window.close();
 		}
 		window.clear();
-		window.draw(shape);
+		land.draw(window);
 		window.display();
 	}
 

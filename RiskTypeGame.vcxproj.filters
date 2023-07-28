@@ -118,6 +118,9 @@
       <Filter>Source Files\Map</Filter>
     </ClCompile>
     <ClCompile Include="CoastalTerritory.cpp">
+      <Filter>Source Files\Territory</Filter>
+    </ClCompile>
+    <ClCompile Include="TerritoryGraphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -186,6 +189,9 @@
       <Filter>Header Files\Map</Filter>
     </ClInclude>
     <ClInclude Include="CoastalTerritory.h">
+      <Filter>Header Files\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="TerritoryGraphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
