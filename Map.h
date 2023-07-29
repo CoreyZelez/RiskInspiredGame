@@ -12,13 +12,8 @@ class Map
 public:
 	void drawTerritoryMap(sf::RenderWindow &window);
 
-	void addLandTerritory(std::unique_ptr<LandTerritory> territory);
-	void removeLandTerritory(LandTerritory** territory);
-	LandTerritory* getLandTerritory(sf::Vector2f worldPosition);
-
-	void addNavalTerritory(std::unique_ptr<NavalTerritory> territory);
-	void removeNavalTerritory(NavalTerritory** territory);
-	NavalTerritory* getNavalTerritory(sf::Vector2f worldPosition);
+	TerritoryManager &getTerritoryManager();
+	EstateManager &getEstateManager();
 
 private:
 	TerritoryManager territoryManager;

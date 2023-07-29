@@ -8,9 +8,24 @@ void Territory::draw(sf::RenderWindow &window) const
 	graphics.draw(window);
 }
 
-void Territory::addGridPosition(sf::Vector2f position)
+bool Territory::isEmpty() const
 {
-	graphics.addGridPosition(position);
+	return graphics.isEmpty();
+}
+
+void Territory::addSquare(sf::Vector2f position)
+{
+	graphics.addSquare(position);
+}
+
+void Territory::removeSquare(sf::Vector2f position)
+{
+	graphics.removeSquare(position);
+}
+
+bool Territory::containsPosition(sf::Vector2f position) const
+{
+	return graphics.containsPosition(position);
 }
 
 double Territory::getDefenceMultiplier() const

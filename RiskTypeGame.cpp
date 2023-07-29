@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "LandArmy.h"
 #include "TerritoryManager.h"
+#include "MapMaker.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <iostream>
@@ -14,12 +15,7 @@ int main()
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
 
-	LandTerritory land;
-	land.addGridPosition(sf::Vector2f(0, 0));
-	land.addGridPosition(sf::Vector2f(1, 0));
-	land.addGridPosition(sf::Vector2f(2, 0));
-	land.addGridPosition(sf::Vector2f(2, 1));
-	land.addGridPosition(sf::Vector2f(5, 1));
+	MapMaker mapMaker;
 
 	while(window.isOpen())
 	{
@@ -27,10 +23,13 @@ int main()
 		while(window.pollEvent(event))
 		{
 			if(event.type == sf::Event::Closed)
+			{
 				window.close();
+			}
+			mapMaker.handleEvent(window, event);
 		}
 		window.clear();
-		land.draw(window);
+		mapMaker.draw(window);
 		window.display();
 	}
 

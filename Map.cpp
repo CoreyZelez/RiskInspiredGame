@@ -5,32 +5,12 @@ void Map::drawTerritoryMap(sf::RenderWindow &window)
 	territoryManager.draw(window);
 }
 
-void Map::addLandTerritory(std::unique_ptr<LandTerritory> territory)
+TerritoryManager& Map::getTerritoryManager()
 {
-	territoryManager.addLandTerritory(std::move(territory));
+	return territoryManager;
 }
 
-void Map::removeLandTerritory(LandTerritory** territory)
+EstateManager& Map::getEstateManager()
 {
-	territoryManager.removeLandTerritory(territory);
-}
-
-LandTerritory* Map::getLandTerritory(sf::Vector2f worldPosition)
-{
-	return territoryManager.getLandTerritory(worldPosition);
-}
-
-void Map::addNavalTerritory(std::unique_ptr<NavalTerritory> territory)
-{
-	territoryManager.addNavalTerritory(std::move(territory));
-}
-
-void Map::removeNavalTerritory(NavalTerritory** territory)
-{
-	territoryManager.removeNavalTerritory(territory);
-}
-
-NavalTerritory* Map::getNavalTerritory(sf::Vector2f worldPosition)
-{
-	return territoryManager.getNavalTerritory(worldPosition);
+	return estateManager;
 }

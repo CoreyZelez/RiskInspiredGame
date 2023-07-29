@@ -58,6 +58,12 @@
     <Filter Include="Source Files\Map">
       <UniqueIdentifier>{c97bd290-8cf0-47f6-ac33-74ed288954a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\User Interface">
+      <UniqueIdentifier>{10c1f2d6-e477-4054-a3a8-3d6b4c410d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\User Interface">
+      <UniqueIdentifier>{50caffbf-40f3-4e70-8cba-26b2bb74cfda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RiskTypeGame.cpp">
@@ -121,6 +127,21 @@
       <Filter>Source Files\Territory</Filter>
     </ClCompile>
     <ClCompile Include="TerritoryGraphics.cpp">
+      <Filter>Source Files\Territory</Filter>
+    </ClCompile>
+    <ClCompile Include="EstateMaker.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="TerritoryMaker.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Source Files\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -192,6 +213,24 @@
       <Filter>Header Files\Territory</Filter>
     </ClInclude>
     <ClInclude Include="TerritoryGraphics.h">
+      <Filter>Header Files\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="EstateMaker.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TerritoryMaker.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Header Files\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeInstance.h">
+      <Filter>Header Files\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

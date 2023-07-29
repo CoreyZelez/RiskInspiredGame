@@ -1,5 +1,6 @@
 #include "TerritoryManager.h"
 #include <assert.h>
+#include <iostream>
 
 void TerritoryManager::draw(sf::RenderWindow &window)
 {
@@ -10,20 +11,78 @@ void TerritoryManager::draw(sf::RenderWindow &window)
 	}
 
 	// Draws naval territories.
-	for(const auto &territory : landTerritories)
+	for(const auto &territory : navalTerritories)
 	{
 		territory.get()->draw(window);
 	}
 }
 
-void TerritoryManager::addLandTerritory(std::unique_ptr<LandTerritory> territory)
+void TerritoryManager::removeEmptyTerritories()
 {
-	landTerritories.emplace_back(std::move(territory));
+	// Remove empty land territories.
+	auto iterL = landTerritories.begin();
+	while(iterL != landTerritories.end())
+	{
+		if((*iterL)->isEmpty())
+		{
+			iterL = landTerritories.erase(iterL);
+		}
+		else
+		{
+			++iterL;
+		}
+	}
+
+	// Remove empty naval territories.
+	auto iterN = navalTerritories.begin();
+	while(iterN != navalTerritories.end())
+	{
+		if((*iterN)->isEmpty())
+		{
+			iterN = navalTerritories.erase(iterN);
+		}
+		else
+		{
+			++iterN;
+		}
+	}
 }
 
-void TerritoryManager::addNavalTerritory(std::unique_ptr<NavalTerritory> territory)
+bool TerritoryManager::positionClaimed(sf::Vector2f position) const
 {
+	// Checks land territories for position.
+	for(const auto &territory : landTerritories)
+	{
+		if(territory.get()->containsPosition(position))
+		{
+			return true;
+		}
+	}
+
+	// Checks naval territories for position.
+	for(const auto &territory : navalTerritories)
+	{
+		if(territory.get()->containsPosition(position))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+LandTerritory* TerritoryManager::createLandTerritory()
+{
+	std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>();
+	landTerritories.emplace_back(std::move(territory));
+	return landTerritories.back().get();
+}
+
+NavalTerritory* TerritoryManager::createNavalTerritory()
+{
+	std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>();
 	navalTerritories.emplace_back(std::move(territory));
+	return navalTerritories.back().get();
 }
 
 void TerritoryManager::removeLandTerritory(LandTerritory **territory)
@@ -42,8 +101,15 @@ void TerritoryManager::removeLandTerritory(LandTerritory **territory)
 	assert(false);
 }
 
-LandTerritory* TerritoryManager::getLandTerritory(sf::Vector2f worldPosition)
+LandTerritory* TerritoryManager::getLandTerritory(sf::Vector2f position)
 {
+	for(const auto &territory : landTerritories)
+	{
+		if(territory.get()->containsPosition(position))
+		{
+			return territory.get();
+		}
+	}
 	return nullptr;
 }
 
@@ -63,7 +129,14 @@ void TerritoryManager::removeNavalTerritory(NavalTerritory **territory)
 	assert(false);
 }
 
-NavalTerritory* TerritoryManager::getNavalTerritory(sf::Vector2f worldPosition)
+NavalTerritory* TerritoryManager::getNavalTerritory(sf::Vector2f position)
 {
+	for(const auto &territory : navalTerritories)
+	{
+		if(territory.get()->containsPosition(position))
+		{
+			return territory.get();
+		}
+	}
 	return nullptr;
 }

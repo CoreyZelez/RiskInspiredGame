@@ -1,27 +1,38 @@
 #pragma once
 #include "Map.h"
-#include <memory>
+#include "TerritoryMaker.h"
+#include "EstateMaker.h"
+#include "Button.h"
 #include <SFML/Graphics.hpp>
+#include <memory>
+#include <vector>
 
-enum MapMakerState
+enum class MapMakerState
 {
-
+	none,
+	territoryMode,
+	estateMode
 };
 
 class MapMaker
 {
 public:
+	MapMaker();
+
 	void draw(sf::RenderWindow &window);
-	void handleInput();
+
+	void handleEvent(const sf::RenderWindow &window, const sf::Event &event);
 
 private:
-	void assertInvariants();
+	void handleButtons(const sf::Event &event);
+	void drawButtons(sf::RenderWindow &window);
 
 	Map map;
+	MapMakerState state = MapMakerState::none;
 
-	std::unique_ptr<LandTerritory> currLand;
-	std::unique_ptr<NavalTerritory> currNaval;
+	TerritoryMaker territoryMaker;
+	EstateMaker estateMaker;
 
-	MapMakerState state;
+	std::vector<Button> buttons;
 };
 

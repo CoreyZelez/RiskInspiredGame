@@ -13,6 +13,8 @@ class Territory
 public:
 	void draw(sf::RenderWindow &window) const;  // TEMPORARY. 
 
+	bool isEmpty() const;  // True if territory occupies no positions on map.
+
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
 	virtual bool occupy(std::shared_ptr<LandArmy> &army) = 0;
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
@@ -23,7 +25,10 @@ public:
 	// Put fleet on territory.
 	virtual void putFleet(std::shared_ptr<NavalFleet> &fleet) = 0;
 
-	void addGridPosition(sf::Vector2f position);
+	void addSquare(sf::Vector2f position);  // Adds square at position in game world.
+	void removeSquare(sf::Vector2f position);  // Removes square at position in game world.
+
+	bool containsPosition(sf::Vector2f position) const;  // Returns true if any grid square of territory contains position.
 
 	double getDefenceMultiplier() const;
 

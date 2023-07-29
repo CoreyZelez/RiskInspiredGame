@@ -163,6 +163,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Command.cpp" />
     <ClCompile Include="CoastalTerritory.cpp" />
     <ClCompile Include="EstateManager.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -182,11 +184,17 @@
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Territory.cpp" />
     <ClCompile Include="TerritoryGraphics.cpp" />
+    <ClCompile Include="TerritoryMaker.cpp" />
     <ClCompile Include="TerritoryManager.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="EstateMaker.cpp" />
+    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Command.h" />
     <ClInclude Include="CoastalTerritory.h" />
+    <ClInclude Include="ChangeInstance.h" />
     <ClInclude Include="EstateManager.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapMaker.h" />
@@ -206,9 +214,12 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Territory.h" />
     <ClInclude Include="TerritoryGraphics.h" />
+    <ClInclude Include="TerritoryMaker.h" />
     <ClInclude Include="TerritoryManager.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="EstateMaker.h" />
+    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

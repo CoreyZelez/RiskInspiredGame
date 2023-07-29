@@ -1,7 +1,11 @@
 #include "TerritoryGraphics.h"
+#include "Utility.h"
+#include <algorithm>
+#include <iostream>
+#include <assert.h>
 
 TerritoryGraphics::TerritoryGraphics()
-	: defaultColor(sf::Color::Red)
+	: defaultColor(createRandomColor())
 {
 	
 }
@@ -11,10 +15,57 @@ void TerritoryGraphics::draw(sf::RenderWindow & window) const
 	window.draw(vertices);
 }
 
-void TerritoryGraphics::addGridPosition(sf::Vector2f position)
+bool TerritoryGraphics::isEmpty() const
 {
-	gridPositions.push_back(position);
-	calculateVertices();
+	return gridPositions.size() == 0;
+}
+
+bool TerritoryGraphics::containsPosition(sf::Vector2f position) const
+{
+	// Converts position to grid coordinates.
+	const int x = position.x / squareSize;
+	const int y = position.y / squareSize;
+
+	auto iter = gridPositions.begin();
+	while(iter != gridPositions.end())
+	{
+		if(iter->x == x && iter->y == y)
+		{
+			return true;
+		}
+		++iter;
+	}
+
+	return false;
+}
+
+void TerritoryGraphics::addSquare(sf::Vector2f position)
+{
+	const int x = position.x / squareSize;
+	const int y = position.y / squareSize;
+	sf::Vector2i gridPos(x, y);
+	if(std::find(gridPositions.begin(), gridPositions.end(), gridPos) == gridPositions.end())
+	{
+		gridPositions.push_back(sf::Vector2i(x, y));
+		calculateVertices();
+	}
+}
+
+void TerritoryGraphics::removeSquare(sf::Vector2f position)
+{
+	const int x = position.x / squareSize;
+	const int y = position.y / squareSize;
+	auto iter = gridPositions.begin();
+	while(iter != gridPositions.end())
+	{
+		if(iter->x == x && iter->y == y)
+		{
+			gridPositions.erase(iter);
+			calculateVertices();
+			return;
+		}
+		++iter;
+	}
 }
 
 void TerritoryGraphics::setColor(sf::Color color)
@@ -38,7 +89,7 @@ void TerritoryGraphics::calculateVertices()
 	// Populate the vertex array, with two triangles per square tile.
 	for(int i = 0; i < gridPositions.size(); ++i)
 	{
-		const sf::Vector2f position = gridPositions[i];
+		const sf::Vector2f position(gridPositions[i].x, gridPositions[i].y);
 
 		const float left = position.x * squareSize;
 		const float right = (position.x * squareSize) + squareSize;
