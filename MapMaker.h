@@ -21,10 +21,10 @@ public:
 
 	void draw(sf::RenderWindow &window);
 
-	void handleEvent(const sf::RenderWindow &window, const sf::Event &event);
+	void handleInput(const sf::RenderWindow &window, sf::View &view);
 
 private:
-	void handleButtons(const sf::Event &event);
+	void handleButtonInput(const sf::RenderWindow &window);
 	void drawButtons(sf::RenderWindow &window);
 
 	Map map;

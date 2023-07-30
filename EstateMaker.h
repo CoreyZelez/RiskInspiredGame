@@ -6,7 +6,7 @@ class EstateMaker
 public:
 	void draw(sf::RenderWindow &window);
 
-	void handleEvent(const sf::Event &event);
+	void handleInput(const sf::RenderWindow &window);
 
 private:
 

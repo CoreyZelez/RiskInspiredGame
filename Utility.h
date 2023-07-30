@@ -3,3 +3,6 @@
 
 sf::Color createRandomColor();
 
+sf::Color createRandomLandColor();
+
+sf::Color createRandomNavalColor();

@@ -144,6 +144,9 @@
     <ClCompile Include="Utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InputUtility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LandArmy.h">
@@ -231,6 +234,9 @@
       <Filter>Header Files\User Interface</Filter>
     </ClInclude>
     <ClInclude Include="Utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputUtility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

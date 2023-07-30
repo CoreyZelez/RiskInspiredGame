@@ -3,6 +3,11 @@
 
 
 
+Territory::Territory(sf::Color color)
+	: graphics(color)
+{
+}
+
 void Territory::draw(sf::RenderWindow &window) const
 {
 	graphics.draw(window);

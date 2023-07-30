@@ -10,8 +10,6 @@ class Estate
 public:
 	Estate(Title title, const Player *ruler);
 
-	//virtual LandArmy generateLandArmy() const;
-
 	Title getTitle() const;
 
 protected:

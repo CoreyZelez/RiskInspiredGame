@@ -4,8 +4,8 @@
 #include <iostream>
 #include <assert.h>
 
-TerritoryGraphics::TerritoryGraphics()
-	: defaultColor(createRandomColor())
+TerritoryGraphics::TerritoryGraphics(sf::Color defaultColor)
+	: defaultColor(defaultColor)
 {
 	
 }

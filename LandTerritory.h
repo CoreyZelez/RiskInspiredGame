@@ -8,7 +8,9 @@ class TerritoryEstate;
 class LandTerritory : public Territory, public Subject
 {
 public:
+	LandTerritory();
 	~LandTerritory() = default;
+
 	void initEstate(const TerritoryEstate *estate);
 
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.

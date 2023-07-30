@@ -13,7 +13,7 @@ public:
 
 	bool contains(const sf::Vector2f &point) const;
 
-	void handleEvent(const sf::Event &event);
+	void handleInput(const sf::RenderWindow &window);
 
 private:
 	sf::RectangleShape shape;

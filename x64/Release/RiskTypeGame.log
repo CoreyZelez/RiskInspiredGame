@@ -1,54 +1,7 @@
-﻿  CoastalTerritory.cpp
-  EstateManager.cpp
-  Map.cpp
-  MapMaker.cpp
-  TerritoryEstate.cpp
-  MilitaryForce.cpp
-  Barony.cpp
-  Estate.cpp
-  LandArmy.cpp
-d:\projects\risktypegame\risktypegame\landarmy.cpp(43): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\landarmy.cpp(44): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  LandTerritory.cpp
-d:\projects\risktypegame\risktypegame\landterritory.cpp(38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  MilitaryManager.cpp
-  NavalFleet.cpp
-  NavalTerritory.cpp
-  Observer.cpp
-  Player.cpp
-  RiskTypeGame.cpp
-  Subject.cpp
-  Territory.cpp
-  TerritoryManager.cpp
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xutility(2718): error C2280: 'NavalTerritory &NavalTerritory::operator =(const NavalTerritory &)': attempting to reference a deleted function
-  d:\projects\risktypegame\risktypegame\navalterritory.h(20): note: compiler has generated 'NavalTerritory::operator =' here
-  d:\projects\risktypegame\risktypegame\navalterritory.h(20): note: 'NavalTerritory &NavalTerritory::operator =(const NavalTerritory &)': function was implicitly deleted because a base class invokes a deleted or inaccessible function 'Territory &Territory::operator =(const Territory &)'
-  d:\projects\risktypegame\risktypegame\territory.h(30): note: 'Territory &Territory::operator =(const Territory &)': function was implicitly deleted because 'Territory' has a data member 'Territory::squareSize' of const-qualified non-class type
-  d:\projects\risktypegame\risktypegame\territory.h(26): note: see declaration of 'Territory::squareSize'
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xutility(2737): note: see reference to function template instantiation '_OutIt std::_Move_unchecked1<_InIt,_OutIt>(_InIt,_InIt,_OutIt,std::_General_ptr_iterator_tag)' being compiled
-          with
-          [
-              _OutIt=NavalTerritory *,
-              _InIt=NavalTerritory *
-          ]
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(1561): note: see reference to function template instantiation '_OutIt *std::_Move_unchecked<NavalTerritory*,NavalTerritory*>(_InIt,_InIt,_OutIt)' being compiled
-          with
-          [
-              _OutIt=NavalTerritory *,
-              _InIt=NavalTerritory *
-          ]
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(1553): note: while compiling class template member function 'std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>> std::vector<_Ty,std::allocator<_Ty>>::erase(std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>)'
-          with
-          [
-              _Ty=NavalTerritory
-          ]
-  d:\projects\risktypegame\risktypegame\territorymanager.cpp(35): note: see reference to function template instantiation 'std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>> std::vector<_Ty,std::allocator<_Ty>>::erase(std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>)' being compiled
-          with
-          [
-              _Ty=NavalTerritory
-          ]
-  d:\projects\risktypegame\risktypegame\territorymanager.h(19): note: see reference to class template instantiation 'std::vector<NavalTerritory,std::allocator<_Ty>>' being compiled
-          with
-          [
-              _Ty=NavalTerritory
-          ]
+﻿  TerritoryMaker.cpp
+  Generating code
+  1 of 994 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Release\RiskTypeGame.exe

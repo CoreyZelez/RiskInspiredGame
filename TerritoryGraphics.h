@@ -4,7 +4,7 @@
 class TerritoryGraphics
 {
 public:
-	TerritoryGraphics();
+	TerritoryGraphics(sf::Color defaultColor);
 
 	void draw(sf::RenderWindow &window) const;
 

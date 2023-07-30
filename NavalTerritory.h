@@ -4,6 +4,7 @@
 class NavalTerritory : public Territory
 {
 public:
+	NavalTerritory();
 	~NavalTerritory() = default;
 
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.

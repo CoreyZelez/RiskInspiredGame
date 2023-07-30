@@ -28,32 +28,32 @@ void MapMaker::draw(sf::RenderWindow &window)
 	}
 }
 
-void MapMaker::handleEvent(const sf::RenderWindow &window, const sf::Event &event)
+void MapMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 {
 	switch(state)
 	{
 	case MapMakerState::none:
-		handleButtons(event);
+		handleButtonInput(window);
 		break;
 	case MapMakerState::territoryMode:
-		territoryMaker.handleEvent(window, event);
+		territoryMaker.handleInput(window, view);
 		break;
 	case MapMakerState::estateMode:
-		estateMaker.handleEvent(event);
+		estateMaker.handleInput(window);
 		break;
 	}
 	
 }
 
-void MapMaker::handleButtons(const sf::Event & event)
+void MapMaker::handleButtonInput(const sf::RenderWindow &window)
 {
 	for(Button &button : buttons)
 	{
-		button.handleEvent(event);
+		button.handleInput(window);
 	}
 }
 
-void MapMaker::drawButtons(sf::RenderWindow & window)
+void MapMaker::drawButtons(sf::RenderWindow &window)
 {
 	for(Button &button : buttons)
 	{

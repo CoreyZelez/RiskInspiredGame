@@ -11,6 +11,8 @@ class NavalFleet;
 class Territory 
 {
 public:
+	Territory(sf::Color color);
+
 	void draw(sf::RenderWindow &window) const;  // TEMPORARY. 
 
 	bool isEmpty() const;  // True if territory occupies no positions on map.

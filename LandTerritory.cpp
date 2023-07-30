@@ -1,8 +1,14 @@
 #include "LandTerritory.h"
 #include "LandArmy.h"
 #include "NavalFleet.h"
+#include "Utility.h"
 #include <assert.h>
 #include <iostream>
+
+LandTerritory::LandTerritory()
+	: Territory(createRandomLandColor())
+{
+}
 
 void LandTerritory::initEstate(const TerritoryEstate *estate)
 {

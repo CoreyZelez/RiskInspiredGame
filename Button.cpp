@@ -1,4 +1,5 @@
 #include "Button.h"
+#include "InputUtility.h"
 
 Button::Button(sf::Vector2f position, sf::Vector2f size, std::unique_ptr<Command> command)
 	: position(position), size(size), command(std::move(command)) 
@@ -13,12 +14,14 @@ bool Button::contains(const sf::Vector2f & point) const
 	return shape.getGlobalBounds().contains(point);
 }
 
-void Button::handleEvent(const sf::Event & event)
+void Button::handleInput(const sf::RenderWindow &window)
 {
-	if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) 
+	InputUtility &inputUtility = InputUtility::getInstance();
+
+	if(inputUtility.getButtonPressed(sf::Mouse::Left))
 	{
-		sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
-		if(contains(mousePos))
+		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+		if(contains(sf::Vector2f(mousePos.x, mousePos.y)))
 		{
 			assert(command.get() != nullptr);
 			command.get()->execute();
@@ -26,7 +29,7 @@ void Button::handleEvent(const sf::Event & event)
 	}
 }
 
-void Button::draw(sf::RenderWindow & window)
+void Button::draw(sf::RenderWindow &window)
 {
 	window.draw(shape);
 }

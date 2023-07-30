@@ -4,6 +4,8 @@ void EstateMaker::draw(sf::RenderWindow &window)
 {
 }
 
-void EstateMaker::handleEvent(const sf::Event & event)
+void EstateMaker::handleInput(const sf::RenderWindow &window)
 {
 }
+
+
