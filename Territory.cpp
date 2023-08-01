@@ -1,6 +1,6 @@
 #include "Territory.h"
 #include <assert.h>
-
+#include <iostream>
 
 
 Territory::Territory(sf::Color color)
@@ -28,6 +28,11 @@ void Territory::removeSquare(sf::Vector2f position)
 	graphics.removeSquare(position);
 }
 
+bool Territory::sharesBorder(const Territory &territory) const
+{
+	return graphics.sharesBorder(territory.graphics);
+}
+
 bool Territory::containsPosition(sf::Vector2f position) const
 {
 	return graphics.containsPosition(position);
@@ -36,6 +41,11 @@ bool Territory::containsPosition(sf::Vector2f position) const
 double Territory::getDefenceMultiplier() const
 {
 	return defenceMultiplier;
+}
+
+sf::Vector2f Territory::getCenter() const
+{
+	return graphics.getCenter();
 }
 
 

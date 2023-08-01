@@ -1,2 +1,37 @@
-﻿  TerritoryMaker.cpp
-  RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe
+﻿  TerritoryGraphics.cpp
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(31): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(31): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(32): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(32): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(44): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(44): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(45): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(45): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(58): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(58): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(59): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(59): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(85): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(85): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(86): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(86): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(97): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(97): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(103): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(105): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(105): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(106): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(106): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(107): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(107): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(108): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\corey\onedrive\documents\projects\riskinspiredgame\territorygraphics.cpp(108): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+  RiskTypeGame.vcxproj -> C:\Users\corey\OneDrive\Documents\Projects\RiskInspiredGame\x64\Debug\RiskTypeGame.exe

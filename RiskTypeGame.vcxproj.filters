@@ -72,9 +72,6 @@
     <ClCompile Include="LandArmy.cpp">
       <Filter>Source Files\Military</Filter>
     </ClCompile>
-    <ClCompile Include="Barony.cpp">
-      <Filter>Source Files\Estate</Filter>
-    </ClCompile>
     <ClCompile Include="Territory.cpp">
       <Filter>Source Files\Territory</Filter>
     </ClCompile>
@@ -107,9 +104,6 @@
     </ClCompile>
     <ClCompile Include="Observer.cpp">
       <Filter>Source Files\Observer</Filter>
-    </ClCompile>
-    <ClCompile Include="TerritoryEstate.cpp">
-      <Filter>Source Files\Estate</Filter>
     </ClCompile>
     <ClCompile Include="EstateManager.cpp">
       <Filter>Source Files\Managers</Filter>
@@ -147,6 +141,12 @@
     <ClCompile Include="InputUtility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LandedEstate.cpp">
+      <Filter>Source Files\Estate</Filter>
+    </ClCompile>
+    <ClCompile Include="Barony.cpp">
+      <Filter>Source Files\Estate</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LandArmy.h">
@@ -162,9 +162,6 @@
       <Filter>Header Files\Territory</Filter>
     </ClInclude>
     <ClInclude Include="Title.h">
-      <Filter>Header Files\Estate</Filter>
-    </ClInclude>
-    <ClInclude Include="Barony.h">
       <Filter>Header Files\Estate</Filter>
     </ClInclude>
     <ClInclude Include="TextureManager.h">
@@ -196,9 +193,6 @@
     </ClInclude>
     <ClInclude Include="Message.h">
       <Filter>Header Files\Observer</Filter>
-    </ClInclude>
-    <ClInclude Include="TerritoryEstate.h">
-      <Filter>Header Files\Estate</Filter>
     </ClInclude>
     <ClInclude Include="EstateManager.h">
       <Filter>Header Files\Managers</Filter>
@@ -238,6 +232,12 @@
     </ClInclude>
     <ClInclude Include="InputUtility.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LandedEstate.h">
+      <Filter>Header Files\Estate</Filter>
+    </ClInclude>
+    <ClInclude Include="Barony.h">
+      <Filter>Header Files\Estate</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

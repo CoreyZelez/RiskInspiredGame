@@ -5,7 +5,7 @@
 
 class TerritoryEstate;
 
-class LandTerritory : public Territory, public Subject
+class LandTerritory : public Territory, public Subject  // Perhaps Territory should be Subject!!! Too much code reptetition...
 {
 public:
 	LandTerritory();
@@ -18,17 +18,12 @@ public:
 	// Fleet attempts to occupy this territory. Either peaceful or hostile. Returns true if attempt is successful.
 	virtual bool occupy(std::shared_ptr<NavalFleet> &fleet) override;
 
-	// Put army on territory.
-	virtual void putArmy(std::shared_ptr<LandArmy> &army) override;
-	// Put fleet on territory.
-	virtual void putFleet(std::shared_ptr<NavalFleet> &fleet) override;
-
 	const Player &getOccupant() const;
 
 	const std::shared_ptr<LandArmy> &getArmy() const;
 
 private:
-	const TerritoryEstate *estate;  // TerritoryEstate this territory is associated with.
-
 	std::shared_ptr<LandArmy> army;  // Army occupying territory. 
+
+	const TerritoryEstate *estate;  // TerritoryEstate this territory is associated with.
 };

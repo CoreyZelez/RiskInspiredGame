@@ -71,6 +71,10 @@ bool TerritoryManager::positionClaimed(sf::Vector2f position) const
 	return false;
 }
 
+void TerritoryManager::convertLandsToCoastal()
+{
+}
+
 LandTerritory* TerritoryManager::createLandTerritory()
 {
 	std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>();

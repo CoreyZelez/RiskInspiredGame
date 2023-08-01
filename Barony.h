@@ -1,15 +1,21 @@
 #pragma once
-#include "TerritoryEstate.h"
+#include "LandedEstate.h"
 #include "LandTerritory.h"
 #include <memory>
 
-class Barony : public TerritoryEstate
+class CoastalTerritory;
+class LandTerritory;
+
+class Barony : public LandedEstate
 {
 public:
-	Barony(const Player *ruler, LandTerritory territory);
+	Barony(Player *ruler, LandTerritory &territory);
+	Barony(Player *ruler, CoastalTerritory &territory);
+
 	~Barony() = default;
 
 private:
+
 
 };
 

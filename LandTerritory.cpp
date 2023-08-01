@@ -59,25 +59,6 @@ bool LandTerritory::occupy(std::shared_ptr<NavalFleet> &fleet)
 	return false;  
 }
 
-/// CAN THIS FUNCTION BE MOVED TO BASE CLASS!!!!
-void LandTerritory::putArmy(std::shared_ptr<LandArmy>& army)
-{
-	// this->army must have same owner as army or be nullptr.
-	assert(this->army.get() == nullptr || &this->army.get()->getOwner() == &army.get()->getOwner());
-	if(this->army.get() == nullptr)
-	{
-		this->army = army;
-	}
-	else if(&this->army.get()->getOwner() == &army.get()->getOwner())
-	{
-		// Increment this->fleet strength by strength of fleet.
-		this->army.get()->adjustStrength(army.get()->getStrength());
-	}
-}
-
-void LandTerritory::putFleet(std::shared_ptr<NavalFleet>& fleet)
-{
-}
 
 const Player& LandTerritory::getOccupant() const
 {
