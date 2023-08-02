@@ -1,4 +1,5 @@
 #include "Estate.h"
+#include "Player.h"
 #include <assert.h>
 
 Estate::Estate(Title title, const Player *ruler)
@@ -11,9 +12,21 @@ Title Estate::getTitle() const
 	return title;
 }
 
-void Estate::changeRuler(const Player *ruler)
+std::shared_ptr<LandArmy> Estate::yieldLandArmy()
+{
+	return nullptr;
+}
+
+std::shared_ptr<NavalFleet> Estate::yieldNavalFleet()
+{
+	return nullptr;
+}
+
+void Estate::setRuler(const Player *ruler)
 {
 	this->ruler = ruler;
 }
+
+
 
 

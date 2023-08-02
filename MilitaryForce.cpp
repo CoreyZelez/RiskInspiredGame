@@ -25,7 +25,7 @@ int MilitaryForce::getStrength() const
 	return strength;
 }
 
-const Player& MilitaryForce::getOwner() const
+const Player& MilitaryForce::getOwner() 
 {
 	return owner;
 }

@@ -12,7 +12,7 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!", sf::Style::Fullscreen);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
 	sf::View view = window.getDefaultView();
 	InputUtility &InputUtility = InputUtility::getInstance();
 

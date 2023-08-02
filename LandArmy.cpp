@@ -9,7 +9,7 @@ LandArmy::LandArmy(const Player &owner, Territory *location, int strength)
 {
 }
 
-void LandArmy::attack(LandArmy &defendingArmy, float defenceMultiplier)
+void LandArmy::attack(LandArmy &defendingArmy, double defenceMultiplier)
 {
 	const double defenderStrength = static_cast<double>(defendingArmy.getStrength());
 	const double defenderAdjustedStrength = defenderStrength * defenceMultiplier;  // defender strength.

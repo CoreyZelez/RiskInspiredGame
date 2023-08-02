@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <memory>
 
-NavalFleet::NavalFleet(const Player & owner, Territory * location, int strength)
+NavalFleet::NavalFleet(Player &owner, Territory *location, int strength)
 	: MilitaryForce(owner, location, strength)
 {
 }

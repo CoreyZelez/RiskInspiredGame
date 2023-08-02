@@ -5,7 +5,7 @@
 
 class TerritoryEstate;
 
-class LandTerritory : public Territory, public Subject  // Perhaps Territory should be Subject!!! Too much code reptetition...
+class LandTerritory : public Territory  // Perhaps Territory should be Subject!!! Too much code reptetition...
 {
 public:
 	LandTerritory();

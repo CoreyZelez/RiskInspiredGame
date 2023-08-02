@@ -28,6 +28,11 @@ void Territory::removeSquare(sf::Vector2f position)
 	graphics.removeSquare(position);
 }
 
+const Player *Territory::getOccupant() 
+{
+	return nullptr;
+}
+
 bool Territory::sharesBorder(const Territory &territory) const
 {
 	return graphics.sharesBorder(territory.graphics);

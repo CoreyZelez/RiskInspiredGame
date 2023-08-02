@@ -4,7 +4,7 @@
 class NavalFleet : public MilitaryForce
 {
 public:
-	NavalFleet(const Player &owner, Territory *location, int strength);
+	NavalFleet(Player &owner, Territory *location, int strength);
 	~NavalFleet() = default;
 
 protected:

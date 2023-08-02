@@ -10,8 +10,8 @@ class NavalFleet;
 class MilitaryManager
 {
 public:
-	void addArmy(std::shared_ptr<LandArmy> army);
-	void addNavy(std::shared_ptr<NavalFleet> navy);
+	void addLandArmy(std::shared_ptr<LandArmy> &army);
+	void addNavalFleet(std::shared_ptr<NavalFleet> &fleet);
 
 private:
 	std::vector<std::shared_ptr<LandArmy>> armies;
