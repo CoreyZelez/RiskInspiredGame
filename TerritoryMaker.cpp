@@ -49,7 +49,6 @@ void TerritoryMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 	{
 		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 		sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
-
 		// Add territory square at mouse position.
 		if(state == TerritoryMakerState::editTerritory && !territoryManager.positionClaimed(worldPos))
 		{

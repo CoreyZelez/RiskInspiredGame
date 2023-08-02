@@ -15,7 +15,7 @@ struct Vector2iHash
 	}
 };
 
-class TerritoryGraphics
+class TerritoryGraphics  // In future rename to TerritoryGrid. Do so when you stop having this class draw itself!!!
 {
 public:
 	TerritoryGraphics(sf::Color defaultColor);
@@ -35,10 +35,12 @@ public:
 	void setDefaultColor(sf::Color color);
 
 private:
+	sf::Vector2i calculateGridCoordinates(const sf::Vector2f &position) const;  // Converts vector world position to grid position.
+
 	void calculateCenter();
 	void calculateVertices();  // Calculates vertices for vertex array from square positions.
 
-	const double squareSize = 30;  // The size of one square of a territory on the map.
+	const float squareSize = 30.0f;  // The size of one square of a territory on the map.
 	std::unordered_set<sf::Vector2i, Vector2iHash> gridPositions;  // Grid positions on map territory occupys. 
 	sf::Vector2f center;  // Center position in game world.
 	sf::VertexArray vertices;

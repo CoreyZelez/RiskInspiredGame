@@ -10,12 +10,12 @@ TerritoryGraphics::TerritoryGraphics(sf::Color defaultColor)
 	
 }
 
-void TerritoryGraphics::draw(sf::RenderWindow & window) const
+void TerritoryGraphics::draw(sf::RenderWindow &window) const
 {
 	window.draw(vertices);
 }
 
-bool TerritoryGraphics::sharesBorder(const TerritoryGraphics & graphics) const
+bool TerritoryGraphics::sharesBorder(const TerritoryGraphics &graphics) const
 {
 	return false;
 }
@@ -27,10 +27,7 @@ bool TerritoryGraphics::isEmpty() const
 
 bool TerritoryGraphics::containsPosition(sf::Vector2f position) const
 {
-	// Converts position to grid coordinates.
-	const int x = position.x / squareSize;
-	const int y = position.y / squareSize;
-	sf::Vector2i gridPosition(x, y);
+	sf::Vector2i gridPosition = calculateGridCoordinates(position);
 	return gridPositions.find(gridPosition) != gridPositions.end();
 }
 
@@ -41,9 +38,7 @@ sf::Vector2f TerritoryGraphics::getCenter() const
 
 void TerritoryGraphics::addSquare(sf::Vector2f position)
 {
-	const int x = position.x / squareSize;
-	const int y = position.y / squareSize;
-	sf::Vector2i gridPosition(x, y);
+	sf::Vector2i gridPosition = calculateGridCoordinates(position);
 	// Add grid position if not contained in set.
 	if(gridPositions.count(gridPosition) == 0)
 	{
@@ -51,14 +46,14 @@ void TerritoryGraphics::addSquare(sf::Vector2f position)
 		calculateVertices();
 		calculateCenter();
 	}
+	calculateVertices();
 }
 
 void TerritoryGraphics::removeSquare(sf::Vector2f position)
 {
-	const int x = position.x / squareSize;
-	const int y = position.y / squareSize;
+	sf::Vector2i gridPosition = calculateGridCoordinates(position);
 	// Erase position and recalculate vertices and center if successful.
-	if (gridPositions.erase(sf::Vector2i(x, y)) == 1)
+	if (gridPositions.erase(gridPosition) == 1)
 	{
 		calculateVertices();
 		calculateCenter();
@@ -77,12 +72,19 @@ void TerritoryGraphics::setDefaultColor(sf::Color color)
 	calculateVertices();
 }
 
+sf::Vector2i TerritoryGraphics::calculateGridCoordinates(const sf::Vector2f &position) const
+{
+	const int x = std::floor(position.x / squareSize);
+	const int y = std::floor(position.y / squareSize);
+	return sf::Vector2i(x, y);
+}
+
 void TerritoryGraphics::calculateCenter()
 {
 	sf::Vector2f centerSum;  // Sum of the centers of grid squares.
 	for (sf::Vector2i position : gridPositions)
 	{
-		const float xCenter = (squareSize * position.x) - (squareSize / 2);
+		const float xCenter = (squareSize * position.x) + (squareSize / 2);
 		const float yCenter = (squareSize * position.y) + (squareSize / 2);
 		centerSum += sf::Vector2f(xCenter, yCenter);
 	}

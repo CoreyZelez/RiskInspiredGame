@@ -12,9 +12,8 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1400, 1000), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!", sf::Style::Fullscreen);
 	sf::View view = window.getDefaultView();
-
 	InputUtility &InputUtility = InputUtility::getInstance();
 
 	MapMaker mapMaker;
