@@ -3,11 +3,38 @@
 #include <algorithm>
 #include <iostream>
 #include <assert.h>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 TerritoryGraphics::TerritoryGraphics(sf::Color defaultColor)
 	: defaultColor(defaultColor)
 {
 	
+}
+
+TerritoryGraphics::TerritoryGraphics(sf::Color defaultColor, 
+	std::unordered_set<sf::Vector2i, Vector2iHash> gridPositions)
+	: defaultColor(defaultColor), gridPositions(gridPositions)
+{
+	calculateVertices();
+	calculateCenter();
+}
+
+void TerritoryGraphics::saveToFile(std::ofstream &file) const
+{
+	// Write territory grid square locations.
+	file << gridSaveLabel << std::endl;
+	for(auto iter = gridPositions.begin(); iter != gridPositions.end(); ++iter)
+	{
+		file << iter->x << " " << iter->y << std::endl;
+	}
+
+	// Write territory default color.
+	file << defaultColorLabel << std::endl;
+	file << static_cast<int>(defaultColor.r) << " " 
+		<< static_cast<int>(defaultColor.g) << " " 
+			<< static_cast<int>(defaultColor.b) << std::endl;
 }
 
 void TerritoryGraphics::draw(sf::RenderWindow &window) const
@@ -129,4 +156,38 @@ void TerritoryGraphics::calculateVertices()
 		triangles[5].color = color;
 		++i;
 	}
+}
+
+TerritoryGraphics loadTerritoryGraphics(std::ifstream &file)
+{
+	std::unordered_set<sf::Vector2i, Vector2iHash> gridPositions;
+
+	std::string line;
+	int num1;
+	int num2;
+
+	std::getline(file, line);
+	assert(line.compare(gridSaveLabel) == 0);
+	while(std::getline(file, line) && line.size() > 0 && line[0] != '#')
+	{
+		std::istringstream iss(line);
+		if(iss >> num1 >> num2)
+		{
+			gridPositions.insert(sf::Vector2i(num1, num2));
+		}
+		else
+		{
+			// Error with file format.
+			exit(1);
+		}
+	}
+
+	// Determine default color from file.
+	std::getline(file, line);
+	std::istringstream iss(line);
+	int r, g, b;
+	iss >> r >> g >> b;
+	sf::Color defaultColor(r, g, b);
+
+	return TerritoryGraphics(defaultColor, gridPositions);
 }

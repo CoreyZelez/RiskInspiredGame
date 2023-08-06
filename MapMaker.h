@@ -19,6 +19,9 @@ class MapMaker
 public:
 	MapMaker();
 
+	void save(std::string name) const;
+	void load(std::string name);
+
 	void draw(sf::RenderWindow &window);
 
 	void handleInput(const sf::RenderWindow &window, sf::View &view);

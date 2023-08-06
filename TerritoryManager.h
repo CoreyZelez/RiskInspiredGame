@@ -8,6 +8,9 @@ class TerritoryManager
 public:
 	void draw(sf::RenderWindow &window);
 
+	void save(std::string mapName) const;
+	void load(std::string mapName);
+
 	void removeEmptyTerritories();
 
 	bool positionClaimed(sf::Vector2f position) const;  // Returns true if any territory contains the world position.
@@ -23,7 +26,9 @@ public:
 	NavalTerritory* getNavalTerritory(sf::Vector2f position);  // Returns pointer to nval territory at world position.
 
 private:
-	std::vector<std::unique_ptr<LandTerritory>> landTerritories;
 	std::vector<std::unique_ptr<NavalTerritory>> navalTerritories;
+	std::vector<std::unique_ptr<LandTerritory>> landTerritories;
 };
+
+
 

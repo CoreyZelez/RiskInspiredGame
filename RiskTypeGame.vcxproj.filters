@@ -239,5 +239,8 @@
     <ClInclude Include="Barony.h">
       <Filter>Header Files\Estate</Filter>
     </ClInclude>
+    <ClInclude Include="IMilitaryFactory.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

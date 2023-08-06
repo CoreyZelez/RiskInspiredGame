@@ -17,6 +17,7 @@ int main()
 	InputUtility &InputUtility = InputUtility::getInstance();
 
 	MapMaker mapMaker;
+	mapMaker.load("test");
 
 	while(window.isOpen())
 	{
@@ -43,11 +44,7 @@ int main()
 		window.display();
 	}
 
-	// TESTING
-	Player player1;
-	Player player2;
-	LandTerritory land1;
-	LandTerritory land2;
+	mapMaker.save("test");
 
 	
 

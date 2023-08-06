@@ -9,10 +9,16 @@ class Player;
 class LandArmy;
 class NavalFleet;
 
+const std::string landSaveLabel = "# land";
+const std::string navalSaveLabel = "# naval";
+
 class Territory : public Subject
 {
 public:
-	Territory(sf::Color color);
+	explicit Territory(TerritoryGraphics graphics);
+	explicit Territory(sf::Color color);
+
+	void saveToFile(std::ofstream &file) const;
 
 	void draw(sf::RenderWindow &window) const;  // In future return vertex arrays probably!!!
 
@@ -20,6 +26,8 @@ public:
 	virtual bool occupy(std::shared_ptr<LandArmy> &army) = 0;
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
 	virtual bool occupy(std::shared_ptr<NavalFleet> &fleet) = 0;
+
+	/// JUST ADD GETTER TO TERRITORY GRAPHICS THEN ELIMINATE THESE FUNCTIONS!!!
 
 	// Adds square at position in game world.
 	void addSquare(sf::Vector2f position);  
@@ -38,11 +46,14 @@ public:
 	// True if territory occupies no positions on map.
 	bool isEmpty() const;  
 
-protected:
+	// Save label is identifier in txt file for territory type.
+	virtual std::string getSaveLabel() const = 0;
+
 	sf::Vector2f getCenter() const;
 
 private:
 	TerritoryGraphics graphics;
 	double defenceMultiplier = 1;  // In future perhaps have complex virtual function to calculate this!
 };
+
 

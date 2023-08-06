@@ -12,14 +12,9 @@ Title Estate::getTitle() const
 	return title;
 }
 
-std::shared_ptr<LandArmy> Estate::yieldLandArmy()
+const Player* Estate::getRuler() const
 {
-	return nullptr;
-}
-
-std::shared_ptr<NavalFleet> Estate::yieldNavalFleet()
-{
-	return nullptr;
+	return ruler;
 }
 
 void Estate::setRuler(const Player *ruler)

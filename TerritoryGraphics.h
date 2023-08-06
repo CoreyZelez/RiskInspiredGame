@@ -1,7 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <unordered_set>
+#include <string>
 
+const std::string gridSaveLabel = "# grid positions";
+const std::string defaultColorLabel = "# default color";
 // Hash function for sf::Vector2i
 struct Vector2iHash 
 {
@@ -19,6 +22,9 @@ class TerritoryGraphics  // In future rename to TerritoryGrid. Do so when you st
 {
 public:
 	TerritoryGraphics(sf::Color defaultColor);
+	TerritoryGraphics(sf::Color defaultColor, std::unordered_set<sf::Vector2i, Vector2iHash> gridPositions);
+
+	virtual void saveToFile(std::ofstream &file) const;
 
 	void draw(sf::RenderWindow &window) const;
 
@@ -41,10 +47,16 @@ private:
 	void calculateVertices();  // Calculates vertices for vertex array from square positions.
 
 	const float squareSize = 30.0f;  // The size of one square of a territory on the map.
+
 	std::unordered_set<sf::Vector2i, Vector2iHash> gridPositions;  // Grid positions on map territory occupys. 
 	sf::Vector2f center;  // Center position in game world.
+
 	sf::VertexArray vertices;
+
 	const sf::Color defaultColor;
 	sf::Color color = defaultColor;
 };
+
+TerritoryGraphics loadTerritoryGraphics(std::ifstream &file);
+
 

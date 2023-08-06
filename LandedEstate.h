@@ -1,22 +1,25 @@
 #pragma once
 #include "Estate.h"
 #include "Observer.h"
+#include "IMilitaryFactory.h"
 
 class Territory;
 
-class LandedEstate : public Estate, public Observer
+class LandedEstate : public Estate, public Observer, public IMilitaryFactory
 {
 public:
 	LandedEstate(Title title, const Player *ruler, Territory &territory);
 
 	virtual void update(Message message) override;
 
-	// virtual std::vector<std::shared_ptr<LandArmy>> yieldLandArmies();
-	// virtual std::vector<std::shared_ptr<NavalFleet>> yieldNavalFleets();
+	// Creates land army on some territory and returns handle to army.
+	virtual std::shared_ptr<LandArmy> yieldLandArmy() override = 0;
+	// Creates naval fleet on some territory and returns handle to fleet.
+	virtual std::shared_ptr<NavalFleet> yieldNavalFleet() override = 0;
 
 protected:
-	void putArmy(int strength);  // Puts new land army owned by ruler onto territory.
-	void putFleet(int strength);  // Puts new naval fleet owned by ruler onto territory.
+	std::shared_ptr<LandArmy> putArmy(int strength);  // Puts new land army owned by ruler onto territory. Returns handle.
+	std::shared_ptr<NavalFleet> putFleet(int strength);  // Puts new naval fleet owned by ruler onto territory. Returns handle.
 
 private:
 	Territory &territory;

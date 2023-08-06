@@ -1,9 +1,13 @@
 #include "TerritoryManager.h"
+#include "Territory.h"
 #include <assert.h>
 #include <iostream>
+#include <fstream>
 
 void TerritoryManager::draw(sf::RenderWindow &window)
 {
+	int cnt = 0;
+
 	// Draws land territories (including coastal territories).
 	for(const auto &territory : landTerritories)
 	{
@@ -14,6 +18,47 @@ void TerritoryManager::draw(sf::RenderWindow &window)
 	for(const auto &territory : navalTerritories)
 	{
 		territory.get()->draw(window);
+	}
+}
+
+void TerritoryManager::save(std::string mapName) const
+{
+	std::ofstream file("res/maps/" + mapName + "/" + mapName + "_territories.txt");
+
+	for(auto& territory : landTerritories)
+	{
+		territory.get()->saveToFile(file);
+	}
+
+	for(auto& territory : navalTerritories)
+	{
+		territory.get()->saveToFile(file);
+	}
+}
+
+void TerritoryManager::load(std::string mapName)
+{
+	std::ifstream file("res/maps/" + mapName + "/" + mapName + "_territories.txt");
+	std::string line;
+
+	while(std::getline(file, line))
+	{
+		if(line.size() == 0)  // Line is blank.
+		{
+			continue;
+		}
+		else if(line.compare(landSaveLabel) == 0)
+		{
+			TerritoryGraphics graphics = loadTerritoryGraphics(file);
+			std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>(graphics);
+			landTerritories.push_back(std::move(territory));
+		}
+		else if(line.compare(navalSaveLabel) == 0)
+		{
+			TerritoryGraphics graphics = loadTerritoryGraphics(file);
+			std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>(graphics);
+			navalTerritories.push_back(std::move(territory));
+		}
 	}
 }
 

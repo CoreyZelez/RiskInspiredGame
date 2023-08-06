@@ -12,6 +12,9 @@ public:
 	Barony(Player *ruler, LandTerritory &territory, double landArmyYield);
 	Barony(Player *ruler, CoastalTerritory &territory, double landArmyYield, double navalFleetYield);
 
+	virtual std::shared_ptr<LandArmy> yieldLandArmy() override;
+	virtual std::shared_ptr<NavalFleet> yieldNavalFleet() override;
+
 	~Barony() = default;
 
 private:

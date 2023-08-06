@@ -10,7 +10,7 @@ TerritoryMaker::TerritoryMaker(TerritoryManager &territoryManager)
 {
 }
 
-void TerritoryMaker::draw(sf::RenderWindow &window)
+void TerritoryMaker::draw(sf::RenderWindow &window) const
 {
 	territoryManager.draw(window);
 }

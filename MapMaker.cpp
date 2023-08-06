@@ -12,6 +12,16 @@ MapMaker::MapMaker()
 	buttons.push_back(Button(position, size, std::move(enterTerritoryMaker)));
 }
 
+void MapMaker::save(std::string name) const
+{
+	map.save(name);
+}
+
+void MapMaker::load(std::string name)
+{
+	map.load(name);
+}
+
 void MapMaker::draw(sf::RenderWindow &window)
 {
 	switch(state)

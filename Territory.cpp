@@ -1,11 +1,26 @@
 #include "Territory.h"
 #include <assert.h>
 #include <iostream>
+#include <fstream>
 
+Territory::Territory(TerritoryGraphics graphics)
+	: graphics(graphics)
+{
+}
 
 Territory::Territory(sf::Color color)
 	: graphics(color)
 {
+}
+
+void Territory::saveToFile(std::ofstream &file) const
+{
+	assert(file.is_open());
+
+	// Append data to the file.
+	file << getSaveLabel() << std::endl;
+	graphics.saveToFile(file);
+	file << std::endl;
 }
 
 void Territory::draw(sf::RenderWindow &window) const
@@ -53,5 +68,7 @@ sf::Vector2f Territory::getCenter() const
 	return graphics.getCenter();
 }
 
-
-
+//TerritoryGraphics createTerritory(std::ifstream &file)
+//{
+//	return TerritoryGraphics();
+//}

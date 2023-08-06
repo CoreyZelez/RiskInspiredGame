@@ -8,10 +8,9 @@ class TerritoryEstate;
 class LandTerritory : public Territory  // Perhaps Territory should be Subject!!! Too much code reptetition...
 {
 public:
+	explicit LandTerritory(TerritoryGraphics graphics);
 	LandTerritory();
 	~LandTerritory() = default;
-
-	void initEstate(const TerritoryEstate *estate);
 
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
 	virtual bool occupy(std::shared_ptr<LandArmy> &army) override;
@@ -22,8 +21,10 @@ public:
 
 	const std::shared_ptr<LandArmy> &getArmy() const;
 
+protected:
+	// Save label is identifier in txt file for territory type.
+	virtual std::string getSaveLabel() const override;
+
 private:
 	std::shared_ptr<LandArmy> army;  // Army occupying territory. 
-
-	const TerritoryEstate *estate;  // TerritoryEstate this territory is associated with.
 };

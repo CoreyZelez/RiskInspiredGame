@@ -4,16 +4,16 @@
 #include "Utility.h"
 #include <assert.h>
 #include <iostream>
+#include <fstream>
+
+LandTerritory::LandTerritory(TerritoryGraphics graphics)
+	: Territory(graphics)
+{
+}
 
 LandTerritory::LandTerritory()
 	: Territory(createRandomLandColor())
 {
-}
-
-void LandTerritory::initEstate(const TerritoryEstate *estate)
-{
-	assert(this->estate == nullptr);
-	this->estate = estate;
 }
 
 bool LandTerritory::occupy(std::shared_ptr<LandArmy> &army)
@@ -47,7 +47,7 @@ bool LandTerritory::occupy(std::shared_ptr<LandArmy> &army)
 		{
 			this->army = army;
 			army.get()->setLocation(this);
-			notifyObservers(newOwner);
+			notifyObservers(newOccupant);
 			return true;
 		}
 	}
@@ -74,4 +74,7 @@ const std::shared_ptr<LandArmy>& LandTerritory::getArmy() const
 	return army;
 }
 
-
+std::string LandTerritory::getSaveLabel() const
+{
+	return landSaveLabel;
+}

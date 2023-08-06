@@ -15,12 +15,8 @@ public:
 
 	Title getTitle() const;
 
-	// Creates land army on some territory and returns handle to army.
-	virtual std::shared_ptr<LandArmy> yieldLandArmy();
-	// Creates naval fleet on some territory and returns handle to fleet.
-	virtual std::shared_ptr<NavalFleet> yieldNavalFleet();
-
 protected:
+	const Player* getRuler() const;
 	void setRuler(const Player *ruler);
 
 private:

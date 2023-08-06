@@ -15,7 +15,7 @@ class TerritoryMaker
 public:
 	TerritoryMaker(TerritoryManager &territoryManager);
 
-	void draw(sf::RenderWindow &window);
+	void draw(sf::RenderWindow &window) const;
 
 	void handleInput(const sf::RenderWindow &window, sf::View &view);
 private:

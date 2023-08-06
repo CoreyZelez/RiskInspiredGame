@@ -2,5 +2,5 @@
 
 enum Message
 {
-	newOwner  // Signifys owner changed.
+	newOccupant  // Signifys occupant changed.
 };

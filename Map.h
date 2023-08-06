@@ -6,11 +6,15 @@
 #include "NavalTerritory.h"
 #include "CoastalTerritory.h"
 #include <SFML/Graphics.hpp>
+#include <string>
 
 class Map
 {
 public:
 	void drawTerritoryMap(sf::RenderWindow &window);
+
+	void save(std::string name) const;
+	void load(std::string name);
 
 	TerritoryManager &getTerritoryManager();
 	EstateManager &getEstateManager();

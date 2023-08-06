@@ -15,3 +15,6 @@ const Player& CoastalTerritory::getOccupant() const
 		return fleet.get()->getOwner();
 	}
 }
+
+
+

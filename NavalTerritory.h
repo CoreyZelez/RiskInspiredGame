@@ -4,13 +4,20 @@
 class NavalTerritory : public Territory
 {
 public:
+	explicit NavalTerritory(TerritoryGraphics graphics);
 	NavalTerritory();
+
 	~NavalTerritory() = default;
 
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
 	virtual bool occupy(std::shared_ptr<LandArmy> &army) override;
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
 	virtual bool occupy(std::shared_ptr<NavalFleet> &fleet) override;
+
+protected:
+	// Save label is identifier in txt file for territory type.
+	virtual std::string getSaveLabel() const override;
+
 private:
 
 };
