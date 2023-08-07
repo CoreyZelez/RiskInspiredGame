@@ -1,7 +1,18 @@
 #include "Barony.h"
 #include "LandTerritory.h"
-#include "CoastalTerritory.h"
 #include <assert.h>
+
+Barony::Barony(LandTerritory &territory, double landArmyYield)
+	: LandedEstate(Title::baron, territory),
+	landArmyYield(landArmyYield)
+{
+}
+
+Barony::Barony(LandTerritory &territory, double landArmyYield, double navalFleetYield)
+	: LandedEstate(Title::baron, territory),
+	landArmyYield(landArmyYield), navalFleetYield(navalFleetYield), canYieldNavy(true)
+{
+}
 
 Barony::Barony(Player* ruler, LandTerritory &territory, double landArmyYield)
 	: LandedEstate(Title::baron, ruler, territory), 
@@ -9,9 +20,9 @@ Barony::Barony(Player* ruler, LandTerritory &territory, double landArmyYield)
 {
 }
 
-Barony::Barony(Player* ruler, CoastalTerritory& territory, double landArmyYield, double navalFleetYield)
-	: LandedEstate(Title::baron, ruler, territory), canYieldNavy(true), 
-	landArmyYield(landArmyYield), navalFleetYield(navalFleetYield)
+Barony::Barony(Player *ruler, LandTerritory &territory, double landArmyYield, double navalFleetYield)
+	: LandedEstate(Title::baron, ruler, territory),
+	landArmyYield(landArmyYield), navalFleetYield(navalFleetYield), canYieldNavy(true)
 {
 }
 

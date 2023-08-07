@@ -18,11 +18,11 @@ struct Vector2iHash
 	}
 };
 
-class TerritoryGraphics  // In future rename to TerritoryGrid. Do so when you stop having this class draw itself!!!
+class TerritoryGrid  // In future rename to TerritoryGrid. Do so when you stop having this class draw itself!!!
 {
 public:
-	TerritoryGraphics(sf::Color defaultColor);
-	TerritoryGraphics(sf::Color defaultColor, std::unordered_set<sf::Vector2i, Vector2iHash> gridPositions);
+	TerritoryGrid(sf::Color defaultColor);
+	TerritoryGrid(sf::Color defaultColor, std::unordered_set<sf::Vector2i, Vector2iHash> gridPositions);
 
 	virtual void saveToFile(std::ofstream &file) const;
 
@@ -31,7 +31,7 @@ public:
 	void addSquare(sf::Vector2f position);  // Adds grid square at position in world.
 	void removeSquare(sf::Vector2f position);  // Adds grid square at position in world.
 
-	bool sharesBorder(const TerritoryGraphics &graphics) const;
+	bool sharesBorder(const TerritoryGrid &graphics) const;
 	bool isEmpty() const;  // Empty is true if there are no grid positions.
 	bool containsPosition(sf::Vector2f position) const;  // Returns true if any grid square contains position.
 
@@ -57,6 +57,6 @@ private:
 	sf::Color color = defaultColor;
 };
 
-TerritoryGraphics loadTerritoryGraphics(std::ifstream &file);
+TerritoryGrid loadTerritoryGrid(std::ifstream &file);
 
 

@@ -169,7 +169,6 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Command.cpp" />
-    <ClCompile Include="CoastalTerritory.cpp" />
     <ClCompile Include="EstateManager.cpp" />
     <ClCompile Include="InputUtility.cpp" />
     <ClCompile Include="LandedEstate.cpp" />
@@ -188,7 +187,7 @@
     <ClCompile Include="RiskTypeGame.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Territory.cpp" />
-    <ClCompile Include="TerritoryGraphics.cpp" />
+    <ClCompile Include="TerritoryGrid.cpp" />
     <ClCompile Include="TerritoryMaker.cpp" />
     <ClCompile Include="TerritoryManager.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -198,7 +197,6 @@
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Command.h" />
-    <ClInclude Include="CoastalTerritory.h" />
     <ClInclude Include="ChangeInstance.h" />
     <ClInclude Include="EstateManager.h" />
     <ClInclude Include="IMilitaryFactory.h" />
@@ -220,7 +218,7 @@
     <ClInclude Include="NavalTerritory.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Territory.h" />
-    <ClInclude Include="TerritoryGraphics.h" />
+    <ClInclude Include="TerritoryGrid.h" />
     <ClInclude Include="TerritoryMaker.h" />
     <ClInclude Include="TerritoryManager.h" />
     <ClInclude Include="TextureManager.h" />

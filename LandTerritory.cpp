@@ -6,13 +6,13 @@
 #include <iostream>
 #include <fstream>
 
-LandTerritory::LandTerritory(TerritoryGraphics graphics)
-	: Territory(graphics)
+LandTerritory::LandTerritory(int id, TerritoryGrid graphics)
+	: Territory(id, graphics)
 {
 }
 
-LandTerritory::LandTerritory()
-	: Territory(createRandomLandColor())
+LandTerritory::LandTerritory(int id)
+	: Territory(id, createRandomLandColor())
 {
 }
 
@@ -59,6 +59,15 @@ bool LandTerritory::occupy(std::shared_ptr<NavalFleet> &fleet)
 	return false;  
 }
 
+void LandTerritory::setIsCoastal(bool isCoastal)
+{
+	this->isCoastal = isCoastal;
+}
+
+bool LandTerritory::getIsCoastal() const
+{
+	return isCoastal;
+}
 
 const Player& LandTerritory::getOccupant() const
 {
@@ -72,6 +81,12 @@ const Player& LandTerritory::getOccupant() const
 const std::shared_ptr<LandArmy>& LandTerritory::getArmy() const
 {
 	return army;
+}
+
+const std::shared_ptr<NavalFleet>& LandTerritory::getFleet() const
+{
+	assert(!isCoastal || fleet.get() == nullptr);
+	return fleet;
 }
 
 std::string LandTerritory::getSaveLabel() const

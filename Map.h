@@ -4,7 +4,6 @@
 #include "Territory.h"
 #include "LandTerritory.h"
 #include "NavalTerritory.h"
-#include "CoastalTerritory.h"
 #include <SFML/Graphics.hpp>
 #include <string>
 

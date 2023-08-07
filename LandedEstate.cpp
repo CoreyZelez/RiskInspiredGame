@@ -8,6 +8,11 @@ LandedEstate::LandedEstate(Title title, const Player *ruler, Territory &territor
 {
 }
 
+LandedEstate::LandedEstate(Title title, Territory & territory)
+	: Estate(title), territory(territory)
+{
+}
+
 void LandedEstate::update(Message message)
 {
 	if(message == Message::newOccupant)

@@ -29,7 +29,7 @@ void TerritoryMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 		// Remove territory square at mouse position.
 		if(state == TerritoryMakerState::editTerritory)
 		{
-			territory->removeSquare(worldPos);
+			territory->getGrid().removeSquare(worldPos);
 		}
 		// Select territory for modification.
 		else if(state == TerritoryMakerState::none)
@@ -52,7 +52,7 @@ void TerritoryMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 		// Add territory square at mouse position.
 		if(state == TerritoryMakerState::editTerritory && !territoryManager.positionClaimed(worldPos))
 		{
-			territory->addSquare(worldPos);
+			territory->getGrid().addSquare(worldPos);
 		}
 	}
 	else if(inputUtility.getKeyPressed(sf::Keyboard::L))

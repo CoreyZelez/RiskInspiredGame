@@ -4,8 +4,8 @@
 class NavalTerritory : public Territory
 {
 public:
-	explicit NavalTerritory(TerritoryGraphics graphics);
-	NavalTerritory();
+	explicit NavalTerritory(int id, TerritoryGrid graphics);
+	NavalTerritory(int id);
 
 	~NavalTerritory() = default;
 

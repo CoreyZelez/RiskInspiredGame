@@ -3,13 +3,15 @@
 #include <assert.h>
 #include <fstream>
 
-NavalTerritory::NavalTerritory(TerritoryGraphics graphics)
-	: Territory(graphics)
+
+
+NavalTerritory::NavalTerritory(int id, TerritoryGrid grid)
+	: Territory(id, grid)
 {
 }
 
-NavalTerritory::NavalTerritory()
-	: Territory(createRandomNavalColor())
+NavalTerritory::NavalTerritory(int id)
+	: Territory(id, createRandomNavalColor())
 {
 }
 

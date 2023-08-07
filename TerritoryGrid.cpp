@@ -1,4 +1,4 @@
-#include "TerritoryGraphics.h"
+#include "TerritoryGrid.h"
 #include "Utility.h"
 #include <algorithm>
 #include <iostream>
@@ -7,13 +7,13 @@
 #include <sstream>
 #include <string>
 
-TerritoryGraphics::TerritoryGraphics(sf::Color defaultColor)
+TerritoryGrid::TerritoryGrid(sf::Color defaultColor)
 	: defaultColor(defaultColor)
 {
 	
 }
 
-TerritoryGraphics::TerritoryGraphics(sf::Color defaultColor, 
+TerritoryGrid::TerritoryGrid(sf::Color defaultColor, 
 	std::unordered_set<sf::Vector2i, Vector2iHash> gridPositions)
 	: defaultColor(defaultColor), gridPositions(gridPositions)
 {
@@ -21,7 +21,7 @@ TerritoryGraphics::TerritoryGraphics(sf::Color defaultColor,
 	calculateCenter();
 }
 
-void TerritoryGraphics::saveToFile(std::ofstream &file) const
+void TerritoryGrid::saveToFile(std::ofstream &file) const
 {
 	// Write territory grid square locations.
 	file << gridSaveLabel << std::endl;
@@ -37,33 +37,33 @@ void TerritoryGraphics::saveToFile(std::ofstream &file) const
 			<< static_cast<int>(defaultColor.b) << std::endl;
 }
 
-void TerritoryGraphics::draw(sf::RenderWindow &window) const
+void TerritoryGrid::draw(sf::RenderWindow &window) const
 {
 	window.draw(vertices);
 }
 
-bool TerritoryGraphics::sharesBorder(const TerritoryGraphics &graphics) const
+bool TerritoryGrid::sharesBorder(const TerritoryGrid &graphics) const
 {
 	return false;
 }
 
-bool TerritoryGraphics::isEmpty() const
+bool TerritoryGrid::isEmpty() const
 {
 	return gridPositions.size() == 0;
 }
 
-bool TerritoryGraphics::containsPosition(sf::Vector2f position) const
+bool TerritoryGrid::containsPosition(sf::Vector2f position) const
 {
 	sf::Vector2i gridPosition = calculateGridCoordinates(position);
 	return gridPositions.find(gridPosition) != gridPositions.end();
 }
 
-sf::Vector2f TerritoryGraphics::getCenter() const
+sf::Vector2f TerritoryGrid::getCenter() const
 {
 	return center;
 }
 
-void TerritoryGraphics::addSquare(sf::Vector2f position)
+void TerritoryGrid::addSquare(sf::Vector2f position)
 {
 	sf::Vector2i gridPosition = calculateGridCoordinates(position);
 	// Add grid position if not contained in set.
@@ -76,7 +76,7 @@ void TerritoryGraphics::addSquare(sf::Vector2f position)
 	calculateVertices();
 }
 
-void TerritoryGraphics::removeSquare(sf::Vector2f position)
+void TerritoryGrid::removeSquare(sf::Vector2f position)
 {
 	sf::Vector2i gridPosition = calculateGridCoordinates(position);
 	// Erase position and recalculate vertices and center if successful.
@@ -87,26 +87,26 @@ void TerritoryGraphics::removeSquare(sf::Vector2f position)
 	}
 }
 
-void TerritoryGraphics::setColor(sf::Color color)
+void TerritoryGrid::setColor(sf::Color color)
 {
 	this->color = color;
 	calculateVertices();
 }
 
-void TerritoryGraphics::setDefaultColor(sf::Color color)
+void TerritoryGrid::setDefaultColor(sf::Color color)
 {
 	color = defaultColor;
 	calculateVertices();
 }
 
-sf::Vector2i TerritoryGraphics::calculateGridCoordinates(const sf::Vector2f &position) const
+sf::Vector2i TerritoryGrid::calculateGridCoordinates(const sf::Vector2f &position) const
 {
 	const int x = std::floor(position.x / squareSize);
 	const int y = std::floor(position.y / squareSize);
 	return sf::Vector2i(x, y);
 }
 
-void TerritoryGraphics::calculateCenter()
+void TerritoryGrid::calculateCenter()
 {
 	sf::Vector2f centerSum;  // Sum of the centers of grid squares.
 	for (sf::Vector2i position : gridPositions)
@@ -120,7 +120,7 @@ void TerritoryGraphics::calculateCenter()
 	center.y /= gridPositions.size();
 }
 
-void TerritoryGraphics::calculateVertices()
+void TerritoryGrid::calculateVertices()
 {
 	vertices.setPrimitiveType(sf::Triangles);
 	const int numTriangles = gridPositions.size() * 6;
@@ -158,7 +158,7 @@ void TerritoryGraphics::calculateVertices()
 	}
 }
 
-TerritoryGraphics loadTerritoryGraphics(std::ifstream &file)
+TerritoryGrid loadTerritoryGrid(std::ifstream &file)
 {
 	std::unordered_set<sf::Vector2i, Vector2iHash> gridPositions;
 
@@ -189,5 +189,5 @@ TerritoryGraphics loadTerritoryGraphics(std::ifstream &file)
 	iss >> r >> g >> b;
 	sf::Color defaultColor(r, g, b);
 
-	return TerritoryGraphics(defaultColor, gridPositions);
+	return TerritoryGrid(defaultColor, gridPositions);
 }

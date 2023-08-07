@@ -9,6 +9,7 @@ class LandedEstate : public Estate, public Observer, public IMilitaryFactory
 {
 public:
 	LandedEstate(Title title, const Player *ruler, Territory &territory);
+	LandedEstate(Title title, Territory &territory);
 
 	virtual void update(Message message) override;
 

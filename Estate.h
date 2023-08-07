@@ -12,7 +12,7 @@ class Estate
 {
 public:
 	Estate(Title title, const Player *ruler);
-
+	Estate(Title title);
 	Title getTitle() const;
 
 protected:
@@ -22,6 +22,6 @@ protected:
 private:
 	const Title title;
 	std::vector<Estate*> subFiefs;
-	const Player *ruler;
+	const Player *ruler = nullptr;
 };
 

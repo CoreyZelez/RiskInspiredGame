@@ -3,13 +3,13 @@
 #include <iostream>
 #include <fstream>
 
-Territory::Territory(TerritoryGraphics graphics)
-	: graphics(graphics)
+Territory::Territory(int id, TerritoryGrid grid)
+	: id(id), grid(grid)
 {
 }
 
-Territory::Territory(sf::Color color)
-	: graphics(color)
+Territory::Territory(int id, sf::Color color)
+	: id(id), grid(color)
 {
 }
 
@@ -19,43 +19,35 @@ void Territory::saveToFile(std::ofstream &file) const
 
 	// Append data to the file.
 	file << getSaveLabel() << std::endl;
-	graphics.saveToFile(file);
+	grid.saveToFile(file);
+	file << "# id" << std::endl;
+	file << id << std::endl;
 	file << std::endl;
 }
 
 void Territory::draw(sf::RenderWindow &window) const
 {
-	graphics.draw(window);
+	grid.draw(window);
 }
 
 bool Territory::isEmpty() const
 {
-	return graphics.isEmpty();
+	return grid.isEmpty();
 }
 
-void Territory::addSquare(sf::Vector2f position)
+TerritoryGrid & Territory::getGrid()
 {
-	graphics.addSquare(position);
+	return grid;
 }
 
-void Territory::removeSquare(sf::Vector2f position)
-{
-	graphics.removeSquare(position);
-}
-
-const Player *Territory::getOccupant() 
+const Player *Territory::getOccupant()
 {
 	return nullptr;
 }
 
 bool Territory::sharesBorder(const Territory &territory) const
 {
-	return graphics.sharesBorder(territory.graphics);
-}
-
-bool Territory::containsPosition(sf::Vector2f position) const
-{
-	return graphics.containsPosition(position);
+	return grid.sharesBorder(territory.grid);
 }
 
 double Territory::getDefenceMultiplier() const
@@ -65,10 +57,17 @@ double Territory::getDefenceMultiplier() const
 
 sf::Vector2f Territory::getCenter() const
 {
-	return graphics.getCenter();
+	return grid.getCenter();
 }
 
-//TerritoryGraphics createTerritory(std::ifstream &file)
-//{
-//	return TerritoryGraphics();
-//}
+int loadTerritoryID(std::ifstream &file)
+{
+	std::string line;
+	int id;
+
+	std::getline(file, line);
+	assert(line.compare("# id") == 0);
+	file >> id;
+	std::getline(file, line);
+	return id;
+}

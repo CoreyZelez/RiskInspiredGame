@@ -28,6 +28,7 @@ public:
 private:
 	std::vector<std::unique_ptr<NavalTerritory>> navalTerritories;
 	std::vector<std::unique_ptr<LandTerritory>> landTerritories;
+	int nextID = 0;  // Next ID to be assigned to newly created territory.
 };
 
 

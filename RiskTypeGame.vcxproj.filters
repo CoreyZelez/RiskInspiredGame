@@ -117,12 +117,6 @@
     <ClCompile Include="Map.cpp">
       <Filter>Source Files\Map</Filter>
     </ClCompile>
-    <ClCompile Include="CoastalTerritory.cpp">
-      <Filter>Source Files\Territory</Filter>
-    </ClCompile>
-    <ClCompile Include="TerritoryGraphics.cpp">
-      <Filter>Source Files\Territory</Filter>
-    </ClCompile>
     <ClCompile Include="EstateMaker.cpp">
       <Filter>Source Files\Map</Filter>
     </ClCompile>
@@ -146,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="Barony.cpp">
       <Filter>Source Files\Estate</Filter>
+    </ClCompile>
+    <ClCompile Include="TerritoryGrid.cpp">
+      <Filter>Source Files\Territory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,12 +203,6 @@
     <ClInclude Include="Map.h">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
-    <ClInclude Include="CoastalTerritory.h">
-      <Filter>Header Files\Territory</Filter>
-    </ClInclude>
-    <ClInclude Include="TerritoryGraphics.h">
-      <Filter>Header Files\Territory</Filter>
-    </ClInclude>
     <ClInclude Include="EstateMaker.h">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
@@ -241,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="IMilitaryFactory.h">
       <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="TerritoryGrid.h">
+      <Filter>Header Files\Territory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

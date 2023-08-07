@@ -7,6 +7,11 @@ Estate::Estate(Title title, const Player *ruler)
 {
 }
 
+Estate::Estate(Title title)
+	: title(title)
+{
+}
+
 Title Estate::getTitle() const
 {
 	return title;

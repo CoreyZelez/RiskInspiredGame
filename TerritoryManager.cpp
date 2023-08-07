@@ -49,15 +49,23 @@ void TerritoryManager::load(std::string mapName)
 		}
 		else if(line.compare(landSaveLabel) == 0)
 		{
-			TerritoryGraphics graphics = loadTerritoryGraphics(file);
-			std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>(graphics);
+			TerritoryGrid graphics = loadTerritoryGrid(file);
+			int id = loadTerritoryID(file);
+			std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>(id, graphics);
 			landTerritories.push_back(std::move(territory));
+
+			// Ensure next id greater than all other territory ids.
+			nextID = std::max(nextID, id + 1);
 		}
 		else if(line.compare(navalSaveLabel) == 0)
 		{
-			TerritoryGraphics graphics = loadTerritoryGraphics(file);
-			std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>(graphics);
+			TerritoryGrid graphics = loadTerritoryGrid(file);
+			int id = loadTerritoryID(file);
+			std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>(id, graphics);
 			navalTerritories.push_back(std::move(territory));
+
+			// Ensure next id greater than all other territory ids.
+			nextID = std::max(nextID, id + 1);
 		}
 	}
 }
@@ -98,7 +106,7 @@ bool TerritoryManager::positionClaimed(sf::Vector2f position) const
 	// Checks land territories for position.
 	for(const auto &territory : landTerritories)
 	{
-		if(territory.get()->containsPosition(position))
+		if(territory.get()->getGrid().containsPosition(position))
 		{
 			return true;
 		}
@@ -107,7 +115,7 @@ bool TerritoryManager::positionClaimed(sf::Vector2f position) const
 	// Checks naval territories for position.
 	for(const auto &territory : navalTerritories)
 	{
-		if(territory.get()->containsPosition(position))
+		if(territory.get()->getGrid().containsPosition(position))
 		{
 			return true;
 		}
@@ -122,14 +130,14 @@ void TerritoryManager::convertLandsToCoastal()
 
 LandTerritory* TerritoryManager::createLandTerritory()
 {
-	std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>();
+	std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>(nextID++);
 	landTerritories.emplace_back(std::move(territory));
 	return landTerritories.back().get();
 }
 
 NavalTerritory* TerritoryManager::createNavalTerritory()
 {
-	std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>();
+	std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>(nextID++);
 	navalTerritories.emplace_back(std::move(territory));
 	return navalTerritories.back().get();
 }
@@ -154,7 +162,7 @@ LandTerritory* TerritoryManager::getLandTerritory(sf::Vector2f position)
 {
 	for(const auto &territory : landTerritories)
 	{
-		if(territory.get()->containsPosition(position))
+		if(territory.get()->getGrid().containsPosition(position))
 		{
 			return territory.get();
 		}
@@ -182,7 +190,7 @@ NavalTerritory* TerritoryManager::getNavalTerritory(sf::Vector2f position)
 {
 	for(const auto &territory : navalTerritories)
 	{
-		if(territory.get()->containsPosition(position))
+		if(territory.get()->getGrid().containsPosition(position))
 		{
 			return territory.get();
 		}
