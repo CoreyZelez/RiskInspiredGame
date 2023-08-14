@@ -6,7 +6,7 @@
 #include <iostream>
 #include <fstream>
 
-LandTerritory::LandTerritory(int id, TerritoryGrid graphics)
+LandTerritory::LandTerritory(int id, Grid graphics)
 	: Territory(id, graphics)
 {
 }

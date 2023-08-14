@@ -4,12 +4,12 @@
 #include "LandArmy.h"
 
 LandedEstate::LandedEstate(Title title, const Player *ruler, Territory &territory)
-	: Estate(title, ruler), territory(territory)
+	: Estate(title, ruler, territory.getGrid()), territory(territory)
 {
 }
 
-LandedEstate::LandedEstate(Title title, Territory & territory)
-	: Estate(title), territory(territory)
+LandedEstate::LandedEstate(Title title, Territory &territory)
+	: Estate(title, territory.getGrid()), territory(territory)
 {
 }
 
@@ -19,6 +19,11 @@ void LandedEstate::update(Message message)
 	{
 		setRuler(territory.getOccupant());
 	}
+}
+
+bool LandedEstate::containsPosition(const sf::Vector2f &position) const
+{
+	return territory.getGrid().containsPosition(position);
 }
 
 std::shared_ptr<LandArmy> LandedEstate::putArmy(int strength)

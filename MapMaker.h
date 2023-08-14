@@ -36,6 +36,6 @@ private:
 	TerritoryMaker territoryMaker;
 	EstateMaker estateMaker;
 
-	std::vector<Button> buttons;
+	std::vector<std::unique_ptr<Button>> buttons;
 };
 

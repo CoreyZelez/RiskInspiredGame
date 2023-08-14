@@ -103,15 +103,14 @@ void TerritoryMaker::handleInputForView(sf::View &view) const
 	}
 
 	// Handle view zoom.
-	const float zoom = 500.0f;
-	const float effectiveZoom = zoom * inputClock.getElapsedTime().asSeconds();
+	const float zoom = 0.1f;
 	if(inputUtility.getMouseScrollDirection() == 1)
 	{
-		view.zoom(1 - effectiveZoom);
+		view.zoom(1 - zoom);
 	}
 	else if(inputUtility.getMouseScrollDirection() == -1)
 	{
-		view.zoom(1 + effectiveZoom);
+		view.zoom(1 + zoom);
 	}
 }
 

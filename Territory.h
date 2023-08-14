@@ -1,6 +1,6 @@
 #pragma once
 #include "Subject.h"
-#include "TerritoryGrid.h"
+#include "Grid.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
@@ -15,7 +15,7 @@ const std::string navalSaveLabel = "# naval";
 class Territory : public Subject
 {
 public:
-	Territory(int id, TerritoryGrid grid);
+	Territory(int id, Grid grid);
 	Territory(int id, sf::Color color);
 
 	void saveToFile(std::ofstream &file) const;
@@ -31,7 +31,8 @@ public:
 	bool sharesBorder(const Territory &territory) const;
 
 	double getDefenceMultiplier() const;
-	TerritoryGrid& getGrid();
+	Grid& getGrid();
+	int getID() const;
 	virtual const Player *getOccupant();
 	bool isEmpty() const;  	// True if territory occupies no positions on map.
 	virtual std::string getSaveLabel() const = 0; 	// Save label is identifier in txt file for territory type.
@@ -39,7 +40,7 @@ public:
 
 private:
 	int id;
-	TerritoryGrid grid;
+	Grid grid;
 	double defenceMultiplier = 1;  // In future perhaps have complex virtual function to calculate this!
 };
 

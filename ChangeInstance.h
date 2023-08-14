@@ -4,7 +4,7 @@
 template<typename T> class ChangeInstance : public Command
 {
 public:
-	ChangeInstance(T & instance, T target) 
+	ChangeInstance(T &instance, T target) 
 		: instance(instance), target(target) {}
 
 	virtual void execute() override
@@ -15,6 +15,5 @@ public:
 private:
 	T &instance;
 	T target;
-
 };
 

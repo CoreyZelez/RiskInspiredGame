@@ -3,11 +3,13 @@
 #include <Memory>
 #include <SFML/Graphics.hpp>
 #include <assert.h>
+#include <vector>
 
 class Button
 {
 public:
-	Button(sf::Vector2f position, sf::Vector2f size, std::unique_ptr<Command> command);
+	Button(sf::Vector2f position, sf::Vector2f size, std::vector<std::unique_ptr<Command>> &commands);
+	Button(sf::Vector2f position, sf::Vector2f size, std::unique_ptr<Command> &command);
 
 	void draw(sf::RenderWindow& window);
 
@@ -20,6 +22,6 @@ private:
 	sf::Vector2f position;
 	sf::Vector2f size;
 
-	std::unique_ptr<Command> command;
+	std::vector<std::unique_ptr<Command>> commands;
 };
 

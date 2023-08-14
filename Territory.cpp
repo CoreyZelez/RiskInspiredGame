@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 
-Territory::Territory(int id, TerritoryGrid grid)
+Territory::Territory(int id, Grid grid)
 	: id(id), grid(grid)
 {
 }
@@ -35,9 +35,14 @@ bool Territory::isEmpty() const
 	return grid.isEmpty();
 }
 
-TerritoryGrid & Territory::getGrid()
+Grid& Territory::getGrid()
 {
 	return grid;
+}
+
+int Territory::getID() const
+{
+	return id;
 }
 
 const Player *Territory::getOccupant()

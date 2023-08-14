@@ -8,7 +8,7 @@ class TerritoryEstate;
 class LandTerritory : public Territory  // Perhaps Territory should be Subject!!! Too much code reptetition...
 {
 public:
-	LandTerritory(int id, TerritoryGrid graphics);
+	LandTerritory(int id, Grid graphics);
 	explicit LandTerritory(int id);
 
 	~LandTerritory() = default;

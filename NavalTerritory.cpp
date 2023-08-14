@@ -5,7 +5,7 @@
 
 
 
-NavalTerritory::NavalTerritory(int id, TerritoryGrid grid)
+NavalTerritory::NavalTerritory(int id, Grid grid)
 	: Territory(id, grid)
 {
 }

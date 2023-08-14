@@ -184,10 +184,11 @@
     <ClCompile Include="NavalTerritory.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ReconcileBaronies.cpp" />
     <ClCompile Include="RiskTypeGame.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Territory.cpp" />
-    <ClCompile Include="TerritoryGrid.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="TerritoryMaker.cpp" />
     <ClCompile Include="TerritoryManager.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="MapMaker.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="ReconcileBaronies.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="MilitaryForce.h" />
     <ClInclude Include="Barony.h" />
@@ -218,7 +220,7 @@
     <ClInclude Include="NavalTerritory.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Territory.h" />
-    <ClInclude Include="TerritoryGrid.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="TerritoryMaker.h" />
     <ClInclude Include="TerritoryManager.h" />
     <ClInclude Include="TextureManager.h" />

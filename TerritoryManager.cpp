@@ -6,8 +6,6 @@
 
 void TerritoryManager::draw(sf::RenderWindow &window)
 {
-	int cnt = 0;
-
 	// Draws land territories (including coastal territories).
 	for(const auto &territory : landTerritories)
 	{
@@ -49,9 +47,9 @@ void TerritoryManager::load(std::string mapName)
 		}
 		else if(line.compare(landSaveLabel) == 0)
 		{
-			TerritoryGrid graphics = loadTerritoryGrid(file);
+			Grid graphics = loadTerritoryGrid(file);
 			int id = loadTerritoryID(file);
-			std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>(id, graphics);
+			std::shared_ptr<LandTerritory> territory = std::make_shared<LandTerritory>(id, graphics);
 			landTerritories.push_back(std::move(territory));
 
 			// Ensure next id greater than all other territory ids.
@@ -59,9 +57,9 @@ void TerritoryManager::load(std::string mapName)
 		}
 		else if(line.compare(navalSaveLabel) == 0)
 		{
-			TerritoryGrid graphics = loadTerritoryGrid(file);
+			Grid graphics = loadTerritoryGrid(file);
 			int id = loadTerritoryID(file);
-			std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>(id, graphics);
+			std::shared_ptr<NavalTerritory> territory = std::make_shared<NavalTerritory>(id, graphics);
 			navalTerritories.push_back(std::move(territory));
 
 			// Ensure next id greater than all other territory ids.
@@ -128,57 +126,29 @@ void TerritoryManager::convertLandsToCoastal()
 {
 }
 
-LandTerritory* TerritoryManager::createLandTerritory()
+std::shared_ptr<LandTerritory> TerritoryManager::createLandTerritory()
 {
-	std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>(nextID++);
-	landTerritories.emplace_back(std::move(territory));
-	return landTerritories.back().get();
+	std::shared_ptr<LandTerritory> territory = std::make_shared<LandTerritory>(nextID++);
+	landTerritories.emplace_back(territory);
+	return territory;
 }
 
-NavalTerritory* TerritoryManager::createNavalTerritory()
+std::shared_ptr<NavalTerritory> TerritoryManager::createNavalTerritory()
 {
-	std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>(nextID++);
-	navalTerritories.emplace_back(std::move(territory));
-	return navalTerritories.back().get();
+	std::shared_ptr<NavalTerritory> territory = std::make_shared<NavalTerritory>(nextID++);
+	navalTerritories.emplace_back(territory);
+	return territory;
 }
 
-void TerritoryManager::removeLandTerritory(LandTerritory **territory)
+void TerritoryManager::removeLandTerritory(std::shared_ptr<LandTerritory> &territory)
 {
 	auto iter = landTerritories.begin();
 	while(iter != landTerritories.end())
 	{
-		if(iter->get() == *territory)
+		if(iter->get() == territory.get())
 		{
 			landTerritories.erase(iter);
-			*territory = nullptr;  // Invalidate future usage of pointer.
-			return;
-		}
-      ++iter;
-	}
-	assert(false);
-}
-
-LandTerritory* TerritoryManager::getLandTerritory(sf::Vector2f position)
-{
-	for(const auto &territory : landTerritories)
-	{
-		if(territory.get()->getGrid().containsPosition(position))
-		{
-			return territory.get();
-		}
-	}
-	return nullptr;
-}
-
-void TerritoryManager::removeNavalTerritory(NavalTerritory **territory)
-{
-	auto iter = navalTerritories.begin();
-	while(iter != navalTerritories.end())
-	{
-		if(iter->get() == *territory)
-		{
-			navalTerritories.erase(iter);
-			*territory = nullptr;  // Invalidate future usage of pointer.
+			territory = nullptr;  // Invalidate future usage of pointer.
 			return;
 		}
 		++iter;
@@ -186,14 +156,47 @@ void TerritoryManager::removeNavalTerritory(NavalTerritory **territory)
 	assert(false);
 }
 
-NavalTerritory* TerritoryManager::getNavalTerritory(sf::Vector2f position)
+std::shared_ptr<LandTerritory> TerritoryManager::getLandTerritory(sf::Vector2f position)
+{
+	for(const auto &territory : landTerritories)
+	{
+		if(territory.get()->getGrid().containsPosition(position))
+		{
+			return territory;
+		}
+	}
+	return nullptr;
+}
+
+void TerritoryManager::removeNavalTerritory(std::shared_ptr<NavalTerritory> &territory)
+{
+	auto iter = navalTerritories.begin();
+	while(iter != navalTerritories.end())
+	{
+		if(iter->get() == territory.get())
+		{
+			navalTerritories.erase(iter);
+			territory = nullptr;  // Invalidate future usage of pointer.
+			return;
+		}
+		++iter;
+	}
+	assert(false);
+}
+
+std::shared_ptr<NavalTerritory> TerritoryManager::getNavalTerritory(sf::Vector2f position)
 {
 	for(const auto &territory : navalTerritories)
 	{
 		if(territory.get()->getGrid().containsPosition(position))
 		{
-			return territory.get();
+			return territory;
 		}
 	}
 	return nullptr;
+}
+
+const std::vector<std::shared_ptr<LandTerritory>>& TerritoryManager::getLandTerritories() const
+{
+	return landTerritories;
 }

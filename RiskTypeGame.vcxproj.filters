@@ -64,6 +64,9 @@
     <Filter Include="Header Files\User Interface">
       <UniqueIdentifier>{50caffbf-40f3-4e70-8cba-26b2bb74cfda}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\User Interface\Commands">
+      <UniqueIdentifier>{82256a10-4994-4785-888a-fc555baeb1dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RiskTypeGame.cpp">
@@ -141,8 +144,11 @@
     <ClCompile Include="Barony.cpp">
       <Filter>Source Files\Estate</Filter>
     </ClCompile>
-    <ClCompile Include="TerritoryGrid.cpp">
-      <Filter>Source Files\Territory</Filter>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="ReconcileBaronies.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,12 +218,6 @@
     <ClInclude Include="Button.h">
       <Filter>Header Files\User Interface</Filter>
     </ClInclude>
-    <ClInclude Include="Command.h">
-      <Filter>Header Files\User Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="ChangeInstance.h">
-      <Filter>Header Files\User Interface</Filter>
-    </ClInclude>
     <ClInclude Include="Utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -233,8 +233,17 @@
     <ClInclude Include="IMilitaryFactory.h">
       <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="TerritoryGrid.h">
-      <Filter>Header Files\Territory</Filter>
+    <ClInclude Include="Grid.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Header Files\User Interface\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeInstance.h">
+      <Filter>Header Files\User Interface\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ReconcileBaronies.h">
+      <Filter>Header Files\User Interface\Commands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

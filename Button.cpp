@@ -1,12 +1,25 @@
 #include "Button.h"
 #include "InputUtility.h"
 
-Button::Button(sf::Vector2f position, sf::Vector2f size, std::unique_ptr<Command> command)
-	: position(position), size(size), command(std::move(command)) 
+Button::Button(sf::Vector2f position, sf::Vector2f size, std::vector<std::unique_ptr<Command>> &commands)
 {
+	for(auto &command : commands)
+	{
+		this->commands.emplace_back(std::move(command));
+	}
+
 	shape.setPosition(position);
 	shape.setSize(size);
-	shape.setFillColor(sf::Color::Green); 
+	shape.setFillColor(sf::Color::Green);
+}
+
+Button::Button(sf::Vector2f position, sf::Vector2f size, std::unique_ptr<Command> &command)
+{
+	commands.emplace_back(std::move(command));
+
+	shape.setPosition(position);
+	shape.setSize(size);
+	shape.setFillColor(sf::Color::Green);
 }
 
 bool Button::contains(const sf::Vector2f & point) const
@@ -23,8 +36,10 @@ void Button::handleInput(const sf::RenderWindow &window)
 		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 		if(contains(sf::Vector2f(mousePos.x, mousePos.y)))
 		{
-			assert(command.get() != nullptr);
-			command.get()->execute();
+			for(auto &command : commands)
+			{
+				command.get()->execute();
+			}
 		}
 	}
 }

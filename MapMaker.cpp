@@ -1,15 +1,27 @@
 #include "MapMaker.h"
 #include "ChangeInstance.h"
+#include "ReconcileBaronies.h"
 #include <assert.h>
 #include <iostream>
 
 MapMaker::MapMaker()
-	: territoryMaker(map.getTerritoryManager())
+	: territoryMaker(map.getTerritoryManager()), estateMaker(map.getEstateManager())
 {
+	// Button for entering territory maker.
 	std::unique_ptr<Command> enterTerritoryMaker = std::make_unique<ChangeInstance<MapMakerState>>(state, MapMakerState::territoryMode);
-	sf::Vector2f position(300, 300);
-	sf::Vector2f size(200, 70);
-	buttons.push_back(Button(position, size, std::move(enterTerritoryMaker)));
+	sf::Vector2f position1(300, 300);
+	sf::Vector2f size1(200, 70);
+	buttons.emplace_back(std::make_unique<Button>(position1, size1, enterTerritoryMaker));
+	
+	// Button for entering estate maker.
+	std::vector<std::unique_ptr<Command>> enterEstateMakerCommands;
+	// Changes map maker state.
+	enterEstateMakerCommands.emplace_back(std::make_unique<ChangeInstance<MapMakerState>>(state, MapMakerState::estateMode));  
+	// Generates and removes necessary baronies.
+	enterEstateMakerCommands.emplace_back(std::make_unique<ReconcileBaronies>(map.getEstateManager(), map.getTerritoryManager().getLandTerritories()));  
+	sf::Vector2f position2(700, 300);
+	sf::Vector2f size2(200, 70);
+	buttons.emplace_back(std::make_unique<Button>(position2, size2, enterEstateMakerCommands));
 }
 
 void MapMaker::save(std::string name) const
@@ -49,24 +61,23 @@ void MapMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 		territoryMaker.handleInput(window, view);
 		break;
 	case MapMakerState::estateMode:
-		estateMaker.handleInput(window);
+		estateMaker.handleInput(window, view);
 		break;
 	}
-	
 }
 
 void MapMaker::handleButtonInput(const sf::RenderWindow &window)
 {
-	for(Button &button : buttons)
+	for(auto &button : buttons)
 	{
-		button.handleInput(window);
+		button.get()->handleInput(window);
 	}
 }
 
 void MapMaker::drawButtons(sf::RenderWindow &window)
 {
-	for(Button &button : buttons)
+	for(auto &button : buttons)
 	{
-		button.draw(window);
+		button.get()->draw(window);
 	}
 }
