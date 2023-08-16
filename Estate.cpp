@@ -30,7 +30,7 @@ void Estate::addSubFief(std::shared_ptr<Estate> subFief)
 	assert(subFief->title < title);
 	assert(subFief->parent == nullptr);
 	subFiefs.push_back(subFief);
-	subFief.get()->parent = shared_from_this();  // Helds shared pointer to this object.
+	subFief.get()->parent = shared_from_this();  // Holds shared pointer to this object.
 	grid.addGrid(subFief.get()->grid);
 }
 
