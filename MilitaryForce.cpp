@@ -1,9 +1,10 @@
 #include "MilitaryForce.h"
 #include <assert.h>
 
-MilitaryForce::MilitaryForce(const Player &owner, Territory *location, int strength)
+MilitaryForce::MilitaryForce(Player &owner, Territory *location, int strength)
 	: owner(owner), location(location), strength(strength)
 {
+	assert(location != nullptr);
 	assert(strength > 0);
 }
 
@@ -25,7 +26,7 @@ int MilitaryForce::getStrength() const
 	return strength;
 }
 
-const Player& MilitaryForce::getOwner() 
+Player& MilitaryForce::getOwner() const
 {
 	return owner;
 }
@@ -35,9 +36,9 @@ bool MilitaryForce::isDead() const
 	return strength == 0;
 }
 
-Territory* MilitaryForce::getLocation() const
+Territory& MilitaryForce::getLocation() const
 {
-	return location;
+	return *location;
 }
 
 void MilitaryForce::setLocation(Territory* location)

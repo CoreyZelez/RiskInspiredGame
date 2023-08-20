@@ -20,7 +20,7 @@ public:
 
 	void setIsCoastal(bool isCoastal);
 	bool getIsCoastal() const;
-	const Player &getOccupant() const;
+	virtual Player *getOccupant() override;
 	const std::shared_ptr<LandArmy> &getArmy() const;
 	const std::shared_ptr<NavalFleet> &getFleet() const;
 

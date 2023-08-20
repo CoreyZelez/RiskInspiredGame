@@ -14,6 +14,8 @@ public:
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
 	virtual bool occupy(std::shared_ptr<NavalFleet> &fleet) override;
 
+	/// virtual Player *getOccupant() override;
+
 protected:
 	// Save label is identifier in txt file for territory type.
 	virtual std::string getSaveLabel() const override;

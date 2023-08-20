@@ -11,13 +11,15 @@ class Barony : public LandedEstate
 public:
 	Barony(LandTerritory &territory, double landArmyYield);
 	Barony(LandTerritory &territory, double landArmyYield, double navalFleetYield);
-	Barony(Player *ruler, LandTerritory &territory, double landArmyYield);
-	Barony(Player *ruler, LandTerritory &territory, double landArmyYield, double navalFleetYield);
 
 	~Barony() = default;
 
 	virtual std::shared_ptr<LandArmy> yieldLandArmy() override;
 	virtual std::shared_ptr<NavalFleet> yieldNavalFleet() override;
+
+protected:
+	// Provides bonus yield to this estate.
+	virtual void receiveBonusYield(const float &bonus) override;
 
 private:
 	double landArmyYield;  // Yield of land army per turn.

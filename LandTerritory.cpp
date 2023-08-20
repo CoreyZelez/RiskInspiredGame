@@ -69,13 +69,14 @@ bool LandTerritory::getIsCoastal() const
 	return isCoastal;
 }
 
-const Player& LandTerritory::getOccupant() const
+Player* LandTerritory::getOccupant()
 {
 	assert(army.get() != nullptr);
 	if(army.get() != nullptr)
 	{
-		return army.get()->getOwner();
+		return &army.get()->getOwner();
 	}
+	return nullptr;
 }
 
 const std::shared_ptr<LandArmy>& LandTerritory::getArmy() const

@@ -19,9 +19,6 @@
     <Filter Include="Source Files\Military">
       <UniqueIdentifier>{12a233ce-15e8-4ac7-849d-3a02d7b5e3a8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Territory">
-      <UniqueIdentifier>{389c53ad-9a93-40e1-a0fd-7ff4a3ee8b77}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Territory">
       <UniqueIdentifier>{74d7b4e6-482b-44f0-9669-7572825d6690}</UniqueIdentifier>
     </Filter>
@@ -67,6 +64,18 @@
     <Filter Include="Header Files\User Interface\Commands">
       <UniqueIdentifier>{82256a10-4994-4785-888a-fc555baeb1dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Testing">
+      <UniqueIdentifier>{9cebcdc9-75a9-4e77-9558-da64b4a39535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Testing">
+      <UniqueIdentifier>{fd224f62-483a-42f7-a325-42fb59f7b774}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Territory">
+      <UniqueIdentifier>{389c53ad-9a93-40e1-a0fd-7ff4a3ee8b77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\User Interface\Commands">
+      <UniqueIdentifier>{4b310f73-5491-4336-a555-48650a862997}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RiskTypeGame.cpp">
@@ -99,9 +108,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Player</Filter>
     </ClCompile>
-    <ClCompile Include="MilitaryManager.cpp">
-      <Filter>Source Files\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Subject.cpp">
       <Filter>Source Files\Observer</Filter>
     </ClCompile>
@@ -129,9 +135,6 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\User Interface</Filter>
     </ClCompile>
-    <ClCompile Include="Command.cpp">
-      <Filter>Source Files\User Interface</Filter>
-    </ClCompile>
     <ClCompile Include="Utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -147,8 +150,26 @@
     <ClCompile Include="Grid.cpp">
       <Filter>Source Files\Map</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerMilitaryManager.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerRelationshipManager.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="IUnitTest.cpp">
+      <Filter>Source Files\Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRunner.cpp">
+      <Filter>Source Files\Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="EstateTest.cpp">
+      <Filter>Source Files\Testing</Filter>
+    </ClCompile>
     <ClCompile Include="ReconcileBaronies.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\User Interface\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Source Files\User Interface\Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -183,9 +204,6 @@
       <Filter>Header Files\Estate</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="MilitaryManager.h">
       <Filter>Header Files\Player</Filter>
     </ClInclude>
     <ClInclude Include="Observer.h">
@@ -244,6 +262,21 @@
     </ClInclude>
     <ClInclude Include="ReconcileBaronies.h">
       <Filter>Header Files\User Interface\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMilitaryManager.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRelationshipManager.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="IUnitTest.h">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="EstateTest.h">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRunner.h">
+      <Filter>Header Files\Testing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -7,7 +7,8 @@ public:
 	NavalFleet(Player &owner, Territory *location, int strength);
 	~NavalFleet() = default;
 
-protected:
+	virtual void move(Territory &location, int strength) override;
+	// void attack(NavalFleet &defendingArmy, /// double defenceMultiplier);
 
 private:
 

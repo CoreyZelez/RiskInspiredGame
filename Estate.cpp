@@ -3,20 +3,9 @@
 #include <assert.h>
 #include <iostream>
 
-Estate::Estate(Title title, const Player *ruler)
-	: title(title), ruler(ruler)
-{
-}
-
 Estate::Estate(Title title)
 	: title(title)
 {
-}
-
-Estate::Estate(Title title, const Player *ruler, const Grid &grid)
-	: title(title), ruler(ruler)
-{
-	this->grid.addGrid(grid);
 }
 
 Estate::Estate(Title title, const Grid &grid)
@@ -25,30 +14,75 @@ Estate::Estate(Title title, const Grid &grid)
 	this->grid.addGrid(grid);
 }
 
-void Estate::addSubFief(std::shared_ptr<Estate> subFief)
+void Estate::initRuler(Player &ruler)
 {
-	assert(subFief->title < title);
-	assert(subFief->parent == nullptr);
-	subFiefs.push_back(subFief);
-	subFief.get()->parent = shared_from_this();  // Holds shared pointer to this object.
-	grid.addGrid(subFief.get()->grid);
+	assert(this->ruler == nullptr);
+	this->ruler = &ruler;
+	this->ruler->addFief(shared_from_this());
 }
 
-void Estate::removeSubFief(std::shared_ptr<Estate>& subFief)
+void Estate::provideSubfiefBonusYields()
 {
-	if(subFief == nullptr || subFief.get()->parent.get() != this)
+	if(title == Title::baron)
+	{
+		assert(subfief.size() == 0);
+		return;
+	}
+
+	float bonus = 0;
+	switch(title)
+	{
+	case Title::count:
+		bonus = 0.3f;
+		break;
+	case Title::duke:
+		bonus = 0.2f;
+		break;
+	case Title::king:
+		bonus = 0.1f;
+		break;
+	case Title::emperor:
+		bonus = 0.1f;
+		break;
+	}
+
+	// Grants bonus yield to all subfiefs that are military generating.
+	this->receiveBonusYield(bonus);
+}
+
+void Estate::yield(PlayerMilitaryManager &militaryManager)
+{
+}
+
+/* Function empty as (currently) non landed estates do not generate military directly. */
+void Estate::generateMilitary(PlayerMilitaryManager &militaryManager)
+{
+}
+
+void Estate::addSubfief(std::shared_ptr<Estate> subfief)
+{
+	assert(subfief->title < title);
+	assert(subfief->parent == nullptr);
+	subfiefs.push_back(subfief);
+	subfief.get()->parent = shared_from_this();  // Holds shared pointer to this object.
+	grid.addGrid(subfief.get()->grid);
+}
+
+void Estate::removeSubfief(std::shared_ptr<Estate>& subfief)
+{
+	if(subfief == nullptr || subfief.get()->parent.get() != this)
 	{
 		return;
 	}
 
-	for(auto iter = subFiefs.cbegin(); iter != subFiefs.cend(); ++iter)
+	for(auto iter = subfiefs.cbegin(); iter != subfiefs.cend(); ++iter)
 	{
-		if(iter->get() == subFief.get())
+		if(iter->get() == subfief.get())
 		{
-			subFiefs.erase(iter);
-			grid.removeGrid(subFief.get()->grid);
-			assert(subFief.get()->parent == this);
-			subFief.get()->parent = nullptr;
+			subfiefs.erase(iter);
+			grid.removeGrid(subfief.get()->grid);
+			assert(subfief.get()->parent.get() == this);
+			subfief.get()->parent = nullptr;
 			return;
 		}
 	}
@@ -79,16 +113,29 @@ bool Estate::hasParent() const
 	return parent != nullptr;
 }
 
+bool Estate::compareRuler(const Player *player) const
+{
+	return this->ruler == player;
+}
+
 Title Estate::getTitle() const
 {
 	return title;
 }
 
+void Estate::receiveBonusYield(const float &bonus)
+{
+	for(auto &subfief : subfiefs)
+	{
+		subfief.get()->receiveBonusYield(bonus);
+	}
+}
+
 bool Estate::containsPosition(const sf::Vector2f &position) const
 {
-	for(auto& subFief : subFiefs)
+	for(auto& subfief : subfiefs)
 	{
-		if(subFief.get()->containsPosition(position))
+		if(subfief.get()->containsPosition(position))
 		{
 			return true;
 		}
@@ -96,14 +143,16 @@ bool Estate::containsPosition(const sf::Vector2f &position) const
 	return false;
 }
 
-const Player* Estate::getRuler() const
+Player* Estate::getRuler() 
 {
 	return ruler;
 }
 
-void Estate::setRuler(const Player *ruler)
+void Estate::setRuler(Player *ruler)
 {
+	this->ruler->removeFief(this);
 	this->ruler = ruler;
+	this->ruler->addFief(shared_from_this());
 }
 
 

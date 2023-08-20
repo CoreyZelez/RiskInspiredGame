@@ -1,6 +1,7 @@
 #pragma once
 #include "Title.h"
-#include "MilitaryManager.h"
+#include "PlayerMilitaryManager.h"
+#include "PlayerRelationshipManager.h"
 #include <vector>
 #include <memory>
 
@@ -11,13 +12,14 @@ class NavalFleet;
 class Player
 {
 public:
-	MilitaryManager &getMilitaryManager();
+	void handleFiefYields();
 
+	void addFief(std::shared_ptr<Estate> estate);
+	void removeFief(const Estate *fief);
 private:
 	Title title;  // Official title of player.
-	std::vector<Estate*> fiefs;
-	Player *liege;
-	MilitaryManager militaryManager;
-
+	std::vector<std::shared_ptr<Estate>> fiefs;
+	PlayerMilitaryManager militaryManager;
+	PlayerRelationshipManager relationshipManager;
 };
 

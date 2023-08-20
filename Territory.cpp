@@ -45,7 +45,7 @@ int Territory::getID() const
 	return id;
 }
 
-const Player *Territory::getOccupant()
+Player *Territory::getOccupant()
 {
 	return nullptr;
 }

@@ -6,6 +6,7 @@
 #include "TerritoryManager.h"
 #include "MapMaker.h"
 #include "InputUtility.h"
+#include "TestRunner.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <iostream>
@@ -46,8 +47,8 @@ int main()
 
 	mapMaker.save("test");
 
-	
+	TestRunner testRunner;
+	testRunner.runTests();
 
-	//Barony
 	return 0;
 }

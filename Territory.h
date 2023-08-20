@@ -33,7 +33,7 @@ public:
 	double getDefenceMultiplier() const;
 	Grid& getGrid();
 	int getID() const;
-	virtual const Player *getOccupant();
+	virtual Player *getOccupant();
 	bool isEmpty() const;  	// True if territory occupies no positions on map.
 	virtual std::string getSaveLabel() const = 0; 	// Save label is identifier in txt file for territory type.
 	sf::Vector2f getCenter() const;

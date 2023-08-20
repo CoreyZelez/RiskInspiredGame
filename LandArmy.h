@@ -4,11 +4,11 @@
 class LandArmy : public MilitaryForce
 {
 public:
-	LandArmy(const Player &owner, Territory *location, int strength);
+	LandArmy(Player &owner, Territory *location, int strength);
 	~LandArmy() = default;
 
+	virtual void move(Territory &location, int strength) override;
 	void attack(LandArmy &defendingArmy, double defenceMultiplier);
-	virtual void move(Territory *location, int strength) override;
 
 private:
 

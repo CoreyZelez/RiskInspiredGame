@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <unordered_map>
 
 Grid::Grid()
 	: color(sf::Color::White)
@@ -22,7 +23,6 @@ Grid::Grid(sf::Color color,
 	: color(color), positions(positions)
 {
 	calculateVertices();
-	calculateCenter();
 }
 
 void Grid::saveToFile(std::ofstream &file) const
@@ -64,7 +64,7 @@ bool Grid::containsPosition(sf::Vector2f position) const
 
 sf::Vector2f Grid::getCenter() const
 {
-	return center;
+	return calculateWorldCoordinates(center);
 }
 
 void Grid::addGrid(const Grid &grid)
@@ -74,7 +74,6 @@ void Grid::addGrid(const Grid &grid)
 		positions.insert(*iter);
 	}
 	calculateVertices();
-	calculateCenter();
 }
 
 void Grid::removeGrid(const Grid &grid)
@@ -84,7 +83,6 @@ void Grid::removeGrid(const Grid &grid)
 		positions.erase(position);
 	}
 	calculateVertices();
-	calculateCenter();
 }
 
 void Grid::addSquare(sf::Vector2f position)
@@ -95,7 +93,6 @@ void Grid::addSquare(sf::Vector2f position)
 	{
 		positions.emplace(gridPosition);
 		calculateVertices();
-		calculateCenter();
 	}
 }
 
@@ -105,8 +102,7 @@ void Grid::removeSquare(sf::Vector2f position)
 	// Erase position and recalculate vertices and center if successful.
 	if (positions.erase(gridPosition) == 1)
 	{
-		calculateVertices();
-		calculateCenter();
+		calculateVertices();  
 	}
 }
 
@@ -121,6 +117,14 @@ sf::Vector2i Grid::calculateGridCoordinates(const sf::Vector2f &position) const
 	const int x = std::floor(position.x / squareSize);
 	const int y = std::floor(position.y / squareSize);
 	return sf::Vector2i(x, y);
+}
+
+/* Calculates world coordinate of center of grid square at position. */
+sf::Vector2f Grid::calculateWorldCoordinates(const sf::Vector2i &position) const
+{
+	const float x = position.x * squareSize + (squareSize / 2);
+	const float y = position.y * squareSize + (squareSize / 2);
+	return sf::Vector2f(x, y);
 }
 
 bool Grid::isBorder(sf::Vector2i position) const
@@ -149,16 +153,82 @@ bool Grid::isBorder(sf::Vector2i position) const
 
 void Grid::calculateCenter()
 {
-	sf::Vector2f centerSum;  // Sum of the centers of grid squares.
-	for (sf::Vector2i position : positions)
+	if(positions.size() == 0)
 	{
-		const float xCenter = (squareSize * position.x) + (squareSize / 2);
-		const float yCenter = (squareSize * position.y) + (squareSize / 2);
-		centerSum += sf::Vector2f(xCenter, yCenter);
+		return;
 	}
-	center = centerSum;
-	center.x /= positions.size();
-	center.y /= positions.size();
+
+	std::unordered_map<sf::Vector2i, int, Vector2iHash> distances;
+
+
+	// Determines which positions lie on grid edge/border.
+	for(auto position = positions.cbegin(); position != positions.cend(); ++position)
+	{
+		sf::Vector2i left(position->x - 1, position->y);
+		sf::Vector2i right(position->x + 1, position->y);
+		sf::Vector2i up(position->x, position->y - 1);
+		sf::Vector2i down(position->x, position->y + 1);
+		std::vector<sf::Vector2i> adjacencies = { left, right, up, down };
+		for(const sf::Vector2i &adjacency : adjacencies)
+		{
+			// position lies on grid border.
+			if(positions.count(adjacency) == 0)
+			{
+				distances[*position] = 0;
+				break;
+			}
+		}
+	}
+
+	// Determines all other distances.
+	bool distancesAltered = true;
+	while(distancesAltered)
+	{
+		distancesAltered = false;
+		// Determines distance of a given position only when an adjacent position has had its distance determined.
+		for(auto position = positions.cbegin(); position != positions.cend(); ++position)
+		{
+			// Distance is already determined.
+			if(distances.count(*position) == 1)
+			{
+				continue;
+			}
+
+			sf::Vector2i left(position->x - 1, position->y);
+			sf::Vector2i right(position->x + 1, position->y);
+			sf::Vector2i up(position->x, position->y - 1);
+			sf::Vector2i down(position->x, position->y + 1);
+			std::vector<sf::Vector2i> adjacencies = { left, right, up, down };
+			int min = INT_MAX;  // min distance of adjacent positions.
+			for(const sf::Vector2i &adjacency : adjacencies)
+			{
+				assert(positions.count(adjacency) == 1);
+				if(distances.count(adjacency) == 1)
+				{
+					assert(distances[adjacency] < INT_MAX);
+					min = std::min(min, distances[adjacency]);
+				}
+			}
+			if(min != INT_MAX)
+			{
+				const int distance = min + 1;
+				distances[*position] = distance;
+				distancesAltered = true;
+			}
+		}
+	}
+
+	// Sets center to position with greatest distance.
+	center = *positions.begin();
+	assert(distances.count(center) == 1);
+	for(auto position = positions.cbegin(); position != positions.cend(); ++position)
+	{
+		assert(distances.count(*position) == 1);
+		if(distances[*position] > distances[center])
+		{
+			center = *position;
+		}
+	}
 }
 
 void Grid::calculateVertices()
