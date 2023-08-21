@@ -5,6 +5,11 @@
 #include <assert.h>
 #include <iostream>
 
+Player::Player()
+	: relationshipManager(*this)
+{
+}
+
 void Player::handleFiefYields()
 {
 	// Provide bonus yields to fiefs contained in subfiefs under this player's control.
@@ -23,7 +28,7 @@ void Player::handleFiefYields()
 void Player::addFief(std::shared_ptr<Estate> estate)
 {
 	fiefs.emplace_back(estate);
-	assert(estate.compareRuler(this));
+	assert(estate.get()->compareRuler(this));
 }
 
 void Player::removeFief(const Estate *fief)
@@ -38,4 +43,10 @@ void Player::removeFief(const Estate *fief)
 	}
 	assert(false);  // Functions should only be called when the estate owner is this player.
 }
+
+PlayerRelationshipManager & Player::getRelationshipManager()
+{
+	return relationshipManager;
+}
+
 

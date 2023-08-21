@@ -25,13 +25,14 @@ public:
 
 	void addSubfief(std::shared_ptr<Estate> subfief);
 	void removeSubfief(std::shared_ptr<Estate> &subfief);
-	bool gridContainsPosition(const sf::Vector2f &position) const;
-	void drawGrid(sf::RenderWindow &window) const;
-	void setGridColor(sf::Color color);
 	void setParent(const std::shared_ptr<const Estate> &parent);
 	bool hasParent() const;
 	bool compareRuler(const Player *player) const;  // For debugging.
 	Title getTitle() const;
+
+	bool gridContainsPosition(const sf::Vector2f &position) const;
+	void drawGrid(sf::RenderWindow &window) const;
+	void setGridColor(sf::Color color);
 
 protected:
 	// Military generating subfiefs receive specified bonus yield.

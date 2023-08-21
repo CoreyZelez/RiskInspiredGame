@@ -21,11 +21,11 @@ std::shared_ptr<LandArmy> Barony::yieldLandArmy()
 	cumulativeLandArmy += landArmyYield;
 
 	// Yield army to territory and player if threshold surpassed.
-	const int threshold = 3;  // Min cumulative value for yield to take place.
-	if(cumulativeLandArmy >= threshold)
+	const int landArmyThreshold = 3;  // Min cumulative value for yield to take place.
+	if(cumulativeLandArmy >= landArmyThreshold)
 	{
 		const int yield = cumulativeLandArmy;
-		cumulativeLandArmy = 0;
+		cumulativeLandArmy -= yield;
 		return putArmy(yield);
 	}
 	return nullptr;
@@ -37,11 +37,11 @@ std::shared_ptr<NavalFleet> Barony::yieldNavalFleet()
 	cumulativeNavalFleet += navalFleetYield;
 
 	// Yield navy to territory and player if threshold surpassed.
-	const int threshold = 2;  // Min cumulative value for yield to take place.
-	if(canYieldNavy && cumulativeNavalFleet >= threshold)
+	const int navalFleetThreshold = 2;  // Min cumulative value for yield to take place.
+	if(canYieldNavy && cumulativeNavalFleet >= navalFleetThreshold)
 	{
 		const int yield = cumulativeNavalFleet;
-		cumulativeNavalFleet = 0;
+		cumulativeNavalFleet -= yield;
 		return putFleet(yield);
 	}
 

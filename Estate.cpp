@@ -25,7 +25,7 @@ void Estate::provideSubfiefBonusYields()
 {
 	if(title == Title::baron)
 	{
-		assert(subfief.size() == 0);
+		assert(subfiefs.size() == 0);
 		return;
 	}
 
@@ -46,7 +46,7 @@ void Estate::provideSubfiefBonusYields()
 		break;
 	}
 
-	// Grants bonus yield to all subfiefs that are military generating.
+	// Grants bonus yield to all subfiefs that are military generating and belong to this ruler's realm.
 	this->receiveBonusYield(bonus);
 }
 
@@ -127,7 +127,11 @@ void Estate::receiveBonusYield(const float &bonus)
 {
 	for(auto &subfief : subfiefs)
 	{
-		subfief.get()->receiveBonusYield(bonus);
+		// Only provides bonus yield to subfief if owner is of same realm as this ruler.
+		if(subfief.get()->ruler == ruler || subfief.get()->ruler->getRelationshipManager().isVassal(*ruler))
+		{
+			subfief.get()->receiveBonusYield(bonus);
+		}
 	}
 }
 

@@ -34,7 +34,7 @@ bool LandTerritory::occupy(std::shared_ptr<LandArmy> &army)
 		// Absorb strength of army into this->army.
 		const int armyStrength = army.get()->getStrength();
 		this->army.get()->adjustStrength(army.get()->getStrength());  
-		army.get()->adjustStrength(-armyStrength);  // Sets strength 0.
+		army.reset();  // Destroys army.
 		return true;
 	}
 	// Case armies have different owner.
@@ -71,8 +71,7 @@ bool LandTerritory::getIsCoastal() const
 
 Player* LandTerritory::getOccupant()
 {
-	assert(army.get() != nullptr);
-	if(army.get() != nullptr)
+	if(army != nullptr)
 	{
 		return &army.get()->getOwner();
 	}

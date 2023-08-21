@@ -2,9 +2,11 @@
 #include "LandArmy.h"
 #include "NavalFleet.h"
 #include <assert.h>
+#include <iostream>
 
 void PlayerMilitaryManager::addLandArmy(std::shared_ptr<LandArmy> army)
 {
+	assert(army.get() != nullptr);
 	assert(army.get()->getStrength() > 0);
 	armies.push_back(army);
 }

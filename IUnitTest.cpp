@@ -11,5 +11,9 @@ void IUnitTest::testReport(std::string testName, bool result, std::string messag
 
 	std::cout << "test: " << testName << std::endl;
 	std::cout << "result: "<< resultMessage << std::endl;
-	std::cout << "message: " << message << std::endl << std::endl;
+	if(message != "")
+	{
+		std::cout << "message: " << message << std::endl;
+	}
+	std::cout << std::endl;
 }

@@ -21,8 +21,16 @@ void LandedEstate::update(Message message)
 
 void LandedEstate::yield(PlayerMilitaryManager &militaryManager)
 {
-	militaryManager.addLandArmy(yieldLandArmy());
-	militaryManager.addNavalFleet(yieldNavalFleet());
+	std::shared_ptr<LandArmy> landArmy = yieldLandArmy();
+	std::shared_ptr<NavalFleet> navalFleet = yieldNavalFleet();
+	if(landArmy != nullptr)
+	{
+		militaryManager.addLandArmy(std::move(landArmy));
+	}
+	if(navalFleet != nullptr)
+	{
+		militaryManager.addNavalFleet(std::move(navalFleet));
+	}
 }
 
 bool LandedEstate::containsPosition(const sf::Vector2f &position) const
@@ -36,8 +44,20 @@ void LandedEstate::generateMilitary(PlayerMilitaryManager &militaryManager)
 
 std::shared_ptr<LandArmy> LandedEstate::putArmy(int strength)
 {
+	// Should not be hostile army residing on territory.
+	assert(territory.getOccupant() == nullptr || territory.getOccupant() == getRuler());
+
 	std::shared_ptr<LandArmy> army = std::make_shared<LandArmy>(*getRuler(), &territory, strength);
 	territory.occupy(army);
+
+	// Army merged with pre-existing army on territory.
+	if(army == nullptr)
+	{
+		return nullptr;
+	}
+
+	// There was no pre-existing army on territory.
+	assert(army.get()->getStrength() > 0);
 	return army;
 }
 
