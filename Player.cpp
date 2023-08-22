@@ -2,11 +2,22 @@
 #include "LandArmy.h"
 #include "NavalFleet.h"
 #include "Estate.h"
+#include "IController.h"
+#include "HumanPlayerController.h"
 #include <assert.h>
 #include <iostream>
 
-Player::Player()
-	: relationshipManager(*this)
+Player::Player(Game &game)
+	: game(game), relationshipManager(*this), controller(std::make_unique<HumanPlayerController>(*this))
+{
+}
+
+Player::Player(Game &game, PersonalityAI personality)
+	: game(game), relationshipManager(*this), controller(std::make_unique<AIPlayerController>(*this, personality))
+{
+}
+
+void Player::update()
 {
 }
 
@@ -42,6 +53,11 @@ void Player::removeFief(const Estate *fief)
 		}
 	}
 	assert(false);  // Functions should only be called when the estate owner is this player.
+}
+
+IController& Player::getController()
+{
+	return *controller.get();
 }
 
 PlayerRelationshipManager& Player::getRelationshipManager()

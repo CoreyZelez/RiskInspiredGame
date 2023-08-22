@@ -93,3 +93,7 @@ std::string LandTerritory::getSaveLabel() const
 {
 	return landSaveLabel;
 }
+
+void LandTerritory::drawMilitary(sf::RenderWindow &window) const
+{
+}

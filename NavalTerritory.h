@@ -16,9 +16,10 @@ public:
 
 	/// virtual Player *getOccupant() override;
 
-protected:
 	// Save label is identifier in txt file for territory type.
 	virtual std::string getSaveLabel() const override;
+
+protected:
 
 private:
 

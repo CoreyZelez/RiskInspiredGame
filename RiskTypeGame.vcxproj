@@ -167,6 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIPlayerController.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="EstateManager.cpp" />
@@ -183,6 +184,7 @@
     <ClCompile Include="Estate.cpp" />
     <ClCompile Include="LandArmy.cpp" />
     <ClCompile Include="LandTerritory.cpp" />
+    <ClCompile Include="HumanPlayerController.cpp" />
     <ClCompile Include="PlayerMilitaryManager.cpp" />
     <ClCompile Include="NavalFleet.cpp" />
     <ClCompile Include="NavalTerritory.cpp" />
@@ -202,6 +204,7 @@
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIPlayerController.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="ChangeInstance.h" />
@@ -209,6 +212,7 @@
     <ClInclude Include="EstateTest.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCreator.h" />
+    <ClInclude Include="IController.h" />
     <ClInclude Include="IMilitaryFactory.h" />
     <ClInclude Include="InputUtility.h" />
     <ClInclude Include="IUnitTest.h" />
@@ -217,6 +221,7 @@
     <ClInclude Include="MapMaker.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="HumanPlayerController.h" />
     <ClInclude Include="ReconcileBaronies.h" />
     <ClInclude Include="PlayerRelationshipManager.h" />
     <ClInclude Include="Subject.h" />

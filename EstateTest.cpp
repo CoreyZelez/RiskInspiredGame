@@ -3,6 +3,7 @@
 #include "Territory.h"
 #include "LandArmy.h"
 #include "Player.h"
+#include "Game.h"
 
 void EstateTest::test()
 {
@@ -14,7 +15,8 @@ void EstateTest::test1()
 {
 	std::string testName = "barony yielding land army";
 	
-	Player player;
+	Game game("");
+	Player player(game);
 	LandTerritory territory(0);
 	const double landArmyYield = 0.4;
 	std::unique_ptr<Estate> barony = std::make_unique<Barony>(territory, landArmyYield);
@@ -60,9 +62,10 @@ void EstateTest::test2()
 {
 	std::string testName = "county providing bonus yields";
 
-	Player player1;
-	Player player2;
-	Player player3;
+	Game game("");
+	Player player1(game);
+	Player player2(game);
+	Player player3(game);
 	LandTerritory territory1(0);
 	LandTerritory territory2(1);
 	LandTerritory territory3(2);

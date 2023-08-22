@@ -23,10 +23,11 @@ public:
 	virtual Player *getOccupant() override;
 	const std::shared_ptr<LandArmy> &getArmy() const;
 	const std::shared_ptr<NavalFleet> &getFleet() const;
-
-protected:
 	// Save label is identifier in txt file for territory type.
 	virtual std::string getSaveLabel() const override;
+
+protected:
+	virtual void drawMilitary(sf::RenderWindow &window)const override;
 
 private:
 	bool isCoastal = false;

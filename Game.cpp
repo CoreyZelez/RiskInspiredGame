@@ -1,6 +1,6 @@
 #include "Game.h"
 
-void Game::handleInput(const sf::RenderWindow & window, sf::View & view)
+void Game::handleInput(const sf::RenderWindow &window, sf::View &view)
 {
 }
 

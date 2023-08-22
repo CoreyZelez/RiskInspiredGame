@@ -38,6 +38,9 @@ public:
 	virtual std::string getSaveLabel() const = 0; 	// Save label is identifier in txt file for territory type.
 	sf::Vector2f getCenter() const;
 
+protected:
+	virtual void drawMilitary(sf::RenderWindow &window) const;
+
 private:
 	int id;
 	Grid grid;
