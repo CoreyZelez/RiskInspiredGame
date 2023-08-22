@@ -10,15 +10,20 @@
 class Map
 {
 public:
+	Map(std::string name);
+
 	void drawTerritoryMap(sf::RenderWindow &window);
 
-	void save(std::string name) const;
-	void load(std::string name);
+	void save();
+	void saveAs(std::string name);  // Save map under different name.
 
 	TerritoryManager &getTerritoryManager();
 	EstateManager &getEstateManager();
 
 private:
+	void load(std::string name);
+
+	std::string name;
 	TerritoryManager territoryManager;
 	EstateManager estateManager;
 };

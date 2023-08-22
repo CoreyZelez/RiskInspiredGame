@@ -16,14 +16,14 @@ public:
 
 	void handleFiefYields();
 
-	void addFief(std::shared_ptr<Estate> estate);
+	void addFief(Estate *fief);
 	void removeFief(const Estate *fief);
 
 	PlayerRelationshipManager &getRelationshipManager();
 
 private:
 	Title title;  // Official title of player.
-	std::vector<std::shared_ptr<Estate>> fiefs;
+	std::vector<Estate*> fiefs;
 	PlayerMilitaryManager militaryManager;
 	PlayerRelationshipManager relationshipManager;
 };

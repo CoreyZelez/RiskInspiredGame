@@ -10,8 +10,10 @@ class LandedEstate : public Estate, public Observer, public IMilitaryFactory
 public:
 	LandedEstate(Title title, Territory &territory);
 
+	// Handles changing of associated territory occupant.
 	virtual void update(Message message) override;
 
+	// Yields any resources directly associated with estate. This does not include subfief resources.
 	virtual void yield(PlayerMilitaryManager &militaryManager) override;
 
 	// Creates land army on some territory and returns handle to army.

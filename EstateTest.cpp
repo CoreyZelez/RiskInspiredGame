@@ -17,7 +17,7 @@ void EstateTest::test1()
 	Player player;
 	LandTerritory territory(0);
 	const double landArmyYield = 0.4;
-	std::shared_ptr<Estate> barony = std::make_shared<Barony>(territory, landArmyYield);
+	std::unique_ptr<Estate> barony = std::make_unique<Barony>(territory, landArmyYield);
 	barony.get()->initRuler(player);
 	
 	// Attempt to yield land army with cumulative land army not surpassing threshold.
@@ -69,16 +69,16 @@ void EstateTest::test2()
 	LandTerritory territory4(3);
 
 	const double landArmyYield = 0.4;
-	std::shared_ptr<Estate> barony1 = std::make_shared<Barony>(territory1, landArmyYield);
-	std::shared_ptr<Estate> barony2 = std::make_shared<Barony>(territory2, landArmyYield);
-	std::shared_ptr<Estate> barony3 = std::make_shared<Barony>(territory3, landArmyYield);
-	std::shared_ptr<Estate> barony4 = std::make_shared<Barony>(territory4, landArmyYield); 
-	std::shared_ptr<Estate> county = std::make_shared<Estate>(Title::count);
+	std::unique_ptr<Estate> barony1 = std::make_unique<Barony>(territory1, landArmyYield);
+	std::unique_ptr<Estate> barony2 = std::make_unique<Barony>(territory2, landArmyYield);
+	std::unique_ptr<Estate> barony3 = std::make_unique<Barony>(territory3, landArmyYield);
+	std::unique_ptr<Estate> barony4 = std::make_unique<Barony>(territory4, landArmyYield); 
+	std::unique_ptr<Estate> county = std::make_unique<Estate>(Title::count);
 
-	county.get()->addSubfief(barony1);
-	county.get()->addSubfief(barony2);
-	county.get()->addSubfief(barony3);
-	county.get()->addSubfief(barony4);  
+	county.get()->addSubfief(barony1.get());
+	county.get()->addSubfief(barony2.get());
+	county.get()->addSubfief(barony3.get());
+	county.get()->addSubfief(barony4.get());  
 
 	barony1.get()->initRuler(player1);
 	barony2.get()->initRuler(player1);

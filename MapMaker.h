@@ -17,10 +17,11 @@ enum class MapMakerState
 class MapMaker
 {
 public:
-	MapMaker();
+	MapMaker(std::string mapName);
 
-	void save(std::string name) const;
-	void load(std::string name);
+	void save();
+	void saveAs(std::string mapName);
+	void load(std::string mapName);
 
 	void draw(sf::RenderWindow &window);
 

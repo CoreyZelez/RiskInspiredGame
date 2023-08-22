@@ -49,7 +49,7 @@ void TerritoryManager::load(std::string mapName)
 		{
 			Grid graphics = loadTerritoryGrid(file);
 			int id = loadTerritoryID(file);
-			std::shared_ptr<LandTerritory> territory = std::make_shared<LandTerritory>(id, graphics);
+			std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>(id, graphics);
 			landTerritories.push_back(std::move(territory));
 
 			// Ensure next id greater than all other territory ids.
@@ -59,7 +59,7 @@ void TerritoryManager::load(std::string mapName)
 		{
 			Grid graphics = loadTerritoryGrid(file);
 			int id = loadTerritoryID(file);
-			std::shared_ptr<NavalTerritory> territory = std::make_shared<NavalTerritory>(id, graphics);
+			std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>(id, graphics);
 			navalTerritories.push_back(std::move(territory));
 
 			// Ensure next id greater than all other territory ids.
@@ -126,26 +126,28 @@ void TerritoryManager::convertLandsToCoastal()
 {
 }
 
-std::shared_ptr<LandTerritory> TerritoryManager::createLandTerritory()
+LandTerritory* TerritoryManager::createLandTerritory()
 {
-	std::shared_ptr<LandTerritory> territory = std::make_shared<LandTerritory>(nextID++);
-	landTerritories.emplace_back(territory);
-	return territory;
+	std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>(nextID++);
+	LandTerritory *t = territory.get();
+	landTerritories.emplace_back(std::move(territory));
+	return t;
 }
 
-std::shared_ptr<NavalTerritory> TerritoryManager::createNavalTerritory()
+NavalTerritory* TerritoryManager::createNavalTerritory()
 {
-	std::shared_ptr<NavalTerritory> territory = std::make_shared<NavalTerritory>(nextID++);
-	navalTerritories.emplace_back(territory);
-	return territory;
+	std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>(nextID++);
+	NavalTerritory *t = territory.get();
+	navalTerritories.emplace_back(std::move(territory));
+	return t;
 }
 
-void TerritoryManager::removeLandTerritory(std::shared_ptr<LandTerritory> &territory)
+void TerritoryManager::removeLandTerritory(LandTerritory *territory)
 {
 	auto iter = landTerritories.begin();
 	while(iter != landTerritories.end())
 	{
-		if(iter->get() == territory.get())
+		if(iter->get() == territory)
 		{
 			landTerritories.erase(iter);
 			territory = nullptr;  // Invalidate future usage of pointer.
@@ -156,24 +158,24 @@ void TerritoryManager::removeLandTerritory(std::shared_ptr<LandTerritory> &terri
 	assert(false);
 }
 
-std::shared_ptr<LandTerritory> TerritoryManager::getLandTerritory(sf::Vector2f position)
+LandTerritory* TerritoryManager::getLandTerritory(sf::Vector2f position)
 {
 	for(const auto &territory : landTerritories)
 	{
 		if(territory.get()->getGrid().containsPosition(position))
 		{
-			return territory;
+			return territory.get();
 		}
 	}
 	return nullptr;
 }
 
-void TerritoryManager::removeNavalTerritory(std::shared_ptr<NavalTerritory> &territory)
+void TerritoryManager::removeNavalTerritory(NavalTerritory *territory)
 {
 	auto iter = navalTerritories.begin();
 	while(iter != navalTerritories.end())
 	{
-		if(iter->get() == territory.get())
+		if(iter->get() == territory)
 		{
 			navalTerritories.erase(iter);
 			territory = nullptr;  // Invalidate future usage of pointer.
@@ -184,19 +186,19 @@ void TerritoryManager::removeNavalTerritory(std::shared_ptr<NavalTerritory> &ter
 	assert(false);
 }
 
-std::shared_ptr<NavalTerritory> TerritoryManager::getNavalTerritory(sf::Vector2f position)
+NavalTerritory* TerritoryManager::getNavalTerritory(sf::Vector2f position)
 {
 	for(const auto &territory : navalTerritories)
 	{
 		if(territory.get()->getGrid().containsPosition(position))
 		{
-			return territory;
+			return territory.get();
 		}
 	}
 	return nullptr;
 }
 
-const std::vector<std::shared_ptr<LandTerritory>>& TerritoryManager::getLandTerritories() const
+const std::vector<std::unique_ptr<LandTerritory>>& TerritoryManager::getLandTerritories() const
 {
 	return landTerritories;
 }

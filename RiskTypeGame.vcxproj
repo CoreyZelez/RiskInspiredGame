@@ -171,6 +171,8 @@
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="EstateManager.cpp" />
     <ClCompile Include="EstateTest.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameCreator.cpp" />
     <ClCompile Include="InputUtility.cpp" />
     <ClCompile Include="IUnitTest.cpp" />
     <ClCompile Include="LandedEstate.cpp" />
@@ -205,6 +207,8 @@
     <ClInclude Include="ChangeInstance.h" />
     <ClInclude Include="EstateManager.h" />
     <ClInclude Include="EstateTest.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameCreator.h" />
     <ClInclude Include="IMilitaryFactory.h" />
     <ClInclude Include="InputUtility.h" />
     <ClInclude Include="IUnitTest.h" />

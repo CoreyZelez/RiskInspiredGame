@@ -10,7 +10,7 @@ class LandArmy;
 class NavalFleet;
 class PlayerMilitaryManager;
 
-class Estate : public std::enable_shared_from_this<Estate>
+class Estate 
 {
 public:
 	Estate(Title title);
@@ -23,9 +23,9 @@ public:
 	// Provides bonus yields to subfiefs. Yield dependant on title.
 	virtual void provideSubfiefBonusYields();
 
-	void addSubfief(std::shared_ptr<Estate> subfief);
-	void removeSubfief(std::shared_ptr<Estate> &subfief);
-	void setParent(const std::shared_ptr<const Estate> &parent);
+	void addSubfief(Estate *subfief);
+	void removeSubfief(Estate *subfief);
+	void setParent(const Estate *parent);
 	bool hasParent() const;
 	bool compareRuler(const Player *player) const;  // For debugging.
 	Title getTitle() const;
@@ -48,7 +48,7 @@ private:
 	Grid grid;
 	const Title title;
 	Player *ruler = nullptr;
-	std::shared_ptr<const Estate> parent;
-	std::vector<std::shared_ptr<Estate>> subfiefs;
+	const Estate *parent;
+	std::vector<Estate*> subfiefs;
 };
 

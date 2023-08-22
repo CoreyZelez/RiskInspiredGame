@@ -23,7 +23,7 @@ private:
 	void handleInputForView(sf::View &view) const;
 
 	TerritoryManager &territoryManager;
-	std::shared_ptr<Territory> territory = nullptr;  // Territory currently being modified.
+	Territory *territory = nullptr;  // Territory currently being modified.
 	TerritoryMakerState state = TerritoryMakerState::none;
 	sf::Clock inputClock;  // Clock tracking time since last time input handled.
 };

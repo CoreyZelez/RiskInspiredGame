@@ -26,7 +26,7 @@ private:
 	void handleInputForView(sf::View &view) const;
 
 	EstateManager &estateManager;
-	std::shared_ptr<Estate> estate = nullptr;  // Territory currently being modified.
+	Estate *estate = nullptr;  // Territory currently being modified.
 	Title selectedTitle;  // Title to be selected for modification.
 	EstateMakerState state = EstateMakerState::none;
 	sf::Clock inputClock;  // Clock tracking time since last time input handled.

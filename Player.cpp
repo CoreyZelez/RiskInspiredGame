@@ -15,27 +15,27 @@ void Player::handleFiefYields()
 	// Provide bonus yields to fiefs contained in subfiefs under this player's control.
 	for(auto &fief : fiefs)
 	{
-		fief.get()->provideSubfiefBonusYields();
+		fief->provideSubfiefBonusYields();
 	}
 
 	// Yield resources (currently just military units).
 	for(auto &fief : fiefs)
 	{
-		fief.get()->yield(militaryManager);
+		fief->yield(militaryManager);
 	}
 }
 
-void Player::addFief(std::shared_ptr<Estate> estate)
+void Player::addFief(Estate *fief)
 {
-	fiefs.emplace_back(estate);
-	assert(estate.get()->compareRuler(this));
+	fiefs.emplace_back(fief);
+	assert(fief->compareRuler(this));
 }
 
 void Player::removeFief(const Estate *fief)
 {
 	for(auto iter = fiefs.begin(); iter != fiefs.end(); ++iter)
 	{
-		if(iter->get() == fief)
+		if(*iter == fief)
 		{
 			fiefs.erase(iter);
 			return;
@@ -44,7 +44,7 @@ void Player::removeFief(const Estate *fief)
 	assert(false);  // Functions should only be called when the estate owner is this player.
 }
 
-PlayerRelationshipManager & Player::getRelationshipManager()
+PlayerRelationshipManager& Player::getRelationshipManager()
 {
 	return relationshipManager;
 }

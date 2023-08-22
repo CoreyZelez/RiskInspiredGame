@@ -9,11 +9,11 @@ class EstateManager;
 class ReconcileBaronies : public Command
 {
 public:
-	ReconcileBaronies(EstateManager &estateManager, const std::vector<std::shared_ptr<LandTerritory>> &landTerritories);
+	ReconcileBaronies(EstateManager &estateManager, const std::vector<std::unique_ptr<LandTerritory>> &landTerritories);
 	virtual void execute() override;
 
 private:
 	EstateManager &estateManager;
-	const std::vector<std::shared_ptr<LandTerritory>> &landTerritories;
+	const std::vector<std::unique_ptr<LandTerritory>> &landTerritories;
 };
 

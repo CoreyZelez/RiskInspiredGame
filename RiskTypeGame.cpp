@@ -17,8 +17,7 @@ int main()
 	sf::View view = window.getDefaultView();
 	InputUtility &InputUtility = InputUtility::getInstance();
 
-	MapMaker mapMaker;
-	mapMaker.load("test");
+	MapMaker mapMaker("test");
 
 	while(window.isOpen())
 	{
@@ -45,7 +44,7 @@ int main()
 		window.display();
 	}
 
-	mapMaker.save("test");
+	mapMaker.save();
 
 	TestRunner testRunner;
 	testRunner.runTests();

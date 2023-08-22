@@ -1,7 +1,9 @@
-﻿  IUnitTest.cpp
+﻿  EstateManager.cpp
+  EstateTest.cpp
+  Estate.cpp
   Generating code
-  8 of 2697 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
-    4 functions were new in current compilation
-    14 functions had inline decision re-evaluated but remain unchanged
+  394 of 2584 functions (15.2%) were compiled, the rest were copied from previous compilation.
+    322 functions were new in current compilation
+    146 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Release\RiskTypeGame.exe

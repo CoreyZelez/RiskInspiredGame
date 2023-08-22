@@ -18,7 +18,7 @@ void Estate::initRuler(Player &ruler)
 {
 	assert(this->ruler == nullptr);
 	this->ruler = &ruler;
-	this->ruler->addFief(shared_from_this());
+	this->ruler->addFief(this);
 }
 
 void Estate::provideSubfiefBonusYields()
@@ -59,30 +59,30 @@ void Estate::generateMilitary(PlayerMilitaryManager &militaryManager)
 {
 }
 
-void Estate::addSubfief(std::shared_ptr<Estate> subfief)
+void Estate::addSubfief(Estate *subfief)
 {
 	assert(subfief->title < title);
 	assert(subfief->parent == nullptr);
 	subfiefs.push_back(subfief);
-	subfief.get()->parent = shared_from_this();  // Holds shared pointer to this object.
-	grid.addGrid(subfief.get()->grid);
+	subfief->parent = this;  // Holds shared pointer to this object.
+	grid.addGrid(subfief->grid);
 }
 
-void Estate::removeSubfief(std::shared_ptr<Estate>& subfief)
+void Estate::removeSubfief(Estate *subfief)
 {
-	if(subfief == nullptr || subfief.get()->parent.get() != this)
+	if(subfief == nullptr || subfief->parent != this)
 	{
 		return;
 	}
 
 	for(auto iter = subfiefs.cbegin(); iter != subfiefs.cend(); ++iter)
 	{
-		if(iter->get() == subfief.get())
+		if(*iter == subfief)
 		{
 			subfiefs.erase(iter);
-			grid.removeGrid(subfief.get()->grid);
-			assert(subfief.get()->parent.get() == this);
-			subfief.get()->parent = nullptr;
+			grid.removeGrid(subfief->grid);
+			assert(subfief->parent == this);
+			subfief->parent = nullptr;
 			return;
 		}
 	}
@@ -103,7 +103,7 @@ void Estate::setGridColor(sf::Color color)
 	grid.setColor(color);
 }
 
-void Estate::setParent(const std::shared_ptr<const Estate> &parent)
+void Estate::setParent(const Estate *parent)
 {
 	this->parent = parent;
 }
@@ -128,9 +128,9 @@ void Estate::receiveBonusYield(const float &bonus)
 	for(auto &subfief : subfiefs)
 	{
 		// Only provides bonus yield to subfief if owner is of same realm as this ruler.
-		if(subfief.get()->ruler == ruler || subfief.get()->ruler->getRelationshipManager().isVassal(*ruler))
+		if(subfief->ruler == ruler || subfief->ruler->getRelationshipManager().isVassal(*ruler))
 		{
-			subfief.get()->receiveBonusYield(bonus);
+			subfief->receiveBonusYield(bonus);
 		}
 	}
 }
@@ -139,7 +139,7 @@ bool Estate::containsPosition(const sf::Vector2f &position) const
 {
 	for(auto& subfief : subfiefs)
 	{
-		if(subfief.get()->containsPosition(position))
+		if(subfief->containsPosition(position))
 		{
 			return true;
 		}
@@ -156,7 +156,7 @@ void Estate::setRuler(Player *ruler)
 {
 	this->ruler->removeFief(this);
 	this->ruler = ruler;
-	this->ruler->addFief(shared_from_this());
+	this->ruler->addFief(this);
 }
 
 

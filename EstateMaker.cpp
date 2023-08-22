@@ -24,7 +24,7 @@ void EstateMaker::draw(sf::RenderWindow &window)
 		///estateManager.draw(window, selectedTitle - 1);
 
 		estateManager.draw(window, selectedTitle);
-		estate.get()->drawGrid(window);
+		estate->drawGrid(window);
 	}
 }
 
@@ -49,9 +49,9 @@ void EstateMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 		// Removes subfiefs from estate.
 		else if(state == EstateMakerState::editEstate)
 		{
-			std::shared_ptr<Estate> subfief = estateManager.getLowerEstate(worldPos, selectedTitle, true);
+			Estate *subfief = estateManager.getLowerEstate(worldPos, selectedTitle, true);
 			// Remove subFief if it is a sub fief of estate. 
-			if(subfief.get() != nullptr)
+			if(subfief != nullptr)
 			{
 				estate->removeSubfief(subfief);
 			}
@@ -66,8 +66,8 @@ void EstateMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 		if(state == EstateMakerState::editEstate)
 		{
 			// Adds parentless and lower title estate at mouse position as a subfief.
-			std::shared_ptr<Estate> subfief = estateManager.getLowerEstate(worldPos, selectedTitle, false);  
-			if(subfief.get() != nullptr)
+			Estate *subfief = estateManager.getLowerEstate(worldPos, selectedTitle, false);  
+			if(subfief != nullptr)
 			{
 				assert(subfief->hasParent() == false);
 				estate->addSubfief(subfief);

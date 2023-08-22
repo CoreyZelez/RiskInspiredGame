@@ -53,7 +53,7 @@ void EstateManager::load(std::string mapName)
 {
 }
 
-void EstateManager::reconcileBaronies(const std::vector<std::shared_ptr<LandTerritory>> &landTerritories)
+void EstateManager::reconcileBaronies(const std::vector<std::unique_ptr<LandTerritory>> &landTerritories)
 {
 	std::random_device rd;
 	std::mt19937 mt(rd());
@@ -68,46 +68,46 @@ void EstateManager::reconcileBaronies(const std::vector<std::shared_ptr<LandTerr
 			continue;
 		}
 
-		std::shared_ptr<LandedEstate> barony;
+		std::unique_ptr<Estate> barony;
 		if(territory.get()->getIsCoastal())
 		{
 			// TEMP. IN FUTURE ALLOW CUSTOMISATION OF BARONY PROSPERITY!!!
-			barony = std::make_shared<Barony>(*territory.get(), armyYieldDist(mt), fleetYieldDist(mt));
+			barony = std::make_unique<Barony>(*territory.get(), armyYieldDist(mt), fleetYieldDist(mt));
 		}
 		else
 		{
 			// TEMP. IN FUTURE ALLOW CUSTOMISATION OF BARONY PROSPERITY!!!
-			barony = std::make_shared<Barony>(*territory.get(), armyYieldDist(mt));
+			barony = std::make_unique<Barony>(*territory.get(), armyYieldDist(mt));
 		}
 
 		allocatedIDs.insert(territory.get()->getID());  // Ensures ID cannot be reused for other landed estate.
-		landedEstates.emplace_back(barony);
-		estates[Title::baron].emplace_back(barony);
+		estates[Title::baron].emplace_back(std::move(barony));
 	}
 }
 
-std::shared_ptr<Estate> EstateManager::createEstate(Title title)
+Estate* EstateManager::createEstate(Title title)
 {
 	assert(title != Title::baron);
-	std::shared_ptr<Estate> estate = std::make_shared<Estate>(title);
-	estates[title].emplace_back(estate);
-	return estate;
+	std::unique_ptr<Estate> estate = std::make_unique<Estate>(title);
+	Estate *e = estate.get();
+	estates[title].emplace_back(std::move(estate));
+	return e;
 }
 
-std::shared_ptr<Estate> EstateManager::getEstate(sf::Vector2f position, Title title, bool allowParent)
+Estate* EstateManager::getEstate(sf::Vector2f position, Title title, bool allowParent)
 {
 	for(auto &estate : estates[title])
 	{
 		if((allowParent || !estate.get()->hasParent()) && estate.get()->gridContainsPosition(position))
 		{
-			return estate;
+			return estate.get();
 		}
 	}
 	
 	return nullptr;
 }
 
-std::shared_ptr<Estate> EstateManager::getLowerEstate(sf::Vector2f position, Title title, bool allowParent)
+Estate* EstateManager::getLowerEstate(sf::Vector2f position, Title title, bool allowParent)
 {
 	// Following code problematic if more titles equal in prominence to Title::baron are added.
 	assert(static_cast<int>(Title::baron) == 1);
@@ -118,7 +118,7 @@ std::shared_ptr<Estate> EstateManager::getLowerEstate(sf::Vector2f position, Tit
 		{
 			if((allowParent || !estate.get()->hasParent()) && estate.get()->gridContainsPosition(position))
 			{
-				return estate;
+				return estate.get();
 			}
 		}
 	}
