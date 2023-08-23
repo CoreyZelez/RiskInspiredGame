@@ -114,16 +114,16 @@ void Grid::setColor(sf::Color color)
 
 sf::Vector2i Grid::calculateGridCoordinates(const sf::Vector2f &position) const
 {
-	const int x = std::floor(position.x / squareSize);
-	const int y = std::floor(position.y / squareSize);
+	const int x = std::floor(position.x / GIRD_SQUARE_SIZE);
+	const int y = std::floor(position.y / GIRD_SQUARE_SIZE);
 	return sf::Vector2i(x, y);
 }
 
 /* Calculates world coordinate of center of grid square at position. */
 sf::Vector2f Grid::calculateWorldCoordinates(const sf::Vector2i &position) const
 {
-	const float x = position.x * squareSize + (squareSize / 2);
-	const float y = position.y * squareSize + (squareSize / 2);
+	const float x = position.x * GIRD_SQUARE_SIZE + (GIRD_SQUARE_SIZE / 2);
+	const float y = position.y * GIRD_SQUARE_SIZE + (GIRD_SQUARE_SIZE / 2);
 	return sf::Vector2f(x, y);
 }
 
@@ -242,10 +242,10 @@ void Grid::calculateVertices()
 	{
 		const sf::Vector2i position(iter->x, iter->y);
 	
-		const float left = position.x * squareSize;
-		const float right = (position.x * squareSize) + squareSize;
-		const float top = (position.y * squareSize);
-		const float bottom = (position.y * squareSize) + squareSize;
+		const float left = position.x * GIRD_SQUARE_SIZE;
+		const float right = (position.x * GIRD_SQUARE_SIZE) + GIRD_SQUARE_SIZE;
+		const float top = (position.y * GIRD_SQUARE_SIZE);
+		const float bottom = (position.y * GIRD_SQUARE_SIZE) + GIRD_SQUARE_SIZE;
 	
 		// Pointer to the triangles' vertices of the current tile.
 		sf::Vertex* triangles = &vertices[i * 6];

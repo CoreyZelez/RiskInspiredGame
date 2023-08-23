@@ -10,8 +10,8 @@ class Game
 public:
 	Game(std::string mapName);
 
+	void draw(sf::RenderWindow &window);
 	void update(); 
-	void draw(sf::RenderWindow &window); 
 	void handleInput(const sf::RenderWindow &window, sf::View &view); 
 
 private: 

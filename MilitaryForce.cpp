@@ -1,9 +1,12 @@
 #include "MilitaryForce.h"
+#include "Grid.h"
 #include <assert.h>
 
-MilitaryForce::MilitaryForce(Player &owner, Territory *location, int strength)
+MilitaryForce::MilitaryForce(Player & owner, Territory * location, int strength, sf::Texture texture)
 	: owner(owner), location(location), strength(strength)
 {
+
+	sprite.setTexture(texture);
 	assert(location != nullptr);
 	assert(strength > 0);
 }

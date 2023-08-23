@@ -3,8 +3,10 @@
 #include <unordered_set>
 #include <string>
 
+const float GIRD_SQUARE_SIZE = 30.0f;  // The width/height of one square of a grid on the map.
 const std::string gridSaveLabel = "# grid positions";
 const std::string defaultColorLabel = "# default color";
+
 // Hash function for sf::Vector2i
 struct Vector2iHash 
 {
@@ -49,7 +51,6 @@ private:
 	sf::Vector2i calculateGridCoordinates(const sf::Vector2f &position) const;  // Converts vector world position to grid position.
 	sf::Vector2f calculateWorldCoordinates(const sf::Vector2i &position) const;  // Converts vector world position to grid position.
 
-	const float squareSize = 30.0f;  // The size of one square of a grid on the map.
 	std::unordered_set<sf::Vector2i, Vector2iHash> positions;  // Positions on map grid occupys. 
 	sf::Vector2i center;  // Center position in game world.
 	sf::VertexArray vertices;
