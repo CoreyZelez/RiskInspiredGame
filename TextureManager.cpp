@@ -10,7 +10,7 @@ TextureManager& TextureManager::getInstance()
 bool TextureManager::loadTexture(const std::string& id, const std::string& filepath)
 {
 	sf::Texture texture;
-	if(!texture.loadFromFile(filepath)) 
+	if(!texture.loadFromFile(filepath))
 	{
 		return false;
 	}
@@ -19,10 +19,10 @@ bool TextureManager::loadTexture(const std::string& id, const std::string& filep
 	return true;
 }
 
-const sf::Texture* TextureManager::getTexture(const std::string& id) const 
+const sf::Texture* TextureManager::getTexture(const std::string& id) const
 {
 	auto it = textures.find(id);
-	if(it != textures.end()) 
+	if(it != textures.end())
 	{
 		return &it->second;
 	}
@@ -30,21 +30,21 @@ const sf::Texture* TextureManager::getTexture(const std::string& id) const
 	return nullptr;  // Texture does not exist.
 }
 
-bool TextureManager::textureExists(const std::string& id) const 
+bool TextureManager::textureExists(const std::string& id) const
 {
 	return textures.find(id) != textures.end();
 }
 
-void TextureManager::removeTexture(const std::string& id) 
+void TextureManager::removeTexture(const std::string& id)
 {
 	auto it = textures.find(id);
-	if(it != textures.end()) 
+	if(it != textures.end())
 	{
 		textures.erase(it);
 	}
 }
 
-void TextureManager::clear() 
+void TextureManager::clear()
 {
 	textures.clear();
 }

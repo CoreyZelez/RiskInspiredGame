@@ -2,1379 +2,300 @@
 # title
 1
 # name
-Trostrethar
+Trisdrenmar
 # subfiefs
 # territory id
 1
 # land army yield
-0.787088
+0.48756
 # naval fleet yield
-0.264706
+0.332066
 
 # barony
 # title
 1
 # name
-ol
+Trosmia
 # subfiefs
 # territory id
 2
 # land army yield
-0.458274
+0.514684
 # naval fleet yield
-0.3593
+0.274629
 
 # barony
 # title
 1
 # name
-Tharrodriax
+Sthenol
 # subfiefs
 # territory id
 3
 # land army yield
-0.475792
+0.657991
 # naval fleet yield
-0.220307
+0.472374
 
 # barony
 # title
 1
 # name
-Finithtrethapinia
+Fermar
 # subfiefs
 # territory id
 4
 # land army yield
-0.415845
+0.543376
 # naval fleet yield
-0.264295
+0.323563
 
 # barony
 # title
 1
 # name
-Fereneigha
+Kerdrenmor
 # subfiefs
 # territory id
 5
 # land army yield
-0.530492
+0.481954
 # naval fleet yield
-0.418022
+0.252314
 
 # barony
 # title
 1
 # name
-Percflinvaynia
+Carol
 # subfiefs
 # territory id
 6
 # land army yield
-0.765518
+0.656954
 # naval fleet yield
-0.21213
+0.295028
 
 # barony
 # title
 1
 # name
-Finithvithisia
+Lerheughough
 # subfiefs
 # territory id
 7
 # land army yield
-0.581806
+0.573753
 # naval fleet yield
-0.252819
+0.331271
 
 # barony
 # title
 1
 # name
-Finithvinisia
+Nilavia
 # subfiefs
 # territory id
 8
 # land army yield
-0.415749
+0.673279
 # naval fleet yield
-0.278245
+0.421956
 
 # barony
 # title
 1
 # name
-Methrool
+Ventvanhenia
 # subfiefs
 # territory id
 9
 # land army yield
-0.423454
+0.634005
 # naval fleet yield
-0.439816
+0.431324
 
 # barony
 # title
 1
 # name
-Daythenia
+mar
 # subfiefs
 # territory id
 10
 # land army yield
-0.414337
+0.803532
 # naval fleet yield
-0.363829
+0.424857
 
 # barony
 # title
 1
 # name
-Morethapinia
+Ventrosia
 # subfiefs
 # territory id
 11
 # land army yield
-0.827254
+0.436534
 # naval fleet yield
-0.296522
+0.354634
 
 # barony
 # title
 1
 # name
-Methvithtopia
+Venteigha
 # subfiefs
 # territory id
 12
 # land army yield
-0.413932
+0.502048
 # naval fleet yield
-0.26251
+0.235495
 
 # barony
 # title
 1
 # name
-Westfrey
+Folnvaynia
 # subfiefs
 # territory id
 13
 # land army yield
-0.407313
+0.570195
 # naval fleet yield
-0.407793
+0.335089
 
 # barony
 # title
 1
 # name
-Nothiohthheughough
+Kerrifreyia
 # subfiefs
 # territory id
 14
 # land army yield
-0.486115
+0.718337
 # naval fleet yield
-0.270682
+0.374264
 
 # barony
 # title
 1
 # name
-Methohthar
+Ventvendriax
 # subfiefs
 # territory id
 15
 # land army yield
-0.55519
+0.594429
 # naval fleet yield
-0.21077
+0.217314
 
 # barony
 # title
 1
 # name
-Methsaeigha
+Nilaflinfrey
 # subfiefs
 # territory id
 16
 # land army yield
-0.66689
+0.792913
 # naval fleet yield
-0.419924
+0.308707
 
 # barony
 # title
 1
 # name
-Ferenthales
+Feighrofreyia
 # subfiefs
 # territory id
 17
 # land army yield
-0.697425
+0.726063
 # naval fleet yield
-0.470295
+0.496923
 
 # barony
 # title
 1
 # name
-Carar
+Drethinimia
 # subfiefs
 # territory id
 18
 # land army yield
-0.538194
+0.741797
 # naval fleet yield
-0.22542
+0.390597
 
 # barony
 # title
 1
 # name
-Feyilar
+Eashisia
 # subfiefs
 # territory id
 19
 # land army yield
-0.866874
+0.89409
 # naval fleet yield
-0.488895
+0.285342
 
 # barony
 # title
 1
 # name
-Fervanhenia
+Nethildriax
 # subfiefs
 # territory id
 20
 # land army yield
-0.683961
+0.727905
 # naval fleet yield
-0.446406
+0.49275
 
 # barony
 # title
 1
 # name
-Kervia
+Sthefrey
 # subfiefs
 # territory id
 21
 # land army yield
-0.861127
+0.788657
 # naval fleet yield
-0.317818
+0.411867
 
 # barony
 # title
 1
 # name
-Feyar
+Tharthales
 # subfiefs
 # territory id
 22
 # land army yield
-0.667758
+0.588632
 # naval fleet yield
-0.413415
+0.479043
 
 # barony
 # title
 1
 # name
-Finithapinia
+Venttrethaxia
 # subfiefs
 # territory id
 23
 # land army yield
-0.436195
+0.791089
 # naval fleet yield
-0.434903
-
-# barony
-# title
-1
-# name
-Kersatopia
-# subfiefs
-# territory id
-24
-# land army yield
-0.750601
-# naval fleet yield
-0.344468
-
-# barony
-# title
-1
-# name
-Sthentrethisia
-# subfiefs
-# territory id
-25
-# land army yield
-0.7431
-# naval fleet yield
-0.223626
-
-# barony
-# title
-1
-# name
-Sthentricth
-# subfiefs
-# territory id
-26
-# land army yield
-0.780222
-# naval fleet yield
-0.460844
-
-# barony
-# title
-1
-# name
-Folnsia
-# subfiefs
-# territory id
-27
-# land army yield
-0.483748
-# naval fleet yield
-0.300161
-
-# barony
-# title
-1
-# name
-Finithflinsia
-# subfiefs
-# territory id
-28
-# land army yield
-0.606655
-# naval fleet yield
-0.437904
-
-# barony
-# title
-1
-# name
-Nilavenapinia
-# subfiefs
-# territory id
-29
-# land army yield
-0.534363
-# naval fleet yield
-0.389576
-
-# barony
-# title
-1
-# name
-Percthales
-# subfiefs
-# territory id
-30
-# land army yield
-0.788401
-# naval fleet yield
-0.352629
-
-# barony
-# title
-1
-# name
-Tunohthlithia
-# subfiefs
-# territory id
-31
-# land army yield
-0.767307
-# naval fleet yield
-0.335242
-
-# barony
-# title
-1
-# name
-Sthenriisia
-# subfiefs
-# territory id
-32
-# land army yield
-0.599384
-# naval fleet yield
-0.204125
-
-# barony
-# title
-1
-# name
-Westvaynia
-# subfiefs
-# territory id
-33
-# land army yield
-0.808325
-# naval fleet yield
-0.382148
-
-# barony
-# title
-1
-# name
-Eashvithfreyia
-# subfiefs
-# territory id
-34
-# land army yield
-0.465579
-# naval fleet yield
-0.39192
-
-# barony
-# title
-1
-# name
-Methvenol
-# subfiefs
-# territory id
-35
-# land army yield
-0.541246
-# naval fleet yield
-0.421803
-
-# barony
-# title
-1
-# name
-Renexmor
-# subfiefs
-# territory id
-36
-# land army yield
-0.558678
-# naval fleet yield
-0.271635
-
-# barony
-# title
-1
-# name
-Hethiafreyia
-# subfiefs
-# territory id
-37
-# land army yield
-0.815305
-# naval fleet yield
-0.274367
-
-# barony
-# title
-1
-# name
-Lueghar
-# subfiefs
-# territory id
-38
-# land army yield
-0.77854
-# naval fleet yield
-0.258218
-
-# barony
-# title
-1
-# name
-Fusinisia
-# subfiefs
-# territory id
-39
-# land army yield
-0.62724
-# naval fleet yield
-0.365353
-
-# barony
-# title
-1
-# name
-Drethisia
-# subfiefs
-# territory id
-40
-# land army yield
-0.74035
-# naval fleet yield
-0.224667
-
-# barony
-# title
-1
-# name
-Topiiniapinia
-# subfiefs
-# territory id
-41
-# land army yield
-0.773543
-# naval fleet yield
-0.491772
-
-# barony
-# title
-1
-# name
-Feythales
-# subfiefs
-# territory id
-42
-# land army yield
-0.739681
-# naval fleet yield
-0.359651
-
-# barony
-# title
-1
-# name
-Mozthsamia
-# subfiefs
-# territory id
-45
-# land army yield
-0.754904
-# naval fleet yield
-0.398158
-
-# barony
-# title
-1
-# name
-Daytmar
-# subfiefs
-# territory id
-46
-# land army yield
-0.405034
-# naval fleet yield
-0.389833
-
-# barony
-# title
-1
-# name
-mor
-# subfiefs
-# territory id
-47
-# land army yield
-0.685368
-# naval fleet yield
-0.35265
-
-# barony
-# title
-1
-# name
-Feighdriax
-# subfiefs
-# territory id
-48
-# land army yield
-0.406633
-# naval fleet yield
-0.271898
-
-# barony
-# title
-1
-# name
-Westisia
-# subfiefs
-# territory id
-49
-# land army yield
-0.694558
-# naval fleet yield
-0.300662
-
-# barony
-# title
-1
-# name
-Fusar
-# subfiefs
-# territory id
-50
-# land army yield
-0.777269
-# naval fleet yield
-0.206859
-
-# barony
-# title
-1
-# name
-Methvinmor
-# subfiefs
-# territory id
-51
-# land army yield
-0.41621
-# naval fleet yield
-0.259174
-
-# barony
-# title
-1
-# name
-Renexhenia
-# subfiefs
-# territory id
-52
-# land army yield
-0.618454
-# naval fleet yield
-0.212826
-
-# barony
-# title
-1
-# name
-Drethohthtaria
-# subfiefs
-# territory id
-53
-# land army yield
-0.812836
-# naval fleet yield
-0.375296
-
-# barony
-# title
-1
-# name
-Mozthrisia
-# subfiefs
-# territory id
-54
-# land army yield
-0.460602
-# naval fleet yield
-0.466177
-
-# barony
-# title
-1
-# name
-Carvaynia
-# subfiefs
-# territory id
-55
-# land army yield
-0.670632
-# naval fleet yield
-0.406405
-
-# barony
-# title
-1
-# name
-Percvantaria
-# subfiefs
-# territory id
-56
-# land army yield
-0.858612
-# naval fleet yield
-0.265852
-
-# barony
-# title
-1
-# name
-Methviththales
-# subfiefs
-# territory id
-57
-# land army yield
-0.661702
-# naval fleet yield
-0.406508
-
-# barony
-# title
-1
-# name
-Tuntrethtricth
-# subfiefs
-# territory id
-58
-# land army yield
-0.801182
-# naval fleet yield
-0.241353
-
-# barony
-# title
-1
-# name
-Folndriax
-# subfiefs
-# territory id
-59
-# land army yield
-0.408775
-# naval fleet yield
-0.243666
-
-# barony
-# title
-1
-# name
-Trossia
-# subfiefs
-# territory id
-60
-# land army yield
-0.760041
-# naval fleet yield
-0.326179
-
-# barony
-# title
-1
-# name
-Tundethia
-# subfiefs
-# territory id
-61
-# land army yield
-0.466836
-# naval fleet yield
-0.317103
-
-# barony
-# title
-1
-# name
-ilvaynia
-# subfiefs
-# territory id
-62
-# land army yield
-0.489411
-# naval fleet yield
-0.490157
-
-# barony
-# title
-1
-# name
-Sardeth
-# subfiefs
-# territory id
-63
-# land army yield
-0.799901
-# naval fleet yield
-0.275486
-
-# barony
-# title
-1
-# name
-Methmia
-# subfiefs
-# territory id
-64
-# land army yield
-0.759002
-# naval fleet yield
-0.307627
-
-# barony
-# title
-1
-# name
-Sthentaria
-# subfiefs
-# territory id
-65
-# land army yield
-0.697668
-# naval fleet yield
-0.27359
-
-# barony
-# title
-1
-# name
-Morethtricth
-# subfiefs
-# territory id
-66
-# land army yield
-0.794056
-# naval fleet yield
-0.311069
-
-# barony
-# title
-1
-# name
-Feyridethia
-# subfiefs
-# territory id
-67
-# land army yield
-0.609124
-# naval fleet yield
-0.257316
-
-# barony
-# title
-1
-# name
-Feytaria
-# subfiefs
-# territory id
-68
-# land army yield
-0.725126
-# naval fleet yield
-0.34132
-
-# barony
-# title
-1
-# name
-Hethialithia
-# subfiefs
-# territory id
-69
-# land army yield
-0.562643
-# naval fleet yield
-0.454268
-
-# barony
-# title
-1
-# name
-Sarrihenia
-# subfiefs
-# territory id
-70
-# land army yield
-0.583856
-# naval fleet yield
-0.334911
-
-# barony
-# title
-1
-# name
-sia
-# subfiefs
-# territory id
-71
-# land army yield
-0.552198
-# naval fleet yield
-0.267887
-
-# barony
-# title
-1
-# name
-Pantopia
-# subfiefs
-# territory id
-72
-# land army yield
-0.801347
-# naval fleet yield
-0.284228
-
-# barony
-# title
-1
-# name
-Fusrihenia
-# subfiefs
-# territory id
-73
-# land army yield
-0.784341
-# naval fleet yield
-0.323837
-
-# barony
-# title
-1
-# name
-Renexmia
-# subfiefs
-# territory id
-74
-# land army yield
-0.890006
-# naval fleet yield
-0.424037
-
-# barony
-# title
-1
-# name
-Ferenlimor
-# subfiefs
-# territory id
-75
-# land army yield
-0.44558
-# naval fleet yield
-0.384018
-
-# barony
-# title
-1
-# name
-Tunhenia
-# subfiefs
-# territory id
-76
-# land army yield
-0.696553
-# naval fleet yield
-0.36109
-
-# barony
-# title
-1
-# name
-Topivaynia
-# subfiefs
-# territory id
-77
-# land army yield
-0.433095
-# naval fleet yield
-0.462576
-
-# barony
-# title
-1
-# name
-Stherovaynia
-# subfiefs
-# territory id
-78
-# land army yield
-0.554183
-# naval fleet yield
-0.201026
-
-# barony
-# title
-1
-# name
-Lerhenia
-# subfiefs
-# territory id
-79
-# land army yield
-0.516451
-# naval fleet yield
-0.325166
-
-# barony
-# title
-1
-# name
-Westinivia
-# subfiefs
-# territory id
-80
-# land army yield
-0.705535
-# naval fleet yield
-0.477285
-
-# barony
-# title
-1
-# name
-Kerinivaynia
-# subfiefs
-# territory id
-81
-# land army yield
-0.545354
-# naval fleet yield
-0.369545
-
-# barony
-# title
-1
-# name
-Lueghdriax
-# subfiefs
-# territory id
-82
-# land army yield
-0.731543
-# naval fleet yield
-0.251785
-
-# barony
-# title
-1
-# name
-Drethmar
-# subfiefs
-# territory id
-83
-# land army yield
-0.662597
-# naval fleet yield
-0.43951
-
-# barony
-# title
-1
-# name
-Sthedeth
-# subfiefs
-# territory id
-84
-# land army yield
-0.585086
-# naval fleet yield
-0.29713
-
-# barony
-# title
-1
-# name
-Sarthales
-# subfiefs
-# territory id
-85
-# land army yield
-0.502043
-# naval fleet yield
-0.460813
-
-# barony
-# title
-1
-# name
-Tunvinvaynia
-# subfiefs
-# territory id
-86
-# land army yield
-0.668237
-# naval fleet yield
-0.488365
-
-# barony
-# title
-1
-# name
-Hethiamar
-# subfiefs
-# territory id
-87
-# land army yield
-0.603308
-# naval fleet yield
-0.285189
-
-# barony
-# title
-1
-# name
-Ferentaria
-# subfiefs
-# territory id
-88
-# land army yield
-0.629757
-# naval fleet yield
-0.346014
-
-# barony
-# title
-1
-# name
-Morethaxia
-# subfiefs
-# territory id
-89
-# land army yield
-0.754486
-# naval fleet yield
-0.42747
-
-# barony
-# title
-1
-# name
-Feytopia
-# subfiefs
-# territory id
-90
-# land army yield
-0.544998
-# naval fleet yield
-0.275513
-
-# barony
-# title
-1
-# name
-Nethvanfreyia
-# subfiefs
-# territory id
-91
-# land army yield
-0.531854
-# naval fleet yield
-0.449535
-
-# barony
-# title
-1
-# name
-Eashthales
-# subfiefs
-# territory id
-92
-# land army yield
-0.440408
-# naval fleet yield
-0.393496
-
-# barony
-# title
-1
-# name
-Tristrethmar
-# subfiefs
-# territory id
-93
-# land army yield
-0.475128
-# naval fleet yield
-0.44829
-
-# barony
-# title
-1
-# name
-Nethdeth
-# subfiefs
-# territory id
-94
-# land army yield
-0.894515
-# naval fleet yield
-0.493486
-
-# barony
-# title
-1
-# name
-Stheinitopia
-# subfiefs
-# territory id
-95
-# land army yield
-0.521051
-# naval fleet yield
-0.333186
-
-# barony
-# title
-1
-# name
-Ferfreyia
-# subfiefs
-# territory id
-96
-# land army yield
-0.559799
-# naval fleet yield
-0.230276
-
-# barony
-# title
-1
-# name
-Tarfrey
-# subfiefs
-# territory id
-97
-# land army yield
-0.714295
-# naval fleet yield
-0.45675
-
-# barony
-# title
-1
-# name
-Kereigha
-# subfiefs
-# territory id
-98
-# land army yield
-0.821105
-# naval fleet yield
-0.242497
-
-# barony
-# title
-1
-# name
-Sardethia
-# subfiefs
-# territory id
-99
-# land army yield
-0.733119
-# naval fleet yield
-0.265501
-
-# barony
-# title
-1
-# name
-Ventrohenia
-# subfiefs
-# territory id
-100
-# land army yield
-0.655024
-# naval fleet yield
-0.340274
-
-# barony
-# title
-1
-# name
-Trismor
-# subfiefs
-# territory id
-101
-# land army yield
-0.498467
-# naval fleet yield
-0.215155
-
-# barony
-# title
-1
-# name
-Panisia
-# subfiefs
-# territory id
-102
-# land army yield
-0.815884
-# naval fleet yield
-0.428339
-
-# barony
-# title
-1
-# name
-Percvenol
-# subfiefs
-# territory id
-103
-# land army yield
-0.690762
-# naval fleet yield
-0.210132
-
-# barony
-# title
-1
-# name
-Trosinitricth
-# subfiefs
-# territory id
-104
-# land army yield
-0.89269
-# naval fleet yield
-0.323913
-
-# barony
-# title
-1
-# name
-Ventohthheughough
-# subfiefs
-# territory id
-105
-# land army yield
-0.804471
-# naval fleet yield
-0.427452
-
-# barony
-# title
-1
-# name
-Hethiavaynia
-# subfiefs
-# territory id
-106
-# land army yield
-0.639886
-# naval fleet yield
-0.260678
-
-# barony
-# title
-1
-# name
-Topifrey
-# subfiefs
-# territory id
-107
-# land army yield
-0.507753
-# naval fleet yield
-0.453818
-
-# barony
-# title
-1
-# name
-Ferensia
-# subfiefs
-# territory id
-108
-# land army yield
-0.6643
-# naval fleet yield
-0.266773
+0.303138
 
 # barony
 # title
@@ -1383,1337 +304,167 @@ Ferensia
 Drethol
 # subfiefs
 # territory id
-109
+24
 # land army yield
-0.44489
+0.466446
 # naval fleet yield
-0.472613
+0.389772
 
 # barony
 # title
 1
 # name
-Kerdeth
+Feydrenvaynia
 # subfiefs
 # territory id
-110
+25
 # land army yield
-0.428756
+0.550561
 # naval fleet yield
-0.289791
+0.255269
 
 # barony
 # title
 1
 # name
-Panohthtaria
+Fusmor
 # subfiefs
 # territory id
-111
+26
 # land army yield
-0.84707
+0.461805
 # naval fleet yield
-0.300238
+0.397143
 
 # barony
 # title
 1
 # name
-Mozthvia
+Kerapinia
 # subfiefs
 # territory id
-112
+27
 # land army yield
-0.876997
+0.472103
 # naval fleet yield
-0.405665
+0.296631
 
 # barony
 # title
 1
 # name
-Ventvithvaynia
+Trosinifreyia
 # subfiefs
 # territory id
-113
+28
 # land army yield
-0.417092
+0.884887
 # naval fleet yield
-0.332296
+0.22676
 
 # barony
 # title
 1
 # name
-Finithdriax
+Methinifrey
 # subfiefs
 # territory id
-114
+29
 # land army yield
-0.441005
+0.412939
 # naval fleet yield
-0.372271
+0.300882
 
 # barony
 # title
 1
 # name
-Mozthrofrey
+Perflinsia
 # subfiefs
 # territory id
-115
+30
 # land army yield
-0.589086
+0.812144
 # naval fleet yield
-0.42533
+0.228894
 
 # barony
 # title
 1
 # name
-Tarmor
+Feightaria
 # subfiefs
 # territory id
-116
+31
 # land army yield
-0.60053
+0.640182
 # naval fleet yield
-0.497246
+0.415907
 
 # barony
 # title
 1
 # name
-Eashriaxia
+Percdrentaria
 # subfiefs
 # territory id
-117
+32
 # land army yield
-0.41518
+0.403099
 # naval fleet yield
-0.493074
+0.484731
 
 # barony
 # title
 1
 # name
-Fussaisia
+Lueghaxia
 # subfiefs
 # territory id
-118
+33
 # land army yield
-0.463733
+0.78805
 # naval fleet yield
-0.440763
+0.425293
 
 # barony
 # title
 1
 # name
-Finithmia
+Fereninivaynia
 # subfiefs
 # territory id
-119
+34
 # land army yield
-0.567723
+0.532555
 # naval fleet yield
-0.386398
+0.399846
 
 # barony
 # title
 1
 # name
-Venttrethdriax
+Ventdrenmor
 # subfiefs
 # territory id
-120
+35
 # land army yield
-0.414165
+0.441131
 # naval fleet yield
-0.337856
+0.33299
 
 # barony
 # title
 1
 # name
-Panol
+Fusvanheughough
 # subfiefs
 # territory id
-121
+36
 # land army yield
-0.719338
+0.750378
 # naval fleet yield
-0.231266
-
-# barony
-# title
-1
-# name
-Methvaynia
-# subfiefs
-# territory id
-122
-# land army yield
-0.715433
-# naval fleet yield
-0.25733
-
-# barony
-# title
-1
-# name
-Troseigha
-# subfiefs
-# territory id
-123
-# land army yield
-0.716754
-# naval fleet yield
-0.432482
-
-# barony
-# title
-1
-# name
-Ferendriax
-# subfiefs
-# territory id
-124
-# land army yield
-0.697523
-# naval fleet yield
-0.289092
-
-# barony
-# title
-1
-# name
-Methapinia
-# subfiefs
-# territory id
-125
-# land army yield
-0.64204
-# naval fleet yield
-0.494099
-
-# barony
-# title
-1
-# name
-Ventmia
-# subfiefs
-# territory id
-126
-# land army yield
-0.498525
-# naval fleet yield
-0.390099
-
-# barony
-# title
-1
-# name
-Lueghmor
-# subfiefs
-# territory id
-127
-# land army yield
-0.768664
-# naval fleet yield
-0.207474
-
-# barony
-# title
-1
-# name
-Mozthohthisia
-# subfiefs
-# territory id
-128
-# land army yield
-0.66943
-# naval fleet yield
-0.398452
-
-# barony
-# title
-1
-# name
-Lerisia
-# subfiefs
-# territory id
-129
-# land army yield
-0.682539
-# naval fleet yield
-0.494291
-
-# barony
-# title
-1
-# name
-Vostricth
-# subfiefs
-# territory id
-130
-# land army yield
-0.422662
-# naval fleet yield
-0.353897
-
-# barony
-# title
-1
-# name
-Morethtopia
-# subfiefs
-# territory id
-220
-# land army yield
-0.853704
-# naval fleet yield
-0.4344
-
-# barony
-# title
-1
-# name
-Tunrofrey
-# subfiefs
-# territory id
-282
-# land army yield
-0.495956
-# naval fleet yield
-0.367176
-
-# barony
-# title
-1
-# name
-Daytvinfrey
-# subfiefs
-# territory id
-667
-# land army yield
-0.518714
-# naval fleet yield
-0.394803
-
-# barony
-# title
-1
-# name
-Methroar
-# subfiefs
-# territory id
-799
-# land army yield
-0.429985
-# naval fleet yield
-0.461952
-
-# barony
-# title
-1
-# name
-Tarmia
-# subfiefs
-# territory id
-1254
-# land army yield
-0.761612
-# naval fleet yield
-0.227973
-
-# barony
-# title
-1
-# name
-Nethritaria
-# subfiefs
-# territory id
-1377
-# land army yield
-0.587017
-# naval fleet yield
-0.252572
-
-# barony
-# title
-1
-# name
-Carvitheigha
-# subfiefs
-# territory id
-1425
-# land army yield
-0.762093
-# naval fleet yield
-0.244383
-
-# barony
-# title
-1
-# name
-Sthevia
-# subfiefs
-# territory id
-1490
-# land army yield
-0.598768
-# naval fleet yield
-0.49437
-
-# barony
-# title
-1
-# name
-Andrenheughough
-# subfiefs
-# territory id
-1608
-# land army yield
-0.631392
-# naval fleet yield
-0.407877
-
-# barony
-# title
-1
-# name
-Ferenlivaynia
-# subfiefs
-# territory id
-1698
-# land army yield
-0.48043
-# naval fleet yield
-0.319053
-
-# barony
-# title
-1
-# name
-Trisvaynia
-# subfiefs
-# territory id
-1983
-# land army yield
-0.541377
-# naval fleet yield
-0.274853
-
-# barony
-# title
-1
-# name
-Nothivenisia
-# subfiefs
-# territory id
-2168
-# land army yield
-0.592586
-# naval fleet yield
-0.431984
-
-# barony
-# title
-1
-# name
-Methlithia
-# subfiefs
-# territory id
-2219
-# land army yield
-0.655032
-# naval fleet yield
-0.296471
-
-# barony
-# title
-1
-# name
-Feighol
-# subfiefs
-# territory id
-2713
-# land army yield
-0.886931
-# naval fleet yield
-0.448454
-
-# barony
-# title
-1
-# name
-Trostrethhenia
-# subfiefs
-# territory id
-2903
-# land army yield
-0.579398
-# naval fleet yield
-0.270524
-
-# barony
-# title
-1
-# name
-Sthenrotaria
-# subfiefs
-# territory id
-2957
-# land army yield
-0.531286
-# naval fleet yield
-0.314036
-
-# barony
-# title
-1
-# name
-Kervineigha
-# subfiefs
-# territory id
-3102
-# land army yield
-0.605868
-# naval fleet yield
-0.427399
-
-# barony
-# title
-1
-# name
-Drethsatricth
-# subfiefs
-# territory id
-3200
-# land army yield
-0.432768
-# naval fleet yield
-0.455621
-
-# barony
-# title
-1
-# name
-Taraxia
-# subfiefs
-# territory id
-3826
-# land army yield
-0.482543
-# naval fleet yield
-0.233997
-
-# barony
-# title
-1
-# name
-Pandrenthales
-# subfiefs
-# territory id
-3873
-# land army yield
-0.472708
-# naval fleet yield
-0.210483
-
-# barony
-# title
-1
-# name
-Trosvithtricth
-# subfiefs
-# territory id
-3904
-# land army yield
-0.506173
-# naval fleet yield
-0.367187
-
-# barony
-# title
-1
-# name
-Drethtricth
-# subfiefs
-# territory id
-4139
-# land army yield
-0.888521
-# naval fleet yield
-0.337269
-
-# barony
-# title
-1
-# name
-Topiroapinia
-# subfiefs
-# territory id
-5806
-# land army yield
-0.819213
-# naval fleet yield
-0.422919
-
-# barony
-# title
-1
-# name
-Trosmar
-# subfiefs
-# territory id
-6075
-# land army yield
-0.440534
-# naval fleet yield
-0.430798
-
-# barony
-# title
-1
-# name
-Finithsahenia
-# subfiefs
-# territory id
-6128
-# land army yield
-0.52436
-# naval fleet yield
-0.392751
-
-# barony
-# title
-1
-# name
-Ventar
-# subfiefs
-# territory id
-6286
-# land army yield
-0.81122
-# naval fleet yield
-0.359855
-
-# barony
-# title
-1
-# name
-Carfreyia
-# subfiefs
-# territory id
-7458
-# land army yield
-0.722801
-# naval fleet yield
-0.215046
-
-# barony
-# title
-1
-# name
-Daytlilithia
-# subfiefs
-# territory id
-7514
-# land army yield
-0.726278
-# naval fleet yield
-0.315586
-
-# barony
-# title
-1
-# name
-Kerdriax
-# subfiefs
-# territory id
-7582
-# land army yield
-0.872931
-# naval fleet yield
-0.240917
-
-# barony
-# title
-1
-# name
-Folnlifreyia
-# subfiefs
-# territory id
-7633
-# land army yield
-0.433354
-# naval fleet yield
-0.323308
-
-# barony
-# title
-1
-# name
-Folnrodeth
-# subfiefs
-# territory id
-7719
-# land army yield
-0.734134
-# naval fleet yield
-0.491853
-
-# barony
-# title
-1
-# name
-Eashsaol
-# subfiefs
-# territory id
-7772
-# land army yield
-0.663376
-# naval fleet yield
-0.269582
-
-# barony
-# title
-1
-# name
-Eashaxia
-# subfiefs
-# territory id
-7817
-# land army yield
-0.420529
-# naval fleet yield
-0.223457
-
-# barony
-# title
-1
-# name
-Percol
-# subfiefs
-# territory id
-7873
-# land army yield
-0.62509
-# naval fleet yield
-0.404005
-
-# barony
-# title
-1
-# name
-Ferenmar
-# subfiefs
-# territory id
-7911
-# land army yield
-0.653294
-# naval fleet yield
-0.351339
-
-# barony
-# title
-1
-# name
-Drethvia
-# subfiefs
-# territory id
-7977
-# land army yield
-0.446991
-# naval fleet yield
-0.42969
-
-# barony
-# title
-1
-# name
-Panvinfreyia
-# subfiefs
-# territory id
-8023
-# land army yield
-0.770438
-# naval fleet yield
-0.284469
-
-# barony
-# title
-1
-# name
-Carflinheughough
-# subfiefs
-# territory id
-8052
-# land army yield
-0.805913
-# naval fleet yield
-0.443668
-
-# barony
-# title
-1
-# name
-Fusvaneigha
-# subfiefs
-# territory id
-8128
-# land army yield
-0.546104
-# naval fleet yield
-0.468432
-
-# barony
-# title
-1
-# name
-Drethdrensia
-# subfiefs
-# territory id
-8169
-# land army yield
-0.597422
-# naval fleet yield
-0.400088
-
-# barony
-# title
-1
-# name
-trethmor
-# subfiefs
-# territory id
-8316
-# land army yield
-0.851244
-# naval fleet yield
-0.446122
-
-# barony
-# title
-1
-# name
-Folnar
-# subfiefs
-# territory id
-8363
-# land army yield
-0.565199
-# naval fleet yield
-0.413044
-
-# barony
-# title
-1
-# name
-Perfreyia
-# subfiefs
-# territory id
-8417
-# land army yield
-0.791246
-# naval fleet yield
-0.392915
-
-# barony
-# title
-1
-# name
-Trosdeth
-# subfiefs
-# territory id
-8466
-# land army yield
-0.761975
-# naval fleet yield
-0.249025
-
-# barony
-# title
-1
-# name
-Nethinimia
-# subfiefs
-# territory id
-8517
-# land army yield
-0.826978
-# naval fleet yield
-0.393403
-
-# barony
-# title
-1
-# name
-Folnlimar
-# subfiefs
-# territory id
-8687
-# land army yield
-0.646825
-# naval fleet yield
-0.364352
-
-# barony
-# title
-1
-# name
-Nilasahenia
-# subfiefs
-# territory id
-8744
-# land army yield
-0.66497
-# naval fleet yield
-0.303663
-
-# barony
-# title
-1
-# name
-Sarfreyia
-# subfiefs
-# territory id
-8783
-# land army yield
-0.422169
-# naval fleet yield
-0.22918
-
-# barony
-# title
-1
-# name
-Finithlithia
-# subfiefs
-# territory id
-8827
-# land army yield
-0.535483
-# naval fleet yield
-0.270693
-
-# barony
-# title
-1
-# name
-Kertricth
-# subfiefs
-# territory id
-8974
-# land army yield
-0.788601
-# naval fleet yield
-0.225032
-
-# barony
-# title
-1
-# name
-Topitrethtaria
-# subfiefs
-# territory id
-9031
-# land army yield
-0.86511
-# naval fleet yield
-0.457946
-
-# barony
-# title
-1
-# name
-Nethrofreyia
-# subfiefs
-# territory id
-9270
-# land army yield
-0.8401
-# naval fleet yield
-0.27105
-
-# barony
-# title
-1
-# name
-Percdriax
-# subfiefs
-# territory id
-9334
-# land army yield
-0.826618
-# naval fleet yield
-0.399676
-
-# barony
-# title
-1
-# name
-Finithohthheughough
-# subfiefs
-# territory id
-9396
-# land army yield
-0.693231
-# naval fleet yield
-0.462473
-
-# barony
-# title
-1
-# name
-Metheigha
-# subfiefs
-# territory id
-9445
-# land army yield
-0.70527
-# naval fleet yield
-0.498767
-
-# barony
-# title
-1
-# name
-Lueghdeth
-# subfiefs
-# territory id
-9494
-# land army yield
-0.698061
-# naval fleet yield
-0.330716
-
-# barony
-# title
-1
-# name
-Tharflinmia
-# subfiefs
-# territory id
-9549
-# land army yield
-0.721346
-# naval fleet yield
-0.405872
-
-# barony
-# title
-1
-# name
-Ferenmia
-# subfiefs
-# territory id
-9601
-# land army yield
-0.675243
-# naval fleet yield
-0.274422
-
-# barony
-# title
-1
-# name
-Fusvinmia
-# subfiefs
-# territory id
-9649
-# land army yield
-0.426017
-# naval fleet yield
-0.302598
-
-# barony
-# title
-1
-# name
-Sthelithia
-# subfiefs
-# territory id
-9707
-# land army yield
-0.665005
-# naval fleet yield
-0.273579
-
-# barony
-# title
-1
-# name
-Nilariol
-# subfiefs
-# territory id
-9769
-# land army yield
-0.889306
-# naval fleet yield
-0.324032
-
-# barony
-# title
-1
-# name
-Topiisia
-# subfiefs
-# territory id
-9808
-# land army yield
-0.752976
-# naval fleet yield
-0.261962
-
-# barony
-# title
-1
-# name
-Vosol
-# subfiefs
-# territory id
-9919
-# land army yield
-0.7322
-# naval fleet yield
-0.379352
-
-# barony
-# title
-1
-# name
-Morethsavia
-# subfiefs
-# territory id
-9966
-# land army yield
-0.69164
-# naval fleet yield
-0.390446
-
-# barony
-# title
-1
-# name
-Feyriar
-# subfiefs
-# territory id
-10004
-# land army yield
-0.73322
-# naval fleet yield
-0.276717
-
-# barony
-# title
-1
-# name
-Careigha
-# subfiefs
-# territory id
-10060
-# land army yield
-0.596249
-# naval fleet yield
-0.276322
-
-# barony
-# title
-1
-# name
-Kertopia
-# subfiefs
-# territory id
-10095
-# land army yield
-0.746483
-# naval fleet yield
-0.285026
-
-# barony
-# title
-1
-# name
-Trisapinia
-# subfiefs
-# territory id
-10186
-# land army yield
-0.54477
-# naval fleet yield
-0.331612
-
-# barony
-# title
-1
-# name
-tricth
-# subfiefs
-# territory id
-10410
-# land army yield
-0.618636
-# naval fleet yield
-0.228017
-
-# barony
-# title
-1
-# name
-Nothifreyia
-# subfiefs
-# territory id
-10461
-# land army yield
-0.640951
-# naval fleet yield
-0.250292
-
-# barony
-# title
-1
-# name
-Panheughough
-# subfiefs
-# territory id
-10489
-# land army yield
-0.405548
-# naval fleet yield
-0.406326
-
-# barony
-# title
-1
-# name
-deth
-# subfiefs
-# territory id
-10560
-# land army yield
-0.586686
-# naval fleet yield
-0.32205
-
-# barony
-# title
-1
-# name
-Sthensaapinia
-# subfiefs
-# territory id
-10607
-# land army yield
-0.773825
-# naval fleet yield
-0.48213
-
-# barony
-# title
-1
-# name
-Perctopia
-# subfiefs
-# territory id
-10651
-# land army yield
-0.611305
-# naval fleet yield
-0.383219
-
-# barony
-# title
-1
-# name
-Vosflindeth
-# subfiefs
-# territory id
-10766
-# land army yield
-0.776761
-# naval fleet yield
-0.359313
-
-# barony
-# title
-1
-# name
-Perlithia
-# subfiefs
-# territory id
-10803
-# land army yield
-0.616423
-# naval fleet yield
-0.428725
-
-# barony
-# title
-1
-# name
-Renexlithia
-# subfiefs
-# territory id
-10840
-# land army yield
-0.595956
-# naval fleet yield
-0.340794
-
-# barony
-# title
-1
-# name
-Sarohthhenia
-# subfiefs
-# territory id
-10889
-# land army yield
-0.749371
-# naval fleet yield
-0.439218
-
-# barony
-# title
-1
-# name
-Lueghflintricth
-# subfiefs
-# territory id
-10946
-# land army yield
-0.583285
-# naval fleet yield
-0.480909
-
-# barony
-# title
-1
-# name
-Eashmia
-# subfiefs
-# territory id
-10999
-# land army yield
-0.584543
-# naval fleet yield
-0.348772
-
-# barony
-# title
-1
-# name
-Sthevineigha
-# subfiefs
-# territory id
-11059
-# land army yield
-0.423765
-# naval fleet yield
-0.219154
+0.275839
 
 # barony
 # title
@@ -2722,882 +473,102 @@ Sthevineigha
 Troslithia
 # subfiefs
 # territory id
-11101
+37
 # land army yield
-0.646758
+0.48753
 # naval fleet yield
-0.424035
+0.495115
 
 # barony
 # title
 1
 # name
-Niladethia
+Daytroar
 # subfiefs
 # territory id
-11162
+38
 # land army yield
-0.808006
+0.599892
 # naval fleet yield
-0.344686
+0.226145
 
 # barony
 # title
 1
 # name
-Perohthfreyia
+Kerol
 # subfiefs
 # territory id
-11242
+39
 # land army yield
-0.406221
+0.459709
 # naval fleet yield
-0.208216
+0.37234
 
 # barony
 # title
 1
 # name
-Vossamor
+Panvithvia
 # subfiefs
 # territory id
-11306
+40
 # land army yield
-0.878041
+0.525496
 # naval fleet yield
-0.415159
+0.473348
 
 # barony
 # title
 1
 # name
-Vosdethia
+Carvia
 # subfiefs
 # territory id
-11356
+41
 # land army yield
-0.417467
+0.41313
 # naval fleet yield
-0.328426
+0.491507
 
 # barony
 # title
 1
 # name
-Trostricth
+Feighillithia
 # subfiefs
 # territory id
-11445
+42
 # land army yield
-0.489807
+0.475289
 # naval fleet yield
-0.207687
+0.290448
 
 # barony
 # title
 1
 # name
-Morethmor
+Folnsamor
 # subfiefs
 # territory id
-11493
+45
 # land army yield
-0.888273
+0.494339
 # naval fleet yield
-0.215698
+0.41323
 
 # barony
 # title
 1
 # name
-Percfreyia
+Ferenrodriax
 # subfiefs
 # territory id
-11535
+46
 # land army yield
-0.477388
+0.866289
 # naval fleet yield
-0.413967
-
-# barony
-# title
-1
-# name
-Nilaaxia
-# subfiefs
-# territory id
-11572
-# land army yield
-0.728493
-# naval fleet yield
-0.264541
-
-# barony
-# title
-1
-# name
-Mozthdrenthales
-# subfiefs
-# territory id
-11627
-# land army yield
-0.635761
-# naval fleet yield
-0.442831
-
-# barony
-# title
-1
-# name
-Drethar
-# subfiefs
-# territory id
-11659
-# land army yield
-0.862006
-# naval fleet yield
-0.382915
-
-# barony
-# title
-1
-# name
-Nothiroar
-# subfiefs
-# territory id
-11713
-# land army yield
-0.459866
-# naval fleet yield
-0.408998
-
-# barony
-# title
-1
-# name
-Feyvendriax
-# subfiefs
-# territory id
-11849
-# land army yield
-0.473045
-# naval fleet yield
-0.403902
-
-# barony
-# title
-1
-# name
-Methtaria
-# subfiefs
-# territory id
-11896
-# land army yield
-0.563638
-# naval fleet yield
-0.202703
-
-# barony
-# title
-1
-# name
-Trisinidriax
-# subfiefs
-# territory id
-11933
-# land army yield
-0.467063
-# naval fleet yield
-0.468328
-
-# barony
-# title
-1
-# name
-Panar
-# subfiefs
-# territory id
-11979
-# land army yield
-0.834997
-# naval fleet yield
-0.377264
-
-# barony
-# title
-1
-# name
-Daytrieigha
-# subfiefs
-# territory id
-12029
-# land army yield
-0.413553
-# naval fleet yield
-0.435969
-
-# barony
-# title
-1
-# name
-Topiohthdriax
-# subfiefs
-# territory id
-12081
-# land army yield
-0.530113
-# naval fleet yield
-0.251993
-
-# barony
-# title
-1
-# name
-Tharflindriax
-# subfiefs
-# territory id
-12173
-# land army yield
-0.647335
-# naval fleet yield
-0.345152
-
-# barony
-# title
-1
-# name
-Perdeth
-# subfiefs
-# territory id
-12239
-# land army yield
-0.873853
-# naval fleet yield
-0.429229
-
-# barony
-# title
-1
-# name
-Nethilol
-# subfiefs
-# territory id
-12360
-# land army yield
-0.514537
-# naval fleet yield
-0.388078
-
-# barony
-# title
-1
-# name
-Ventiltricth
-# subfiefs
-# territory id
-12455
-# land army yield
-0.647691
-# naval fleet yield
-0.362864
-
-# barony
-# title
-1
-# name
-Feymia
-# subfiefs
-# territory id
-12506
-# land army yield
-0.446132
-# naval fleet yield
-0.245469
-
-# barony
-# title
-1
-# name
-Vosvinheughough
-# subfiefs
-# territory id
-12555
-# land army yield
-0.850933
-# naval fleet yield
-0.489903
-
-# barony
-# title
-1
-# name
-Tunflinsia
-# subfiefs
-# territory id
-12880
-# land army yield
-0.689794
-# naval fleet yield
-0.302795
-
-# barony
-# title
-1
-# name
-Sthevinthales
-# subfiefs
-# territory id
-12936
-# land army yield
-0.827364
-# naval fleet yield
-0.459055
-
-# barony
-# title
-1
-# name
-Mozthvintricth
-# subfiefs
-# territory id
-12975
-# land army yield
-0.589739
-# naval fleet yield
-0.385587
-
-# barony
-# title
-1
-# name
-Morethridethia
-# subfiefs
-# territory id
-13085
-# land army yield
-0.739141
-# naval fleet yield
-0.440072
-
-# barony
-# title
-1
-# name
-Feyrifreyia
-# subfiefs
-# territory id
-13121
-# land army yield
-0.741125
-# naval fleet yield
-0.378792
-
-# barony
-# title
-1
-# name
-saheughough
-# subfiefs
-# territory id
-13204
-# land army yield
-0.685355
-# naval fleet yield
-0.452198
-
-# barony
-# title
-1
-# name
-Morethilfreyia
-# subfiefs
-# territory id
-13252
-# land army yield
-0.466589
-# naval fleet yield
-0.259053
-
-# barony
-# title
-1
-# name
-topia
-# subfiefs
-# territory id
-13308
-# land army yield
-0.852982
-# naval fleet yield
-0.461479
-
-# barony
-# title
-1
-# name
-Drethdrenheughough
-# subfiefs
-# territory id
-13409
-# land army yield
-0.746781
-# naval fleet yield
-0.479722
-
-# barony
-# title
-1
-# name
-Daytaxia
-# subfiefs
-# territory id
-13513
-# land army yield
-0.888142
-# naval fleet yield
-0.280098
-
-# barony
-# title
-1
-# name
-Fusventricth
-# subfiefs
-# territory id
-13554
-# land army yield
-0.78203
-# naval fleet yield
-0.244327
-
-# barony
-# title
-1
-# name
-Kervaynia
-# subfiefs
-# territory id
-13603
-# land army yield
-0.896937
-# naval fleet yield
-0.204255
-
-# barony
-# title
-1
-# name
-Pertopia
-# subfiefs
-# territory id
-13685
-# land army yield
-0.665702
-# naval fleet yield
-0.450237
-
-# barony
-# title
-1
-# name
-Perceigha
-# subfiefs
-# territory id
-13727
-# land army yield
-0.838817
-# naval fleet yield
-0.374887
-
-# barony
-# title
-1
-# name
-Lerliol
-# subfiefs
-# territory id
-13780
-# land army yield
-0.5029
-# naval fleet yield
-0.245431
-
-# barony
-# title
-1
-# name
-Morethlithia
-# subfiefs
-# territory id
-13825
-# land army yield
-0.800663
-# naval fleet yield
-0.364897
-
-# barony
-# title
-1
-# name
-Perchenia
-# subfiefs
-# territory id
-13992
-# land army yield
-0.680359
-# naval fleet yield
-0.230533
-
-# barony
-# title
-1
-# name
-Stheapinia
-# subfiefs
-# territory id
-14036
-# land army yield
-0.646101
-# naval fleet yield
-0.294839
-
-# barony
-# title
-1
-# name
-Nilasaheughough
-# subfiefs
-# territory id
-14121
-# land army yield
-0.755548
-# naval fleet yield
-0.407631
-
-# barony
-# title
-1
-# name
-Mozthdriax
-# subfiefs
-# territory id
-14603
-# land army yield
-0.757937
-# naval fleet yield
-0.414333
-
-# barony
-# title
-1
-# name
-Nothivantricth
-# subfiefs
-# territory id
-14983
-# land army yield
-0.86777
-# naval fleet yield
-0.304894
-
-# barony
-# title
-1
-# name
-Nilaeigha
-# subfiefs
-# territory id
-15032
-# land army yield
-0.727568
-# naval fleet yield
-0.41922
-
-# barony
-# title
-1
-# name
-Nethfrey
-# subfiefs
-# territory id
-15092
-# land army yield
-0.458941
-# naval fleet yield
-0.402152
-
-# barony
-# title
-1
-# name
-Lersia
-# subfiefs
-# territory id
-15143
-# land army yield
-0.564911
-# naval fleet yield
-0.248685
-
-# barony
-# title
-1
-# name
-Ferisia
-# subfiefs
-# territory id
-15183
-# land army yield
-0.743089
-# naval fleet yield
-0.465126
-
-# barony
-# title
-1
-# name
-Finithaxia
-# subfiefs
-# territory id
-15239
-# land army yield
-0.4115
-# naval fleet yield
-0.419676
-
-# barony
-# title
-1
-# name
-Lueghvia
-# subfiefs
-# territory id
-15293
-# land army yield
-0.874145
-# naval fleet yield
-0.452248
-
-# barony
-# title
-1
-# name
-Sarrolithia
-# subfiefs
-# territory id
-15354
-# land army yield
-0.409626
-# naval fleet yield
-0.364458
-
-# barony
-# title
-1
-# name
-Mozthlivia
-# subfiefs
-# territory id
-15407
-# land army yield
-0.804248
-# naval fleet yield
-0.412997
-
-# barony
-# title
-1
-# name
-Daytthales
-# subfiefs
-# territory id
-15473
-# land army yield
-0.684167
-# naval fleet yield
-0.384513
-
-# barony
-# title
-1
-# name
-Eashlithia
-# subfiefs
-# territory id
-15726
-# land army yield
-0.731243
-# naval fleet yield
-0.261873
-
-# barony
-# title
-1
-# name
-Tunaxia
-# subfiefs
-# territory id
-15823
-# land army yield
-0.625699
-# naval fleet yield
-0.208846
-
-# barony
-# title
-1
-# name
-Fusheughough
-# subfiefs
-# territory id
-15870
-# land army yield
-0.516738
-# naval fleet yield
-0.499096
-
-# barony
-# title
-1
-# name
-Trosaxia
-# subfiefs
-# territory id
-15938
-# land army yield
-0.63921
-# naval fleet yield
-0.230274
-
-# barony
-# title
-1
-# name
-Tuntricth
-# subfiefs
-# territory id
-15988
-# land army yield
-0.625101
-# naval fleet yield
-0.347616
-
-# barony
-# title
-1
-# name
-Sarohthfreyia
-# subfiefs
-# territory id
-16043
-# land army yield
-0.476625
-# naval fleet yield
-0.472823
-
-# barony
-# title
-1
-# name
-Hethiailmar
-# subfiefs
-# territory id
-16098
-# land army yield
-0.717461
-# naval fleet yield
-0.475615
-
-# barony
-# title
-1
-# name
-Ventmar
-# subfiefs
-# territory id
-16132
-# land army yield
-0.741262
-# naval fleet yield
-0.340138
-
-# barony
-# title
-1
-# name
-Fertaria
-# subfiefs
-# territory id
-16179
-# land army yield
-0.403309
-# naval fleet yield
-0.325389
-
-# barony
-# title
-1
-# name
-Nilatrethdriax
-# subfiefs
-# territory id
-16246
-# land army yield
-0.553553
-# naval fleet yield
-0.367969
-
-# barony
-# title
-1
-# name
-Westfreyia
-# subfiefs
-# territory id
-16400
-# land army yield
-0.62756
-# naval fleet yield
-0.233335
-
-# barony
-# title
-1
-# name
-Trosol
-# subfiefs
-# territory id
-16498
-# land army yield
-0.82344
-# naval fleet yield
-0.240897
-
-# barony
-# title
-1
-# name
-Methtopia
-# subfiefs
-# territory id
-16554
-# land army yield
-0.636084
-# naval fleet yield
-0.472394
-
-# barony
-# title
-1
-# name
-Nilataria
-# subfiefs
-# territory id
-16641
-# land army yield
-0.727414
-# naval fleet yield
-0.464775
+0.326975
 
 # barony
 # title
@@ -3606,76 +577,1038 @@ Nilataria
 Nilasia
 # subfiefs
 # territory id
-17119
+47
 # land army yield
-0.894965
+0.876064
 # naval fleet yield
-0.211368
+0.354529
 
 # barony
 # title
 1
 # name
-Panilapinia
+Drethtrethapinia
 # subfiefs
 # territory id
-17158
+48
 # land army yield
-0.455003
+0.408992
 # naval fleet yield
-0.486616
+0.400949
 
 # barony
 # title
 1
 # name
-Anlithia
+lisia
 # subfiefs
 # territory id
-17212
+49
 # land army yield
-0.873566
+0.459843
 # naval fleet yield
-0.295614
+0.467734
 
 # barony
 # title
 1
 # name
-Lerdriax
+Sarsia
 # subfiefs
 # territory id
-17313
+50
 # land army yield
-0.636478
+0.898186
 # naval fleet yield
-0.443318
+0.220038
 
 # barony
 # title
 1
 # name
-Anisia
+Mozthinidethia
 # subfiefs
 # territory id
-17365
+51
 # land army yield
-0.584801
+0.482733
 # naval fleet yield
-0.420992
+0.350602
 
 # barony
 # title
 1
 # name
-Nothitaria
+Hethiafrey
 # subfiefs
 # territory id
-17409
+52
 # land army yield
-0.704685
+0.497543
 # naval fleet yield
-0.47951
+0.428701
+
+# barony
+# title
+1
+# name
+Ventdrenlithia
+# subfiefs
+# territory id
+53
+# land army yield
+0.899922
+# naval fleet yield
+0.40561
+
+# barony
+# title
+1
+# name
+Lervaynia
+# subfiefs
+# territory id
+54
+# land army yield
+0.655291
+# naval fleet yield
+0.382592
+
+# barony
+# title
+1
+# name
+Folnapinia
+# subfiefs
+# territory id
+55
+# land army yield
+0.743078
+# naval fleet yield
+0.239088
+
+# barony
+# title
+1
+# name
+Tharsaol
+# subfiefs
+# territory id
+56
+# land army yield
+0.451129
+# naval fleet yield
+0.398867
+
+# barony
+# title
+1
+# name
+vanheughough
+# subfiefs
+# territory id
+57
+# land army yield
+0.614855
+# naval fleet yield
+0.337972
+
+# barony
+# title
+1
+# name
+Renexdriax
+# subfiefs
+# territory id
+58
+# land army yield
+0.630387
+# naval fleet yield
+0.436378
+
+# barony
+# title
+1
+# name
+Venttrethdethia
+# subfiefs
+# territory id
+59
+# land army yield
+0.793224
+# naval fleet yield
+0.283315
+
+# barony
+# title
+1
+# name
+Percohthfreyia
+# subfiefs
+# territory id
+60
+# land army yield
+0.402972
+# naval fleet yield
+0.283898
+
+# barony
+# title
+1
+# name
+Perlivia
+# subfiefs
+# territory id
+61
+# land army yield
+0.87733
+# naval fleet yield
+0.234429
+
+# barony
+# title
+1
+# name
+Feysia
+# subfiefs
+# territory id
+62
+# land army yield
+0.635086
+# naval fleet yield
+0.299595
+
+# barony
+# title
+1
+# name
+Lueghol
+# subfiefs
+# territory id
+63
+# land army yield
+0.499705
+# naval fleet yield
+0.200985
+
+# barony
+# title
+1
+# name
+Ferenroeigha
+# subfiefs
+# territory id
+64
+# land army yield
+0.710459
+# naval fleet yield
+0.405753
+
+# barony
+# title
+1
+# name
+Trisdrenmor
+# subfiefs
+# territory id
+65
+# land army yield
+0.84828
+# naval fleet yield
+0.273404
+
+# barony
+# title
+1
+# name
+Pertaria
+# subfiefs
+# territory id
+66
+# land army yield
+0.662625
+# naval fleet yield
+0.273241
+
+# barony
+# title
+1
+# name
+Mozthdrenfrey
+# subfiefs
+# territory id
+67
+# land army yield
+0.790698
+# naval fleet yield
+0.294756
+
+# barony
+# title
+1
+# name
+Percvindriax
+# subfiefs
+# territory id
+68
+# land army yield
+0.475246
+# naval fleet yield
+0.446124
+
+# barony
+# title
+1
+# name
+Hethiainifrey
+# subfiefs
+# territory id
+69
+# land army yield
+0.604334
+# naval fleet yield
+0.366134
+
+# barony
+# title
+1
+# name
+Sthetopia
+# subfiefs
+# territory id
+70
+# land army yield
+0.820767
+# naval fleet yield
+0.294389
+
+# barony
+# title
+1
+# name
+Trosflinaxia
+# subfiefs
+# territory id
+71
+# land army yield
+0.441684
+# naval fleet yield
+0.330829
+
+# barony
+# title
+1
+# name
+Fervineigha
+# subfiefs
+# territory id
+72
+# land army yield
+0.829965
+# naval fleet yield
+0.313194
+
+# barony
+# title
+1
+# name
+iniar
+# subfiefs
+# territory id
+73
+# land army yield
+0.498061
+# naval fleet yield
+0.332071
+
+# barony
+# title
+1
+# name
+Nilasamia
+# subfiefs
+# territory id
+74
+# land army yield
+0.796828
+# naval fleet yield
+0.481966
+
+# barony
+# title
+1
+# name
+Trisiniol
+# subfiefs
+# territory id
+75
+# land army yield
+0.604815
+# naval fleet yield
+0.232817
+
+# barony
+# title
+1
+# name
+Carilfreyia
+# subfiefs
+# territory id
+76
+# land army yield
+0.480438
+# naval fleet yield
+0.308481
+
+# barony
+# title
+1
+# name
+flinheughough
+# subfiefs
+# territory id
+77
+# land army yield
+0.635662
+# naval fleet yield
+0.339236
+
+# barony
+# title
+1
+# name
+Fussaeigha
+# subfiefs
+# territory id
+78
+# land army yield
+0.530004
+# naval fleet yield
+0.381994
+
+# barony
+# title
+1
+# name
+Trosdethia
+# subfiefs
+# territory id
+79
+# land army yield
+0.463459
+# naval fleet yield
+0.21845
+
+# barony
+# title
+1
+# name
+Panapinia
+# subfiefs
+# territory id
+80
+# land army yield
+0.809028
+# naval fleet yield
+0.376175
+
+# barony
+# title
+1
+# name
+Feightricth
+# subfiefs
+# territory id
+81
+# land army yield
+0.786645
+# naval fleet yield
+0.42625
+
+# barony
+# title
+1
+# name
+Lerol
+# subfiefs
+# territory id
+82
+# land army yield
+0.834224
+# naval fleet yield
+0.271017
+
+# barony
+# title
+1
+# name
+Ferenflinar
+# subfiefs
+# territory id
+83
+# land army yield
+0.677324
+# naval fleet yield
+0.237927
+
+# barony
+# title
+1
+# name
+Topiisia
+# subfiefs
+# territory id
+84
+# land army yield
+0.48121
+# naval fleet yield
+0.248032
+
+# barony
+# title
+1
+# name
+Westtrethlithia
+# subfiefs
+# territory id
+85
+# land army yield
+0.783878
+# naval fleet yield
+0.237327
+
+# barony
+# title
+1
+# name
+Nethlithia
+# subfiefs
+# territory id
+86
+# land army yield
+0.708102
+# naval fleet yield
+0.401207
+
+# barony
+# title
+1
+# name
+Percdethia
+# subfiefs
+# territory id
+87
+# land army yield
+0.425674
+# naval fleet yield
+0.450726
+
+# barony
+# title
+1
+# name
+Folnaxia
+# subfiefs
+# territory id
+88
+# land army yield
+0.677707
+# naval fleet yield
+0.406243
+
+# barony
+# title
+1
+# name
+Daytdeth
+# subfiefs
+# territory id
+89
+# land army yield
+0.833955
+# naval fleet yield
+0.26326
+
+# barony
+# title
+1
+# name
+Eashtaria
+# subfiefs
+# territory id
+90
+# land army yield
+0.852623
+# naval fleet yield
+0.297891
+
+# barony
+# title
+1
+# name
+Drethheughough
+# subfiefs
+# territory id
+91
+# land army yield
+0.626722
+# naval fleet yield
+0.493352
+
+# barony
+# title
+1
+# name
+rodethia
+# subfiefs
+# territory id
+92
+# land army yield
+0.452922
+# naval fleet yield
+0.23934
+
+# barony
+# title
+1
+# name
+Mozthdrenmia
+# subfiefs
+# territory id
+93
+# land army yield
+0.464423
+# naval fleet yield
+0.257109
+
+# barony
+# title
+1
+# name
+Topilimar
+# subfiefs
+# territory id
+94
+# land army yield
+0.680683
+# naval fleet yield
+0.40213
+
+# barony
+# title
+1
+# name
+Kertopia
+# subfiefs
+# territory id
+95
+# land army yield
+0.636377
+# naval fleet yield
+0.498583
+
+# barony
+# title
+1
+# name
+Nilaflinvaynia
+# subfiefs
+# territory id
+96
+# land army yield
+0.776206
+# naval fleet yield
+0.221514
+
+# barony
+# title
+1
+# name
+Ventridriax
+# subfiefs
+# territory id
+97
+# land army yield
+0.706472
+# naval fleet yield
+0.459836
+
+# barony
+# title
+1
+# name
+Renextricth
+# subfiefs
+# territory id
+98
+# land army yield
+0.83315
+# naval fleet yield
+0.249107
+
+# barony
+# title
+1
+# name
+Percar
+# subfiefs
+# territory id
+99
+# land army yield
+0.441505
+# naval fleet yield
+0.473527
+
+# barony
+# title
+1
+# name
+Permia
+# subfiefs
+# territory id
+100
+# land army yield
+0.677941
+# naval fleet yield
+0.430162
+
+# barony
+# title
+1
+# name
+Drethisia
+# subfiefs
+# territory id
+101
+# land army yield
+0.79055
+# naval fleet yield
+0.460866
+
+# barony
+# title
+1
+# name
+Sarfrey
+# subfiefs
+# territory id
+102
+# land army yield
+0.792093
+# naval fleet yield
+0.370672
+
+# barony
+# title
+1
+# name
+Feyvinmia
+# subfiefs
+# territory id
+103
+# land army yield
+0.867195
+# naval fleet yield
+0.258486
+
+# barony
+# title
+1
+# name
+Nothiheughough
+# subfiefs
+# territory id
+104
+# land army yield
+0.894758
+# naval fleet yield
+0.395626
+
+# barony
+# title
+1
+# name
+Trisflindriax
+# subfiefs
+# territory id
+105
+# land army yield
+0.827674
+# naval fleet yield
+0.415192
+
+# barony
+# title
+1
+# name
+Feyohthheughough
+# subfiefs
+# territory id
+106
+# land army yield
+0.710701
+# naval fleet yield
+0.390377
+
+# barony
+# title
+1
+# name
+Sthesaisia
+# subfiefs
+# territory id
+107
+# land army yield
+0.529863
+# naval fleet yield
+0.306258
+
+# barony
+# title
+1
+# name
+Fereninifreyia
+# subfiefs
+# territory id
+108
+# land army yield
+0.453228
+# naval fleet yield
+0.365008
+
+# barony
+# title
+1
+# name
+Feyeigha
+# subfiefs
+# territory id
+109
+# land army yield
+0.70509
+# naval fleet yield
+0.377345
+
+# barony
+# title
+1
+# name
+Nothirifreyia
+# subfiefs
+# territory id
+110
+# land army yield
+0.854555
+# naval fleet yield
+0.453678
+
+# barony
+# title
+1
+# name
+Mozthvithmar
+# subfiefs
+# territory id
+111
+# land army yield
+0.891021
+# naval fleet yield
+0.429452
+
+# barony
+# title
+1
+# name
+Anvithaxia
+# subfiefs
+# territory id
+112
+# land army yield
+0.743977
+# naval fleet yield
+0.222602
+
+# barony
+# title
+1
+# name
+Tundrenmia
+# subfiefs
+# territory id
+113
+# land army yield
+0.759622
+# naval fleet yield
+0.221776
+
+# barony
+# title
+1
+# name
+Westriisia
+# subfiefs
+# territory id
+114
+# land army yield
+0.751921
+# naval fleet yield
+0.432928
+
+# barony
+# title
+1
+# name
+Sthensafreyia
+# subfiefs
+# territory id
+115
+# land army yield
+0.782744
+# naval fleet yield
+0.360135
+
+# barony
+# title
+1
+# name
+Panhenia
+# subfiefs
+# territory id
+116
+# land army yield
+0.716365
+# naval fleet yield
+0.420456
+
+# barony
+# title
+1
+# name
+Ferenhenia
+# subfiefs
+# territory id
+117
+# land army yield
+0.560146
+# naval fleet yield
+0.222772
+
+# barony
+# title
+1
+# name
+Tharmar
+# subfiefs
+# territory id
+118
+# land army yield
+0.650461
+# naval fleet yield
+0.356632
+
+# barony
+# title
+1
+# name
+Nothitrethfreyia
+# subfiefs
+# territory id
+119
+# land army yield
+0.876562
+# naval fleet yield
+0.434202
+
+# barony
+# title
+1
+# name
+Nothihenia
+# subfiefs
+# territory id
+120
+# land army yield
+0.590615
+# naval fleet yield
+0.316052
+
+# barony
+# title
+1
+# name
+Feighsia
+# subfiefs
+# territory id
+121
+# land army yield
+0.757915
+# naval fleet yield
+0.247882
+
+# barony
+# title
+1
+# name
+Vosmia
+# subfiefs
+# territory id
+122
+# land army yield
+0.508635
+# naval fleet yield
+0.204385
+
+# barony
+# title
+1
+# name
+Tharvithsia
+# subfiefs
+# territory id
+123
+# land army yield
+0.718145
+# naval fleet yield
+0.456677
+
+# barony
+# title
+1
+# name
+Mozthisia
+# subfiefs
+# territory id
+124
+# land army yield
+0.779473
+# naval fleet yield
+0.310833
+
+# barony
+# title
+1
+# name
+Tunheughough
+# subfiefs
+# territory id
+125
+# land army yield
+0.449988
+# naval fleet yield
+0.305256
+
+# barony
+# title
+1
+# name
+Feytricth
+# subfiefs
+# territory id
+126
+# land army yield
+0.703426
+# naval fleet yield
+0.401917
 
 # barony
 # title
@@ -3684,1099 +1617,2487 @@ Nothitaria
 Fuseigha
 # subfiefs
 # territory id
-17777
+127
 # land army yield
-0.456356
+0.636247
 # naval fleet yield
-0.323431
+0.256326
 
 # barony
 # title
 1
 # name
-Topitrethvia
+Hethiadriax
+# subfiefs
+# territory id
+128
+# land army yield
+0.485744
+# naval fleet yield
+0.422427
+
+# barony
+# title
+1
+# name
+Percthales
+# subfiefs
+# territory id
+129
+# land army yield
+0.833942
+# naval fleet yield
+0.229869
+
+# barony
+# title
+1
+# name
+Carriaxia
+# subfiefs
+# territory id
+130
+# land army yield
+0.506859
+# naval fleet yield
+0.270317
+
+# barony
+# title
+1
+# name
+Cartricth
+# subfiefs
+# territory id
+220
+# land army yield
+0.683775
+# naval fleet yield
+0.392825
+
+# barony
+# title
+1
+# name
+Finithvindeth
+# subfiefs
+# territory id
+282
+# land army yield
+0.69768
+# naval fleet yield
+0.447107
+
+# barony
+# title
+1
+# name
+frey
+# subfiefs
+# territory id
+667
+# land army yield
+0.602838
+# naval fleet yield
+0.34333
+
+# barony
+# title
+1
+# name
+Trosdeth
+# subfiefs
+# territory id
+799
+# land army yield
+0.87471
+# naval fleet yield
+0.262775
+
+# barony
+# title
+1
+# name
+Trosflintricth
+# subfiefs
+# territory id
+1254
+# land army yield
+0.679327
+# naval fleet yield
+0.376354
+
+# barony
+# title
+1
+# name
+Mozthol
+# subfiefs
+# territory id
+1377
+# land army yield
+0.7524
+# naval fleet yield
+0.332055
+
+# barony
+# title
+1
+# name
+Tarilisia
+# subfiefs
+# territory id
+1425
+# land army yield
+0.824409
+# naval fleet yield
+0.341257
+
+# barony
+# title
+1
+# name
+Anvia
+# subfiefs
+# territory id
+1490
+# land army yield
+0.552901
+# naval fleet yield
+0.249352
+
+# barony
+# title
+1
+# name
+Tarvenmor
+# subfiefs
+# territory id
+1608
+# land army yield
+0.639446
+# naval fleet yield
+0.484266
+
+# barony
+# title
+1
+# name
+Renexvindethia
+# subfiefs
+# territory id
+1698
+# land army yield
+0.753063
+# naval fleet yield
+0.266833
+
+# barony
+# title
+1
+# name
+Lueghapinia
+# subfiefs
+# territory id
+1983
+# land army yield
+0.528889
+# naval fleet yield
+0.449158
+
+# barony
+# title
+1
+# name
+Morethheughough
+# subfiefs
+# territory id
+2168
+# land army yield
+0.431715
+# naval fleet yield
+0.43409
+
+# barony
+# title
+1
+# name
+Andeth
+# subfiefs
+# territory id
+2219
+# land army yield
+0.767169
+# naval fleet yield
+0.283001
+
+# barony
+# title
+1
+# name
+Feyvenfreyia
+# subfiefs
+# territory id
+2713
+# land army yield
+0.760741
+# naval fleet yield
+0.309356
+
+# barony
+# title
+1
+# name
+Feighvineigha
+# subfiefs
+# territory id
+2903
+# land army yield
+0.873487
+# naval fleet yield
+0.480352
+
+# barony
+# title
+1
+# name
+Lertrethapinia
+# subfiefs
+# territory id
+2957
+# land army yield
+0.572084
+# naval fleet yield
+0.293365
+
+# barony
+# title
+1
+# name
+Daytsaaxia
+# subfiefs
+# territory id
+3102
+# land army yield
+0.55243
+# naval fleet yield
+0.442246
+
+# barony
+# title
+1
+# name
+Ferveneigha
+# subfiefs
+# territory id
+3200
+# land army yield
+0.654307
+# naval fleet yield
+0.266847
+
+# barony
+# title
+1
+# name
+Renexar
+# subfiefs
+# territory id
+3826
+# land army yield
+0.509345
+# naval fleet yield
+0.379741
+
+# barony
+# title
+1
+# name
+ohthdethia
+# subfiefs
+# territory id
+3873
+# land army yield
+0.785748
+# naval fleet yield
+0.472482
+
+# barony
+# title
+1
+# name
+Ferendrenisia
+# subfiefs
+# territory id
+3904
+# land army yield
+0.6387
+# naval fleet yield
+0.355476
+
+# barony
+# title
+1
+# name
+Nothiflinmor
+# subfiefs
+# territory id
+4139
+# land army yield
+0.622319
+# naval fleet yield
+0.301884
+
+# barony
+# title
+1
+# name
+Feytaria
+# subfiefs
+# territory id
+5806
+# land army yield
+0.898734
+# naval fleet yield
+0.34806
+
+# barony
+# title
+1
+# name
+Fusvenfreyia
+# subfiefs
+# territory id
+6075
+# land army yield
+0.721855
+# naval fleet yield
+0.422163
+
+# barony
+# title
+1
+# name
+Hethiamia
+# subfiefs
+# territory id
+6128
+# land army yield
+0.470111
+# naval fleet yield
+0.282805
+
+# barony
+# title
+1
+# name
+Trosrivaynia
+# subfiefs
+# territory id
+6286
+# land army yield
+0.838168
+# naval fleet yield
+0.202954
+
+# barony
+# title
+1
+# name
+Westlithia
+# subfiefs
+# territory id
+7458
+# land army yield
+0.738776
+# naval fleet yield
+0.335368
+
+# barony
+# title
+1
+# name
+Sthevenmor
+# subfiefs
+# territory id
+7514
+# land army yield
+0.544136
+# naval fleet yield
+0.443423
+
+# barony
+# title
+1
+# name
+Feymar
+# subfiefs
+# territory id
+7582
+# land army yield
+0.400328
+# naval fleet yield
+0.448605
+
+# barony
+# title
+1
+# name
+Lueghohthmor
+# subfiefs
+# territory id
+7633
+# land army yield
+0.462598
+# naval fleet yield
+0.441481
+
+# barony
+# title
+1
+# name
+Topivensia
+# subfiefs
+# territory id
+7719
+# land army yield
+0.44844
+# naval fleet yield
+0.301788
+
+# barony
+# title
+1
+# name
+Trisohthtaria
+# subfiefs
+# territory id
+7772
+# land army yield
+0.768586
+# naval fleet yield
+0.218477
+
+# barony
+# title
+1
+# name
+Stheol
+# subfiefs
+# territory id
+7817
+# land army yield
+0.588917
+# naval fleet yield
+0.318561
+
+# barony
+# title
+1
+# name
+Percvithfreyia
+# subfiefs
+# territory id
+7873
+# land army yield
+0.625944
+# naval fleet yield
+0.346279
+
+# barony
+# title
+1
+# name
+Feighvithmor
+# subfiefs
+# territory id
+7911
+# land army yield
+0.84814
+# naval fleet yield
+0.205053
+
+# barony
+# title
+1
+# name
+Pandriax
+# subfiefs
+# territory id
+7977
+# land army yield
+0.812971
+# naval fleet yield
+0.238387
+
+# barony
+# title
+1
+# name
+Sthevithtopia
+# subfiefs
+# territory id
+8023
+# land army yield
+0.804226
+# naval fleet yield
+0.376809
+
+# barony
+# title
+1
+# name
+Tunfreyia
+# subfiefs
+# territory id
+8052
+# land army yield
+0.521197
+# naval fleet yield
+0.446219
+
+# barony
+# title
+1
+# name
+Eashrodethia
+# subfiefs
+# territory id
+8128
+# land army yield
+0.703441
+# naval fleet yield
+0.349099
+
+# barony
+# title
+1
+# name
+Kermor
+# subfiefs
+# territory id
+8169
+# land army yield
+0.495276
+# naval fleet yield
+0.435838
+
+# barony
+# title
+1
+# name
+Topidriax
+# subfiefs
+# territory id
+8316
+# land army yield
+0.596985
+# naval fleet yield
+0.430605
+
+# barony
+# title
+1
+# name
+Daytdriax
+# subfiefs
+# territory id
+8363
+# land army yield
+0.795147
+# naval fleet yield
+0.384679
+
+# barony
+# title
+1
+# name
+Carilapinia
+# subfiefs
+# territory id
+8417
+# land army yield
+0.55688
+# naval fleet yield
+0.47788
+
+# barony
+# title
+1
+# name
+Methinidriax
+# subfiefs
+# territory id
+8466
+# land army yield
+0.539751
+# naval fleet yield
+0.28255
+
+# barony
+# title
+1
+# name
+Stheninithales
+# subfiefs
+# territory id
+8517
+# land army yield
+0.744536
+# naval fleet yield
+0.279025
+
+# barony
+# title
+1
+# name
+Methohthlithia
+# subfiefs
+# territory id
+8687
+# land army yield
+0.66207
+# naval fleet yield
+0.458405
+
+# barony
+# title
+1
+# name
+Fussaisia
+# subfiefs
+# territory id
+8744
+# land army yield
+0.472828
+# naval fleet yield
+0.319268
+
+# barony
+# title
+1
+# name
+Sthenapinia
+# subfiefs
+# territory id
+8783
+# land army yield
+0.619732
+# naval fleet yield
+0.344732
+
+# barony
+# title
+1
+# name
+Folntrethmor
+# subfiefs
+# territory id
+8827
+# land army yield
+0.710827
+# naval fleet yield
+0.440246
+
+# barony
+# title
+1
+# name
+Renexvia
+# subfiefs
+# territory id
+8974
+# land army yield
+0.746103
+# naval fleet yield
+0.251551
+
+# barony
+# title
+1
+# name
+Vosvaynia
+# subfiefs
+# territory id
+9031
+# land army yield
+0.481556
+# naval fleet yield
+0.408607
+
+# barony
+# title
+1
+# name
+Carinilithia
+# subfiefs
+# territory id
+9270
+# land army yield
+0.490291
+# naval fleet yield
+0.286203
+
+# barony
+# title
+1
+# name
+Sarvantricth
+# subfiefs
+# territory id
+9334
+# land army yield
+0.538085
+# naval fleet yield
+0.349196
+
+# barony
+# title
+1
+# name
+Ferflinhenia
+# subfiefs
+# territory id
+9396
+# land army yield
+0.446919
+# naval fleet yield
+0.460975
+
+# barony
+# title
+1
+# name
+Methohthfreyia
+# subfiefs
+# territory id
+9445
+# land army yield
+0.806798
+# naval fleet yield
+0.277091
+
+# barony
+# title
+1
+# name
+Drethaxia
+# subfiefs
+# territory id
+9494
+# land army yield
+0.890635
+# naval fleet yield
+0.221213
+
+# barony
+# title
+1
+# name
+Tuntopia
+# subfiefs
+# territory id
+9549
+# land army yield
+0.40721
+# naval fleet yield
+0.21766
+
+# barony
+# title
+1
+# name
+Thardriax
+# subfiefs
+# territory id
+9601
+# land army yield
+0.794941
+# naval fleet yield
+0.4119
+
+# barony
+# title
+1
+# name
+Methmar
+# subfiefs
+# territory id
+9649
+# land army yield
+0.718325
+# naval fleet yield
+0.376679
+
+# barony
+# title
+1
+# name
+Tharvinvaynia
+# subfiefs
+# territory id
+9707
+# land army yield
+0.725186
+# naval fleet yield
+0.377462
+
+# barony
+# title
+1
+# name
+Hethiataria
+# subfiefs
+# territory id
+9769
+# land army yield
+0.502406
+# naval fleet yield
+0.220811
+
+# barony
+# title
+1
+# name
+Ventsavaynia
+# subfiefs
+# territory id
+9808
+# land army yield
+0.439123
+# naval fleet yield
+0.410742
+
+# barony
+# title
+1
+# name
+Sthedrenapinia
+# subfiefs
+# territory id
+9919
+# land army yield
+0.756729
+# naval fleet yield
+0.425848
+
+# barony
+# title
+1
+# name
+Trisflinmia
+# subfiefs
+# territory id
+9966
+# land army yield
+0.840634
+# naval fleet yield
+0.422084
+
+# barony
+# title
+1
+# name
+freyia
+# subfiefs
+# territory id
+10004
+# land army yield
+0.650163
+# naval fleet yield
+0.328998
+
+# barony
+# title
+1
+# name
+Sarvaynia
+# subfiefs
+# territory id
+10060
+# land army yield
+0.864802
+# naval fleet yield
+0.429075
+
+# barony
+# title
+1
+# name
+Lerdeth
+# subfiefs
+# territory id
+10095
+# land army yield
+0.575505
+# naval fleet yield
+0.342345
+
+# barony
+# title
+1
+# name
+Nothimar
+# subfiefs
+# territory id
+10186
+# land army yield
+0.739213
+# naval fleet yield
+0.389678
+
+# barony
+# title
+1
+# name
+Nothivanar
+# subfiefs
+# territory id
+10410
+# land army yield
+0.704654
+# naval fleet yield
+0.438029
+
+# barony
+# title
+1
+# name
+Fusvinsia
+# subfiefs
+# territory id
+10461
+# land army yield
+0.443566
+# naval fleet yield
+0.368739
+
+# barony
+# title
+1
+# name
+Sarthales
+# subfiefs
+# territory id
+10489
+# land army yield
+0.678468
+# naval fleet yield
+0.391721
+
+# barony
+# title
+1
+# name
+Lueghsahenia
+# subfiefs
+# territory id
+10560
+# land army yield
+0.472406
+# naval fleet yield
+0.296841
+
+# barony
+# title
+1
+# name
+Morethapinia
+# subfiefs
+# territory id
+10607
+# land army yield
+0.430056
+# naval fleet yield
+0.39731
+
+# barony
+# title
+1
+# name
+Ventohthisia
+# subfiefs
+# territory id
+10651
+# land army yield
+0.706388
+# naval fleet yield
+0.30307
+
+# barony
+# title
+1
+# name
+Nethtrethol
+# subfiefs
+# territory id
+10766
+# land army yield
+0.430084
+# naval fleet yield
+0.292951
+
+# barony
+# title
+1
+# name
+Anohthisia
+# subfiefs
+# territory id
+10803
+# land army yield
+0.420965
+# naval fleet yield
+0.299381
+
+# barony
+# title
+1
+# name
+Tunvithfrey
+# subfiefs
+# territory id
+10840
+# land army yield
+0.810323
+# naval fleet yield
+0.388236
+
+# barony
+# title
+1
+# name
+Andrenisia
+# subfiefs
+# territory id
+10889
+# land army yield
+0.539986
+# naval fleet yield
+0.388868
+
+# barony
+# title
+1
+# name
+Percsia
+# subfiefs
+# territory id
+10946
+# land army yield
+0.594089
+# naval fleet yield
+0.201527
+
+# barony
+# title
+1
+# name
+Renexdrenhenia
+# subfiefs
+# territory id
+10999
+# land army yield
+0.661087
+# naval fleet yield
+0.480925
+
+# barony
+# title
+1
+# name
+mor
+# subfiefs
+# territory id
+11059
+# land army yield
+0.702414
+# naval fleet yield
+0.376087
+
+# barony
+# title
+1
+# name
+Trisohthisia
+# subfiefs
+# territory id
+11101
+# land army yield
+0.515886
+# naval fleet yield
+0.473905
+
+# barony
+# title
+1
+# name
+Trosromar
+# subfiefs
+# territory id
+11162
+# land army yield
+0.660153
+# naval fleet yield
+0.440833
+
+# barony
+# title
+1
+# name
+Fusvanisia
+# subfiefs
+# territory id
+11242
+# land army yield
+0.853544
+# naval fleet yield
+0.230221
+
+# barony
+# title
+1
+# name
+ritricth
+# subfiefs
+# territory id
+11306
+# land army yield
+0.438179
+# naval fleet yield
+0.483297
+
+# barony
+# title
+1
+# name
+Pandrenaxia
+# subfiefs
+# territory id
+11356
+# land army yield
+0.675893
+# naval fleet yield
+0.28049
+
+# barony
+# title
+1
+# name
+Renexdeth
+# subfiefs
+# territory id
+11445
+# land army yield
+0.49471
+# naval fleet yield
+0.340974
+
+# barony
+# title
+1
+# name
+Panvindeth
+# subfiefs
+# territory id
+11493
+# land army yield
+0.687451
+# naval fleet yield
+0.47885
+
+# barony
+# title
+1
+# name
+Feraxia
+# subfiefs
+# territory id
+11535
+# land army yield
+0.697242
+# naval fleet yield
+0.219467
+
+# barony
+# title
+1
+# name
+Westrovia
+# subfiefs
+# territory id
+11572
+# land army yield
+0.514367
+# naval fleet yield
+0.262446
+
+# barony
+# title
+1
+# name
+Drethmia
+# subfiefs
+# territory id
+11627
+# land army yield
+0.601396
+# naval fleet yield
+0.288574
+
+# barony
+# title
+1
+# name
+Nethvithisia
+# subfiefs
+# territory id
+11659
+# land army yield
+0.827486
+# naval fleet yield
+0.229632
+
+# barony
+# title
+1
+# name
+Trisol
+# subfiefs
+# territory id
+11713
+# land army yield
+0.62856
+# naval fleet yield
+0.395144
+
+# barony
+# title
+1
+# name
+Tharrihenia
+# subfiefs
+# territory id
+11849
+# land army yield
+0.888084
+# naval fleet yield
+0.218625
+
+# barony
+# title
+1
+# name
+Perclimia
+# subfiefs
+# territory id
+11896
+# land army yield
+0.68289
+# naval fleet yield
+0.420749
+
+# barony
+# title
+1
+# name
+Trosroisia
+# subfiefs
+# territory id
+11933
+# land army yield
+0.417729
+# naval fleet yield
+0.444732
+
+# barony
+# title
+1
+# name
+Ferohthmia
+# subfiefs
+# territory id
+11979
+# land army yield
+0.596063
+# naval fleet yield
+0.434337
+
+# barony
+# title
+1
+# name
+Morethfreyia
+# subfiefs
+# territory id
+12029
+# land army yield
+0.861742
+# naval fleet yield
+0.493134
+
+# barony
+# title
+1
+# name
+Lermia
+# subfiefs
+# territory id
+12081
+# land army yield
+0.762175
+# naval fleet yield
+0.414632
+
+# barony
+# title
+1
+# name
+Sthedriax
+# subfiefs
+# territory id
+12173
+# land army yield
+0.735527
+# naval fleet yield
+0.298694
+
+# barony
+# title
+1
+# name
+Nilavanfrey
+# subfiefs
+# territory id
+12239
+# land army yield
+0.775408
+# naval fleet yield
+0.478866
+
+# barony
+# title
+1
+# name
+Lueghmor
+# subfiefs
+# territory id
+12360
+# land army yield
+0.515443
+# naval fleet yield
+0.394511
+
+# barony
+# title
+1
+# name
+Ferenvithfreyia
+# subfiefs
+# territory id
+12455
+# land army yield
+0.690767
+# naval fleet yield
+0.317388
+
+# barony
+# title
+1
+# name
+Tarmor
+# subfiefs
+# territory id
+12506
+# land army yield
+0.682488
+# naval fleet yield
+0.206754
+
+# barony
+# title
+1
+# name
+Feydrenthales
+# subfiefs
+# territory id
+12555
+# land army yield
+0.434661
+# naval fleet yield
+0.33136
+
+# barony
+# title
+1
+# name
+Lervia
+# subfiefs
+# territory id
+12880
+# land army yield
+0.583083
+# naval fleet yield
+0.335684
+
+# barony
+# title
+1
+# name
+Feydriax
+# subfiefs
+# territory id
+12936
+# land army yield
+0.868971
+# naval fleet yield
+0.266899
+
+# barony
+# title
+1
+# name
+Carrovia
+# subfiefs
+# territory id
+12975
+# land army yield
+0.410317
+# naval fleet yield
+0.415847
+
+# barony
+# title
+1
+# name
+Topiflinthales
+# subfiefs
+# territory id
+13085
+# land army yield
+0.624388
+# naval fleet yield
+0.295545
+
+# barony
+# title
+1
+# name
+Sthensia
+# subfiefs
+# territory id
+13121
+# land army yield
+0.795185
+# naval fleet yield
+0.39966
+
+# barony
+# title
+1
+# name
+Carroar
+# subfiefs
+# territory id
+13204
+# land army yield
+0.640749
+# naval fleet yield
+0.310028
+
+# barony
+# title
+1
+# name
+Trisar
+# subfiefs
+# territory id
+13252
+# land army yield
+0.599791
+# naval fleet yield
+0.459306
+
+# barony
+# title
+1
+# name
+Nothiaxia
+# subfiefs
+# territory id
+13308
+# land army yield
+0.865383
+# naval fleet yield
+0.345313
+
+# barony
+# title
+1
+# name
+Eashvinisia
+# subfiefs
+# territory id
+13409
+# land army yield
+0.721387
+# naval fleet yield
+0.271667
+
+# barony
+# title
+1
+# name
+Nilavintaria
+# subfiefs
+# territory id
+13513
+# land army yield
+0.848532
+# naval fleet yield
+0.202403
+
+# barony
+# title
+1
+# name
+Sthenvaynia
+# subfiefs
+# territory id
+13554
+# land army yield
+0.66153
+# naval fleet yield
+0.275302
+
+# barony
+# title
+1
+# name
+Pertopia
+# subfiefs
+# territory id
+13603
+# land army yield
+0.666454
+# naval fleet yield
+0.476564
+
+# barony
+# title
+1
+# name
+Voshenia
+# subfiefs
+# territory id
+13685
+# land army yield
+0.756911
+# naval fleet yield
+0.389295
+
+# barony
+# title
+1
+# name
+Venthenia
+# subfiefs
+# territory id
+13727
+# land army yield
+0.438785
+# naval fleet yield
+0.335062
+
+# barony
+# title
+1
+# name
+Anol
+# subfiefs
+# territory id
+13780
+# land army yield
+0.591733
+# naval fleet yield
+0.425506
+
+# barony
+# title
+1
+# name
+Panritopia
+# subfiefs
+# territory id
+13825
+# land army yield
+0.432782
+# naval fleet yield
+0.252403
+
+# barony
+# title
+1
+# name
+Kerdeth
+# subfiefs
+# territory id
+13992
+# land army yield
+0.486022
+# naval fleet yield
+0.377768
+
+# barony
+# title
+1
+# name
+Tunflinfrey
+# subfiefs
+# territory id
+14036
+# land army yield
+0.889658
+# naval fleet yield
+0.471724
+
+# barony
+# title
+1
+# name
+Morethflinapinia
+# subfiefs
+# territory id
+14121
+# land army yield
+0.895198
+# naval fleet yield
+0.276795
+
+# barony
+# title
+1
+# name
+Vosvia
+# subfiefs
+# territory id
+14603
+# land army yield
+0.422391
+# naval fleet yield
+0.453089
+
+# barony
+# title
+1
+# name
+vithheughough
+# subfiefs
+# territory id
+14983
+# land army yield
+0.633671
+# naval fleet yield
+0.278287
+
+# barony
+# title
+1
+# name
+vandriax
+# subfiefs
+# territory id
+15032
+# land army yield
+0.684209
+# naval fleet yield
+0.281826
+
+# barony
+# title
+1
+# name
+Renexdrendeth
+# subfiefs
+# territory id
+15092
+# land army yield
+0.862433
+# naval fleet yield
+0.367908
+
+# barony
+# title
+1
+# name
+Nothivithdeth
+# subfiefs
+# territory id
+15143
+# land army yield
+0.678423
+# naval fleet yield
+0.273317
+
+# barony
+# title
+1
+# name
+Panmor
+# subfiefs
+# territory id
+15183
+# land army yield
+0.521729
+# naval fleet yield
+0.224756
+
+# barony
+# title
+1
+# name
+Methlisia
+# subfiefs
+# territory id
+15239
+# land army yield
+0.863495
+# naval fleet yield
+0.442039
+
+# barony
+# title
+1
+# name
+Sthedeth
+# subfiefs
+# territory id
+15293
+# land army yield
+0.60079
+# naval fleet yield
+0.27808
+
+# barony
+# title
+1
+# name
+Morethilheughough
+# subfiefs
+# territory id
+15354
+# land army yield
+0.734995
+# naval fleet yield
+0.409407
+
+# barony
+# title
+1
+# name
+Feyflindriax
+# subfiefs
+# territory id
+15407
+# land army yield
+0.551467
+# naval fleet yield
+0.240367
+
+# barony
+# title
+1
+# name
+Carsia
+# subfiefs
+# territory id
+15473
+# land army yield
+0.496577
+# naval fleet yield
+0.285647
+
+# barony
+# title
+1
+# name
+Panlidethia
+# subfiefs
+# territory id
+15726
+# land army yield
+0.688779
+# naval fleet yield
+0.329006
+
+# barony
+# title
+1
+# name
+Hethiailol
+# subfiefs
+# territory id
+15823
+# land army yield
+0.468429
+# naval fleet yield
+0.358524
+
+# barony
+# title
+1
+# name
+Westdrenmar
+# subfiefs
+# territory id
+15870
+# land army yield
+0.768571
+# naval fleet yield
+0.444893
+
+# barony
+# title
+1
+# name
+Lueghflinapinia
+# subfiefs
+# territory id
+15938
+# land army yield
+0.746247
+# naval fleet yield
+0.417362
+
+# barony
+# title
+1
+# name
+Trismia
+# subfiefs
+# territory id
+15988
+# land army yield
+0.443246
+# naval fleet yield
+0.326822
+
+# barony
+# title
+1
+# name
+Morethdethia
+# subfiefs
+# territory id
+16043
+# land army yield
+0.463721
+# naval fleet yield
+0.291413
+
+# barony
+# title
+1
+# name
+Percinimar
+# subfiefs
+# territory id
+16098
+# land army yield
+0.704117
+# naval fleet yield
+0.477765
+
+# barony
+# title
+1
+# name
+Nothirivaynia
+# subfiefs
+# territory id
+16132
+# land army yield
+0.537057
+# naval fleet yield
+0.418572
+
+# barony
+# title
+1
+# name
+Lerlithales
+# subfiefs
+# territory id
+16179
+# land army yield
+0.625931
+# naval fleet yield
+0.498506
+
+# barony
+# title
+1
+# name
+Renexvantaria
+# subfiefs
+# territory id
+16246
+# land army yield
+0.860941
+# naval fleet yield
+0.44264
+
+# barony
+# title
+1
+# name
+Mozthdrensia
+# subfiefs
+# territory id
+16400
+# land army yield
+0.405229
+# naval fleet yield
+0.388637
+
+# barony
+# title
+1
+# name
+Perapinia
+# subfiefs
+# territory id
+16498
+# land army yield
+0.698281
+# naval fleet yield
+0.489221
+
+# barony
+# title
+1
+# name
+Methmor
+# subfiefs
+# territory id
+16554
+# land army yield
+0.600092
+# naval fleet yield
+0.466917
+
+# barony
+# title
+1
+# name
+Daytmar
+# subfiefs
+# territory id
+16641
+# land army yield
+0.763227
+# naval fleet yield
+0.328158
+
+# barony
+# title
+1
+# name
+Ferenflinfrey
+# subfiefs
+# territory id
+17119
+# land army yield
+0.594426
+# naval fleet yield
+0.204225
+
+# barony
+# title
+1
+# name
+Trisisia
+# subfiefs
+# territory id
+17158
+# land army yield
+0.887609
+# naval fleet yield
+0.292274
+
+# barony
+# title
+1
+# name
+Trismor
+# subfiefs
+# territory id
+17212
+# land army yield
+0.75544
+# naval fleet yield
+0.345674
+
+# barony
+# title
+1
+# name
+Vosliheughough
+# subfiefs
+# territory id
+17313
+# land army yield
+0.777263
+# naval fleet yield
+0.274447
+
+# barony
+# title
+1
+# name
+Eashohthol
+# subfiefs
+# territory id
+17365
+# land army yield
+0.688236
+# naval fleet yield
+0.286408
+
+# barony
+# title
+1
+# name
+Renexvanhenia
+# subfiefs
+# territory id
+17409
+# land army yield
+0.867621
+# naval fleet yield
+0.239266
+
+# barony
+# title
+1
+# name
+Perctrethhenia
+# subfiefs
+# territory id
+17777
+# land army yield
+0.695373
+# naval fleet yield
+0.377098
+
+# barony
+# title
+1
+# name
+Nothisia
 # subfiefs
 # territory id
 17879
 # land army yield
-0.742858
+0.470868
 # naval fleet yield
-0.253554
+0.478129
 
 # barony
 # title
 1
 # name
-Kersia
+Methtopia
 # subfiefs
 # territory id
 17961
 # land army yield
-0.403502
+0.818646
 # naval fleet yield
-0.491297
+0.43667
 
 # barony
 # title
 1
 # name
-eigha
+Lersavia
 # subfiefs
 # territory id
 18002
 # land army yield
-0.838527
+0.688488
 # naval fleet yield
-0.260271
+0.460047
 
 # barony
 # title
 1
 # name
-Finithdeth
+Vosvaneigha
 # subfiefs
 # territory id
 18091
 # land army yield
-0.750308
+0.474763
 # naval fleet yield
-0.247938
+0.46766
 
 # barony
 # title
 1
 # name
-Methvitheigha
+Perclimar
 # subfiefs
 # territory id
 18194
 # land army yield
-0.798089
+0.5905
 # naval fleet yield
-0.283533
+0.499292
 
 # barony
 # title
 1
 # name
-Morethridriax
+Sthenilapinia
 # subfiefs
 # territory id
 18587
 # land army yield
-0.800342
+0.683369
 # naval fleet yield
-0.429229
+0.228289
 
 # barony
 # title
 1
 # name
-Methdriax
+Stheliisia
 # subfiefs
 # territory id
 18640
 # land army yield
-0.553479
+0.797856
 # naval fleet yield
-0.333849
+0.212492
 
 # barony
 # title
 1
 # name
-Kerliar
+Ventar
 # subfiefs
 # territory id
 18684
 # land army yield
-0.411898
+0.881111
 # naval fleet yield
-0.215899
+0.359572
 
 # barony
 # title
 1
 # name
-Eashrohenia
+Anriisia
 # subfiefs
 # territory id
 18730
 # land army yield
-0.504835
+0.555341
 # naval fleet yield
-0.372286
+0.359017
 
 # barony
 # title
 1
 # name
-Ferdrenol
+Mozthohthheughough
 # subfiefs
 # territory id
 18786
 # land army yield
-0.635897
+0.739061
 # naval fleet yield
-0.318311
+0.486023
 
 # barony
 # title
 1
 # name
-Drethfrey
+Niladriax
 # subfiefs
 # territory id
 18832
 # land army yield
-0.644083
+0.833633
 # naval fleet yield
-0.214736
+0.314205
 
 # barony
 # title
 1
 # name
-Morethflinthales
+Eashventricth
 # subfiefs
 # territory id
 18876
 # land army yield
-0.520543
+0.79183
 # naval fleet yield
-0.323828
+0.264165
 
 # barony
 # title
 1
 # name
-Sthemia
+Drethtricth
 # subfiefs
 # territory id
 18930
 # land army yield
-0.484142
+0.757395
 # naval fleet yield
-0.275206
+0.316317
 
 # barony
 # title
 1
 # name
-Kersamor
+Methsatricth
 # subfiefs
 # territory id
 18971
 # land army yield
-0.514462
+0.710595
 # naval fleet yield
-0.31698
+0.269114
 
 # barony
 # title
 1
 # name
-Saraxia
+Westinitopia
 # subfiefs
 # territory id
 19133
 # land army yield
-0.649636
+0.484997
 # naval fleet yield
-0.267743
+0.21745
 
 # estate
 # title
 2
 # name
-Daytheughough
+Folnmar
 # subfiefs
-Ventrohenia
-Trismor
-
-# estate
-# title
-2
-# name
-Stheromia
-# subfiefs
-Sardethia
-Kereigha
-
-# estate
-# title
-2
-# name
-Fusviththales
-# subfiefs
-Panisia
-Kerdeth
-
-# estate
-# title
-2
-# name
-Cartrethaxia
-# subfiefs
-Tarfrey
-Finithdriax
-
-# estate
-# title
-2
-# name
-Nothiol
-# subfiefs
-Ferfreyia
-Panohthtaria
-
-# estate
-# title
-2
-# name
-Tunar
-# subfiefs
-Stheinitopia
-Percvenol
-
-# estate
-# title
-2
-# name
-Lerflinhenia
-# subfiefs
-Nethvanfreyia
-Hethiamar
-
-# estate
-# title
-2
-# name
-Finithhenia
-# subfiefs
-Mozthvia
-Ventvithvaynia
-
-# estate
-# title
-2
-# name
-Westsavaynia
-# subfiefs
-Mozthrofrey
-Ferensia
-
-# estate
-# title
-2
-# name
-Sartaria
-# subfiefs
-Drethol
-Tarmor
-
-# estate
-# title
-2
-# name
-Drethsamar
-# subfiefs
-Feytaria
-Feytopia
-
-# estate
-# title
-2
-# name
-Lueghlitricth
-# subfiefs
-Tunvinvaynia
-Ferentaria
-
-# estate
-# title
-2
-# name
-Trosvanheughough
-# subfiefs
-Eashthales
-Hethiavaynia
-
-# estate
-# title
-2
-# name
-Mozthmia
-# subfiefs
-Tristrethmar
-Topifrey
-
-# estate
-# title
-2
-# name
-Nothidrentaria
-# subfiefs
-Nethdeth
-Ventohthheughough
-
-# estate
-# title
-2
-# name
-Daytlithia
-# subfiefs
-Sarthales
-Trosinitricth
-Drethmar
-
-# estate
-# title
-2
-# name
-Mozthvaynia
-# subfiefs
-Folnsia
-Lueghdriax
-Pantopia
-
-# estate
-# title
-2
-# name
-Vosvendeth
-# subfiefs
-Tharrodriax
-Sthentricth
-
-# estate
-# title
-2
-# name
-Lueghtrethmia
-# subfiefs
-ol
-Sthentrethisia
-Kersatopia
-
-# estate
-# title
-2
-# name
-Sthefreyia
-# subfiefs
-Kerinivaynia
-Sthedeth
-
-# estate
-# title
-2
-# name
-Eashar
-# subfiefs
-Westinivia
-Trostrethar
-
-# estate
-# title
-2
-# name
-Sthenar
-# subfiefs
-Finithflinsia
-Percflinvaynia
-
-# estate
-# title
-2
-# name
-Vosfrey
-# subfiefs
-Fereneigha
-Nilavenapinia
-
-# estate
-# title
-2
-# name
-Methtrethmia
-# subfiefs
-Finithtrethapinia
-Feyar
-Kervia
-
-# estate
-# title
-2
-# name
-Perillithia
-# subfiefs
-Finithapinia
-Vostricth
-
-# estate
-# title
-2
-# name
-Sarilmor
-# subfiefs
-ilvaynia
-Sardeth
-
-# estate
-# title
-2
-# name
-Fertrethmia
-# subfiefs
-Methmia
-Sthentaria
-
-# estate
-# title
-2
-# name
-Percvaynia
-# subfiefs
-Morethtricth
-Feyridethia
-
-# estate
-# title
-2
-# name
-apinia
-# subfiefs
-Sarrihenia
-sia
-
-# estate
-# title
-2
-# name
-Ferentrethtaria
-# subfiefs
-Hethialithia
-Morethaxia
-
-# estate
-# title
-2
-# name
-Methilvia
-# subfiefs
-Fervanhenia
-Methsaeigha
-
-# estate
-# title
-2
-# name
-Tharar
-# subfiefs
-Methohthar
-Finithvinisia
-
-# estate
-# title
-2
-# name
-Sarinifrey
-# subfiefs
-Carar
-Ferenthales
-
-# estate
-# title
-2
-# name
-Tharlithia
-# subfiefs
-Daytmar
-Westvaynia
-
-# estate
-# title
-2
-# name
-Anvandeth
-# subfiefs
-Feyilar
-Eashvithfreyia
-
-# estate
-# title
-2
-# name
-Fusohthtricth
-# subfiefs
-Folndriax
-Topiroapinia
-
-# estate
-# title
-2
-# name
-Folnlitricth
-# subfiefs
-Trossia
-Tundethia
-
-# estate
-# title
-2
-# name
-limor
-# subfiefs
-Methviththales
-Percvantaria
-Tuntrethtricth
-
-# estate
-# title
-2
-# name
-Lervinfrey
-# subfiefs
-Methvinmor
-Renexhenia
-
-# estate
-# title
-2
-# name
-Topiar
-# subfiefs
-Carvaynia
-Drethohthtaria
-
-# estate
-# title
-2
-# name
-Percar
-# subfiefs
-Sthevia
-Mozthrisia
-
-# estate
-# title
-2
-# name
-Nothidriax
-# subfiefs
-Andrenheughough
-Drethsatricth
-
-# estate
-# title
-2
-# name
-Renexvintricth
-# subfiefs
-Sthenrotaria
-Feighol
-Trostrethhenia
-
-# estate
-# title
-2
-# name
-Morethmar
-# subfiefs
-Methlithia
-Kervineigha
-
-# estate
-# title
-2
-# name
-Sthenflinfreyia
-# subfiefs
-Tarmia
-Taraxia
-
-# estate
-# title
-2
-# name
-Methmar
-# subfiefs
-Methroar
-Tunrofrey
-
-# estate
-# title
-2
-# name
-Westtricth
-# subfiefs
-Nethritaria
-Nothivenisia
-
-# estate
-# title
-2
-# name
-Vosohthhenia
-# subfiefs
-Carvitheigha
-Saraxia
-
-# estate
-# title
-2
-# name
-Tharromor
-# subfiefs
-Daytvinfrey
-Morethtopia
-
-# estate
-# title
-2
-# name
-Finithlihenia
-# subfiefs
-Westisia
-mor
-
-# estate
-# title
-2
-# name
-Trisrotopia
-# subfiefs
-Venttrethdriax
-Panol
-
-# estate
-# title
-2
-# name
-Sthenflinmar
-# subfiefs
-Fussaisia
-Eashriaxia
-
-# estate
-# title
-2
-# name
-Carillithia
-# subfiefs
-Methvaynia
-Troseigha
-Finithmia
-
-# estate
-# title
-2
-# name
-Eashrothales
-# subfiefs
-Lerhenia
-Stherovaynia
-
-# estate
-# title
-2
-# name
-Morethtrethtricth
-# subfiefs
-Tunhenia
-Topivaynia
-
-# estate
-# title
-2
-# name
-Methmor
-# subfiefs
-Fusrihenia
-Renexmia
-
-# estate
-# title
-2
-# name
-Aniniar
-# subfiefs
-Nothiohthheughough
-Ferenlimor
-
-# estate
-# title
-2
-# name
-Stheaxia
-# subfiefs
-Daythenia
-Westfrey
-Finithvithisia
-
-# estate
-# title
-2
-# name
-Morethiniaxia
-# subfiefs
-Sthenriisia
-Methvithtopia
-
-# estate
-# title
-2
-# name
-Eashdethia
-# subfiefs
-Morethapinia
-Methrool
-
-# estate
-# title
-2
-# name
-Feysaaxia
-# subfiefs
-Tunohthlithia
-Percthales
-
-# estate
-# title
-2
-# name
-Renexflinmia
-# subfiefs
-Drethtricth
-Pandrenthales
-Trosvithtricth
-
-# estate
-# title
-2
-# name
-Westrilithia
-# subfiefs
-Trisvaynia
-Lueghar
-
-# estate
-# title
-2
-# name
-Trosrimia
-# subfiefs
-Fusinisia
-Topiiniapinia
-
-# estate
-# title
-2
-# name
-Kerfrey
-# subfiefs
-Ferenlivaynia
+Drethheughough
+Kertopia
+rodethia
+Folnaxia
+Nilaflinvaynia
+Westriisia
+Ventridriax
+Sarfrey
 Drethisia
-Fusar
+Renextricth
 
 # estate
 # title
 2
 # name
-Renexrool
+Lerilvia
 # subfiefs
-Mozthsamia
-Finithsahenia
+Fereninifreyia
+Feyvinmia
+Anvithaxia
+Sthensafreyia
+Tundrenmia
+Mozthvithmar
 
 # estate
 # title
 2
 # name
-Nothiisia
+Folnol
 # subfiefs
-Feythales
-Renexmor
+Feyeigha
+Panhenia
+Percvindriax
+Eashtaria
+Sthesaisia
+Mozthdrenmia
 
 # estate
 # title
 3
 # name
-Antaria
+Cariniar
 # subfiefs
-Daytheughough
-Stheromia
-Fusviththales
-Cartrethaxia
+Folnmar
+Lerilvia
+Feyohthheughough
+Trisflindriax
+Topilimar
+Folnol
+Hethiainifrey
+Sthetopia
+Mozthdrenfrey
+Daytdeth
+Percdethia
+Topiisia
+Feightricth
+Nethlithia
+Lerol
+Westtrethlithia
+Fervineigha
+Trosflinaxia
+Pertaria
+Ferenroeigha
+Lueghol
+Ferenflinar
+Trisdrenmor
+Feysia
+Kerapinia
+Panapinia
+Trisdrenmar
+Fusmor
+Perlivia
+Venttrethaxia
+Drethol
+Trosmia
+Fermar
+Kerdrenmor
+Sthefrey
+Tharthales
+Feytaria
+Percohthfreyia
+Venttrethdethia
 
 # estate
 # title
-3
+4
 # name
-Trosfreyia
+driax
 # subfiefs
-Nothiol
-Tunar
-Finithhenia
-
-# estate
-# title
-3
-# name
-Panthales
-# subfiefs
-Lerflinhenia
-Lueghlitricth
-Trosvanheughough
-
-# estate
-# title
-3
-# name
-Stheinieigha
-# subfiefs
-Westsavaynia
-Sartaria
-Drethsamar
-Mozthmia
-
-# estate
-# title
-3
-# name
-Nethilisia
-# subfiefs
-Fertrethmia
-Percvaynia
-Sarilmor
-
-# estate
-# title
-3
-# name
-Westol
-# subfiefs
-apinia
-Ferentrethtaria
-
-# estate
-# title
-3
-# name
-Vostopia
-# subfiefs
-Mozthvaynia
-Daytlithia
-Nothidrentaria
-
-# estate
-# title
-3
-# name
-Anridethia
-# subfiefs
-Sthenar
-Eashar
-Sthefreyia
-Vosvendeth
-
-# estate
-# title
-3
-# name
-Kerheughough
-# subfiefs
-Methtrethmia
-Lueghtrethmia
-Vosfrey
-Perillithia
-
-# estate
-# title
-3
-# name
-Nothiilapinia
-# subfiefs
-Tharar
-Methilvia
-Anvandeth
-Sarinifrey
-
-# estate
-# title
-3
-# name
-Sarvithdeth
-# subfiefs
-limor
-Folnlitricth
-Fusohthtricth
-
-# estate
-# title
-3
-# name
-Moztheigha
-# subfiefs
-Finithlihenia
-Tharlithia
-Tharromor
-
-# estate
-# title
-3
-# name
-Finithrodeth
-# subfiefs
-Lervinfrey
-Topiar
-
-# estate
-# title
-3
-# name
-Westtrethfrey
-# subfiefs
+Cariniar
+Nothiheughough
 Percar
-Nothidriax
-Renexvintricth
-
-# estate
-# title
-3
-# name
-Lueghflinheughough
-# subfiefs
-Vosohthhenia
-Westtricth
-Morethmar
-Sthenflinfreyia
+Nothirifreyia
+Permia
+Carriaxia
+Renexdriax
+vanheughough
+Nethildriax
+Nilaflinfrey
+Methinifrey
+Carol
+Trosinifreyia
+Sthenol
+Feydrenvaynia
+Eashisia
+Ventvendriax
+Nilavia
+Feighrofreyia
+Fereninivaynia
+Hethiafrey
+Drethinimia
+Lueghaxia
+Ferenrodriax
+Nilasia
+lisia
+Ventdrenlithia
+Lervaynia
+Folnapinia
+Mozthinidethia
+Tharsaol
+Westinitopia
+Anvia
+Feyvenfreyia
+Ferveneigha
+Lertrethapinia
+Morethheughough
+Tarilisia
+frey
+Cartricth
+Mozthol
+Feighvineigha
+Daytsaaxia
+Tarvenmor
+Finithvindeth
+Trosdeth
+Trosflintricth
+Andeth
+Methohthlithia
+Drethaxia
+Westrovia
+vithheughough
+Morethflinapinia
+Ferohthmia
+Trosroisia
+Trisohthisia
+Percsia
+Nethtrethol
+Ventohthisia
+Trosromar
+Nethvithisia
+Trisol
+Sthedeth
+Carsia
+Perapinia
+Perctrethhenia
+Methtopia
+Lersavia
+Perclimar
+Niladriax
+Vosvaneigha
+Ventar
+Nothisia
+Hethiailol
+Tunvithfrey
+Lerdeth
 Methmar
-
-# estate
-# title
-3
-# name
-Trosohthapinia
-# subfiefs
-Carillithia
-Sthenflinmar
-Trisrotopia
-
-# estate
-# title
-3
-# name
-Mozthlihenia
-# subfiefs
-Eashrothales
-Morethtrethtricth
+Tharvinvaynia
+Sarvaynia
+Fusvinsia
+Morethapinia
+Vosvia
 Methmor
-
-# estate
-# title
-3
-# name
-Pervaynia
-# subfiefs
-Feysaaxia
-Eashdethia
-
-# estate
-# title
-3
-# name
-Topirilithia
-# subfiefs
-Stheaxia
-Morethiniaxia
-Aniniar
-
-# estate
-# title
-3
-# name
-Anroapinia
-# subfiefs
-Kerfrey
-Westrilithia
-Trosrimia
-
-# estate
-# title
-4
-# name
-Feighmor
-# subfiefs
-Lueghflinheughough
-Westtrethfrey
-Finithrodeth
-Moztheigha
-
-# estate
-# title
-4
-# name
-Westlithia
-# subfiefs
-Antaria
-Trosfreyia
-Panthales
-
-# estate
-# title
-4
-# name
-Panvaynia
-# subfiefs
-Vostopia
-Stheinieigha
-Westol
-Nethilisia
-
-# estate
-# title
-4
-# name
-Lueghtopia
-# subfiefs
-Anridethia
-Kerheughough
-Nothiilapinia
-Sarvithdeth
-
-# estate
-# title
-4
-# name
-Perinitopia
-# subfiefs
-Mozthlihenia
-Topirilithia
-Pervaynia
-
-# estate
-# title
-4
-# name
-Methdrentaria
-# subfiefs
-Methvenol
-Nothiisia
-Renexrool
-Anroapinia
-Hethiafreyia
-Renexflinmia
+Trisisia
+Westdrenmar
+Tharrihenia
+Lueghsahenia
+Ventsavaynia
+Hethiataria
+Panlidethia
 
 # estate
 # title
 5
 # name
-vaynia
+Perdrentricth
 # subfiefs
-Feighmor
-Lueghtopia
-Panvaynia
-Westlithia
-Feighdriax
+driax
+Nothimar
+Anohthisia
+Morethfreyia
+Nothivithdeth
+Lueghflinapinia
+Renexvantaria
+Trismia
+Renexdrendeth
+Andrenisia
+Renexvia
+Feytricth
+Ferenhenia
+Lerheughough
+Trisiniol
+Kerrifreyia
+mar
+iniar
+Trosdethia
+Venteigha
+Perflinsia
+Ventdrenmor
+Drethtrethapinia
 

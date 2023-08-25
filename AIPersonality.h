@@ -8,3 +8,4 @@ struct AIPersonality
 	int vassalTaxPreference;  // Preference to tax vassals less vs more.
 	int dejurePreference;  // Preference to target dejure baronies of owned estates and parent estates.
 };
+

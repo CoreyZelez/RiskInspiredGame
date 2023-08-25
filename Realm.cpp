@@ -42,7 +42,7 @@ void Realm::addFief(Estate *fief)
 {
 	fiefs.emplace_back(fief);
 	assert(fief->compareRuler(&this->player));
-	//grid.addGrid(fief->getGrid());
+	grid.addGrid(fief->getGrid());
 }
 
 void Realm::removeFief(const Estate *fief)

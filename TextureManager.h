@@ -5,7 +5,7 @@
 
 class TextureManager {
 public:
-	static TextureManager& getInstance(); 
+	static TextureManager& getInstance();
 
 	bool loadTexture(const std::string& id, const std::string& filepath);
 	const sf::Texture* getTexture(const std::string& id) const;

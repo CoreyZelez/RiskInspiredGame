@@ -171,7 +171,7 @@ void EstateManager::loadEstate(std::ifstream &file)
 	Title title = static_cast<Title>(std::stoi(line));
 
 	// Load name.
-	std::string name = loadName(file); 
+	std::string name = loadName(file);
 
 	// Load the names of the subfiefs.
 	std::vector<std::string> subfiefNames = loadSubfiefNames(file);
@@ -222,8 +222,8 @@ void EstateManager::reconcileBaronies(const std::vector<std::unique_ptr<LandTerr
 	// TEMPORARY RNG FOR BARONIES!!!
 	std::random_device rd;
 	std::mt19937 mt(rd());
-	std::uniform_real_distribution<double> armyYieldDist(0.4, 0.9); 
-	std::uniform_real_distribution<double> fleetYieldDist(0.2, 0.5); 
+	std::uniform_real_distribution<double> armyYieldDist(0.4, 0.9);
+	std::uniform_real_distribution<double> fleetYieldDist(0.2, 0.5);
 
 	for(auto &territory : landTerritories)
 	{
@@ -245,6 +245,7 @@ void EstateManager::reconcileBaronies(const std::vector<std::unique_ptr<LandTerr
 
 std::vector<std::unique_ptr<Estate>>& EstateManager::getBaronies()
 {
+	assert(estates.count(Title::baron) != 0);
 	return estates[Title::baron];
 }
 
@@ -270,7 +271,7 @@ Estate* EstateManager::getEstate(sf::Vector2f position, Title title, bool allowP
 			return estate.get();
 		}
 	}
-	
+
 	return nullptr;
 }
 
@@ -283,10 +284,10 @@ Estate* EstateManager::getLowerEstate(sf::Vector2f position, Title title, bool a
 	{
 		for(auto &estate : estates[currTitle])
 		{
-			//if((allowParent || !estate.get()->hasParent()) && estate.get()->getGrid().containsPosition(position))
-			//{
-			//	return estate.get();
-			//}
+			if((allowParent || !estate.get()->hasParent()) && estate.get()->getGrid().containsPosition(position))
+			{
+				return estate.get();
+			}
 		}
 	}
 	return nullptr;

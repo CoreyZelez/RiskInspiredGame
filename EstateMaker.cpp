@@ -8,7 +8,7 @@ EstateMaker::EstateMaker(EstateManager &estateManager)
 {
 }
 
-void EstateMaker::draw(sf::RenderWindow &window) 
+void EstateMaker::draw(sf::RenderWindow &window)
 {
 	if(state == EstateMakerState::none)
 	{
@@ -24,7 +24,7 @@ void EstateMaker::draw(sf::RenderWindow &window)
 		///estateManager.draw(window, selectedTitle - 1);
 
 		estateManager.draw(window, selectedTitle);
-		//estate->getGrid().draw(window);
+		estate->getGrid().draw(window);
 	}
 }
 
@@ -66,7 +66,7 @@ void EstateMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 		if(state == EstateMakerState::editEstate)
 		{
 			// Adds parentless and lower title estate at mouse position as a subfief.
-			Estate *subfief = estateManager.getLowerEstate(worldPos, selectedTitle, false);  
+			Estate *subfief = estateManager.getLowerEstate(worldPos, selectedTitle, false);
 			if(subfief != nullptr)
 			{
 				assert(subfief->hasParent() == false);
@@ -136,7 +136,7 @@ void EstateMaker::changeState(EstateMakerState state)
 	{
 		estateManager.makeColored(selectedTitle, true);
 		const sf::Color selectedEstateColor(240, 240, 0);
-		//estate->getGrid().setColor(selectedEstateColor);
+		estate->getGrid().setColor(selectedEstateColor);
 	}
 
 	this->state = state;
@@ -177,5 +177,3 @@ void EstateMaker::handleInputForView(sf::View &view) const
 		view.zoom(1 + zoom);
 	}
 }
-
-

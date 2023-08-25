@@ -167,8 +167,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIPersonality.cpp" />
     <ClCompile Include="AIPlayer.cpp" />
-    <ClCompile Include="Button.cpp" />
     <ClCompile Include="CommandButton.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="EstateManager.cpp" />
@@ -181,8 +181,8 @@
     <ClCompile Include="IUnitTest.cpp" />
     <ClCompile Include="LandedEstate.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MapMaker.cpp" />
     <ClCompile Include="MapHandler.cpp" />
+    <ClCompile Include="MapMaker.cpp" />
     <ClCompile Include="MilitaryForce.cpp" />
     <ClCompile Include="Barony.cpp" />
     <ClCompile Include="Estate.cpp" />
@@ -194,8 +194,8 @@
     <ClCompile Include="NavalTerritory.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="ReconcileBaronies.cpp" />
     <ClCompile Include="Realm.cpp" />
+    <ClCompile Include="ReconcileBaronies.cpp" />
     <ClCompile Include="RiskTypeGame.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Territory.cpp" />
@@ -211,7 +211,6 @@
   <ItemGroup>
     <ClInclude Include="AIPersonality.h" />
     <ClInclude Include="AIPlayer.h" />
-    <ClInclude Include="Button.h" />
     <ClInclude Include="CommandButton.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="ChangeInstance.h" />
@@ -226,13 +225,13 @@
     <ClInclude Include="IUnitTest.h" />
     <ClInclude Include="LandedEstate.h" />
     <ClInclude Include="Map.h" />
-    <ClInclude Include="MapMaker.h" />
     <ClInclude Include="MapHandler.h" />
+    <ClInclude Include="MapMaker.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="NameGenerator.h" />
     <ClInclude Include="Observer.h" />
-    <ClInclude Include="ReconcileBaronies.h" />
     <ClInclude Include="Realm.h" />
+    <ClInclude Include="ReconcileBaronies.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="MilitaryForce.h" />
     <ClInclude Include="Barony.h" />

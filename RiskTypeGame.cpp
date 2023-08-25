@@ -16,15 +16,15 @@
 int main()
 {
 	bool mapEditorMode = true;
-	
+
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
 	sf::View view = window.getDefaultView();
 	InputUtility &InputUtility = InputUtility::getInstance();
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS IN TESTING CODE!!!
-	
+
 	MapMaker mapMaker("test");
 	Game game("test");
-	
+
 	while(window.isOpen())
 	{
 		sf::Event event;
@@ -34,13 +34,13 @@ int main()
 			{
 				InputUtility.handleInputEvent(event);
 			}
-	
+
 			if(event.type == sf::Event::Closed)
 			{
 				window.close();
 			}
 		}
-	
+
 		if(mapEditorMode)
 		{
 			mapMaker.handleInput(window, view);
@@ -49,22 +49,22 @@ int main()
 		{
 			//game.handleInput(window);
 		}
-	
+
 		InputUtility.update();
-	
+
 		window.clear();
 		window.setView(view);
-	
+
 		if(mapEditorMode)
 		{
 			mapMaker.draw(window);
 		}
-	
+
 		window.display();
 	}
-	
+
 	mapMaker.save();
-	
+
 	TestRunner testRunner;
 	testRunner.runTests();
 

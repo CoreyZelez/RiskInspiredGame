@@ -15,17 +15,17 @@ void Map::drawTerritoryMap(sf::RenderWindow &window)
 	territoryManager.draw(window);
 }
 
-void Map::save() 
+void Map::save()
 {
 	saveAs(name);
 }
 
-void Map::saveAs(std::string name) 
+void Map::saveAs(std::string name)
 {
 	namespace fs = std::filesystem;
 
 	const std::string folderPath = "res/maps/" + name;
-	
+
 	// Create the folder
 	if(!fs::exists(folderPath))
 	{
@@ -38,7 +38,7 @@ void Map::saveAs(std::string name)
 
 	territoryManager.save(name);
 	estateManager.save(name);
-	this->name = name;  
+	this->name = name;
 }
 
 void Map::load(std::string name)

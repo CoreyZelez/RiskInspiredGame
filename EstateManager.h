@@ -28,7 +28,7 @@ public:
 	std::vector<std::unique_ptr<Estate>>& getBaronies();
 
 	Estate* createEstate(Title title);  // Creates estate with title and returns handle.
-	void removeEstate(Estate *estate);  // Removes estate.
+	///void removeEstate(Estate *estate);  // Removes estate.
 	Estate* getEstate(sf::Vector2f position, Title title, bool allowParent);  // Returns pointer to estate at world position.
 	Estate* getLowerEstate(sf::Vector2f position, Title title, bool allowParent);  // Returns pointer to estate at world position.
 
@@ -50,4 +50,3 @@ private:
 	std::unordered_set<int> allocatedTerritoryIDs;
 	std::unordered_set<std::string> allocatedEstateNames;
 };
-

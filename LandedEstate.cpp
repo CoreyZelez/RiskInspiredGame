@@ -17,8 +17,6 @@ void LandedEstate::saveToFile(std::ofstream & file) const
 	Estate::saveToFile(file);
 	file << "# territory id" << std::endl;
 	file << territory.getID() << std::endl;
-
-
 }
 
 void LandedEstate::update(Message message)
@@ -46,8 +44,7 @@ void LandedEstate::yield(MilitaryManager &militaryManager)
 
 bool LandedEstate::containsPosition(const sf::Vector2f &position) const
 {
-	//return territory.getGrid().containsPosition(position);
-	return true;
+	return territory.getGrid().containsPosition(position);
 }
 
 void LandedEstate::generateMilitary(MilitaryManager &militaryManager)
@@ -77,5 +74,5 @@ std::shared_ptr<NavalFleet> LandedEstate::putFleet(int strength)
 {
 	std::shared_ptr<NavalFleet> fleet = std::make_shared<NavalFleet>(*getRuler(), &territory, strength);
 	territory.occupy(fleet);
-    return fleet;
+	return fleet;
 }

@@ -16,7 +16,7 @@ class EstateMaker
 {
 public:
 	EstateMaker(EstateManager &estateManager);
-	
+
 	void draw(sf::RenderWindow &window);
 
 	void handleInput(const sf::RenderWindow &window, sf::View &view);
@@ -31,4 +31,3 @@ private:
 	EstateMakerState state = EstateMakerState::none;
 	sf::Clock inputClock;  // Clock tracking time since last time input handled.
 };
-

@@ -12,7 +12,7 @@ enum class Title
 	emperor
 };
 
-const std::vector<Title> getOrderedTitles(); 
+const std::vector<Title> getOrderedTitles();
 
 inline
 bool operator>=(Title lhs, Title rhs)
@@ -37,14 +37,14 @@ Title& operator--(Title& title, int) {
 }
 
 inline
-Title operator-(Title lhs, int rhs) 
+Title operator-(Title lhs, int rhs)
 {
 	return static_cast<Title>(static_cast<int>(lhs) - rhs);
 }
 
-struct TitleComparer 
+struct TitleComparer
 {
-	bool operator()(const Title& lhs, const Title& rhs) const 
+	bool operator()(const Title& lhs, const Title& rhs) const
 	{
 		return static_cast<int>(lhs) < static_cast<int>(rhs);
 	}

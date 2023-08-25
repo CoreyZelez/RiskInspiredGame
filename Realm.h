@@ -39,4 +39,3 @@ private:
 	Grid grid;
 	bool drawVassalRealms = false;  // Specifies to draw realms of vassals instead of realm of player.
 };
-

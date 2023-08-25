@@ -30,4 +30,3 @@ private:
 	Territory *location;
 	int strength;
 };
-

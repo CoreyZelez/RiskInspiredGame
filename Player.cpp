@@ -10,7 +10,7 @@ Player::Player(Game &game)
 {
 }
 
-void Player::handleTurn() 
+void Player::handleTurn()
 {
 	if(awaitingUserInput)
 	{
@@ -42,5 +42,3 @@ Realm& Player::getRealm()
 {
 	return realm;
 }
-
-

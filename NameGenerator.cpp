@@ -26,7 +26,7 @@ std::vector<std::string> NameGenerator::readWordsFromFile(const std::string& fil
 	return words;
 }
 
-std::string NameGenerator::generateRandomName() 
+std::string NameGenerator::generateRandomName()
 {
 	std::random_device rd;
 	std::mt19937 gen(rd());

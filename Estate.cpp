@@ -159,11 +159,6 @@ Grid & Estate::getGrid()
 	return grid;
 }
 
-const Grid & Estate::getGrid() const
-{
-	return grid;
-}
-
 void Estate::receiveBonusYield(const float &bonus)
 {
 	for(auto &subfief : subfiefs)
@@ -188,7 +183,7 @@ bool Estate::containsPosition(const sf::Vector2f &position) const
 	return false;
 }
 
-Player* Estate::getRuler() 
+Player* Estate::getRuler()
 {
 	return ruler;
 }
@@ -205,7 +200,4 @@ void Estate::setRuler(Player *ruler)
 	this->ruler = ruler;
 	this->ruler->getRealm().addFief(this);
 }
-
-
-
 

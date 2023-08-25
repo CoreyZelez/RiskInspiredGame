@@ -13,7 +13,7 @@ class MilitaryManager;
 const std::string estateSaveLabel = "# estate";  // Save label for non landed estate.
 const std::string baronySaveLabel = "# barony";  // Save label for barony.
 
-class Estate 
+class Estate
 {
 public:
 	Estate(Title title);
@@ -40,13 +40,12 @@ public:
 	std::string getName() const;
 
 	Grid& getGrid();
-	const Grid& getGrid() const;
 
 protected:
 	// Military generating subfiefs receive specified bonus yield.
 	virtual void receiveBonusYield(const float &bonus);
 	// Estate attempts to create military units on map.
-	virtual void generateMilitary(MilitaryManager &militaryManager); 	
+	virtual void generateMilitary(MilitaryManager &militaryManager);
 	virtual std::string getSaveLabel() const;
 
 	virtual bool containsPosition(const sf::Vector2f &position) const;

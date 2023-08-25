@@ -3,7 +3,7 @@
 #include <string>
 #include <set>
 
-class NameGenerator 
+class NameGenerator
 {
 public:
 	NameGenerator(); // Constructor reads files internally.
@@ -17,3 +17,5 @@ private:
 	std::vector<std::string> readWordsFromFile(const std::string& filename) const;
 	std::set<std::string> usedNames;
 };
+
+

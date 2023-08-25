@@ -29,7 +29,7 @@ void MapMaker::save()
 	map.save();
 }
 
-void MapMaker::saveAs(std::string mapName) 
+void MapMaker::saveAs(std::string mapName)
 {
 	map.saveAs(mapName);
 }

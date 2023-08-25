@@ -4,14 +4,14 @@
 #include <iostream>
 #include <fstream>
 
-void TerritoryManager::draw(sf::RenderWindow &window) const
+void TerritoryManager::draw(sf::RenderWindow &window)
 {
 	// Draws land territories (including coastal territories).
 	for(const auto &territory : landTerritories)
 	{
 		territory.get()->draw(window);
 	}
-	
+
 	// Draws naval territories.
 	for(const auto &territory : navalTerritories)
 	{
@@ -92,7 +92,7 @@ void TerritoryManager::removeEmptyTerritories()
 bool TerritoryManager::positionClaimed(sf::Vector2f position) const
 {
 	// Checks land territories for position.
-	for(const auto &territory : landTerritories)
+	for(auto &territory : landTerritories)
 	{
 		if(territory.get()->getGrid().containsPosition(position))
 		{
@@ -101,7 +101,7 @@ bool TerritoryManager::positionClaimed(sf::Vector2f position) const
 	}
 
 	// Checks naval territories for position.
-	for(const auto &territory : navalTerritories)
+	for(auto &territory : navalTerritories)
 	{
 		if(territory.get()->getGrid().containsPosition(position))
 		{
@@ -180,15 +180,15 @@ NavalTerritory* TerritoryManager::getNavalTerritory(sf::Vector2f position)
 {
 	for(const auto &territory : navalTerritories)
 	{
-		//if(territory.get()->getGrid().containsPosition(position))
-		//{
-		//	return territory.get();
-		//}
+		if(territory.get()->getGrid().containsPosition(position))
+		{
+			return territory.get();
+		}
 	}
 	return nullptr;
 }
 
-std::vector<std::unique_ptr<LandTerritory>>& TerritoryManager::getLandTerritories() 
+std::vector<std::unique_ptr<LandTerritory>>& TerritoryManager::getLandTerritories()
 {
 	return landTerritories;
 }
@@ -212,4 +212,3 @@ void TerritoryManager::loadNavalTerritory(std::ifstream & file)
 
 	nextID = std::max(nextID, id + 1);  // Ensure next id greater than all other territory ids.
 }
-
