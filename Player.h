@@ -1,46 +1,39 @@
 #pragma once
-#include "Title.h"
-#include "PlayerMilitaryManager.h"
-#include "PlayerRelationshipManager.h"
-#include "AIPlayerController.h"
+#include "MilitaryManager.h"
+#include "Realm.h"
+#include "AIPersonality.h"
 #include <vector>
 #include <memory>
 
 class Estate;
 class Game;
-class IController;
 
 class Player
 {
 public:
 	// Human controlled player.
-	Player(Game &game);
-	// AI controlled player.
-	Player(Game &game, PersonalityAI personality);
+	explicit Player(Game &game);
 
-	void update();
+	virtual void handleTurn();
 
-	void handleFiefYields();
+	bool getAwaitingUserInput() const;
+	void completeTurn();
 
-	void addFief(Estate *fief);
-	void removeFief(const Estate *fief);
+	MilitaryManager& getMilitaryMangager();
+	Realm& getRealm();
 
-	IController &getController();
-
-	PlayerRelationshipManager &getRelationshipManager();
+protected:
+	// getInformation()  for AI decision making.
 
 private:
 	Game &game;
+	MilitaryManager militaryManager;
+	Realm realm;
+	bool awaitingUserInput = false;
 
-	std::unique_ptr<IController> controller;
-
-	Title title;  // Official title of player.
-	std::vector<Estate*> fiefs;
-	PlayerMilitaryManager militaryManager;
-	PlayerRelationshipManager relationshipManager;
 	/*
 	SHOULD HAVE AN INFORMATION CLASS HERE THAT STORES INFORMATION ABOUT NEIGHBOURING PLAYERS SUCH
-	AS THEIR ARMY STRENGTH, THE DISTANCE OF THEIR ARMIES 
+	AS THEIR ARMY STRENGTH, THE DISTANCE OF THEIR ARMIES AND ALSO INFO ABOUT PLAYER. BASICALLY ALL INFO FOR AI DECISION MAKING.
 	
 	*/
 };

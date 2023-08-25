@@ -7,45 +7,64 @@
 #include "MapMaker.h"
 #include "InputUtility.h"
 #include "TestRunner.h"
+#include "Game.h"
+#include "TextureManager.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <iostream>
 
 int main()
 {
+	bool mapEditorMode = true;
+	
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
 	sf::View view = window.getDefaultView();
 	InputUtility &InputUtility = InputUtility::getInstance();
-
+	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS IN TESTING CODE!!!
+	
 	MapMaker mapMaker("test");
-
+	Game game("test");
+	
 	while(window.isOpen())
 	{
 		sf::Event event;
 		while(window.pollEvent(event))
 		{
-			InputUtility.handleInputEvent(event);
-
+			if(mapEditorMode)
+			{
+				InputUtility.handleInputEvent(event);
+			}
+	
 			if(event.type == sf::Event::Closed)
 			{
 				window.close();
 			}
 		}
-
-		mapMaker.handleInput(window, view);
-
+	
+		if(mapEditorMode)
+		{
+			mapMaker.handleInput(window, view);
+		}
+		else
+		{
+			//game.handleInput(window);
+		}
+	
 		InputUtility.update();
-
+	
 		window.clear();
 		window.setView(view);
-
-		mapMaker.draw(window);
-
+	
+		if(mapEditorMode)
+		{
+			mapMaker.draw(window);
+		}
+	
 		window.display();
 	}
-
+	
 	mapMaker.save();
-
+	
 	TestRunner testRunner;
 	testRunner.runTests();
 

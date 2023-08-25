@@ -11,7 +11,7 @@ MapMaker::MapMaker(std::string mapName)
 	std::unique_ptr<Command> enterTerritoryMaker = std::make_unique<ChangeInstance<MapMakerState>>(state, MapMakerState::territoryMode);
 	sf::Vector2f position1(300, 300);
 	sf::Vector2f size1(200, 70);
-	buttons.emplace_back(std::make_unique<Button>(position1, size1, enterTerritoryMaker));
+	buttons.emplace_back(std::make_unique<CommandButton>(position1, size1, enterTerritoryMaker));
 
 	// Button for entering estate maker.
 	std::vector<std::unique_ptr<Command>> enterEstateMakerCommands;
@@ -21,7 +21,7 @@ MapMaker::MapMaker(std::string mapName)
 	enterEstateMakerCommands.emplace_back(std::make_unique<ReconcileBaronies>(map.getEstateManager(), map.getTerritoryManager().getLandTerritories()));
 	sf::Vector2f position2(700, 300);
 	sf::Vector2f size2(200, 70);
-	buttons.emplace_back(std::make_unique<Button>(position2, size2, enterEstateMakerCommands));
+	buttons.emplace_back(std::make_unique<CommandButton>(position2, size2, enterEstateMakerCommands));
 }
 
 void MapMaker::save()

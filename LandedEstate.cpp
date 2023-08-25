@@ -2,12 +2,23 @@
 #include "Territory.h"
 #include "NavalFleet.h"
 #include "LandArmy.h"
-#include "PlayerMilitaryManager.h"
+#include "MilitaryManager.h"
 #include "Player.h"
+#include <fstream>
+#include <iostream>
 
 LandedEstate::LandedEstate(Title title, Territory &territory)
 	: Estate(title, territory.getGrid()), territory(territory)
 {
+}
+
+void LandedEstate::saveToFile(std::ofstream & file) const
+{
+	Estate::saveToFile(file);
+	file << "# territory id" << std::endl;
+	file << territory.getID() << std::endl;
+
+
 }
 
 void LandedEstate::update(Message message)
@@ -19,7 +30,7 @@ void LandedEstate::update(Message message)
 	}
 }
 
-void LandedEstate::yield(PlayerMilitaryManager &militaryManager)
+void LandedEstate::yield(MilitaryManager &militaryManager)
 {
 	std::shared_ptr<LandArmy> landArmy = yieldLandArmy();
 	std::shared_ptr<NavalFleet> navalFleet = yieldNavalFleet();
@@ -35,10 +46,11 @@ void LandedEstate::yield(PlayerMilitaryManager &militaryManager)
 
 bool LandedEstate::containsPosition(const sf::Vector2f &position) const
 {
-	return territory.getGrid().containsPosition(position);
+	//return territory.getGrid().containsPosition(position);
+	return true;
 }
 
-void LandedEstate::generateMilitary(PlayerMilitaryManager &militaryManager)
+void LandedEstate::generateMilitary(MilitaryManager &militaryManager)
 {
 }
 

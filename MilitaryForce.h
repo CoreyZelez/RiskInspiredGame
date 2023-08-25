@@ -8,10 +8,11 @@ class Territory;
 class MilitaryForce
 {
 public:
-	MilitaryForce(Player &owner, Territory *location, int strength, sf::Texture texture);
+	MilitaryForce(Player &owner, Territory *location, int strength);  // TEMP FOR TESTING!!!
+	MilitaryForce(Player &owner, Territory *location, int strength, const sf::Texture &texture);
 
 	// Draws sprite at position of game world.
-	virtual void draw(sf::RenderWindow &window, sf::Vector2f position) const;
+	virtual void draw(sf::RenderWindow &window) const;
 
 	virtual void move(Territory &location, int strength) = 0;
 

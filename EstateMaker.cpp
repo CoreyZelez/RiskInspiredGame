@@ -24,7 +24,7 @@ void EstateMaker::draw(sf::RenderWindow &window)
 		///estateManager.draw(window, selectedTitle - 1);
 
 		estateManager.draw(window, selectedTitle);
-		estate->drawGrid(window);
+		//estate->getGrid().draw(window);
 	}
 }
 
@@ -136,7 +136,7 @@ void EstateMaker::changeState(EstateMakerState state)
 	{
 		estateManager.makeColored(selectedTitle, true);
 		const sf::Color selectedEstateColor(240, 240, 0);
-		estate->setGridColor(selectedEstateColor);
+		//estate->getGrid().setColor(selectedEstateColor);
 	}
 
 	this->state = state;

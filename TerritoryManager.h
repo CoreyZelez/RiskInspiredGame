@@ -6,7 +6,7 @@
 class TerritoryManager
 {
 public:
-	void draw(sf::RenderWindow &window);
+	void draw(sf::RenderWindow &window) const;
 
 	void save(std::string mapName) const;
 	void load(std::string mapName);
@@ -25,13 +25,17 @@ public:
 	void removeNavalTerritory(NavalTerritory *territory);  // Removes NavalTerritory and nulls pointer.
 	NavalTerritory* getNavalTerritory(sf::Vector2f position);  // Returns pointer to nval territory at world position.
 
-	const std::vector<std::unique_ptr<LandTerritory>> &getLandTerritories() const;
+	std::vector<std::unique_ptr<LandTerritory>> &getLandTerritories();
 
 private:
+	void loadLandTerritory(std::ifstream &file);
+	void loadNavalTerritory(std::ifstream &file);
+
 	std::vector<std::unique_ptr<NavalTerritory>> navalTerritories;
 	std::vector<std::unique_ptr<LandTerritory>> landTerritories;
 	int nextID = 0;  // Next ID to be assigned to newly created territory.
 };
+
 
 
 

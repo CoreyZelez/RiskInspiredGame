@@ -66,3 +66,8 @@ sf::Color createRandomNavalColor()
 
 	return sf::Color(red, green, blue);
 }
+
+std::string generateRandomEstateName(Title title)
+{
+	return std::string();
+}

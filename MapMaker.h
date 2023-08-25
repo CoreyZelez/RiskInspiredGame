@@ -2,7 +2,7 @@
 #include "Map.h"
 #include "TerritoryMaker.h"
 #include "EstateMaker.h"
-#include "Button.h"
+#include "CommandButton.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
@@ -37,6 +37,6 @@ private:
 	TerritoryMaker territoryMaker;
 	EstateMaker estateMaker;
 
-	std::vector<std::unique_ptr<Button>> buttons;
+	std::vector<std::unique_ptr<CommandButton>> buttons;
 };
 

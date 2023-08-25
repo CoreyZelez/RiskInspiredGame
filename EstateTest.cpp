@@ -19,11 +19,12 @@ void EstateTest::test1()
 	Player player(game);
 	LandTerritory territory(0);
 	const double landArmyYield = 0.4;
-	std::unique_ptr<Estate> barony = std::make_unique<Barony>(territory, landArmyYield);
+	const double navalFleetYield = 0.1;
+	std::unique_ptr<Estate> barony = std::make_unique<Barony>(territory, landArmyYield, navalFleetYield);
 	barony.get()->initRuler(player);
 	
 	// Attempt to yield land army with cumulative land army not surpassing threshold.
-	player.handleFiefYields();
+	player.getRealm().handleFiefYields();
 	if(territory.getArmy().get() != nullptr)
 	{
 		bool result = false;
@@ -36,7 +37,7 @@ void EstateTest::test1()
 	// 20 loops executed as this should guaruntee surpassing threshold for any sanely chosen threshold value.
 	for(int i = 0; i < 20; ++i)  
 	{
-		player.handleFiefYields();
+		player.getRealm().handleFiefYields();
 	}
 	if(territory.getArmy().get() == nullptr)
 	{
@@ -72,10 +73,11 @@ void EstateTest::test2()
 	LandTerritory territory4(3);
 
 	const double landArmyYield = 0.4;
-	std::unique_ptr<Estate> barony1 = std::make_unique<Barony>(territory1, landArmyYield);
-	std::unique_ptr<Estate> barony2 = std::make_unique<Barony>(territory2, landArmyYield);
-	std::unique_ptr<Estate> barony3 = std::make_unique<Barony>(territory3, landArmyYield);
-	std::unique_ptr<Estate> barony4 = std::make_unique<Barony>(territory4, landArmyYield); 
+	const double navalFleetYield = 0.1;
+	std::unique_ptr<Estate> barony1 = std::make_unique<Barony>(territory1, landArmyYield, navalFleetYield);
+	std::unique_ptr<Estate> barony2 = std::make_unique<Barony>(territory2, landArmyYield, navalFleetYield);
+	std::unique_ptr<Estate> barony3 = std::make_unique<Barony>(territory3, landArmyYield, navalFleetYield);
+	std::unique_ptr<Estate> barony4 = std::make_unique<Barony>(territory4, landArmyYield, navalFleetYield); 
 	std::unique_ptr<Estate> county = std::make_unique<Estate>(Title::count);
 
 	county.get()->addSubfief(barony1.get());
@@ -89,10 +91,10 @@ void EstateTest::test2()
 	county.get()->initRuler(player2);
 	barony4.get()->initRuler(player3);  // player3 will not be apart of player2's realm.
 
-	player2.getRelationshipManager().addVassal(player1);
+	player2.getRealm().addVassal(player1);
 
-	player2.handleFiefYields();
-	player1.handleFiefYields();
+	player2.getRealm().handleFiefYields();
+	player1.getRealm().handleFiefYields();
 	if(territory1.getArmy().get() != nullptr)
 	{
 		bool result = false;
@@ -105,9 +107,9 @@ void EstateTest::test2()
     // 150 loops executed as this should guaruntee surpassing yield threshold for any sanely chosen threshold value.
 	for(int i = 0; i < 150; ++i)
 	{
-		player2.handleFiefYields();
+		player2.getRealm().handleFiefYields();
 	}
-	player1.handleFiefYields();
+	player1.getRealm().handleFiefYields();
 	if(territory1.getArmy().get() == nullptr)
 	{
 		bool result = false;
@@ -124,7 +126,7 @@ void EstateTest::test2()
 	}
 
 	// Checks that the player not apart of the realm was not receiving the bonus yields.
-	player3.handleFiefYields();
+	player3.getRealm().handleFiefYields();
 	if(territory4.getArmy().get() != nullptr)
 	{
 		bool result = false;

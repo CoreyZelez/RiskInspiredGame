@@ -44,6 +44,7 @@ void Map::saveAs(std::string name)
 void Map::load(std::string name)
 {
 	territoryManager.load(name);
+	estateManager.load(name, territoryManager.getLandTerritories());
 }
 
 TerritoryManager& Map::getTerritoryManager()

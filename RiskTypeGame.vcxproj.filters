@@ -16,23 +16,11 @@
     <Filter Include="Header Files\Interfaces">
       <UniqueIdentifier>{04f9fdb0-dcc0-46e4-93c7-246633334de1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\User Interface">
-      <UniqueIdentifier>{10c1f2d6-e477-4054-a3a8-3d6b4c410d9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\User Interface">
-      <UniqueIdentifier>{50caffbf-40f3-4e70-8cba-26b2bb74cfda}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\User Interface\Commands">
-      <UniqueIdentifier>{82256a10-4994-4785-888a-fc555baeb1dd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Testing">
       <UniqueIdentifier>{9cebcdc9-75a9-4e77-9558-da64b4a39535}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Testing">
       <UniqueIdentifier>{fd224f62-483a-42f7-a325-42fb59f7b774}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\User Interface\Commands">
-      <UniqueIdentifier>{4b310f73-5491-4336-a555-48650a862997}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{155316c6-6b80-43cc-bec9-6e0279ea456d}</UniqueIdentifier>
@@ -43,9 +31,6 @@
     <Filter Include="Header Files\Utility">
       <UniqueIdentifier>{502dad92-551d-4942-9293-f7b4778e96d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Controllers">
-      <UniqueIdentifier>{bb5b27b6-7e8a-4455-a739-9f4c54640223}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Utility">
       <UniqueIdentifier>{563dc5ce-5a61-445b-a858-314a76dd2e7e}</UniqueIdentifier>
     </Filter>
@@ -55,38 +40,8 @@
     <Filter Include="Source Files\Utility\Observer">
       <UniqueIdentifier>{30d01422-2b1a-49e7-bda8-6b5a74aba911}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Game\World">
-      <UniqueIdentifier>{3519e86a-8ded-4e1d-8a07-bafe53ff3b98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Game\World\Territory">
-      <UniqueIdentifier>{389c53ad-9a93-40e1-a0fd-7ff4a3ee8b77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Game\World\Estate">
-      <UniqueIdentifier>{8c90837f-30d2-4da4-b42d-f155e8d9aa78}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Game\World\Map">
-      <UniqueIdentifier>{dbe296e0-38d3-4ead-adbe-550ef3f498ee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Game\Player">
       <UniqueIdentifier>{984de3f9-6f2b-4ac2-8720-d4d6d025a6ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game\World">
-      <UniqueIdentifier>{0e9a1d3b-87e8-4b71-b4a8-5c1906726975}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game\World\Territory">
-      <UniqueIdentifier>{74d7b4e6-482b-44f0-9669-7572825d6690}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game\World\Estate">
-      <UniqueIdentifier>{cfe3e379-6e62-441e-a859-344e8d03fde4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game\World\Military">
-      <UniqueIdentifier>{12a233ce-15e8-4ac7-849d-3a02d7b5e3a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game\World\Map">
-      <UniqueIdentifier>{c97bd290-8cf0-47f6-ac33-74ed288954a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Controllers">
-      <UniqueIdentifier>{1206ad9b-bb43-4a4a-8de8-261e7afd8ff0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Game\Player">
       <UniqueIdentifier>{c55f7f18-6d0e-42f3-9e63-3b221474035a}</UniqueIdentifier>
@@ -94,31 +49,76 @@
     <Filter Include="Header Files\Game\Military">
       <UniqueIdentifier>{d10f13d7-498f-4aea-b3d7-c602ba0a54a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{50caffbf-40f3-4e70-8cba-26b2bb74cfda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UI\CommandButton">
+      <UniqueIdentifier>{82256a10-4994-4785-888a-fc555baeb1dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UI\CommandButton\Commands">
+      <UniqueIdentifier>{e35e0206-5f31-4b97-ab27-29e5a7e259f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{10c1f2d6-e477-4054-a3a8-3d6b4c410d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI\CommandButton">
+      <UniqueIdentifier>{20e1ba54-c798-4120-a0e5-674a2183a60e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI\CommandButton\Commands">
+      <UniqueIdentifier>{4b310f73-5491-4336-a555-48650a862997}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Military">
+      <UniqueIdentifier>{12a233ce-15e8-4ac7-849d-3a02d7b5e3a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Estate">
+      <UniqueIdentifier>{8c90837f-30d2-4da4-b42d-f155e8d9aa78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Map">
+      <UniqueIdentifier>{dbe296e0-38d3-4ead-adbe-550ef3f498ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Map\MapMaker">
+      <UniqueIdentifier>{ab9b22c0-7320-483c-9c1b-1936b793bdfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Territory">
+      <UniqueIdentifier>{389c53ad-9a93-40e1-a0fd-7ff4a3ee8b77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Map">
+      <UniqueIdentifier>{c97bd290-8cf0-47f6-ac33-74ed288954a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Map\MapMaker">
+      <UniqueIdentifier>{cb5ac5d1-fb99-4fca-bc37-57b046bc875c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Estate">
+      <UniqueIdentifier>{cfe3e379-6e62-441e-a859-344e8d03fde4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Territory">
+      <UniqueIdentifier>{74d7b4e6-482b-44f0-9669-7572825d6690}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RiskTypeGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LandArmy.cpp">
-      <Filter>Source Files\Game\World\Military</Filter>
+      <Filter>Source Files\Game\Military</Filter>
     </ClCompile>
     <ClCompile Include="Territory.cpp">
-      <Filter>Source Files\Game\World\Territory</Filter>
+      <Filter>Source Files\Game\Territory</Filter>
     </ClCompile>
     <ClCompile Include="LandTerritory.cpp">
-      <Filter>Source Files\Game\World\Territory</Filter>
+      <Filter>Source Files\Game\Territory</Filter>
     </ClCompile>
     <ClCompile Include="NavalTerritory.cpp">
-      <Filter>Source Files\Game\World\Territory</Filter>
+      <Filter>Source Files\Game\Territory</Filter>
     </ClCompile>
     <ClCompile Include="NavalFleet.cpp">
-      <Filter>Source Files\Game\World\Military</Filter>
+      <Filter>Source Files\Game\Military</Filter>
     </ClCompile>
     <ClCompile Include="MilitaryForce.cpp">
-      <Filter>Source Files\Game\World\Military</Filter>
+      <Filter>Source Files\Game\Military</Filter>
     </ClCompile>
     <ClCompile Include="Estate.cpp">
-      <Filter>Source Files\Game\World\Estate</Filter>
+      <Filter>Source Files\Game\Estate</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Game\Player</Filter>
@@ -129,35 +129,17 @@
     <ClCompile Include="Observer.cpp">
       <Filter>Source Files\Utility\Observer</Filter>
     </ClCompile>
-    <ClCompile Include="MapMaker.cpp">
-      <Filter>Source Files\Game\World\Map</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
-      <Filter>Source Files\Game\World\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="EstateMaker.cpp">
-      <Filter>Source Files\Game\World\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="TerritoryMaker.cpp">
-      <Filter>Source Files\Game\World\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Source Files\User Interface</Filter>
+      <Filter>Source Files\Game\Map</Filter>
     </ClCompile>
     <ClCompile Include="LandedEstate.cpp">
-      <Filter>Source Files\Game\World\Estate</Filter>
+      <Filter>Source Files\Game\Estate</Filter>
     </ClCompile>
     <ClCompile Include="Barony.cpp">
-      <Filter>Source Files\Game\World\Estate</Filter>
+      <Filter>Source Files\Game\Estate</Filter>
     </ClCompile>
     <ClCompile Include="Grid.cpp">
-      <Filter>Source Files\Game\World\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerMilitaryManager.cpp">
-      <Filter>Source Files\Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerRelationshipManager.cpp">
-      <Filter>Source Files\Game\Player</Filter>
+      <Filter>Source Files\Game\Map</Filter>
     </ClCompile>
     <ClCompile Include="IUnitTest.cpp">
       <Filter>Source Files\Testing</Filter>
@@ -169,10 +151,10 @@
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
     <ClCompile Include="ReconcileBaronies.cpp">
-      <Filter>Source Files\User Interface\Commands</Filter>
+      <Filter>Source Files\UI\CommandButton\Commands</Filter>
     </ClCompile>
     <ClCompile Include="Command.cpp">
-      <Filter>Source Files\User Interface\Commands</Filter>
+      <Filter>Source Files\UI\CommandButton\Commands</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\Game</Filter>
@@ -187,22 +169,52 @@
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
     <ClCompile Include="EstateManager.cpp">
-      <Filter>Source Files\Game\World\Map</Filter>
+      <Filter>Source Files\Game\Map</Filter>
     </ClCompile>
     <ClCompile Include="TerritoryManager.cpp">
-      <Filter>Source Files\Game\World\Map</Filter>
+      <Filter>Source Files\Game\Map</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="HumanPlayerController.cpp">
-      <Filter>Source Files\Controllers</Filter>
+    <ClCompile Include="GameController.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="AIPlayerController.cpp">
-      <Filter>Source Files\Controllers</Filter>
+    <ClCompile Include="CommandButton.cpp">
+      <Filter>Source Files\UI\CommandButton</Filter>
     </ClCompile>
-    <ClCompile Include="MapMode.cpp">
+    <ClCompile Include="EstateMaker.cpp">
+      <Filter>Source Files\Game\Map\MapMaker</Filter>
+    </ClCompile>
+    <ClCompile Include="MapMaker.cpp">
+      <Filter>Source Files\Game\Map\MapMaker</Filter>
+    </ClCompile>
+    <ClCompile Include="TerritoryMaker.cpp">
+      <Filter>Source Files\Game\Map\MapMaker</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameUI.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="NameGenerator.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>Source Files\Game\Estate</Filter>
+    </ClCompile>
+    <ClCompile Include="AIPlayer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MapHandler.cpp">
+      <Filter>Source Files\Game\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MilitaryManager.cpp">
+      <Filter>Source Files\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Realm.cpp">
+      <Filter>Source Files\Game\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -210,16 +222,16 @@
       <Filter>Header Files\Game\Military</Filter>
     </ClInclude>
     <ClInclude Include="NavalTerritory.h">
-      <Filter>Header Files\Game\World\Territory</Filter>
+      <Filter>Header Files\Game\Territory</Filter>
     </ClInclude>
     <ClInclude Include="LandTerritory.h">
-      <Filter>Header Files\Game\World\Territory</Filter>
+      <Filter>Header Files\Game\Territory</Filter>
     </ClInclude>
     <ClInclude Include="Territory.h">
-      <Filter>Header Files\Game\World\Territory</Filter>
+      <Filter>Header Files\Game\Territory</Filter>
     </ClInclude>
     <ClInclude Include="Title.h">
-      <Filter>Header Files\Game\World\Estate</Filter>
+      <Filter>Header Files\Game\Estate</Filter>
     </ClInclude>
     <ClInclude Include="IDrawable.h">
       <Filter>Header Files\Interfaces</Filter>
@@ -231,7 +243,7 @@
       <Filter>Header Files\Game\Military</Filter>
     </ClInclude>
     <ClInclude Include="Estate.h">
-      <Filter>Header Files\Game\World\Estate</Filter>
+      <Filter>Header Files\Game\Estate</Filter>
     </ClInclude>
     <ClInclude Include="Observer.h">
       <Filter>Header Files\Utility\Observer</Filter>
@@ -242,47 +254,20 @@
     <ClInclude Include="Message.h">
       <Filter>Header Files\Utility\Observer</Filter>
     </ClInclude>
-    <ClInclude Include="MapMaker.h">
-      <Filter>Header Files\Game\World\Map</Filter>
-    </ClInclude>
     <ClInclude Include="Map.h">
-      <Filter>Header Files\Game\World\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="EstateMaker.h">
-      <Filter>Header Files\Game\World\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="TerritoryMaker.h">
-      <Filter>Header Files\Game\World\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Header Files\User Interface</Filter>
+      <Filter>Header Files\Game\Map</Filter>
     </ClInclude>
     <ClInclude Include="LandedEstate.h">
-      <Filter>Header Files\Game\World\Estate</Filter>
+      <Filter>Header Files\Game\Estate</Filter>
     </ClInclude>
     <ClInclude Include="Barony.h">
-      <Filter>Header Files\Game\World\Estate</Filter>
+      <Filter>Header Files\Game\Estate</Filter>
     </ClInclude>
     <ClInclude Include="IMilitaryFactory.h">
       <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="Grid.h">
-      <Filter>Header Files\Game\World\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Command.h">
-      <Filter>Header Files\User Interface\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="ChangeInstance.h">
-      <Filter>Header Files\User Interface\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="ReconcileBaronies.h">
-      <Filter>Header Files\User Interface\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerMilitaryManager.h">
-      <Filter>Header Files\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerRelationshipManager.h">
-      <Filter>Header Files\Game\Player</Filter>
+      <Filter>Header Files\Game\Map</Filter>
     </ClInclude>
     <ClInclude Include="IUnitTest.h">
       <Filter>Header Files\Testing</Filter>
@@ -303,10 +288,10 @@
       <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
     <ClInclude Include="EstateManager.h">
-      <Filter>Header Files\Game\World\Map</Filter>
+      <Filter>Header Files\Game\Map</Filter>
     </ClInclude>
     <ClInclude Include="TerritoryManager.h">
-      <Filter>Header Files\Game\World\Map</Filter>
+      <Filter>Header Files\Game\Map</Filter>
     </ClInclude>
     <ClInclude Include="InputUtility.h">
       <Filter>Header Files\Utility</Filter>
@@ -317,17 +302,53 @@
     <ClInclude Include="Utility.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="IController.h">
-      <Filter>Header Files\Controllers</Filter>
+    <ClInclude Include="GameController.h">
+      <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="HumanPlayerController.h">
-      <Filter>Header Files\Controllers</Filter>
+    <ClInclude Include="CommandButton.h">
+      <Filter>Header Files\UI\CommandButton</Filter>
     </ClInclude>
-    <ClInclude Include="AIPlayerController.h">
-      <Filter>Header Files\Controllers</Filter>
+    <ClInclude Include="Command.h">
+      <Filter>Header Files\UI\CommandButton\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="MapMode.h">
+    <ClInclude Include="ChangeInstance.h">
+      <Filter>Header Files\UI\CommandButton\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ReconcileBaronies.h">
+      <Filter>Header Files\UI\CommandButton\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="AIPersonality.h">
+      <Filter>Header Files\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="EstateMaker.h">
+      <Filter>Header Files\Game\Map\MapMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="MapMaker.h">
+      <Filter>Header Files\Game\Map\MapMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="TerritoryMaker.h">
+      <Filter>Header Files\Game\Map\MapMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameUI.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="NameGenerator.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="AIPlayer.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MapHandler.h">
+      <Filter>Header Files\Game\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MilitaryManager.h">
+      <Filter>Header Files\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Realm.h">
+      <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

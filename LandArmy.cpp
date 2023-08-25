@@ -1,11 +1,12 @@
 #include "LandArmy.h"
 #include "Territory.h"
+#include "TextureManager.h"
 #include <assert.h>
 #include <random>
 #include <iostream>
 
 LandArmy::LandArmy(Player &owner, Territory *location, int strength)
-	: MilitaryForce(owner, location, strength)
+	: MilitaryForce(owner, location, strength, *(TextureManager::getInstance().getTexture("landArmy")))
 {
 	assert(location != nullptr);
 }

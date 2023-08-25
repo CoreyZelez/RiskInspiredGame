@@ -72,7 +72,13 @@ void Grid::addGrid(const Grid &grid)
 	for(auto iter = grid.positions.cbegin(); iter != grid.positions.cend(); ++iter)
 	{
 		positions.insert(*iter);
+
+		if(grid.subBorderPositions.count(*iter) > 0 || grid.isBorder(*iter))
+		{
+			subBorderPositions.insert(*iter);
+		}
 	}
+
 	calculateVertices();
 }
 
@@ -259,16 +265,39 @@ void Grid::calculateVertices()
 		triangles[5].position = sf::Vector2f(left, bottom);
 	
 		// define the 6 matching texture coordinates
-		if(isBorder(position))
+		if((borderMode == BorderMode::feintBorders || borderMode == BorderMode::darkBorders) 
+			&& isBorder(position))
 		{
-			const sf::Color borderColor(color.r * 0.8, color.g * 0.8, color.b * 0.8);
+			if(borderMode == BorderMode::feintBorders)
+			{
+				const sf::Color borderColor(color.r * 0.8, color.g * 0.8, color.b * 0.8);
+				triangles[0].color = borderColor;
+				triangles[1].color = borderColor;
+				triangles[2].color = borderColor;
+				triangles[3].color = borderColor;
+				triangles[4].color = borderColor;
+				triangles[5].color = borderColor;
+			}
+			else if(borderMode == BorderMode::darkBorders)
+			{
+				const sf::Color borderColor(50, 50, 50);
+				triangles[0].color = borderColor;
+				triangles[1].color = borderColor;
+				triangles[2].color = borderColor;
+				triangles[3].color = borderColor;
+				triangles[4].color = borderColor;
+				triangles[5].color = borderColor;
+			}
+		}
+		else if(borderMode == BorderMode::darkBorders && subBorderPositions.count(position) > 0)
+		{
+			const sf::Color borderColor(color.r * 0.4, color.g * 0.4, color.b * 0.4);
 			triangles[0].color = borderColor;
 			triangles[1].color = borderColor;
 			triangles[2].color = borderColor;
 			triangles[3].color = borderColor;
 			triangles[4].color = borderColor;
 			triangles[5].color = borderColor;
-			++i;
 		}
 		else
 		{
@@ -278,8 +307,9 @@ void Grid::calculateVertices()
 			triangles[3].color = color;
 			triangles[4].color = color;
 			triangles[5].color = color;
-			++i;
 		}
+
+		++i;
 	}
 }
 

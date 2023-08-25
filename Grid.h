@@ -20,6 +20,14 @@ struct Vector2iHash
 	}
 };
 
+enum class BorderMode
+{
+	noBorders,
+	feintBorders,
+	darkBorders
+
+};
+
 class Grid  
 {
 public:
@@ -52,9 +60,11 @@ private:
 	sf::Vector2f calculateWorldCoordinates(const sf::Vector2i &position) const;  // Converts vector world position to grid position.
 
 	std::unordered_set<sf::Vector2i, Vector2iHash> positions;  // Positions on map grid occupys. 
+	std::unordered_set<sf::Vector2i, Vector2iHash> subBorderPositions;  // Positions that form a sub border.
 	sf::Vector2i center;  // Center position in game world.
 	sf::VertexArray vertices;
 	sf::Color color;
+	BorderMode borderMode = BorderMode::feintBorders;
 };
 
 Grid loadTerritoryGrid(std::ifstream &file);

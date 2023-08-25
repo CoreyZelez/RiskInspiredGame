@@ -1,18 +1,16 @@
 #include "TextureManager.h"
 #include <assert.h>
 
-TextureManager::~TextureManager() 
+TextureManager& TextureManager::getInstance()
 {
-	for(auto& pair : textures) 
-	{
-		pair.second.~Texture();
-	}
+	static TextureManager instance; // This will be created only once.
+	return instance;
 }
 
-bool TextureManager::loadTexture(const std::string& id, const std::string& filename) 
+bool TextureManager::loadTexture(const std::string& id, const std::string& filepath)
 {
 	sf::Texture texture;
-	if(!texture.loadFromFile(filename)) 
+	if(!texture.loadFromFile(filepath)) 
 	{
 		return false;
 	}
@@ -28,7 +26,7 @@ const sf::Texture* TextureManager::getTexture(const std::string& id) const
 	{
 		return &it->second;
 	}
-
+	assert(false);
 	return nullptr;  // Texture does not exist.
 }
 
@@ -49,4 +47,12 @@ void TextureManager::removeTexture(const std::string& id)
 void TextureManager::clear() 
 {
 	textures.clear();
+}
+
+TextureManager::TextureManager()
+{
+	std::string landArmyPath = "res/textures/land army texture.png";
+	std::string landArmyID = "landArmy";
+	bool result = loadTexture(landArmyID, landArmyPath);
+	assert(result);
 }

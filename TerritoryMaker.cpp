@@ -52,7 +52,7 @@ void TerritoryMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 		// Add territory square at mouse position.
 		if(state == TerritoryMakerState::editTerritory && !territoryManager.positionClaimed(worldPos))
 		{
-			territory->getGrid().addSquare(worldPos);
+			//territory->getGrid().addSquare(worldPos);
 		}
 	}
 	else if(inputUtility.getKeyPressed(sf::Keyboard::L))

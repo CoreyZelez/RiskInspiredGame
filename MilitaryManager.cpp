@@ -1,17 +1,17 @@
-#include "PlayerMilitaryManager.h"
+#include "MilitaryManager.h"
 #include "LandArmy.h"
 #include "NavalFleet.h"
 #include <assert.h>
 #include <iostream>
 
-void PlayerMilitaryManager::addLandArmy(std::shared_ptr<LandArmy> army)
+void MilitaryManager::addLandArmy(std::shared_ptr<LandArmy> army)
 {
 	assert(army.get() != nullptr);
 	assert(army.get()->getStrength() > 0);
 	armies.push_back(army);
 }
 
-void PlayerMilitaryManager::addNavalFleet(std::shared_ptr<NavalFleet> fleet)
+void MilitaryManager::addNavalFleet(std::shared_ptr<NavalFleet> fleet)
 {
 	assert(fleet.get()->getStrength() > 0);
 	navies.push_back(fleet);

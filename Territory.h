@@ -31,7 +31,10 @@ public:
 	bool sharesBorder(const Territory &territory) const;
 
 	double getDefenceMultiplier() const;
+
 	Grid& getGrid();
+	const Grid& getGrid()const ;
+
 	int getID() const;
 	virtual Player *getOccupant();
 	bool isEmpty() const;  	// True if territory occupies no positions on map.

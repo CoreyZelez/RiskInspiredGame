@@ -1,15 +1,18 @@
 #pragma once
 #include <assert.h>
+#include <vector>
 
 enum class Title
 {
 	noTitle,
-	baron,
+	baron,  // Be very careful adding new titles as there are loops dependant on the current title set. In general baron should = 1 always.
 	count,
 	duke,
 	king,
 	emperor
 };
+
+const std::vector<Title> getOrderedTitles(); 
 
 inline
 bool operator>=(Title lhs, Title rhs)

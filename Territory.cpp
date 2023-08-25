@@ -41,6 +41,11 @@ Grid& Territory::getGrid()
 	return grid;
 }
 
+const Grid & Territory::getGrid() const
+{
+	return grid;
+}
+
 int Territory::getID() const
 {
 	return id;
@@ -70,7 +75,7 @@ void Territory::drawMilitary(sf::RenderWindow &window) const
 {
 }
 
-int loadTerritoryID(std::ifstream &file)
+int loadTerritoryID(std::ifstream & file)
 {
 	std::string line;
 	int id;
