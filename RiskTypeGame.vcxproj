@@ -169,6 +169,7 @@
   <ItemGroup>
     <ClCompile Include="AIPersonality.cpp" />
     <ClCompile Include="AIPlayer.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="CommandButton.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="EstateManager.cpp" />
@@ -177,11 +178,12 @@
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="GameCreator.cpp" />
     <ClCompile Include="GameUI.cpp" />
+    <ClCompile Include="GameView.cpp" />
     <ClCompile Include="InputUtility.cpp" />
     <ClCompile Include="IUnitTest.cpp" />
     <ClCompile Include="LandedEstate.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MapHandler.cpp" />
+    <ClCompile Include="MapView.cpp" />
     <ClCompile Include="MapMaker.cpp" />
     <ClCompile Include="MilitaryForce.cpp" />
     <ClCompile Include="Barony.cpp" />
@@ -211,6 +213,7 @@
   <ItemGroup>
     <ClInclude Include="AIPersonality.h" />
     <ClInclude Include="AIPlayer.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="CommandButton.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="ChangeInstance.h" />
@@ -220,12 +223,13 @@
     <ClInclude Include="GameController.h" />
     <ClInclude Include="GameCreator.h" />
     <ClInclude Include="GameUI.h" />
+    <ClInclude Include="GameView.h" />
     <ClInclude Include="IMilitaryFactory.h" />
     <ClInclude Include="InputUtility.h" />
     <ClInclude Include="IUnitTest.h" />
     <ClInclude Include="LandedEstate.h" />
     <ClInclude Include="Map.h" />
-    <ClInclude Include="MapHandler.h" />
+    <ClInclude Include="MapView.h" />
     <ClInclude Include="MapMaker.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="NameGenerator.h" />

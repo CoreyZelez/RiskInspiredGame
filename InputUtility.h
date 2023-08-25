@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include <set>
 #include <SFML/Graphics.hpp>
 
 /*
@@ -20,6 +20,8 @@ public:
 
 	bool getButtonPressed(const sf::Mouse::Button& button) const;
 	bool getKeyPressed(const sf::Keyboard::Key& key) const;
+	bool getButtonDown(const sf::Mouse::Button& button) const;
+	bool getKeyDown(const sf::Keyboard::Key& key) const;
 	int getMouseScrollDirection() const;
 
 private:
@@ -32,8 +34,10 @@ private:
 	InputUtility& operator=(const InputUtility&) = delete;
 
 	// Member variables.
-	std::vector<sf::Mouse::Button> pressedButtons;
-	std::vector<sf::Keyboard::Key> pressedKeys;
+	std::set<sf::Mouse::Button> pressedButtons;
+	std::set<sf::Keyboard::Key> pressedKeys;
+	std::set<sf::Mouse::Button> downButtons;
+	std::set<sf::Keyboard::Key> downKeys;
 	int mouseScrollDelta;
 };
 

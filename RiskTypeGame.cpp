@@ -47,7 +47,7 @@ int main()
 		}
 		else
 		{
-			//game.handleInput(window);
+			game.handleInput(window, view);
 		}
 
 		InputUtility.update();

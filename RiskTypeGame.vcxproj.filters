@@ -201,14 +201,20 @@
     <ClCompile Include="GameController.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="GameUI.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="AIPlayer.cpp">
       <Filter>Source Files\Game\Player</Filter>
     </ClCompile>
-    <ClCompile Include="MapHandler.cpp">
+    <ClCompile Include="Button.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameView.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MapView.cpp">
+      <Filter>Source Files\Game\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="GameUI.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,12 +296,6 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
-    <ClInclude Include="EstateManager.h">
-      <Filter>Header Files\Game\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="TerritoryManager.h">
-      <Filter>Header Files\Game\Map</Filter>
-    </ClInclude>
     <ClInclude Include="InputUtility.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
@@ -332,14 +332,26 @@
     <ClInclude Include="GameController.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="GameUI.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="AIPlayer.h">
       <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
-    <ClInclude Include="MapHandler.h">
+    <ClInclude Include="Button.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameView.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="TerritoryManager.h">
+      <Filter>Header Files\Game\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="EstateManager.h">
+      <Filter>Header Files\Game\Estate</Filter>
+    </ClInclude>
+    <ClInclude Include="MapView.h">
+      <Filter>Header Files\Game\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="GameUI.h">
+      <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

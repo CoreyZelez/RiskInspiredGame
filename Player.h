@@ -17,7 +17,7 @@ public:
 	virtual void handleTurn();
 
 	bool getAwaitingUserInput() const;
-	void completeTurn();
+	void completeTurn();  // Call when human player ends turn through user input.
 
 	MilitaryManager& getMilitaryMangager();
 	Realm& getRealm();

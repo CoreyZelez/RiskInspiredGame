@@ -5,41 +5,31 @@ void InputUtility::handleInputEvent(const sf::Event &event)
 	// Handle mouse button events.
 	if(event.type == sf::Event::MouseButtonPressed)
 	{
-		if(std::find(pressedButtons.begin(), pressedButtons.end(), event.mouseButton.button) == pressedButtons.end())
+		if(downButtons.count(event.mouseButton.button) == 0)
 		{
-			pressedButtons.push_back(event.mouseButton.button);
+			pressedButtons.insert(event.mouseButton.button);
 		}
+		downButtons.insert(event.mouseButton.button);
 	}
-	else if(event.type == sf::Event::MouseButtonReleased)
+	if(event.type == sf::Event::MouseButtonReleased)
 	{
-		// Find the position of the value in the vector.
-		auto iter = std::find(pressedButtons.begin(), pressedButtons.end(), event.mouseButton.button);
-
-		// Check if the value is found before erasing.
-		if(iter != pressedButtons.end()) 
-		{
-			pressedButtons.erase(iter);
-		}
+		pressedButtons.erase(event.mouseButton.button);
+		downButtons.erase(event.mouseButton.button);
 	}
 
 	// Handle keyboard events.
 	if(event.type == sf::Event::KeyPressed)
 	{
-		if(std::find(pressedKeys.begin(), pressedKeys.end(), event.key.code) == pressedKeys.end())
+		if(downKeys.count(event.key.code) == 0)
 		{
-			pressedKeys.push_back(event.key.code);
+			pressedKeys.insert(event.key.code);
 		}
+		downKeys.insert(event.key.code);
 	}
-	else if(event.type == sf::Event::KeyReleased)
+	if(event.type == sf::Event::KeyReleased)
 	{
-		// Find the position of the value in the vector.
-		auto iter = std::find(pressedKeys.begin(), pressedKeys.end(), event.key.code);
-
-		// Check if the value is found before erasing.
-		if(iter != pressedKeys.end())
-		{
-			pressedKeys.erase(iter);
-		}
+		pressedKeys.erase(event.key.code);
+		downKeys.erase(event.key.code);
 	}
 
 	// Handle mouse scroll event.
@@ -51,18 +41,32 @@ void InputUtility::handleInputEvent(const sf::Event &event)
 
 void InputUtility::update()
 {
-	// Reset mouseScrollDelta since if no events trigger it remains fixed.
+	// Reset pressed keys and buttons since they are only considered pressed for a single frame.
+	pressedButtons.clear();
+	pressedKeys.clear();
+
+	// Reset mouseScrollDelta since if no events triggers it remains fixed.
 	mouseScrollDelta = 0;
 }
 
 bool InputUtility::getButtonPressed(const sf::Mouse::Button &button) const
 {
-	return std::find(pressedButtons.begin(), pressedButtons.end(), button) != pressedButtons.end();
+	return pressedButtons.count(button) == 1;
 }
 
 bool InputUtility::getKeyPressed(const sf::Keyboard::Key &key) const
 {
-	return std::find(pressedKeys.begin(), pressedKeys.end(), key) != pressedKeys.end();
+	return pressedKeys.count(key) == 1;
+}
+
+bool InputUtility::getButtonDown(const sf::Mouse::Button & button) const
+{
+	return downButtons.count(button) == 1;
+}
+
+bool InputUtility::getKeyDown(const sf::Keyboard::Key & key) const
+{
+	return downKeys.count(key) == 1;
 }
 
 int InputUtility::getMouseScrollDirection() const

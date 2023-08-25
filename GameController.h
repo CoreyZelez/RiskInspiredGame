@@ -1,12 +1,12 @@
 #pragma once
 
 class Game;
-class GameUI;
+class GameView;
 
 class GameController
 {
 public:
-	GameController(Game &game, GameUI &gameUI);
+	GameController(Game &game, GameView &gameUI);
 
 	/* On mouseclick notify gameview to see if any buttons pressed. game view
 	then returns button id. the controller handles necessary actions for game and gameview.
@@ -18,5 +18,5 @@ public:
 
 private:
 	Game &game;
-	GameUI &gameView;
+	GameView &gameView;
 };
