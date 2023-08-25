@@ -10,7 +10,11 @@ void MapView::draw(sf::RenderWindow &window) const
 {
 	switch(mode)
 	{
-	
+	case MapMode::realm:
+		for(const auto &player : players)
+		{
+			player.getRealm().draw(window);
+		}
 	}
 }
 

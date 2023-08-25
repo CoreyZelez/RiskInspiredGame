@@ -21,7 +21,7 @@ void TerritoryMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 
 	handleInputForView(view);
 
-	if(inputUtility.getButtonPressed(sf::Mouse::Right))
+	if(inputUtility.getButtonDown(sf::Mouse::Right))
 	{
 		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 		sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
@@ -45,14 +45,14 @@ void TerritoryMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 			}
 		}
 	}
-	else if(inputUtility.getButtonPressed(sf::Mouse::Left))
+	else if(inputUtility.getButtonDown(sf::Mouse::Left))
 	{
 		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 		sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
 		// Add territory square at mouse position.
 		if(state == TerritoryMakerState::editTerritory && !territoryManager.positionClaimed(worldPos))
 		{
-			//territory->getGrid().addSquare(worldPos);
+			territory->getGrid().addSquare(worldPos);
 		}
 	}
 	else if(inputUtility.getKeyPressed(sf::Keyboard::L))
@@ -85,19 +85,19 @@ void TerritoryMaker::handleInputForView(sf::View &view) const
 	// Handle view movement.
 	const float speed = 3000.0f;
 	const float effectiveSpeed = speed * inputClock.getElapsedTime().asSeconds();
-	if(inputUtility.getKeyPressed(sf::Keyboard::W))
+	if(inputUtility.getKeyDown(sf::Keyboard::W))
 	{
 		view.move(0, -effectiveSpeed);
 	}
-	if(inputUtility.getKeyPressed(sf::Keyboard::A))
+	if(inputUtility.getKeyDown(sf::Keyboard::A))
 	{
 		view.move(-effectiveSpeed, 0);
 	}
-	if(inputUtility.getKeyPressed(sf::Keyboard::S))
+	if(inputUtility.getKeyDown(sf::Keyboard::S))
 	{
 		view.move(0, effectiveSpeed);
 	}
-	if(inputUtility.getKeyPressed(sf::Keyboard::D))
+	if(inputUtility.getKeyDown(sf::Keyboard::D))
 	{
 		view.move(effectiveSpeed, 0);
 	}

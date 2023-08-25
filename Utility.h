@@ -10,4 +10,6 @@ sf::Color createRandomLandColor();
 
 sf::Color createRandomNavalColor();
 
+sf::Color createRandomRealmColor();
+
 std::string generateRandomEstateName(Title title);

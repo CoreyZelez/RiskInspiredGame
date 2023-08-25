@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 
 class Game;
 class GameView;
@@ -8,15 +9,12 @@ class GameController
 public:
 	GameController(Game &game, GameView &gameUI);
 
-	/* On mouseclick notify gameview to see if any buttons pressed. game view
-	then returns button id. the controller handles necessary actions for game and gameview.
-	Another action to take on mouse click is to check for what estates were clicked on. This is
-	partially dependant on the map mode and which estates the map mode is showing e.g. just baronies
-	or only the highest titles etc. Then pass the view the estate to display information about it. View
-	may also create buttons to influence the estate if it is a humans turn.*/
-	void handleInput();
+	void handleInput(const sf::RenderWindow &window, sf::View &view);
 
 private:
+	void handleInputForView(sf::View &view) const;
+
 	Game &game;
 	GameView &gameView;
+	sf::Clock inputClock;  // Clock tracking time since last time input handled.
 };

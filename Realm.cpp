@@ -1,11 +1,13 @@
 #include "Realm.h"
 #include "Player.h"
 #include "Estate.h"
+#include "Utility.h"
 #include <assert.h>
 
 Realm::Realm(Player &player)
 	: player(player), militaryManager(player.getMilitaryMangager())
 {
+	grid.setColor(createRandomRealmColor());
 }
 
 void Realm::draw(sf::RenderWindow & window) const

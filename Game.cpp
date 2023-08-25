@@ -7,12 +7,6 @@ Game::Game(std::string mapName)
 	currPlayer = players.begin();
 }
 
-
-void Game::handleInput(const sf::RenderWindow &window, sf::View &view)
-{
-	
-}
-
 void Game::generatePlayers()
 {
 	for(auto &barony : map.getEstateManager().getBaronies())
@@ -43,7 +37,7 @@ void Game::update()
 	}
 }
 
-void Game::draw(sf::RenderWindow &window)
+GameView Game::createView() const
 {
-	map.drawTerritoryMap(window);
+	return GameView(map, players);
 }

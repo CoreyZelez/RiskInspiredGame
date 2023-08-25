@@ -1,22 +1,46 @@
-﻿  CommandButton.cpp
-d:\projects\risktypegame\risktypegame\commandbutton.cpp(37): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-          and
-          [
-              T=float
-          ]
+﻿  AIPlayer.cpp
+  Barony.cpp
+d:\projects\risktypegame\risktypegame\barony.cpp(32): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(32): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(48): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(48): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+  Estate.cpp
   EstateMaker.cpp
-  GameController.cpp
-  InputUtility.cpp
-d:\projects\risktypegame\risktypegame\inpututility.cpp(38): warning C4244: '=': conversion from 'const float' to 'int', possible loss of data
+  EstateManager.cpp
+  EstateTest.cpp
+  Game.cpp
+  GameView.cpp
+  Grid.cpp
+d:\projects\risktypegame\risktypegame\grid.cpp(123): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\grid.cpp(123): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\grid.cpp(124): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\grid.cpp(124): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\grid.cpp(243): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\grid.cpp(243): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\grid.cpp(273): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+d:\projects\risktypegame\risktypegame\grid.cpp(294): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+  LandArmy.cpp
+d:\projects\risktypegame\risktypegame\landarmy.cpp(45): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\landarmy.cpp(46): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  LandTerritory.cpp
+  LandedEstate.cpp
+  Map.cpp
+  MapMaker.cpp
+  MapView.cpp
+  MilitaryForce.cpp
+  NavalFleet.cpp
+  NavalTerritory.cpp
+  Player.cpp
+  Realm.cpp
+  Compiling...
+  ReconcileBaronies.cpp
   RiskTypeGame.cpp
+  Territory.cpp
   TerritoryMaker.cpp
+  TerritoryManager.cpp
   Generating code
-  4 of 3422 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    2 functions were new in current compilation
+  5 of 3451 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
     7 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Release\RiskTypeGame.exe

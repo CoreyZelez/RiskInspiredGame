@@ -21,6 +21,7 @@ public:
 
 	MilitaryManager& getMilitaryMangager();
 	Realm& getRealm();
+	const Realm& getRealm() const;
 
 protected:
 	// getInformation()  for AI decision making.

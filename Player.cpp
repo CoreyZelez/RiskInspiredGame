@@ -42,3 +42,8 @@ Realm& Player::getRealm()
 {
 	return realm;
 }
+
+const Realm& Player::getRealm() const
+{
+	return realm;
+}

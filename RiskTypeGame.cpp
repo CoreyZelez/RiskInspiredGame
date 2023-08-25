@@ -1,21 +1,16 @@
-#include "LandArmy.h"
-#include "Barony.h"
-#include "LandTerritory.h"
-#include "Player.h"
-#include "LandArmy.h"
-#include "TerritoryManager.h"
 #include "MapMaker.h"
 #include "InputUtility.h"
 #include "TestRunner.h"
 #include "Game.h"
 #include "TextureManager.h"
+#include "GameController.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <iostream>
 
 int main()
 {
-	bool mapEditorMode = true;
+	bool mapEditorMode = false;
 
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
 	sf::View view = window.getDefaultView();
@@ -23,17 +18,17 @@ int main()
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS IN TESTING CODE!!!
 
 	MapMaker mapMaker("test");
+
 	Game game("test");
+	GameView gameView = game.createView();
+	GameController gameController(game, gameView);
 
 	while(window.isOpen())
 	{
 		sf::Event event;
 		while(window.pollEvent(event))
 		{
-			if(mapEditorMode)
-			{
-				InputUtility.handleInputEvent(event);
-			}
+			InputUtility.handleInputEvent(event);
 
 			if(event.type == sf::Event::Closed)
 			{
@@ -47,19 +42,19 @@ int main()
 		}
 		else
 		{
-			game.handleInput(window, view);
+			gameController.handleInput(window, view);
 		}
-
 		InputUtility.update();
-
 		window.clear();
 		window.setView(view);
-
 		if(mapEditorMode)
 		{
 			mapMaker.draw(window);
 		}
-
+		else
+		{
+			gameView.draw(window);
+		}
 		window.display();
 	}
 
