@@ -23,12 +23,12 @@ void TerritoryManager::save(std::string mapName) const
 {
 	std::ofstream file("res/maps/" + mapName + "/" + mapName + "_territories.txt");
 
-	for(auto& territory : landTerritories)
+	for(const auto& territory : landTerritories)
 	{
 		territory.get()->saveToFile(file);
 	}
 
-	for(auto& territory : navalTerritories)
+	for(const auto& territory : navalTerritories)
 	{
 		territory.get()->saveToFile(file);
 	}
@@ -47,25 +47,15 @@ void TerritoryManager::load(std::string mapName)
 		}
 		else if(line.compare(landSaveLabel) == 0)
 		{
-			Grid graphics = loadTerritoryGrid(file);
-			int id = loadTerritoryID(file);
-			std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>(id, graphics);
-			landTerritories.push_back(std::move(territory));
-
-			// Ensure next id greater than all other territory ids.
-			nextID = std::max(nextID, id + 1);
+			loadLandTerritory(file);
 		}
 		else if(line.compare(navalSaveLabel) == 0)
 		{
-			Grid graphics = loadTerritoryGrid(file);
-			int id = loadTerritoryID(file);
-			std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>(id, graphics);
-			navalTerritories.push_back(std::move(territory));
-
-			// Ensure next id greater than all other territory ids.
-			nextID = std::max(nextID, id + 1);
+			loadNavalTerritory(file);
 		}
 	}
+
+	removeEmptyTerritories();
 }
 
 void TerritoryManager::removeEmptyTerritories()
@@ -102,7 +92,7 @@ void TerritoryManager::removeEmptyTerritories()
 bool TerritoryManager::positionClaimed(sf::Vector2f position) const
 {
 	// Checks land territories for position.
-	for(const auto &territory : landTerritories)
+	for(auto &territory : landTerritories)
 	{
 		if(territory.get()->getGrid().containsPosition(position))
 		{
@@ -111,7 +101,7 @@ bool TerritoryManager::positionClaimed(sf::Vector2f position) const
 	}
 
 	// Checks naval territories for position.
-	for(const auto &territory : navalTerritories)
+	for(auto &territory : navalTerritories)
 	{
 		if(territory.get()->getGrid().containsPosition(position))
 		{
@@ -198,7 +188,27 @@ NavalTerritory* TerritoryManager::getNavalTerritory(sf::Vector2f position)
 	return nullptr;
 }
 
-const std::vector<std::unique_ptr<LandTerritory>>& TerritoryManager::getLandTerritories() const
+std::vector<std::unique_ptr<LandTerritory>>& TerritoryManager::getLandTerritories()
 {
 	return landTerritories;
+}
+
+void TerritoryManager::loadLandTerritory(std::ifstream & file)
+{
+	Grid graphics = loadTerritoryGrid(file);
+	int id = loadTerritoryID(file);
+	std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>(id, graphics);
+	landTerritories.push_back(std::move(territory));
+
+	nextID = std::max(nextID, id + 1);  // Ensure next id greater than all other territory ids.
+}
+
+void TerritoryManager::loadNavalTerritory(std::ifstream & file)
+{
+	Grid graphics = loadTerritoryGrid(file);
+	int id = loadTerritoryID(file);
+	std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>(id, graphics);
+	navalTerritories.push_back(std::move(territory));
+
+	nextID = std::max(nextID, id + 1);  // Ensure next id greater than all other territory ids.
 }

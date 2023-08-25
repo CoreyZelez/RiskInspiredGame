@@ -1,7 +1,7 @@
-#include "Button.h"
+#include "CommandButton.h"
 #include "InputUtility.h"
 
-Button::Button(sf::Vector2f position, sf::Vector2f size, std::vector<std::unique_ptr<Command>> &commands)
+CommandButton::CommandButton(sf::Vector2f position, sf::Vector2f size, std::vector<std::unique_ptr<Command>> &commands)
 {
 	for(auto &command : commands)
 	{
@@ -13,7 +13,7 @@ Button::Button(sf::Vector2f position, sf::Vector2f size, std::vector<std::unique
 	shape.setFillColor(sf::Color::Green);
 }
 
-Button::Button(sf::Vector2f position, sf::Vector2f size, std::unique_ptr<Command> &command)
+CommandButton::CommandButton(sf::Vector2f position, sf::Vector2f size, std::unique_ptr<Command> &command)
 {
 	commands.emplace_back(std::move(command));
 
@@ -22,12 +22,12 @@ Button::Button(sf::Vector2f position, sf::Vector2f size, std::unique_ptr<Command
 	shape.setFillColor(sf::Color::Green);
 }
 
-bool Button::contains(const sf::Vector2f & point) const
+bool CommandButton::contains(const sf::Vector2f & point) const
 {
 	return shape.getGlobalBounds().contains(point);
 }
 
-void Button::handleInput(const sf::RenderWindow &window)
+void CommandButton::handleInput(const sf::RenderWindow &window)
 {
 	InputUtility &inputUtility = InputUtility::getInstance();
 
@@ -44,7 +44,7 @@ void Button::handleInput(const sf::RenderWindow &window)
 	}
 }
 
-void Button::draw(sf::RenderWindow &window)
+void CommandButton::draw(sf::RenderWindow &window)
 {
 	window.draw(shape);
 }

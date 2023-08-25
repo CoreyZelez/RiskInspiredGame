@@ -1,11 +1,12 @@
 #include "LandArmy.h"
 #include "Territory.h"
+#include "TextureManager.h"
 #include <assert.h>
 #include <random>
 #include <iostream>
 
 LandArmy::LandArmy(Player &owner, Territory *location, int strength)
-	: MilitaryForce(owner, location, strength)
+	: MilitaryForce(owner, location, strength, *(TextureManager::getInstance().getTexture("landArmy")))
 {
 	assert(location != nullptr);
 }
@@ -34,11 +35,11 @@ void LandArmy::attack(LandArmy &defendingArmy, double defenceMultiplier)
 	const double strengthRatio = attackerStrength / defenderAdjustedStrength;
 	const double maxMultiplier = 0.4;
 	const double minMultiplier = 0.2;
-	const double maxAttacker = maxMultiplier * strengthRatio; 
-	const double minAttacker = minMultiplier * strengthRatio; 
-	const double maxDefender = maxMultiplier / strengthRatio; 
-	const double minDefender = minMultiplier / strengthRatio;  
-	std::mt19937 rng(std::random_device{}()); 
+	const double maxAttacker = maxMultiplier * strengthRatio;
+	const double minAttacker = minMultiplier * strengthRatio;
+	const double maxDefender = maxMultiplier / strengthRatio;
+	const double minDefender = minMultiplier / strengthRatio;
+	std::mt19937 rng(std::random_device{}());
 	std::uniform_real_distribution<double> attackerDist(minAttacker, maxAttacker);  // Percent of strength defending army loses.
 	std::uniform_real_distribution<double> defenderDist(minDefender, maxDefender);  // Percent of strength attacking army loses.
 	int defenderStrengthAdjustment = -std::round(attackerDist(rng) * defenderStrength);
@@ -103,7 +104,5 @@ void LandArmy::move(Territory &location, int strength)
 		deployedArmy.reset();
 	}
 }
-
-
 
 

@@ -10,11 +10,13 @@ class LandedEstate : public Estate, public Observer, public IMilitaryFactory
 public:
 	LandedEstate(Title title, Territory &territory);
 
+	virtual void saveToFile(std::ofstream &file) const override;
+
 	// Handles changing of associated territory occupant.
 	virtual void update(Message message) override;
 
 	// Yields any resources directly associated with estate. This does not include subfief resources.
-	virtual void yield(PlayerMilitaryManager &militaryManager) override;
+	virtual void yield(MilitaryManager &militaryManager) override;
 
 	// Creates land army on some territory and returns handle to army.
 	virtual std::shared_ptr<LandArmy> yieldLandArmy() = 0;
@@ -25,14 +27,16 @@ public:
 
 protected:
 	// Yields military units at territory if possible.
-	virtual void generateMilitary(PlayerMilitaryManager &militaryManager) override;  
+	virtual void generateMilitary(MilitaryManager &militaryManager) override;
 	// Provides bonus yield to this estate.
 	virtual void receiveBonusYield(const float &bonus) override = 0;
 
+	virtual std::string getSaveLabel() const override = 0;
+
 	// Puts new land army owned by ruler onto territory. Returns handle.
-	std::shared_ptr<LandArmy> putArmy(int strength);  
+	std::shared_ptr<LandArmy> putArmy(int strength);
 	// Puts new naval fleet owned by ruler onto territory. Returns handle.
-	std::shared_ptr<NavalFleet> putFleet(int strength);  
+	std::shared_ptr<NavalFleet> putFleet(int strength);
 
 private:
 	Territory &territory;

@@ -1,35 +1,11 @@
-﻿  AIPlayerController.cpp
-  EstateManager.cpp
-  EstateTest.cpp
-  Game.cpp
-  LandedEstate.cpp
-  Map.cpp
-  MapMaker.cpp
-  MilitaryForce.cpp
-  Barony.cpp
-d:\projects\risktypegame\risktypegame\barony.cpp(27): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(27): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(43): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(43): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-  Estate.cpp
-  LandArmy.cpp
-d:\projects\risktypegame\risktypegame\landarmy.cpp(44): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\landarmy.cpp(45): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  LandTerritory.cpp
-  HumanPlayerController.cpp
-  PlayerMilitaryManager.cpp
-  NavalFleet.cpp
-  NavalTerritory.cpp
-  Player.cpp
-  PlayerRelationshipManager.cpp
+﻿  AIPlayer.cpp
+  GameController.cpp
+  GameUI.cpp
+  Realm.cpp
   RiskTypeGame.cpp
-  Territory.cpp
-  Compiling...
-  TerritoryMaker.cpp
-  TerritoryManager.cpp
   Generating code
-  302 of 2622 functions (11.5%) were compiled, the rest were copied from previous compilation.
-    40 functions were new in current compilation
-    129 functions had inline decision re-evaluated but remain unchanged
+  411 of 3317 functions (12.4%) were compiled, the rest were copied from previous compilation.
+    4 functions were new in current compilation
+    390 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Release\RiskTypeGame.exe

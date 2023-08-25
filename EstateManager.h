@@ -11,6 +11,7 @@
 
 class LandTerritory;
 class CoastalTerritory;
+class TerritoryManager;
 
 class EstateManager
 {
@@ -19,22 +20,33 @@ public:
 	void draw(sf::RenderWindow &window) const;  // Draws all estates without a parent estate.
 
 	void save(std::string mapName) const;
-	void load(std::string mapName);
+	void load(std::string mapName, std::vector<std::unique_ptr<LandTerritory>>& landTerritories);
 
 	// Adds and removes baronies as necessary dependant on land territories.
 	void reconcileBaronies(const std::vector<std::unique_ptr<LandTerritory>> &landTerritories);
+	// Returns vector to all baronies.
+	std::vector<std::unique_ptr<Estate>>& getBaronies();
 
 	Estate* createEstate(Title title);  // Creates estate with title and returns handle.
-	void removeEstate(Estate *estate);  // Removes estate and nulls pointer handle.
+	///void removeEstate(Estate *estate);  // Removes estate.
 	Estate* getEstate(sf::Vector2f position, Title title, bool allowParent);  // Returns pointer to estate at world position.
 	Estate* getLowerEstate(sf::Vector2f position, Title title, bool allowParent);  // Returns pointer to estate at world position.
 
 	void makeColored(Title title, bool setLower);  // Makes estate grids colored for specified title(s). Other estates made grey.
 
 private:
+	std::string generateName();
+
+	Estate *getFief(std::string name);
+
+	void loadBarony(std::ifstream &file, std::vector<std::unique_ptr<LandTerritory>>& landTerritories);
+	void loadEstate(std::ifstream &file);
+	std::string loadName(std::ifstream &file);
+	std::vector<std::string> loadSubfiefNames(std::ifstream &file);
+
 	void setTitleColor(Title title, sf::Color color);  // Sets any estates grid with title to color.
 
-	std::unordered_set<int> allocatedIDs;
 	std::map<Title, std::vector<std::unique_ptr<Estate>>, TitleComparer> estates;
+	std::unordered_set<int> allocatedTerritoryIDs;
+	std::unordered_set<std::string> allocatedEstateNames;
 };
-

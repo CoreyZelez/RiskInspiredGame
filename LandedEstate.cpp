@@ -2,12 +2,21 @@
 #include "Territory.h"
 #include "NavalFleet.h"
 #include "LandArmy.h"
-#include "PlayerMilitaryManager.h"
+#include "MilitaryManager.h"
 #include "Player.h"
+#include <fstream>
+#include <iostream>
 
 LandedEstate::LandedEstate(Title title, Territory &territory)
 	: Estate(title, territory.getGrid()), territory(territory)
 {
+}
+
+void LandedEstate::saveToFile(std::ofstream & file) const
+{
+	Estate::saveToFile(file);
+	file << "# territory id" << std::endl;
+	file << territory.getID() << std::endl;
 }
 
 void LandedEstate::update(Message message)
@@ -19,7 +28,7 @@ void LandedEstate::update(Message message)
 	}
 }
 
-void LandedEstate::yield(PlayerMilitaryManager &militaryManager)
+void LandedEstate::yield(MilitaryManager &militaryManager)
 {
 	std::shared_ptr<LandArmy> landArmy = yieldLandArmy();
 	std::shared_ptr<NavalFleet> navalFleet = yieldNavalFleet();
@@ -38,7 +47,7 @@ bool LandedEstate::containsPosition(const sf::Vector2f &position) const
 	return territory.getGrid().containsPosition(position);
 }
 
-void LandedEstate::generateMilitary(PlayerMilitaryManager &militaryManager)
+void LandedEstate::generateMilitary(MilitaryManager &militaryManager)
 {
 }
 
@@ -65,5 +74,5 @@ std::shared_ptr<NavalFleet> LandedEstate::putFleet(int strength)
 {
 	std::shared_ptr<NavalFleet> fleet = std::make_shared<NavalFleet>(*getRuler(), &territory, strength);
 	territory.occupy(fleet);
-    return fleet;
+	return fleet;
 }

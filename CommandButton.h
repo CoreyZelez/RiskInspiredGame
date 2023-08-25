@@ -5,11 +5,11 @@
 #include <assert.h>
 #include <vector>
 
-class Button
+class CommandButton
 {
 public:
-	Button(sf::Vector2f position, sf::Vector2f size, std::vector<std::unique_ptr<Command>> &commands);
-	Button(sf::Vector2f position, sf::Vector2f size, std::unique_ptr<Command> &command);
+	CommandButton(sf::Vector2f position, sf::Vector2f size, std::vector<std::unique_ptr<Command>> &commands);
+	CommandButton(sf::Vector2f position, sf::Vector2f size, std::unique_ptr<Command> &command);
 
 	void draw(sf::RenderWindow& window);
 

@@ -16,7 +16,7 @@ class EstateMaker
 {
 public:
 	EstateMaker(EstateManager &estateManager);
-	
+
 	void draw(sf::RenderWindow &window);
 
 	void handleInput(const sf::RenderWindow &window, sf::View &view);
@@ -26,9 +26,8 @@ private:
 	void handleInputForView(sf::View &view) const;
 
 	EstateManager &estateManager;
-	Estate *estate = nullptr;  // Territory currently being modified.
+	Estate *estate = nullptr;  // Estate currently being modified.
 	Title selectedTitle;  // Title to be selected for modification.
 	EstateMakerState state = EstateMakerState::none;
 	sf::Clock inputClock;  // Clock tracking time since last time input handled.
 };
-

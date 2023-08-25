@@ -27,4 +27,3 @@ private:
 	TerritoryManager territoryManager;
 	EstateManager estateManager;
 };
-

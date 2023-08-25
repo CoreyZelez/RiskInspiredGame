@@ -1,9 +1,17 @@
-﻿  Grid.cpp
-c:\users\corey\onedrive\documents\projects\riskinspiredgame\grid.cpp(117): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\corey\onedrive\documents\projects\riskinspiredgame\grid.cpp(117): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
-c:\users\corey\onedrive\documents\projects\riskinspiredgame\grid.cpp(118): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\corey\onedrive\documents\projects\riskinspiredgame\grid.cpp(118): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
-c:\users\corey\onedrive\documents\projects\riskinspiredgame\grid.cpp(237): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-c:\users\corey\onedrive\documents\projects\riskinspiredgame\grid.cpp(237): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-c:\users\corey\onedrive\documents\projects\riskinspiredgame\grid.cpp(264): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
-  RiskTypeGame.vcxproj -> C:\Users\corey\OneDrive\Documents\Projects\RiskInspiredGame\x64\Debug\RiskTypeGame.exe
+﻿  NameGenerator.cpp
+d:\projects\risktypegame\risktypegame\namegenerator.cpp(33): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+d:\projects\risktypegame\risktypegame\namegenerator.cpp(34): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+d:\projects\risktypegame\risktypegame\namegenerator.cpp(35): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+  RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe

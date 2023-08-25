@@ -1,6 +1,5 @@
 #pragma once
 #include "Map.h"
-#include "IController.h"
 #include "Player.h"
 #include <SFML/Graphics.hpp>
 #include <vector>

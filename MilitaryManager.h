@@ -7,7 +7,7 @@ class Territory;
 class LandArmy;
 class NavalFleet;
 
-class PlayerMilitaryManager
+class MilitaryManager
 {
 public:
 	void addLandArmy(std::shared_ptr<LandArmy> army);

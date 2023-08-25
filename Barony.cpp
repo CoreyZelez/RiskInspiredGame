@@ -2,17 +2,22 @@
 #include "LandTerritory.h"
 #include <assert.h>
 #include <iostream>
-
-Barony::Barony(LandTerritory &territory, double landArmyYield)
-	: LandedEstate(Title::baron, territory),
-	landArmyYield(landArmyYield)
-{
-}
+#include <fstream>
 
 Barony::Barony(LandTerritory &territory, double landArmyYield, double navalFleetYield)
 	: LandedEstate(Title::baron, territory),
-	landArmyYield(landArmyYield), navalFleetYield(navalFleetYield), canYieldNavy(true)
+	landArmyYield(landArmyYield), navalFleetYield(navalFleetYield), yieldsNavy(territory.getIsCoastal())
 {
+
+}
+
+void Barony::saveToFile(std::ofstream & file) const
+{
+	LandedEstate::saveToFile(file);
+	file << "# land army yield" << std::endl;
+	file << landArmyYield << std::endl;
+	file << "# naval fleet yield" << std::endl;
+	file << navalFleetYield << std::endl;
 }
 
 std::shared_ptr<LandArmy> Barony::yieldLandArmy()
@@ -38,7 +43,7 @@ std::shared_ptr<NavalFleet> Barony::yieldNavalFleet()
 
 	// Yield navy to territory and player if threshold surpassed.
 	const int navalFleetThreshold = 2;  // Min cumulative value for yield to take place.
-	if(canYieldNavy && cumulativeNavalFleet >= navalFleetThreshold)
+	if(yieldsNavy && cumulativeNavalFleet >= navalFleetThreshold)
 	{
 		const int yield = cumulativeNavalFleet;
 		cumulativeNavalFleet -= yield;
@@ -52,5 +57,10 @@ void Barony::receiveBonusYield(const float &bonus)
 {
 	cumulativeLandArmy += landArmyYield * bonus;
 	cumulativeNavalFleet += navalFleetYield * bonus;
+}
+
+std::string Barony::getSaveLabel() const
+{
+	return baronySaveLabel;
 }
 

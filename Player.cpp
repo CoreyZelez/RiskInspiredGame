@@ -2,67 +2,43 @@
 #include "LandArmy.h"
 #include "NavalFleet.h"
 #include "Estate.h"
-#include "IController.h"
-#include "HumanPlayerController.h"
 #include <assert.h>
 #include <iostream>
 
 Player::Player(Game &game)
-	: game(game), relationshipManager(*this), controller(std::make_unique<HumanPlayerController>(*this))
+	: game(game), realm(*this)
 {
 }
 
-Player::Player(Game &game, PersonalityAI personality)
-	: game(game), relationshipManager(*this), controller(std::make_unique<AIPlayerController>(*this, personality))
+void Player::handleTurn()
 {
-}
-
-void Player::update()
-{
-}
-
-void Player::handleFiefYields()
-{
-	// Provide bonus yields to fiefs contained in subfiefs under this player's control.
-	for(auto &fief : fiefs)
+	if(awaitingUserInput)
 	{
-		fief->provideSubfiefBonusYields();
+		return;
 	}
 
-	// Yield resources (currently just military units).
-	for(auto &fief : fiefs)
-	{
-		fief->yield(militaryManager);
-	}
+	realm.handleFiefYields();
+	// Specifies waiting for human player to end turn through user input.
+	awaitingUserInput = true;
 }
 
-void Player::addFief(Estate *fief)
+bool Player::getAwaitingUserInput() const
 {
-	fiefs.emplace_back(fief);
-	assert(fief->compareRuler(this));
+	return !awaitingUserInput;
 }
 
-void Player::removeFief(const Estate *fief)
+void Player::completeTurn()
 {
-	for(auto iter = fiefs.begin(); iter != fiefs.end(); ++iter)
-	{
-		if(*iter == fief)
-		{
-			fiefs.erase(iter);
-			return;
-		}
-	}
-	assert(false);  // Functions should only be called when the estate owner is this player.
+	assert(awaitingUserInput);
+	awaitingUserInput = false;
 }
 
-IController& Player::getController()
+MilitaryManager& Player::getMilitaryMangager()
 {
-	return *controller.get();
+	return militaryManager;
 }
 
-PlayerRelationshipManager& Player::getRelationshipManager()
+Realm& Player::getRealm()
 {
-	return relationshipManager;
+	return realm;
 }
-
-
