@@ -6,7 +6,7 @@
 class TerritoryManager
 {
 public:
-	void draw(sf::RenderWindow &window);
+	void draw(sf::RenderWindow &window) const;
 
 	void save(std::string mapName) const;
 	void load(std::string mapName);
@@ -30,9 +30,12 @@ public:
 private:
 	void loadLandTerritory(std::ifstream &file);
 	void loadNavalTerritory(std::ifstream &file);
+	void removeTerritory(Territory *territory);
 
+	std::vector<Territory*> territories;
 	std::vector<std::unique_ptr<NavalTerritory>> navalTerritories;
 	std::vector<std::unique_ptr<LandTerritory>> landTerritories;
+
 	int nextID = 0;  // Next ID to be assigned to newly created territory.
 };
 

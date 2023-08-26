@@ -72,7 +72,7 @@ sf::Color createRandomRealmColor()
 	// Seed the random number generator.
 	std::random_device rd;
 	std::mt19937 mt(rd());
-	std::uniform_int_distribution<int> dist(0, 255);
+	std::uniform_int_distribution<int> dist(0, 200);
 	std::uniform_int_distribution<int> distCombination(1, 6);
 
 	// Generate random color components.
@@ -83,33 +83,39 @@ sf::Color createRandomRealmColor()
 	int combinationVal = distCombination(mt);
 	if(combinationVal == 1)
 	{
-		red = 255;
+		red = 200;
 		green = dist(mt);
+		blue = 40;
 	}
 	else if(combinationVal == 2)
 	{
-		red = 255;
+		red = 200;
 		blue = dist(mt);
+		green = 40;
 	}
 	else if(combinationVal == 3)
 	{
-		green = 255;
+		green = 200;
 		red = dist(mt);
+		blue = 40;
 	}
 	else if(combinationVal == 4)
 	{
-		green = 255;
+		green = 200;
 		blue = dist(mt);
+		red = 40;
 	}
 	else if(combinationVal == 5)
 	{
-		blue = 255;
+		blue = 200;
 		green = dist(mt);
+		red = 40;
 	}
 	else if(combinationVal == 6)
 	{
-		blue = 255;
+		blue = 200;
 		red = dist(mt);
+		green = 40;
 	}
 
 	return sf::Color(red, green, blue);

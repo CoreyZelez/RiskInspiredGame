@@ -1,17 +1,2 @@
-﻿  NameGenerator.cpp
-d:\projects\risktypegame\risktypegame\namegenerator.cpp(33): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=int
-          ]
-d:\projects\risktypegame\risktypegame\namegenerator.cpp(34): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=int
-          ]
-d:\projects\risktypegame\risktypegame\namegenerator.cpp(35): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=int
-          ]
+﻿  MilitaryManager.cpp
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe

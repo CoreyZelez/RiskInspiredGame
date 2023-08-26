@@ -30,8 +30,10 @@ void LandedEstate::update(Message message)
 
 void LandedEstate::yield(MilitaryManager &militaryManager)
 {
-	std::shared_ptr<LandArmy> landArmy = yieldLandArmy();
-	std::shared_ptr<NavalFleet> navalFleet = yieldNavalFleet();
+	// Yields army if able to territory associated with estate.
+	std::unique_ptr<LandArmy> landArmy = yieldLandArmy();
+	// Yields fleet if able to territory associated with estate.
+	std::unique_ptr<NavalFleet> navalFleet = yieldNavalFleet();
 	if(landArmy != nullptr)
 	{
 		militaryManager.addLandArmy(std::move(landArmy));
@@ -51,16 +53,16 @@ void LandedEstate::generateMilitary(MilitaryManager &militaryManager)
 {
 }
 
-std::shared_ptr<LandArmy> LandedEstate::putArmy(int strength)
+std::unique_ptr<LandArmy> LandedEstate::putArmy(int strength)
 {
 	// Should not be hostile army residing on territory.
 	assert(territory.getOccupant() == nullptr || territory.getOccupant() == getRuler());
 
-	std::shared_ptr<LandArmy> army = std::make_shared<LandArmy>(*getRuler(), &territory, strength);
-	territory.occupy(army);
+	std::unique_ptr<LandArmy> army = std::make_unique<LandArmy>(*getRuler(), &territory, strength);
+	territory.occupy(army.get());
 
 	// Army merged with pre-existing army on territory.
-	if(army == nullptr)
+	if(army->getStrength() == 0)
 	{
 		return nullptr;
 	}
@@ -70,9 +72,12 @@ std::shared_ptr<LandArmy> LandedEstate::putArmy(int strength)
 	return army;
 }
 
-std::shared_ptr<NavalFleet> LandedEstate::putFleet(int strength)
+std::unique_ptr<NavalFleet> LandedEstate::putFleet(int strength)
 {
-	std::shared_ptr<NavalFleet> fleet = std::make_shared<NavalFleet>(*getRuler(), &territory, strength);
-	territory.occupy(fleet);
+	//temp
+	//temp
+	//temp
+	std::unique_ptr<NavalFleet> fleet = std::make_unique<NavalFleet>(*getRuler(), &territory, strength);
+	territory.occupy(fleet.get());
 	return fleet;
 }

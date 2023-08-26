@@ -13,7 +13,18 @@ void MapView::draw(sf::RenderWindow &window) const
 	case MapMode::realm:
 		for(const auto &player : players)
 		{
-			player.getRealm().draw(window);
+			if(!player.getRealm().hasLiege())
+			{
+				player.getRealm().draw(window);
+			}
+		}
+	}
+
+	if(displayMilitary)
+	{
+		for(auto & player : players)
+		{
+			player.getMilitaryManager().draw(window);
 		}
 	}
 }

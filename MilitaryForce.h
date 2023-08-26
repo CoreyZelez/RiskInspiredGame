@@ -23,6 +23,7 @@ public:
 	Player &getOwner() const;
 	Territory &getLocation() const;
 	void setLocation(Territory *location);
+	void setSpritePosition(const sf::Vector2f &position);
 
 private:
 	sf::Sprite sprite;

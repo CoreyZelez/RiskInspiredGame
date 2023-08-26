@@ -16,10 +16,11 @@ public:
 
 	virtual void handleTurn();
 
-	bool getAwaitingUserInput() const;
+	bool getTurnOver() const;
 	void completeTurn();  // Call when human player ends turn through user input.
 
-	MilitaryManager& getMilitaryMangager();
+	MilitaryManager& getMilitaryManager();
+	const MilitaryManager& getMilitaryManager() const;
 	Realm& getRealm();
 	const Realm& getRealm() const;
 
@@ -30,7 +31,7 @@ private:
 	Game &game;
 	MilitaryManager militaryManager;
 	Realm realm;
-	bool awaitingUserInput = false;
+	bool awaitingTurnEnd = false;
 
 	/*
 	SHOULD HAVE AN INFORMATION CLASS HERE THAT STORES INFORMATION ABOUT NEIGHBOURING PLAYERS SUCH

@@ -3,9 +3,10 @@
 #include "Estate.h"
 #include "Utility.h"
 #include <assert.h>
+#include <iostream>
 
 Realm::Realm(Player &player)
-	: player(player), militaryManager(player.getMilitaryMangager())
+	: player(player), militaryManager(player.getMilitaryManager())
 {
 	grid.setColor(createRandomRealmColor());
 }

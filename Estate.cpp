@@ -105,7 +105,7 @@ void Estate::addSubfief(Estate *subfief)
 	assert(subfief->title < title);
 	assert(subfief->parent == nullptr);
 	subfiefs.push_back(subfief);
-	subfief->parent = this;  // Holds shared pointer to this object.
+	subfief->parent = this;  
 	grid.addGrid(subfief->grid);
 }
 

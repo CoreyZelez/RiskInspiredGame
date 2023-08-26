@@ -15,12 +15,12 @@ NavalTerritory::NavalTerritory(int id)
 {
 }
 
-bool NavalTerritory::occupy(std::shared_ptr<LandArmy> &army)
+bool NavalTerritory::occupy(LandArmy *army)
 {
 	return false;
 }
 
-bool NavalTerritory::occupy(std::shared_ptr<NavalFleet> &fleet)
+bool NavalTerritory::occupy(NavalFleet *fleet)
 {
 	return false;
 }

@@ -23,9 +23,9 @@ public:
 	void draw(sf::RenderWindow &window) const;  // In future return vertex arrays probably!!!
 
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
-	virtual bool occupy(std::shared_ptr<LandArmy> &army) = 0;
+	virtual bool occupy(LandArmy *army) = 0;
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
-	virtual bool occupy(std::shared_ptr<NavalFleet> &fleet) = 0;
+	virtual bool occupy(NavalFleet *fleet) = 0;
 
 	// Returns true if territories have touching grid squares.
 	bool sharesBorder(const Territory &territory) const;
@@ -33,16 +33,15 @@ public:
 	double getDefenceMultiplier() const;
 
 	Grid& getGrid();
-	const Grid& getGrid()const ;
+	const Grid& getGrid() const;
 
 	int getID() const;
 	virtual Player *getOccupant();
 	bool isEmpty() const;  	// True if territory occupies no positions on map.
 	virtual std::string getSaveLabel() const = 0; 	// Save label is identifier in txt file for territory type.
-	sf::Vector2f getCenter() const;
 
 protected:
-	virtual void drawMilitary(sf::RenderWindow &window) const;
+	sf::Vector2f getCenter() const;
 
 private:
 	int id;

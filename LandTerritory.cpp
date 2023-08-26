@@ -16,45 +16,53 @@ LandTerritory::LandTerritory(int id)
 {
 }
 
-bool LandTerritory::occupy(std::shared_ptr<LandArmy> &army)
+bool LandTerritory::occupy(LandArmy *army)
 {
-	assert(army.get() != nullptr);
+	bool isValid = false;
 
-	/// return false if territory of army not adjacent to this land territory!
-
-	if(this->army.get() == nullptr)
+	if(this->army == nullptr)
 	{
 		this->army = army;
-		army.get()->setLocation(this);
-		return true;
+		army->setLocation(this);
+		isValid = true;
 	}
 	// Case armies have same owner.
-	else if(&(army.get()->getOwner()) == &(this->army.get()->getOwner()))
+	else if(&(army->getOwner()) == &(this->army->getOwner()))
 	{
+		const int initialStrengthSum = army->getStrength() + this->army->getStrength();
+
 		// Absorb strength of army into this->army.
-		const int armyStrength = army.get()->getStrength();
-		this->army.get()->adjustStrength(army.get()->getStrength());  
-		army.reset();  // Destroys army.
-		return true;
+		const int armyStrength = army->getStrength();
+		this->army->adjustStrength(army->getStrength());  
+		army->adjustStrength(-army->getStrength());  // Sets strength to 0.
+
+		const int finalStrengthSum = army->getStrength() + this->army->getStrength();
+		assert(initialStrengthSum == finalStrengthSum);  // Strength sum should remain unchanged.
+
+		isValid = true;
 	}
 	// Case armies have different owner.
 	else
 	{
 		// Temporarily implemented as always attack. In future potentially not as there may be friendly sharing of troop territory.
-		army.get()->attack(*this->army.get(), getDefenceMultiplier());
+		army->attack(*this->army, getDefenceMultiplier());
 		// Attacking army occupys land if defending army killed.
-		if(this->army.get()->isDead() && !army.get()->isDead())
+		if(this->army->isDead() && !army->isDead())
 		{
 			this->army = army;
-			army.get()->setLocation(this);
+			army->setLocation(this);
 			notifyObservers(newOccupant);
-			return true;
+			isValid = true;
 		}
 	}
-	return false;  // WARNING CURRENTLY USELESS. IS THIS EVER NEEDED!!!
+
+	// Update the positions of military unit sprites.
+	updateMilitaryPositions();
+
+	return isValid;  // WARNING CURRENTLY USELESS. IS THIS EVER NEEDED!!!
 }
 
-bool LandTerritory::occupy(std::shared_ptr<NavalFleet> &fleet)
+bool LandTerritory::occupy(NavalFleet *fleet)
 {
 	return false;  
 }
@@ -73,19 +81,19 @@ Player* LandTerritory::getOccupant()
 {
 	if(army != nullptr)
 	{
-		return &army.get()->getOwner();
+		return &army->getOwner();
 	}
 	return nullptr;
 }
 
-const std::shared_ptr<LandArmy>& LandTerritory::getArmy() const
+const LandArmy* LandTerritory::getArmy() const
 {
 	return army;
 }
 
-const std::shared_ptr<NavalFleet>& LandTerritory::getFleet() const
+const NavalFleet* LandTerritory::getFleet() const
 {
-	assert(!isCoastal || fleet.get() == nullptr);
+	assert(!isCoastal || fleet == nullptr);
 	return fleet;
 }
 
@@ -94,6 +102,10 @@ std::string LandTerritory::getSaveLabel() const
 	return landSaveLabel;
 }
 
-void LandTerritory::drawMilitary(sf::RenderWindow &window) const
+void LandTerritory::updateMilitaryPositions()
 {
+	if(army != nullptr)
+	{
+		army->setSpritePosition(getCenter());
+	}
 }

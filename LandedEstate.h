@@ -19,9 +19,9 @@ public:
 	virtual void yield(MilitaryManager &militaryManager) override;
 
 	// Creates land army on some territory and returns handle to army.
-	virtual std::shared_ptr<LandArmy> yieldLandArmy() = 0;
+	virtual std::unique_ptr<LandArmy> yieldLandArmy() = 0;
 	// Creates naval fleet on some territory and returns handle to fleet.
-	virtual std::shared_ptr<NavalFleet> yieldNavalFleet() = 0;
+	virtual std::unique_ptr<NavalFleet> yieldNavalFleet() = 0;
 
 	virtual bool containsPosition(const sf::Vector2f &position) const override;
 
@@ -34,9 +34,9 @@ protected:
 	virtual std::string getSaveLabel() const override = 0;
 
 	// Puts new land army owned by ruler onto territory. Returns handle.
-	std::shared_ptr<LandArmy> putArmy(int strength);
+	std::unique_ptr<LandArmy> putArmy(int strength);
 	// Puts new naval fleet owned by ruler onto territory. Returns handle.
-	std::shared_ptr<NavalFleet> putFleet(int strength);
+	std::unique_ptr<NavalFleet> putFleet(int strength);
 
 private:
 	Territory &territory;

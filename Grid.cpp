@@ -280,7 +280,7 @@ void Grid::calculateVertices()
 			}
 			else if(borderMode == BorderMode::darkBorders)
 			{
-				const sf::Color borderColor(50, 50, 50);
+				const sf::Color borderColor(0, 0, 0);
 				triangles[0].color = borderColor;
 				triangles[1].color = borderColor;
 				triangles[2].color = borderColor;

@@ -10,9 +10,9 @@ public:
 	~NavalTerritory() = default;
 
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
-	virtual bool occupy(std::shared_ptr<LandArmy> &army) override;
+	virtual bool occupy(LandArmy *army) override;
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
-	virtual bool occupy(std::shared_ptr<NavalFleet> &fleet) override;
+	virtual bool occupy(NavalFleet *fleet) override;
 
 	/// virtual Player *getOccupant() override;
 

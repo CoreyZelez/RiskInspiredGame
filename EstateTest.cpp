@@ -1,7 +1,8 @@
 #include "EstateTest.h"
 #include "Barony.h"
-#include "Territory.h"
+#include "LandTerritory.h"
 #include "LandArmy.h"
+#include "NavalFleet.h"
 #include "Player.h"
 #include "Game.h"
 
@@ -14,7 +15,6 @@ void EstateTest::test()
 void EstateTest::test1()
 {
 	std::string testName = "barony yielding land army";
-
 	Game game("");
 	Player player(game);
 	LandTerritory territory(0);
@@ -25,7 +25,7 @@ void EstateTest::test1()
 
 	// Attempt to yield land army with cumulative land army not surpassing threshold.
 	player.getRealm().handleFiefYields();
-	if(territory.getArmy().get() != nullptr)
+	if(territory.getArmy() != nullptr)
 	{
 		bool result = false;
 		std::string message = "unexpected land army yielded";
@@ -39,14 +39,14 @@ void EstateTest::test1()
 	{
 		player.getRealm().handleFiefYields();
 	}
-	if(territory.getArmy().get() == nullptr)
+	if(territory.getArmy() == nullptr)
 	{
 		bool result = false;
 		std::string message = "no land army yielded to territory";
 		testReport(testName, result, message);
 		return;
 	}
-	else if(&territory.getArmy().get()->getOwner() != &player)
+	else if(&territory.getArmy()->getOwner() != &player)
 	{
 		bool result = false;
 		std::string message = "incorrect owner of yielded land army";
@@ -95,7 +95,7 @@ void EstateTest::test2()
 
 	player2.getRealm().handleFiefYields();
 	player1.getRealm().handleFiefYields();
-	if(territory1.getArmy().get() != nullptr)
+	if(territory1.getArmy() != nullptr)
 	{
 		bool result = false;
 		std::string message = "unexpected land army yielded";
@@ -110,14 +110,14 @@ void EstateTest::test2()
 		player2.getRealm().handleFiefYields();
 	}
 	player1.getRealm().handleFiefYields();
-	if(territory1.getArmy().get() == nullptr)
+	if(territory1.getArmy() == nullptr)
 	{
 		bool result = false;
 		std::string message = "no land army yielded to territory";
 		testReport(testName, result, message);
 		return;
 	}
-	else if(&territory1.getArmy().get()->getOwner() != &player1)
+	else if(&territory1.getArmy()->getOwner() != &player1)
 	{
 		bool result = false;
 		std::string message = "incorrect owner of yielded land army";
@@ -127,7 +127,7 @@ void EstateTest::test2()
 
 	// Checks that the player not apart of the realm was not receiving the bonus yields.
 	player3.getRealm().handleFiefYields();
-	if(territory4.getArmy().get() != nullptr)
+	if(territory4.getArmy() != nullptr)
 	{
 		bool result = false;
 		std::string message = "player receiving bonus yields from a player in a different realm";

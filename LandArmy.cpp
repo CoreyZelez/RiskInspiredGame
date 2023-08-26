@@ -1,6 +1,7 @@
 #include "LandArmy.h"
 #include "Territory.h"
 #include "TextureManager.h"
+#include "Player.h"
 #include <assert.h>
 #include <random>
 #include <iostream>
@@ -90,10 +91,10 @@ void LandArmy::move(Territory &location, int strength)
 	adjustStrength(strengthAdjustment);  // this->army loses strength of required to create deployedArmy.
 
 	/// IN FUTURE USE FACTORY TO CREATE ARMY!!! SHOULD AUTOMATICALLY STORE ARMY IN PLAYER MILITARYMANAGER!!!
-	std::shared_ptr<LandArmy> deployedArmy = std::make_shared<LandArmy>(getOwner(), &getLocation(), strength);  // Land army attempting location occupation.
+	std::unique_ptr<LandArmy> deployedArmy = std::make_unique<LandArmy>(getOwner(), &getLocation(), strength);  // Land army attempting location occupation.
 
 	// Attempt occupation of location by deployed army.
-	location.occupy(deployedArmy);
+	location.occupy(deployedArmy.get());
 
 	// Refund strength to this->army if deployedArmy is not able to occupy location
 	if(&deployedArmy.get()->getLocation() == &getLocation())
@@ -102,6 +103,11 @@ void LandArmy::move(Territory &location, int strength)
 		assert(strengthRefund >= 0);
 		adjustStrength(strengthRefund);  // this->army loses strength of required to create deployedArmy.
 		deployedArmy.reset();
+	}
+	// Add the army to the military manager of owning player.
+	else
+	{
+		getOwner().getMilitaryManager().addLandArmy(std::move(deployedArmy));
 	}
 }
 

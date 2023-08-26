@@ -247,6 +247,7 @@
     <ClInclude Include="NavalFleet.h" />
     <ClInclude Include="NavalTerritory.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Temp.h" />
     <ClInclude Include="Territory.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="TerritoryMaker.h" />

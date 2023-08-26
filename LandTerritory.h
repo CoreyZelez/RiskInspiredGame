@@ -3,7 +3,8 @@
 #include "Subject.h"
 #include <memory>
 
-class TerritoryEstate;
+class NavalFleet;
+class LandArmy;
 
 class LandTerritory : public Territory  // Perhaps Territory should be Subject!!! Too much code reptetition...
 {
@@ -14,23 +15,23 @@ public:
 	~LandTerritory() = default;
 
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
-	virtual bool occupy(std::shared_ptr<LandArmy> &army) override;
+	virtual bool occupy(LandArmy *army) override;
 	// Fleet attempts to occupy this territory. Either peaceful or hostile. Returns true if attempt is successful.
-	virtual bool occupy(std::shared_ptr<NavalFleet> &fleet) override;
+	virtual bool occupy(NavalFleet *fleet) override;
 
 	void setIsCoastal(bool isCoastal);
 	bool getIsCoastal() const;
-	virtual Player *getOccupant() override;
-	const std::shared_ptr<LandArmy> &getArmy() const;
-	const std::shared_ptr<NavalFleet> &getFleet() const;
+	virtual Player* getOccupant() override;
+	const LandArmy* getArmy() const;
+	const NavalFleet* getFleet() const;
 	// Save label is identifier in txt file for territory type.
 	virtual std::string getSaveLabel() const override;
 
-protected:
-	virtual void drawMilitary(sf::RenderWindow &window)const override;
-
 private:
+	// Sets positions of military unit sprites.
+	void updateMilitaryPositions(); 
+
 	bool isCoastal = false;
-	std::shared_ptr<LandArmy> army;  // Army occupying territory. 
-	std::shared_ptr<NavalFleet> fleet;  // Army occupying territory. 
+	LandArmy *army;  // Army occupying territory. 
+	NavalFleet *fleet;  // Fleet occupying territory coast. 
 };

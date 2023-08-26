@@ -28,7 +28,6 @@ void Territory::saveToFile(std::ofstream &file) const
 void Territory::draw(sf::RenderWindow &window) const
 {
 	grid.draw(window);
-	drawMilitary(window);
 }
 
 bool Territory::isEmpty() const
@@ -69,10 +68,6 @@ double Territory::getDefenceMultiplier() const
 sf::Vector2f Territory::getCenter() const
 {
 	return grid.getCenter();
-}
-
-void Territory::drawMilitary(sf::RenderWindow &window) const
-{
 }
 
 int loadTerritoryID(std::ifstream & file)

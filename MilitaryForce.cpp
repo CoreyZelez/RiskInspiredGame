@@ -15,7 +15,9 @@ MilitaryForce::MilitaryForce(Player &owner, Territory *location, int strength)
 MilitaryForce::MilitaryForce(Player &owner, Territory *location, int strength, const sf::Texture &texture)
 	: owner(owner), location(location), strength(strength)
 {
-	sprite.setOrigin(sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
+	// float centerX = sprite.getLocalBounds().width / 2;
+	// float centerY = sprite.getLocalBounds().height / 2;
+	// sprite.setOrigin(sf::Vector2f(centerX, centerY));  // Origin is center of sprite.
 	sprite.setTexture(texture);
 	assert(location != nullptr);
 	assert(strength > 0);
@@ -62,5 +64,9 @@ Territory& MilitaryForce::getLocation() const
 void MilitaryForce::setLocation(Territory* location)
 {
 	this->location = location;
-	sprite.setPosition(location->getCenter());  // Temporary. Will have to draw off center in future due to multiple armies at single territory.
+}
+
+void MilitaryForce::setSpritePosition(const sf::Vector2f &position)
+{
+	sprite.setPosition(position);
 }

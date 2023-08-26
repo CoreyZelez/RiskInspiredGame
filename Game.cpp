@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <iostream>
 
 Game::Game(std::string mapName)
 	: map(mapName)
@@ -12,18 +13,19 @@ void Game::generatePlayers()
 	for(auto &barony : map.getEstateManager().getBaronies())
 	{
 		Player player(*this);
-		player.getRealm().addFief(barony.get());
+		barony.get()->initRuler(player);
 		players.push_back(player);
 	}
 }
 
 void Game::update()
 {
+
 	while(currPlayer != players.end())
 	{
 		currPlayer->handleTurn();
 		// Waiting for user input to complete turn.
-		if(currPlayer->getAwaitingUserInput())
+		if(!currPlayer->getTurnOver())
 		{
 			return;
 		}

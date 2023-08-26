@@ -1,5 +1,7 @@
 #include "Barony.h"
 #include "LandTerritory.h"
+#include "NavalFleet.h"
+#include "LandArmy.h"
 #include <assert.h>
 #include <iostream>
 #include <fstream>
@@ -20,7 +22,7 @@ void Barony::saveToFile(std::ofstream & file) const
 	file << navalFleetYield << std::endl;
 }
 
-std::shared_ptr<LandArmy> Barony::yieldLandArmy()
+std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 {
 	// Add army per turn yield to cumulative yield.
 	cumulativeLandArmy += landArmyYield;
@@ -36,7 +38,7 @@ std::shared_ptr<LandArmy> Barony::yieldLandArmy()
 	return nullptr;
 }
 
-std::shared_ptr<NavalFleet> Barony::yieldNavalFleet()
+std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
 {
 	// Add navy per turn yield to cumulative yield.
 	cumulativeNavalFleet += navalFleetYield;

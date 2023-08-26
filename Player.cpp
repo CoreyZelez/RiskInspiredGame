@@ -12,28 +12,35 @@ Player::Player(Game &game)
 
 void Player::handleTurn()
 {
-	if(awaitingUserInput)
+	if(awaitingTurnEnd)
 	{
 		return;
 	}
 
 	realm.handleFiefYields();
 	// Specifies waiting for human player to end turn through user input.
-	awaitingUserInput = true;
+	// TEMPORARILY TRUE FOR TESTING!!!
+	awaitingTurnEnd = false;   
 }
 
-bool Player::getAwaitingUserInput() const
+bool Player::getTurnOver() const
 {
-	return !awaitingUserInput;
+	return !awaitingTurnEnd;
 }
 
 void Player::completeTurn()
 {
-	assert(awaitingUserInput);
-	awaitingUserInput = false;
+	assert(awaitingTurnEnd);
+	// awaitingTurnEnd = false;
+	awaitingTurnEnd = true;  // TEMPORARY FOR TESTING!!!
 }
 
-MilitaryManager& Player::getMilitaryMangager()
+MilitaryManager& Player::getMilitaryManager()
+{
+	return militaryManager;
+}
+
+const MilitaryManager & Player::getMilitaryManager() const
 {
 	return militaryManager;
 }

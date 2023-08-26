@@ -4,17 +4,31 @@
 #include <assert.h>
 #include <iostream>
 
-void MilitaryManager::addLandArmy(std::shared_ptr<LandArmy> army)
+void MilitaryManager::draw(sf::RenderWindow & window) const
 {
-	assert(army.get() != nullptr);
-	assert(army.get()->getStrength() > 0);
-	armies.push_back(army);
+	for(auto &army : armies)
+	{
+		army.get()->draw(window);
+	}
+	
+	for(auto &fleet : navies)
+	{
+		fleet.get()->draw(window);
+	}
 }
 
-void MilitaryManager::addNavalFleet(std::shared_ptr<NavalFleet> fleet)
+void MilitaryManager::addLandArmy(std::unique_ptr<LandArmy> army)
 {
+	assert(army != nullptr);
+	assert(army.get()->getStrength() > 0);
+	armies.emplace_back(std::move(army));
+}
+
+void MilitaryManager::addNavalFleet(std::unique_ptr<NavalFleet> fleet)
+{
+	assert(fleet != nullptr);
 	assert(fleet.get()->getStrength() > 0);
-	navies.push_back(fleet);
+	navies.emplace_back(std::move(fleet));
 }
 
 

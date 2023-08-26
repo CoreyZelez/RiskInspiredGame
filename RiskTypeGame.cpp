@@ -23,6 +23,21 @@ int main()
 	GameView gameView = game.createView();
 	GameController gameController(game, gameView);
 
+	game.update();
+	game.update();
+	game.update();
+	game.update();
+	game.update();
+	game.update();
+	game.update();
+	game.update();
+	game.update();
+	game.update();
+	game.update();
+	game.update();
+	game.update();
+	game.update();
+
 	while(window.isOpen())
 	{
 		sf::Event event;

@@ -17,8 +17,8 @@ public:
 
 	void setIsCoastal(bool isCoastal);
 
-	virtual std::shared_ptr<LandArmy> yieldLandArmy() override;
-	virtual std::shared_ptr<NavalFleet> yieldNavalFleet() override;
+	virtual std::unique_ptr<LandArmy> yieldLandArmy() override;
+	virtual std::unique_ptr<NavalFleet> yieldNavalFleet() override;
 
 protected:
 	// Provides bonus yield to this estate.

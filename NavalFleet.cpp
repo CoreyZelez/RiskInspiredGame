@@ -1,5 +1,6 @@
 #include "NavalFleet.h"
 #include "Territory.h"
+#include "Player.h"
 #include <assert.h>
 #include <memory>
 

@@ -52,6 +52,11 @@ TerritoryManager& Map::getTerritoryManager()
 	return territoryManager;
 }
 
+const TerritoryManager & Map::getTerritoryManager() const
+{
+	return territoryManager;
+}
+
 EstateManager& Map::getEstateManager()
 {
 	return estateManager;
