@@ -19,7 +19,7 @@ private:
 	void generatePlayers();  // Creates and assigns 1 player per barony.
 
 	Map map; 
-	std::list<Player> players; 
-	std::list<Player>::iterator currPlayer;
+	std::vector<std::unique_ptr<Player>> players; 
+	std::vector<std::unique_ptr<Player>>::iterator currPlayer;
 };
 

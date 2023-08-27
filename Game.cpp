@@ -12,26 +12,25 @@ void Game::generatePlayers()
 {
 	for(auto &barony : map.getEstateManager().getBaronies())
 	{
-		Player player(*this);
-		barony.get()->initRuler(player);
-		players.push_back(player);
+		std::unique_ptr<Player> player = std::make_unique<Player>(*this);
+		barony.get()->initRuler(*player.get());
+		players.emplace_back(std::move(player));
 	}
 }
 
 void Game::update()
 {
-
 	while(currPlayer != players.end())
 	{
-		currPlayer->handleTurn();
+		currPlayer->get()->handleTurn();
 		// Waiting for user input to complete turn.
-		if(!currPlayer->getTurnOver())
+		if(!currPlayer->get()->getTurnOver())
 		{
 			return;
 		}
 		++currPlayer;
 	}
-
+	
 	if(currPlayer == players.end())
 	{
 		// removeEliminatedPlayers()  

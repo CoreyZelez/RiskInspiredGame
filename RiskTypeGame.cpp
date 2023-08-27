@@ -4,6 +4,8 @@
 #include "Game.h"
 #include "TextureManager.h"
 #include "GameController.h"
+#include "MilitaryManager.h"
+#include "LandArmy.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <iostream>
@@ -23,21 +25,6 @@ int main()
 	GameView gameView = game.createView();
 	GameController gameController(game, gameView);
 
-	game.update();
-	game.update();
-	game.update();
-	game.update();
-	game.update();
-	game.update();
-	game.update();
-	game.update();
-	game.update();
-	game.update();
-	game.update();
-	game.update();
-	game.update();
-	game.update();
-
 	while(window.isOpen())
 	{
 		sf::Event event;
@@ -51,6 +38,8 @@ int main()
 			}
 		}
 
+		game.update();
+
 		if(mapEditorMode)
 		{
 			mapMaker.handleInput(window, view);
@@ -60,7 +49,7 @@ int main()
 			gameController.handleInput(window, view);
 		}
 		InputUtility.update();
-		window.clear();
+		window.clear(sf::Color(255, 255, 255));
 		window.setView(view);
 		if(mapEditorMode)
 		{

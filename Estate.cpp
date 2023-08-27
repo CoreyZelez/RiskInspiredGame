@@ -141,7 +141,7 @@ bool Estate::hasParent() const
 
 bool Estate::compareRuler(const Player *player) const
 {
-	return this->ruler == player;
+	return (this->ruler == player);
 }
 
 Title Estate::getTitle() const

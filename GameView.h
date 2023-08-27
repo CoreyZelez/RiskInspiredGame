@@ -8,11 +8,11 @@ class Estate;
 class GameView
 {
 public:
-	GameView(const Map &map, const std::list<Player> &players);
+	GameView(const Map &map, const std::vector<std::unique_ptr<Player>>& players);
 	void draw(sf::RenderWindow &window) const;
 
 private:
-	GameUI gameUI;
-	MapView mapView;
+	GameUI gameUI;  
+	MapView mapView;  
 };
 

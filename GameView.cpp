@@ -1,6 +1,6 @@
 #include "GameView.h"
 
-GameView::GameView(const Map &map, const std::list<Player>& players)
+GameView::GameView(const Map &map, const std::vector<std::unique_ptr<Player>>& players)
 	: mapView(map, players)
 {
 }

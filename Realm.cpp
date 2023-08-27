@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Estate.h"
 #include "Utility.h"
+#include "MilitaryManager.h"
 #include <assert.h>
 #include <iostream>
 
@@ -11,7 +12,7 @@ Realm::Realm(Player &player)
 	grid.setColor(createRandomRealmColor());
 }
 
-void Realm::draw(sf::RenderWindow & window) const
+void Realm::draw(sf::RenderWindow &window) const
 {
 	if(drawVassalRealms)
 	{

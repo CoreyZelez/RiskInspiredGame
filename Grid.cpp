@@ -120,16 +120,16 @@ void Grid::setColor(sf::Color color)
 
 sf::Vector2i Grid::calculateGridCoordinates(const sf::Vector2f &position) const
 {
-	const int x = std::floor(position.x / GIRD_SQUARE_SIZE);
-	const int y = std::floor(position.y / GIRD_SQUARE_SIZE);
+	const int x = std::floor(position.x / GRID_SQUARE_SIZE);
+	const int y = std::floor(position.y / GRID_SQUARE_SIZE);
 	return sf::Vector2i(x, y);
 }
 
 /* Calculates world coordinate of center of grid square at position. */
 sf::Vector2f Grid::calculateWorldCoordinates(const sf::Vector2i &position) const
 {
-	const float x = position.x * GIRD_SQUARE_SIZE + (GIRD_SQUARE_SIZE / 2);
-	const float y = position.y * GIRD_SQUARE_SIZE + (GIRD_SQUARE_SIZE / 2);
+	const float x = position.x * GRID_SQUARE_SIZE + (GRID_SQUARE_SIZE / 2);
+	const float y = position.y * GRID_SQUARE_SIZE + (GRID_SQUARE_SIZE / 2);
 	return sf::Vector2f(x, y);
 }
 
@@ -164,38 +164,30 @@ void Grid::calculateCenter()
 		return;
 	}
 
+	// Manhattan distances of positions from border.
 	std::unordered_map<sf::Vector2i, int, Vector2iHash> distances;
-
 
 	// Determines which positions lie on grid edge/border.
 	for(auto position = positions.cbegin(); position != positions.cend(); ++position)
 	{
-		sf::Vector2i left(position->x - 1, position->y);
-		sf::Vector2i right(position->x + 1, position->y);
-		sf::Vector2i up(position->x, position->y - 1);
-		sf::Vector2i down(position->x, position->y + 1);
-		std::vector<sf::Vector2i> adjacencies = { left, right, up, down };
-		for(const sf::Vector2i &adjacency : adjacencies)
+		if(isBorder(*position))
 		{
-			// position lies on grid border.
-			if(positions.count(adjacency) == 0)
-			{
-				distances[*position] = 0;
-				break;
-			}
+			distances[*position] = 0;
 		}
 	}
 
-	// Determines all other distances.
+	// Determines all other distances progressively i.e. distances 1 then 2 then 3 etc.
 	bool distancesAltered = true;
 	while(distancesAltered)
 	{
+		// Use a stored copy of distances before iteration since otherwise distance calculation won't be progressive.
+		std::unordered_map<sf::Vector2i, int, Vector2iHash> prevDistances = distances;
 		distancesAltered = false;
 		// Determines distance of a given position only when an adjacent position has had its distance determined.
 		for(auto position = positions.cbegin(); position != positions.cend(); ++position)
 		{
 			// Distance is already determined.
-			if(distances.count(*position) == 1)
+			if(prevDistances.count(*position) == 1)
 			{
 				continue;
 			}
@@ -205,14 +197,14 @@ void Grid::calculateCenter()
 			sf::Vector2i up(position->x, position->y - 1);
 			sf::Vector2i down(position->x, position->y + 1);
 			std::vector<sf::Vector2i> adjacencies = { left, right, up, down };
+			// Determine minimum distance value of adjacent points.
 			int min = INT_MAX;  // min distance of adjacent positions.
 			for(const sf::Vector2i &adjacency : adjacencies)
 			{
-				assert(positions.count(adjacency) == 1);
-				if(distances.count(adjacency) == 1)
+				if(prevDistances.count(adjacency) == 1)
 				{
-					assert(distances[adjacency] < INT_MAX);
-					min = std::min(min, distances[adjacency]);
+					assert(prevDistances[adjacency] < INT_MAX);
+					min = std::min(min, prevDistances[adjacency]);
 				}
 			}
 			if(min != INT_MAX)
@@ -224,15 +216,48 @@ void Grid::calculateCenter()
 		}
 	}
 
-	// Sets center to position with greatest distance.
-	center = *positions.begin();
-	assert(distances.count(center) == 1);
+	// Collects positions with greatest manhattan distance from edge.
+	std::vector<sf::Vector2i> candidatePositions; 
+	int maxDist = 0;
+	const int distLenience = 1;
 	for(auto position = positions.cbegin(); position != positions.cend(); ++position)
 	{
 		assert(distances.count(*position) == 1);
-		if(distances[*position] > distances[center])
+		if(distances[*position] > maxDist)
 		{
-			center = *position;
+			maxDist = distances[*position];
+			candidatePositions.clear();
+			candidatePositions.push_back(*position);
+		}
+		else if(distances[*position] == maxDist)
+		{
+			candidatePositions.push_back(*position);
+		}
+	}
+
+	assert(candidatePositions.size() > 0);
+	// Determine average position of candidate position.
+	float xSum = 0;
+	float ySum = 0;
+	for(const sf::Vector2i& position : candidatePositions)
+	{
+		xSum += position.x;
+		ySum += position.y;
+	}
+	const float xAvg = xSum / candidatePositions.size();
+	const float yAvg = ySum / candidatePositions.size();
+	sf::Vector2f candidateAverage(xAvg, yAvg);  
+
+
+	// Determines candidate position closest to candidate average position. This will be the center.
+	float minDist = FLT_MAX;
+	for(const sf::Vector2i& position : candidatePositions)
+	{
+		const float dist = abs(position.x - candidateAverage.x) + abs(position.y - candidateAverage.y);
+		if(dist < minDist)
+		{
+			center = position;
+			minDist = dist;
 		}
 	}
 }
@@ -248,10 +273,10 @@ void Grid::calculateVertices()
 	{
 		const sf::Vector2i position(iter->x, iter->y);
 	
-		const float left = position.x * GIRD_SQUARE_SIZE;
-		const float right = (position.x * GIRD_SQUARE_SIZE) + GIRD_SQUARE_SIZE;
-		const float top = (position.y * GIRD_SQUARE_SIZE);
-		const float bottom = (position.y * GIRD_SQUARE_SIZE) + GIRD_SQUARE_SIZE;
+		const float left = position.x * GRID_SQUARE_SIZE;
+		const float right = (position.x * GRID_SQUARE_SIZE) + GRID_SQUARE_SIZE;
+		const float top = (position.y * GRID_SQUARE_SIZE);
+		const float bottom = (position.y * GRID_SQUARE_SIZE) + GRID_SQUARE_SIZE;
 	
 		// Pointer to the triangles' vertices of the current tile.
 		sf::Vertex* triangles = &vertices[i * 6];
@@ -344,5 +369,8 @@ Grid loadTerritoryGrid(std::ifstream &file)
 	iss >> r >> g >> b;
 	sf::Color defaultColor(r, g, b);
 
-	return Grid(defaultColor, positions);
+	Grid grid(defaultColor, positions);
+	grid.calculateCenter();
+
+	return grid;
 }

@@ -216,6 +216,9 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="MilitaryForceGraphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LandArmy.h">
@@ -355,6 +358,9 @@
     </ClInclude>
     <ClInclude Include="Temp.h">
       <Filter>Header Files\Game\Military</Filter>
+    </ClInclude>
+    <ClInclude Include="MilitaryForceGraphics.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

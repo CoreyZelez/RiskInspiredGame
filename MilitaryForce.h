@@ -1,4 +1,5 @@
 #pragma once
+#include "MilitaryForceGraphics.h"
 #include <cstdint>
 #include <SFML/Graphics.hpp>
 
@@ -8,7 +9,6 @@ class Territory;
 class MilitaryForce
 {
 public:
-	MilitaryForce(Player &owner, Territory *location, int strength);  // TEMP FOR TESTING!!!
 	MilitaryForce(Player &owner, Territory *location, int strength, const sf::Texture &texture);
 
 	// Draws sprite at position of game world.
@@ -23,10 +23,10 @@ public:
 	Player &getOwner() const;
 	Territory &getLocation() const;
 	void setLocation(Territory *location);
-	void setSpritePosition(const sf::Vector2f &position);
+	void setSpritePosition(sf::Vector2f position);
 
 private:
-	sf::Sprite sprite;
+	MilitaryForceGraphics graphics;
 	Player &owner;
 	Territory *location;
 	int strength;

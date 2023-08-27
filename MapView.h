@@ -16,7 +16,7 @@ enum class MapMode
 class MapView
 {
 public:
-	MapView(const Map &map, const std::list<Player> &players);
+	MapView(const Map &map, const std::vector<std::unique_ptr<Player>> &players);
 
 	void draw(sf::RenderWindow &window) const;
 
@@ -25,7 +25,7 @@ public:
 
 private:
 	const Map &map;
-	const std::list<Player> &players;
+	const std::vector<std::unique_ptr<Player>> &players;
 
 	bool displayMilitary = true;
 	MapMode mode = MapMode::realm;

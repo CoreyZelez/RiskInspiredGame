@@ -2,30 +2,20 @@
 #include "Grid.h"
 #include "Player.h"
 #include "Territory.h"
+#include <string>
 #include <assert.h>
-
-MilitaryForce::MilitaryForce(Player &owner, Territory *location, int strength)
-	: owner(owner), location(location), strength(strength)
-{
-
-	assert(location != nullptr);
-	assert(strength > 0);
-}
+#include <iostream>
 
 MilitaryForce::MilitaryForce(Player &owner, Territory *location, int strength, const sf::Texture &texture)
-	: owner(owner), location(location), strength(strength)
+	: owner(owner), location(location), strength(strength), graphics(texture, this->strength)
 {
-	// float centerX = sprite.getLocalBounds().width / 2;
-	// float centerY = sprite.getLocalBounds().height / 2;
-	// sprite.setOrigin(sf::Vector2f(centerX, centerY));  // Origin is center of sprite.
-	sprite.setTexture(texture);
 	assert(location != nullptr);
 	assert(strength > 0);
 }
 
 void MilitaryForce::draw(sf::RenderWindow &window) const
 {
-	window.draw(sprite);
+	graphics.draw(window);
 }
 
 void MilitaryForce::adjustStrength(int amount)
@@ -39,6 +29,8 @@ void MilitaryForce::adjustStrength(int amount)
 	{
 		strength += amount;
 	}
+
+	graphics.update();
 }
 
 int MilitaryForce::getStrength() const
@@ -66,7 +58,8 @@ void MilitaryForce::setLocation(Territory* location)
 	this->location = location;
 }
 
-void MilitaryForce::setSpritePosition(const sf::Vector2f &position)
+void MilitaryForce::setSpritePosition(sf::Vector2f position)
 {
-	sprite.setPosition(position);
+	
+	graphics.setPosition(position);
 }

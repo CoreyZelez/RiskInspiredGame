@@ -190,6 +190,7 @@
     <ClCompile Include="Estate.cpp" />
     <ClCompile Include="LandArmy.cpp" />
     <ClCompile Include="LandTerritory.cpp" />
+    <ClCompile Include="MilitaryForceGraphics.cpp" />
     <ClCompile Include="NameGenerator.cpp" />
     <ClCompile Include="MilitaryManager.cpp" />
     <ClCompile Include="NavalFleet.cpp" />
@@ -232,6 +233,7 @@
     <ClInclude Include="MapView.h" />
     <ClInclude Include="MapMaker.h" />
     <ClInclude Include="Message.h" />
+    <ClInclude Include="MilitaryForceGraphics.h" />
     <ClInclude Include="NameGenerator.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Realm.h" />

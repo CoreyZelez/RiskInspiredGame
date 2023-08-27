@@ -1,0 +1,21 @@
+# barony
+# title
+1
+# name
+Tunvia
+# subfiefs
+# territory id
+0
+# land army yield
+0.711386
+# naval fleet yield
+0.353401
+
+# estate
+# title
+2
+# name
+Ventar
+# subfiefs
+Tunvia
+

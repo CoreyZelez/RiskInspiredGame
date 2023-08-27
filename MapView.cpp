@@ -1,7 +1,7 @@
 #include "MapView.h"
 #include "Player.h"
 
-MapView::MapView(const Map &map, const std::list<Player> &players)
+MapView::MapView(const Map &map, const std::vector<std::unique_ptr<Player>> &players)
 	: map(map), players(players)
 {
 }
@@ -13,9 +13,9 @@ void MapView::draw(sf::RenderWindow &window) const
 	case MapMode::realm:
 		for(const auto &player : players)
 		{
-			if(!player.getRealm().hasLiege())
+			if(!player.get()->getRealm().hasLiege())
 			{
-				player.getRealm().draw(window);
+				player.get()->getRealm().draw(window);
 			}
 		}
 	}
@@ -24,7 +24,7 @@ void MapView::draw(sf::RenderWindow &window) const
 	{
 		for(auto & player : players)
 		{
-			player.getMilitaryManager().draw(window);
+			player.get()->getMilitaryManager().draw(window);
 		}
 	}
 }

@@ -3,7 +3,7 @@
 #include <unordered_set>
 #include <string>
 
-const float GIRD_SQUARE_SIZE = 30.0f;  // The width/height of one square of a grid on the map.
+const float GRID_SQUARE_SIZE = 30.0f;  // The width/height of one square of a grid on the map.
 const std::string gridSaveLabel = "# grid positions";
 const std::string defaultColorLabel = "# default color";
 
@@ -54,7 +54,6 @@ public:
 
 private:
 	bool isBorder(sf::Vector2i position) const;  // Returns true if grid position on grid border.
-	// void calculateCenter();
 	void calculateVertices();  // Calculates vertices for vertex array from square positions.
 	sf::Vector2i calculateGridCoordinates(const sf::Vector2f &position) const;  // Converts vector world position to grid position.
 	sf::Vector2f calculateWorldCoordinates(const sf::Vector2i &position) const;  // Converts vector world position to grid position.
