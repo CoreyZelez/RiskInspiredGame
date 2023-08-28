@@ -26,8 +26,8 @@ public:
 	void setSpritePosition(sf::Vector2f position);
 
 private:
-	MilitaryForceGraphics graphics;
 	Player &owner;
 	Territory *location;
 	int strength;
+	MilitaryForceGraphics graphics;
 };

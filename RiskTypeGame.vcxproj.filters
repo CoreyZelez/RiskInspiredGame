@@ -195,9 +195,6 @@
     <ClCompile Include="GameController.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="AIPlayer.cpp">
-      <Filter>Source Files\Game\Player</Filter>
-    </ClCompile>
     <ClCompile Include="GameView.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
@@ -217,7 +214,10 @@
       <Filter>Source Files\User Interface</Filter>
     </ClCompile>
     <ClCompile Include="MilitaryForceGraphics.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Military</Filter>
+    </ClCompile>
+    <ClCompile Include="AIPlayerComponent.cpp">
+      <Filter>Source Files\Game\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -335,9 +335,6 @@
     <ClInclude Include="GameController.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="AIPlayer.h">
-      <Filter>Header Files\Game\Player</Filter>
-    </ClInclude>
     <ClInclude Include="GameView.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
@@ -360,7 +357,10 @@
       <Filter>Header Files\Game\Military</Filter>
     </ClInclude>
     <ClInclude Include="MilitaryForceGraphics.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\Military</Filter>
+    </ClInclude>
+    <ClInclude Include="AIPlayerComponent.h">
+      <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

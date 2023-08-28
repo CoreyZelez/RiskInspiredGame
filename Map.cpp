@@ -61,3 +61,10 @@ EstateManager& Map::getEstateManager()
 {
 	return estateManager;
 }
+
+const EstateManager & Map::getEstateManager() const
+{
+	return estateManager;
+}
+
+

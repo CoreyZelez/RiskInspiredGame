@@ -168,7 +168,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AIPersonality.cpp" />
-    <ClCompile Include="AIPlayer.cpp" />
+    <ClCompile Include="AIPlayerComponent.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CommandButton.cpp" />
     <ClCompile Include="Command.cpp" />
@@ -213,7 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIPersonality.h" />
-    <ClInclude Include="AIPlayer.h" />
+    <ClInclude Include="AIPlayerComponent.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CommandButton.h" />
     <ClInclude Include="Command.h" />

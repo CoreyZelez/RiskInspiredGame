@@ -16,7 +16,8 @@ void EstateTest::test1()
 {
 	std::string testName = "barony yielding land army";
 	Game game("");
-	Player player(game);
+	AIPersonality personality = { 0 };
+	Player player(game, personality);
 	LandTerritory territory(0);
 	const double landArmyYield = 0.4;
 	const double navalFleetYield = 0.1;
@@ -71,9 +72,10 @@ void EstateTest::test2()
 	std::string testName = "county providing bonus yields";
 
 	Game game("");
-	Player player1(game);
-	Player player2(game);
-	Player player3(game);
+	AIPersonality personality = { 0 };
+	Player player1(game, personality);
+	Player player2(game, personality);
+	Player player3(game, personality);
 	LandTerritory territory1(0);
 	LandTerritory territory2(1);
 	LandTerritory territory3(2);

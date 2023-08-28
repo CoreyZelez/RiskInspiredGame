@@ -1,7 +1,7 @@
 #pragma once
 #include "MilitaryManager.h"
 #include "Realm.h"
-#include "AIPersonality.h"
+#include "AIPlayerComponent.h"
 #include <vector>
 #include <memory>
 
@@ -11,31 +11,25 @@ class Game;
 class Player
 {
 public:
-	// Human controlled player.
-	explicit Player(Game &game);
+	// AI controlled player.
+	explicit Player(Game &game, AIPersonality personality);
 
-	virtual void handleTurn();
+	void handleTurn();
 
-	bool getTurnOver() const;
-	void completeTurn();  // Call when human player ends turn through user input.
+	void setHuman();
+	bool getIsHuman() const;
 
 	MilitaryManager& getMilitaryManager();
 	const MilitaryManager& getMilitaryManager() const;
 	Realm& getRealm();
 	const Realm& getRealm() const;
 
-protected:
 	// getInformation()  for AI decision making.
 
 private:
 	Game &game;
 	MilitaryManager militaryManager;
 	Realm realm;
-	bool awaitingTurnEnd = false;
-
-	/*
-	SHOULD HAVE AN INFORMATION CLASS HERE THAT STORES INFORMATION ABOUT NEIGHBOURING PLAYERS SUCH
-	AS THEIR ARMY STRENGTH, THE DISTANCE OF THEIR ARMIES AND ALSO INFO ABOUT PLAYER. BASICALLY ALL INFO FOR AI DECISION MAKING.
-
-	*/
+	AIPlayerComponent AIComponent;
+	bool isHuman = false;
 };

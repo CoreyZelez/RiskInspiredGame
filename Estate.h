@@ -42,6 +42,8 @@ public:
 	Grid& getGrid();
 
 protected:
+	void initColor();
+
 	// Military generating subfiefs receive specified bonus yield.
 	virtual void receiveBonusYield(const float &bonus);
 	// Estate attempts to create military units on map.

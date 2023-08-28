@@ -11,3 +11,8 @@ void GameView::draw(sf::RenderWindow & window) const
 	gameUI.draw(window);
 }
 
+void GameView::setMapMode(MapMode mapMode)
+{
+	mapView.setMapMode(mapMode);
+}
+

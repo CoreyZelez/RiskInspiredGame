@@ -1,5 +1,6 @@
 #include "GameController.h"
 #include "InputUtility.h"
+#include "Game.h"
 
 GameController::GameController(Game &game, GameView &gameView)
 	: game(game), gameView(gameView)
@@ -11,10 +12,15 @@ void GameController::handleInput(const sf::RenderWindow &window, sf::View &view)
 	InputUtility &inputUtility = InputUtility::getInstance();
 
 	handleInputForView(view);
+
+	handleInputForMapView();
+
+	handleInputForHumanPlayer();
+
 	inputClock.restart();
 }
 
-void GameController::handleInputForView(sf::View &view) const
+void GameController::handleInputForView(sf::View &view) 
 {
 	InputUtility &inputUtility = InputUtility::getInstance();
 
@@ -47,5 +53,43 @@ void GameController::handleInputForView(sf::View &view) const
 	else if(inputUtility.getMouseScrollDirection() == -1)
 	{
 		view.zoom(1 + zoom);
+	}
+}
+
+void GameController::handleInputForMapView()
+{
+	InputUtility &inputUtility = InputUtility::getInstance();
+
+	// Handle ending of human player turn.
+	if(inputUtility.getKeyPressed(sf::Keyboard::F1))
+	{
+		gameView.setMapMode(MapMode::realm);
+	}
+	else if(inputUtility.getKeyPressed(sf::Keyboard::F2))
+	{
+		gameView.setMapMode(MapMode::county);
+	}
+	else if(inputUtility.getKeyPressed(sf::Keyboard::F3))
+	{
+		gameView.setMapMode(MapMode::duchy);
+	}
+	else if(inputUtility.getKeyPressed(sf::Keyboard::F4))
+	{
+		gameView.setMapMode(MapMode::kingdom);
+	}
+	else if(inputUtility.getKeyPressed(sf::Keyboard::F5))
+	{
+		gameView.setMapMode(MapMode::empire);
+	}
+}
+
+void GameController::handleInputForHumanPlayer() 
+{
+	InputUtility &inputUtility = InputUtility::getInstance();
+
+	// Handle ending of human player turn.
+	if(inputUtility.getKeyPressed(sf::Keyboard::Space))
+	{
+		game.endHumanPlayerTurn();
 	}
 }

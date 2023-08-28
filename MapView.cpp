@@ -18,18 +18,31 @@ void MapView::draw(sf::RenderWindow &window) const
 				player.get()->getRealm().draw(window);
 			}
 		}
+		break;
+	case MapMode::county:
+		map.getEstateManager().draw(window, Title::count);
+		break;
+	case MapMode::duchy:
+		map.getEstateManager().draw(window, Title::duke);
+		break;
+	case MapMode::kingdom:
+		map.getEstateManager().draw(window, Title::king);
+		break;
+	case MapMode::empire:
+		map.getEstateManager().draw(window, Title::emperor);
+		break;
 	}
 
 	if(displayMilitary)
 	{
-		for(auto & player : players)
+		for(auto &player : players)
 		{
 			player.get()->getMilitaryManager().draw(window);
 		}
 	}
 }
 
-void MapView::changeMapMode(MapMode mode)
+void MapView::setMapMode(MapMode mode)
 {
 	this->mode = mode;
 	

@@ -20,6 +20,7 @@ public:
 	TerritoryManager &getTerritoryManager();
 	const TerritoryManager &getTerritoryManager() const;
 	EstateManager &getEstateManager();
+	const EstateManager &getEstateManager()const ;
 
 private:
 	void load(std::string name);

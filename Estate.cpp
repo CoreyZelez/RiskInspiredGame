@@ -8,18 +8,21 @@
 Estate::Estate(Title title)
 	: title(title)
 {
+	initColor();
 }
 
 Estate::Estate(Title title, const Grid &grid)
 	: title(title)
 {
 	this->grid.addGrid(grid);
+	initColor();
 }
 
 Estate::Estate(Title title, const Grid &grid, std::string name)
 	: title(title), name(name)
 {
 	this->grid.addGrid(grid);
+	initColor();
 }
 
 void Estate::initName(std::string name)
@@ -157,6 +160,34 @@ std::string Estate::getName() const
 Grid & Estate::getGrid()
 {
 	return grid;
+}
+
+void Estate::initColor()
+{
+	const sf::Color baronyColor(189, 19, 0);
+	const sf::Color countyColor(167, 218, 0);
+	const sf::Color dukedomColor(41, 245, 0);
+	const sf::Color kingdomColor(245, 179, 0);
+	const sf::Color empireColor(245, 0, 100);
+
+	switch(title)
+	{
+	case Title::baron:
+		this->grid.setColor(baronyColor);
+		break;
+	case Title::count:
+		this->grid.setColor(countyColor);
+		break;
+	case Title::duke:
+		this->grid.setColor(dukedomColor);
+		break;
+	case Title::king:
+		this->grid.setColor(kingdomColor);
+		break;
+	case Title::emperor:
+		this->grid.setColor(empireColor);
+		break;
+	}
 }
 
 void Estate::receiveBonusYield(const float &bonus)

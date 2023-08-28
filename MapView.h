@@ -20,7 +20,7 @@ public:
 
 	void draw(sf::RenderWindow &window) const;
 
-	void changeMapMode(MapMode mode);
+	void setMapMode(MapMode mode);
 	void changeDisplayMilitary();
 
 private:

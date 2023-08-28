@@ -134,7 +134,11 @@ void EstateMaker::changeState(EstateMakerState state)
 	}
 	else if(state == EstateMakerState::editEstate)
 	{
-		estateManager.makeColored(selectedTitle, true);
+		////
+		estateManager.makeColored(selectedTitle, true);  // In future change this for more efficiency for larger maps!!!
+		////
+
+		// Change the color of selected estate to be unique of other estates.
 		const sf::Color selectedEstateColor(240, 240, 0);
 		estate->getGrid().setColor(selectedEstateColor);
 	}
