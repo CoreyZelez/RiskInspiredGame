@@ -1,16 +1,35 @@
-﻿  Estate.cpp
+﻿  EstateManager.cpp
   EstateTest.cpp
   Game.cpp
   GameController.cpp
+  GameView.cpp
+  LandedEstate.cpp
+  Map.cpp
+  MapView.cpp
+  MapMaker.cpp
+  MilitaryForce.cpp
+  Barony.cpp
+d:\projects\risktypegame\risktypegame\barony.cpp(34): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(34): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(50): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(50): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+  Estate.cpp
   LandArmy.cpp
 d:\projects\risktypegame\risktypegame\landarmy.cpp(46): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 d:\projects\risktypegame\risktypegame\landarmy.cpp(47): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  LandedEstate.cpp
-  MapView.cpp
-  MilitaryForce.cpp
+  LandTerritory.cpp
+  MilitaryTest.cpp
+  MilitaryManager.cpp
   NavalFleet.cpp
   Player.cpp
   Realm.cpp
+  ReconcileBaronies.cpp
+  Generating Code...
+d:\projects\risktypegame\risktypegame\title.h(36): warning C4172: returning address of local variable or temporary: originalTitle
+  Compiling...
   RiskTypeGame.cpp
+  TerritoryMaker.cpp
+  TestRunner.cpp
+  EstateMaker.cpp
   Generating Code...
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe

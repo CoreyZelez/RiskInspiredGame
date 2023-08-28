@@ -3872,32 +3872,6 @@ Finithsia
 # naval fleet yield
 0.445006
 
-# barony
-# title
-1
-# name
-Fusvithmar
-# subfiefs
-# territory id
-19134
-# land army yield
-0.843432
-# naval fleet yield
-0.459378
-
-# barony
-# title
-1
-# name
-Vossia
-# subfiefs
-# territory id
-19135
-# land army yield
-0.709787
-# naval fleet yield
-0.389659
-
 # estate
 # title
 2
@@ -4355,6 +4329,805 @@ Westmor
 
 # estate
 # title
+2
+# name
+Westapinia
+# subfiefs
+Morethilfrey
+Hethiadrenar
+
+# estate
+# title
+2
+# name
+Tunvenfreyia
+# subfiefs
+Daytrolithia
+Feighdethia
+Mozthiltopia
+
+# estate
+# title
+2
+# name
+Ansia
+# subfiefs
+Feightaria
+Tunohthtaria
+
+# estate
+# title
+2
+# name
+Vosriaxia
+# subfiefs
+Folndethia
+Trosaxia
+
+# estate
+# title
+2
+# name
+Hethiadrenthales
+# subfiefs
+Folnthales
+Fusvia
+
+# estate
+# title
+2
+# name
+Stherotricth
+# subfiefs
+Nethtaria
+Vosapinia
+
+# estate
+# title
+2
+# name
+Anriar
+# subfiefs
+Lertaria
+Kerthales
+
+# estate
+# title
+2
+# name
+Nethvinhenia
+# subfiefs
+Ventflinsia
+Daythenia
+
+# estate
+# title
+2
+# name
+Pansia
+# subfiefs
+Drethrovaynia
+Vosvithdriax
+Renexrihenia
+
+# estate
+# title
+2
+# name
+iltricth
+# subfiefs
+Finithdeth
+Ventar
+
+# estate
+# title
+2
+# name
+Nothitrethvaynia
+# subfiefs
+Lueghlithia
+Folnvenaxia
+
+# estate
+# title
+2
+# name
+Kermor
+# subfiefs
+Feydrenlithia
+Sthedethia
+Hethiamia
+
+# estate
+# title
+2
+# name
+Mozthvitheigha
+# subfiefs
+Fuslithia
+Panohthaxia
+
+# estate
+# title
+2
+# name
+Mozthtopia
+# subfiefs
+Anheughough
+Vosvaynia
+
+# estate
+# title
+2
+# name
+Ventfrey
+# subfiefs
+Carfreyia
+Fusvithdeth
+
+# estate
+# title
+2
+# name
+Lueghsaar
+# subfiefs
+Trosapinia
+Tharhenia
+
+# estate
+# title
+2
+# name
+Mozthar
+# subfiefs
+Ferentrethvia
+Venttaria
+Hethialiisia
+
+# estate
+# title
+2
+# name
+Drethflinar
+# subfiefs
+Sariltricth
+Folnvinmia
+Tunhenia
+
+# estate
+# title
+2
+# name
+Pervithol
+# subfiefs
+Ferdethia
+Renexsadriax
+
+# estate
+# title
+2
+# name
+Drethvaneigha
+# subfiefs
+Anhenia
+Eashdeth
+
+# estate
+# title
+2
+# name
+Sthevenmar
+# subfiefs
+Lueghtrethtopia
+Nilaliisia
+
+# estate
+# title
+2
+# name
+Mozthflinthales
+# subfiefs
+Anmar
+Tardriax
+
+# estate
+# title
+2
+# name
+Renexohthhenia
+# subfiefs
+Tharmia
+Sthenileigha
+
+# estate
+# title
+2
+# name
+Daytdrenmor
+# subfiefs
+Folntaria
+Dayttrethmor
+
+# estate
+# title
+2
+# name
+Tunventopia
+# subfiefs
+Fersia
+Cardethia
+
+# estate
+# title
+2
+# name
+Kervithdriax
+# subfiefs
+Stheneigha
+Renexeigha
+
+# estate
+# title
+2
+# name
+Nothisia
+# subfiefs
+Sthesia
+Tuntaria
+
+# estate
+# title
+2
+# name
+Folntreththales
+# subfiefs
+Westinieigha
+Westiniar
+
+# estate
+# title
+2
+# name
+Nethvanaxia
+# subfiefs
+Fusmor
+Mozthriisia
+
+# estate
+# title
+2
+# name
+Sarsadethia
+# subfiefs
+Pervineigha
+Westohthheughough
+
+# estate
+# title
+2
+# name
+Finithvia
+# subfiefs
+Troslidethia
+Sthenapinia
+
+# estate
+# title
+2
+# name
+Sthetaria
+# subfiefs
+Ferlithia
+Tarrimia
+
+# estate
+# title
+2
+# name
+Percrofrey
+# subfiefs
+Nethflindeth
+Persavaynia
+
+# estate
+# title
+2
+# name
+Trisdrendeth
+# subfiefs
+Vostopia
+Tarfreyia
+
+# estate
+# title
+2
+# name
+Eashinieigha
+# subfiefs
+Finithvaynia
+Tunol
+Nethdeth
+
+# estate
+# title
+2
+# name
+Trisinivia
+# subfiefs
+venvia
+Sthetricth
+
+# estate
+# title
+2
+# name
+Tarvithlithia
+# subfiefs
+Renexfrey
+Tunsatricth
+Nothiapinia
+
+# estate
+# title
+2
+# name
+Morethheughough
+# subfiefs
+Renexvanvia
+Methilaxia
+
+# estate
+# title
+2
+# name
+Thardrenmar
+# subfiefs
+Lueghvithtopia
+Nothideth
+
+# estate
+# title
+2
+# name
+Carrisia
+# subfiefs
+Nethdrenlithia
+Folnvineigha
+Tharapinia
+
+# estate
+# title
+2
+# name
+Lerventaria
+# subfiefs
+Folntopia
+Perctaria
+
+# estate
+# title
+2
+# name
+Westvenmia
+# subfiefs
+Netheigha
+Carroheughough
+
+# estate
+# title
+2
+# name
+Lueghtopia
+# subfiefs
+Fusvanmia
+Feymar
+
+# estate
+# title
+2
+# name
+Morethvanhenia
+# subfiefs
+Methvaynia
+Fereninilithia
+
+# estate
+# title
+2
+# name
+Folndrenisia
+# subfiefs
+Trosfreyia
+Voseigha
+
+# estate
+# title
+2
+# name
+Fusheughough
+# subfiefs
+Drethsia
+Pervandethia
+Vosheughough
+
+# estate
+# title
+2
+# name
+Mozthsia
+# subfiefs
+Tunmar
+Nothithales
+
+# estate
+# title
+2
+# name
+Drethvensia
+# subfiefs
+Anvinheughough
+Carflinmor
+
+# estate
+# title
+2
+# name
+Finithflintaria
+# subfiefs
+Pandeth
+Percaxia
+
+# estate
+# title
+2
+# name
+Carvaynia
+# subfiefs
+Renexvinmia
+Ferensataria
+Feyohthheughough
+
+# estate
+# title
+2
+# name
+Ferendrenthales
+# subfiefs
+Mozthvaynia
+ilfreyia
+
+# estate
+# title
+2
+# name
+Morethaxia
+# subfiefs
+Nilavithaxia
+Panvaynia
+
+# estate
+# title
+2
+# name
+Ventfreyia
+# subfiefs
+Renexmor
+deth
+
+# estate
+# title
+2
+# name
+Finithvinhenia
+# subfiefs
+Ventlifrey
+Folnvendeth
+
+# estate
+# title
+2
+# name
+Lerinitaria
+# subfiefs
+Niladriax
+Pervindeth
+
+# estate
+# title
+2
+# name
+Nilalieigha
+# subfiefs
+Trostaria
+Nethfrey
+
+# estate
+# title
+2
+# name
+Fusiniol
+# subfiefs
+Tardrendriax
+Morethvindriax
+
+# estate
+# title
+2
+# name
+Tunfreyia
+# subfiefs
+Lueghliol
+Drethvia
+
+# estate
+# title
+2
+# name
+Westsia
+# subfiefs
+Trosilhenia
+Tharflintricth
+Eashheughough
+
+# estate
+# title
+2
+# name
+Eashvinheughough
+# subfiefs
+Anohthvia
+Methvia
+
+# estate
+# title
+2
+# name
+Tardrenisia
+# subfiefs
+Ferhenia
+Fusroaxia
+Fuslimor
+
+# estate
+# title
+2
+# name
+Nilariaxia
+# subfiefs
+Panmia
+Hethiavandriax
+
+# estate
+# title
+2
+# name
+Eashrimar
+# subfiefs
+vintaria
+Vostrethtopia
+
+# estate
+# title
+2
+# name
+Lueghvanfreyia
+# subfiefs
+sia
+Folnfreyia
+
+# estate
+# title
+2
+# name
+Nilailhenia
+# subfiefs
+Ventaxia
+Percisia
+
+# estate
+# title
+2
+# name
+Moztheigha
+# subfiefs
+Nothifrey
+Morethflindeth
+Percfrey
+
+# estate
+# title
+2
+# name
+Carar
+# subfiefs
+Topiar
+Nothivia
+
+# estate
+# title
+2
+# name
+Lervanfreyia
+# subfiefs
+Renexventricth
+Tunmia
+
+# estate
+# title
+2
+# name
+Lereigha
+# subfiefs
+Topiisia
+Sthenohthvia
+
+# estate
+# title
+2
+# name
+Folnmar
+# subfiefs
+Folniltaria
+Nilatopia
+
+# estate
+# title
+2
+# name
+Sthevithtopia
+# subfiefs
+Daytaxia
+Feyritopia
+
+# estate
+# title
+2
+# name
+Eashdrentricth
+# subfiefs
+Nothitricth
+Finithohthaxia
+
+# estate
+# title
+2
+# name
+iniar
+# subfiefs
+Kerfrey
+lithia
+Tarinivia
+
+# estate
+# title
+2
+# name
+Nilailfreyia
+# subfiefs
+Anilar
+Nilataria
+
+# estate
+# title
+2
+# name
+Mozthapinia
+# subfiefs
+Methvinfrey
+Finithrivaynia
+
+# estate
+# title
+2
+# name
+Tarrotaria
+# subfiefs
+Folniniol
+Stheinieigha
+
+# estate
+# title
+2
+# name
+Sardeth
+# subfiefs
+Troseigha
+Folnvia
+Sarvithfreyia
+
+# estate
+# title
+2
+# name
+Sarmar
+# subfiefs
+Fusiniheughough
+Tharvia
+
+# estate
+# title
+2
+# name
+Trismia
+# subfiefs
+Lueghtaria
+Fusdethia
+
+# estate
+# title
+2
+# name
+Vosdethia
+# subfiefs
+Carvithtopia
+Ferenflindethia
+
+# estate
+# title
+2
+# name
+Trisdriax
+# subfiefs
+Hethiahenia
+Tarritricth
+
+# estate
+# title
+2
+# name
+Sthemar
+# subfiefs
+Sthenmia
+Ferenflinfreyia
+
+# estate
+# title
+2
+# name
+Feraxia
+# subfiefs
+Carthales
+Eashmia
+
+# estate
+# title
+2
+# name
+Topideth
+# subfiefs
+Nilatricth
+Perlithia
+
+# estate
+# title
+2
+# name
+Nethlimor
+# subfiefs
+Feighmar
+Finithtopia
+Sarinidriax
+
+# estate
+# title
+2
+# name
+Topidrentaria
+# subfiefs
+Perctricth
+Carsavia
+
+# estate
+# title
+2
+# name
+Percohthtaria
+# subfiefs
+Westromor
+Topitricth
+
+# estate
+# title
 3
 # name
 Carvanthales
@@ -4517,6 +5290,279 @@ Fertopia
 
 # estate
 # title
+3
+# name
+Ferenvaynia
+# subfiefs
+Westapinia
+Tunvenfreyia
+Ansia
+
+# estate
+# title
+3
+# name
+Nethvenar
+# subfiefs
+Vosriaxia
+Hethiadrenthales
+
+# estate
+# title
+3
+# name
+Anmor
+# subfiefs
+Anriar
+Stherotricth
+Nethvinhenia
+
+# estate
+# title
+3
+# name
+Sarrisia
+# subfiefs
+iltricth
+Kermor
+Nothitrethvaynia
+
+# estate
+# title
+3
+# name
+Anilapinia
+# subfiefs
+Ventfrey
+Lueghsaar
+Mozthar
+
+# estate
+# title
+3
+# name
+Westfreyia
+# subfiefs
+Drethflinar
+Folntreththales
+Pervithol
+
+# estate
+# title
+3
+# name
+Tharvandeth
+# subfiefs
+Percrofrey
+Sarsadethia
+Finithvia
+Nethvanaxia
+
+# estate
+# title
+3
+# name
+Hethialithia
+# subfiefs
+Eashinieigha
+Trisdrendeth
+
+# estate
+# title
+3
+# name
+Sthevia
+# subfiefs
+Nothisia
+Sthetaria
+Kervithdriax
+
+# estate
+# title
+3
+# name
+Eashvenmia
+# subfiefs
+Sthevenmar
+Drethvaneigha
+
+# estate
+# title
+3
+# name
+Ferenfrey
+# subfiefs
+Westvenmia
+Lerventaria
+Lueghtopia
+Folndrenisia
+
+# estate
+# title
+3
+# name
+Trisilar
+# subfiefs
+Tunventopia
+Renexohthhenia
+Mozthflinthales
+Daytdrenmor
+
+# estate
+# title
+3
+# name
+Taraxia
+# subfiefs
+Trisinivia
+Tarvithlithia
+Morethheughough
+
+# estate
+# title
+3
+# name
+Nethdriax
+# subfiefs
+Carrisia
+Thardrenmar
+Mozthsia
+
+# estate
+# title
+3
+# name
+Nothidethia
+# subfiefs
+Fusheughough
+Ventfreyia
+Finithvinhenia
+
+# estate
+# title
+3
+# name
+Finithtrethhenia
+# subfiefs
+Drethvensia
+Finithflintaria
+Morethaxia
+
+# estate
+# title
+3
+# name
+Carapinia
+# subfiefs
+Ferendrenthales
+Carvaynia
+
+# estate
+# title
+3
+# name
+Moretheigha
+# subfiefs
+Tunfreyia
+Westsia
+Eashvinheughough
+Tardrenisia
+
+# estate
+# title
+3
+# name
+Vosmar
+# subfiefs
+Morethvanhenia
+Fusiniol
+Feraxia
+Nilalieigha
+
+# estate
+# title
+3
+# name
+Ferenapinia
+# subfiefs
+Lerinitaria
+Lervanfreyia
+Carar
+
+# estate
+# title
+3
+# name
+Tunvinvia
+# subfiefs
+Moztheigha
+Lereigha
+Sardeth
+
+# estate
+# title
+3
+# name
+Tuneigha
+# subfiefs
+Nilailhenia
+Nilariaxia
+Eashrimar
+Lueghvanfreyia
+
+# estate
+# title
+3
+# name
+Panilisia
+# subfiefs
+iniar
+Eashdrentricth
+Nilailfreyia
+
+# estate
+# title
+3
+# name
+Fermia
+# subfiefs
+Sthevithtopia
+Folnmar
+Tarrotaria
+Mozthapinia
+
+# estate
+# title
+3
+# name
+Lerfreyia
+# subfiefs
+Vosdethia
+Sarmar
+Trismia
+
+# estate
+# title
+3
+# name
+Tunlithia
+# subfiefs
+Sthemar
+Trisdriax
+Topideth
+Nethlimor
+
+# estate
+# title
+3
+# name
+Methmia
+# subfiefs
+Topidrentaria
+Percohthtaria
+
+# estate
+# title
 4
 # name
 lifrey
@@ -4568,6 +5614,94 @@ Carvanthales
 
 # estate
 # title
+4
+# name
+Folnvenfreyia
+# subfiefs
+Ferenvaynia
+Anmor
+Nethvenar
+
+# estate
+# title
+4
+# name
+Daytmor
+# subfiefs
+Keraxia
+Lueghar
+Mozthtopia
+Westdreneigha
+Mozthvitheigha
+Sarrisia
+Pansia
+
+# estate
+# title
+4
+# name
+Nilaol
+# subfiefs
+Eashvenmia
+Sthevia
+Westfreyia
+Tharvandeth
+Hethialithia
+
+# estate
+# title
+4
+# name
+Anapinia
+# subfiefs
+Taraxia
+Nethdriax
+Finithtrethhenia
+
+# estate
+# title
+4
+# name
+Lueghriar
+# subfiefs
+Trisilar
+Ferenfrey
+Nothidethia
+Ferenapinia
+
+# estate
+# title
+4
+# name
+Percapinia
+# subfiefs
+Vosmar
+Tunlithia
+Methmia
+Lerfreyia
+
+# estate
+# title
+4
+# name
+ol
+# subfiefs
+Carapinia
+Moretheigha
+Tuneigha
+
+# estate
+# title
+4
+# name
+Mozthol
+# subfiefs
+Tunvinvia
+Fermia
+Panilisia
+
+# estate
+# title
 5
 # name
 Sthenmor
@@ -4577,4 +5711,25 @@ Anflinmar
 Westillithia
 thales
 lifrey
+
+# estate
+# title
+5
+# name
+Methtrethtricth
+# subfiefs
+Nilaol
+Anapinia
+Anilapinia
+
+# estate
+# title
+5
+# name
+Tharfreyia
+# subfiefs
+Lueghriar
+ol
+Mozthol
+Percapinia
 

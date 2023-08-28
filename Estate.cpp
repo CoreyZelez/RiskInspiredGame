@@ -164,11 +164,11 @@ Grid & Estate::getGrid()
 
 void Estate::initColor()
 {
-	const sf::Color baronyColor(189, 19, 0);
-	const sf::Color countyColor(167, 218, 0);
-	const sf::Color dukedomColor(41, 245, 0);
-	const sf::Color kingdomColor(245, 179, 0);
-	const sf::Color empireColor(245, 0, 100);
+	const sf::Color baronyColor(210, 19, 0);
+	const sf::Color countyColor(50, 200, 180);
+	const sf::Color dukedomColor(30, 220, 0);
+	const sf::Color kingdomColor(230, 110, 0);
+	const sf::Color empireColor(240, 0, 140);
 
 	switch(title)
 	{
