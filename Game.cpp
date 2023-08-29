@@ -62,15 +62,60 @@ void Game::update()
 	}
 }
 
+GameState Game::getState() const
+{
+	return state;
+}
+
+bool Game::getDisplayMilitary() const
+{
+	// Militaries not selected in realm select mode.
+	if(state == GameState::realmSelectMode)
+	{
+		return false;
+	}
+
+	return displayMilitary;
+}
+
+void Game::selectMilitary(sf::Vector2f position)
+{
+	if(!humanPlayerTurn)
+	{
+		assert(selectedMilitary == nullptr);
+		return;
+	}
+	assert(currPlayer->get()->getIsHuman);
+
+	// Select military.
+	selectedMilitary = currPlayer->get()->getMilitaryManager().getMilitary(position);
+
+	// Set game state.
+	if(selectedMilitary != nullptr)
+	{
+		state = GameState::militarySelected;
+	}
+	else
+	{
+		state = GameState::idle;
+	}
+}
+
 void Game::endHumanPlayerTurn()
 {
+	assert(currPlayer->get()->getIsHuman);
 	if(humanPlayerTurn)
 	{
 		humanPlayerTurn = false;
 	}
 }
 
+void Game::changeDisplayMilitary()
+{
+	displayMilitary = !displayMilitary;
+}
+
 GameView Game::createView() const
 {
-	return GameView(map, players);
+	return GameView(*this, map, players);
 }

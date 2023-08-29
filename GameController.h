@@ -12,9 +12,10 @@ public:
 	void handleInput(const sf::RenderWindow &window, sf::View &view);
 
 private:
-	void handleInputForView(sf::View &view);
+	void handleInputForWindowView(sf::View &view);
 	void handleInputForMapView();
-	void handleInputForHumanPlayer();
+	void handleInputForGameView();
+	void handleInputForHumanPlayer(const sf::RenderWindow &window);
 
 	Game &game;
 	GameView &gameView;

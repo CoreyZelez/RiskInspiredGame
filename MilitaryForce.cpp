@@ -6,8 +6,8 @@
 #include <assert.h>
 #include <iostream>
 
-MilitaryForce::MilitaryForce(Player &owner, Territory *location, int strength, const sf::Texture &texture)
-	: owner(owner), location(location), strength(strength), graphics(texture, this->strength)
+MilitaryForce::MilitaryForce(Player &owner, Territory *territory, int strength, const sf::Texture &texture)
+	: owner(owner), territory(territory), strength(strength), graphics(texture, this->strength)
 {
 	assert(location != nullptr);
 	assert(strength > 0);
@@ -48,14 +48,19 @@ bool MilitaryForce::isDead() const
 	return strength == 0;
 }
 
-Territory& MilitaryForce::getLocation() const
+Territory& MilitaryForce::getTerritory() const
 {
-	return *location;
+	return *territory;
 }
 
-void MilitaryForce::setLocation(Territory* location)
+void MilitaryForce::setTerritory(Territory* territory)
 {
-	this->location = location;
+	this->territory = territory;
+}
+
+bool MilitaryForce::containsPosition(sf::Vector2f position) const
+{
+	return graphics.containsPosition(position);
 }
 
 void MilitaryForce::setSpritePosition(sf::Vector2f position)

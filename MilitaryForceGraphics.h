@@ -6,6 +6,7 @@ class MilitaryForceGraphics
 public:
 	MilitaryForceGraphics(const sf::Texture &texture, const int &strength);
 
+	bool containsPosition(sf::Vector2f position) const;
 	void draw(sf::RenderWindow &window) const;
 	void setPosition(sf::Vector2f position);
 	void update();

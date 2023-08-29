@@ -21,6 +21,11 @@ MilitaryForceGraphics::MilitaryForceGraphics(const sf::Texture &texture, const i
 	text.setFillColor(sf::Color::White);
 }
 
+bool MilitaryForceGraphics::containsPosition(sf::Vector2f position) const
+{
+	return sprite.getGlobalBounds().contains(position);
+}
+
 void MilitaryForceGraphics::draw(sf::RenderWindow & window) const
 {
 	window.draw(sprite);

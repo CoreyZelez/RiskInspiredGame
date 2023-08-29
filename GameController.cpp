@@ -11,16 +11,19 @@ void GameController::handleInput(const sf::RenderWindow &window, sf::View &view)
 {
 	InputUtility &inputUtility = InputUtility::getInstance();
 
-	handleInputForView(view);
+	handleInputForWindowView(view);
 
 	handleInputForMapView();
 
-	handleInputForHumanPlayer();
+	handleInputForGameView();
+
+	// POTENTIAL RISK (MAYBE) FOR RACE CONDITIONS WHEN IMPLEMENTING MULTITHREADING.
+	handleInputForHumanPlayer(window);
 
 	inputClock.restart();
 }
 
-void GameController::handleInputForView(sf::View &view) 
+void GameController::handleInputForWindowView(sf::View &view)
 {
 	InputUtility &inputUtility = InputUtility::getInstance();
 
@@ -83,7 +86,18 @@ void GameController::handleInputForMapView()
 	}
 }
 
-void GameController::handleInputForHumanPlayer() 
+void GameController::handleInputForGameView()
+{
+	InputUtility &inputUtility = InputUtility::getInstance();
+
+	// Toggles military display.
+	if(inputUtility.getKeyPressed(sf::Keyboard::M))
+	{
+		game.changeDisplayMilitary();
+	}
+}
+
+void GameController::handleInputForHumanPlayer(const sf::RenderWindow &window) 
 {
 	InputUtility &inputUtility = InputUtility::getInstance();
 
@@ -91,5 +105,16 @@ void GameController::handleInputForHumanPlayer()
 	if(inputUtility.getKeyPressed(sf::Keyboard::Space))
 	{
 		game.endHumanPlayerTurn();
+	}
+
+	if(inputUtility.getButtonPressed(sf::Mouse::Right))
+	{
+		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+		sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+
+		if(game.getState() == GameState::idle)
+		{
+			game.selectMilitary(worldPos);
+		}
 	}
 }

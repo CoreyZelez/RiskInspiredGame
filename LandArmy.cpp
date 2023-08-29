@@ -91,13 +91,13 @@ void LandArmy::move(Territory &location, int strength)
 	adjustStrength(strengthAdjustment);  // this->army loses strength of required to create deployedArmy.
 
 	/// IN FUTURE USE FACTORY TO CREATE ARMY!!! SHOULD AUTOMATICALLY STORE ARMY IN PLAYER MILITARYMANAGER!!!
-	std::unique_ptr<LandArmy> deployedArmy = std::make_unique<LandArmy>(getOwner(), &getLocation(), strength);  // Land army attempting location occupation.
+	std::unique_ptr<LandArmy> deployedArmy = std::make_unique<LandArmy>(getOwner(), &getTerritory(), strength);  // Land army attempting location occupation.
 
 	// Attempt occupation of location by deployed army.
 	location.occupy(deployedArmy.get());
 
 	// Refund strength to this->army if deployedArmy is not able to occupy location
-	if(&deployedArmy.get()->getLocation() == &getLocation())
+	if(&deployedArmy.get()->getTerritory() == &getTerritory())
 	{
 		const int strengthRefund = deployedArmy.get()->getStrength();
 		assert(strengthRefund >= 0);

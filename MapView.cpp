@@ -1,8 +1,9 @@
 #include "MapView.h"
 #include "Player.h"
+#include "Game.h"
 
-MapView::MapView(const Map &map, const std::vector<std::unique_ptr<Player>> &players)
-	: map(map), players(players)
+MapView::MapView(const Game &game, const Map &map, const std::vector<std::unique_ptr<Player>> &players)
+	: game(game), map(map), players(players)
 {
 }
 
@@ -32,14 +33,6 @@ void MapView::draw(sf::RenderWindow &window) const
 		map.getEstateManager().draw(window, Title::emperor);
 		break;
 	}
-
-	if(displayMilitary)
-	{
-		for(auto &player : players)
-		{
-			player.get()->getMilitaryManager().draw(window);
-		}
-	}
 }
 
 void MapView::setMapMode(MapMode mode)
@@ -54,7 +47,3 @@ void MapView::setMapMode(MapMode mode)
 	}
 }
 
-void MapView::changeDisplayMilitary()
-{
-	displayMilitary = !displayMilitary;
-}

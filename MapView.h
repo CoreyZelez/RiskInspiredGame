@@ -4,6 +4,7 @@
 
 enum class MapMode
 {
+	selectedRealm,  // Displays selected realm in yellow. All other realms displayed grey.
 	realm,
 	barony,
 	county,
@@ -13,21 +14,22 @@ enum class MapMode
 	prosperity
 };
 
+class Game;
+
 class MapView
 {
 public:
-	MapView(const Map &map, const std::vector<std::unique_ptr<Player>> &players);
+	MapView(const Game &game, const Map &map, const std::vector<std::unique_ptr<Player>> &players);
 
 	void draw(sf::RenderWindow &window) const;
 
 	void setMapMode(MapMode mode);
-	void changeDisplayMilitary();
 
 private:
+	const Game &game;
 	const Map &map;
 	const std::vector<std::unique_ptr<Player>> &players;
 
-	bool displayMilitary = true;
 	MapMode mode = MapMode::realm;
 };
 

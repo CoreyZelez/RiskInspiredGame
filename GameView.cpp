@@ -1,18 +1,33 @@
 #include "GameView.h"
+#include "Game.h"
 
-GameView::GameView(const Map &map, const std::vector<std::unique_ptr<Player>>& players)
-	: mapView(map, players)
+GameView::GameView(const Game &game, const Map &map, const std::vector<std::unique_ptr<Player>>& players)
+	: game(game), mapView(game, map, players), players(players)
 {
 }
 
 void GameView::draw(sf::RenderWindow & window) const
 {
 	mapView.draw(window);
+
+	drawMilitaries(window);
+
 	gameUI.draw(window);
 }
 
 void GameView::setMapMode(MapMode mapMode)
 {
 	mapView.setMapMode(mapMode);
+}
+
+void GameView::drawMilitaries(sf::RenderWindow & window) const
+{
+	if(game.getDisplayMilitary())
+	{
+		for(auto &player : players)
+		{
+			player.get()->getMilitaryManager().draw(window);
+		}
+	}
 }
 

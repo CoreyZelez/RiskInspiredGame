@@ -23,7 +23,7 @@ bool LandTerritory::occupy(LandArmy *army)
 	if(this->army == nullptr)
 	{
 		this->army = army;
-		army->setLocation(this);
+		army->setTerritory(this);
 		isValid = true;
 	}
 	// Case armies have same owner.
@@ -50,7 +50,7 @@ bool LandTerritory::occupy(LandArmy *army)
 		if(this->army->isDead() && !army->isDead())
 		{
 			this->army = army;
-			army->setLocation(this);
+			army->setTerritory(this);
 			notifyObservers(newOccupant);
 			isValid = true;
 		}
