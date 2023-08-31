@@ -40,7 +40,7 @@ Grid& Territory::getGrid()
 	return grid;
 }
 
-const Grid & Territory::getGrid() const
+const Grid& Territory::getGrid() const
 {
 	return grid;
 }

@@ -16,6 +16,22 @@ LandTerritory::LandTerritory(int id)
 {
 }
 
+void LandTerritory::update(Message message)
+{
+	switch(message)
+	{
+	case deadMilitary:
+		if(army != nullptr && army->getStrength() == 0)
+		{
+			army = nullptr;
+		}
+		if(fleet != nullptr && fleet->getStrength() == 0)
+		{
+			fleet = nullptr;
+		}
+	}
+}
+
 bool LandTerritory::occupy(LandArmy *army)
 {
 	bool isValid = false;
@@ -25,6 +41,9 @@ bool LandTerritory::occupy(LandArmy *army)
 		this->army = army;
 		army->setTerritory(this);
 		isValid = true;
+		// Observer methods.
+		this->army->addObserver(this);  
+		notifyObservers(newOccupant);
 	}
 	// Case armies have same owner.
 	else if(&(army->getOwner()) == &(this->army->getOwner()))
@@ -47,17 +66,26 @@ bool LandTerritory::occupy(LandArmy *army)
 		// Temporarily implemented as always attack. In future potentially not as there may be friendly sharing of troop territory.
 		army->attack(*this->army, getDefenceMultiplier());
 		// Attacking army occupys land if defending army killed.
-		if(this->army->isDead() && !army->isDead())
+		// this->army nullptr implies dead since it's pointer was nulled by territory in response to its death.
+		if(this->army == nullptr && !army->isDead())
 		{
 			this->army = army;
 			army->setTerritory(this);
-			notifyObservers(newOccupant);
 			isValid = true;
+			// Observer methods.
+			this->army->addObserver(this);
+			notifyObservers(newOccupant);
 		}
 	}
 
+	// Remove pointer to army if army is dead.
+	if(army != nullptr && army->getStrength() == 0)
+	{
+		army = nullptr;
+	}
+
 	// Update the positions of military unit sprites.
-	updateMilitaryPositions();
+	updateMilitaryPosition();
 
 	return isValid;  // WARNING CURRENTLY USELESS. IS THIS EVER NEEDED!!!
 }
@@ -102,7 +130,7 @@ std::string LandTerritory::getSaveLabel() const
 	return landSaveLabel;
 }
 
-void LandTerritory::updateMilitaryPositions()
+void LandTerritory::updateMilitaryPosition()
 {
 	if(army != nullptr)
 	{

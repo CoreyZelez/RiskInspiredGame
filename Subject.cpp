@@ -1,6 +1,16 @@
 #include "Subject.h"
 #include "Observer.h"
 #include <algorithm>
+#include <iostream>
+
+Subject::~Subject()
+{
+	// Remove all observers.
+	for(Observer *observer : observers)
+	{
+		removeObserver(observer);
+	}
+}
 
 void Subject::addObserver(Observer *observer)
 {
@@ -16,13 +26,10 @@ void Subject::removeObserver(Observer *observer)
 	{
 		if(*iter == observer) 
 		{
-
-			iter = observers.erase(iter);
+			observers.erase(iter);
+			return;
 		}
-		else
-		{
-			++iter;
-		}
+		++iter;
 	}
 }
 

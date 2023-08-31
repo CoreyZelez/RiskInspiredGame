@@ -23,6 +23,9 @@ public:
 
 	// Selects military at world position of current HUMAN players turn.
 	void selectMilitary(sf::Vector2f position);
+	// Selected military attempts to attack territory located at position.
+	void moveSelectedMilitary(sf::Vector2f position);
+
 	void endHumanPlayerTurn();
 
 	void changeDisplayMilitary();
@@ -42,6 +45,8 @@ private:
 
 	GameState state;
 	bool displayMilitary = true;  
-	MilitaryForce *selectedMilitary = nullptr;
+
+	MilitaryForce *selectedMilitary = nullptr;  // Military selected for movement.
+	int selectedStrength;  // Strength of selected military to move.
 };
 

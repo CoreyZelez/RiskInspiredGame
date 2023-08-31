@@ -40,6 +40,7 @@ public:
 	std::string getName() const;
 
 	Grid& getGrid();
+	const Grid& getGrid() const;
 
 protected:
 	void initColor();

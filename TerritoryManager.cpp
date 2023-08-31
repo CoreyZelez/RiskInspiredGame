@@ -109,6 +109,18 @@ void TerritoryManager::convertLandsToCoastal()
 {
 }
 
+Territory* TerritoryManager::getTerritory(const sf::Vector2f &position)
+{
+	for(auto &territory : territories)
+	{
+		if(territory->getGrid().containsPosition(position))
+		{
+			return territory;
+		}
+	}
+	return nullptr;
+}
+
 LandTerritory* TerritoryManager::createLandTerritory()
 {
 	std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>(nextID++);

@@ -7,7 +7,7 @@ class Observer;
 class Subject 
 {
 public:
-	virtual ~Subject() = default;
+	virtual ~Subject();
 
 	void addObserver(Observer* observer);
 

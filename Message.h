@@ -2,5 +2,6 @@
 
 enum Message
 {
-	newOccupant  // Signifys occupant changed.
+	newOccupant,  // Signifys occupant changed.
+	deadMilitary  // Signifys death of military unit.
 };

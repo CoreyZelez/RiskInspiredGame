@@ -51,6 +51,11 @@ void Game::update()
 			}
 		}
 
+		///if(!currPlayer->get()->getIsHuman())
+		///{
+		///	return;
+		///}
+
 		currPlayer->get()->handleTurn();
 
 		// Need to wait for user input to complete turn.
@@ -85,7 +90,7 @@ void Game::selectMilitary(sf::Vector2f position)
 		assert(selectedMilitary == nullptr);
 		return;
 	}
-	assert(currPlayer->get()->getIsHuman);
+	assert(currPlayer->get()->getIsHuman());
 
 	// Select military.
 	selectedMilitary = currPlayer->get()->getMilitaryManager().getMilitary(position);
@@ -93,6 +98,9 @@ void Game::selectMilitary(sf::Vector2f position)
 	// Set game state.
 	if(selectedMilitary != nullptr)
 	{
+		// Set selectedStrength to total strength of military.
+		selectedStrength = selectedMilitary->getStrength();
+
 		state = GameState::militarySelected;
 	}
 	else
@@ -101,9 +109,27 @@ void Game::selectMilitary(sf::Vector2f position)
 	}
 }
 
+void Game::moveSelectedMilitary(sf::Vector2f position)
+{
+	Territory *territory = map.getTerritoryManager().getTerritory(position);
+
+	// Deselect military.
+	if(territory == nullptr)
+	{
+		state = GameState::idle;
+		selectedMilitary = nullptr;
+		return;
+	}
+
+	// Move the military.
+	selectedMilitary->move(*territory, selectedStrength);
+	// Deselect military.
+	state = GameState::idle;
+	selectedMilitary = nullptr;
+}
+
 void Game::endHumanPlayerTurn()
 {
-	assert(currPlayer->get()->getIsHuman);
 	if(humanPlayerTurn)
 	{
 		humanPlayerTurn = false;

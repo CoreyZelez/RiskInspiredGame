@@ -116,5 +116,9 @@ void GameController::handleInputForHumanPlayer(const sf::RenderWindow &window)
 		{
 			game.selectMilitary(worldPos);
 		}
+		else if(game.getState() == GameState::militarySelected)
+		{
+			game.moveSelectedMilitary(worldPos);
+		}
 	}
 }

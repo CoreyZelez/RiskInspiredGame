@@ -9,7 +9,7 @@
 MilitaryForce::MilitaryForce(Player &owner, Territory *territory, int strength, const sf::Texture &texture)
 	: owner(owner), territory(territory), strength(strength), graphics(texture, this->strength)
 {
-	assert(location != nullptr);
+	assert(territory != nullptr);
 	assert(strength > 0);
 }
 
@@ -20,10 +20,13 @@ void MilitaryForce::draw(sf::RenderWindow &window) const
 
 void MilitaryForce::adjustStrength(int amount)
 {
+	/// SHOULD NEVER ADJUST STRENGTH OF DEAD ARMY.
+	assert(strength > 0);
+
 	if(strength <= -amount)
 	{
 		strength = 0;
-		// Handle death here?
+		notifyObservers(deadMilitary);
 	}
 	else
 	{

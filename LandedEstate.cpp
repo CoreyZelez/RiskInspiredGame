@@ -10,6 +10,7 @@
 LandedEstate::LandedEstate(Title title, Territory &territory)
 	: Estate(title, territory.getGrid()), territory(territory)
 {
+	this->territory.addObserver(this);
 }
 
 void LandedEstate::saveToFile(std::ofstream & file) const
@@ -24,6 +25,7 @@ void LandedEstate::update(Message message)
 	// Observed territory occupant changed.
 	if(message == Message::newOccupant)
 	{
+		assert(territory.getOccupant() != nullptr);
 		setRuler(territory.getOccupant());
 	}
 }

@@ -81,27 +81,32 @@ void LandArmy::attack(LandArmy &defendingArmy, double defenceMultiplier)
 	}
 }
 
-void LandArmy::move(Territory &location, int strength)
+void LandArmy::move(Territory &territory, int strength)
 {
+	// Attempt to move to current location.
+	if(&territory == &getTerritory())
+	{
+		return;
+	}
+
 	assert(strength > 0);
 	assert(strength <= getStrength());
 
-	// Create army to be deployed at location (either hostile or non-hostile).
-	const int strengthAdjustment = -strength;
-	adjustStrength(strengthAdjustment);  // this->army loses strength of required to create deployedArmy.
+	// Amount to adjust military strength. 
+	int strengthAdjustment = -strength;
 
 	/// IN FUTURE USE FACTORY TO CREATE ARMY!!! SHOULD AUTOMATICALLY STORE ARMY IN PLAYER MILITARYMANAGER!!!
 	std::unique_ptr<LandArmy> deployedArmy = std::make_unique<LandArmy>(getOwner(), &getTerritory(), strength);  // Land army attempting location occupation.
 
 	// Attempt occupation of location by deployed army.
-	location.occupy(deployedArmy.get());
+	territory.occupy(deployedArmy.get());
 
 	// Refund strength to this->army if deployedArmy is not able to occupy location
 	if(&deployedArmy.get()->getTerritory() == &getTerritory())
 	{
 		const int strengthRefund = deployedArmy.get()->getStrength();
 		assert(strengthRefund >= 0);
-		adjustStrength(strengthRefund);  // this->army loses strength of required to create deployedArmy.
+		strengthAdjustment += strengthRefund;
 		deployedArmy.reset();
 	}
 	// Add the army to the military manager of owning player.
@@ -109,6 +114,9 @@ void LandArmy::move(Territory &location, int strength)
 	{
 		getOwner().getMilitaryManager().addLandArmy(std::move(deployedArmy));
 	}
+
+	// Adjust strength of this army.
+	adjustStrength(strengthAdjustment);
 }
 
 

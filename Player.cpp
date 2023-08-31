@@ -12,7 +12,9 @@ Player::Player(Game& game, AIPersonality personality)
 
 void Player::handleTurn()
 {
+	militaryManager.removeDeadMilitaries();
 	realm.handleFiefYields();
+
 	if(!isHuman)
 	{
 		AIComponent.handleTurn();

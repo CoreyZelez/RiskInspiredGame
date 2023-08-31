@@ -56,6 +56,7 @@ void Realm::removeFief(const Estate *fief)
 		if(*iter == fief)
 		{
 			fiefs.erase(iter);
+			grid.removeGrid(fief->getGrid());
 			return;
 		}
 	}

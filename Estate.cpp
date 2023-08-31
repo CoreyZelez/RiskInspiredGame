@@ -157,7 +157,12 @@ std::string Estate::getName() const
 	return name;
 }
 
-Grid & Estate::getGrid()
+Grid& Estate::getGrid()
+{
+	return grid;
+}
+
+const Grid& Estate::getGrid() const
 {
 	return grid;
 }

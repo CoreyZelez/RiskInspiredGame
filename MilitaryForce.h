@@ -1,12 +1,13 @@
 #pragma once
 #include "MilitaryForceGraphics.h"
+#include "Subject.h"
 #include <cstdint>
 #include <SFML/Graphics.hpp>
 
 class Player;
 class Territory;
 
-class MilitaryForce
+class MilitaryForce : public Subject
 {
 public:
 	MilitaryForce(Player &owner, Territory *territory, int strength, const sf::Texture &texture);

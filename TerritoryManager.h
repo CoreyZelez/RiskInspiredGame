@@ -17,6 +17,8 @@ public:
 
 	void convertLandsToCoastal();  // Converts land territories bordering naval territories into coastal territories.
 
+	Territory* getTerritory(const sf::Vector2f &position);
+
 	LandTerritory* createLandTerritory();  // Creates empty land territory and returns handle.
 	void removeLandTerritory(LandTerritory *territory);  // Removes NavalTerritory and nulls pointer.
 	LandTerritory* getLandTerritory(sf::Vector2f position);  // Returns pointer to land territory at world position.

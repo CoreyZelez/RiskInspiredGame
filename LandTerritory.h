@@ -1,18 +1,21 @@
 #pragma once
 #include "Territory.h"
+#include "Observer.h"
 #include "Subject.h"
 #include <memory>
 
 class NavalFleet;
 class LandArmy;
 
-class LandTerritory : public Territory  // Perhaps Territory should be Subject!!! Too much code reptetition...
+class LandTerritory : public Territory, public Observer  // Perhaps Territory should be Subject!!! Too much code reptetition...
 {
 public:
 	LandTerritory(int id, Grid graphics);
 	explicit LandTerritory(int id);
 
 	~LandTerritory() = default;
+
+	virtual void update(Message message) override;
 
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
 	virtual bool occupy(LandArmy *army) override;
@@ -29,7 +32,7 @@ public:
 
 private:
 	// Sets positions of military unit sprites.
-	void updateMilitaryPositions(); 
+	void updateMilitaryPosition(); 
 
 	bool isCoastal = false;
 	LandArmy *army;  // Army occupying territory. 
