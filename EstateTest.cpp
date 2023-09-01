@@ -22,7 +22,7 @@ void EstateTest::test1()
 	const double landArmyYield = 0.4;
 	const double navalFleetYield = 0.1;
 	std::unique_ptr<Estate> barony = std::make_unique<Barony>(territory, landArmyYield, navalFleetYield);
-	barony.get()->initRuler(player);
+	barony.get()->setRuler(&player);
 
 	// Attempt to yield land army with cumulative land army not surpassing threshold.
 	player.getRealm().handleFiefYields();
@@ -94,11 +94,11 @@ void EstateTest::test2()
 	county.get()->addSubfief(barony3.get());
 	county.get()->addSubfief(barony4.get());
 
-	barony1.get()->initRuler(player1);
-	barony2.get()->initRuler(player1);
-	barony3.get()->initRuler(player2);
-	county.get()->initRuler(player2);
-	barony4.get()->initRuler(player3);  // player3 will not be apart of player2's realm.
+	barony1.get()->setRuler(&player1);
+	barony2.get()->setRuler(&player1);
+	barony3.get()->setRuler(&player2);
+	county.get()->setRuler(&player2);
+	barony4.get()->setRuler(&player3);  // player3 will not be apart of player2's realm.
 
 	player2.getRealm().addVassal(player1);
 

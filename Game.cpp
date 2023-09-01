@@ -16,7 +16,7 @@ void Game::generatePlayers()
 	{
 		AIPersonality tempPersonality;  // Personality for testing.
 		std::unique_ptr<Player> player = std::make_unique<Player>(*this, tempPersonality);
-		barony.get()->initRuler(*player.get());
+		barony.get()->setRuler(player.get());
 		if(!firstHuman)
 		{
 			firstHuman = true;
@@ -25,6 +25,8 @@ void Game::generatePlayers()
 
 		players.emplace_back(std::move(player));
 	}
+
+	std::cout << "OVER" << std::endl;
 }
 
 void Game::update()
@@ -95,6 +97,8 @@ void Game::selectMilitary(sf::Vector2f position)
 	// Select military.
 	selectedMilitary = currPlayer->get()->getMilitaryManager().getMilitary(position);
 
+	assert(selectedMilitary->getStrength() > 0);
+
 	// Set game state.
 	if(selectedMilitary != nullptr)
 	{
@@ -133,6 +137,8 @@ void Game::endHumanPlayerTurn()
 	if(humanPlayerTurn)
 	{
 		humanPlayerTurn = false;
+		state = GameState::idle;
+		selectedMilitary = nullptr;
 	}
 }
 

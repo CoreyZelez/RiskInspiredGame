@@ -19,7 +19,7 @@ MilitaryForce* MilitaryManager::getMilitary(sf::Vector2f position)
 {
 	for(MilitaryForce *military : militaries)
 	{
-		if(military->containsPosition(position))
+		if(military->containsPosition(position) && military->getStrength() > 0)
 		{
 			return military;
 		}

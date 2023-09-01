@@ -53,13 +53,6 @@ void Estate::saveSubfiefs(std::ofstream &file) const
 	}
 }
 
-void Estate::initRuler(Player &ruler)
-{
-	assert(this->ruler == nullptr);
-	this->ruler = &ruler;
-	this->ruler->getRealm().addFief(this);
-}
-
 void Estate::provideSubfiefBonusYields()
 {
 	if(title == Title::baron)
@@ -107,7 +100,7 @@ void Estate::addSubfief(Estate *subfief)
 {
 	assert(subfief->title < title);
 	assert(subfief->parent == nullptr);
-	subfiefs.push_back(subfief);
+	subfiefs.insert(subfief);
 	subfief->parent = this;  
 	grid.addGrid(subfief->grid);
 }
@@ -132,7 +125,7 @@ void Estate::removeSubfief(Estate *subfief)
 	}
 }
 
-void Estate::setParent(const Estate *parent)
+void Estate::setParent(Estate *parent)
 {
 	this->parent = parent;
 }
@@ -199,8 +192,8 @@ void Estate::receiveBonusYield(const float &bonus)
 {
 	for(auto &subfief : subfiefs)
 	{
-		// Only provides bonus yield to subfief if owner is of same realm as this ruler.
-		if(subfief->ruler == ruler || subfief->ruler->getRealm().isVassal(*ruler))
+		// Only provides bonus yield to subfief if owner is this ruler or a (direct or indirect) vassal of this ruler.
+		if(subfief->ruler == ruler || subfief->ruler->getRealm().isVassal(*ruler, false))
 		{
 			subfief->receiveBonusYield(bonus);
 		}
@@ -232,8 +225,61 @@ void Estate::setRuler(Player *ruler)
 		return;
 	}
 
-	this->ruler->getRealm().removeFief(this);
+	if(this->ruler != nullptr)
+	{
+		this->ruler->getRealm().removeFief(this);
+	}
 	this->ruler = ruler;
 	this->ruler->getRealm().addFief(this);
+
+	// Tell upper estate(s) to check whether uppermost liege of ruler (possibly ruler themselves) should gain control of it.
+	parent->handleLowerEstateChange(*this);
+}
+
+void Estate::handleAllocation()
+{
+}
+
+void Estate::handleRevocation()
+{
+}
+
+void Estate::handleLowerEstateChange(const Estate &lowerEstate)
+{
+	assert(subfiefs.count(&subfief) == 1);
+	assert(subfiefs.size() > 0);
+
+	// Estate unowned.
+	if(ruler == nullptr)
+	{
+		// Determines rightful owner (if any) and grants fief accordingly.
+		handleAllocation();
+
+		std::cout << 1 << std::endl;
+
+	}
+	// This estate already apart of same upper realm.
+	else if(ruler->getRealm().sameUpperRealm(*lowerEstate.ruler))
+	{
+		std::cout << 2 << std::endl;
+
+		// Do nothing.
+	}
+	// Estate apart of enemy upper realm. Potentially requires revocation.
+	else if(!ruler->getRealm().sameUpperRealm(*lowerEstate.ruler))
+	{
+		std::cout << 3 << std::endl;
+
+		handleRevocation();
+	}
+
+	// Handle ownership changes of upper estates.
+	if(parent != nullptr)
+	{
+		std::cout << 4 << std::endl;
+
+		parent->handleLowerEstateChange(lowerEstate);
+	}
+
 }
 

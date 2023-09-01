@@ -52,6 +52,7 @@ bool LandTerritory::occupy(LandArmy *army)
 
 		// Absorb strength of army into this->army.
 		const int armyStrength = army->getStrength();
+		assert(armyStrength > 0);
 		this->army->adjustStrength(army->getStrength());  
 		army->adjustStrength(-army->getStrength());  // Sets strength to 0.
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "Title.h"
 #include "Grid.h"
-#include <vector>
+#include <set>
 #include <memory>
 #include <SFML/Graphics.hpp>
 
@@ -24,7 +24,7 @@ public:
 
 	virtual void saveToFile(std::ofstream &file) const;
 
-	void initRuler(Player &ruler);
+	void setRuler(Player *ruler);
 
 	// Yields any resources directly associated with estate. This does not include subfief resources.
 	virtual void yield(MilitaryManager &militaryManager);
@@ -33,7 +33,7 @@ public:
 
 	void addSubfief(Estate *subfief);
 	void removeSubfief(Estate *subfief);
-	void setParent(const Estate *parent);
+	void setParent(Estate *parent);
 	bool hasParent() const;
 	bool compareRuler(const Player *player) const;  // For debugging.
 	Title getTitle() const;
@@ -53,16 +53,23 @@ protected:
 
 	virtual bool containsPosition(const sf::Vector2f &position) const;
 	Player* getRuler();
-	void setRuler(Player *ruler);
 
 private:
+	Player *ruler = nullptr;
+	const Title title;
+	Estate *parent;
+	std::set<Estate*> subfiefs;
+	std::string name = "";
+	Grid grid;
+
+	// Alocates estate to ruler who's realm owns every lower estate entirely.
+	void handleAllocation();
+	// Revokes estate from ruler if a threshold of lower estate ownership is not surpassed.
+	void handleRevocation();
+	// Gets notified of ownership change of a lower estate and updates ownership accordingly.
+	void handleLowerEstateChange(const Estate &lowerEstate);
+
 	void saveSubfiefs(std::ofstream &file) const;
 
-	Grid grid;
-	const Title title;
-	Player *ruler = nullptr;
-	const Estate *parent;
-	std::vector<Estate*> subfiefs;
-	std::string name = "";
 };
 
