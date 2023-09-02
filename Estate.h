@@ -66,8 +66,10 @@ private:
 	void handleAllocation();
 	// Revokes estate from ruler if a threshold of lower estate ownership is not surpassed.
 	void handleRevocation();
+	// Returns player who's realm contains EVERY lower estate of this estate. Otherwise nullptr.
+	Player* getLowerEstatesUpperRealmRuler();
 	// Gets notified of ownership change of a lower estate and updates ownership accordingly.
-	void handleLowerEstateChange(const Estate &lowerEstate);
+	void handleLowerEstateChange(const Estate &subfief);
 
 	void saveSubfiefs(std::ofstream &file) const;
 

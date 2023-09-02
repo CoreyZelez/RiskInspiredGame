@@ -108,9 +108,14 @@ bool Realm::sameUpperRealm(const Player &player) const
 	return &upperLiege1 == &upperLiege2;
 }
 
-bool Realm::hasLiege() const
+Player& Realm::getUpperRealmRuler()
 {
-	return liege != nullptr;
+	Player *upperLiege = &player;
+	while(upperLiege->getRealm().liege != nullptr)
+	{
+		upperLiege = liege;
+	}
+	return *upperLiege;
 }
 
 const Player& Realm::getUpperRealmRuler() const
@@ -122,3 +127,9 @@ const Player& Realm::getUpperRealmRuler() const
 	}
 	return *upperLiege;
 }
+
+bool Realm::hasLiege() const
+{
+	return liege != nullptr;
+}
+

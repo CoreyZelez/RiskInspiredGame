@@ -222,6 +222,9 @@
     <ClCompile Include="MilitaryTest.cpp">
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
+    <ClCompile Include="RealmTest.cpp">
+      <Filter>Source Files\Testing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LandArmy.h">
@@ -363,6 +366,9 @@
       <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
     <ClInclude Include="MilitaryTest.h">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="RealmTest.h">
       <Filter>Header Files\Testing</Filter>
     </ClInclude>
   </ItemGroup>

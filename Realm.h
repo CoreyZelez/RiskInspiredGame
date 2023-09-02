@@ -28,16 +28,19 @@ public:
 	bool isVassal(const Player &player, bool direct = true) const;
 	// Returns true if player belongs to same upper realm as this->player.
 	bool sameUpperRealm(const Player &player) const;
+	// Returns the ruler of the upper most realm which player belongs to.
+	Player& getUpperRealmRuler();
+	// Returns the ruler of the upper most realm which player belongs to.
+	const Player& getUpperRealmRuler() const;
 	bool hasLiege() const;
 
 private:
-	// Returns the ruler of the upper most realm which player belongs to.
-	const Player& getUpperRealmRuler()const;
 
-	const Player &player;
+
+	Player &player;
 	MilitaryManager &militaryManager;
 
-	const Player *liege;
+	Player *liege;
 	Title title;  // Official title of player.
 	std::vector<Player*> vassals;
 	std::vector<Estate*> fiefs;

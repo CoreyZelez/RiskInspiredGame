@@ -20,16 +20,19 @@ void LandArmy::attack(LandArmy &defendingArmy, double defenceMultiplier)
 	assert(defenderStrength > 0);
 	assert(attackerStrength > 0);
 
+	int defenderStrengthAdjustment = 0;
+	int attackerStrengthAdjustment = 0;
+
 	// Adjust strengths for passing a given threshold.
 	const double strengthThreshold = 3;  // Threshold for guaranteed damage on opponent.
 	const int thresholdAdjustmentValue = -1;  // Strength adjustment for opponent passing threshold.
 	if(defenderAdjustedStrength >= strengthThreshold)
 	{
-		adjustStrength(thresholdAdjustmentValue);
+		attackerStrengthAdjustment += thresholdAdjustmentValue;
 	}
 	if(attackerStrength >= strengthThreshold)
 	{
-		defendingArmy.adjustStrength(thresholdAdjustmentValue);
+		defenderStrengthAdjustment += thresholdAdjustmentValue;
 	}
 
 	// Partially randomised damage to each army.
@@ -43,8 +46,8 @@ void LandArmy::attack(LandArmy &defendingArmy, double defenceMultiplier)
 	std::mt19937 rng(std::random_device{}());
 	std::uniform_real_distribution<double> attackerDist(minAttacker, maxAttacker);  // Percent of strength defending army loses.
 	std::uniform_real_distribution<double> defenderDist(minDefender, maxDefender);  // Percent of strength attacking army loses.
-	int defenderStrengthAdjustment = -std::round(attackerDist(rng) * defenderStrength);
-	int attackerStrengthAdjustment = -std::round(defenderDist(rng) * attackerStrength);
+	defenderStrengthAdjustment += -std::round(attackerDist(rng) * defenderStrength);
+	attackerStrengthAdjustment += -std::round(defenderDist(rng) * attackerStrength);
 	assert(defenderStrengthAdjustment <= 0);
 	assert(attackerStrengthAdjustment <= 0);
 	defendingArmy.adjustStrength(defenderStrengthAdjustment);
