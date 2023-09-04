@@ -131,7 +131,8 @@ void Estate::removeSubfief(Estate *subfief)
 	        //
 	        //
 			grid.removeGrid(subfief->grid);
-
+			//
+			//
 			assert(subfief->parent == this);
 			subfief->parent = nullptr;
 			return;
@@ -232,7 +233,7 @@ Player* Estate::getRuler()
 	return ruler;
 }
 
-void Estate::setRuler(Player *ruler)
+void Estate::setRuler(Player *ruler, bool updatePlayerGrid)
 {
 	// Case ruler is not changed.
 	if(this->ruler == ruler)
@@ -242,10 +243,13 @@ void Estate::setRuler(Player *ruler)
 
 	if(this->ruler != nullptr)
 	{
-		this->ruler->getRealm().removeFief(this);
+		this->ruler->getRealm().removeFief(this, updatePlayerGrid);
 	}
 	this->ruler = ruler;
-	this->ruler->getRealm().addFief(this);
+	if(this->ruler != nullptr)
+	{
+		this->ruler->getRealm().addFief(this, updatePlayerGrid);
+	}
 
 	// Tell upper estate(s) to check whether uppermost liege of ruler (possibly ruler themselves) should gain control of it.
 	if(parent != nullptr)
@@ -262,12 +266,33 @@ void Estate::handleAllocation()
 	{
 		assert(ruler->getRealm().hasLiege() == false);
 		// Ruler's realm contains every lowest level estate of this estate thus gets granted this estate.
-		setRuler(ruler);
+		// WARNING: RELIES ON FACT THAT LOWER ESTATE TITLE IS A LANDED ESTATE AND UPPER ESTATES ARE NOT.
+		const bool updatePlayerGrid = false;  // Don't update player grid since estate not landed.
+		////
+		setRuler(ruler, updatePlayerGrid);
 	}
 }
 
 void Estate::handleRevocation()
 {
+	assert(ruler != nullptr);
+
+	bool revoked = false;
+
+	// Revokes estate if any subfief of estate is not apart of ruler's realm.
+	for(const Estate *subfief : subfiefs)
+	{
+
+		if(subfief->ruler == nullptr || &subfief->ruler->getRealm().getUpperRealmRuler())
+		{
+			// WARNING: RELIES ON FACT THAT LOWER ESTATE TITLE IS A LANDED ESTATE AND UPPER ESTATES ARE NOT.
+			const bool updatePlayerGrid = false;  // Don't update player grid since estate not landed.
+			////
+			setRuler(nullptr, updatePlayerGrid);
+			revoked = true;
+			break;
+		}
+	}
 }
 
 Player* Estate::getLowerEstatesUpperRealmRuler() 
@@ -319,21 +344,26 @@ void Estate::handleLowerEstateChange(const Estate &subfief)
 		// ruler who has no liege and lower estate belongs to their realm.
 		handleAllocation();
 	}
+	// A lower fief was revoked.
+	else if(subfief.ruler == nullptr)
+	{
+		handleRevocation();
+	}
 	// This estate already apart of same upper realm.
 	else if(ruler->getRealm().sameUpperRealm(*subfief.ruler))
 	{
 		// Do nothing.
 	}
 	// Estate apart of enemy upper realm. Potentially requires revocation.
-	else if(!ruler->getRealm().sameUpperRealm(*subfief.ruler))
+	else 
 	{
 		handleRevocation();
 	}
 
-	// Handle ownership changes of upper estates.
-	if(parent != nullptr)
-	{
-		parent->handleLowerEstateChange(*this);
-	}
+	///// Handle ownership changes of upper estates.
+	///if(parent != nullptr)
+	///{
+	///	parent->handleLowerEstateChange(*this);
+	///}
 }
 

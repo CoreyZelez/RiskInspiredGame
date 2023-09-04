@@ -26,6 +26,9 @@ public:
 	// Selected military attempts to attack territory located at position.
 	void moveSelectedMilitary(sf::Vector2f position);
 
+	// Gets player realm which contains a given world position.
+	const Realm* getRealm(const sf::Vector2f &position);
+
 	void endHumanPlayerTurn();
 
 	void changeDisplayMilitary();
@@ -44,6 +47,8 @@ private:
 	std::vector<std::unique_ptr<Player>>::iterator currPlayer;
 
 	GameState state;
+	MapMode mode = MapMode::realm;
+
 	bool displayMilitary = true;  
 
 	MilitaryForce *selectedMilitary = nullptr;  // Military selected for movement.

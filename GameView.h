@@ -11,9 +11,15 @@ public:
 	GameView(const Game &game, const Map &map, const std::vector<std::unique_ptr<Player>>& players);
 	void draw(sf::RenderWindow &window) const;
 
+	void setLeftPanel(const IHasUI &hasUI);
+	void setRightPanel(const IHasUI &hasUI);
+	void setBottomPanel(const IHasUI &hasUI);
+
 	void setMapMode(MapMode mapMode);
+	MapMode getMapMode() const;
 
 private:
+
 	void drawMilitaries(sf::RenderWindow &window) const;
 
 	const Game &game;

@@ -16,9 +16,9 @@ void EstateTest::test1()
 {
 	std::string testName = "barony yielding land army";
 	Game game("");
-	AIPersonality personality = { 0 };
-	Player player(game, personality);
-	LandTerritory territory(0);
+	AIPersonality personality = { 0 }; 
+	Player player(game, personality);  
+	LandTerritory territory(0);        
 	const double landArmyYield = 0.4;
 	const double navalFleetYield = 0.1;
 	std::unique_ptr<Estate> barony = std::make_unique<Barony>(territory, landArmyYield, navalFleetYield);
@@ -65,6 +65,7 @@ void EstateTest::test1()
 	// Test succeeded.
 	bool result = true;
 	testReport(testName, result);
+
 }
 
 void EstateTest::test2()

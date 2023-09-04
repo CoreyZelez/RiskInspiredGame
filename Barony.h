@@ -11,7 +11,7 @@ class Barony : public LandedEstate
 public:
 	Barony(LandTerritory &territory, double landArmyYield, double navalFleetYield);
 
-	~Barony() = default;
+	virtual ~Barony() = default;
 
 	virtual void saveToFile(std::ofstream &file) const override;
 

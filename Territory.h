@@ -18,6 +18,8 @@ public:
 	Territory(int id, Grid grid);
 	Territory(int id, sf::Color color);
 
+	virtual ~Territory() = default;
+
 	void saveToFile(std::ofstream &file) const;
 
 	void draw(sf::RenderWindow &window) const;  // In future return vertex arrays probably!!!

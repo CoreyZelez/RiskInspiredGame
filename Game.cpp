@@ -10,16 +10,16 @@ Game::Game(std::string mapName)
 
 void Game::generatePlayers()
 {
-	bool firstHuman = false; // Used temporarily for testing.
-
+	int numHuman = 0; // Used temporarily for testing.
+	const int numHumans = 2;
 	for(auto &barony : map.getEstateManager().getBaronies())
 	{
 		AIPersonality tempPersonality;  // Personality for testing.
 		std::unique_ptr<Player> player = std::make_unique<Player>(*this, tempPersonality);
 		barony.get()->setRuler(player.get());
-		if(!firstHuman)
+		if(numHuman < numHumans)
 		{
-			firstHuman = true;
+			++numHuman;
 			player.get()->setHuman();
 		}
 
@@ -53,10 +53,10 @@ void Game::update()
 			}
 		}
 
-		///if(!currPlayer->get()->getIsHuman())
-		///{
-		///	return;
-		///}
+		/// if(!currPlayer->get()->getIsHuman())
+		/// {
+		/// 	return;
+		/// }
 
 		currPlayer->get()->handleTurn();
 
@@ -130,6 +130,19 @@ void Game::moveSelectedMilitary(sf::Vector2f position)
 	// Deselect military.
 	state = GameState::idle;
 	selectedMilitary = nullptr;
+}
+
+const Realm* Game::getRealm(const sf::Vector2f &position)
+{
+	for(const auto &player : players)
+	{
+		const Realm &realm = player.get()->getRealm();
+		if(realm.containsPosition(position))
+		{
+			return &realm;
+		}
+	}
+	return nullptr;
 }
 
 void Game::endHumanPlayerTurn()

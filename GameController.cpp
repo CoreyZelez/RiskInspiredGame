@@ -1,6 +1,7 @@
 #include "GameController.h"
 #include "InputUtility.h"
 #include "Game.h"
+#include <iostream>
 
 GameController::GameController(Game &game, GameView &gameView)
 	: game(game), gameView(gameView)
@@ -15,7 +16,7 @@ void GameController::handleInput(const sf::RenderWindow &window, sf::View &view)
 
 	handleInputForMapView();
 
-	handleInputForGameView();
+	handleInputForGameView(window);
 
 	// POTENTIAL RISK (MAYBE) FOR RACE CONDITIONS WHEN IMPLEMENTING MULTITHREADING.
 	handleInputForHumanPlayer(window);
@@ -86,7 +87,7 @@ void GameController::handleInputForMapView()
 	}
 }
 
-void GameController::handleInputForGameView()
+void GameController::handleInputForGameView(const sf::RenderWindow &window)
 {
 	InputUtility &inputUtility = InputUtility::getInstance();
 
@@ -94,6 +95,23 @@ void GameController::handleInputForGameView()
 	if(inputUtility.getKeyPressed(sf::Keyboard::M))
 	{
 		game.changeDisplayMilitary();
+	}
+
+	// Display information about map estates.
+	if(inputUtility.getButtonPressed(sf::Mouse::Left))
+	{
+		const MapMode mapMode = gameView.getMapMode();
+		switch(mapMode)
+		{
+		case MapMode::realm:
+			sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+			sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+			const Realm *realm = game.getRealm(worldPos);
+			if(realm != nullptr)
+			{
+				gameView.setLeftPanel(*realm);
+			}
+		}
 	}
 }
 

@@ -13,7 +13,7 @@ public:
 	LandTerritory(int id, Grid graphics);
 	explicit LandTerritory(int id);
 
-	~LandTerritory() = default;
+	virtual ~LandTerritory() = default;
 
 	virtual void update(Message message) override;
 

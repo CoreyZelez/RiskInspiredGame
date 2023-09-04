@@ -3,6 +3,8 @@
 #include "Estate.h"
 #include "Utility.h"
 #include "MilitaryManager.h"
+#include "UIComponent.h"
+#include "FontManager.h"
 #include <assert.h>
 #include <iostream>
 
@@ -25,6 +27,31 @@ void Realm::draw(sf::RenderWindow &window) const
 	{
 		grid.draw(window);
 	}
+}
+
+UIComponent Realm::getUI() const
+{
+	FontManager &fontManager = FontManager::getInstance();
+	UIComponent component;
+
+	// Create name decoration.
+	// CURRENTLY NO NAMES!!!
+
+	const sf::Font *font = fontManager.getFont("UIFont1");
+	unsigned int fontSize = 2000;
+	sf::Color textColor = sf::Color::Green;
+	sf::Color backgroundColor = sf::Color::Black;
+	assert(font != nullptr);
+
+	// Create realm size decoration (num landed estates).
+	std::string text1 = "Number of estates: " + std::to_string(fiefs.size());
+	UIDecoration decoration1(text1, *font, fontSize, textColor, backgroundColor);
+	component.addDecoration(decoration1);
+
+	// Create total military strength decoration.
+
+
+	return component;
 }
 
 void Realm::handleFiefYields()
@@ -132,4 +159,11 @@ bool Realm::hasLiege() const
 {
 	return liege != nullptr;
 }
+
+bool Realm::containsPosition(const sf::Vector2f &position) const
+{
+	return grid.containsPosition(position);
+}
+
+
 

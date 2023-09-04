@@ -5,6 +5,7 @@
 #include "TextureManager.h"
 #include "GameController.h"
 #include "MilitaryManager.h"
+#include "FontManager.h"
 #include "LandArmy.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
@@ -18,6 +19,7 @@ int main()
 	sf::View view = window.getDefaultView();
 	InputUtility &InputUtility = InputUtility::getInstance();
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS IN TESTING CODE!!!
+	FontManager::getInstance();
 
 	MapMaker mapMaker("test");
 

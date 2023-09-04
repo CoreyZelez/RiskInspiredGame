@@ -7,7 +7,7 @@ public:
 	NavalTerritory(int id, Grid grid);
 	explicit NavalTerritory(int id);
 
-	~NavalTerritory() = default;
+	virtual ~NavalTerritory() = default;
 
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
 	virtual bool occupy(LandArmy *army) override;

@@ -24,6 +24,7 @@ public:
 	void draw(sf::RenderWindow &window) const;
 
 	void setMapMode(MapMode mode);
+	MapMode getMapMode() const;
 
 private:
 	const Game &game;

@@ -1,4 +1,5 @@
 #include "MilitaryForceGraphics.h"
+#include "FontManager.h"
 
 MilitaryForceGraphics::MilitaryForceGraphics(const sf::Texture &texture, const int &strength)
 	: strength(strength)
@@ -9,13 +10,11 @@ MilitaryForceGraphics::MilitaryForceGraphics(const sf::Texture &texture, const i
 	sprite.setColor(sf::Color::White);
 	sprite.setScale(sf::Vector2f(2, 2));
 
-	if(!font.loadFromFile("res/fonts/ChunkFive-Regular.otf"))
-	{
-		exit(1);
-	}
+	FontManager &fontManager = FontManager::getInstance();
 
 	text.setOrigin(text.getGlobalBounds().width / 2, text.getGlobalBounds().height / 2);
-	text.setFont(font);
+	std::string fontID = "militaryFont";
+	text.setFont(*fontManager.getFont(fontID));
 	text.setString(std::to_string(strength));
 	text.setCharacterSize(80);
 	text.setFillColor(sf::Color::White);

@@ -14,7 +14,7 @@ public:
 private:
 	void handleInputForWindowView(sf::View &view);
 	void handleInputForMapView();
-	void handleInputForGameView();
+	void handleInputForGameView(const sf::RenderWindow &window);
 	void handleInputForHumanPlayer(const sf::RenderWindow &window);
 
 	Game &game;

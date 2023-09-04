@@ -20,11 +20,13 @@ public:
 	Estate(Title title, const Grid &grid);
 	Estate(Title title, const Grid &grid, std::string name);
 
+	virtual ~Estate() = default;
+	
 	void initName(std::string name);
 
 	virtual void saveToFile(std::ofstream &file) const;
 
-	void setRuler(Player *ruler);
+	void setRuler(Player *ruler, bool updatePlayerGrid = true);
 
 	// Yields any resources directly associated with estate. This does not include subfief resources.
 	virtual void yield(MilitaryManager &militaryManager);

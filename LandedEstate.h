@@ -10,6 +10,8 @@ class LandedEstate : public Estate, public Observer, public IMilitaryFactory
 public:
 	LandedEstate(Title title, Territory &territory);
 
+	virtual ~LandedEstate() = default;
+
 	virtual void saveToFile(std::ofstream &file) const override;
 
 	// Handles changing of associated territory occupant.

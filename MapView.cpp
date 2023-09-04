@@ -47,3 +47,8 @@ void MapView::setMapMode(MapMode mode)
 	}
 }
 
+MapMode MapView::getMapMode() const
+{
+	return mode;
+}
+

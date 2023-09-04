@@ -1,18 +1,21 @@
 #pragma once
 #include "Title.h"
 #include "Grid.h"
+#include "IHasUI.h"
 #include <vector>
 
 class Player;
 class Estate;
 class MilitaryManager;
 
-class Realm
+class Realm : public IHasUI
 {
 public:
 	explicit Realm(Player &player);
 
 	void draw(sf::RenderWindow &window) const;
+
+	virtual UIComponent getUI() const override;
 
 	// void receiveVassal
 	// void transferVassal
@@ -33,12 +36,14 @@ public:
 	// Returns the ruler of the upper most realm which player belongs to.
 	const Player& getUpperRealmRuler() const;
 	bool hasLiege() const;
+	// Returns true if realm grid contains specified world position.
+	bool containsPosition(const sf::Vector2f &position) const;
 
 private:
 
 
 	Player &player;
-	MilitaryManager &militaryManager;
+	MilitaryManager &militaryManager; 
 
 	Player *liege;
 	Title title;  // Official title of player.
