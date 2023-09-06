@@ -180,8 +180,10 @@
     <ClCompile Include="GameCreator.cpp" />
     <ClCompile Include="GameUI.cpp" />
     <ClCompile Include="GameView.cpp" />
-    <ClCompile Include="IHasUI.cpp" />
+    <ClCompile Include="HasUI.cpp" />
+    <ClCompile Include="InformationPanel.cpp" />
     <ClCompile Include="InputUtility.cpp" />
+    <ClCompile Include="InteractionPanel.cpp" />
     <ClCompile Include="IUnitTest.cpp" />
     <ClCompile Include="LandedEstate.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -194,6 +196,7 @@
     <ClCompile Include="LandTerritory.cpp" />
     <ClCompile Include="MilitaryForceGraphics.cpp" />
     <ClCompile Include="MilitaryTest.cpp" />
+    <ClCompile Include="MultiPanel.cpp" />
     <ClCompile Include="NameGenerator.cpp" />
     <ClCompile Include="MilitaryManager.cpp" />
     <ClCompile Include="NavalFleet.cpp" />
@@ -203,6 +206,7 @@
     <ClCompile Include="Realm.cpp" />
     <ClCompile Include="RealmTest.cpp" />
     <ClCompile Include="ReconcileBaronies.cpp" />
+    <ClCompile Include="RichText.cpp" />
     <ClCompile Include="RiskTypeGame.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Territory.cpp" />
@@ -213,8 +217,7 @@
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="EstateMaker.cpp" />
     <ClCompile Include="Title.cpp" />
-    <ClCompile Include="UIComponent.cpp" />
-    <ClCompile Include="UIDecoration.cpp" />
+    <ClCompile Include="UIPanel.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -232,9 +235,11 @@
     <ClInclude Include="GameCreator.h" />
     <ClInclude Include="GameUI.h" />
     <ClInclude Include="GameView.h" />
-    <ClInclude Include="IHasUI.h" />
+    <ClInclude Include="HasUI.h" />
     <ClInclude Include="IMilitaryFactory.h" />
+    <ClInclude Include="InformationPanel.h" />
     <ClInclude Include="InputUtility.h" />
+    <ClInclude Include="InteractionPanel.h" />
     <ClInclude Include="IUnitTest.h" />
     <ClInclude Include="LandedEstate.h" />
     <ClInclude Include="Map.h" />
@@ -243,11 +248,13 @@
     <ClInclude Include="Message.h" />
     <ClInclude Include="MilitaryForceGraphics.h" />
     <ClInclude Include="MilitaryTest.h" />
+    <ClInclude Include="MultiPanel.h" />
     <ClInclude Include="NameGenerator.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Realm.h" />
     <ClInclude Include="RealmTest.h" />
     <ClInclude Include="ReconcileBaronies.h" />
+    <ClInclude Include="RichText.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="MilitaryForce.h" />
     <ClInclude Include="Barony.h" />
@@ -267,8 +274,7 @@
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="EstateMaker.h" />
-    <ClInclude Include="UIComponent.h" />
-    <ClInclude Include="UIDecoration.h" />
+    <ClInclude Include="UIPanel.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

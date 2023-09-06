@@ -15,21 +15,6 @@ void GameView::draw(sf::RenderWindow & window) const
 	gameUI.draw(window);
 }
 
-void GameView::setLeftPanel(const IHasUI &hasUI)
-{
-	gameUI.setLeftPanel(hasUI);
-}
-
-void GameView::setRightPanel(const IHasUI & hasUI)
-{
-	gameUI.setRightPanel(hasUI);
-}
-
-void GameView::setBottomPanel(const IHasUI & hasUI)
-{
-	gameUI.setBottomPanel(hasUI);
-}
-
 void GameView::setMapMode(MapMode mapMode)
 {
 	mapView.setMapMode(mapMode);

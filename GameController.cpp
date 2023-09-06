@@ -109,7 +109,6 @@ void GameController::handleInputForGameView(const sf::RenderWindow &window)
 			const Realm *realm = game.getRealm(worldPos);
 			if(realm != nullptr)
 			{
-				gameView.setLeftPanel(*realm);
 			}
 		}
 	}

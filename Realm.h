@@ -1,21 +1,18 @@
 #pragma once
 #include "Title.h"
 #include "Grid.h"
-#include "IHasUI.h"
 #include <vector>
 
 class Player;
 class Estate;
 class MilitaryManager;
 
-class Realm : public IHasUI
+class Realm 
 {
 public:
 	explicit Realm(Player &player);
 
 	void draw(sf::RenderWindow &window) const;
-
-	virtual UIComponent getUI() const override;
 
 	// void receiveVassal
 	// void transferVassal

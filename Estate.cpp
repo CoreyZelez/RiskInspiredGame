@@ -205,7 +205,6 @@ void Estate::initColor()
 
 void Estate::receiveBonusYield(const float &bonus)
 {
-	std::cout << "the title " << (int)title << std::endl;
 	for(auto &subfief : subfiefs)
 	{
 		// Only provides bonus yield to subfief if owner is this ruler or a (direct or indirect) vassal of this ruler.
