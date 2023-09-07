@@ -1,22 +1,30 @@
 #include "GameController.h"
 #include "InputUtility.h"
+#include "GameDisplay.h"
 #include "Game.h"
 #include <iostream>
 
-GameController::GameController(Game &game, GameView &gameView)
-	: game(game), gameView(gameView)
+GameController::GameController(Game &game, GameUI &gameUI, GameDisplay &gameDisplay)
+	: game(game), gameDisplay(gameDisplay), gameUIController(game, gameUI)
 {
 }
 
-void GameController::handleInput(const sf::RenderWindow &window, sf::View &view)
+void GameController::handleUIInput(const sf::RenderWindow &window, sf::View &UIView)
+{
+	gameUIController.handleInput(window, UIView);
+}
+
+void GameController::handleGameInput(const sf::RenderWindow &window, sf::View &gameView)
 {
 	InputUtility &inputUtility = InputUtility::getInstance();
 
-	handleInputForWindowView(view);
+	handleInputForGameView(gameView);
 
-	handleInputForMapView();
+	handleInputForMapDisplay();
 
-	handleInputForGameView(window);
+	handleInputForGameDisplay(window);
+
+	gameUIController.handlePanelCreation(window);
 
 	// POTENTIAL RISK (MAYBE) FOR RACE CONDITIONS WHEN IMPLEMENTING MULTITHREADING.
 	handleInputForHumanPlayer(window);
@@ -24,7 +32,7 @@ void GameController::handleInput(const sf::RenderWindow &window, sf::View &view)
 	inputClock.restart();
 }
 
-void GameController::handleInputForWindowView(sf::View &view)
+void GameController::handleInputForGameView(sf::View &view)
 {
 	InputUtility &inputUtility = InputUtility::getInstance();
 
@@ -60,34 +68,34 @@ void GameController::handleInputForWindowView(sf::View &view)
 	}
 }
 
-void GameController::handleInputForMapView()
+void GameController::handleInputForMapDisplay()
 {
 	InputUtility &inputUtility = InputUtility::getInstance();
 
 	// Handle ending of human player turn.
 	if(inputUtility.getKeyPressed(sf::Keyboard::F1))
 	{
-		gameView.setMapMode(MapMode::realm);
+		game.setMapMode(MapMode::realm);
 	}
 	else if(inputUtility.getKeyPressed(sf::Keyboard::F2))
 	{
-		gameView.setMapMode(MapMode::county);
+		game.setMapMode(MapMode::county);
 	}
 	else if(inputUtility.getKeyPressed(sf::Keyboard::F3))
 	{
-		gameView.setMapMode(MapMode::duchy);
+		game.setMapMode(MapMode::duchy);
 	}
 	else if(inputUtility.getKeyPressed(sf::Keyboard::F4))
 	{
-		gameView.setMapMode(MapMode::kingdom);
+		game.setMapMode(MapMode::kingdom);
 	}
 	else if(inputUtility.getKeyPressed(sf::Keyboard::F5))
 	{
-		gameView.setMapMode(MapMode::empire);
+		game.setMapMode(MapMode::empire);
 	}
 }
 
-void GameController::handleInputForGameView(const sf::RenderWindow &window)
+void GameController::handleInputForGameDisplay(const sf::RenderWindow &window)
 {
 	InputUtility &inputUtility = InputUtility::getInstance();
 
@@ -96,25 +104,9 @@ void GameController::handleInputForGameView(const sf::RenderWindow &window)
 	{
 		game.changeDisplayMilitary();
 	}
-
-	// Display information about map estates.
-	if(inputUtility.getButtonPressed(sf::Mouse::Left))
-	{
-		const MapMode mapMode = gameView.getMapMode();
-		switch(mapMode)
-		{
-		case MapMode::realm:
-			sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-			sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
-			const Realm *realm = game.getRealm(worldPos);
-			if(realm != nullptr)
-			{
-			}
-		}
-	}
 }
 
-void GameController::handleInputForHumanPlayer(const sf::RenderWindow &window) 
+void GameController::handleInputForHumanPlayer(const sf::RenderWindow &window)
 {
 	InputUtility &inputUtility = InputUtility::getInstance();
 

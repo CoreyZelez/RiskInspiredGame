@@ -1,4 +1,2 @@
-﻿  LandArmy.cpp
-d:\projects\risktypegame\risktypegame\landarmy.cpp(49): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\landarmy.cpp(50): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+﻿  Realm.cpp
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe

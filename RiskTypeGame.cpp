@@ -16,7 +16,9 @@ int main()
 	bool mapEditorMode = false;
 
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
-	sf::View view = window.getDefaultView();
+	sf::View gameView = window.getDefaultView();
+	sf::View UIView = window.getDefaultView();
+
 	InputUtility &InputUtility = InputUtility::getInstance();
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS IN TESTING CODE!!!
 	FontManager::getInstance();
@@ -24,11 +26,13 @@ int main()
 	MapMaker mapMaker("test");
 
 	Game game("test");
-	GameView gameView = game.createView();
-	GameController gameController(game, gameView);
+	GameDisplay gameDisplay = game.createView();
+	GameUI gameUI;
+	GameController gameController(game, gameUI, gameDisplay);
 
 	while(window.isOpen())
 	{
+		// Detect input events.
 		sf::Event event;
 		while(window.pollEvent(event))
 		{
@@ -40,26 +44,44 @@ int main()
 			}
 		}
 
+		// Update game.
 		game.update();
-
+		
+		// Handle input.
+		window.setView(gameView);
 		if(mapEditorMode)
 		{
-			mapMaker.handleInput(window, view);
+			mapMaker.handleInput(window, gameView);
 		}
 		else
 		{
-			gameController.handleInput(window, view);
+			gameController.handleGameInput(window, gameView);
+			window.setView(UIView);
+			gameController.handleUIInput(window, UIView);
 		}
+
+		// Update input.
 		InputUtility.update();
+
+		// Clear window.
 		window.clear(sf::Color(255, 255, 255));
-		window.setView(view);
+
+		// Display game.
+		window.setView(gameView);
 		if(mapEditorMode)
 		{
 			mapMaker.draw(window);
 		}
 		else
 		{
-			gameView.draw(window);
+			gameDisplay.draw(window);
+		}
+
+		// Display UI.
+		window.setView(UIView);
+		if(!mapEditorMode)
+		{
+			gameUI.draw(window);
 		}
 		window.display();
 	}

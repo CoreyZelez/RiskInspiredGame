@@ -1,18 +1,21 @@
 #pragma once
 #include "Title.h"
 #include "Grid.h"
+#include "HasUI.h"
 #include <vector>
 
 class Player;
 class Estate;
 class MilitaryManager;
 
-class Realm 
+class Realm : public HasUI
 {
 public:
 	explicit Realm(Player &player);
 
 	void draw(sf::RenderWindow &window) const;
+
+	virtual std::unique_ptr<UIPanel> getUI(UIType type) const override;
 
 	// void receiveVassal
 	// void transferVassal
@@ -37,8 +40,6 @@ public:
 	bool containsPosition(const sf::Vector2f &position) const;
 
 private:
-
-
 	Player &player;
 	MilitaryManager &militaryManager; 
 

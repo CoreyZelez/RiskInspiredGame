@@ -14,7 +14,6 @@ bool FontManager::loadFont(const std::string& id, const std::string& filepath)
 	{
 		return false;
 	}
-	assert(!fontsExists(id));  // id should not already exist.
 	fonts[id] = font;
 	return true;
 }

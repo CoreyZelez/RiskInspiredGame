@@ -74,6 +74,16 @@ GameState Game::getState() const
 	return state;
 }
 
+void Game::setMapMode(MapMode mapMode)
+{
+	this->mapMode = mapMode;
+}
+
+MapMode Game::getMapMode() const
+{
+	return mapMode;
+}
+
 bool Game::getDisplayMilitary() const
 {
 	// Militaries not selected in realm select mode.
@@ -97,11 +107,11 @@ void Game::selectMilitary(sf::Vector2f position)
 	// Select military.
 	selectedMilitary = currPlayer->get()->getMilitaryManager().getMilitary(position);
 
-	assert(selectedMilitary->getStrength() > 0);
-
 	// Set game state.
 	if(selectedMilitary != nullptr)
 	{
+		assert(selectedMilitary->getStrength() > 0);
+
 		// Set selectedStrength to total strength of military.
 		selectedStrength = selectedMilitary->getStrength();
 
@@ -160,7 +170,7 @@ void Game::changeDisplayMilitary()
 	displayMilitary = !displayMilitary;
 }
 
-GameView Game::createView() const
+GameDisplay Game::createView() const
 {
-	return GameView(*this, map, players);
+	return GameDisplay(*this, map, players);
 }

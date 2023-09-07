@@ -65,7 +65,6 @@ void EstateTest::test1()
 	// Test succeeded.
 	bool result = true;
 	testReport(testName, result);
-
 }
 
 void EstateTest::test2()

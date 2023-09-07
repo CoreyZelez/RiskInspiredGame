@@ -4,6 +4,8 @@
 #include "Utility.h"
 #include "MilitaryManager.h"
 #include "FontManager.h"
+#include "RichText.h"
+#include "InformationPanel.h"
 #include <assert.h>
 #include <iostream>
 
@@ -26,6 +28,31 @@ void Realm::draw(sf::RenderWindow &window) const
 	{
 		grid.draw(window);
 	}
+}
+
+std::unique_ptr<UIPanel> Realm::getUI(UIType type) const
+{
+	FontManager &fontManager = FontManager::getInstance();
+	if(type == UIType::information)
+	{
+		const sf::Font &font = *fontManager.getFont("UIFont1");
+
+		// Name text.
+		sfe::RichText nameText(font);
+		nameText << sf::Text::Regular << sf::Color::White << "Name: "
+			<< sf::Color::Yellow << "tempName";
+
+		// Estate count text.
+		sfe::RichText estateCntText(font);
+		estateCntText << sf::Text::Regular << sf::Color::White << "Number of estates: "
+			<< sf::Color::Yellow << std::to_string(fiefs.size());
+
+
+		std::vector<sfe::RichText> texts = { nameText, estateCntText };
+		return std::make_unique<InformationPanel>(texts);
+	}
+
+	return nullptr;
 }
 
 void Realm::handleFiefYields()
