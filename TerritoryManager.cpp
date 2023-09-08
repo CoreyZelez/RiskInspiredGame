@@ -49,6 +49,9 @@ void TerritoryManager::load(std::string mapName)
 	}
 
 	removeEmptyTerritories();
+
+	calculateAdjacencies();
+	calculateDistances();
 }
 
 void TerritoryManager::removeEmptyTerritories()
@@ -202,6 +205,22 @@ NavalTerritory* TerritoryManager::getNavalTerritory(sf::Vector2f position)
 std::vector<std::unique_ptr<LandTerritory>>& TerritoryManager::getLandTerritories()
 {
 	return landTerritories;
+}
+
+void TerritoryManager::calculateAdjacencies()
+{
+	for(auto &territory : territories)
+	{
+		territory->addAdjacencies(territories);
+	}
+}
+
+void TerritoryManager::calculateDistances()
+{
+	for(auto &territory : territories)
+	{
+		territory->calculateDistances(territories);
+	}
 }
 
 void TerritoryManager::loadLandTerritory(std::ifstream & file)

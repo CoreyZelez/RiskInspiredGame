@@ -44,22 +44,26 @@ public:
 	void addSquare(sf::Vector2f position);  // Adds grid square at position in world.
 	void removeSquare(sf::Vector2f position);  // Adds grid square at position in world.
 
-	bool sharesBorder(const Grid &graphics) const;
+	bool sharesBorder(const Grid &grid) const;
 	bool isEmpty() const;  // Empty is true if there are no grid positions.
 	bool containsPosition(sf::Vector2f position) const;  // Returns true if any grid square contains position.
 	sf::Vector2f getCenter() const;  // Returns center position in game world of territory.
 	void setColor(sf::Color color);
 
-	void calculateCenter();  // public for testing
+	void calculateCenter();  
+	// Borders are added to subBorders. 
+	void addBordersToSubBorders();  // Necessary for calculating adjacencies efficiently.
 
 private:
+
+
 	bool isBorder(sf::Vector2i position) const;  // Returns true if grid position on grid border.
 	void calculateVertices();  // Calculates vertices for vertex array from square positions.
 	sf::Vector2i calculateGridCoordinates(const sf::Vector2f &position) const;  // Converts vector world position to grid position.
 	sf::Vector2f calculateWorldCoordinates(const sf::Vector2i &position) const;  // Converts vector world position to grid position.
 
 	std::unordered_set<sf::Vector2i, Vector2iHash> positions;  // Positions on map grid occupys. 
-	std::unordered_set<sf::Vector2i, Vector2iHash> subBorderPositions;  // Positions that form a sub border.
+	std::unordered_set<sf::Vector2i, Vector2iHash> borderAndSubBorderPositions;  // Positions that form sub border or border.
 	sf::Vector2i center;  // Center position in game world.
 	sf::VertexArray vertices;
 	sf::Color color;

@@ -46,8 +46,29 @@ void Grid::draw(sf::RenderWindow &window) const
 	window.draw(vertices);
 }
 
-bool Grid::sharesBorder(const Grid &graphics) const
+bool Grid::sharesBorder(const Grid &grid) const
 {
+	for(const sf::Vector2i &position : borderAndSubBorderPositions)
+	{
+		sf::Vector2i l = sf::Vector2i(position.x - 1, position.y);
+		sf::Vector2i r = sf::Vector2i(position.x + 1, position.y);
+		sf::Vector2i u = sf::Vector2i(position.x, position.y - 1);
+		sf::Vector2i d = sf::Vector2i(position.x, position.y + 1);
+		sf::Vector2i lu = sf::Vector2i(position.x - 1, position.y - 1);
+		sf::Vector2i ld = sf::Vector2i(position.x - 1, position.y + 1);
+		sf::Vector2i ru = sf::Vector2i(position.x + 1, position.y - 1);
+		sf::Vector2i rd = sf::Vector2i(position.x + 1, position.y + 1);
+
+		std::vector<sf::Vector2i> adjacentPositions = { l, r, u, d, lu, ld, ru, rd };
+
+		for(const sf::Vector2i &adjacentPosition : adjacentPositions)
+		{
+			if(grid.borderAndSubBorderPositions.count(adjacentPosition) == 1)
+			{
+				return true;
+			}
+		}
+	}
 	return false;
 }
 
@@ -73,9 +94,9 @@ void Grid::addGrid(const Grid &grid)
 	{
 		positions.insert(*iter);
 
-		if(grid.subBorderPositions.count(*iter) > 0 || grid.isBorder(*iter))
+		if(grid.borderAndSubBorderPositions.count(*iter) > 0 || grid.isBorder(*iter))
 		{
-			subBorderPositions.insert(*iter);
+			borderAndSubBorderPositions.insert(*iter);
 		}
 	}
 
@@ -131,6 +152,17 @@ sf::Vector2f Grid::calculateWorldCoordinates(const sf::Vector2i &position) const
 	const float x = position.x * GRID_SQUARE_SIZE + (GRID_SQUARE_SIZE / 2);
 	const float y = position.y * GRID_SQUARE_SIZE + (GRID_SQUARE_SIZE / 2);
 	return sf::Vector2f(x, y);
+}
+
+void Grid::addBordersToSubBorders()
+{
+	for(auto position : positions)
+	{
+		if(isBorder(position))
+		{
+			borderAndSubBorderPositions.insert(position);
+		}
+	}
 }
 
 bool Grid::isBorder(sf::Vector2i position) const
@@ -314,7 +346,7 @@ void Grid::calculateVertices()
 				triangles[5].color = borderColor;
 			}
 		}
-		else if(borderMode == BorderMode::darkBorders && subBorderPositions.count(position) > 0)
+		else if(borderMode == BorderMode::darkBorders && borderAndSubBorderPositions.count(position) > 0)
 		{
 			const sf::Color borderColor(color.r * 0.4, color.g * 0.4, color.b * 0.4);
 			triangles[0].color = borderColor;
@@ -371,6 +403,9 @@ Grid loadTerritoryGrid(std::ifstream &file)
 
 	Grid grid(defaultColor, positions);
 	grid.calculateCenter();
+
+	// Necessary for efficient computation of adjacencies.
+	grid.addBordersToSubBorders();
 
 	return grid;
 }

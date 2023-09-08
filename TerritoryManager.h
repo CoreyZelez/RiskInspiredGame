@@ -30,6 +30,9 @@ public:
 	std::vector<std::unique_ptr<LandTerritory>> &getLandTerritories();
 
 private:
+	void calculateAdjacencies();
+	void calculateDistances();
+
 	void loadLandTerritory(std::ifstream &file);
 	void loadNavalTerritory(std::ifstream &file);
 	void removeTerritory(Territory *territory);
@@ -37,6 +40,8 @@ private:
 	std::vector<Territory*> territories;
 	std::vector<std::unique_ptr<NavalTerritory>> navalTerritories;
 	std::vector<std::unique_ptr<LandTerritory>> landTerritories;
+
+
 
 	int nextID = 0;  // Next ID to be assigned to newly created territory.
 };

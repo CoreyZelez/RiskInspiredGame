@@ -91,6 +91,11 @@ void LandArmy::move(Territory &territory, int strength)
 	{
 		return;
 	}
+	
+	if(!getTerritory().isAdjacent(&territory))
+	{
+		return;
+	}
 
 	assert(strength > 0);
 	assert(strength <= getStrength());

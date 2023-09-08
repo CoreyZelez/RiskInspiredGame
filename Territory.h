@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
+#include <set>
 
 class Player;
 class LandArmy;
@@ -29,14 +30,14 @@ public:
 	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
 	virtual bool occupy(NavalFleet *fleet) = 0;
 
-	// Returns true if territories have touching grid squares.
-	bool sharesBorder(const Territory &territory) const;
+	void calculateDistances(const std::vector<Territory*> &territories);
+	void addAdjacencies(const std::vector<Territory*> &territories);
+	bool isAdjacent(const Territory *territory) const;
 
 	double getDefenceMultiplier() const;
 
 	Grid& getGrid();
 	const Grid& getGrid() const;
-
 	int getID() const;
 	virtual Player *getOccupant();
 	bool isEmpty() const;  	// True if territory occupies no positions on map.
@@ -46,9 +47,14 @@ protected:
 	sf::Vector2f getCenter() const;
 
 private:
+	// Returns true if territories have touching grid squares.
+	bool sharesBorder(const Territory &territory) const;
+
 	int id;
 	Grid grid;
 	double defenceMultiplier = 1;  // In future perhaps have complex virtual function to calculate this!
+	std::set<const Territory*> adjacencies;
+	std::map<const Territory*, int> distances;
 };
 
 int loadTerritoryID(std::ifstream &file);
