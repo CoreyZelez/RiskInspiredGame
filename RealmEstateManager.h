@@ -3,12 +3,13 @@
 #include "Grid.h"
 #include "HasUI.h"
 #include <vector>
+#include <set>
 #include <SFML/Graphics.hpp>
 
 class Player;
 class Estate;
 class MilitaryManager;
-
+class Territory;
 
 class RealmEstateManager
 {
@@ -25,12 +26,18 @@ public:
 	// Returns true if realm grid contains specified world position.
 	bool containsPosition(const sf::Vector2f &position) const;
 
-
+	std::set<Territory*> &getTerritories();
 	int getRealmSize() const;
 
 private:
 	MilitaryManager &militaryManager;
-	std::vector<Estate*> fiefs;
+
+	////////////////////////////////////////////////////////////
+	// SHOULD PROBABLY CHANGE THIS TO SET FOR MORE EFFICIENCY!//
+	std::vector<Estate*> fiefs;  ///////////////////////////////
+	////////////////////////////////////////////////////////////
+
+	std::set<Territory*> territories;
 	Grid grid;
 };
 

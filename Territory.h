@@ -33,6 +33,7 @@ public:
 	void calculateDistances(const std::vector<Territory*> &territories);
 	void addAdjacencies(const std::vector<Territory*> &territories);
 	bool isAdjacent(const Territory *territory) const;
+	const std::set<const Territory*> &getAdjacencies() const;
 
 	double getDefenceMultiplier() const;
 

@@ -24,8 +24,6 @@ void Game::generatePlayers()
 
 		players.emplace_back(std::move(player));
 	}
-
-	std::cout << "OVER" << std::endl;
 }
 
 void Game::update()

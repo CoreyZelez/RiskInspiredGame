@@ -113,6 +113,11 @@ bool Territory::isAdjacent(const Territory *territory) const
 	return adjacencies.count(territory) == 1;
 }
 
+const std::set<const Territory*>& Territory::getAdjacencies() const
+{
+	return adjacencies;
+}
+
 double Territory::getDefenceMultiplier() const
 {
 	return defenceMultiplier;

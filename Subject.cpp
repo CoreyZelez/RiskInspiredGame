@@ -21,12 +21,12 @@ void Subject::addObserver(Observer *observer)
 void Subject::removeObserver(Observer *observer)
 {
 	auto iter = observers.begin();
-
 	while(iter != observers.end())
 	{
 		if(*iter == observer) 
 		{
 			observers.erase(iter);
+			observer->setSubject(nullptr);
 			return;
 		}
 		++iter;
@@ -35,7 +35,8 @@ void Subject::removeObserver(Observer *observer)
 
 void Subject::notifyObservers(Message message)
 {
-	for(Observer* observer : observers) {
+	for(Observer* observer : observers) 
+	{
 		observer->update(message);
 	}
 }

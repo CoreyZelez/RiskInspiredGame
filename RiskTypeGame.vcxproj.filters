@@ -100,6 +100,9 @@
     <Filter Include="Source Files\User Interface\Panels">
       <UniqueIdentifier>{e18c34a9-7666-4117-93be-9c5de5cfcbe0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game\Player\AI">
+      <UniqueIdentifier>{ab9b5993-477a-452c-9e1e-4c231cb9cea7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RiskTypeGame.cpp">
@@ -374,9 +377,6 @@
     <ClInclude Include="CommandButton.h">
       <Filter>Header Files\User Interface\CommandButton</Filter>
     </ClInclude>
-    <ClInclude Include="AIPersonality.h">
-      <Filter>Header Files\Game\Player</Filter>
-    </ClInclude>
     <ClInclude Include="TerritoryManager.h">
       <Filter>Header Files\Game\Territory</Filter>
     </ClInclude>
@@ -434,20 +434,23 @@
     <ClInclude Include="UIPanel.h">
       <Filter>Header Files\User Interface\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerAIComponent.h">
+    <ClInclude Include="RealmRelationshipManager.h">
       <Filter>Header Files\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="SimplePlayerAI.h">
-      <Filter>Header Files\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerAIContext.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RealmEstateManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
-    <ClInclude Include="RealmRelationshipManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="AIPersonality.h">
+      <Filter>Header Files\Game\Player\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="SimplePlayerAI.h">
+      <Filter>Header Files\Game\Player\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAIContext.h">
+      <Filter>Header Files\Game\Player\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAIComponent.h">
+      <Filter>Header Files\Game\Player\AI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -16,7 +16,7 @@ void RealmRelationshipManager::drawVassalRealms(sf::RenderWindow & window) const
 
 void RealmRelationshipManager::addVassal(Player &vassal)
 {
-	assert(!vassal.getRealm().hasLiege());
+	assert(!vassal.getRealm().getRelationshipManager().hasLiege());
 	vassal.getRealm().getRelationshipManager().liege = &(this->player);
 	vassals.emplace_back(&vassal);
 }

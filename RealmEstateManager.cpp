@@ -1,6 +1,7 @@
 #include "RealmEstateManager.h"
 #include "Estate.h"
 #include "Utility.h"
+#include "LandedEstate.h"
 
 RealmEstateManager::RealmEstateManager(MilitaryManager &militaryManager)
 	: militaryManager(militaryManager)
@@ -31,10 +32,15 @@ void RealmEstateManager::handleFiefYields()
 void RealmEstateManager::addFief(Estate *fief, bool updateGrid)
 {
 	fiefs.emplace_back(fief);
-	assert(fief->compareRuler(&this->player));
 	if(updateGrid)
 	{
 		grid.addGrid(fief->getGrid());
+	}
+
+	// Add territory to realm territories if estate is landed estate.
+	if(LandedEstate *landedEstate = dynamic_cast<LandedEstate*>(fief))
+	{
+		territories.insert(&landedEstate->getTerritory());
 	}
 }
 
@@ -49,15 +55,29 @@ void RealmEstateManager::removeFief(const Estate *fief, bool updateGrid)
 			{
 				grid.removeGrid(fief->getGrid());
 			}
+
+			// Remove territory from realm territories if estate is landed estate.
+			if(LandedEstate *landedEstate = dynamic_cast<LandedEstate*>(*iter))
+			{
+				assert(territories.count(&landedEstate->getTerritory()) == 1);
+				territories.erase(&landedEstate->getTerritory());
+			}
+
 			return;
 		}
 	}
+
 	assert(false);  // Functions should only be called when the estate owner is this player.
 }
 
 bool RealmEstateManager::containsPosition(const sf::Vector2f &position) const
 {
 	return grid.containsPosition(position);
+}
+
+std::set<Territory*>& RealmEstateManager::getTerritories()
+{
+	return territories;
 }
 
 int RealmEstateManager::getRealmSize() const

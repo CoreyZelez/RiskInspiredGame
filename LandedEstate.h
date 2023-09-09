@@ -27,6 +27,8 @@ public:
 
 	virtual bool containsPosition(const sf::Vector2f &position) const override;
 
+	Territory &getTerritory();
+
 protected:
 	// Yields military units at territory if possible.
 	virtual void generateMilitary(MilitaryManager &militaryManager) override;

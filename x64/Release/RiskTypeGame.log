@@ -1,7 +1,7 @@
-﻿  Realm.cpp
+﻿  Subject.cpp
   Generating code
-  443 of 5214 functions ( 8.5%) were compiled, the rest were copied from previous compilation.
-    33 functions were new in current compilation
-    79 functions had inline decision re-evaluated but remain unchanged
+  1 of 5316 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Release\RiskTypeGame.exe

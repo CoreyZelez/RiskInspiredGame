@@ -51,6 +51,11 @@ bool LandedEstate::containsPosition(const sf::Vector2f &position) const
 	return territory.getGrid().containsPosition(position);
 }
 
+Territory& LandedEstate::getTerritory()
+{
+	return territory;
+}
+
 void LandedEstate::generateMilitary(MilitaryManager &militaryManager)
 {
 }

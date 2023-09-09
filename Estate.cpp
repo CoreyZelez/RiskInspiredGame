@@ -263,7 +263,7 @@ void Estate::handleAllocation()
 	Player *ruler = getLowerEstatesUpperRealmRuler();
 	if(ruler != nullptr)
 	{
-		assert(ruler->getRealm().hasLiege() == false);
+		assert(ruler->getRealm().getRelationshipManager().hasLiege() == false);
 		// Ruler's realm contains every lowest level estate of this estate thus gets granted this estate.
 		// WARNING: RELIES ON FACT THAT LOWER ESTATE TITLE IS A LANDED ESTATE AND UPPER ESTATES ARE NOT.
 		const bool updatePlayerGrid = false;  // Don't update player grid since estate not landed.

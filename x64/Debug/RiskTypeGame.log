@@ -1,8 +1,2 @@
-﻿  Barony.cpp
-d:\projects\risktypegame\risktypegame\barony.cpp(34): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(34): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(50): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(50): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-  Territory.cpp
-  Generating Code...
+﻿  PlayerAIContext.cpp
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe
