@@ -16,10 +16,9 @@ void RealmTest::test1()
 	std::string testName = "county providing bonus yields";
 
 	Game game("");
-	AIPersonality personality = { 0 };
-	Player player1(game, personality);
-	Player player2(game, personality);
-	Player player3(game, personality);
+	Player player1(game);
+	Player player2(game);
+	Player player3(game);
 	LandTerritory territory1(0);
 	LandTerritory territory2(1);
 	LandTerritory territory3(2);
@@ -44,10 +43,10 @@ void RealmTest::test1()
 	county.get()->setRuler(&player2);
 	barony4.get()->setRuler(&player3);  // player3 will not be apart of player2's realm.
 
-	player2.getRealm().addVassal(player1);
+	player2.getRealm().getRelationshipManager().addVassal(player1);
 
-	player2.getRealm().handleFiefYields();
-	player1.getRealm().handleFiefYields();
+	player2.getRealm().getEstateManager().handleFiefYields();
+	player1.getRealm().getEstateManager().handleFiefYields();
 	if(territory1.getArmy() != nullptr)
 	{
 		bool result = false;
@@ -60,9 +59,9 @@ void RealmTest::test1()
 	// 150 loops executed as this should guaruntee surpassing yield threshold for any sanely chosen threshold value.
 	for(int i = 0; i < 150; ++i)
 	{
-		player2.getRealm().handleFiefYields();
+		player2.getRealm().getEstateManager().handleFiefYields();
 	}
-	player1.getRealm().handleFiefYields();
+	player1.getRealm().getEstateManager().handleFiefYields();
 	if(territory1.getArmy() == nullptr)
 	{
 		bool result = false;

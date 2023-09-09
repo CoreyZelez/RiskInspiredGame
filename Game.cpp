@@ -14,8 +14,7 @@ void Game::generatePlayers()
 	const int numHumans = 2;
 	for(auto &barony : map.getEstateManager().getBaronies())
 	{
-		AIPersonality tempPersonality;  // Personality for testing.
-		std::unique_ptr<Player> player = std::make_unique<Player>(*this, tempPersonality);
+		std::unique_ptr<Player> player = std::make_unique<Player>(*this);
 		barony.get()->setRuler(player.get());
 		if(numHuman < numHumans)
 		{
@@ -147,7 +146,7 @@ const Realm* Game::getRealm(const sf::Vector2f &position)
 	for(const auto &player : players)
 	{
 		const Realm &realm = player.get()->getRealm();
-		if(realm.containsPosition(position))
+		if(realm.getEstateManager().containsPosition(position))
 		{
 			return &realm;
 		}

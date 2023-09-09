@@ -2,6 +2,8 @@
 #include "Title.h"
 #include "Grid.h"
 #include "HasUI.h"
+#include "RealmEstateManager.h"
+#include "RealmRelationshipManager.h"
 #include <vector>
 
 class Player;
@@ -17,37 +19,14 @@ public:
 
 	virtual std::unique_ptr<UIPanel> getUI(UIType type) const override;
 
-	// void receiveVassal
-	// void transferVassal
-	// Adds player as a vassal. Requires player has no liege.
-	
-	void handleFiefYields();
-
-	void addFief(Estate *fief, bool updateGrid = true);
-	void removeFief(const Estate *fief, bool updateGrid = true);
-
-	void addVassal(Player &vassal);
-	// Returns true if realm owner is a indirect or direct vassal of player 
-	bool isVassal(const Player &player, bool direct = true) const;
-	// Returns true if player belongs to same upper realm as this->player.
-	bool sameUpperRealm(const Player &player) const;
-	// Returns the ruler of the upper most realm which player belongs to.
-	Player& getUpperRealmRuler();
-	// Returns the ruler of the upper most realm which player belongs to.
-	const Player& getUpperRealmRuler() const;
-	bool hasLiege() const;
-	// Returns true if realm grid contains specified world position.
-	bool containsPosition(const sf::Vector2f &position) const;
+	RealmEstateManager &getEstateManager();
+	const RealmEstateManager &getEstateManager() const;
+	RealmRelationshipManager &getRelationshipManager();
+	const RealmRelationshipManager &getRelationshipManager() const;
 
 private:
 	Player &player;
-	MilitaryManager &militaryManager; 
-
-	Player *liege;
-	Title title;  // Official title of player.
-	std::vector<Player*> vassals;
-	std::vector<Estate*> fiefs;
-
-	Grid grid;
+	RealmEstateManager estateManager;
+	RealmRelationshipManager relationshipManager;
 	bool drawVassalRealms = false;  // Specifies to draw realms of vassals instead of realm of player.
 };

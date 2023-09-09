@@ -14,7 +14,7 @@ void MapDisplay::draw(sf::RenderWindow &window) const
 	case MapMode::realm:
 		for(const auto &player : players)
 		{
-			if(!player.get()->getRealm().hasLiege())
+			if(!player.get()->getRealm().getRelationshipManager().hasLiege())
 			{
 				player.get()->getRealm().draw(window);
 			}

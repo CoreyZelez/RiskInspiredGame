@@ -1,7 +1,7 @@
 #pragma once
 #include "MilitaryManager.h"
 #include "Realm.h"
-#include "AIPlayerComponent.h"
+#include "PlayerAIComponent.h"
 #include <vector>
 #include <memory>
 
@@ -11,8 +11,10 @@ class Game;
 class Player
 {
 public:
-	// AI controlled player.
-	explicit Player(Game &game, AIPersonality personality);
+	// Smart AI player.
+	Player(Game &game, AIPersonality personality);
+	// Simple AI player.
+	Player(Game &game);
 
 	void handleTurn();
 
@@ -24,12 +26,10 @@ public:
 	Realm& getRealm();
 	const Realm& getRealm() const;
 
-	// getInformation()  for AI decision making.
-
 private:
 	Game &game;
 	MilitaryManager militaryManager;
 	Realm realm;
-	AIPlayerComponent AIComponent;
+	std::unique_ptr<PlayerAIComponent> AIComponent;
 	bool isHuman = false;
 };

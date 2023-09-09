@@ -25,7 +25,7 @@ void EstateTest::test1()
 	barony.get()->setRuler(&player);
 
 	// Attempt to yield land army with cumulative land army not surpassing threshold.
-	player.getRealm().handleFiefYields();
+	player.getRealm().getEstateManager().handleFiefYields();
 	if(territory.getArmy() != nullptr)
 	{
 		bool result = false;
@@ -38,7 +38,7 @@ void EstateTest::test1()
 	// 20 loops executed as this should guaruntee surpassing threshold for any sanely chosen threshold value.
 	for(int i = 0; i < 20; ++i)
 	{
-		player.getRealm().handleFiefYields();
+		player.getRealm().getEstateManager().handleFiefYields();
 	}
 	if(territory.getArmy() == nullptr)
 	{
@@ -72,10 +72,9 @@ void EstateTest::test2()
 	std::string testName = "county providing bonus yields";
 
 	Game game("");
-	AIPersonality personality = { 0 };
-	Player player1(game, personality);
-	Player player2(game, personality);
-	Player player3(game, personality);
+	Player player1(game);
+	Player player2(game);
+	Player player3(game);
 	LandTerritory territory1(0);
 	LandTerritory territory2(1);
 	LandTerritory territory3(2);
@@ -100,10 +99,10 @@ void EstateTest::test2()
 	county.get()->setRuler(&player2);
 	barony4.get()->setRuler(&player3);  // player3 will not be apart of player2's realm.
 
-	player2.getRealm().addVassal(player1);
+	player2.getRealm().getRelationshipManager().addVassal(player1);
 
-	player2.getRealm().handleFiefYields();
-	player1.getRealm().handleFiefYields();
+	player2.getRealm().getEstateManager().handleFiefYields();
+	player1.getRealm().getEstateManager().handleFiefYields();
 	if(territory1.getArmy() != nullptr)
 	{
 		bool result = false;
@@ -116,9 +115,9 @@ void EstateTest::test2()
 	// 150 loops executed as this should guaruntee surpassing yield threshold for any sanely chosen threshold value.
 	for(int i = 0; i < 150; ++i)
 	{
-		player2.getRealm().handleFiefYields();
+		player2.getRealm().getEstateManager().handleFiefYields();
 	}
-	player1.getRealm().handleFiefYields();
+	player1.getRealm().getEstateManager().handleFiefYields();
 	if(territory1.getArmy() == nullptr)
 	{
 		bool result = false;
@@ -135,7 +134,7 @@ void EstateTest::test2()
 	}
 
 	// Checks that the player not apart of the realm was not receiving the bonus yields.
-	player3.getRealm().handleFiefYields();
+	player3.getRealm().getEstateManager().handleFiefYields();
 	if(territory4.getArmy() != nullptr)
 	{
 		bool result = false;

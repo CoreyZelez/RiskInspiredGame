@@ -210,9 +210,6 @@
     <ClCompile Include="MilitaryForceGraphics.cpp">
       <Filter>Source Files\Game\Military</Filter>
     </ClCompile>
-    <ClCompile Include="AIPlayerComponent.cpp">
-      <Filter>Source Files\Game\Player</Filter>
-    </ClCompile>
     <ClCompile Include="MilitaryTest.cpp">
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
@@ -257,6 +254,21 @@
     </ClCompile>
     <ClCompile Include="HasUI.cpp">
       <Filter>Source Files\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAIComponent.cpp">
+      <Filter>Source Files\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="SimplePlayerAI.cpp">
+      <Filter>Source Files\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAIContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RealmEstateManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RealmRelationshipManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -377,9 +389,6 @@
     <ClInclude Include="MilitaryForceGraphics.h">
       <Filter>Header Files\Game\Military</Filter>
     </ClInclude>
-    <ClInclude Include="AIPlayerComponent.h">
-      <Filter>Header Files\Game\Player</Filter>
-    </ClInclude>
     <ClInclude Include="MilitaryTest.h">
       <Filter>Header Files\Testing</Filter>
     </ClInclude>
@@ -424,6 +433,21 @@
     </ClInclude>
     <ClInclude Include="UIPanel.h">
       <Filter>Header Files\User Interface\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAIComponent.h">
+      <Filter>Header Files\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="SimplePlayerAI.h">
+      <Filter>Header Files\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAIContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RealmEstateManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RealmRelationshipManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

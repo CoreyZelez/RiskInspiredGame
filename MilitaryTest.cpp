@@ -17,9 +17,8 @@ void MilitaryTest::test1()
 	bool result;
 
 	 Game game("");
-	 AIPersonality personality = { 0 };
-	 Player player1(game, personality);
-	 Player player2(game, personality);
+	 Player player1(game);
+	 Player player2(game);
 	 LandTerritory territory1(1, sf::Color::White);
 	 LandTerritory territory2(2, sf::Color::White);
 	 LandArmy army1(player1, &territory1, 30);
