@@ -11,7 +11,7 @@ Game::Game(std::string mapName)
 void Game::generatePlayers()
 {
 	int numHuman = 0; // Used temporarily for testing.
-	const int numHumans = 1;
+	const int numHumans = 0;
 	for(auto &barony : map.getEstateManager().getBaronies())
 	{
 		std::unique_ptr<Player> player = std::make_unique<Player>(*this);
@@ -28,6 +28,12 @@ void Game::generatePlayers()
 
 void Game::update()
 {
+	///////////////////////////////
+	// Caps number of turns per update call. For testing. 
+	const int maxTurns = 3;
+	int turnCnt = 0;
+	///////////////////////////////
+
 	// Waiting for human player to end their turn.
 	if(humanPlayerTurn)
 	{
@@ -35,8 +41,10 @@ void Game::update()
 	}
 
 	// Iterate through players handling their turns until a human player is reached.
-	while(currPlayer != players.end())
+	while(currPlayer != players.end() && turnCnt < 3)
 	{
+		++turnCnt;
+
 		if(currPlayer == players.end())
 		{
 			currPlayer = players.begin();
@@ -47,13 +55,9 @@ void Game::update()
 			if(currPlayer == players.end())
 			{
 				currPlayer = players.begin();
+				return;
 			}
 		}
-
-		/// if(!currPlayer->get()->getIsHuman())
-		/// {
-		/// 	return;
-		/// }
 
 		currPlayer->get()->handleTurn();
 

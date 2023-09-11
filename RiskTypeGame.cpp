@@ -46,7 +46,7 @@ int main()
 
 		// Update game.
 		game.update();
-		
+
 		// Handle input.
 		window.setView(gameView);
 		if(mapEditorMode)

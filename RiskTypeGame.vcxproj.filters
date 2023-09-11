@@ -103,6 +103,9 @@
     <Filter Include="Header Files\Game\Player\AI">
       <UniqueIdentifier>{ab9b5993-477a-452c-9e1e-4c231cb9cea7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Player\AI">
+      <UniqueIdentifier>{c8874d7e-3801-4014-8314-f0f86c74e678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RiskTypeGame.cpp">
@@ -198,9 +201,6 @@
     <ClCompile Include="CommandButton.cpp">
       <Filter>Source Files\User Interface\CommandButton</Filter>
     </ClCompile>
-    <ClCompile Include="AIPersonality.cpp">
-      <Filter>Source Files\Game\Player</Filter>
-    </ClCompile>
     <ClCompile Include="EstateManager.cpp">
       <Filter>Source Files\Game\Estate</Filter>
     </ClCompile>
@@ -258,20 +258,23 @@
     <ClCompile Include="HasUI.cpp">
       <Filter>Source Files\User Interface</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerAIComponent.cpp">
-      <Filter>Source Files\Game\Player</Filter>
+    <ClCompile Include="AIPersonality.cpp">
+      <Filter>Source Files\Game\Player\AI</Filter>
     </ClCompile>
-    <ClCompile Include="SimplePlayerAI.cpp">
-      <Filter>Source Files\Game\Player</Filter>
+    <ClCompile Include="PlayerAIComponent.cpp">
+      <Filter>Source Files\Game\Player\AI</Filter>
     </ClCompile>
     <ClCompile Include="PlayerAIContext.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Player\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="SimplePlayerAI.cpp">
+      <Filter>Source Files\Game\Player\AI</Filter>
     </ClCompile>
     <ClCompile Include="RealmEstateManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Player</Filter>
     </ClCompile>
     <ClCompile Include="RealmRelationshipManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
