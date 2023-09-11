@@ -44,24 +44,26 @@ void RealmEstateManager::addFief(Estate *fief, bool updateGrid)
 	}
 }
 
-void RealmEstateManager::removeFief(const Estate *fief, bool updateGrid)
+void RealmEstateManager::removeFief(Estate *fief, bool updateGrid)
 {
 	for(auto iter = fiefs.begin(); iter != fiefs.end(); ++iter)
 	{
 		if(*iter == fief)
 		{
-			fiefs.erase(iter);
 			if(updateGrid)
 			{
 				grid.removeGrid(fief->getGrid());
 			}
 
 			// Remove territory from realm territories if estate is landed estate.
-			if(LandedEstate *landedEstate = dynamic_cast<LandedEstate*>(*iter))
+			LandedEstate *landedEstate = dynamic_cast<LandedEstate*>(*iter);
+			if(landedEstate != nullptr)
 			{
 				assert(territories.count(&landedEstate->getTerritory()) == 1);
 				territories.erase(&landedEstate->getTerritory());
 			}
+
+			fiefs.erase(iter);
 
 			return;
 		}
