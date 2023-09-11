@@ -19,6 +19,11 @@ public:
 	// Returns pointer to military force at specified world position.
 	MilitaryForce* getMilitary(sf::Vector2f position);
 
+	// Returns army at territory.
+	LandArmy *getArmy(const Territory *territory);
+	const std::vector<std::unique_ptr<LandArmy>> &getArmies() const;
+	const std::vector<std::unique_ptr<NavalFleet>> &getNavies() const;
+
 	void removeDeadMilitaries();
 
 	void addLandArmy(std::unique_ptr<LandArmy> army);
@@ -27,7 +32,13 @@ public:
 private:
 	// BE CAREFUL DELETING FROM BELOW LISTS AS POINTERS POTENTIALLY HELD IN TERRITORIES!!!
 	std::set<MilitaryForce*> militaries;  // Holds handle to every army and navy in manager.
+
+	//
+	// IN FUTURE CAN MAKE ARMIES AND NAVIES BE AN STD::MAP WITH TERRITORY THE KEY FOR GREATER EFFICIENCY WITH AI!!!
+	//
 	std::vector<std::unique_ptr<LandArmy>> armies;  
 	std::vector<std::unique_ptr<NavalFleet>> navies;
+	//
+	//
 };
 

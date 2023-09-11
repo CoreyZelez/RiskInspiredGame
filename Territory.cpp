@@ -1,4 +1,5 @@
 #include "Territory.h"
+#include "LandedEstate.h"
 #include <assert.h>
 #include <iostream>
 #include <fstream>
@@ -12,6 +13,12 @@ Territory::Territory(int id, Grid grid)
 Territory::Territory(int id, sf::Color color)
 	: id(id), grid(color)
 {
+}
+
+void Territory::assignLandedEstate(const LandedEstate *estate)
+{
+	assert(this->landedEstate == nullptr);
+	landedEstate = estate;
 }
 
 void Territory::saveToFile(std::ofstream &file) const
@@ -34,6 +41,15 @@ void Territory::draw(sf::RenderWindow &window) const
 bool Territory::isEmpty() const
 {
 	return grid.isEmpty();
+}
+
+const Player* Territory::getEstateOwner() const
+{
+	if(landedEstate == nullptr)
+	{
+		return nullptr;
+	}
+	return landedEstate->getRuler();
 }
 
 Grid& Territory::getGrid()
@@ -97,9 +113,20 @@ void Territory::calculateDistances(const std::vector<Territory*>& territories)
 	}
 }
 
-void Territory::addAdjacencies(const std::vector<Territory*> &territories)
+int Territory::getDistance(const Territory &territory) const
 {
-	for(const Territory* territory : territories)
+	// Territory on different continent. Maybe should calculate distances across oceans though.
+	// if(distances.count(territory) == 0)
+	// {
+	// 	return -1;
+	// }
+
+	return distances[&territory];
+}
+
+void Territory::addAdjacencies(std::vector<Territory*> &territories)
+{
+	for(Territory* territory : territories)
 	{
 		if(sharesBorder(*territory))
 		{
@@ -110,10 +137,15 @@ void Territory::addAdjacencies(const std::vector<Territory*> &territories)
 
 bool Territory::isAdjacent(const Territory *territory) const
 {
-	return adjacencies.count(territory) == 1;
+	return adjacencies.count(const_cast<Territory*>(territory)) == 1;
 }
 
-const std::set<const Territory*>& Territory::getAdjacencies() const
+const std::set<Territory*>& Territory::getAdjacencies() const
+{
+	return const_cast<std::set<Territory*>&>(adjacencies);
+}
+
+std::set<Territory*>& Territory::getAdjacencies()
 {
 	return adjacencies;
 }

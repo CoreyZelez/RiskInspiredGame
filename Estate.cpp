@@ -65,18 +65,16 @@ void Estate::provideSubfiefBonusYields()
 	switch(title)
 	{
 	case Title::count:
-		// bonus = 0.3f;
-		bonus = 10.0f;
+		bonus = 0.5f;
 		break;
 	case Title::duke:
-		bonus = 0.2f;
+		bonus = 0.5f;
 		break;
 	case Title::king:
-		// bonus = 0.1f;
-		bonus = 1000.0f;
+		bonus = 0.3f;
 		break;
 	case Title::emperor:
-		bonus = 0.1f;
+		bonus = 0.2f;
 		break;
 	}
 
@@ -153,6 +151,11 @@ bool Estate::hasParent() const
 bool Estate::compareRuler(const Player *player) const
 {
 	return (this->ruler == player);
+}
+
+const Player* Estate::getRuler() const
+{
+	return ruler;
 }
 
 Title Estate::getTitle() const

@@ -11,6 +11,7 @@ LandedEstate::LandedEstate(Title title, Territory &territory)
 	: Estate(title, territory.getGrid()), territory(territory)
 {
 	this->territory.addObserver(this);
+	this->territory.assignLandedEstate(this);
 }
 
 void LandedEstate::saveToFile(std::ofstream & file) const

@@ -38,6 +38,7 @@ public:
 	void setParent(Estate *parent);
 	bool hasParent() const;
 	bool compareRuler(const Player *player) const;  // For debugging.
+	const Player *getRuler() const;
 	Title getTitle() const;
 	std::string getName() const;
 

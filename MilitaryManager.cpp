@@ -27,6 +27,28 @@ MilitaryForce* MilitaryManager::getMilitary(sf::Vector2f position)
 	return nullptr;
 }
 
+LandArmy* MilitaryManager::getArmy(const Territory *territory)
+{
+	for(auto &army : armies)
+	{
+		if(&army.get()->getTerritory() == territory)
+		{
+			return army.get();
+		}
+	}
+	return nullptr;
+}
+
+const std::vector<std::unique_ptr<LandArmy>>& MilitaryManager::getArmies() const
+{
+	return armies;
+}
+
+const std::vector<std::unique_ptr<NavalFleet>>& MilitaryManager::getNavies() const
+{
+	return navies;
+}
+
 void MilitaryManager::removeDeadMilitaries()
 {
 	// Remove dead land armies.
