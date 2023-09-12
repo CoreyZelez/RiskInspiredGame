@@ -44,9 +44,24 @@ const std::vector<std::unique_ptr<LandArmy>>& MilitaryManager::getArmies() const
 	return armies;
 }
 
+std::vector<std::unique_ptr<LandArmy>>& MilitaryManager::getArmies()
+{
+	return armies;
+}
+
 const std::vector<std::unique_ptr<NavalFleet>>& MilitaryManager::getNavies() const
 {
 	return navies;
+}
+
+int MilitaryManager::getTotalArmyStrength() const
+{
+	int totalStrength = 0;
+	for(const auto &army : armies)
+	{
+		totalStrength += army.get()->getStrength();
+	}
+	return totalStrength;
 }
 
 void MilitaryManager::removeDeadMilitaries()

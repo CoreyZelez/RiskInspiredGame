@@ -86,6 +86,9 @@ void LandArmy::attack(LandArmy &defendingArmy, double defenceMultiplier)
 
 void LandArmy::move(Territory &territory, int strength)
 {
+	assert(strength > 0);
+	assert(strength <= getStrength());
+
 	// Attempt to move to current location.
 	if(&territory == &getTerritory())
 	{
@@ -96,9 +99,6 @@ void LandArmy::move(Territory &territory, int strength)
 	{
 		return;
 	}
-
-	assert(strength > 0);
-	assert(strength <= getStrength());
 
 	// Amount to adjust military strength. 
 	int strengthAdjustment = -strength;
@@ -125,6 +125,42 @@ void LandArmy::move(Territory &territory, int strength)
 
 	// Adjust strength of this army.
 	adjustStrength(strengthAdjustment);
+}
+
+void LandArmy::moveClosest(Territory &target, int strength)
+{
+	assert(strength > 0);
+	const int distance = getTerritory().getDistance(target);
+	std::set<Territory*> adjacencies = getTerritory().getAdjacencies();
+	std::set<Territory*> friendlyAdjacencies;
+	for(Territory* territory : adjacencies)
+	{
+		if(territory->getEstateOwner() == &getOwner())
+		{
+			friendlyAdjacencies.insert(territory);
+		}
+	}
+
+	// 
+	// ADD IN PRIORITISATION OF MOVEMENT TO BORDER TERRITORIES IN THIS LOOP.
+	//
+	for(Territory* territory : friendlyAdjacencies)
+	{
+		assert(territory->getEstateOwner() == &getOwner());
+		if(territory->getDistance(target) < distance)
+		{
+			assert(territory->getDistance(target) == distance - 1);
+			move(*territory, strength);
+			return;
+		}
+
+	}
+
+	//////////////////
+	// in future prioritise border territories!
+	//////////////
+	// consider computation cost!
+	////////////////////////
 }
 
 

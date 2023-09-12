@@ -1,3 +1,12 @@
-﻿  RealmEstateManager.cpp
-d:\projects\risktypegame\risktypegame\realmestatemanager.cpp(87): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+﻿  LandArmy.cpp
+d:\projects\risktypegame\risktypegame\landarmy.cpp(49): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\landarmy.cpp(50): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+  SimplePlayerAI.cpp
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(94): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(147): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(147): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(180): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(181): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(181): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+  Generating Code...
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe

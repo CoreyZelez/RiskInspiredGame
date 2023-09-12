@@ -22,7 +22,9 @@ public:
 	// Returns army at territory.
 	LandArmy *getArmy(const Territory *territory);
 	const std::vector<std::unique_ptr<LandArmy>> &getArmies() const;
+	std::vector<std::unique_ptr<LandArmy>> &getArmies();
 	const std::vector<std::unique_ptr<NavalFleet>> &getNavies() const;
+	int getTotalArmyStrength() const;
 
 	void removeDeadMilitaries();
 

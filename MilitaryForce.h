@@ -16,6 +16,7 @@ public:
 	virtual void draw(sf::RenderWindow &window) const;
 
 	virtual void move(Territory &location, int strength) = 0;
+	virtual void moveClosest(Territory &target, int strength) = 0;
 
 	// Returns true if graphical component contains specified world position.
 	bool containsPosition(sf::Vector2f position) const;
