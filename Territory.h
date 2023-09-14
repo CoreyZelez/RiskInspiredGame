@@ -34,13 +34,13 @@ public:
 	virtual bool occupy(NavalFleet *fleet) = 0;
 
 	// Calculates distance to each territory in territories and updates distances map.
-	void calculateDistances(const std::vector<Territory*> &territories);
-	int getDistance(const Territory &territory) const;
+	virtual void calculateDistances(const std::vector<Territory*> &territories);
+	virtual int getDistance(const Territory &territory, bool sameType) const;
 
-	void addAdjacencies(std::vector<Territory*> &territories);
+	virtual void addAdjacencies(std::vector<Territory*> &territories);
 	bool isAdjacent(const Territory *territory) const;
-	const std::set<Territory*> &getAdjacencies() const;
-	std::set<Territory*> &getAdjacencies();
+	virtual const std::set<Territory*> &getAdjacencies(bool sameType) const;
+	virtual std::set<Territory*> &getAdjacencies(bool sameType);
 
 	virtual double getDefenceMultiplier() const;
 
@@ -53,6 +53,7 @@ public:
 	const Player *getEstateOwner() const;
 
 protected:
+	std::map<const Territory*, int> calculateDistancesBFS(const std::vector<Territory*>& territories, bool sameType);
 	sf::Vector2f getCenter() const;
 
 private:
@@ -61,12 +62,12 @@ private:
 
 	int id;
 	Grid grid;
-	double defenceMultiplier = 1.2;  // In future perhaps have complex virtual function to calculate this!
+	double defenceMultiplier = 1.4;  // In future perhaps have complex virtual function to calculate this!
 	std::set<Territory*> adjacencies;
+	// Distances between any territory type.
 	mutable std::map<const Territory*, int> distances;
 	const LandedEstate *landedEstate = nullptr;
 };
 
 int loadTerritoryID(std::ifstream &file);
-
 

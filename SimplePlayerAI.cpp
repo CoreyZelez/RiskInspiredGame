@@ -26,10 +26,10 @@ void SimplePlayerAI::handleTurn()
 	std::map<Territory*, int> strategicValues;
 	for(Territory* territory : borderTerritories)
 	{
+		assert(calculateStrategicValue(*territory) >= 0);
 		strategicValues[territory] = calculateStrategicValue(*territory);
 	}
-
-	executeMoveOrders(strategicValues);
+	executeLandMoveOrders(strategicValues);
 }
 
 int SimplePlayerAI::calculateStrategicValue(const Territory &territory) 
@@ -39,14 +39,14 @@ int SimplePlayerAI::calculateStrategicValue(const Territory &territory)
 
 	int strategicValue = 0;
 
-	// Calculate max and total threat of territory.
+	// Calculate strategic value from threat of attack of territory.
 	std::map<const Player*, int> weightedThreats = context.getWeightedThreats(territory);
 	int maxThreat = calculateMaxThreat(weightedThreats);  
 	int totalThreat = calculateTotalThreat(weightedThreats);  
 	strategicValue += maxThreat + totalThreat;
 
-	// Calculate strategic value from enemy neighbouring territories.
-	const std::set<Territory*> adjacencies = territory.getAdjacencies();
+	// Calculate strategic desire to attack enemy neighbouring territories.
+	const std::set<Territory*> adjacencies = territory.getAdjacencies(false);
 	std::set<const Territory*> enemyTerritories;
 	// Determine enemy territories from adjacencies.
 	for(std::set<Territory*>::iterator iter = adjacencies.begin();
@@ -57,6 +57,8 @@ int SimplePlayerAI::calculateStrategicValue(const Territory &territory)
 			enemyTerritories.insert(*iter);
 		}
 	}
+
+	assert(strategicValue >= 0);
 
 	return strategicValue;
 }
@@ -96,9 +98,10 @@ void SimplePlayerAI::executeArmyAttack(LandArmy &army)
 			if(enemyArmy == nullptr)
 			{
 				int attackStrength = 0.3 * strength;
-				if(attackStrength == 0)
+
+				if(attackStrength <= 1)
 				{
-					attackStrength = 1;
+					attackStrength = strength;
 				}
 				army.move(*landTerritory, attackStrength);
 			}
@@ -111,7 +114,7 @@ void SimplePlayerAI::executeArmyAttack(LandArmy &army)
 				}
 				army.move(*landTerritory, attackStrength);
 			}
-			else if(enemyArmy->getStrength() < 0.8 * strength)
+			else if(enemyArmy->getStrength() < 0.6 * strength)
 			{
 				army.move(*landTerritory, strength);
 			}
@@ -128,22 +131,32 @@ void SimplePlayerAI::executeArmyAttack(LandArmy &army)
 }
 
 
-void SimplePlayerAI::executeMoveOrders(std::map<Territory*, int> strategicValues)
+void SimplePlayerAI::executeLandMoveOrders(const std::map<Territory*, int> &strategicValues)
 {
 	Player &player = getPlayer();
 	std::map<Territory*, int> remainingStrategicValues = strategicValues;
 
 	// Find sum of strategic values.
-	int valueSum = 0; 
+	int totalStrategicValue = 0; 
 	for(const auto& pair : strategicValues)
 	{
-		valueSum += pair.second;
+		assert(pair.second >= 0);
+		totalStrategicValue += pair.second;
 	}
 
 	// Total strength of player's land military.
 	const int totalArmyStrength = player.getMilitaryManager().getTotalArmyStrength();
+	assert(totalArmyStrength >= 0);
+	if(totalArmyStrength == 0)
+	{
+		return;
+	}
 
-	// Move players armies to priority territories..
+	// Strategic value that is allocated to each unit of army strength.
+	float strategicValuePerUnit = (float)totalStrategicValue / (float)totalArmyStrength;
+	strategicValuePerUnit; // testing.
+	assert(strategicValuePerUnit >= 0);
+
 	std::vector<std::unique_ptr<LandArmy>> &armies = player.getMilitaryManager().getArmies();
 
 	// Keeps track of what amount of strength of a given army is free to move from
@@ -156,26 +169,35 @@ void SimplePlayerAI::executeMoveOrders(std::map<Territory*, int> strategicValues
 
 	// Armies are added through movement so only iterate up to pre movement number of armies. 
 	const int numArmies = armies.size(); 
-	if(numArmies == 0)
-	{
-		return;
-	}
+	assert(numArmies > 0);
 
 	// Partially allocates armies prioritising closest first. Closer armies provide greater allocation.
-	for(int distance = 0; distance <= 5; ++distance)
+	for(int distance = 0; distance <= 13; ++distance)
 	{
-		for(auto& pair : strategicValues)
+		for(auto& pair : remainingStrategicValues)
 		{
 			Territory& territory = *pair.first;
-			const int strategicValue = pair.second;
+			int &strategicValue = pair.second;
+
+			assert(strategicValue >= 0);
+
+			if(strategicValue == 0)
+			{
+				continue;
+			}
 
 			// Move armies of specified distance towards the territory.
 			for(int i = 0; i < numArmies; ++i)
 			{
+
 				LandArmy &army = *armies[i].get();
-				assert(freeToMove[&army] <= army.getStrength());
+
 				const Territory &armyTerritory = army.getTerritory();
-				const int armyDistance = territory.getDistance(armyTerritory);
+				const int armyDistance = territory.getDistance(armyTerritory, true);
+
+				assert(remainingStrategicValues.count(&territory) == 1);
+				assert(strategicValue > 0);
+				assert(freeToMove[&army] <= army.getStrength());
 
 				if(armyDistance != distance)
 				{
@@ -186,33 +208,27 @@ void SimplePlayerAI::executeMoveOrders(std::map<Territory*, int> strategicValues
 					continue;
 				}
 
-				// Moves army to friendly territory closest to territory.
-				// Prioritises border territories.
+				// Move army to friendly territory closest to territory.
+				// In future prioritise border territories!!!
 				const float moveRatio = 0.7;
-				const int moveStrength = freeToMove[&army] * moveRatio;
+				int moveStrength = freeToMove[&army] * moveRatio;
+				const int maximumAllocation = strategicValue / strategicValuePerUnit;
+				// Move strength is capped by maximum allocation amount derived from territory priority.
+				moveStrength = std::min(moveStrength, maximumAllocation);
 				if(moveStrength != 0)
 				{
 					army.moveClosest(territory, moveStrength);
 					freeToMove[&army] -= moveStrength;
+					const int usedStrategicValue = 1 + moveStrength * strategicValuePerUnit;
+					strategicValue -= usedStrategicValue;
+					if(strategicValue <= 0)
+					{
+						strategicValue = 0;
+						break;
+					}
 					assert(freeToMove[&army] <= army.getStrength());
 				}
 			}
 		}
-	}
-
-	// Iterate through territories and move armies according to priority.
-	for(auto& pair : strategicValues)
-	{
-		Territory *territory = pair.first;
-		int &strategicValue = pair.second;
-		// Allocate bonus amount if army already stationed at territory. 
-		/// PERHAPS ADD PERSONALITY TRAIT FLEXABILITY THAT INCREASES WILLINGNESS TO MOVE ARMIES AROUND.
-		std::map<int, std::vector<LandArmy*>> armyDistances;
-		for(auto &army : armies)
-		{
-			const Territory &armyTerritory = army.get()->getTerritory();
-			armyDistances[territory->getDistance(armyTerritory)].push_back(army.get());
-		}
-
 	}
 }

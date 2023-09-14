@@ -20,7 +20,7 @@ std::vector<Territory*> PlayerAIContext::getBorderTerritories()
 		assert(territory->getEstateOwner() == &player);
 
 		// Add territory to border territories if one of its adjacencies is enemy owned.
-		const std::set<Territory*> &adjacencies = territory->getAdjacencies();
+		const std::set<Territory*> &adjacencies = territory->getAdjacencies(false);
 		for(const auto &adjacency : adjacencies)
 		{
 			// Checks whether adjacent territory is apart of realms territories.
@@ -38,7 +38,7 @@ std::vector<Territory*> PlayerAIContext::getBorderTerritories()
 
 const std::set<Territory*> PlayerAIContext::getEnemyAdjacencies(Territory &territory)
 {
-	const std::set<Territory*>& adjacencies = territory.getAdjacencies();
+	const std::set<Territory*>& adjacencies = territory.getAdjacencies(false);
 	std::set<Territory*> enemyAdjacencies;
 
 	// Adds adjacent territories to enemyAdjacencies owned by enemy players.
@@ -56,7 +56,7 @@ const std::set<Territory*> PlayerAIContext::getEnemyAdjacencies(Territory &terri
 
 std::map<const Player*, int> PlayerAIContext::getWeightedThreats(const Territory &territory)
 {
-	const std::set<Territory*>& adjacencies = territory.getAdjacencies();
+	const std::set<Territory*>& adjacencies = territory.getAdjacencies(false);
 	std::set<const Player*> enemyPlayers = {};
 	std::map<const Player*, int> weightedThreats;
 
@@ -72,7 +72,7 @@ std::map<const Player*, int> PlayerAIContext::getWeightedThreats(const Territory
 	}
 
 	// Calculated weighted threats of each enemy player.
-	const int distanceFactor = 2;  // Calculation uses squared distance.
+	const int distanceFactor = 1.5;  // Calculation uses squared distance.
 	for(std::set<const Player*>::const_iterator iter = enemyPlayers.begin(); 
 		iter != enemyPlayers.end(); ++iter)
 	{
@@ -89,9 +89,12 @@ int calculateWeightedThreat(const Territory &territory, const Player &player, co
 	for(const auto &army : armies)
 	{
 		const Territory &armyTerritory = army.get()->getTerritory();
-		const int distance = territory.getDistance(armyTerritory);
-		assert(distance > 0);
-		threatScore += army.get()->getStrength() / pow(distance, distanceFactor);
+		const int distance = territory.getDistance(armyTerritory, false);
+		assert(distance > 0 || army.get()->getStrength() == 0);
+		if(distance > 0)
+		{
+			threatScore += army.get()->getStrength() / pow(distance, distanceFactor);
+		}
 	}
 	return threatScore;
 }

@@ -79,47 +79,19 @@ bool Territory::sharesBorder(const Territory &territory) const
 
 void Territory::calculateDistances(const std::vector<Territory*>& territories)
 {
-	std::queue<Territory*> q;
-	std::map<Territory*, bool> visited;
-
-	// Initialize distances and visited map.
-	for(Territory* territory : territories) 
-	{
-		visited[territory] = false;
-		distances[territory] = -1; // Initialize distances to -1 (unreachable).
-	}
-
-	// Starting territory has a distance of 0 from itself.
-	distances[this] = 0;
-	visited[this] = true;
-
-	q.push(this);
-
-	while(!q.empty()) 
-	{
-		Territory* currentTerritory = q.front();
-		q.pop();
-
-		// Iterate through adjacent territories.
-		for(const Territory* adjacentTerritory : currentTerritory->adjacencies) 
-		{
-			if(!visited[const_cast<Territory*>(adjacentTerritory)]) 
-			{
-				distances[const_cast<Territory*>(adjacentTerritory)] = distances[currentTerritory] + 1;
-				visited[const_cast<Territory*>(adjacentTerritory)] = true;
-				q.push(const_cast<Territory*>(adjacentTerritory)); // Enqueue adjacent territory.
-			}
-		}
-	}
+	distances = calculateDistancesBFS(territories, false);
 }
 
-int Territory::getDistance(const Territory &territory) const
+int Territory::getDistance(const Territory &territory, bool sameType) const
 {
-	// Territory on different continent. Maybe should calculate distances across oceans though.
-	// if(distances.count(territory) == 0)
-	// {
-	// 	return -1;
-	// }
+	// This function should only be called by subclass when this condition holds.
+	assert(sameType == false);
+
+	// No connecting path exists.
+	if(distances.count(&territory) == 0)
+	{
+		return -1;
+	}
 
 	return distances[&territory];
 }
@@ -140,19 +112,63 @@ bool Territory::isAdjacent(const Territory *territory) const
 	return adjacencies.count(const_cast<Territory*>(territory)) == 1;
 }
 
-const std::set<Territory*>& Territory::getAdjacencies() const
+const std::set<Territory*>& Territory::getAdjacencies(bool sameType) const
 {
+	// This function should only be called by subclass when this condition holds.
+	assert(sameType == false);
+
 	return const_cast<std::set<Territory*>&>(adjacencies);
 }
 
-std::set<Territory*>& Territory::getAdjacencies()
+std::set<Territory*>& Territory::getAdjacencies(bool sameType)
 {
+	// This function should only be called by subclass when this condition holds.
+	assert(sameType == false);
 	return adjacencies;
 }
 
 double Territory::getDefenceMultiplier() const
 {
 	return defenceMultiplier;
+}
+
+std::map<const Territory*, int> Territory::calculateDistancesBFS(const std::vector<Territory*>& territories, bool sameType)
+{
+	std::queue<Territory*> q;
+	std::map<Territory*, bool> visited;
+	std::map<const Territory*, int> distances;
+
+	// Initialize distances and visited map.
+	for(Territory* territory : territories)
+	{
+		visited[territory] = false;
+		distances[territory] = -1; // Initialize distances to -1 (unreachable).
+	}
+
+	// Starting territory has a distance of 0 from itself.
+	distances[this] = 0;
+	visited[this] = true;
+
+	q.push(this);
+
+	while(!q.empty())
+	{
+		Territory* currentTerritory = q.front();
+		q.pop();
+
+		// Iterate through adjacent territories.
+		for(const Territory* adjacentTerritory : currentTerritory->getAdjacencies(sameType))
+		{
+			if(!visited[const_cast<Territory*>(adjacentTerritory)])
+			{
+				distances[const_cast<Territory*>(adjacentTerritory)] = distances[currentTerritory] + 1;
+				visited[const_cast<Territory*>(adjacentTerritory)] = true;
+				q.push(const_cast<Territory*>(adjacentTerritory)); // Enqueue adjacent territory.
+			}
+		}
+	}
+
+	return distances;
 }
 
 sf::Vector2f Territory::getCenter() const

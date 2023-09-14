@@ -16,6 +16,13 @@ void Game::generatePlayers()
 	{
 		std::unique_ptr<Player> player = std::make_unique<Player>(*this);
 		barony.get()->setRuler(player.get());
+
+		// Provide starting yields for each player.
+		for(int i = 0; i < 20; ++i)
+		{
+			player.get()->getRealm().getEstateManager().handleFiefYields();
+		}
+
 		if(humanCnt < numHumans)
 		{
 			++humanCnt;

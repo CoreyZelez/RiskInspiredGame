@@ -18,6 +18,6 @@ private:
 	int calculateStrategicValue(const Territory &territory);
 	void executeArmyAttacks(const std::vector<Territory*> &borderTerritories);
 	void executeArmyAttack(LandArmy &army);
-	void executeMoveOrders(std::map<Territory*, int> strategicValues);
+	void executeLandMoveOrders(const std::map<Territory*, int> &strategicValues);
 };
 

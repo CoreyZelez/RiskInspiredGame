@@ -130,8 +130,8 @@ void LandArmy::move(Territory &territory, int strength)
 void LandArmy::moveClosest(Territory &target, int strength)
 {
 	assert(strength > 0);
-	const int distance = getTerritory().getDistance(target);
-	std::set<Territory*> adjacencies = getTerritory().getAdjacencies();
+	const int distance = getTerritory().getDistance(target, true);
+	std::set<Territory*> adjacencies = getTerritory().getAdjacencies(true);
 	std::set<Territory*> friendlyAdjacencies;
 	for(Territory* territory : adjacencies)
 	{
@@ -147,9 +147,9 @@ void LandArmy::moveClosest(Territory &target, int strength)
 	for(Territory* territory : friendlyAdjacencies)
 	{
 		assert(territory->getEstateOwner() == &getOwner());
-		if(territory->getDistance(target) < distance)
+		if(territory->getDistance(target, true) < distance)
 		{
-			assert(territory->getDistance(target) == distance - 1);
+			assert(territory->getDistance(target, true) == distance - 1);
 			move(*territory, strength);
 			return;
 		}
