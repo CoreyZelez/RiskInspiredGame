@@ -67,7 +67,7 @@ private:
 	sf::Vector2i center;  // Center position in game world.
 	sf::VertexArray vertices;
 	sf::Color color;
-	BorderMode borderMode = BorderMode::darkBorders;
+	BorderMode borderMode = BorderMode::feintBorders;
 };
 
 Grid loadTerritoryGrid(std::ifstream &file);

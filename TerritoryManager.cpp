@@ -62,6 +62,7 @@ void TerritoryManager::removeEmptyTerritories()
 	{
 		if((*iterL)->isEmpty())
 		{
+			removeTerritory(iterL->get());
 			iterL = landTerritories.erase(iterL);
 		}
 		else
@@ -76,6 +77,7 @@ void TerritoryManager::removeEmptyTerritories()
 	{
 		if((*iterN)->isEmpty())
 		{
+			removeTerritory(iterL->get());
 			iterN = navalTerritories.erase(iterN);
 		}
 		else

@@ -276,6 +276,9 @@
     <ClCompile Include="RealmRelationshipManager.cpp">
       <Filter>Source Files\Game\Player</Filter>
     </ClCompile>
+    <ClCompile Include="IOccupiable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LandArmy.h">
@@ -454,6 +457,9 @@
     </ClInclude>
     <ClInclude Include="PlayerAIComponent.h">
       <Filter>Header Files\Game\Player\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="IOccupiable.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

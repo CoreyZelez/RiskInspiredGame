@@ -61,6 +61,11 @@ void Game::update()
 			if(currPlayer == players.end())
 			{
 				currPlayer = players.begin();
+				// Need to wait for user input to complete turn.
+				if(currPlayer->get()->getIsHuman())
+				{
+					humanPlayerTurn = true;
+				}
 				return;
 			}
 		}

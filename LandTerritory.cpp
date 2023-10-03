@@ -115,17 +115,18 @@ void LandTerritory::calculateDistances(const std::vector<Territory*>& territorie
 
 int LandTerritory::getDistance(const Territory &territory, bool sameType) const
 {
+	// Check path through any passable territory type.
 	if(sameType == false)
 	{
 		return Territory::getDistance(territory, sameType);
 	}
 
+	// Check path through same territory type.
 	// No connecting path exists.
 	if(landTerritoryDistances.count(&territory) == 0)
 	{
 		return -1;
 	}
-
 	return landTerritoryDistances[&territory];
 }
 

@@ -167,6 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IOccupiable.cpp" />
     <ClCompile Include="PlayerAIContext.cpp" />
     <ClCompile Include="AIPersonality.cpp" />
     <ClCompile Include="PlayerAIComponent.cpp" />
@@ -225,6 +226,7 @@
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IOccupiable.h" />
     <ClInclude Include="PlayerAIContext.h" />
     <ClInclude Include="AIPersonality.h" />
     <ClInclude Include="PlayerAIComponent.h" />
