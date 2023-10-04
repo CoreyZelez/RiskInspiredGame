@@ -26,7 +26,7 @@ void EstateTest::test1()
 
 	// Attempt to yield land army with cumulative land army not surpassing threshold.
 	player.getRealm().getEstateManager().handleFiefYields();
-	if(territory.getArmy() != nullptr)
+	if(territory.getOccupancyHandler()->getArmy() != nullptr)
 	{
 		bool result = false;
 		std::string message = "unexpected land army yielded";
@@ -40,21 +40,21 @@ void EstateTest::test1()
 	{
 		player.getRealm().getEstateManager().handleFiefYields();
 	}
-	if(territory.getArmy() == nullptr)
+	if(territory.getOccupancyHandler()->getArmy() == nullptr)
 	{
 		bool result = false;
 		std::string message = "no land army yielded to territory";
 		testReport(testName, result, message);
 		return;
 	}
-	else if(&territory.getArmy()->getOwner() != &player)
+	else if(&territory.getOccupancyHandler()->getArmy()->getOwner() != &player)
 	{
 		bool result = false;
 		std::string message = "incorrect owner of yielded land army";
 		testReport(testName, result, message);
 		return;
 	}
-	else if(territory.getArmy()->getStrength() <= 0)
+	else if(territory.getOccupancyHandler()->getArmy()->getStrength() <= 0)
 	{
 		bool result = false;
 		std::string message = "invalid army strength yielded.";
@@ -103,7 +103,7 @@ void EstateTest::test2()
 
 	player2.getRealm().getEstateManager().handleFiefYields();
 	player1.getRealm().getEstateManager().handleFiefYields();
-	if(territory1.getArmy() != nullptr)
+	if(territory1.getOccupancyHandler()->getArmy() != nullptr)
 	{
 		bool result = false;
 		std::string message = "unexpected land army yielded";
@@ -118,14 +118,14 @@ void EstateTest::test2()
 		player2.getRealm().getEstateManager().handleFiefYields();
 	}
 	player1.getRealm().getEstateManager().handleFiefYields();
-	if(territory1.getArmy() == nullptr)
+	if(territory1.getOccupancyHandler()->getArmy() == nullptr)
 	{
 		bool result = false;
 		std::string message = "no land army yielded to territory";
 		testReport(testName, result, message);
 		return;
 	}
-	else if(&territory1.getArmy()->getOwner() != &player1)
+	else if(&territory1.getOccupancyHandler()->getArmy()->getOwner() != &player1)
 	{
 		bool result = false;
 		std::string message = "incorrect owner of yielded land army";
@@ -135,7 +135,7 @@ void EstateTest::test2()
 
 	// Checks that the player not apart of the realm was not receiving the bonus yields.
 	player3.getRealm().getEstateManager().handleFiefYields();
-	if(territory4.getArmy() != nullptr)
+	if(territory4.getOccupancyHandler()->getArmy() != nullptr)
 	{
 		bool result = false;
 		std::string message = "player receiving bonus yields from a player in a different realm";

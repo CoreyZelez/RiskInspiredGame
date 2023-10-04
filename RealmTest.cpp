@@ -47,7 +47,7 @@ void RealmTest::test1()
 
 	player2.getRealm().getEstateManager().handleFiefYields();
 	player1.getRealm().getEstateManager().handleFiefYields();
-	if(territory1.getArmy() != nullptr)
+	if(territory1.getOccupancyHandler()->getArmy() != nullptr)
 	{
 		bool result = false;
 		std::string message = "unexpected land army yielded";
@@ -62,7 +62,7 @@ void RealmTest::test1()
 		player2.getRealm().getEstateManager().handleFiefYields();
 	}
 	player1.getRealm().getEstateManager().handleFiefYields();
-	if(territory1.getArmy() == nullptr)
+	if(territory1.getOccupancyHandler()->getArmy() == nullptr)
 	{
 		bool result = false;
 		std::string message = "no land army yielded to territory";

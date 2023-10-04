@@ -6,12 +6,22 @@
 #include <queue>
 
 Territory::Territory(int id, Grid grid)
-	: id(id), grid(grid)
+	: Territory(id, grid, nullptr)
 {
 }
 
 Territory::Territory(int id, sf::Color color)
-	: id(id), grid(color)
+	: Territory(id, color, nullptr)
+{
+}
+
+Territory::Territory(int id, Grid grid, std::unique_ptr<IOccupiable> occupancyHandler)
+	: id(id), grid(grid), occupancyHandler(std::move(occupancyHandler))
+{
+}
+
+Territory::Territory(int id, sf::Color color, std::unique_ptr<IOccupiable> occupancyHandler)
+	: id(id), grid(color), occupancyHandler(std::move(occupancyHandler))
 {
 }
 
@@ -38,9 +48,9 @@ void Territory::draw(sf::RenderWindow &window) const
 	grid.draw(window);
 }
 
-bool Territory::isEmpty() const
+IOccupiable* Territory::getOccupancyHandler()
 {
-	return grid.isEmpty();
+	return occupancyHandler.get();
 }
 
 const Player* Territory::getEstateOwner() const
@@ -65,11 +75,6 @@ const Grid& Territory::getGrid() const
 int Territory::getID() const
 {
 	return id;
-}
-
-Player *Territory::getOccupant()
-{
-	return nullptr;
 }
 
 bool Territory::sharesBorder(const Territory &territory) const
@@ -127,11 +132,6 @@ std::set<Territory*>& Territory::getAdjacencies(bool sameType)
 	return adjacencies;
 }
 
-double Territory::getDefenceMultiplier() const
-{
-	return defenceMultiplier;
-}
-
 std::map<const Territory*, int> Territory::calculateDistancesBFS(const std::vector<Territory*>& territories, bool sameType)
 {
 	std::queue<Territory*> q;
@@ -169,11 +169,6 @@ std::map<const Territory*, int> Territory::calculateDistancesBFS(const std::vect
 	}
 
 	return distances;
-}
-
-sf::Vector2f Territory::getCenter() const
-{
-	return grid.getCenter();
 }
 
 int loadTerritoryID(std::ifstream & file)

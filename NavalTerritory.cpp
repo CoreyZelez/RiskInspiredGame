@@ -15,16 +15,6 @@ NavalTerritory::NavalTerritory(int id)
 {
 }
 
-bool NavalTerritory::occupy(LandArmy *army)
-{
-	return false;
-}
-
-bool NavalTerritory::occupy(NavalFleet *fleet)
-{
-	return false;
-}
-
 std::string NavalTerritory::getSaveLabel() const
 {
 	return navalSaveLabel;

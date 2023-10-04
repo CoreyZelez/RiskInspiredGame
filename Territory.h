@@ -1,6 +1,7 @@
 #pragma once
 #include "Subject.h"
 #include "Grid.h"
+#include "IOccupiable.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
@@ -17,8 +18,10 @@ const std::string navalSaveLabel = "# naval";
 class Territory : public Subject
 {
 public:
-	Territory(int id, Grid grid);
-	Territory(int id, sf::Color color);
+	Territory(int id, Grid grid);  // Temporary for testing.
+	Territory(int id, sf::Color color);  // Temporary for testing.
+	Territory(int id, Grid grid, std::unique_ptr<IOccupiable> occupancyHandler);
+	Territory(int id, sf::Color color, std::unique_ptr<IOccupiable> occupancyHandler);
 
 	virtual ~Territory() = default;
 
@@ -28,45 +31,39 @@ public:
 
 	void draw(sf::RenderWindow &window) const;  // In future return vertex arrays probably!!!
 
-	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
-	virtual bool occupy(LandArmy *army) = 0;
-	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
-	virtual bool occupy(NavalFleet *fleet) = 0;
-
 	// Calculates distance to each territory in territories and updates distances map.
 	virtual void calculateDistances(const std::vector<Territory*> &territories);
 	virtual int getDistance(const Territory &territory, bool sameType) const;
 
+	// Adds territories from parameters that are adjacent (Have bordering grid squares).
 	virtual void addAdjacencies(std::vector<Territory*> &territories);
 	bool isAdjacent(const Territory *territory) const;
 	virtual const std::set<Territory*> &getAdjacencies(bool sameType) const;
 	virtual std::set<Territory*> &getAdjacencies(bool sameType);
 
-	virtual double getDefenceMultiplier() const;
-
+	IOccupiable* getOccupancyHandler();
 	Grid& getGrid();
 	const Grid& getGrid() const;
 	int getID() const;
-	virtual Player *getOccupant();
-	bool isEmpty() const;  	// True if territory occupies no positions on map.
-	virtual std::string getSaveLabel() const = 0; 	// Save label is identifier in txt file for territory type.
-	const Player *getEstateOwner() const;
+	// Save label is identifier in txt file for territory type.
+	virtual std::string getSaveLabel() const = 0; 	
+	// Returns owner of associated estate.
+	const Player *getEstateOwner() const;  
 
 protected:
+	// Calculates distances of this territory to all other specified (optionally same type) territories. 
 	std::map<const Territory*, int> calculateDistancesBFS(const std::vector<Territory*>& territories, bool sameType);
-	sf::Vector2f getCenter() const;
 
 private:
 	// Returns true if territories have touching grid squares.
 	bool sharesBorder(const Territory &territory) const;
 
-	int id;
+	int id;  // ID representing territory in text file.
 	Grid grid;
-	double defenceMultiplier = 1.4;  // In future perhaps have complex virtual function to calculate this!
-	std::set<Territory*> adjacencies;
-	// Distances between any territory type.
-	mutable std::map<const Territory*, int> distances;
-	const LandedEstate *landedEstate = nullptr;
+	std::set<Territory*> adjacencies;  // Adjacent territories.
+	mutable std::map<const Territory*, int> distances;  // Distances between any territory type.
+	const LandedEstate *landedEstate = nullptr; 
+	std::unique_ptr<IOccupiable> occupancyHandler;  // Handles military occupancy of territory.
 };
 
 int loadTerritoryID(std::ifstream &file);

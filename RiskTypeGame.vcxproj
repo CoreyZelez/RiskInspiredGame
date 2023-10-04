@@ -168,6 +168,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="IOccupiable.cpp" />
+    <ClCompile Include="LandTerritoryOccupancy.cpp" />
     <ClCompile Include="PlayerAIContext.cpp" />
     <ClCompile Include="AIPersonality.cpp" />
     <ClCompile Include="PlayerAIComponent.cpp" />
@@ -227,6 +228,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IOccupiable.h" />
+    <ClInclude Include="LandTerritoryOccupancy.h" />
     <ClInclude Include="PlayerAIContext.h" />
     <ClInclude Include="AIPersonality.h" />
     <ClInclude Include="PlayerAIComponent.h" />

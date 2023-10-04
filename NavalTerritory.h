@@ -9,11 +9,6 @@ public:
 
 	virtual ~NavalTerritory() = default;
 
-	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
-	virtual bool occupy(LandArmy *army) override;
-	// Army attempts to occupy this territory. Either peaceful or hostile. Returns true if successful.
-	virtual bool occupy(NavalFleet *fleet) override;
-
 	/// virtual Player *getOccupant() override;
 
 	// Save label is identifier in txt file for territory type.

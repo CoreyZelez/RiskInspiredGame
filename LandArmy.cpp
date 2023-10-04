@@ -107,7 +107,7 @@ void LandArmy::move(Territory &territory, int strength)
 	std::unique_ptr<LandArmy> deployedArmy = std::make_unique<LandArmy>(getOwner(), &getTerritory(), strength);  // Land army attempting location occupation.
 
 	// Attempt occupation of location by deployed army.
-	territory.occupy(deployedArmy.get());
+	territory.getOccupancyHandler()->occupy(deployedArmy.get());
 
 	// Refund strength to this->army if deployedArmy is not able to occupy location
 	if(&deployedArmy.get()->getTerritory() == &getTerritory())

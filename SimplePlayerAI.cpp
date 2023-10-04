@@ -93,7 +93,7 @@ void SimplePlayerAI::executeArmyAttack(LandArmy &army)
 		LandTerritory* landTerritory = dynamic_cast<LandTerritory*>(*iter);
 		if(landTerritory != nullptr)
 		{
-			const LandArmy *enemyArmy = landTerritory->getArmy();
+			const LandArmy *enemyArmy = landTerritory->getOccupancyHandler()->getArmy();
 
 			if(enemyArmy == nullptr)
 			{

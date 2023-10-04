@@ -4359,8 +4359,8 @@ Renexdrenmar
 # name
 Sthefrey
 # subfiefs
-Trossadethia
 Hethiamor
+Trossadethia
 
 # estate
 # title
@@ -4368,8 +4368,8 @@ Hethiamor
 # name
 Eashvaynia
 # subfiefs
-Renexlithia
 Fersataria
+Renexlithia
 
 # estate
 # title
@@ -4440,8 +4440,8 @@ Tunmor
 # name
 Folnsia
 # subfiefs
-Anthales
 Westohthapinia
+Anthales
 
 # estate
 # title
@@ -4449,8 +4449,8 @@ Westohthapinia
 # name
 Lervia
 # subfiefs
-Fustrethtaria
 Easheigha
+Fustrethtaria
 
 # estate
 # title
@@ -4458,9 +4458,9 @@ Easheigha
 # name
 Perohththales
 # subfiefs
+Kertaria
 Fushenia
 Panliol
-Kertaria
 
 # estate
 # title
@@ -4477,8 +4477,8 @@ Perclithia
 # name
 Kerdethia
 # subfiefs
-Feigheigha
 Drethiniar
+Feigheigha
 Finithroaxia
 
 # estate
@@ -4506,8 +4506,8 @@ Trosvandethia
 Stheilar
 # subfiefs
 Perlifreyia
-Hethiaol
 Daytromar
+Hethiaol
 
 # estate
 # title
@@ -4515,8 +4515,8 @@ Daytromar
 # name
 Nilaisia
 # subfiefs
-Fusapinia
 Trislithia
+Fusapinia
 
 # estate
 # title
@@ -4533,8 +4533,8 @@ Lerhenia
 # name
 Hethiavanheughough
 # subfiefs
-Fereigha
 Mozthhenia
+Fereigha
 
 # estate
 # title
@@ -4551,8 +4551,8 @@ Sthensavia
 # name
 Ventflintopia
 # subfiefs
-Ventilheughough
 Fusdrenapinia
+Ventilheughough
 
 # estate
 # title
@@ -4569,8 +4569,8 @@ Trishenia
 # name
 vaynia
 # subfiefs
-Mozthlithia
 Morethol
+Mozthlithia
 
 # estate
 # title
@@ -4578,8 +4578,8 @@ Morethol
 # name
 Folnvinhenia
 # subfiefs
-Cartopia
 Sthenvenlithia
+Cartopia
 
 # estate
 # title
@@ -4632,8 +4632,8 @@ Fustricth
 # name
 Finithtrethdeth
 # subfiefs
-Anvaynia
 Nethvantopia
+Anvaynia
 
 # estate
 # title
@@ -4641,8 +4641,8 @@ Nethvantopia
 # name
 Daytvantricth
 # subfiefs
-Pantaria
 Trisilfreyia
+Pantaria
 
 # estate
 # title
@@ -4659,8 +4659,8 @@ Tharvinmia
 # name
 Paniniar
 # subfiefs
-Tarsaaxia
 Hethiadrenvia
+Tarsaaxia
 
 # estate
 # title
@@ -4668,8 +4668,8 @@ Hethiadrenvia
 # name
 Ferenmar
 # subfiefs
-Nothiohthfrey
 Tuntrethfrey
+Nothiohthfrey
 
 # estate
 # title
@@ -4704,8 +4704,8 @@ Sthenfreyia
 # name
 Westvanmor
 # subfiefs
-Topiaxia
 Folnvendethia
+Topiaxia
 
 # estate
 # title
@@ -4722,8 +4722,8 @@ Ventmor
 # name
 Tunapinia
 # subfiefs
-Panvithdethia
 Finithsataria
+Panvithdethia
 
 # estate
 # title
@@ -4759,8 +4759,8 @@ Ferenmor
 # name
 Lerlithales
 # subfiefs
-Hethiatrethsia
 Nilavia
+Hethiatrethsia
 
 # estate
 # title
@@ -4768,8 +4768,8 @@ Nilavia
 # name
 Ferar
 # subfiefs
-Trosthales
 Westflinfreyia
+Trosthales
 
 # estate
 # title
@@ -4786,8 +4786,8 @@ Folndeth
 # name
 Sthenar
 # subfiefs
-Sarvanvia
 Carheughough
+Sarvanvia
 
 # estate
 # title
@@ -4823,9 +4823,9 @@ Hethiadrenar
 # name
 Tunvenfreyia
 # subfiefs
+Mozthiltopia
 Feighdethia
 Daytrolithia
-Mozthiltopia
 
 # estate
 # title
@@ -4860,8 +4860,8 @@ Folnthales
 # name
 Stherotricth
 # subfiefs
-Vosapinia
 Nethtaria
+Vosapinia
 
 # estate
 # title
@@ -4869,8 +4869,8 @@ Nethtaria
 # name
 Anriar
 # subfiefs
-Lertaria
 Kerthales
+Lertaria
 
 # estate
 # title
@@ -4878,8 +4878,8 @@ Kerthales
 # name
 Nethvinhenia
 # subfiefs
-Ventflinsia
 Daythenia
+Ventflinsia
 
 # estate
 # title
@@ -4887,9 +4887,9 @@ Daythenia
 # name
 Pansia
 # subfiefs
-Drethrovaynia
 Vosvithdriax
 Renexrihenia
+Drethrovaynia
 
 # estate
 # title
@@ -4906,8 +4906,8 @@ Ventar
 # name
 Nothitrethvaynia
 # subfiefs
-Lueghlithia
 Folnvenaxia
+Lueghlithia
 
 # estate
 # title
@@ -4925,8 +4925,8 @@ Hethiamia
 # name
 Mozthvitheigha
 # subfiefs
-Panohthaxia
 Fuslithia
+Panohthaxia
 
 # estate
 # title
@@ -4961,9 +4961,9 @@ Tharhenia
 # name
 Mozthar
 # subfiefs
+Venttaria
 Ferentrethvia
 Hethialiisia
-Venttaria
 
 # estate
 # title
@@ -4971,8 +4971,8 @@ Venttaria
 # name
 Drethflinar
 # subfiefs
-Folnvinmia
 Sariltricth
+Folnvinmia
 Tunhenia
 
 # estate
@@ -4981,8 +4981,8 @@ Tunhenia
 # name
 Pervithol
 # subfiefs
-Renexsadriax
 Ferdethia
+Renexsadriax
 
 # estate
 # title
@@ -4990,8 +4990,8 @@ Ferdethia
 # name
 Drethvaneigha
 # subfiefs
-Anhenia
 Eashdeth
+Anhenia
 
 # estate
 # title
@@ -4999,8 +4999,8 @@ Eashdeth
 # name
 Sthevenmar
 # subfiefs
-Nilaliisia
 Lueghtrethtopia
+Nilaliisia
 
 # estate
 # title
@@ -5026,8 +5026,8 @@ Tharmia
 # name
 Daytdrenmor
 # subfiefs
-Dayttrethmor
 Folntaria
+Dayttrethmor
 
 # estate
 # title
@@ -5035,8 +5035,8 @@ Folntaria
 # name
 Tunventopia
 # subfiefs
-Fersia
 Cardethia
+Fersia
 
 # estate
 # title
@@ -5053,8 +5053,8 @@ Stheneigha
 # name
 Nothisia
 # subfiefs
-Sthesia
 Tuntaria
+Sthesia
 
 # estate
 # title
@@ -5071,8 +5071,8 @@ Westinieigha
 # name
 Nethvanaxia
 # subfiefs
-Mozthriisia
 Fusmor
+Mozthriisia
 
 # estate
 # title
@@ -5080,8 +5080,8 @@ Fusmor
 # name
 Sarsadethia
 # subfiefs
-Pervineigha
 Westohthheughough
+Pervineigha
 
 # estate
 # title
@@ -5098,8 +5098,8 @@ Troslidethia
 # name
 Sthetaria
 # subfiefs
-Ferlithia
 Tarrimia
+Ferlithia
 
 # estate
 # title
@@ -5116,8 +5116,8 @@ Nethflindeth
 # name
 Trisdrendeth
 # subfiefs
-Vostopia
 Tarfreyia
+Vostopia
 
 # estate
 # title
@@ -5125,9 +5125,9 @@ Tarfreyia
 # name
 Eashinieigha
 # subfiefs
-Finithvaynia
 Nethdeth
 Tunol
+Finithvaynia
 
 # estate
 # title
@@ -5172,8 +5172,8 @@ Nothideth
 # name
 Carrisia
 # subfiefs
-Nethdrenlithia
 Folnvineigha
+Nethdrenlithia
 Tharapinia
 
 # estate
@@ -5209,8 +5209,8 @@ Feymar
 # name
 Morethvanhenia
 # subfiefs
-Methvaynia
 Fereninilithia
+Methvaynia
 
 # estate
 # title
@@ -5227,9 +5227,9 @@ Voseigha
 # name
 Fusheughough
 # subfiefs
-Pervandethia
 Drethsia
 Vosheughough
+Pervandethia
 
 # estate
 # title
@@ -5246,8 +5246,8 @@ Nothithales
 # name
 Drethvensia
 # subfiefs
-Carflinmor
 Anvinheughough
+Carflinmor
 
 # estate
 # title
@@ -5255,8 +5255,8 @@ Anvinheughough
 # name
 Finithflintaria
 # subfiefs
-Pandeth
 Percaxia
+Pandeth
 
 # estate
 # title
@@ -5264,9 +5264,9 @@ Percaxia
 # name
 Carvaynia
 # subfiefs
-Renexvinmia
 Ferensataria
 Feyohthheughough
+Renexvinmia
 
 # estate
 # title
@@ -5274,8 +5274,8 @@ Feyohthheughough
 # name
 Ferendrenthales
 # subfiefs
-Mozthvaynia
 ilfreyia
+Mozthvaynia
 
 # estate
 # title
@@ -5301,8 +5301,8 @@ deth
 # name
 Finithvinhenia
 # subfiefs
-Ventlifrey
 Folnvendeth
+Ventlifrey
 
 # estate
 # title
@@ -5310,8 +5310,8 @@ Folnvendeth
 # name
 Lerinitaria
 # subfiefs
-Niladriax
 Pervindeth
+Niladriax
 
 # estate
 # title
@@ -5346,9 +5346,9 @@ Drethvia
 # name
 Westsia
 # subfiefs
+Trosilhenia
 Eashheughough
 Tharflintricth
-Trosilhenia
 
 # estate
 # title
@@ -5365,9 +5365,9 @@ Anohthvia
 # name
 Tardrenisia
 # subfiefs
-Fusroaxia
-Fuslimor
 Ferhenia
+Fuslimor
+Fusroaxia
 
 # estate
 # title
@@ -5375,8 +5375,8 @@ Ferhenia
 # name
 Nilariaxia
 # subfiefs
-Panmia
 Hethiavandriax
+Panmia
 
 # estate
 # title
@@ -5384,8 +5384,8 @@ Hethiavandriax
 # name
 Eashrimar
 # subfiefs
-vintaria
 Vostrethtopia
+vintaria
 
 # estate
 # title
@@ -5411,9 +5411,9 @@ Percisia
 # name
 Moztheigha
 # subfiefs
+Percfrey
 Morethflindeth
 Nothifrey
-Percfrey
 
 # estate
 # title
@@ -5430,8 +5430,8 @@ Topiar
 # name
 Lervanfreyia
 # subfiefs
-Renexventricth
 Tunmia
+Renexventricth
 
 # estate
 # title
@@ -5439,8 +5439,8 @@ Tunmia
 # name
 Lereigha
 # subfiefs
-Topiisia
 Sthenohthvia
+Topiisia
 
 # estate
 # title
@@ -5448,8 +5448,8 @@ Sthenohthvia
 # name
 Folnmar
 # subfiefs
-Folniltaria
 Nilatopia
+Folniltaria
 
 # estate
 # title
@@ -5466,8 +5466,8 @@ Daytaxia
 # name
 Eashdrentricth
 # subfiefs
-Finithohthaxia
 Nothitricth
+Finithohthaxia
 
 # estate
 # title
@@ -5475,9 +5475,9 @@ Nothitricth
 # name
 iniar
 # subfiefs
+Tarinivia
 Kerfrey
 lithia
-Tarinivia
 
 # estate
 # title
@@ -5512,9 +5512,9 @@ Folniniol
 # name
 Sardeth
 # subfiefs
-Sarvithfreyia
-Folnvia
 Troseigha
+Folnvia
+Sarvithfreyia
 
 # estate
 # title
@@ -5522,8 +5522,8 @@ Troseigha
 # name
 Sarmar
 # subfiefs
-Fusiniheughough
 Tharvia
+Fusiniheughough
 
 # estate
 # title
@@ -5531,8 +5531,8 @@ Tharvia
 # name
 Trismia
 # subfiefs
-Lueghtaria
 Fusdethia
+Lueghtaria
 
 # estate
 # title
@@ -5549,8 +5549,8 @@ Ferenflindethia
 # name
 Trisdriax
 # subfiefs
-Tarritricth
 Hethiahenia
+Tarritricth
 
 # estate
 # title
@@ -5567,8 +5567,8 @@ Ferenflinfreyia
 # name
 Feraxia
 # subfiefs
-Eashmia
 Carthales
+Eashmia
 
 # estate
 # title
@@ -5576,8 +5576,8 @@ Carthales
 # name
 Topideth
 # subfiefs
-Nilatricth
 Perlithia
+Nilatricth
 
 # estate
 # title
@@ -5585,9 +5585,9 @@ Perlithia
 # name
 Nethlimor
 # subfiefs
-Finithtopia
 Feighmar
 Sarinidriax
+Finithtopia
 
 # estate
 # title
@@ -5613,8 +5613,8 @@ Topitricth
 # name
 Morethdeth
 # subfiefs
-Renexar
 Folnvaynia
+Renexar
 
 # estate
 # title
@@ -5622,8 +5622,8 @@ Folnvaynia
 # name
 Tristrethdeth
 # subfiefs
-Nothisamar
 Lerohthar
+Nothisamar
 
 # estate
 # title
@@ -5631,8 +5631,8 @@ Lerohthar
 # name
 Fervanol
 # subfiefs
-Anillithia
 Feighromor
+Anillithia
 Renexdrenmar
 
 # estate
@@ -5641,8 +5641,8 @@ Renexdrenmar
 # name
 Eashhenia
 # subfiefs
-Lueghtricth
 Fustrethlithia
+Lueghtricth
 
 # estate
 # title
@@ -5659,9 +5659,9 @@ Sarsamor
 # name
 Renexriar
 # subfiefs
-vinvia
-Fusilar
 drenaxia
+Fusilar
+vinvia
 
 # estate
 # title
@@ -5669,8 +5669,8 @@ drenaxia
 # name
 Westtricth
 # subfiefs
-Ferenlisia
 Feighvaynia
+Ferenlisia
 
 # estate
 # title
@@ -5678,8 +5678,8 @@ Feighvaynia
 # name
 Nilamor
 # subfiefs
-Folnroeigha
 Fusohthvaynia
+Folnroeigha
 Feylithia
 
 # estate
@@ -5706,9 +5706,9 @@ Folntricth
 # name
 Finithar
 # subfiefs
+Perol
 Hethiathales
 Ferilvaynia
-Perol
 
 # estate
 # title
@@ -5717,8 +5717,8 @@ Perol
 Westvinhenia
 # subfiefs
 Ventmia
-Perthales
 Hethiavintaria
+Perthales
 
 # estate
 # title
@@ -5726,9 +5726,9 @@ Hethiavintaria
 # name
 axia
 # subfiefs
-Morethdethia
-Sthetopia
 Lerdrensia
+Sthetopia
+Morethdethia
 
 # estate
 # title
@@ -5745,9 +5745,9 @@ flinvia
 # name
 Thardeth
 # subfiefs
-Drethdeth
 Kervanmia
 Sthedrentopia
+Drethdeth
 
 # estate
 # title
@@ -5755,9 +5755,9 @@ Sthedrentopia
 # name
 Carvanthales
 # subfiefs
+Nethventricth
 Sthenar
 Lueghsadeth
-Nethventricth
 
 # estate
 # title
@@ -5765,11 +5765,11 @@ Nethventricth
 # name
 Feighvinar
 # subfiefs
-Lerildethia
 Tunapinia
+Ferar
 Mozthheughough
 Lerlithales
-Ferar
+Lerildethia
 
 # estate
 # title
@@ -5786,8 +5786,8 @@ Thardrentricth
 # name
 Percilmar
 # subfiefs
-Westvanmor
 Vosilhenia
+Westvanmor
 
 # estate
 # title
@@ -5796,8 +5796,8 @@ Vosilhenia
 Finithrithales
 # subfiefs
 Lueghflinisia
-Hethiavithvia
 Topivaynia
+Hethiavithvia
 
 # estate
 # title
@@ -5805,8 +5805,8 @@ Topivaynia
 # name
 Tuntrethvaynia
 # subfiefs
-Ferenmar
 Finithtrethdeth
+Ferenmar
 Lerdeth
 
 # estate
@@ -5815,9 +5815,9 @@ Lerdeth
 # name
 Methliisia
 # subfiefs
-Ferenvanapinia
 Daytvantricth
 Paniniar
+Ferenvanapinia
 
 # estate
 # title
@@ -5825,10 +5825,10 @@ Paniniar
 # name
 Westdrenaxia
 # subfiefs
-Feyvia
 Kerdethia
 Anvinisia
 Stheilar
+Feyvia
 
 # estate
 # title
@@ -5837,8 +5837,8 @@ Stheilar
 Ferenflinmia
 # subfiefs
 Nilaisia
-Eashtaria
 Lueghisia
+Eashtaria
 
 # estate
 # title
@@ -5856,9 +5856,9 @@ Ventflintopia
 # name
 Folnrisia
 # subfiefs
+Tharlithia
 vaynia
 Folnvinhenia
-Tharlithia
 
 # estate
 # title
@@ -5867,9 +5867,9 @@ Tharlithia
 Kersavia
 # subfiefs
 Trisvenisia
-Morethtaria
 Hethiasia
 Trosrifrey
+Morethtaria
 
 # estate
 # title
@@ -5877,10 +5877,10 @@ Trosrifrey
 # name
 Mozthilar
 # subfiefs
-Vosiniisia
-Eashvaynia
 Pantopia
+Vosiniisia
 Sthefrey
+Eashvaynia
 
 # estate
 # title
@@ -5888,8 +5888,8 @@ Sthefrey
 # name
 Perisia
 # subfiefs
-Trisrothales
 Nothiflinaxia
+Trisrothales
 Sarsia
 
 # estate
@@ -5898,9 +5898,9 @@ Sarsia
 # name
 Hethialihenia
 # subfiefs
-Perohththales
 Folnsia
 Lervia
+Perohththales
 
 # estate
 # title
@@ -5927,8 +5927,8 @@ Ansia
 # name
 Nethvenar
 # subfiefs
-Vosriaxia
 Hethiadrenthales
+Vosriaxia
 
 # estate
 # title
@@ -5937,8 +5937,8 @@ Hethiadrenthales
 Anmor
 # subfiefs
 Nethvinhenia
-Anriar
 Stherotricth
+Anriar
 
 # estate
 # title
@@ -5947,8 +5947,8 @@ Stherotricth
 Sarrisia
 # subfiefs
 Nothitrethvaynia
-Kermor
 iltricth
+Kermor
 
 # estate
 # title
@@ -5956,9 +5956,9 @@ iltricth
 # name
 Anilapinia
 # subfiefs
+Lueghsaar
 Ventfrey
 Mozthar
-Lueghsaar
 
 # estate
 # title
@@ -5966,9 +5966,9 @@ Lueghsaar
 # name
 Westfreyia
 # subfiefs
-Folntreththales
 Drethflinar
 Pervithol
+Folntreththales
 
 # estate
 # title
@@ -5977,8 +5977,8 @@ Pervithol
 Tharvandeth
 # subfiefs
 Nethvanaxia
-Finithvia
 Percrofrey
+Finithvia
 Sarsadethia
 
 # estate
@@ -5987,8 +5987,8 @@ Sarsadethia
 # name
 Hethialithia
 # subfiefs
-Eashinieigha
 Trisdrendeth
+Eashinieigha
 
 # estate
 # title
@@ -6015,10 +6015,10 @@ Sthevenmar
 # name
 Ferenfrey
 # subfiefs
-Westvenmia
 Lerventaria
 Lueghtopia
 Folndrenisia
+Westvenmia
 
 # estate
 # title
@@ -6027,9 +6027,9 @@ Folndrenisia
 Trisilar
 # subfiefs
 Mozthflinthales
-Tunventopia
 Renexohthhenia
 Daytdrenmor
+Tunventopia
 
 # estate
 # title
@@ -6038,8 +6038,8 @@ Daytdrenmor
 Taraxia
 # subfiefs
 Tarvithlithia
-Morethheughough
 Trisinivia
+Morethheughough
 
 # estate
 # title
@@ -6047,9 +6047,9 @@ Trisinivia
 # name
 Nethdriax
 # subfiefs
+Carrisia
 Thardrenmar
 Mozthsia
-Carrisia
 
 # estate
 # title
@@ -6057,9 +6057,9 @@ Carrisia
 # name
 Nothidethia
 # subfiefs
-Ventfreyia
-Fusheughough
 Finithvinhenia
+Fusheughough
+Ventfreyia
 
 # estate
 # title
@@ -6067,9 +6067,9 @@ Finithvinhenia
 # name
 Finithtrethhenia
 # subfiefs
-Drethvensia
-Finithflintaria
 Morethaxia
+Finithflintaria
+Drethvensia
 
 # estate
 # title
@@ -6088,8 +6088,8 @@ Moretheigha
 # subfiefs
 Eashvinheughough
 Tardrenisia
-Westsia
 Tunfreyia
+Westsia
 
 # estate
 # title
@@ -6099,8 +6099,8 @@ Vosmar
 # subfiefs
 Feraxia
 Nilalieigha
-Morethvanhenia
 Fusiniol
+Morethvanhenia
 
 # estate
 # title
@@ -6118,9 +6118,9 @@ Lerinitaria
 # name
 Tunvinvia
 # subfiefs
-Lereigha
-Moztheigha
 Sardeth
+Moztheigha
+Lereigha
 
 # estate
 # title
@@ -6128,10 +6128,10 @@ Sardeth
 # name
 Tuneigha
 # subfiefs
-Nilailhenia
 Eashrimar
-Lueghvanfreyia
 Nilariaxia
+Lueghvanfreyia
+Nilailhenia
 
 # estate
 # title
@@ -6139,8 +6139,8 @@ Nilariaxia
 # name
 Panilisia
 # subfiefs
-Eashdrentricth
 iniar
+Eashdrentricth
 Nilailfreyia
 
 # estate
@@ -6150,8 +6150,8 @@ Nilailfreyia
 Fermia
 # subfiefs
 Folnmar
-Tarrotaria
 Mozthapinia
+Tarrotaria
 Sthevithtopia
 
 # estate
@@ -6161,8 +6161,8 @@ Sthevithtopia
 Lerfreyia
 # subfiefs
 Trismia
-Vosdethia
 Sarmar
+Vosdethia
 
 # estate
 # title
@@ -6170,9 +6170,9 @@ Sarmar
 # name
 Tunlithia
 # subfiefs
-Trisdriax
 Sthemar
 Topideth
+Trisdriax
 Nethlimor
 
 # estate
@@ -6181,8 +6181,8 @@ Nethlimor
 # name
 Methmia
 # subfiefs
-Topidrentaria
 Percohthtaria
+Topidrentaria
 
 # estate
 # title
@@ -6191,9 +6191,9 @@ Percohthtaria
 Vosromia
 # subfiefs
 Morethdeth
+Carvanmia
 Tristrethdeth
 Eashhenia
-Carvanmia
 
 # estate
 # title
@@ -6201,9 +6201,9 @@ Carvanmia
 # name
 Sarinisia
 # subfiefs
+Westtricth
 Fervanol
 Renexriar
-Westtricth
 
 # estate
 # title
@@ -6232,9 +6232,9 @@ Thardeth
 # name
 lifrey
 # subfiefs
+Perisia
 Drethtaria
 Mozthilar
-Perisia
 
 # estate
 # title
@@ -6242,9 +6242,9 @@ Perisia
 # name
 thales
 # subfiefs
-Kersavia
 Feymor
 Folnrisia
+Kersavia
 
 # estate
 # title
@@ -6252,9 +6252,9 @@ Folnrisia
 # name
 Westillithia
 # subfiefs
-Hethialihenia
-Ferenflinmia
 Westdrenaxia
+Ferenflinmia
+Hethialihenia
 
 # estate
 # title
@@ -6272,10 +6272,10 @@ Methliisia
 # name
 Feydrenisia
 # subfiefs
-Carvanthales
-Feighvinar
-Percilmar
 Feighheughough
+Carvanthales
+Percilmar
+Feighvinar
 
 # estate
 # title
@@ -6283,9 +6283,9 @@ Feighheughough
 # name
 Folnvenfreyia
 # subfiefs
+Nethvenar
 Anmor
 Ferenvaynia
-Nethvenar
 
 # estate
 # title
@@ -6293,13 +6293,13 @@ Nethvenar
 # name
 Daytmor
 # subfiefs
-Sarrisia
+Keraxia
 Westdreneigha
+Lueghar
 Pansia
 Mozthvitheigha
 Mozthtopia
-Keraxia
-Lueghar
+Sarrisia
 
 # estate
 # title
@@ -6307,10 +6307,10 @@ Lueghar
 # name
 Nilaol
 # subfiefs
-Tharvandeth
 Hethialithia
-Sthevia
 Eashvenmia
+Sthevia
+Tharvandeth
 Westfreyia
 
 # estate
@@ -6320,8 +6320,8 @@ Westfreyia
 Anapinia
 # subfiefs
 Taraxia
-Nethdriax
 Finithtrethhenia
+Nethdriax
 
 # estate
 # title
@@ -6331,8 +6331,8 @@ Lueghriar
 # subfiefs
 Trisilar
 Ferenfrey
-Nothidethia
 Ferenapinia
+Nothidethia
 
 # estate
 # title
@@ -6352,8 +6352,8 @@ Tunlithia
 ol
 # subfiefs
 Carapinia
-Moretheigha
 Tuneigha
+Moretheigha
 
 # estate
 # title
@@ -6361,8 +6361,8 @@ Tuneigha
 # name
 Mozthol
 # subfiefs
-Tunvinvia
 Panilisia
+Tunvinvia
 Fermia
 
 # estate
@@ -6371,10 +6371,10 @@ Fermia
 # name
 Sthenmor
 # subfiefs
+Westillithia
+thales
 lifrey
 Feydrenisia
-thales
-Westillithia
 Anflinmar
 
 # estate
@@ -6393,8 +6393,8 @@ Anapinia
 # name
 Tharfreyia
 # subfiefs
-Lueghriar
-Mozthol
-ol
 Percapinia
+ol
+Mozthol
+Lueghriar
 

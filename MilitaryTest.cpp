@@ -23,12 +23,12 @@ void MilitaryTest::test1()
 	 LandTerritory territory2(2, sf::Color::White);
 	 LandArmy army1(player1, &territory1, 30);
 	 LandArmy army2(player2, &territory2, 4);
-	 territory1.occupy(&army1);
-	 territory2.occupy(&army2);
+	 territory1.getOccupancyHandler()->occupy(&army1);
+	 territory2.getOccupancyHandler()->occupy(&army2);
 
 	 army1.move(territory2, 25);
 
-	 if(territory1.getArmy() == nullptr)
+	 if(territory1.getOccupancyHandler()->getArmy() == nullptr)
 	 {
 		 result = false;
 		 std::string message = "Expected army on territory.";
@@ -37,7 +37,7 @@ void MilitaryTest::test1()
 	 }
 
 	 // Note that under any sane implementation player1's army should kill player2's army.
-	 if(&territory2.getArmy()->getOwner() !=  &player1)
+	 if(&territory2.getOccupancyHandler()->getArmy()->getOwner() !=  &player1)
 	 {
 		 result = false;
 		 std::string message = "Unexpected owner of territory.";
