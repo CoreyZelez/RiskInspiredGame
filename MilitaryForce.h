@@ -16,7 +16,10 @@ public:
 	virtual void draw(sf::RenderWindow &window) const;
 
 	virtual void move(Territory &location, int strength) = 0;
-	virtual void moveClosest(Territory &target, int strength) = 0;
+	/*
+	Moves to the territory along the path withing owners realm to the target territory.
+	*/
+	virtual void moveClosest(Territory &target, int strength, int maxDist) = 0;
 
 	// Returns true if graphical component contains specified world position.
 	bool containsPosition(sf::Vector2f position) const;
@@ -35,3 +38,6 @@ private:
 	int strength;
 	MilitaryForceGraphics graphics;
 };
+
+Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory &sourceTerritory, Territory &targetTerritory, int maxDist);
+

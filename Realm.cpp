@@ -43,6 +43,9 @@ std::unique_ptr<UIPanel> Realm::getUI(UIType type) const
 		estateCntText << sf::Text::Regular << sf::Color::White << "Number of estates: "
 			<< sf::Color::Yellow << std::to_string(estateManager.getRealmSize());
 
+		// instead of listing number of estates, list number of baronies, counties, kingdoms etc.
+		// only list when value greater than 0.
+		// estateManager.getEstateCount(title).
 
 		std::vector<sfe::RichText> texts = { nameText, estateCntText };
 		return std::make_unique<InformationPanel>(texts);

@@ -16,7 +16,7 @@ void EstateManager::draw(sf::RenderWindow &window, Title title) const
 	{
 		for(const auto &estate : element.second)
 		{
-			estate.get()->getGrid().draw(window);
+			estate.get()->draw(window);
 		}
 	}
 
@@ -29,7 +29,7 @@ void EstateManager::draw(sf::RenderWindow &window, Title title) const
 		}
 		for(const auto &estate : element.second)
 		{
-			estate.get()->getGrid().draw(window);
+			estate.get()->draw(window);
 		}
 	}
 }
@@ -43,7 +43,7 @@ void EstateManager::draw(sf::RenderWindow &window) const
 	{
 		for(const auto &estate : element.second)
 		{
-			estate.get()->getGrid().draw(window);
+			estate.get()->draw(window);
 		}
 	}
 }

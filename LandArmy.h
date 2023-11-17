@@ -8,7 +8,7 @@ public:
 	~LandArmy() = default;
 
 	virtual void move(Territory &territory, int strength) override;
-	virtual void moveClosest(Territory &target, int strength) override;
+	virtual void moveClosest(Territory &target, int strength, int maxDist) override;
 
 	void attack(LandArmy &defendingArmy, double defenceMultiplier);
 

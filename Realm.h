@@ -8,7 +8,6 @@
 
 class Player;
 class Estate;
-class MilitaryManager;
 
 class Realm : public HasUI
 {

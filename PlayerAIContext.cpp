@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Game.h"
 #include "Territory.h"
+#include <queue>
 #include <set>
 #include <iostream>
 
@@ -20,7 +21,7 @@ std::vector<Territory*> PlayerAIContext::getBorderTerritories()
 		assert(territory->getEstateOwner() == &player);
 
 		// Add territory to border territories if one of its adjacencies is enemy owned.
-		const std::set<Territory*> &adjacencies = territory->getAdjacencies(false);
+		const std::set<Territory*> &adjacencies = territory->getDistanceMap().getAdjacencies();
 		for(const auto &adjacency : adjacencies)
 		{
 			// Checks whether adjacent territory is apart of realms territories.
@@ -38,14 +39,15 @@ std::vector<Territory*> PlayerAIContext::getBorderTerritories()
 
 const std::set<Territory*> PlayerAIContext::getEnemyAdjacencies(Territory &territory)
 {
-	const std::set<Territory*>& adjacencies = territory.getAdjacencies(false);
+	const std::set<Territory*>& adjacencies = territory.getDistanceMap().getAdjacencies();
 	std::set<Territory*> enemyAdjacencies;
 
 	// Adds adjacent territories to enemyAdjacencies owned by enemy players.
 	for(std::set<Territory*>::const_iterator iter = adjacencies.begin();
 		iter != adjacencies.end(); ++iter)
 	{
-		if((*iter)->getEstateOwner() != &player)
+		if((*iter)->getEstateOwner() != &player 
+			&& (*iter)->getEstateOwner() != nullptr)
 		{
 			enemyAdjacencies.insert(*iter);
 		}
@@ -56,7 +58,7 @@ const std::set<Territory*> PlayerAIContext::getEnemyAdjacencies(Territory &terri
 
 std::map<const Player*, int> PlayerAIContext::getWeightedThreats(const Territory &territory)
 {
-	const std::set<Territory*>& adjacencies = territory.getAdjacencies(false);
+	const std::set<Territory*>& adjacencies = territory.getDistanceMap().getAdjacencies();
 	std::set<const Player*> enemyPlayers = {};
 	std::map<const Player*, int> weightedThreats;
 
@@ -82,6 +84,73 @@ std::map<const Player*, int> PlayerAIContext::getWeightedThreats(const Territory
 	return weightedThreats;
 }
 
+std::map<std::pair<const Territory*, int>, std::vector<LandArmy*>> PlayerAIContext::getArmyBorderDistances(int maxDist)
+{
+	std::map<std::pair<const Territory*, int>, std::vector<LandArmy*>> armyBorderDistances;
+	std::vector<std::unique_ptr<LandArmy>> &armies = player.getMilitaryManager().getArmies();
+	for(const auto &army : armies)
+	{
+		Territory &armyTerritory = army.get()->getTerritory();
+		for(const Territory* borderTerritory : getBorderTerritories())
+		{
+			assert(armyTerritory.getEstateOwner() == borderTerritory->getEstateOwner());
+			const int distance = calculateFriendlyDistanceBFS(armyTerritory, *borderTerritory, maxDist);
+			const std::pair<const Territory*, int> key = { borderTerritory, distance };
+			armyBorderDistances[key].push_back(army.get());  // Holds underlying pointer of unique pointer. Be careful.
+		}
+	}
+	return armyBorderDistances;
+}
+
+int calculateFriendlyDistanceBFS(const Territory &territory1, const Territory &territory2, int maxDist) {
+	// Ensure territories have the same owner
+	assert(territory1.getEstateOwner() == territory2.getEstateOwner());
+
+	// Create a queue for BFS.
+	std::queue<const Territory*> bfsQueue;
+
+	// Create a set to keep track of visited territories
+	std::unordered_set<const Territory*> visited;
+
+	// Enqueue the starting territory.
+	bfsQueue.push(&territory1);
+	visited.insert(&territory1);
+
+	// Start BFS
+	int distance = 0;
+	while(!bfsQueue.empty()) {
+		// Process all territories at the current distance
+		int currentQueueSize = bfsQueue.size();
+		for(int i = 0; i < currentQueueSize; ++i) {
+			const Territory* currentTerritory = bfsQueue.front();
+			bfsQueue.pop();
+
+			// Check if we reached territory2
+			if(currentTerritory == &territory2) {
+				return distance;
+			}
+
+			// Enqueue adjacent territories with the same owner
+			for(const Territory* neighbor : currentTerritory->getDistanceMap().getAdjacencies()) {
+				if(visited.find(neighbor) == visited.end() && neighbor->getEstateOwner() == territory1.getEstateOwner()) {
+					bfsQueue.push(neighbor);
+					visited.insert(neighbor);
+				}
+			}
+		}
+
+		// Move to the next distance level
+		++distance;
+		if(distance > maxDist)
+		{
+			break;
+		}
+	}
+
+	// If territory2 is not reachable from territory1, return -1 or some special value
+	return INT_MAX;
+}
+
 int calculateWeightedThreat(const Territory &territory, const Player &player, const float distanceFactor)
 {
 	int threatScore = 0;
@@ -89,7 +158,7 @@ int calculateWeightedThreat(const Territory &territory, const Player &player, co
 	for(const auto &army : armies)
 	{
 		const Territory &armyTerritory = army.get()->getTerritory();
-		const int distance = territory.getDistance(armyTerritory, false);
+		const int distance = territory.getDistanceMap().getDistance(armyTerritory);
 		assert(distance > 0 || army.get()->getStrength() == 0);
 		if(distance > 0)
 		{
@@ -123,3 +192,4 @@ int calculateTotalThreat(const std::map<const Player*, int>& threats)
 
 	return totalThreat;
 }
+

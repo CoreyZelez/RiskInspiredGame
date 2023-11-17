@@ -64,7 +64,8 @@ void LandedEstate::generateMilitary(MilitaryManager &militaryManager)
 std::unique_ptr<LandArmy> LandedEstate::putArmy(int strength)
 {
 	// Should not be hostile army residing on territory.
-	assert(territory.getOccupant() == nullptr || territory.getOccupant() == getRuler());
+	assert(territory.getOccupancyHandler()->getOccupant() == nullptr 
+		|| territory.getOccupancyHandler()->getOccupant() == getRuler());
 
 	std::unique_ptr<LandArmy> army = std::make_unique<LandArmy>(*getRuler(), &territory, strength);
 	territory.getOccupancyHandler()->occupy(army.get());

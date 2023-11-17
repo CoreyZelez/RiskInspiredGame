@@ -46,7 +46,7 @@ int SimplePlayerAI::calculateStrategicValue(const Territory &territory)
 	strategicValue += maxThreat + totalThreat;
 
 	// Calculate strategic desire to attack enemy neighbouring territories.
-	const std::set<Territory*> adjacencies = territory.getAdjacencies(false);
+	const std::set<Territory*> adjacencies = territory.getDistanceMap().getAdjacencies();
 	std::set<const Territory*> enemyTerritories;
 	// Determine enemy territories from adjacencies.
 	for(std::set<Territory*>::iterator iter = adjacencies.begin();
@@ -171,8 +171,12 @@ void SimplePlayerAI::executeLandMoveOrders(const std::map<Territory*, int> &stra
 	const int numArmies = armies.size(); 
 	assert(numArmies > 0);
 
+	// Distances of each friendly army to borders of own territory with movement inside own territory.
+	const int maxDist = 13;
+	std::map<std::pair<const Territory*, int>, std::vector<LandArmy*>> armyBorderDistances = context.getArmyBorderDistances(maxDist);
+
 	// Partially allocates armies prioritising closest first. Closer armies provide greater allocation.
-	for(int distance = 0; distance <= 13; ++distance)
+	for(int distance = 0; distance <= maxDist; ++distance)
 	{
 		for(auto& pair : remainingStrategicValues)
 		{
@@ -187,23 +191,20 @@ void SimplePlayerAI::executeLandMoveOrders(const std::map<Territory*, int> &stra
 			}
 
 			// Move armies of specified distance towards the territory.
-			for(int i = 0; i < numArmies; ++i)
+			std::pair<const Territory*, int> key = { &territory, distance };
+			std::vector<LandArmy*> &currDistArmies = armyBorderDistances[key];  
+			for(int i = 0; i < currDistArmies.size(); ++i)
 			{
 
-				LandArmy &army = *armies[i].get();
+				LandArmy &army = *currDistArmies[i];
 
 				const Territory &armyTerritory = army.getTerritory();
-				const int armyDistance = territory.getDistance(armyTerritory, true);
-
+				// assert(distance = bfsfriendly(army, territory))
 				assert(remainingStrategicValues.count(&territory) == 1);
 				assert(strategicValue > 0);
 				assert(freeToMove[&army] <= army.getStrength());
 
-				if(armyDistance != distance)
-				{
-					continue;
-				}
-				else if(freeToMove[&army] == 0)
+				if(freeToMove[&army] == 0)  
 				{
 					continue;
 				}
@@ -217,7 +218,7 @@ void SimplePlayerAI::executeLandMoveOrders(const std::map<Territory*, int> &stra
 				moveStrength = std::min(moveStrength, maximumAllocation);
 				if(moveStrength != 0)
 				{
-					army.moveClosest(territory, moveStrength);
+					army.moveClosest(territory, moveStrength, maxDist);
 					freeToMove[&army] -= moveStrength;
 					const int usedStrategicValue = 1 + moveStrength * strategicValuePerUnit;
 					strategicValue -= usedStrategicValue;

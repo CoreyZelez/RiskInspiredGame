@@ -94,8 +94,9 @@ void LandArmy::move(Territory &territory, int strength)
 	{
 		return;
 	}
-	
-	if(!getTerritory().isAdjacent(&territory))
+
+	// +Attempt to move to non adjacent location.
+	if(!getTerritory().getDistanceMap().isAdjacent(&territory))
 	{
 		return;
 	}
@@ -104,35 +105,36 @@ void LandArmy::move(Territory &territory, int strength)
 	int strengthAdjustment = -strength;
 
 	/// IN FUTURE USE FACTORY TO CREATE ARMY!!! SHOULD AUTOMATICALLY STORE ARMY IN PLAYER MILITARYMANAGER!!!
-	std::unique_ptr<LandArmy> deployedArmy = std::make_unique<LandArmy>(getOwner(), &getTerritory(), strength);  // Land army attempting location occupation.
+	std::unique_ptr<LandArmy> newArmy = std::make_unique<LandArmy>(getOwner(), &getTerritory(), strength);  // Land army attempting location occupation.
 
-	// Attempt occupation of location by deployed army.
-	territory.getOccupancyHandler()->occupy(deployedArmy.get());
+	// Attempt occupation of location by new army.
+	territory.getOccupancyHandler()->occupy(newArmy.get());
 
 	// Refund strength to this->army if deployedArmy is not able to occupy location
-	if(&deployedArmy.get()->getTerritory() == &getTerritory())
+	if(&newArmy.get()->getTerritory() == &getTerritory())
 	{
-		const int strengthRefund = deployedArmy.get()->getStrength();
+		const int strengthRefund = newArmy.get()->getStrength();
 		assert(strengthRefund >= 0);
 		strengthAdjustment += strengthRefund;
-		deployedArmy.reset();
+		newArmy.reset();
 	}
-	// Add the army to the military manager of owning player.
 	else
 	{
-		getOwner().getMilitaryManager().addLandArmy(std::move(deployedArmy));
+		// Add the army to the military manager of owning player.
+		getOwner().getMilitaryManager().addLandArmy(std::move(newArmy));
 	}
 
 	// Adjust strength of this army.
 	adjustStrength(strengthAdjustment);
 }
 
-void LandArmy::moveClosest(Territory &target, int strength)
+void LandArmy::moveClosest(Territory &target, int strength, int maxDist)
 {
 	assert(strength > 0);
-	const int distance = getTerritory().getDistance(target, true);
-	std::set<Territory*> adjacencies = getTerritory().getAdjacencies(true);
-	std::set<Territory*> friendlyAdjacencies;
+	const int distance = getTerritory().getDistanceMap().getDistance(target);  
+	std::set<Territory*> adjacencies = getTerritory().getDistanceMap().getAdjacencies();
+	// Construct adjacent territories with same owner as army owner.
+	std::set<Territory*> friendlyAdjacencies;  
 	for(Territory* territory : adjacencies)
 	{
 		if(territory->getEstateOwner() == &getOwner())
@@ -141,26 +143,15 @@ void LandArmy::moveClosest(Territory &target, int strength)
 		}
 	}
 
-	// 
-	// ADD IN PRIORITISATION OF MOVEMENT TO BORDER TERRITORIES IN THIS LOOP.
-	//
-	for(Territory* territory : friendlyAdjacencies)
-	{
-		assert(territory->getEstateOwner() == &getOwner());
-		if(territory->getDistance(target, true) < distance)
-		{
-			assert(territory->getDistance(target, true) == distance - 1);
-			move(*territory, strength);
-			return;
-		}
+	Territory& source = getTerritory();
+	Territory* nearest = nearestFriendlyAdjacentTerritoryDijkstra(source, target, maxDist);
+	assert(territory != nullptr);
+	move(*nearest, strength);
 
-	}
 
 	//////////////////
 	// in future prioritise border territories!
 	//////////////
-	// consider computation cost!
-	////////////////////////
 }
 
 

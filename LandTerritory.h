@@ -15,12 +15,7 @@ public:
 
 	virtual ~LandTerritory() = default;
 
-	// Calculates distance to each territory in territories and updates distances map.
 	virtual void calculateDistances(const std::vector<Territory*> &territories) override;
-	virtual int getDistance(const Territory &territory, bool sameType) const override;
-	virtual const std::set<Territory*> &getAdjacencies(bool sameType) const override;
-	virtual std::set<Territory*> &getAdjacencies(bool sameType) override;
-	virtual void addAdjacencies(std::vector<Territory*> &territories) override;
 
 	void setIsCoastal(bool isCoastal);
 	bool getIsCoastal() const;
@@ -29,10 +24,6 @@ public:
 	virtual std::string getSaveLabel() const override;
 
 private:
+	TerritoryDistanceMap landDistanceMap;  // Stores information about distances to any territory.
 	bool isCoastal = false;
-	// Distances between other land territories.
-	mutable std::map<const Territory*, int> landTerritoryDistances;
-	// Adjacent land territories.
-	std::set<Territory*> landTerritoryAdjacencies;
-
 };

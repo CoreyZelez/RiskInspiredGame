@@ -15,8 +15,6 @@ public:
 
 	virtual void saveToFile(std::ofstream &file) const override;
 
-	void setIsCoastal(bool isCoastal);
-
 	virtual std::unique_ptr<LandArmy> yieldLandArmy() override;
 	virtual std::unique_ptr<NavalFleet> yieldNavalFleet() override;
 

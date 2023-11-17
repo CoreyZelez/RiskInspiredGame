@@ -25,7 +25,6 @@ enum class BorderMode
 	noBorders,
 	feintBorders,
 	darkBorders
-
 };
 
 class Grid  
@@ -38,6 +37,8 @@ public:
 	virtual void saveToFile(std::ofstream &file) const;
 
 	void draw(sf::RenderWindow &window) const;
+
+	// select()  // grid becomes selected and displays border in different colour.
 
 	void addGrid(const Grid &grid);  // Adds parameter grid positions to this grids positions.
 	void removeGrid(const Grid &grid);  // Removes parameter grid positions from this grids positions.
@@ -67,7 +68,7 @@ private:
 	sf::Vector2i center;  // Center position in game world.
 	sf::VertexArray vertices;
 	sf::Color color;
-	BorderMode borderMode = BorderMode::feintBorders;
+	BorderMode borderMode = BorderMode::darkBorders;
 };
 
 Grid loadTerritoryGrid(std::ifstream &file);

@@ -45,6 +45,18 @@ void Estate::saveToFile(std::ofstream &file) const
 	saveSubfiefs(file);
 }
 
+void Estate::draw(sf::RenderWindow &window) const
+{
+	if(drawSubfiefs)
+	{
+		//
+	}
+	else
+	{
+		grid.draw(window);
+	}
+}
+
 void Estate::saveSubfiefs(std::ofstream &file) const
 {
 	for(auto subfief : subfiefs)

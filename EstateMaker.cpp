@@ -24,7 +24,7 @@ void EstateMaker::draw(sf::RenderWindow &window)
 		///estateManager.draw(window, selectedTitle - 1);
 
 		estateManager.draw(window, selectedTitle);
-		estate->getGrid().draw(window);
+		estate->draw(window);
 	}
 }
 

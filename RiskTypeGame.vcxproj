@@ -217,6 +217,7 @@
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Territory.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="TerritoryDistanceMap.cpp" />
     <ClCompile Include="TerritoryMaker.cpp" />
     <ClCompile Include="TerritoryManager.cpp" />
     <ClCompile Include="TestRunner.cpp" />
@@ -280,6 +281,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Territory.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="TerritoryDistanceMap.h" />
     <ClInclude Include="TerritoryMaker.h" />
     <ClInclude Include="TerritoryManager.h" />
     <ClInclude Include="TestRunner.h" />

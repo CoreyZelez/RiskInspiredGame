@@ -213,7 +213,7 @@ void TerritoryManager::calculateAdjacencies()
 {
 	for(auto &territory : territories)
 	{
-		territory->addAdjacencies(territories);
+		territory->getDistanceMap().addAdjacencies(territories);
 	}
 }
 

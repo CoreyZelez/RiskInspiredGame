@@ -4,7 +4,9 @@
 
 enum class MapMode
 {
+	// sus 
 	selectedRealm,  // Displays selected realm in yellow. All other realms displayed grey.
+	//
 	realm,
 	barony,
 	county,

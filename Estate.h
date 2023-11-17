@@ -13,7 +13,8 @@ class MilitaryManager;
 const std::string estateSaveLabel = "# estate";  // Save label for non landed estate.
 const std::string baronySaveLabel = "# barony";  // Save label for barony.
 
-class Estate
+// SHOULD INHERIT HASUI SO WE CAN DISPLAY INFORMATION WHEN ESTATE IS CLICKED FROM F2 F3 ETC.
+class Estate  // : public HadUI  
 {
 public:
 	Estate(Title title);
@@ -26,13 +27,14 @@ public:
 
 	virtual void saveToFile(std::ofstream &file) const;
 
-	void setRuler(Player *ruler, bool updatePlayerGrid = true);
+	void draw(sf::RenderWindow &window) const;
 
 	// Yields any resources directly associated with estate. This does not include subfief resources.
 	virtual void yield(MilitaryManager &militaryManager);
 	// Provides bonus yields to subfiefs. Yield dependant on title.
 	virtual void provideSubfiefBonusYields();
 
+	void setRuler(Player *ruler, bool updatePlayerGrid = true);
 	void addSubfief(Estate *subfief);
 	void removeSubfief(Estate *subfief);
 	void setParent(Estate *parent);
@@ -41,6 +43,8 @@ public:
 	const Player *getRuler() const;
 	Title getTitle() const;
 	std::string getName() const;
+
+	// VOID DRAW
 
 	Grid& getGrid();
 	const Grid& getGrid() const;
@@ -64,6 +68,7 @@ private:
 	std::set<Estate*> subfiefs;
 	std::string name = "";
 	Grid grid;
+	bool drawSubfiefs = false;
 
 	// Alocates estate to ruler who's realm owns every lower estate entirely.
 	void handleAllocation();

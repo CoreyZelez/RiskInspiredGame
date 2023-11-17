@@ -15,7 +15,7 @@ void NavalFleet::move(Territory &location, int strength)
 {
 }
 
-void NavalFleet::moveClosest(Territory & target, int strength)
+void NavalFleet::moveClosest(Territory & target, int strength, int maxDist)
 {
 }
 

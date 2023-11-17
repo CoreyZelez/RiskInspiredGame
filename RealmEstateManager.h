@@ -31,12 +31,10 @@ public:
 
 private:
 	MilitaryManager &militaryManager;
-
 	////////////////////////////////////////////////////////////
 	// SHOULD PROBABLY CHANGE THIS TO SET FOR MORE EFFICIENCY!//
 	std::vector<Estate*> fiefs;  ///////////////////////////////
 	////////////////////////////////////////////////////////////
-
 	std::set<Territory*> territories;
 	Grid grid;
 };
