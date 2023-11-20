@@ -93,7 +93,6 @@ std::array<unsigned int, 4> MilitaryForce::expendStrength(unsigned int amount, c
 			break;
 		}
 	}
-	assert(amount == 0);  // Should not call function with amount greater than total available strength.
 	graphics.update();
 	return newStaminaStrength;
 }

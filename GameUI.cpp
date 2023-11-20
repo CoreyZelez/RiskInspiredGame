@@ -4,32 +4,32 @@
 
 void GameUI::draw(sf::RenderWindow &window) const
 {
-	if(leftPanel != nullptr)
+	if(leftUI != nullptr)
 	{
-		leftPanel.get()->draw(window);
+		leftUI.get()->draw(window);
 	}
-	if(rightPanel != nullptr)
+	if(rightUI != nullptr)
 	{
-		rightPanel.get()->draw(window);
+		rightUI.get()->draw(window);
 	}
-	if(bottomPanel != nullptr)
+	if(bottomUI != nullptr)
 	{
-		bottomPanel.get()->draw(window);
+		bottomUI.get()->draw(window);
 	}
 }
 
-void GameUI::setLeftPanel(std::unique_ptr<UIPanel> panel)
+void GameUI::setLeftUI(std::unique_ptr<UIEntity> entity)
 {
-	leftPanel = std::move(panel);
-	leftPanel.get()->setPosition(sf::Vector2f(0, 400));
+	leftUI = std::move(entity);
+	leftUI.get()->setPosition(sf::Vector2f(0, 400));
 }
 
-void GameUI::setRightPanel(std::unique_ptr<UIPanel> panel)
+void GameUI::setRightUI(std::unique_ptr<UIEntity> entity)
 {
-	rightPanel = std::move(panel);
+	rightUI = std::move(entity);
 }
 
-void GameUI::setBottomPanel(std::unique_ptr<UIPanel> panel)
+void GameUI::setBottomUI(std::unique_ptr<UIEntity> entity)
 {
-	bottomPanel = std::move(panel);
+	bottomUI = std::move(entity);
 }

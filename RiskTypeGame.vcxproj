@@ -224,6 +224,7 @@
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="EstateMaker.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="UIEntity.cpp" />
     <ClCompile Include="UIPanel.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
@@ -288,6 +289,7 @@
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="EstateMaker.h" />
+    <ClInclude Include="UIEntity.h" />
     <ClInclude Include="UIPanel.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>

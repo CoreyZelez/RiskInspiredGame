@@ -29,7 +29,7 @@ void GameUIController::handlePanelCreation(const sf::RenderWindow &window)
 			const Realm *realm = game.getRealm(worldPos);
 			if(realm != nullptr)
 			{
-				gameUI.setLeftPanel(realm->getUI(UIType::information));
+				gameUI.setLeftUI(realm->getUI(UIType::information));
 			}
 		}
 	}

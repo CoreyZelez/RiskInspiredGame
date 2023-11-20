@@ -2,21 +2,21 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-class UIPanel;
+class UIEntity;
 
 class GameUI
 {
 public:
 	void draw(sf::RenderWindow &window) const;
 
-	void setLeftPanel(std::unique_ptr<UIPanel> panel);
-	void setRightPanel(std::unique_ptr<UIPanel> panel);
-	void setBottomPanel(std::unique_ptr<UIPanel> panel);
+	void setLeftUI(std::unique_ptr<UIEntity> entity);
+	void setRightUI(std::unique_ptr<UIEntity> entity);
+	void setBottomUI(std::unique_ptr<UIEntity> entity);
 
 private:
-	std::unique_ptr<UIPanel> leftPanel;
-	std::unique_ptr<UIPanel> rightPanel;
-	std::unique_ptr<UIPanel> bottomPanel;
+	std::unique_ptr<UIEntity> leftUI;
+	std::unique_ptr<UIEntity> rightUI;
+	std::unique_ptr<UIEntity> bottomUI;
 
 };
 

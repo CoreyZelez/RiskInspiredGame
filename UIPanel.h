@@ -1,7 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "UIEntity.h"
 
-class UIPanel
+class UIPanel : public UIEntity
 {
 public:
 	UIPanel(sf::Color backgroundColor);
