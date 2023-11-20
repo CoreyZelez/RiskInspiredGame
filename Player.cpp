@@ -18,7 +18,7 @@ Player::Player(Game& game)
 
 void Player::handleTurn()
 {
-	militaryManager.removeDeadMilitaries();
+	militaryManager.update();
 	realm.getEstateManager().handleFiefYields();
 
 	if(!isHuman)

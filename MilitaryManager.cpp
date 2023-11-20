@@ -15,6 +15,12 @@ void MilitaryManager::draw(sf::RenderWindow & window) const
 	}
 }
 
+void MilitaryManager::update()
+{
+	removeDeadMilitaries();
+	resetStaminas();
+}
+
 MilitaryForce* MilitaryManager::getMilitary(sf::Vector2f position)
 {
 	for(MilitaryForce *military : militaries)
@@ -98,6 +104,19 @@ void MilitaryManager::removeDeadMilitaries()
 			militaries.erase(iterN->get());
 			iterN = navies.erase(iterN);
 		}
+	}
+}
+
+void MilitaryManager::resetStaminas()
+{
+	for(auto &army : armies)
+	{
+		army.get()->resetStamina();
+	}
+
+	for(auto &navy : navies)
+	{
+		navy.get()->resetStamina();
 	}
 }
 

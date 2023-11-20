@@ -16,13 +16,19 @@ class LandedEstate;
 const std::string landSaveLabel = "# land";
 const std::string navalSaveLabel = "# naval";
 
+enum class TerritoryType
+{
+	land,
+	naval
+};
+
 class Territory : public Subject
 {
 public:
-	Territory(int id, Grid grid);  // Temporary for testing.
-	Territory(int id, sf::Color color);  // Temporary for testing.
-	Territory(int id, Grid grid, std::unique_ptr<IOccupiable> occupancyHandler);
-	Territory(int id, sf::Color color, std::unique_ptr<IOccupiable> occupancyHandler);
+	Territory(int id, Grid grid, TerritoryType type);  // Temporary for testing.
+	Territory(int id, sf::Color color, TerritoryType type);  // Temporary for testing.
+	Territory(int id, Grid grid, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type);
+	Territory(int id, sf::Color color, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type);
 	virtual ~Territory() = default;
 
 	void saveToFile(std::ofstream &file) const;
@@ -52,6 +58,7 @@ public:
 private:
 	int id;  // ID representing territory in text file.
 	Grid grid;
+	TerritoryType type;
 	const LandedEstate *landedEstate = nullptr; 
 	std::unique_ptr<IOccupiable> occupancyHandler;  // Handles military occupancy of territory.
 	TerritoryDistanceMap distanceMap;  // Stores information about distances to any territory.

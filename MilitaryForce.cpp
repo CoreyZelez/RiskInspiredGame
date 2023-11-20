@@ -9,7 +9,7 @@
 #include <unordered_map>
 
 MilitaryForce::MilitaryForce(Player &owner, Territory *territory, int strength, const sf::Texture &texture)
-	: owner(owner), territory(territory), strength(strength), graphics(texture, this->strength)
+	: owner(owner), territory(territory), staminaStrength({ 0, 0, 0, strength }), graphics(texture, this)
 {
 	assert(territory != nullptr);
 	assert(strength > 0);
@@ -20,27 +20,88 @@ void MilitaryForce::draw(sf::RenderWindow &window) const
 	graphics.draw(window);
 }
 
-void MilitaryForce::adjustStrength(int amount)
+void MilitaryForce::resetStamina()
 {
-	/// SHOULD NEVER ADJUST STRENGTH OF DEAD ARMY.
-	assert(strength > 0);
+	assert(staminaStrength.size() == 4);
+	staminaStrength = { 0, 0, 0, getTotalStrength() };
+}
 
-	if(strength <= -amount)
+void MilitaryForce::reduceStrength(unsigned int amount)
+{
+	for(int stamina = 0; stamina < staminaStrength.size(); ++stamina)
 	{
-		strength = 0;
+		if(amount > staminaStrength[stamina])
+		{
+			amount -= staminaStrength[stamina];
+			staminaStrength[stamina] = 0;
+		}
+		else
+		{
+			staminaStrength[stamina] -= amount;
+			amount = 0;
+			break;
+		}
+	}
+	assert(amount = 0);  // Should not call function with amount greater than total strength.
+	if(isDead())
+	{
 		notifyObservers(deadMilitary);
 	}
-	else
-	{
-		strength += amount;
-	}
-
+	// Update graphics sprite of military.
 	graphics.update();
 }
 
-int MilitaryForce::getStrength() const
+std::array<unsigned int, 4> MilitaryForce::getStaminaStrength() const
 {
-	return strength;
+	return staminaStrength;
+}
+
+std::array<unsigned int, 4> MilitaryForce::expendStrength(unsigned int amount, const Territory &territory)
+{
+	const std::pair<int, int> minMaxStaminaCost = calculateMinMaxStaminaCost(territory);
+	const int minStaminaCost = minMaxStaminaCost.first;
+	const int maxStaminaCost = minMaxStaminaCost.second;
+	std::array<unsigned int, 4> newStaminaStrength = { 0 };
+	for(int stamina = minStaminaCost; stamina <= staminaStrength.size(); ++stamina)
+	{
+		const int newStamina = std::max(stamina - maxStaminaCost, 0);
+		if(staminaStrength[stamina] < amount)
+		{
+			amount -= staminaStrength[stamina];
+			newStaminaStrength[newStamina] = staminaStrength[stamina];
+			staminaStrength[stamina] = 0;
+		}
+		else
+		{
+			newStaminaStrength[newStamina] = amount;
+			staminaStrength[stamina] -= amount;
+			amount = 0;
+			break;
+		}
+	}
+	assert(amount == 0);  // Should not call function with amount greater than total available strength.
+	if(isDead())
+	{
+		notifyObservers(deadMilitary);
+	}
+	// Update graphics sprite of military.
+	graphics.update();
+	return newStaminaStrength;
+}
+
+void MilitaryForce::increaseStrength(unsigned int strengthAmount)
+{
+	staminaStrength[staminaStrength.size() - 1] += strengthAmount;
+}
+
+unsigned int MilitaryForce::getStrength(int minStamina) const
+{
+	unsigned int strengthSum = 0;
+	for(int stamina = minStamina; stamina < staminaStrength.size(); ++stamina)
+	{
+		strengthSum += staminaStrength[stamina];
+	}
+	return strengthSum;
 }
 
 Player& MilitaryForce::getOwner() const
@@ -48,9 +109,14 @@ Player& MilitaryForce::getOwner() const
 	return owner;
 }
 
+unsigned int MilitaryForce::getTotalStrength() const
+{
+	return getStrength(0);
+}
+
 bool MilitaryForce::isDead() const
 {
-	return strength == 0;
+	return getTotalStrength() == 0;
 }
 
 Territory& MilitaryForce::getTerritory() const

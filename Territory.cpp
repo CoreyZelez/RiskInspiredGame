@@ -5,23 +5,23 @@
 #include <fstream>
 #include <queue>
 
-Territory::Territory(int id, Grid grid)
-	: Territory(id, grid, nullptr)
+Territory::Territory(int id, Grid grid, TerritoryType type)
+	: Territory(id, grid, nullptr, type)
 {
 }
 
-Territory::Territory(int id, sf::Color color)
-	: Territory(id, color, nullptr)
+Territory::Territory(int id, sf::Color color, TerritoryType type)
+	: Territory(id, color, nullptr, type)
 {
 }
 
-Territory::Territory(int id, Grid grid, std::unique_ptr<IOccupiable> occupancyHandler)
-	: id(id), grid(grid), occupancyHandler(std::move(occupancyHandler)), distanceMap(*this)
+Territory::Territory(int id, Grid grid, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type)
+	: id(id), grid(grid), occupancyHandler(std::move(occupancyHandler)), distanceMap(*this), type(type)
 {
 }
 
-Territory::Territory(int id, sf::Color color, std::unique_ptr<IOccupiable> occupancyHandler)
-	: id(id), grid(color), occupancyHandler(std::move(occupancyHandler)), distanceMap(*this)
+Territory::Territory(int id, sf::Color color, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type)
+	: id(id), grid(color), occupancyHandler(std::move(occupancyHandler)), distanceMap(*this), type(type)
 {
 }
 

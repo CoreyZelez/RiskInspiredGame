@@ -25,7 +25,7 @@ void LandArmy::attack(LandArmy &defendingArmy, double defenceMultiplier)
 
 	// Adjust strengths for passing a given threshold.
 	const double strengthThreshold = 3;  // Threshold for guaranteed damage on opponent.
-	const int thresholdAdjustmentValue = -1;  // Strength adjustment for opponent passing threshold.
+	const int thresholdAdjustmentValue = 1;  // Strength adjustment for opponent passing threshold.
 	if(defenderAdjustedStrength >= strengthThreshold)
 	{
 		attackerStrengthAdjustment += thresholdAdjustmentValue;
@@ -46,15 +46,15 @@ void LandArmy::attack(LandArmy &defendingArmy, double defenceMultiplier)
 	std::mt19937 rng(std::random_device{}());
 	std::uniform_real_distribution<double> attackerDist(minAttacker, maxAttacker);  // Percent of strength defending army loses.
 	std::uniform_real_distribution<double> defenderDist(minDefender, maxDefender);  // Percent of strength attacking army loses.
-	defenderStrengthAdjustment += -std::round(attackerDist(rng) * defenderStrength);
-	attackerStrengthAdjustment += -std::round(defenderDist(rng) * attackerStrength);
-	assert(defenderStrengthAdjustment <= 0);
-	assert(attackerStrengthAdjustment <= 0);
-	defendingArmy.adjustStrength(defenderStrengthAdjustment);
-	adjustStrength(attackerStrengthAdjustment);
+	defenderStrengthAdjustment += std::round(attackerDist(rng) * defenderStrength);
+	attackerStrengthAdjustment += std::round(defenderDist(rng) * attackerStrength);
+	assert(defenderStrengthAdjustment >= 0);
+	assert(attackerStrengthAdjustment >= 0);
+	defendingArmy.reduceStrength(defenderStrengthAdjustment);
+	reduceStrength(attackerStrengthAdjustment);
 
 	// Special case where no damage is taken by either army.
-	if(getStrength() == attackerStrength && defendingArmy.getStrength() == defenderStrength)
+	if(getTotalStrength() == attackerStrength && defendingArmy.getTotalStrength() == defenderStrength)
 	{
 		assert(attackerStrength < strengthThreshold && defenderStrength < strengthThreshold);
 		assert(attackerStrengthAdjustment == 0 && defenderStrengthAdjustment == 0);
@@ -63,24 +63,36 @@ void LandArmy::attack(LandArmy &defendingArmy, double defenceMultiplier)
 		std::uniform_int_distribution<int> dist(0, 1);
 		if(defenderAdjustedStrength > attackerStrength)
 		{
-			--attackerStrengthAdjustment;
+			++attackerStrengthAdjustment;
 		}
 		else if(defenderAdjustedStrength < attackerStrength)
 		{
-			--defenderStrengthAdjustment;
+			++defenderStrengthAdjustment;
 		}
 		else if(dist(rng) == 1)
 		{
-			--attackerStrengthAdjustment;
+			++attackerStrengthAdjustment;
 		}
 		else
 		{
-			--defenderStrengthAdjustment;
+			++defenderStrengthAdjustment;
 		}
 
 		// Adjust army strengths.
-		defendingArmy.adjustStrength(defenderStrengthAdjustment);
-		adjustStrength(attackerStrengthAdjustment);
+		defendingArmy.reduceStrength(defenderStrengthAdjustment);
+		reduceStrength(attackerStrengthAdjustment);
+	}
+}
+
+std::pair<int, int> LandArmy::calculateMinMaxStaminaCost(const Territory & territory) const
+{
+	if(getTerritory().getType() == TerritoryType::land || territory.getType() == TerritoryType::land)
+	{
+		return { 3, 3 };
+	}
+	else
+	{
+		return { 1, 2 };
 	}
 }
 
@@ -145,7 +157,7 @@ void LandArmy::moveClosest(Territory &target, int strength, int maxDist)
 
 	Territory& source = getTerritory();
 	Territory* nearest = nearestFriendlyAdjacentTerritoryDijkstra(source, target, maxDist);
-	assert(territory != nullptr);
+	assert(nearest != nullptr);
 	move(*nearest, strength);
 
 

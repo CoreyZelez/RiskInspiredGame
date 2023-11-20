@@ -3,6 +3,7 @@
 #include "Subject.h"
 #include <cstdint>
 #include <SFML/Graphics.hpp>
+#include <array>
 
 class Player;
 class Territory;

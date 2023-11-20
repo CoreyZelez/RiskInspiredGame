@@ -19,3 +19,9 @@ void NavalFleet::moveClosest(Territory & target, int strength, int maxDist)
 {
 }
 
+std::pair<int, int> NavalFleet::calculateMinMaxStaminaCost(const Territory & territory) const
+{
+	// temp.
+	return { 4, 4 };
+}
+
