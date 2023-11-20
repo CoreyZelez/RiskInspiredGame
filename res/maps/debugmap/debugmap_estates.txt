@@ -325,8 +325,8 @@ Nilamor
 # name
 Feymia
 # subfiefs
-Methinidriax
 Finithvantricth
+Methinidriax
 
 # estate
 # title
@@ -343,8 +343,8 @@ Methtrethheughough
 # name
 Percflinmar
 # subfiefs
-Drethdethia
 Thardrentopia
+Drethdethia
 
 # estate
 # title
@@ -361,8 +361,8 @@ Lueghmia
 # name
 Drethdeth
 # subfiefs
-Nilavia
 Tundeth
+Nilavia
 
 # estate
 # title
@@ -370,9 +370,9 @@ Tundeth
 # name
 Carmia
 # subfiefs
+Fusdrenmar
 Easheigha
 Morethsafrey
-Fusdrenmar
 
 # estate
 # title
@@ -380,8 +380,8 @@ Fusdrenmar
 # name
 Sarlithia
 # subfiefs
-Ferol
 Perlisia
+Ferol
 
 # estate
 # title
@@ -426,8 +426,8 @@ Trosfrey
 # name
 Dayttaria
 # subfiefs
-Feymia
 Tardeth
+Feymia
 
 # estate
 # title
@@ -435,8 +435,8 @@ Tardeth
 # name
 Metheigha
 # subfiefs
-Drethdeth
 Sarlithia
+Drethdeth
 
 # estate
 # title
@@ -444,8 +444,8 @@ Sarlithia
 # name
 Vosdeth
 # subfiefs
-Tharvenmor
 Carmia
+Tharvenmor
 
 # estate
 # title
@@ -462,10 +462,10 @@ Lertopia
 # name
 Niladriax
 # subfiefs
-Ferthales
-Metheigha
 Carmar
+Metheigha
 Vosdeth
+Ferthales
 
 # estate
 # title
@@ -482,6 +482,6 @@ Permor
 # name
 Panol
 # subfiefs
-Niladriax
 Pantaria
+Niladriax
 

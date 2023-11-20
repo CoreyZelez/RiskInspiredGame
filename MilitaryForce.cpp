@@ -76,7 +76,7 @@ std::array<unsigned int, 4> MilitaryForce::expendStrength(unsigned int amount, c
 	const int minStaminaCost = minMaxStaminaCost.first;
 	const int maxStaminaCost = minMaxStaminaCost.second;
 	std::array<unsigned int, 4> newStaminaStrength = { 0 };
-	for(int stamina = minStaminaCost; stamina <= staminaStrength.size(); ++stamina)
+	for(int stamina = minStaminaCost; stamina < staminaStrength.size(); ++stamina)
 	{
 		const int newStamina = std::max(stamina - maxStaminaCost, 0);
 		if(staminaStrength[stamina] < amount)

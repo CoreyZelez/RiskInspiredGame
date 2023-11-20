@@ -1,22 +1,9 @@
 ﻿  LandArmy.cpp
 d:\projects\risktypegame\risktypegame\landarmy.cpp(55): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
 d:\projects\risktypegame\risktypegame\landarmy.cpp(56): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-  MilitaryForce.cpp
-  RiskTypeGame.cpp
-  SimplePlayerAI.cpp
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(100): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(110): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(177): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(177): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(220): warning C4305: 'initializing': truncation from 'double' to 'float'
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(221): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(222): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(222): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(229): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(229): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
   Generating code
-  8 of 6933 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 6933 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+    19 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Release\RiskTypeGame.exe

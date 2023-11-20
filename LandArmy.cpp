@@ -125,6 +125,11 @@ void LandArmy::move(Territory &territory, unsigned int strength)
 	std::array<unsigned int, 4> expendedStrength = expendStrength(strength, territory);
 	// Land army attempting location occupation.
 	std::unique_ptr<LandArmy> newArmy = std::make_unique<LandArmy>(getOwner(), &getTerritory(), expendedStrength);  
+	// Only proceed if new army strength is greater than 0.
+	if(newArmy.get()->isDead())
+	{
+		return;
+	}
 
 	// Attempt occupation of location by new army.
 	territory.getOccupancyHandler()->occupy(newArmy.get());
@@ -163,12 +168,13 @@ void LandArmy::moveClosest(Territory &target, unsigned int strength, int maxDist
 
 	Territory& source = getTerritory();
 	Territory* nearest = nearestFriendlyAdjacentTerritoryDijkstra(source, target, maxDist);
-	assert(nearest != nullptr);
-	move(*nearest, strength);
-
+	if(nearest != nullptr)
+	{
+		move(*nearest, strength);
+	}
 
 	//////////////////
-	// in future prioritise border territories!
+	// in future prioritise border territories PERHAPS!
 	//////////////
 }
 
