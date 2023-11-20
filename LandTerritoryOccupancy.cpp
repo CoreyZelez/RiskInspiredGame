@@ -14,11 +14,11 @@ void LandTerritoryOccupancy::update(Message message)
 	switch(message)
 	{
 	case deadMilitary:
-		if(army != nullptr && army->getStrength() == 0)
+		if(army != nullptr && army->isDead())
 		{
 			army = nullptr;
 		}
-		if(fleet != nullptr && fleet->getStrength() == 0)
+		if(fleet != nullptr && fleet->isDead())
 		{
 			fleet = nullptr;
 		}
@@ -41,15 +41,14 @@ bool LandTerritoryOccupancy::occupy(LandArmy *army)
 	// Case armies have same owner.
 	else if(&(army->getOwner()) == &(this->army->getOwner()))
 	{
-		const int initialStrengthSum = army->getStrength() + this->army->getStrength();
+		const int initialStrengthSum = army->getTotalStrength() + this->army->getTotalStrength();
 
 		// Absorb strength of army into this->army.
-		const int armyStrength = army->getStrength();
-		assert(armyStrength > 0);
-		this->army->adjustStrength(army->getStrength());
-		army->adjustStrength(-army->getStrength());  // Sets strength to 0.
+		assert(army->getTotalStrength() > 0);
+		this->army->increaseStrength(army->getStaminaStrength());
+		army->clearStrength();  // Sets strength to 0.
 
-		const int finalStrengthSum = army->getStrength() + this->army->getStrength();
+		const int finalStrengthSum = army->getTotalStrength() + this->army->getTotalStrength();
 		assert(initialStrengthSum == finalStrengthSum);  // Strength sum should remain unchanged.
 
 		isValid = true;
@@ -73,7 +72,7 @@ bool LandTerritoryOccupancy::occupy(LandArmy *army)
 	}
 
 	// Remove pointer to army if army is dead.
-	if(army != nullptr && army->getStrength() == 0)
+	if(army != nullptr && army->isDead())
 	{
 		army = nullptr;
 	}

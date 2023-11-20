@@ -1,8 +1,9 @@
 #include "MilitaryForceGraphics.h"
 #include "FontManager.h"
+#include "MilitaryForce.h"
 
-MilitaryForceGraphics::MilitaryForceGraphics(const sf::Texture &texture, const int &strength)
-	: strength(strength)
+MilitaryForceGraphics::MilitaryForceGraphics(const sf::Texture &texture, const MilitaryForce &military)
+	: military(military)
 {
 	// PUT CODE HERE TO STANDARDISE SIZE OF SPRITE IRRESPECTIVE OF TEXTURE!!!
 
@@ -15,7 +16,7 @@ MilitaryForceGraphics::MilitaryForceGraphics(const sf::Texture &texture, const i
 	text.setOrigin(text.getGlobalBounds().width / 2, text.getGlobalBounds().height / 2);
 	std::string fontID = "militaryFont";
 	text.setFont(*fontManager.getFont(fontID));
-	text.setString(std::to_string(strength));
+	text.setString(std::to_string(military.getTotalStrength()));
 	text.setCharacterSize(80);
 	text.setFillColor(sf::Color::White);
 }
@@ -44,7 +45,7 @@ void MilitaryForceGraphics::setPosition(sf::Vector2f position)
 
 void MilitaryForceGraphics::update()
 {
-	text.setString(std::to_string(strength));
+	text.setString(std::to_string(military.getTotalStrength()));
 }
 
 sf::Vector2f MilitaryForceGraphics::calculateTextPosition() const

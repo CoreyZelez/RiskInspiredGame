@@ -1,10 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+class MilitaryForce;
+
 class MilitaryForceGraphics
 {
 public:
-	MilitaryForceGraphics(const sf::Texture &texture, const int &strength);
+	MilitaryForceGraphics(const sf::Texture &texture, const MilitaryForce &military);
 
 	bool containsPosition(sf::Vector2f position) const;
 	void draw(sf::RenderWindow &window) const;
@@ -15,7 +17,7 @@ private:
 	// Calculate the position for the text relative to the sprite.
 	sf::Vector2f calculateTextPosition() const;
 
-	const int &strength;  // Strength of army.
+	const MilitaryForce &military; 
 
 	sf::Sprite sprite;
 	sf::Text text;

@@ -87,6 +87,11 @@ const Grid& Territory::getGrid() const
 	return grid;
 }
 
+TerritoryType Territory::getType() const
+{
+	return type;
+}
+
 int Territory::getID() const
 {
 	return id;

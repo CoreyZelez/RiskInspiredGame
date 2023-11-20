@@ -11,11 +11,17 @@ NavalFleet::NavalFleet(Player &owner, Territory *location, int strength)
 	assert(location != nullptr);
 }
 
-void NavalFleet::move(Territory &location, int strength)
+NavalFleet::NavalFleet(Player & owner, Territory * location, std::array<unsigned int, 4> staminaStrength)
+	: MilitaryForce(owner, location, staminaStrength, *(TextureManager::getInstance().getTexture("landArmy")))
+{
+	assert(location != nullptr);
+}
+
+void NavalFleet::move(Territory &location, unsigned int strength)
 {
 }
 
-void NavalFleet::moveClosest(Territory & target, int strength, int maxDist)
+void NavalFleet::moveClosest(Territory & target, unsigned int strength, int maxDist)
 {
 }
 

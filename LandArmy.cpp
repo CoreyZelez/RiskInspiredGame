@@ -12,11 +12,17 @@ LandArmy::LandArmy(Player &owner, Territory *location, int strength)
 	assert(location != nullptr);
 }
 
+LandArmy::LandArmy(Player & owner, Territory * location, std::array<unsigned int, 4> staminaStrength)
+	: MilitaryForce(owner, location, staminaStrength, *(TextureManager::getInstance().getTexture("landArmy")))
+{
+	assert(location != nullptr);
+}
+
 void LandArmy::attack(LandArmy &defendingArmy, double defenceMultiplier)
 {
-	const double defenderStrength = static_cast<double>(defendingArmy.getStrength());
+	const double defenderStrength = static_cast<double>(defendingArmy.getTotalStrength());
 	const double defenderAdjustedStrength = defenderStrength * defenceMultiplier;  // defender strength.
-	const double attackerStrength = getStrength();
+	const double attackerStrength = getTotalStrength();
 	assert(defenderStrength > 0);
 	assert(attackerStrength > 0);
 
@@ -84,7 +90,7 @@ void LandArmy::attack(LandArmy &defendingArmy, double defenceMultiplier)
 	}
 }
 
-std::pair<int, int> LandArmy::calculateMinMaxStaminaCost(const Territory & territory) const
+std::pair<int, int> LandArmy::calculateMinMaxStaminaCost(const Territory &territory) const
 {
 	if(getTerritory().getType() == TerritoryType::land || territory.getType() == TerritoryType::land)
 	{
@@ -96,10 +102,10 @@ std::pair<int, int> LandArmy::calculateMinMaxStaminaCost(const Territory & terri
 	}
 }
 
-void LandArmy::move(Territory &territory, int strength)
+void LandArmy::move(Territory &territory, unsigned int strength)
 {
 	assert(strength > 0);
-	assert(strength <= getStrength());
+	assert(strength <= getTotalStrength());
 
 	// Attempt to move to current location.
 	if(&territory == &getTerritory())
@@ -107,17 +113,18 @@ void LandArmy::move(Territory &territory, int strength)
 		return;
 	}
 
-	// +Attempt to move to non adjacent location.
+	// Attempt to move to non adjacent location.
 	if(!getTerritory().getDistanceMap().isAdjacent(&territory))
 	{
 		return;
 	}
 
-	// Amount to adjust military strength. 
-	int strengthAdjustment = -strength;
-
-	/// IN FUTURE USE FACTORY TO CREATE ARMY!!! SHOULD AUTOMATICALLY STORE ARMY IN PLAYER MILITARYMANAGER!!!
-	std::unique_ptr<LandArmy> newArmy = std::make_unique<LandArmy>(getOwner(), &getTerritory(), strength);  // Land army attempting location occupation.
+	// Determine stamina strength array of army being moved.
+	// It is possible that the total strength of this army is 0. We do not yet trigger any death related events
+	// however as it is possible for strength to be refunded to this army.
+	std::array<unsigned int, 4> expendedStrength = expendStrength(strength, territory);
+	// Land army attempting location occupation.
+	std::unique_ptr<LandArmy> newArmy = std::make_unique<LandArmy>(getOwner(), &getTerritory(), expendedStrength);  
 
 	// Attempt occupation of location by new army.
 	territory.getOccupancyHandler()->occupy(newArmy.get());
@@ -125,9 +132,8 @@ void LandArmy::move(Territory &territory, int strength)
 	// Refund strength to this->army if deployedArmy is not able to occupy location
 	if(&newArmy.get()->getTerritory() == &getTerritory())
 	{
-		const int strengthRefund = newArmy.get()->getStrength();
-		assert(strengthRefund >= 0);
-		strengthAdjustment += strengthRefund;
+		std::array<unsigned int, 4> strengthRefund = newArmy.get()->getStaminaStrength();
+		increaseStrength(strengthRefund);
 		newArmy.reset();
 	}
 	else
@@ -136,11 +142,11 @@ void LandArmy::move(Territory &territory, int strength)
 		getOwner().getMilitaryManager().addLandArmy(std::move(newArmy));
 	}
 
-	// Adjust strength of this army.
-	adjustStrength(strengthAdjustment);
+	// After any strength refunds we check if the army is dead to trigger death related events.
+	checkDeath();
 }
 
-void LandArmy::moveClosest(Territory &target, int strength, int maxDist)
+void LandArmy::moveClosest(Territory &target, unsigned int strength, int maxDist)
 {
 	assert(strength > 0);
 	const int distance = getTerritory().getDistanceMap().getDistance(target);  

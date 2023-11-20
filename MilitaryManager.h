@@ -16,6 +16,8 @@ class MilitaryManager
 public:
 	void draw(sf::RenderWindow &window) const;
 
+	void update();
+
 	// Returns pointer to military force at specified world position.
 	MilitaryForce* getMilitary(sf::Vector2f position);
 
@@ -25,13 +27,16 @@ public:
 	std::vector<std::unique_ptr<LandArmy>> &getArmies();
 	const std::vector<std::unique_ptr<NavalFleet>> &getNavies() const;
 	int getTotalArmyStrength() const;
-
-	void removeDeadMilitaries();
+	// Returns total army strength for stamina >= minStamina.
+	int getTotalArmyStrength(int minStamina) const;
 
 	void addLandArmy(std::unique_ptr<LandArmy> army);
 	void addNavalFleet(std::unique_ptr<NavalFleet> fleet);
 
 private:
+	void removeDeadMilitaries();
+	void resetStaminas();
+
 	// BE CAREFUL DELETING FROM BELOW LISTS AS POINTERS POTENTIALLY HELD IN TERRITORIES!!!
 	std::set<MilitaryForce*> militaries;  // Holds handle to every army and navy in manager.
 

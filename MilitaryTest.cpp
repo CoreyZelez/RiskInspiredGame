@@ -45,7 +45,7 @@ void MilitaryTest::test1()
 		 return;
 	 }
 
-	 if(army1.getStrength() != 5)
+	 if(army1.getTotalStrength() != 5)
 	 {
 		 result = false;
 		 std::string message = "Invalid army strength.";

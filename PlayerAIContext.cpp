@@ -159,10 +159,10 @@ int calculateWeightedThreat(const Territory &territory, const Player &player, co
 	{
 		const Territory &armyTerritory = army.get()->getTerritory();
 		const int distance = territory.getDistanceMap().getDistance(armyTerritory);
-		assert(distance > 0 || army.get()->getStrength() == 0);
+		assert(distance > 0 || army.get()->isDead());
 		if(distance > 0)
 		{
-			threatScore += army.get()->getStrength() / pow(distance, distanceFactor);
+			threatScore += army.get()->getTotalStrength() / pow(distance, distanceFactor);
 		}
 	}
 	return threatScore;

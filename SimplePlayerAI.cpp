@@ -82,10 +82,10 @@ void SimplePlayerAI::executeArmyAttacks(const std::vector<Territory*> &borderTer
 
 void SimplePlayerAI::executeArmyAttack(LandArmy &army)
 {
-	int strength = army.getStrength();
+	const int attackStamina = 3;
+	int availableStrength = army.getStrength(attackStamina);
 	Territory &territory = army.getTerritory();
 	const std::set<Territory*> enemyTerritories = context.getEnemyAdjacencies(territory);
-
 	for(std::set<Territory*>::iterator iter = enemyTerritories.begin();
 		iter != enemyTerritories.end(); ++iter)
 	{
@@ -97,33 +97,33 @@ void SimplePlayerAI::executeArmyAttack(LandArmy &army)
 
 			if(enemyArmy == nullptr)
 			{
-				int attackStrength = 0.3 * strength;
+				int attackStrength = 0.3 * availableStrength;
 
 				if(attackStrength <= 1)
 				{
-					attackStrength = strength;
+					attackStrength = availableStrength;
 				}
 				army.move(*landTerritory, attackStrength);
 			}
-			else if(enemyArmy->getStrength() < 0.1 * strength)
+			else if(enemyArmy->getTotalStrength() < 0.1 * availableStrength)
 			{
-				int attackStrength = 0.4 * strength;
+				int attackStrength = 0.4 * availableStrength;
 				if(attackStrength == 0)
 				{
 					attackStrength = 1;
 				}
 				army.move(*landTerritory, attackStrength);
 			}
-			else if(enemyArmy->getStrength() < 0.6 * strength)
+			else if(enemyArmy->getTotalStrength() < 0.6 * availableStrength)
 			{
-				army.move(*landTerritory, strength);
+				army.move(*landTerritory, availableStrength);
 			}
 		}
 
 		// Update strength.
-		strength = army.getStrength();
-		// Return since army dead.
-		if(strength == 0)
+		availableStrength = army.getStrength(attackStamina);
+		// Return since army has no strength left for attacking with.
+		if(availableStrength == 0)
 		{
 			return;
 		}
@@ -144,16 +144,22 @@ void SimplePlayerAI::executeLandMoveOrders(const std::map<Territory*, int> &stra
 		totalStrategicValue += pair.second;
 	}
 
-	// Total strength of player's land military.
-	const int totalArmyStrength = player.getMilitaryManager().getTotalArmyStrength();
-	assert(totalArmyStrength >= 0);
-	if(totalArmyStrength == 0)
+	/////////////////
+	// NOT VALID FOR NAVAL MOVEMENT!!!
+	/////
+	const int landMoveCost = 3;
+	/////////
+
+	// Total strength of player's land military that is available for movement.
+	const int totalAvailableArmyStrength = player.getMilitaryManager().getTotalArmyStrength(landMoveCost);
+	assert(totalAvailableArmyStrength >= 0);
+	if(totalAvailableArmyStrength == 0)
 	{
 		return;
 	}
 
 	// Strategic value that is allocated to each unit of army strength.
-	float strategicValuePerUnit = (float)totalStrategicValue / (float)totalArmyStrength;
+	float strategicValuePerUnit = (float)totalStrategicValue / (float)totalAvailableArmyStrength;
 	strategicValuePerUnit; // testing.
 	assert(strategicValuePerUnit >= 0);
 
@@ -164,7 +170,7 @@ void SimplePlayerAI::executeLandMoveOrders(const std::map<Territory*, int> &stra
 	std::map<LandArmy*, int> freeToMove;
 	for(auto &army : armies)
 	{
-		freeToMove[army.get()] = army.get()->getStrength();
+		freeToMove[army.get()] = army.get()->getStrength(landMoveCost);
 	}
 
 	// Armies are added through movement so only iterate up to pre movement number of armies. 
@@ -202,7 +208,7 @@ void SimplePlayerAI::executeLandMoveOrders(const std::map<Territory*, int> &stra
 				// assert(distance = bfsfriendly(army, territory))
 				assert(remainingStrategicValues.count(&territory) == 1);
 				assert(strategicValue > 0);
-				assert(freeToMove[&army] <= army.getStrength());
+				assert(freeToMove[&army] <= army.getStrength(landMoveCost));
 
 				if(freeToMove[&army] == 0)  
 				{
@@ -227,7 +233,7 @@ void SimplePlayerAI::executeLandMoveOrders(const std::map<Territory*, int> &stra
 						strategicValue = 0;
 						break;
 					}
-					assert(freeToMove[&army] <= army.getStrength());
+					assert(freeToMove[&army] <= army.getStrength(landMoveCost));
 				}
 			}
 		}

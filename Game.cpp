@@ -109,10 +109,10 @@ void Game::selectMilitary(sf::Vector2f position)
 	// Set game state.
 	if(selectedMilitary != nullptr)
 	{
-		assert(selectedMilitary->getStrength() > 0);
+		assert(selectedMilitary->getTotalStrength() > 0);
 
 		// Set selectedStrength to total strength of military.
-		selectedStrength = selectedMilitary->getStrength();
+		selectedStrength = selectedMilitary->getTotalStrength();
 
 		state = GameState::militarySelected;
 	}

@@ -8,7 +8,7 @@ void MilitaryManager::draw(sf::RenderWindow & window) const
 {
 	for(auto &military : militaries)
 	{
-		if(military->getStrength() > 0)
+		if(!military->isDead())
 		{
 			military->draw(window);
 		}
@@ -25,7 +25,7 @@ MilitaryForce* MilitaryManager::getMilitary(sf::Vector2f position)
 {
 	for(MilitaryForce *military : militaries)
 	{
-		if(military->containsPosition(position) && military->getStrength() > 0)
+		if(military->containsPosition(position) && !military->isDead())
 		{
 			return military;
 		}
@@ -65,7 +65,18 @@ int MilitaryManager::getTotalArmyStrength() const
 	int totalStrength = 0;
 	for(const auto &army : armies)
 	{
-		totalStrength += army.get()->getStrength();
+		totalStrength += army.get()->getTotalStrength();
+	}
+	assert(totalStrength == getTotalArmyStrength(0));
+	return totalStrength;
+}
+
+int MilitaryManager::getTotalArmyStrength(int minStamina) const
+{
+	int totalStrength = 0;
+	for(const auto &army : armies)
+	{
+		totalStrength += army.get()->getStrength(minStamina);
 	}
 	return totalStrength;
 }
@@ -76,13 +87,13 @@ void MilitaryManager::removeDeadMilitaries()
 	auto iterL = armies.begin();
 	while(iterL != armies.end())
 	{
-		if(iterL->get()->getStrength() > 0)
+		if(!iterL->get()->isDead())
 		{
 			++iterL;
 		}
 		else
 		{
-			assert(iterL->get()->getStrength() == 0);
+			assert(iterL->get()->getTotalStrength() == 0);
 			assert(militaries.count(iterL->get()) == 1);
 			militaries.erase(iterL->get());
 			iterL = armies.erase(iterL);
@@ -93,13 +104,13 @@ void MilitaryManager::removeDeadMilitaries()
 	auto iterN = navies.begin();
 	while(iterN != navies.end())
 	{
-		if(iterN->get()->getStrength() > 0)
+		if(!iterN->get()->isDead())
 		{
 			++iterN;
 		}
 		else
 		{
-			assert(iterN->get()->getStrength() == 0);
+			assert(iterN->get()->getTotalStrength() == 0);
 			assert(militaries.count(iterN->get()) == 1);
 			militaries.erase(iterN->get());
 			iterN = navies.erase(iterN);
@@ -123,7 +134,7 @@ void MilitaryManager::resetStaminas()
 void MilitaryManager::addLandArmy(std::unique_ptr<LandArmy> army)
 {
 	assert(army != nullptr);
-	assert(army.get()->getStrength() > 0);
+	assert(army.get()->getTotalStrength() > 0);
 	militaries.insert(army.get());
 	armies.emplace_back(std::move(army));
 }
@@ -131,7 +142,7 @@ void MilitaryManager::addLandArmy(std::unique_ptr<LandArmy> army)
 void MilitaryManager::addNavalFleet(std::unique_ptr<NavalFleet> fleet)
 {
 	assert(fleet != nullptr);
-	assert(fleet.get()->getStrength() > 0);
+	assert(fleet.get()->getTotalStrength() > 0);
 	militaries.insert(fleet.get());
 	navies.emplace_back(std::move(fleet));
 }

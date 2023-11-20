@@ -71,13 +71,13 @@ std::unique_ptr<LandArmy> LandedEstate::putArmy(int strength)
 	territory.getOccupancyHandler()->occupy(army.get());
 
 	// Army merged with pre-existing army on territory.
-	if(army->getStrength() == 0)
+	if(army->isDead())
 	{
 		return nullptr;
 	}
 
 	// There was no pre-existing army on territory.
-	assert(army.get()->getStrength() > 0);
+	assert(army.get()->getTotalStrength() > 0);
 	return army;
 }
 

@@ -54,7 +54,7 @@ void EstateTest::test1()
 		testReport(testName, result, message);
 		return;
 	}
-	else if(territory.getOccupancyHandler()->getArmy()->getStrength() <= 0)
+	else if(territory.getOccupancyHandler()->getArmy()->getTotalStrength() <= 0)
 	{
 		bool result = false;
 		std::string message = "invalid army strength yielded.";

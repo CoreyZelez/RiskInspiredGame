@@ -8,12 +8,12 @@
 #include <fstream>
 
 LandTerritory::LandTerritory(int id, Grid graphics)
-	: Territory(id, graphics, std::make_unique<LandTerritoryOccupancy>(*this)), landDistanceMap(*this)
+	: Territory(id, graphics, std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land), landDistanceMap(*this)
 {
 }
 
 LandTerritory::LandTerritory(int id)
-	: Territory(id, createRandomLandColor(), std::make_unique<LandTerritoryOccupancy>(*this)), landDistanceMap(*this)
+	: Territory(id, createRandomLandColor(), std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land), landDistanceMap(*this)
 {
 }
 

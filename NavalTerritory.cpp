@@ -6,12 +6,12 @@
 
 
 NavalTerritory::NavalTerritory(int id, Grid grid)
-	: Territory(id, grid)
+	: Territory(id, grid, TerritoryType::naval)
 {
 }
 
 NavalTerritory::NavalTerritory(int id)
-	: Territory(id, createRandomNavalColor())
+	: Territory(id, createRandomNavalColor(), TerritoryType::naval)
 {
 }
 

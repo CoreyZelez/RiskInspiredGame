@@ -23,9 +23,9 @@ int main()
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS IN TESTING CODE!!!
 	FontManager::getInstance();
 
-	MapMaker mapMaker("test");
+	MapMaker mapMaker("debugMap");
 
-	Game game("test");
+	Game game("debugMap");
 	GameDisplay gameDisplay = game.createView();
 	GameUI gameUI;
 	GameController gameController(game, gameUI, gameDisplay);

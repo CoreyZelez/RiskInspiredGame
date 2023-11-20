@@ -47,6 +47,8 @@ public:
 	Grid& getGrid();
 	const Grid& getGrid() const;
 
+	TerritoryType getType() const;
+
 	int getID() const;
 
 	// Save label is identifier in txt file for territory type.
