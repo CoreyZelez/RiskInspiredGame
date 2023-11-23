@@ -29,6 +29,9 @@ public:
 	std::set<Territory*> &getTerritories();
 	int getRealmSize() const;
 
+	// Return title counts of directly controlled (non-vassal) estates.
+	std::map<Title, int> getTitleCounts() const;
+
 private:
 	MilitaryManager &militaryManager;
 	////////////////////////////////////////////////////////////

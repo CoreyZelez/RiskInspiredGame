@@ -18,6 +18,22 @@ void GameUI::draw(sf::RenderWindow &window) const
 	}
 }
 
+void GameUI::notifyButtonDown(sf::Mouse::Button button, sf::Vector2f position)
+{
+	if(leftUI != nullptr)
+	{
+		leftUI.get()->handleButtonDown(button, position);
+	}
+	if(rightUI != nullptr)
+	{
+		rightUI.get()->handleButtonDown(button, position);
+	}
+	if(bottomUI != nullptr)
+	{
+		bottomUI.get()->handleButtonDown(button, position);
+	}
+}
+
 void GameUI::setLeftUI(std::unique_ptr<UIEntity> entity)
 {
 	leftUI = std::move(entity);
@@ -32,4 +48,15 @@ void GameUI::setRightUI(std::unique_ptr<UIEntity> entity)
 void GameUI::setBottomUI(std::unique_ptr<UIEntity> entity)
 {
 	bottomUI = std::move(entity);
+	bottomUI.get()->setPosition(sf::Vector2f(650, 800));
+}
+
+void GameUI::clearBottomUI()
+{
+	bottomUI = nullptr;
+}
+
+bool GameUI::noBottomUI()
+{
+	return bottomUI.get() == nullptr;
 }

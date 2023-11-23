@@ -54,7 +54,7 @@ FontManager::FontManager()
 	std::string militaryFontID = "militaryFont";
 	loadFont(militaryFontID, militaryFontPath);
 
-	std::string UIFont1Path = "res/fonts/ChunkFive-Regular.otf";
+	std::string UIFont1Path = "res/fonts/TimesNewRomanBold.ttf";
 	std::string UIFont1ID = "UIFont1";
 	loadFont(UIFont1ID, UIFont1Path);
 }

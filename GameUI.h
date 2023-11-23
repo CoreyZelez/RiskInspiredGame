@@ -9,9 +9,13 @@ class GameUI
 public:
 	void draw(sf::RenderWindow &window) const;
 
+
+	void notifyButtonDown(sf::Mouse::Button button, sf::Vector2f position);
 	void setLeftUI(std::unique_ptr<UIEntity> entity);
 	void setRightUI(std::unique_ptr<UIEntity> entity);
 	void setBottomUI(std::unique_ptr<UIEntity> entity);
+	bool noBottomUI();
+	void clearBottomUI();
 
 private:
 	std::unique_ptr<UIEntity> leftUI;

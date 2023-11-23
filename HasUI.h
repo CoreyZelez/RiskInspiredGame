@@ -1,6 +1,8 @@
 #pragma once
-#include "UIPanel.h"
 #include <memory>
+#include "UIEntity.h"
+
+class UIEntity;
 
 enum class UIType
 {
@@ -11,7 +13,6 @@ enum class UIType
 class HasUI
 {
 public:
-	virtual std::unique_ptr<UIPanel> getUI(UIType type) const = 0;
-
+	virtual std::unique_ptr<UIEntity> getUI(UIType type) const = 0;
 };
 

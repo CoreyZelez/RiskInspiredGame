@@ -167,7 +167,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="IOccupiable.cpp" />
     <ClCompile Include="LandTerritoryOccupancy.cpp" />
     <ClCompile Include="PlayerAIContext.cpp" />
     <ClCompile Include="AIPersonality.cpp" />
@@ -214,6 +213,7 @@
     <ClCompile Include="RichText.cpp" />
     <ClCompile Include="RiskTypeGame.cpp" />
     <ClCompile Include="SimplePlayerAI.cpp" />
+    <ClCompile Include="StrengthSlider.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Territory.cpp" />
     <ClCompile Include="Grid.cpp" />
@@ -269,6 +269,7 @@
     <ClInclude Include="ReconcileBaronies.h" />
     <ClInclude Include="RichText.h" />
     <ClInclude Include="SimplePlayerAI.h" />
+    <ClInclude Include="StrengthSlider.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="MilitaryForce.h" />
     <ClInclude Include="Barony.h" />

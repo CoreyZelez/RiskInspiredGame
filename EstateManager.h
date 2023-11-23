@@ -29,7 +29,13 @@ public:
 
 	Estate* createEstate(Title title);  // Creates estate with title and returns handle.
 	///void removeEstate(Estate *estate);  // Removes estate.
-	Estate* getEstate(sf::Vector2f position, Title title, bool allowParent);  // Returns pointer to estate at world position.
+
+	// Returns pointer to estate at world position. Allows specifying parent.
+	Estate* getEstate(sf::Vector2f position, Title title, bool allowParent);  
+
+	// Returns pointer to estate at world position with associated title..
+	const Estate* getEstate(sf::Vector2f position, Title title) const;  
+
 	Estate* getLowerEstate(sf::Vector2f position, Title title, bool allowParent);  // Returns pointer to estate at world position.
 
 	void makeColored(Title title, bool setLower);  // Makes estate grids colored for specified title(s). Other estates made grey.

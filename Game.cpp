@@ -94,6 +94,17 @@ bool Game::getDisplayMilitary() const
 	return displayMilitary;
 }
 
+const MilitaryForce& Game::getSelectedMilitary() const
+{
+	assert(selectedMilitary != nullptr);
+	return *selectedMilitary;
+}
+
+unsigned int& Game::getSelectedStrength()
+{
+	return selectedStrength;
+}
+
 void Game::selectMilitary(sf::Vector2f position)
 {
 	if(!humanPlayerTurn)
@@ -152,6 +163,12 @@ const Realm* Game::getRealm(const sf::Vector2f &position)
 		}
 	}
 	return nullptr;
+}
+
+const Estate * Game::getEstate(const sf::Vector2f & position, Title title)
+{
+	const EstateManager &estateManager = map.getEstateManager();
+	return estateManager.getEstate(position, title);
 }
 
 void Game::endHumanPlayerTurn()

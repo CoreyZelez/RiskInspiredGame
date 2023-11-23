@@ -86,3 +86,13 @@ int RealmEstateManager::getRealmSize() const
 {
 	return fiefs.size();
 }
+
+std::map<Title, int> RealmEstateManager::getTitleCounts() const
+{
+	std::map<Title, int> counts;
+	for(const auto &fief : fiefs)
+	{
+		++counts[fief->getTitle()];
+	}
+	return counts;
+}

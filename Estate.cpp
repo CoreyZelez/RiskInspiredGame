@@ -1,6 +1,9 @@
 #include "Estate.h"
 #include "Player.h"
+#include "RichText.h"
 #include "NameGenerator.h"
+#include "InformationPanel.h"
+#include "FontManager.h"
 #include <assert.h>
 #include <iostream>
 #include <fstream>
@@ -49,12 +52,86 @@ void Estate::draw(sf::RenderWindow &window) const
 {
 	if(drawSubfiefs)
 	{
-		//
+		
 	}
 	else
 	{
 		grid.draw(window);
 	}
+}
+
+std::unique_ptr<UIEntity> Estate::getUI(UIType type) const
+{
+	FontManager &fontManager = FontManager::getInstance();
+	if(type == UIType::information)
+	{
+		const sf::Font &font = *fontManager.getFont("UIFont1");
+
+		// Name text.
+		sfe::RichText nameText(font);
+		nameText << sf::Text::Regular << sf::Color::White << "Name: "
+			<< sf::Color::Yellow << name;
+
+		// Title text map.
+		std::map<Title, std::string> titleStringMap = 
+		{
+		{ Title::baron, "Barony" },
+		{ Title::count, "County" },
+		{ Title::duke, "Duchy" },
+		{ Title::king, "Kingdom" },
+		{ Title::emperor, "Empire" } 
+		};
+
+		// Title text.
+		sfe::RichText titleText(font);
+		titleText << sf::Text::Regular << sf::Color::White << "type: "
+			<< sf::Color::Yellow << titleStringMap[title];
+
+		std::map<Title, int> titleCounts = getSubfiefTitleCounts();
+
+		// Barony count text.
+		sfe::RichText baronyCntText(font);
+		baronyCntText << sf::Text::Regular << sf::Color::White << "Number of Barony subfiefs: "
+			<< sf::Color::Yellow << std::to_string(titleCounts[Title::baron]);
+
+		// County count text.
+		sfe::RichText countyCntText(font);
+		countyCntText << sf::Text::Regular << sf::Color::White << "Number of County subfiefs: "
+			<< sf::Color::Yellow << std::to_string(titleCounts[Title::count]);
+
+		// Duchy count text.
+		sfe::RichText duchyCntText(font);
+		duchyCntText << sf::Text::Regular << sf::Color::White << "Number of Duchy subfiefs: "
+			<< sf::Color::Yellow << std::to_string(titleCounts[Title::duke]);
+
+		// Kingdom count text.
+		sfe::RichText kingdomCntText(font);
+		kingdomCntText << sf::Text::Regular << sf::Color::White << "Number of Kingdom subfiefs: "
+			<< sf::Color::Yellow << std::to_string(titleCounts[Title::king]);
+
+
+		std::vector<sfe::RichText> texts = { nameText, titleText };
+		if(title == Title::emperor)
+		{
+			texts.push_back(kingdomCntText);
+		}
+		if(title >= Title::king)
+		{
+			texts.push_back(duchyCntText);
+		}
+		if(title >= Title::duke)
+		{
+			texts.push_back(countyCntText);
+		}
+		if(title >= Title::count)
+		{
+			texts.push_back(baronyCntText);
+		}
+
+		return std::make_unique<InformationPanel>(texts);
+	}
+
+	return nullptr;
 }
 
 void Estate::saveSubfiefs(std::ofstream &file) const
@@ -271,6 +348,22 @@ void Estate::setRuler(Player *ruler, bool updatePlayerGrid)
 		/// THIS FUNCTION MAY BE GETTING CALLED MULTIPLE TIMES UNNECESSARILY. SEE HANDLE ALLOCATION.
 		parent->handleLowerEstateChange(*this);
 	}
+}
+
+void Estate::recursiveGetSubfiefTitleCounts(std::map<Title, int>& subfiefTitleCounts) const
+{
+	for(const auto &subfief : subfiefs)
+	{
+		++subfiefTitleCounts[subfief->getTitle()];
+		subfief->recursiveGetSubfiefTitleCounts(subfiefTitleCounts);
+	}
+}
+
+std::map<Title, int> Estate::getSubfiefTitleCounts() const
+{
+	std::map<Title, int> counts;
+	recursiveGetSubfiefTitleCounts(counts);
+	return counts;
 }
 
 void Estate::handleAllocation()

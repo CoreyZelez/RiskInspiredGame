@@ -275,6 +275,24 @@ Estate* EstateManager::getEstate(sf::Vector2f position, Title title, bool allowP
 	return nullptr;
 }
 
+const Estate* EstateManager::getEstate(sf::Vector2f position, Title title)  const
+{
+	for(auto it = estates.find(title); it != estates.end(); ++it)
+	{
+		const std::vector<std::unique_ptr<Estate>> &estateVector = it->second;
+		for(const auto &estate : estateVector)
+		{
+			assert(estate->containsPosition(position) == estate->getGrid().containsPosition(position));
+			if(estate->getTitle() == title && estate->containsPosition(position))
+			{
+				return estate.get();
+			}
+		}
+	}
+
+	return nullptr;
+}
+
 Estate* EstateManager::getLowerEstate(sf::Vector2f position, Title title, bool allowParent)
 {
 	// Following code problematic if more titles equal in prominence to Title::baron are added.

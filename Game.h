@@ -32,10 +32,16 @@ public:
 	// Gets player realm which contains a given world position.
 	const Realm* getRealm(const sf::Vector2f &position);
 
+	// Gets estate of specified title at a given world position.
+	const Estate* getEstate(const sf::Vector2f &position, Title title);
+
 	void endHumanPlayerTurn();
 
 	void changeDisplayMilitary();
 	bool getDisplayMilitary() const;
+
+	const MilitaryForce &getSelectedMilitary() const;
+	unsigned int &getSelectedStrength();
 
 	// Creates a view for the game.
 	GameDisplay createView() const;
@@ -51,6 +57,6 @@ private:
 	std::vector<std::unique_ptr<Player>>::iterator currPlayer;
 	bool humanPlayerTurn = false;  // Specifies that current turn is human player. Game waits for input.
 	MilitaryForce *selectedMilitary = nullptr;  // Military selected for movement.
-	int selectedStrength;  // Strength of selected military to move.
+	unsigned int selectedStrength;  // Strength of selected military to move.
 };
 

@@ -26,7 +26,7 @@ void Realm::draw(sf::RenderWindow &window) const
 	}
 }
 
-std::unique_ptr<UIPanel> Realm::getUI(UIType type) const
+std::unique_ptr<UIEntity> Realm::getUI(UIType type) const
 {
 	FontManager &fontManager = FontManager::getInstance();
 	if(type == UIType::information)
@@ -38,16 +38,53 @@ std::unique_ptr<UIPanel> Realm::getUI(UIType type) const
 		nameText << sf::Text::Regular << sf::Color::White << "Name: "
 			<< sf::Color::Yellow << "tempName";
 
-		// Estate count text.
-		sfe::RichText estateCntText(font);
-		estateCntText << sf::Text::Regular << sf::Color::White << "Number of estates: "
-			<< sf::Color::Yellow << std::to_string(estateManager.getRealmSize());
+		std::map<Title, int> titleCounts = estateManager.getTitleCounts();
 
-		// instead of listing number of estates, list number of baronies, counties, kingdoms etc.
-		// only list when value greater than 0.
-		// estateManager.getEstateCount(title).
+		// Barony count text.
+		sfe::RichText baronyCntText(font);
+		baronyCntText << sf::Text::Regular << sf::Color::White << "Number of Baronies: "
+			<< sf::Color::Yellow << std::to_string(titleCounts[Title::baron]);
+		// County count text.
+		sfe::RichText countyCntText(font);
+		countyCntText << sf::Text::Regular << sf::Color::White << "Number of Counties: "
+			<< sf::Color::Yellow << std::to_string(titleCounts[Title::count]);
+		// Duchy count text.
+		sfe::RichText duchyCntText(font);
+		duchyCntText << sf::Text::Regular << sf::Color::White << "Number of Duchies: "
+			<< sf::Color::Yellow << std::to_string(titleCounts[Title::duke]);
+		// Kingdom count text.
+		sfe::RichText kingdomCntText(font);
+		kingdomCntText << sf::Text::Regular << sf::Color::White << "Number of Kingdoms: "
+			<< sf::Color::Yellow << std::to_string(titleCounts[Title::king]);
+		// Empire count text.
+		sfe::RichText empireCntText(font);
+		empireCntText << sf::Text::Regular << sf::Color::White << "Number of Empires: "
+			<< sf::Color::Yellow << std::to_string(titleCounts[Title::emperor]);
 
-		std::vector<sfe::RichText> texts = { nameText, estateCntText };
+		std::vector<sfe::RichText> texts = { nameText };
+
+		if(titleCounts[Title::baron] > 0)
+		{
+			texts.push_back(baronyCntText);
+		}
+		if(titleCounts[Title::count] > 0)
+		{
+			std::cout << titleCounts[Title::count] << std::endl;
+			texts.push_back(countyCntText);
+		}
+		if(titleCounts[Title::duke] > 0)
+		{
+			texts.push_back(duchyCntText);
+		}
+		if(titleCounts[Title::king] > 0)
+		{
+			texts.push_back(kingdomCntText);
+		}
+		if(titleCounts[Title::emperor] > 0)
+		{
+			texts.push_back(empireCntText);
+		}
+
 		return std::make_unique<InformationPanel>(texts);
 	}
 

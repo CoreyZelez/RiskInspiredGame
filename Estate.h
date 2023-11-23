@@ -1,6 +1,7 @@
 #pragma once
 #include "Title.h"
 #include "Grid.h"
+#include "HasUI.h"
 #include <set>
 #include <memory>
 #include <SFML/Graphics.hpp>
@@ -13,8 +14,7 @@ class MilitaryManager;
 const std::string estateSaveLabel = "# estate";  // Save label for non landed estate.
 const std::string baronySaveLabel = "# barony";  // Save label for barony.
 
-// SHOULD INHERIT HASUI SO WE CAN DISPLAY INFORMATION WHEN ESTATE IS CLICKED FROM F2 F3 ETC.
-class Estate  // : public HadUI  
+class Estate : public HasUI  
 {
 public:
 	Estate(Title title);
@@ -29,22 +29,28 @@ public:
 
 	void draw(sf::RenderWindow &window) const;
 
+	virtual std::unique_ptr<UIEntity> getUI(UIType type) const override;
+
+	virtual bool containsPosition(const sf::Vector2f &position) const;
+
 	// Yields any resources directly associated with estate. This does not include subfief resources.
 	virtual void yield(MilitaryManager &militaryManager);
 	// Provides bonus yields to subfiefs. Yield dependant on title.
 	virtual void provideSubfiefBonusYields();
 
 	void setRuler(Player *ruler, bool updatePlayerGrid = true);
+
 	void addSubfief(Estate *subfief);
 	void removeSubfief(Estate *subfief);
+
 	void setParent(Estate *parent);
 	bool hasParent() const;
+
 	bool compareRuler(const Player *player) const;  // For debugging.
 	const Player *getRuler() const;
+
 	Title getTitle() const;
 	std::string getName() const;
-
-	// VOID DRAW
 
 	Grid& getGrid();
 	const Grid& getGrid() const;
@@ -58,7 +64,6 @@ protected:
 	virtual void generateMilitary(MilitaryManager &militaryManager);
 	virtual std::string getSaveLabel() const;
 
-	virtual bool containsPosition(const sf::Vector2f &position) const;
 	Player* getRuler();
 
 private:
@@ -78,6 +83,9 @@ private:
 	Player* getLowerEstatesUpperRealmRuler();
 	// Gets notified of ownership change of a lower estate and updates ownership accordingly.
 	void handleLowerEstateChange(const Estate &subfief);
+
+	void recursiveGetSubfiefTitleCounts(std::map<Title, int> &subfiefTitleCounts) const;
+	std::map<Title, int> getSubfiefTitleCounts() const;
 
 	void saveSubfiefs(std::ofstream &file) const;
 

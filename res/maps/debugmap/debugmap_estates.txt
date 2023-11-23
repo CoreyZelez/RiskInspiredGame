@@ -310,14 +310,27 @@ Methtrethheughough
 # naval fleet yield
 0.420152
 
+# barony
+# title
+1
+# name
+Nethohthvia
+# subfiefs
+# territory id
+24
+# land army yield
+0.496157
+# naval fleet yield
+0.479605
+
 # estate
 # title
 2
 # name
 Trosfrey
 # subfiefs
-Tarfreyia
 Nilamor
+Tarfreyia
 
 # estate
 # title
@@ -343,8 +356,8 @@ Methtrethheughough
 # name
 Percflinmar
 # subfiefs
-Thardrentopia
 Drethdethia
+Thardrentopia
 
 # estate
 # title
@@ -370,9 +383,9 @@ Tundeth
 # name
 Carmia
 # subfiefs
+Morethsafrey
 Fusdrenmar
 Easheigha
-Morethsafrey
 
 # estate
 # title
@@ -380,8 +393,8 @@ Morethsafrey
 # name
 Sarlithia
 # subfiefs
-Ferol
 Perlisia
+Ferol
 
 # estate
 # title
@@ -389,8 +402,8 @@ Perlisia
 # name
 thales
 # subfiefs
-Fermar
 Antrethapinia
+Fermar
 
 # estate
 # title
@@ -407,8 +420,8 @@ Daytromar
 # name
 Carmar
 # subfiefs
-Folnmor
 Finithilfrey
+Folnmor
 
 # estate
 # title
@@ -416,9 +429,9 @@ Finithilfrey
 # name
 Permor
 # subfiefs
+Tariltricth
 Percflinmar
 Trosfrey
-Tariltricth
 
 # estate
 # title
@@ -435,8 +448,8 @@ Feymia
 # name
 Metheigha
 # subfiefs
-Drethdeth
 Sarlithia
+Drethdeth
 
 # estate
 # title
@@ -453,8 +466,8 @@ Tharvenmor
 # name
 Ferthales
 # subfiefs
-thales
 Lertopia
+thales
 
 # estate
 # title
@@ -462,10 +475,10 @@ Lertopia
 # name
 Niladriax
 # subfiefs
+Metheigha
 Vosdeth
 Carmar
 Ferthales
-Metheigha
 
 # estate
 # title
@@ -482,6 +495,6 @@ Permor
 # name
 Panol
 # subfiefs
-Niladriax
 Pantaria
+Niladriax
 

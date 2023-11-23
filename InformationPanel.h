@@ -13,7 +13,7 @@ public:
 	InformationPanel(std::vector<sfe::RichText> texts);
 
 	virtual void draw(sf::RenderWindow &window) const override;
-	virtual void handleInteraction(sf::Vector2f position) override;
+	virtual void handleLeftClick(sf::Vector2f position) override;
 	virtual void setPosition(sf::Vector2f position) override;
 
 private:

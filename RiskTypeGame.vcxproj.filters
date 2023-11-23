@@ -276,17 +276,17 @@
     <ClCompile Include="RealmRelationshipManager.cpp">
       <Filter>Source Files\Game\Player</Filter>
     </ClCompile>
-    <ClCompile Include="IOccupiable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LandTerritoryOccupancy.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Territory</Filter>
     </ClCompile>
-    <ClCompile Include="TerritoryDistanceMap.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="StrengthSlider.cpp">
+      <Filter>Source Files\User Interface</Filter>
     </ClCompile>
     <ClCompile Include="UIEntity.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="TerritoryDistanceMap.cpp">
+      <Filter>Source Files\Game\Territory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -467,17 +467,20 @@
     <ClInclude Include="PlayerAIComponent.h">
       <Filter>Header Files\Game\Player\AI</Filter>
     </ClInclude>
+    <ClInclude Include="UIEntity.h">
+      <Filter>Header Files\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="StrengthSlider.h">
+      <Filter>Header Files\User Interface</Filter>
+    </ClInclude>
     <ClInclude Include="IOccupiable.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="LandTerritoryOccupancy.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\Territory</Filter>
     </ClInclude>
     <ClInclude Include="TerritoryDistanceMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UIEntity.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\Territory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

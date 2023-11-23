@@ -16,7 +16,7 @@ public:
 
 	void draw(sf::RenderWindow &window) const;
 
-	virtual std::unique_ptr<UIPanel> getUI(UIType type) const override;
+	virtual std::unique_ptr<UIEntity> getUI(UIType type) const override;
 
 	RealmEstateManager &getEstateManager();
 	const RealmEstateManager &getEstateManager() const;

@@ -7,7 +7,7 @@ class UIPanel : public UIEntity
 public:
 	UIPanel(sf::Color backgroundColor);
 	virtual void draw(sf::RenderWindow &window) const;
-	virtual void handleInteraction(sf::Vector2f position) = 0;
+	virtual void handleLeftClick(sf::Vector2f position) = 0;
 	virtual void setPosition(sf::Vector2f position);
 
 protected:

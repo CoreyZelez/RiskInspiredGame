@@ -1,0 +1,13 @@
+# barony
+# title
+1
+# name
+Sardrenthales
+# subfiefs
+# territory id
+0
+# land army yield
+0.624363
+# naval fleet yield
+0.439039
+

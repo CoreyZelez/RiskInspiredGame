@@ -24,7 +24,7 @@ void GameController::handleGameInput(const sf::RenderWindow &window, sf::View &g
 
 	handleInputForGameDisplay(window);
 
-	gameUIController.handlePanelCreation(window);
+	gameUIController.handleUICreation(window);
 
 	// POTENTIAL RISK (MAYBE) FOR RACE CONDITIONS WHEN IMPLEMENTING MULTITHREADING.
 	handleInputForHumanPlayer(window);
