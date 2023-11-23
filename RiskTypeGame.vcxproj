@@ -210,7 +210,7 @@
     <ClCompile Include="RealmEstateManager.cpp" />
     <ClCompile Include="RealmRelationshipManager.cpp" />
     <ClCompile Include="RealmTest.cpp" />
-    <ClCompile Include="ReconcileBaronies.cpp" />
+    <ClCompile Include="ReconcileLandedEstates.cpp" />
     <ClCompile Include="RichText.cpp" />
     <ClCompile Include="RiskTypeGame.cpp" />
     <ClCompile Include="SimplePlayerAI.cpp" />
@@ -268,7 +268,7 @@
     <ClInclude Include="RealmEstateManager.h" />
     <ClInclude Include="RealmRelationshipManager.h" />
     <ClInclude Include="RealmTest.h" />
-    <ClInclude Include="ReconcileBaronies.h" />
+    <ClInclude Include="ReconcileLandedEstates.h" />
     <ClInclude Include="RichText.h" />
     <ClInclude Include="SimplePlayerAI.h" />
     <ClInclude Include="StrengthSlider.h" />

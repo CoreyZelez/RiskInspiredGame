@@ -15,8 +15,6 @@ public:
 
 	bool positionClaimed(sf::Vector2f position) const;  // Returns true if any territory contains the world position.
 
-	void convertLandsToCoastal();  // Converts land territories bordering naval territories into coastal territories.
-
 	Territory* getTerritory(const sf::Vector2f &position);
 
 	LandTerritory* createLandTerritory();  // Creates empty land territory and returns handle.
@@ -28,6 +26,7 @@ public:
 	NavalTerritory* getNavalTerritory(sf::Vector2f position);  // Returns pointer to nval territory at world position.
 
 	std::vector<std::unique_ptr<LandTerritory>> &getLandTerritories();
+	std::vector<std::unique_ptr<NavalTerritory>> &getNavalTerritories();
 
 private:
 	void calculateAdjacencies();

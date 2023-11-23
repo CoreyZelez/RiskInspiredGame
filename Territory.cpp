@@ -18,11 +18,13 @@ Territory::Territory(int id, sf::Color color, TerritoryType type)
 Territory::Territory(int id, Grid grid, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type)
 	: id(id), grid(grid), occupancyHandler(std::move(occupancyHandler)), distanceMap(*this), type(type)
 {
+	this->grid.setBorderMode(BorderMode::feintBorders);
 }
 
 Territory::Territory(int id, sf::Color color, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type)
 	: id(id), grid(color), occupancyHandler(std::move(occupancyHandler)), distanceMap(*this), type(type)
 {
+	this->grid.setBorderMode(BorderMode::feintBorders);
 }
 
 void Territory::assignLandedEstate(const LandedEstate *estate)

@@ -69,7 +69,6 @@ std::unique_ptr<UIEntity> Realm::getUI(UIType type) const
 		}
 		if(titleCounts[Title::count] > 0)
 		{
-			std::cout << titleCounts[Title::count] << std::endl;
 			texts.push_back(countyCntText);
 		}
 		if(titleCounts[Title::duke] > 0)

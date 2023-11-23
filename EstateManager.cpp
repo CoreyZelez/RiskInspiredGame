@@ -1,5 +1,7 @@
 #include "EstateManager.h"
 #include "LandTerritory.h"
+#include "NavalTerritory.h"
+#include "Maridom.h"
 #include "Barony.h"
 #include "NameGenerator.h"
 #include "Estate.h"
@@ -48,6 +50,24 @@ void EstateManager::draw(sf::RenderWindow &window) const
 	}
 }
 
+void EstateManager::drawUnownedMaridoms(sf::RenderWindow &window) const
+{
+	// Determine if there are any maridoms that can be drawn.
+	auto it = estates.find(Title::admiral);
+	if(it == estates.end())
+	{
+		return;
+	}
+
+	for(const auto &maridom : estates.at(Title::admiral))
+	{
+		if(!maridom.get()->hasRuler())
+		{
+			maridom->draw(window);
+		}
+	}
+}
+
 void EstateManager::save(std::string mapName) const
 {
 	std::ofstream file("res/maps/" + mapName + "/" + mapName + "_estates.txt");
@@ -73,7 +93,8 @@ void EstateManager::save(std::string mapName) const
 	}
 }
 
-void EstateManager::load(std::string mapName, std::vector<std::unique_ptr<LandTerritory>>& landTerritories)
+void EstateManager::load(std::string mapName, std::vector<std::unique_ptr<LandTerritory>>& landTerritories, 
+	std::vector<std::unique_ptr<NavalTerritory>>& navalTerritories)
 {
 	std::ifstream file("res/maps/" + mapName + "/" + mapName + "_estates.txt");
 	std::string line;
@@ -92,7 +113,14 @@ void EstateManager::load(std::string mapName, std::vector<std::unique_ptr<LandTe
 		{
 			loadBarony(file, landTerritories);
 		}
+		else if(line.compare(maridomSaveLabel) == 0)
+		{
+			loadMaridom(file, navalTerritories);
+		}
 	}
+
+	// Set color of maridoms to greyish blue.
+	setTitleColor(Title::admiral, sf::Color(90, 130, 255));
 }
 
 void EstateManager::loadBarony(std::ifstream &file, std::vector<std::unique_ptr<LandTerritory>>& landTerritories)
@@ -157,6 +185,58 @@ void EstateManager::loadBarony(std::ifstream &file, std::vector<std::unique_ptr<
 	}
 	// Add the barony to estates.
 	estates[Title::baron].emplace_back(std::move(barony));
+}
+
+void EstateManager::loadMaridom(std::ifstream & file, std::vector<std::unique_ptr<NavalTerritory>>& navalTerritories)
+{
+	std::string line;
+
+	// Load title.
+	std::getline(file, line);
+	assert(line.compare("# title") == 0);
+	std::getline(file, line);
+	assert(line[0] != '#');
+	assert(static_cast<Title>(std::stoi(line)) == Title::admiral);
+	Title title = static_cast<Title>(std::stoi(line));
+
+	// Load maridom name.
+	std::string name = loadName(file);
+
+	// Load names of subfiefs of maridom.
+	std::vector<std::string> subfiefNames = loadSubfiefNames(file);
+
+	// Load territory.
+	std::getline(file, line);  // Label is traversed by loadSubfiefNames functions.
+	const int territoryID = std::stoi(line);
+	NavalTerritory *territory = nullptr;
+	for(auto &navalTerritory : navalTerritories)
+	{
+		// Territory already allocated to a landed estate.
+		if(navalTerritory.get()->getID() == territoryID)
+		{
+			assert(allocatedTerritoryIDs.count(territoryID) == 0);
+			allocatedTerritoryIDs.insert(territoryID);  // Track territory id so reconcileBaronies does not create new barony with same territory.
+			territory = navalTerritory.get();
+			break;
+		}
+	}
+
+	// Territory was removed so barony no longer exists.
+	if(territory == nullptr)
+	{
+		return;
+	}
+
+	// Create the maridom.
+	std::unique_ptr<Estate> maridom = std::make_unique<Maridom>(*territory);
+	maridom.get()->initName(name);
+	// Add the subfiefs.
+	for(std::string &subfiefName : subfiefNames)
+	{
+		maridom->addSubfief(getFief(subfiefName));
+	}
+	// Add the barony to estates.
+	estates[Title::admiral].emplace_back(std::move(maridom));
 }
 
 void EstateManager::loadEstate(std::ifstream &file)
@@ -240,6 +320,26 @@ void EstateManager::reconcileBaronies(const std::vector<std::unique_ptr<LandTerr
 
 		allocatedTerritoryIDs.insert(territory.get()->getID());  // Ensures ID cannot be reused for other landed estate.
 		estates[Title::baron].emplace_back(std::move(barony));
+	}
+}
+
+void EstateManager::reconcileMaridoms(const std::vector<std::unique_ptr<NavalTerritory>>& navalTerritories)
+{
+	for(auto &territory : navalTerritories)
+	{
+		// Territory already allocated to a landed estate.
+		if(allocatedTerritoryIDs.count(territory.get()->getID()) == 1)
+		{
+			continue;
+		}
+
+		std::unique_ptr<Estate> maridom = std::make_unique<Maridom>(*territory.get());
+
+		// Generate name for maridom.
+		maridom.get()->initName(generateName());
+
+		allocatedTerritoryIDs.insert(territory.get()->getID());  // Ensures ID cannot be reused for other landed estate.
+		estates[Title::admiral].emplace_back(std::move(maridom));
 	}
 }
 

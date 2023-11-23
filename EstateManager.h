@@ -10,6 +10,7 @@
 #include <map>
 
 class LandTerritory;
+class NavalTerritory;
 class CoastalTerritory;
 class TerritoryManager;
 
@@ -18,12 +19,19 @@ class EstateManager
 public:
 	void draw(sf::RenderWindow &window, Title title) const;  // Draws all estates with estates of title drawn over all other titles.
 	void draw(sf::RenderWindow &window) const;  // Draws all estates without a parent estate.
+	void drawUnownedMaridoms(sf::RenderWindow &window) const;
 
 	void save(std::string mapName) const;
-	void load(std::string mapName, std::vector<std::unique_ptr<LandTerritory>>& landTerritories);
+
+	void load(std::string mapName, std::vector<std::unique_ptr<LandTerritory>>& landTerritories, 
+		std::vector<std::unique_ptr<NavalTerritory>>& navalTerritories);
 
 	// Adds and removes baronies as necessary dependant on land territories.
 	void reconcileBaronies(const std::vector<std::unique_ptr<LandTerritory>> &landTerritories);
+
+	// Adds and removes maridoms as necessary dependant on naval territories.
+	void reconcileMaridoms(const std::vector<std::unique_ptr<NavalTerritory>> &navalTerritories);
+
 	// Returns vector to all baronies.
 	std::vector<std::unique_ptr<Estate>>& getBaronies();
 
@@ -46,6 +54,7 @@ private:
 	Estate *getFief(std::string name);
 
 	void loadBarony(std::ifstream &file, std::vector<std::unique_ptr<LandTerritory>>& landTerritories);
+	void loadMaridom(std::ifstream &file, std::vector<std::unique_ptr<NavalTerritory>>& navalTerritories);
 	void loadEstate(std::ifstream &file);
 	std::string loadName(std::ifstream &file);
 	std::vector<std::string> loadSubfiefNames(std::ifstream &file);

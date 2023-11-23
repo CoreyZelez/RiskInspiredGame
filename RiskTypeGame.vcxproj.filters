@@ -162,9 +162,6 @@
     <ClCompile Include="EstateTest.cpp">
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
-    <ClCompile Include="ReconcileBaronies.cpp">
-      <Filter>Source Files\User Interface\CommandButton</Filter>
-    </ClCompile>
     <ClCompile Include="Command.cpp">
       <Filter>Source Files\User Interface\CommandButton</Filter>
     </ClCompile>
@@ -291,6 +288,9 @@
     <ClCompile Include="Maridom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ReconcileLandedEstates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LandArmy.h">
@@ -348,9 +348,6 @@
       <Filter>Header Files\User Interface\CommandButton</Filter>
     </ClInclude>
     <ClInclude Include="ChangeInstance.h">
-      <Filter>Header Files\User Interface\CommandButton</Filter>
-    </ClInclude>
-    <ClInclude Include="ReconcileBaronies.h">
       <Filter>Header Files\User Interface\CommandButton</Filter>
     </ClInclude>
     <ClInclude Include="IUnitTest.h">
@@ -485,8 +482,11 @@
     <ClInclude Include="TerritoryDistanceMap.h">
       <Filter>Header Files\Game\Territory</Filter>
     </ClInclude>
+    <ClInclude Include="ReconcileLandedEstates.h">
+      <Filter>Header Files\User Interface\CommandButton</Filter>
+    </ClInclude>
     <ClInclude Include="Maridom.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\Estate</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

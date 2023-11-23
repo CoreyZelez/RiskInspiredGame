@@ -247,6 +247,11 @@ const Player* Estate::getRuler() const
 	return ruler;
 }
 
+bool Estate::hasRuler() const
+{
+	return ruler != nullptr;
+}
+
 Title Estate::getTitle() const
 {
 	return title;

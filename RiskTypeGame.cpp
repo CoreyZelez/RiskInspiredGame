@@ -13,7 +13,7 @@
 
 int main()
 {
-	bool mapEditorMode = false;
+	bool mapEditorMode = true;
 
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
 	sf::View gameView = window.getDefaultView();
@@ -23,9 +23,9 @@ int main()
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS IN TESTING CODE!!!
 	FontManager::getInstance();
 
-	MapMaker mapMaker("debugmap");
+	MapMaker mapMaker("test");
 
-	Game game("debugmap");
+	Game game("test");
 	GameDisplay gameDisplay = game.createView();
 	GameUI gameUI;
 	GameController gameController(game, gameUI, gameDisplay);

@@ -88,6 +88,12 @@ sf::Vector2f Grid::getCenter() const
 	return calculateWorldCoordinates(center);
 }
 
+void Grid::setBorderMode(BorderMode borderMode)
+{
+	this->borderMode = borderMode;
+	setColor(color);  // Updates grid with no border mode.
+}
+
 void Grid::addGrid(const Grid &grid)
 {
 	for(auto iter = grid.positions.cbegin(); iter != grid.positions.cend(); ++iter)

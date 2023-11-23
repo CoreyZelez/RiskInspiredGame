@@ -110,10 +110,6 @@ bool TerritoryManager::positionClaimed(sf::Vector2f position) const
 	return false;
 }
 
-void TerritoryManager::convertLandsToCoastal()
-{
-}
-
 Territory* TerritoryManager::getTerritory(const sf::Vector2f &position)
 {
 	for(auto &territory : territories)
@@ -207,6 +203,11 @@ NavalTerritory* TerritoryManager::getNavalTerritory(sf::Vector2f position)
 std::vector<std::unique_ptr<LandTerritory>>& TerritoryManager::getLandTerritories()
 {
 	return landTerritories;
+}
+
+std::vector<std::unique_ptr<NavalTerritory>>& TerritoryManager::getNavalTerritories()
+{
+	return navalTerritories;
 }
 
 void TerritoryManager::calculateAdjacencies()

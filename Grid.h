@@ -40,6 +40,7 @@ public:
 
 	// select()  // grid becomes selected and displays border in different colour.
 
+	void setBorderMode(BorderMode borderMode);
 	void addGrid(const Grid &grid);  // Adds parameter grid positions to this grids positions.
 	void removeGrid(const Grid &grid);  // Removes parameter grid positions from this grids positions.
 	void addSquare(sf::Vector2f position);  // Adds grid square at position in world.
