@@ -4,12 +4,13 @@
 
 enum class Title
 {
-	noTitle,
-	baron,  // Be very careful adding new titles as there are loops dependant on the current title set. In general baron should = 1 always.
-	count,
-	duke,
-	king,
-	emperor
+	noTitle = 0,
+	admiral = -1,
+	baron = 1,  // Be very careful adding new titles as there are loops dependant on the current title set. In general baron should = 1 always.
+	count = 2,
+	duke = 3,
+	king = 4,
+	emperor = 5
 };
 
 const std::vector<Title> getOrderedTitles();

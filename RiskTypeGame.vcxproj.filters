@@ -288,6 +288,9 @@
     <ClCompile Include="TerritoryDistanceMap.cpp">
       <Filter>Source Files\Game\Territory</Filter>
     </ClCompile>
+    <ClCompile Include="Maridom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LandArmy.h">
@@ -481,6 +484,9 @@
     </ClInclude>
     <ClInclude Include="TerritoryDistanceMap.h">
       <Filter>Header Files\Game\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="Maridom.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

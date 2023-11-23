@@ -10,7 +10,6 @@ Barony::Barony(LandTerritory &territory, double landArmyYield, double navalFleet
 	: LandedEstate(Title::baron, territory),
 	landArmyYield(landArmyYield), navalFleetYield(navalFleetYield), yieldsNavy(territory.getIsCoastal())
 {
-
 }
 
 void Barony::saveToFile(std::ofstream & file) const
