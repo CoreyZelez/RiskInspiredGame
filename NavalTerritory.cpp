@@ -1,17 +1,18 @@
 #include "NavalTerritory.h"
 #include "Utility.h"
+#include "NavalTerritoryOccupancy.h"
 #include <assert.h>
 #include <fstream>
 
 
 
 NavalTerritory::NavalTerritory(int id, Grid grid)
-	: Territory(id, grid, TerritoryType::naval)
+	: Territory(id, grid, std::make_unique<NavalTerritoryOccupancy>(*this),  TerritoryType::naval)
 {
 }
 
 NavalTerritory::NavalTerritory(int id)
-	: Territory(id, createRandomNavalColor(), TerritoryType::naval)
+	: Territory(id, createRandomNavalColor(), std::make_unique<NavalTerritoryOccupancy>(*this), TerritoryType::naval)
 {
 }
 

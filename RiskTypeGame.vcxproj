@@ -169,6 +169,7 @@
   <ItemGroup>
     <ClCompile Include="LandTerritoryOccupancy.cpp" />
     <ClCompile Include="Maridom.cpp" />
+    <ClCompile Include="NavalTerritoryOccupancy.cpp" />
     <ClCompile Include="PlayerAIContext.cpp" />
     <ClCompile Include="AIPersonality.cpp" />
     <ClCompile Include="PlayerAIComponent.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="IOccupiable.h" />
     <ClInclude Include="LandTerritoryOccupancy.h" />
     <ClInclude Include="Maridom.h" />
+    <ClInclude Include="NavalTerritoryOccupancy.h" />
     <ClInclude Include="PlayerAIContext.h" />
     <ClInclude Include="AIPersonality.h" />
     <ClInclude Include="PlayerAIComponent.h" />

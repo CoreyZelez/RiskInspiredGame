@@ -11,6 +11,10 @@
 Estate::Estate(Title title)
 	: title(title)
 {
+	if(title == Title::admiral)
+	{
+		this->grid.setBorderMode(BorderMode::feintBorders);
+	}
 	initColor();
 }
 
@@ -18,6 +22,10 @@ Estate::Estate(Title title, const Grid &grid)
 	: title(title)
 {
 	this->grid.addGrid(grid);
+	if(title == Title::admiral)
+	{
+		this->grid.setBorderMode(BorderMode::feintBorders);
+	}
 	initColor();
 }
 
@@ -25,6 +33,10 @@ Estate::Estate(Title title, const Grid &grid, std::string name)
 	: title(title), name(name)
 {
 	this->grid.addGrid(grid);
+	if(title == Title::admiral)
+	{
+		this->grid.setBorderMode(BorderMode::feintBorders);
+	}
 	initColor();
 }
 

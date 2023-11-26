@@ -13,7 +13,7 @@
 
 int main()
 {
-	bool mapEditorMode = true;
+	bool mapEditorMode = false;
 
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
 	sf::View gameView = window.getDefaultView();
@@ -45,7 +45,10 @@ int main()
 		}
 
 		// Update game.
-		game.update();
+		if(!mapEditorMode)
+		{
+			game.update();
+		}
 
 		// Handle input.
 		window.setView(gameView);

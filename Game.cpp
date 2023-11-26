@@ -11,7 +11,7 @@ Game::Game(std::string mapName)
 void Game::generatePlayers()
 {
 	int humanCnt = 0; // Used temporarily for testing.
-	const int numHumans = 1;
+	const int numHumans = 0;
 	for(auto &barony : map.getEstateManager().getBaronies())
 	{
 		std::unique_ptr<Player> player = std::make_unique<Player>(*this);
@@ -36,7 +36,7 @@ void Game::update()
 {
 	///////////////////////////////
 	// Caps number of turns per update call. For testing. 
-	const int maxTurns = 2;
+	const int maxTurns = 100;
 	int turnCnt = 0;
 	///////////////////////////////
 

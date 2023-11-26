@@ -365,8 +365,8 @@ Thardrentopia
 # name
 Tardeth
 # subfiefs
-Nethdrentricth
 Lueghmia
+Nethdrentricth
 
 # estate
 # title
@@ -383,8 +383,8 @@ Tundeth
 # name
 Carmia
 # subfiefs
-Easheigha
 Fusdrenmar
+Easheigha
 Morethsafrey
 
 # estate
@@ -429,9 +429,9 @@ Finithilfrey
 # name
 Permor
 # subfiefs
-Percflinmar
-Tariltricth
 Trosfrey
+Tariltricth
+Percflinmar
 
 # estate
 # title
@@ -457,8 +457,8 @@ Drethdeth
 # name
 Vosdeth
 # subfiefs
-Tharvenmor
 Carmia
+Tharvenmor
 
 # estate
 # title
@@ -477,8 +477,8 @@ Niladriax
 # subfiefs
 Metheigha
 Vosdeth
-Carmar
 Ferthales
+Carmar
 
 # estate
 # title
@@ -486,8 +486,8 @@ Ferthales
 # name
 Pantaria
 # subfiefs
-Dayttaria
 Permor
+Dayttaria
 
 # estate
 # title
