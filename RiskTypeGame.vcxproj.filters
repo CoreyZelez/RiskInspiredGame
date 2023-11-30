@@ -106,6 +106,12 @@
     <Filter Include="Source Files\Game\Player\AI">
       <UniqueIdentifier>{c8874d7e-3801-4014-8314-f0f86c74e678}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Utility\Graphics">
+      <UniqueIdentifier>{5989f5be-ec6f-426e-9d45-dbac84c9b72d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\Graphics">
+      <UniqueIdentifier>{21b79dcc-fb14-4906-851e-651bf6f77409}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RiskTypeGame.cpp">
@@ -207,9 +213,6 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\User Interface</Filter>
     </ClCompile>
-    <ClCompile Include="MilitaryForceGraphics.cpp">
-      <Filter>Source Files\Game\Military</Filter>
-    </ClCompile>
     <ClCompile Include="MilitaryTest.cpp">
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
@@ -285,14 +288,26 @@
     <ClCompile Include="TerritoryDistanceMap.cpp">
       <Filter>Source Files\Game\Territory</Filter>
     </ClCompile>
+    <ClCompile Include="NavalTerritoryOccupancy.cpp">
+      <Filter>Source Files\Game\Territory</Filter>
+    </ClCompile>
     <ClCompile Include="Maridom.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Estate</Filter>
+    </ClCompile>
+    <ClCompile Include="Port.cpp">
+      <Filter>Source Files\Game\Territory</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsComponent.cpp">
+      <Filter>Source Files\Utility\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteGraphicsComponent.cpp">
+      <Filter>Source Files\Utility\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="MilitaryForceGraphics.cpp">
+      <Filter>Source Files\Utility\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="ReconcileLandedEstates.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NavalTerritoryOccupancy.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\User Interface\CommandButton</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -492,7 +507,16 @@
       <Filter>Header Files\Game\Estate</Filter>
     </ClInclude>
     <ClInclude Include="NavalTerritoryOccupancy.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="Port.h">
+      <Filter>Header Files\Game\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsComponent.h">
+      <Filter>Header Files\Utility\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteGraphicsComponent.h">
+      <Filter>Header Files\Utility\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -81,12 +81,12 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 		this->fleet->addObserver(this);  // Observe army so it can be set to nullptr when it dies.
 		territory.notifyObservers(newOccupant);
 	}
-	// Case armies have same owner.
+	// Case fleets have same owner.
 	else if(&(fleet->getOwner()) == &(this->fleet->getOwner()))
 	{
 		const int initialStrengthSum = fleet->getTotalStrength() + this->fleet->getTotalStrength();
 
-		// Absorb strength of army into this->army.
+		// Absorb strength of army into this->fleet.
 		assert(fleet->getTotalStrength() > 0);
 		this->fleet->increaseStrength(fleet->getStaminaStrength());
 		fleet->clearStrength();  // Sets strength to 0.
@@ -100,8 +100,8 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 	else
 	{
 		// Temporarily implemented as always attack. In future potentially not as there may be friendly sharing of troop territory.
-//fleet->attack(*this->fleet, defenceMultiplier);
-		// Attacking army occupys land if defending army killed.
+        fleet->attack(*this->fleet, defenceMultiplier);
+		// Attacking fleet occupys territory if defending fleet killed.
 		// this->army nullptr implies dead since it's pointer was nulled by territory in response to its death.
 		if(this->fleet == nullptr && !fleet->isDead())
 		{

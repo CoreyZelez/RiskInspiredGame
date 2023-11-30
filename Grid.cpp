@@ -72,6 +72,44 @@ bool Grid::sharesBorder(const Grid &grid) const
 	return false;
 }
 
+std::vector<sf::Vector2f> Grid::getNeighbouringBorderPositions(const Grid &grid) const
+{
+	std::vector<sf::Vector2i> borderPositions = {};
+	for(auto position = borderAndSubBorderPositions.cbegin(); position != borderAndSubBorderPositions.cend(); ++position)
+	{
+		sf::Vector2i l(position->x - 1, position->y);
+		sf::Vector2i r(position->x + 1, position->y);
+		sf::Vector2i u(position->x, position->y - 1);
+		sf::Vector2i d(position->x, position->y + 1);
+		sf::Vector2i lu(position->x - 1, position->y - 1);
+		sf::Vector2i ru(position->x + 1, position->y - 1);
+		sf::Vector2i ld(position->x - 1, position->y + 1);
+		sf::Vector2i rd(position->x + 1, position->y + 1);
+		std::vector<sf::Vector2i> adjacentPositions = { l, u, r, d, lu, ru, ld, rd };
+		for(sf::Vector2i position : adjacentPositions)
+		{
+			if(grid.borderAndSubBorderPositions.count(position) == 1)
+			{
+				borderPositions.push_back(position);
+				break;
+			}
+			else
+			{
+				// Verifies that position does not exist at all in grid since otherwise it would be a border position.
+				assert(grid.positions.count(position) == 0);
+			}
+		}
+	}
+
+	// Convert positions to global coordinates.
+	std::vector<sf::Vector2f> borderCoordinates = {};
+	for(sf::Vector2i position : borderPositions)
+	{
+		borderCoordinates.push_back(calculateWorldCoordinates(position));
+	}
+	return borderCoordinates;
+}
+
 bool Grid::isEmpty() const
 {
 	return positions.size() == 0;

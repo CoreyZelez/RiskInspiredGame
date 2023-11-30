@@ -102,19 +102,19 @@ std::pair<int, int> LandArmy::calculateMinMaxStaminaCost(const Territory &territ
 	}
 }
 
-void LandArmy::move(Territory &territory, unsigned int strength)
+void LandArmy::move(Territory &location, unsigned int strength)
 {
 	assert(strength > 0);
 	assert(strength <= getTotalStrength());
 
 	// Attempt to move to current location.
-	if(&territory == &getTerritory())
+	if(&location == &getTerritory())
 	{
 		return;
 	}
 
 	// Attempt to move to non adjacent location.
-	if(!getTerritory().getDistanceMap().isAdjacent(&territory))
+	if(!getTerritory().getDistanceMap().isAdjacent(&location))
 	{
 		return;
 	}
@@ -122,7 +122,7 @@ void LandArmy::move(Territory &territory, unsigned int strength)
 	// Determine stamina strength array of army being moved.
 	// It is possible that the total strength of this army is 0. We do not yet trigger any death related events
 	// however as it is possible for strength to be refunded to this army.
-	std::array<unsigned int, 4> expendedStrength = expendStrength(strength, territory);
+	std::array<unsigned int, 4> expendedStrength = expendStrength(strength, location);
 	// Land army attempting location occupation.
 	std::unique_ptr<LandArmy> newArmy = std::make_unique<LandArmy>(getOwner(), &getTerritory(), expendedStrength);  
 	// Only proceed if new army strength is greater than 0.
@@ -132,7 +132,7 @@ void LandArmy::move(Territory &territory, unsigned int strength)
 	}
 
 	// Attempt occupation of location by new army.
-	territory.getOccupancyHandler()->occupy(newArmy.get());
+	location.getOccupancyHandler()->occupy(newArmy.get());
 
 	// Refund strength to this->army if deployedArmy is not able to occupy location
 	if(&newArmy.get()->getTerritory() == &getTerritory())
