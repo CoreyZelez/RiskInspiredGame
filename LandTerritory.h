@@ -15,8 +15,6 @@ public:
 
 	virtual ~LandTerritory() = default;
 
-	virtual void calculateDistances(const std::vector<Territory*> &territories) override;
-
 	void setIsCoastal(bool isCoastal);
 	bool getIsCoastal() const;
 
@@ -24,6 +22,5 @@ public:
 	virtual std::string getSaveLabel() const override;
 
 private:
-	TerritoryDistanceMap landDistanceMap;  // Stores information about distances to any territory.
 	bool isCoastal = false;
 };
