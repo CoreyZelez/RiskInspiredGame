@@ -18,7 +18,7 @@ int TerritoryDistanceMap::getDistance(const Territory &territory) const
 	// No connecting path exists.
 	if(distances.count(&territory) == 0)
 	{
-		return -1;
+		return INT_MAX;
 	}
 
 	return distances[&territory];
@@ -52,36 +52,46 @@ std::set<Territory*>& TerritoryDistanceMap::getAdjacencies()
 
 std::map<const Territory*, int> TerritoryDistanceMap::calculateDistancesBFS(const std::vector<Territory*>& territories)
 {
-	std::queue<const Territory*> q;
+	// Restrict maxDepth as distance of greater value is not useful for us.
+	const int maxDepth = 12;
+
+	std::queue<std::pair<const Territory*, int>> q;
 	std::map<const Territory*, bool> visited;
 	std::map<const Territory*, int> distances;
 
 	// Initialize distances and visited map.
-	for(const Territory* territory : territories)
+	for(const Territory* t : territories)
 	{
-		visited[territory] = false;
-		distances[territory] = -1; // Initialize distances to -1 (unreachable).
+		visited[t] = false;
+		distances[t] = -1; // Initialize distances to -1 (unreachable).
 	}
 
 	// Starting territory has a distance of 0 from itself.
 	distances[&territory] = 0;
 	visited[&territory] = true;
 
-	q.push(&territory);
+	q.push({ &territory, 0 });
 
 	while(!q.empty())
 	{
-		const Territory* currentTerritory = q.front();
+		const Territory* currentTerritory = q.front().first;
+		int currentDepth = q.front().second;
 		q.pop();
 
-		// Iterate through adjacent territories.
-		for(const Territory* adjacentTerritory : currentTerritory->getDistanceMap().getAdjacencies()) 
+		// Check if the current depth exceeds the maximum depth.
+		if(currentDepth >= maxDepth)
 		{
-			if(!visited[const_cast<Territory*>(adjacentTerritory)])
+			continue; // Skip exploring further at this depth.
+		}
+
+		// Iterate through adjacent territories.
+		for(const Territory* adjacentTerritory : currentTerritory->getDistanceMap().getAdjacencies())
+		{
+			if(!visited[adjacentTerritory])
 			{
-				distances[const_cast<Territory*>(adjacentTerritory)] = distances[currentTerritory] + 1;
-				visited[const_cast<Territory*>(adjacentTerritory)] = true;
-				q.push(const_cast<Territory*>(adjacentTerritory)); // Enqueue adjacent territory.
+				distances[adjacentTerritory] = distances[currentTerritory] + 1;
+				visited[adjacentTerritory] = true;
+				q.push({ adjacentTerritory, currentDepth + 1 }); // Enqueue adjacent territory with incremented depth.
 			}
 		}
 	}

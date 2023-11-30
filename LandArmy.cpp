@@ -154,7 +154,6 @@ void LandArmy::move(Territory &location, unsigned int strength)
 void LandArmy::moveClosest(Territory &target, unsigned int strength, int maxDist)
 {
 	assert(strength > 0);
-	const int distance = getTerritory().getDistanceMap().getDistance(target);  
 	std::set<Territory*> adjacencies = getTerritory().getDistanceMap().getAdjacencies();
 	// Construct adjacent territories with same owner as army owner.
 	std::set<Territory*> friendlyAdjacencies;  
