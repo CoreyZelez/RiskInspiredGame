@@ -6,9 +6,9 @@
 #include <iostream>
 #include <fstream>
 
-Barony::Barony(LandTerritory &territory, double landArmyYield, double navalFleetYield)
-	: LandedEstate(Title::baron, territory),
-	landArmyYield(landArmyYield), navalFleetYield(navalFleetYield), yieldsNavy(territory.getIsCoastal())
+Barony::Barony(LandTerritory &landTerritory, double landArmyYield, double navalFleetYield)
+	: LandedEstate(Title::baron, landTerritory),
+	landArmyYield(landArmyYield), navalFleetYield(navalFleetYield), landTerritory(landTerritory)
 {
 }
 
@@ -43,8 +43,10 @@ std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
 	cumulativeNavalFleet += navalFleetYield;
 
 	// Yield navy to territory and player if threshold surpassed.
+	// Only yields navy if territory has a port.
+	// T
 	const int navalFleetThreshold = 2;  // Min cumulative value for yield to take place.
-	if(yieldsNavy && cumulativeNavalFleet >= navalFleetThreshold)
+	if(landTerritory.hasPort() && cumulativeNavalFleet >= navalFleetThreshold)
 	{
 		const int yield = cumulativeNavalFleet;
 		cumulativeNavalFleet -= yield;

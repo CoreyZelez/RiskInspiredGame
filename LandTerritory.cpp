@@ -17,17 +17,12 @@ LandTerritory::LandTerritory(int id)
 {
 }
 
-void LandTerritory::setIsCoastal(bool isCoastal)
-{
-	this->isCoastal = isCoastal;
-}
-
-bool LandTerritory::getIsCoastal() const
-{
-	return isCoastal;
-}
-
 std::string LandTerritory::getSaveLabel() const
 {
 	return landSaveLabel;
+}
+
+bool LandTerritory::hasPort() const
+{
+	return port != nullptr;
 }

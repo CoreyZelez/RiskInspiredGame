@@ -2,6 +2,7 @@
 #include "Territory.h"
 #include "Observer.h"
 #include "Subject.h"
+#include "Port.h"
 #include <memory>
 
 class NavalFleet;
@@ -15,12 +16,11 @@ public:
 
 	virtual ~LandTerritory() = default;
 
-	void setIsCoastal(bool isCoastal);
-	bool getIsCoastal() const;
-
 	// Save label is identifier in txt file for territory type.
 	virtual std::string getSaveLabel() const override;
 
+	bool hasPort() const;
+
 private:
-	bool isCoastal = false;
+	std::unique_ptr<Port> port = nullptr;
 };
