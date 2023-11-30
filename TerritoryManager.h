@@ -35,6 +35,7 @@ private:
 	void loadLandTerritory(std::ifstream &file);
 	void loadNavalTerritory(std::ifstream &file);
 	void removeTerritory(Territory *territory);
+	NavalTerritory *getNavalTerritory(int id);
 
 	std::vector<Territory*> territories;
 	std::vector<std::unique_ptr<NavalTerritory>> navalTerritories;

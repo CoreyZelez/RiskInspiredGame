@@ -47,7 +47,6 @@ void Territory::saveToFile(std::ofstream &file) const
 	grid.saveToFile(file);
 	file << "# id" << std::endl;
 	file << id << std::endl;
-	file << std::endl;
 }
 
 void Territory::draw(sf::RenderWindow &window) const

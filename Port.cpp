@@ -11,6 +11,11 @@ Port::Port(const LandTerritory &landTerritory, NavalTerritory &navalTerritory)
 	graphics.setPosition(spritePosition);
 }
 
+int Port::getNavalTerritoryID() const
+{
+	return navalTerritory.getID();
+}
+
 sf::Vector2f Port::determineSpritePosition(const LandTerritory &landTerritory, const NavalTerritory &navalTerritory)
 {
 	// Territories must border each other.

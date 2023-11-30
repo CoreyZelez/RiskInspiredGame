@@ -11,6 +11,8 @@ class Port
 public:
 	Port(const LandTerritory &landTerritory, NavalTerritory& navalTerritory);
 
+	int getNavalTerritoryID() const;
+
 private:
 	SpriteGraphicsComponent graphics;
 	NavalTerritory &navalTerritory;  

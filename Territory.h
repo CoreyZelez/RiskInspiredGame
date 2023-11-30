@@ -31,7 +31,7 @@ public:
 	Territory(int id, sf::Color color, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type);
 	virtual ~Territory() = default;
 
-	void saveToFile(std::ofstream &file) const;
+	virtual void saveToFile(std::ofstream &file) const;
 
 	void draw(sf::RenderWindow &window) const;  // In future consdier returning vertex arrays probably!!!
 
