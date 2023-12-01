@@ -12,6 +12,14 @@ void TerritoryManager::draw(sf::RenderWindow &window) const
 	}
 }
 
+void TerritoryManager::drawPorts(sf::RenderWindow & window) const
+{
+	for(const auto &territory : landTerritories)
+	{
+		territory.get()->drawPort(window);
+	}
+}
+
 void TerritoryManager::save(std::string mapName) const
 {
 	std::ofstream file("res/maps/" + mapName + "/" + mapName + "_territories.txt");

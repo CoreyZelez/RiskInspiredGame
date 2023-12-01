@@ -3,6 +3,7 @@
 #include "NavalFleet.h"
 #include "Utility.h"
 #include "LandTerritoryOccupancy.h"
+#include "NavalTerritory.h"
 #include <assert.h>
 #include <iostream>
 #include <fstream>
@@ -38,9 +39,46 @@ void LandTerritory::saveToFile(std::ofstream &file) const
 	}
 }
 
+void LandTerritory::draw(sf::RenderWindow & window) const
+{
+	Territory::draw(window);
+	if(port != nullptr)
+	{
+		port.get()->draw(window);
+	}
+}
+
+std::unique_ptr<Port>& LandTerritory::getPort()
+{
+	return port;
+}
+
+void LandTerritory::drawPort(sf::RenderWindow & window) const
+{
+	if(port != nullptr)
+	{
+		port.get()->draw(window);
+	}
+}
+
 std::string LandTerritory::getSaveLabel() const
 {
 	return landSaveLabel;
+}
+
+void LandTerritory::createPort(NavalTerritory &navalTerritory)
+{
+	// Return if grids do not share border.
+	if(!getGrid().sharesBorder(navalTerritory.getGrid()))
+	{
+		return;
+	}
+	port = std::make_unique<Port>(*this, navalTerritory);
+}
+
+void LandTerritory::deletePort()
+{
+	port = nullptr;
 }
 
 bool LandTerritory::hasPort() const

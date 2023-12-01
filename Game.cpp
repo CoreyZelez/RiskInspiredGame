@@ -83,17 +83,6 @@ MapMode Game::getMapMode() const
 	return mapMode;
 }
 
-bool Game::getDisplayMilitary() const
-{
-	// Militaries not selected in realm select mode.
-	if(state == GameState::realmSelectMode)
-	{
-		return false;
-	}
-
-	return displayMilitary;
-}
-
 const MilitaryForce& Game::getSelectedMilitary() const
 {
 	assert(selectedMilitary != nullptr);
@@ -152,6 +141,11 @@ void Game::moveSelectedMilitary(sf::Vector2f position)
 	selectedMilitary = nullptr;
 }
 
+const Map& Game::getMap() const
+{
+	return map;
+}
+
 const Realm* Game::getRealm(const sf::Vector2f &position)
 {
 	for(const auto &player : players)
@@ -183,7 +177,12 @@ void Game::endHumanPlayerTurn()
 
 void Game::changeDisplayMilitary()
 {
-	displayMilitary = !displayMilitary;
+	displayOptions.displayMilitaries = !displayOptions.displayMilitaries;
+}
+
+DisplayOptions Game::getDisplayOptions() const
+{
+	return displayOptions;
 }
 
 GameDisplay Game::createView() const

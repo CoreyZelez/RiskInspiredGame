@@ -96,7 +96,7 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 
 		isValid = true;
 	}
-	// Case armies have different owner.
+	// Case fleets have different owner.
 	else
 	{
 		// Temporarily implemented as always attack. In future potentially not as there may be friendly sharing of troop territory.
@@ -127,8 +127,9 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 		controller = &this->fleet->getOwner();
 	}
 
-	if(&army->getOwner() != controller)
+	if(army != nullptr && &army->getOwner() != controller)
 	{
+		assert(!army->isDead());
 		// Kill the army occupying this territory.
 		army->clearStrength();  
 		assert(army.isDead());
@@ -158,4 +159,12 @@ const NavalFleet * NavalTerritoryOccupancy::getFleet() const
 
 void NavalTerritoryOccupancy::updateMilitaryPosition()
 {
+	if(army != nullptr)
+	{
+		army->setSpritePosition(territory.getGrid().getCenter());
+	}
+	if(fleet != nullptr)
+	{
+		fleet->setSpritePosition(territory.getGrid().getCenter());
+	}
 }

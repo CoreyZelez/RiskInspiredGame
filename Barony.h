@@ -19,13 +19,16 @@ public:
 	virtual std::unique_ptr<NavalFleet> yieldNavalFleet() override;
 
 protected:
+	// Puts new naval fleet owned by ruler onto naval territory associated with port. Returns handle.
+	virtual std::unique_ptr<NavalFleet> putFleet(int strength) override;
+
 	// Provides bonus yield to this estate.
 	virtual void receiveBonusYield(const float &bonus) override;
 
 	virtual std::string getSaveLabel() const override;
 
 private:
-	const LandTerritory &landTerritory;
+	LandTerritory &landTerritory;
 
 	double landArmyYield;  // Yield of land army per turn.
 	double navalFleetYield = 0;  // Yield of naval fleets per turn.

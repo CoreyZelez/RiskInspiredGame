@@ -33,7 +33,7 @@ public:
 
 	virtual void saveToFile(std::ofstream &file) const;
 
-	void draw(sf::RenderWindow &window) const;  // In future consdier returning vertex arrays probably!!!
+	virtual void draw(sf::RenderWindow &window) const; 
 
 	void assignLandedEstate(const LandedEstate *estate);
 

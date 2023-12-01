@@ -12,11 +12,11 @@ public:
 	void draw(sf::RenderWindow &window) const;
 
 private:
-
-	void drawMilitaries(sf::RenderWindow &window) const;
-
 	const Game &game;
 	const std::vector<std::unique_ptr<Player>> &players;
 	MapDisplay MapDisplay;  
+
+	void drawMilitaries(sf::RenderWindow &window) const;
+	void drawPorts(sf::RenderWindow &window) const;
 };
 

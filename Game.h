@@ -12,6 +12,12 @@ enum class GameState
 	realmSelectMode
 };
 
+struct DisplayOptions
+{
+	bool displayPorts = true;
+	bool displayMilitaries = true;
+};
+
 class Game
 {
 public:
@@ -29,6 +35,8 @@ public:
 	// Selected military attempts to attack territory located at position.
 	void moveSelectedMilitary(sf::Vector2f position);
 
+	const Map &getMap() const;
+
 	// Gets player realm which contains a given world position.
 	const Realm* getRealm(const sf::Vector2f &position);
 
@@ -38,7 +46,7 @@ public:
 	void endHumanPlayerTurn();
 
 	void changeDisplayMilitary();
-	bool getDisplayMilitary() const;
+	DisplayOptions getDisplayOptions() const;
 
 	const MilitaryForce &getSelectedMilitary() const;
 	unsigned int &getSelectedStrength();
@@ -51,7 +59,7 @@ private:
 
 	Map map; 
 	MapMode mapMode = MapMode::realm;
-	bool displayMilitary = true;
+	DisplayOptions displayOptions;
 	GameState state;
 	std::vector<std::unique_ptr<Player>> players; 
 	std::vector<std::unique_ptr<Player>>::iterator currPlayer;

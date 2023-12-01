@@ -20,9 +20,15 @@ public:
 
 	virtual void saveToFile(std::ofstream &file) const override;
 
+	virtual void draw(sf::RenderWindow &window) const override;
+
 	// Save label is identifier in txt file for territory type.
 	virtual std::string getSaveLabel() const override;
 
+	std::unique_ptr<Port> &getPort();
+	void drawPort(sf::RenderWindow &window) const;
+	void createPort(NavalTerritory &navalTerritory);
+	void deletePort();
 	bool hasPort() const;
 
 private:

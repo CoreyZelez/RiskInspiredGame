@@ -11,6 +11,10 @@ class Port
 public:
 	Port(const LandTerritory &landTerritory, NavalTerritory& navalTerritory);
 
+	void draw(sf::RenderWindow &window) const;
+
+	NavalTerritory &getNavalTerritory();
+
 	int getNavalTerritoryID() const;
 
 private:

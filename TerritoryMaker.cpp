@@ -21,6 +21,46 @@ void TerritoryMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 
 	handleInputForView(view);
 
+	if(inputUtility.getButtonPressed(sf::Mouse::Right))
+	{
+		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+		sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+
+		// Select territories for port creation.
+		if(state == TerritoryMakerState::createPort)
+		{
+			assert(portTerritories.first == nullptr || portTerritories.second == nullptr);
+
+			if(portTerritories.first == nullptr)
+			{
+				portTerritories.first = territoryManager.getLandTerritory(worldPos);
+				if(portTerritories.first == nullptr)
+				{
+					portTerritories.second = nullptr;
+					state = TerritoryMakerState::none;
+				}
+			}
+			else if(portTerritories.second == nullptr)
+			{
+				portTerritories.second = territoryManager.getNavalTerritory(worldPos);
+				if(portTerritories.second == nullptr)
+				{
+					portTerritories.first = nullptr;
+					state = TerritoryMakerState::none;
+				}
+			}
+
+			if(portTerritories.first != nullptr && portTerritories.second != nullptr)
+			{
+				// Create the port. Port is not created if territories not adjacent.
+				portTerritories.first->createPort(*portTerritories.second);
+				portTerritories.first = nullptr;
+				portTerritories.second = nullptr;
+				state = TerritoryMakerState::none;
+			}
+
+		}
+	}
 	if(inputUtility.getButtonDown(sf::Mouse::Right))
 	{
 		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
@@ -45,7 +85,7 @@ void TerritoryMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 			}
 		}
 	}
-	else if(inputUtility.getButtonDown(sf::Mouse::Left))
+	if(inputUtility.getButtonDown(sf::Mouse::Left))
 	{
 		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 		sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
@@ -55,33 +95,32 @@ void TerritoryMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 			territory->getGrid().addSquare(worldPos);
 		}
 	}
-	else if(inputUtility.getKeyPressed(sf::Keyboard::L))
+	if(inputUtility.getKeyPressed(sf::Keyboard::L))
 	{
 		// Create a new territory.
 		territoryManager.removeEmptyTerritories();
 		territory = territoryManager.createLandTerritory();
 		state = TerritoryMakerState::editTerritory;
 	}
-	else if(inputUtility.getKeyPressed(sf::Keyboard::N))
+	if(inputUtility.getKeyPressed(sf::Keyboard::N))
 	{
 		// Create a new territory.
 		territoryManager.removeEmptyTerritories();
 		territory = territoryManager.createNavalTerritory();
 		state = TerritoryMakerState::editTerritory;
 	}
-	else if(inputUtility.getKeyPressed(sf::Keyboard::Enter))
+	if(inputUtility.getKeyPressed(sf::Keyboard::Enter))
 	{
 		territory = nullptr;
 		state = TerritoryMakerState::none;
 	}
-	else if(inputUtility.getKeyPressed(sf::Keyboard::P))
+	if(inputUtility.getKeyPressed(sf::Keyboard::P))
 	{
-		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-		sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
-		// Add territory square at mouse position.
-		if(state == TerritoryMakerState::editTerritory)
+		if(state == TerritoryMakerState::none)
 		{
-			territory->getGrid().addSquare(worldPos);
+			std::cout << "LETS MAKE A PORT!" << std::endl;
+			state = TerritoryMakerState::createPort;
+			portTerritories = { nullptr, nullptr };
 		}
 	}
 

@@ -1,56 +1,11 @@
 ﻿  Barony.cpp
-d:\projects\risktypegame\risktypegame\barony.cpp(33): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(33): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(51): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(51): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-  EstateTest.cpp
-  Game.cpp
-  GameController.cpp
-  GameDisplay.cpp
-  GameUIController.cpp
-  LandArmy.cpp
-d:\projects\risktypegame\risktypegame\landarmy.cpp(55): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\landarmy.cpp(56): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-  LandTerritory.cpp
-  LandTerritoryOccupancy.cpp
-  LandedEstate.cpp
-  Map.cpp
-  MapDisplay.cpp
-  MapMaker.cpp
-  Maridom.cpp
-  MilitaryForce.cpp
-  MilitaryTest.cpp
-  NavalFleet.cpp
-d:\projects\risktypegame\risktypegame\navalfleet.cpp(108): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\navalfleet.cpp(109): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-  NavalTerritory.cpp
-  NavalTerritoryOccupancy.cpp
-  PlayerAIContext.cpp
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(77): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(123): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(165): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-  Compiling...
-  Port.cpp
-  RealmTest.cpp
-  RiskTypeGame.cpp
-  SimplePlayerAI.cpp
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(100): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(110): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(177): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(177): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(220): warning C4305: 'initializing': truncation from 'double' to 'float'
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(221): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(222): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(222): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(229): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(229): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
-  Territory.cpp
-  TerritoryDistanceMap.cpp
-  TerritoryMaker.cpp
-  TerritoryManager.cpp
+d:\projects\risktypegame\risktypegame\barony.cpp(35): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(35): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(52): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(52): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
   Generating code
-  148 of 7592 functions ( 1.9%) were compiled, the rest were copied from previous compilation.
-    16 functions were new in current compilation
-    106 functions had inline decision re-evaluated but remain unchanged
+  1 of 7609 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    10 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Release\RiskTypeGame.exe

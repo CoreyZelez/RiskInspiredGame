@@ -9,6 +9,17 @@ Port::Port(const LandTerritory &landTerritory, NavalTerritory &navalTerritory)
 {
 	sf::Vector2f spritePosition = determineSpritePosition(landTerritory, navalTerritory);
 	graphics.setPosition(spritePosition);
+	graphics.setScale(sf::Vector2f(3.5, 3.5));
+}
+
+void Port::draw(sf::RenderWindow & window) const
+{
+	graphics.draw(window);
+}
+
+NavalTerritory& Port::getNavalTerritory()
+{
+	return navalTerritory;
 }
 
 int Port::getNavalTerritoryID() const

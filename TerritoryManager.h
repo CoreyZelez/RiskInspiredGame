@@ -8,6 +8,8 @@ class TerritoryManager
 public:
 	void draw(sf::RenderWindow &window) const;
 
+	void drawPorts(sf::RenderWindow &window) const;
+
 	void save(std::string mapName) const;
 	void load(std::string mapName);
 

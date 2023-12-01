@@ -2,6 +2,8 @@
 #include "LandTerritory.h"
 #include "NavalFleet.h"
 #include "LandArmy.h"
+#include "LandTerritory.h"
+#include "NavalTerritory.h"
 #include <assert.h>
 #include <iostream>
 #include <fstream>
@@ -44,7 +46,6 @@ std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
 
 	// Yield navy to territory and player if threshold surpassed.
 	// Only yields navy if territory has a port.
-	// T
 	const int navalFleetThreshold = 2;  // Min cumulative value for yield to take place.
 	if(landTerritory.hasPort() && cumulativeNavalFleet >= navalFleetThreshold)
 	{
@@ -54,6 +55,36 @@ std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
 	}
 
 	return nullptr;
+}
+
+std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
+{
+	// Should not be hostile army residing on this territory.
+	// There may however be a hostile army on the naval territory associated with the port.
+	assert(territory.getOccupancyHandler()->getOccupant() == nullptr
+		|| territory.getOccupancyHandler()->getOccupant() == getRuler());
+
+	// Estate does not generate naval units if no port.
+	if(landTerritory.getPort() == nullptr)
+	{
+		return nullptr;
+	}
+
+	// Territory we place the fleet on.
+	NavalTerritory &navalTerritory = landTerritory.getPort().get()->getNavalTerritory();
+
+	std::unique_ptr<NavalFleet> fleet = std::make_unique<NavalFleet>(*getRuler(), &navalTerritory, strength);
+	navalTerritory.getOccupancyHandler()->occupy(fleet.get());
+
+	// Fleet merged with pre-existing fleet on territory or was killed by it.
+	if(fleet->isDead())
+	{
+		return nullptr;
+	}
+
+	// There was no pre-existing fleet on territory.
+	assert(fleet.get()->getTotalStrength() > 0);
+	return fleet;
 }
 
 void Barony::receiveBonusYield(const float &bonus)
