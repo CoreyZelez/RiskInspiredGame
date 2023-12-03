@@ -37,7 +37,6 @@ int main()
 		while(window.pollEvent(event))
 		{
 			InputUtility.handleInputEvent(event);
-
 			if(event.type == sf::Event::Closed)
 			{
 				window.close();

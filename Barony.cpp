@@ -14,7 +14,7 @@ Barony::Barony(LandTerritory &landTerritory, double landArmyYield, double navalF
 {
 }
 
-void Barony::saveToFile(std::ofstream & file) const
+void Barony::saveToFile(std::ofstream &file) const
 {
 	LandedEstate::saveToFile(file);
 	file << "# land army yield" << std::endl;
@@ -59,10 +59,12 @@ std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
 
 std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 {
+	assert(getRuler != nullptr);
+
 	// Should not be hostile army residing on this territory.
 	// There may however be a hostile army on the naval territory associated with the port.
-	assert(territory.getOccupancyHandler()->getOccupant() == nullptr
-		|| territory.getOccupancyHandler()->getOccupant() == getRuler());
+	assert(getTerritory().getOccupancyHandler()->getOccupant() == nullptr
+		|| getTerritory().getOccupancyHandler()->getOccupant() == getRuler());
 
 	// Estate does not generate naval units if no port.
 	if(landTerritory.getPort() == nullptr)
@@ -74,7 +76,14 @@ std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 	NavalTerritory &navalTerritory = landTerritory.getPort().get()->getNavalTerritory();
 
 	std::unique_ptr<NavalFleet> fleet = std::make_unique<NavalFleet>(*getRuler(), &navalTerritory, strength);
+	// Attempt occupancy.
 	navalTerritory.getOccupancyHandler()->occupy(fleet.get());
+	// Repeatedly reattempy occupancy of naval territory until success or death of fleet.
+	// This is necessary since first attempt to occupy may fail whilst fleet still alive thus has no where to return to.
+	while(!fleet.get()->isDead() && navalTerritory.getOccupancyHandler()->getOccupant() != getRuler())
+	{
+		navalTerritory.getOccupancyHandler()->occupy(fleet.get());
+	}
 
 	// Fleet merged with pre-existing fleet on territory or was killed by it.
 	if(fleet->isDead())

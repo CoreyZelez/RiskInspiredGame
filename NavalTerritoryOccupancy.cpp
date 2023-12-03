@@ -72,14 +72,15 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 {
 	bool isValid = false;
 
+	assert(fleet != nullptr);
+
 	if(this->fleet == nullptr)
 	{
 		this->fleet = fleet;
-		fleet->setTerritory(&territory);
+		this->fleet->setTerritory(&territory);
 		isValid = true;
 		// Observer methods.
 		this->fleet->addObserver(this);  // Observe army so it can be set to nullptr when it dies.
-		territory.notifyObservers(newOccupant);
 	}
 	// Case fleets have same owner.
 	else if(&(fleet->getOwner()) == &(this->fleet->getOwner()))
@@ -102,37 +103,39 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 		// Temporarily implemented as always attack. In future potentially not as there may be friendly sharing of troop territory.
         fleet->attack(*this->fleet, defenceMultiplier);
 		// Attacking fleet occupys territory if defending fleet killed.
-		// this->army nullptr implies dead since it's pointer was nulled by territory in response to its death.
+		// this->fleet nullptr implies dead since it's pointer was nulled by territory in response to its death.
 		if(this->fleet == nullptr && !fleet->isDead())
 		{
 			this->fleet = fleet;
-			fleet->setTerritory(&territory);
+			this->fleet->setTerritory(&territory);
 			isValid = true;
 			// Observer methods.
 			this->fleet->addObserver(this);  // Observe army so it can be set to nullptr when it dies.
-			territory.notifyObservers(newOccupant);
 		}
 	}
 
-	// Remove pointer to army if army is dead.
-	if(fleet != nullptr && fleet->isDead())
-	{
-		fleet = nullptr;
-	}
-
 	// Set the controller of this territory as the owner of the occupying naval army.
-	if(this->fleet != nullptr)
+	// Notify observers if owner changed.
+	if(this->fleet != nullptr && controller != &this->fleet->getOwner())
 	{
-		assert(!this->fleet->isDead());
 		controller = &this->fleet->getOwner();
+		territory.notifyObservers(newOccupant);
 	}
 
+	// Remove pointer to army if army is dead.
+	// Note that the owner should still be the owner of the now dead fleet.
+	if(this->fleet != nullptr && this->fleet->isDead())
+	{
+		this->fleet = nullptr;
+	}
+
+	// Kill enemy land armies occupying this territory.
 	if(army != nullptr && &army->getOwner() != controller)
 	{
 		assert(!army->isDead());
 		// Kill the army occupying this territory.
 		army->clearStrength();  
-		assert(army.isDead());
+		assert(army->isDead());
 		army = nullptr;
 	}
 
@@ -144,17 +147,17 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 
 Player * NavalTerritoryOccupancy::getOccupant()
 {
-	return nullptr;
+	return controller;
 }
 
-const LandArmy * NavalTerritoryOccupancy::getArmy() const
+const LandArmy* NavalTerritoryOccupancy::getArmy() const
 {
-	return nullptr;
+	return army;
 }
 
-const NavalFleet * NavalTerritoryOccupancy::getFleet() const
+const NavalFleet* NavalTerritoryOccupancy::getFleet() const
 {
-	return nullptr;
+	return fleet;
 }
 
 void NavalTerritoryOccupancy::updateMilitaryPosition()

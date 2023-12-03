@@ -1,3 +1,30 @@
+# maridom
+# title
+-1
+# name
+Sthensia
+# subfiefs
+# territory id
+25
+
+# maridom
+# title
+-1
+# name
+Mozthsia
+# subfiefs
+# territory id
+26
+
+# maridom
+# title
+-1
+# name
+Westtrethlithia
+# subfiefs
+# territory id
+27
+
 # barony
 # title
 1
@@ -356,8 +383,8 @@ Methtrethheughough
 # name
 Percflinmar
 # subfiefs
-Drethdethia
 Thardrentopia
+Drethdethia
 
 # estate
 # title
@@ -365,8 +392,8 @@ Thardrentopia
 # name
 Tardeth
 # subfiefs
-Lueghmia
 Nethdrentricth
+Lueghmia
 
 # estate
 # title
@@ -383,9 +410,9 @@ Tundeth
 # name
 Carmia
 # subfiefs
-Fusdrenmar
-Easheigha
 Morethsafrey
+Easheigha
+Fusdrenmar
 
 # estate
 # title
@@ -448,8 +475,8 @@ Feymia
 # name
 Metheigha
 # subfiefs
-Sarlithia
 Drethdeth
+Sarlithia
 
 # estate
 # title
@@ -457,8 +484,8 @@ Drethdeth
 # name
 Vosdeth
 # subfiefs
-Carmia
 Tharvenmor
+Carmia
 
 # estate
 # title
@@ -476,9 +503,9 @@ Lertopia
 Niladriax
 # subfiefs
 Metheigha
-Vosdeth
 Ferthales
 Carmar
+Vosdeth
 
 # estate
 # title

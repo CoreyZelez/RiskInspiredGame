@@ -67,80 +67,81 @@ void NavalFleet::move(Territory &location, unsigned int strength)
 	checkDeath();
 }
 
-void NavalFleet::moveClosest(Territory & target, unsigned int strength, int maxDist)
+void NavalFleet::moveClosest(Territory &target, unsigned int strength, int maxDist)
 {
 }
 
-void NavalFleet::attack(NavalFleet & defendingNavy, double defenceMultiplier)
+void NavalFleet::attack(NavalFleet &defendingNavy, double defenceMultiplier)
 {
-	const double defenderStrength = static_cast<double>(defendingNavy.getTotalStrength());
-	const double defenderAdjustedStrength = defenderStrength * defenceMultiplier;  // defender strength.
+	const double defenderTrueStrength = static_cast<double>(defendingNavy.getTotalStrength());  // Defender strength before adjustments.
+	const double defenderStrength = defenderTrueStrength * defenceMultiplier;  // defender strength adjusted for defence multiplier.
 	const double attackerStrength = getTotalStrength();
+	int attackerStrengthAdjustment = 0;
+	int defenderStrengthAdjustment = 0;
+	assert(defenderTrueStrength > 0);
 	assert(defenderStrength > 0);
 	assert(attackerStrength > 0);
 
-	int defenderStrengthAdjustment = 0;
-	int attackerStrengthAdjustment = 0;
+	// Apply guaranteed damage.
+	const float guaranteedDamageRatio = 0.2f;
+	const int guaranteedDamageOnAttacker = (guaranteedDamageRatio * defenderStrength);
+	const int guaranteedDamageOnDefender = (guaranteedDamageRatio * attackerStrength);
+	attackerStrengthAdjustment += guaranteedDamageOnAttacker;
+	defenderStrengthAdjustment += guaranteedDamageOnDefender;
 
-	// Adjust strengths for passing a given threshold.
-	const double strengthThreshold = 3;  // Threshold for guaranteed damage on opponent.
-	const int thresholdAdjustmentValue = 1;  // Strength adjustment for opponent passing threshold.
-	if(defenderAdjustedStrength >= strengthThreshold)
+	// Apply additional damage if threshold passed.
+	if(defenderStrength >= 3)
 	{
-		attackerStrengthAdjustment += thresholdAdjustmentValue;
+		attackerStrengthAdjustment += 1;
 	}
-	if(attackerStrength >= strengthThreshold)
+	if(attackerStrength >= 3)
 	{
-		defenderStrengthAdjustment += thresholdAdjustmentValue;
+		defenderStrengthAdjustment += 1;
+	}
+
+	// Apply completely random damage
+	std::mt19937 rng(std::random_device{}());
+	std::uniform_int_distribution<int> randomDist(1, 100);
+	const int rngVal = randomDist(rng);
+	if(rngVal <= 25)
+	{
+		defenderStrengthAdjustment += 1;
+	}
+	else if(rngVal >= 76)
+	{
+		attackerStrengthAdjustment += 1;
+	}
+	else if(41 <= rngVal <= 60)
+	{
+		defenderStrengthAdjustment += 1;
+		attackerStrengthAdjustment += 1;
 	}
 
 	// Partially randomised damage to each army.
-	const double strengthRatio = attackerStrength / defenderAdjustedStrength;
+	const double strengthRatio = attackerStrength / defenderStrength;
 	const double maxMultiplier = 0.4;
-	const double minMultiplier = 0.2;
+	const double minMultiplier = 0.1;
 	const double maxAttacker = maxMultiplier * strengthRatio;
 	const double minAttacker = minMultiplier * strengthRatio;
 	const double maxDefender = maxMultiplier / strengthRatio;
 	const double minDefender = minMultiplier / strengthRatio;
-	std::mt19937 rng(std::random_device{}());
 	std::uniform_real_distribution<double> attackerDist(minAttacker, maxAttacker);  // Percent of strength defending army loses.
 	std::uniform_real_distribution<double> defenderDist(minDefender, maxDefender);  // Percent of strength attacking army loses.
-	defenderStrengthAdjustment += std::round(attackerDist(rng) * defenderStrength);
+	defenderStrengthAdjustment += std::round(attackerDist(rng) * defenderTrueStrength);
 	attackerStrengthAdjustment += std::round(defenderDist(rng) * attackerStrength);
+
+	// Ensure some strength adjustment takes place.
+	if(defenderStrengthAdjustment == 0 && attackerStrengthAdjustment == 0)
+	{
+		++defenderStrengthAdjustment;
+		++attackerStrengthAdjustment;
+	}
+
+	// Reduce strength of both navies.
 	assert(defenderStrengthAdjustment >= 0);
 	assert(attackerStrengthAdjustment >= 0);
 	defendingNavy.reduceStrength(defenderStrengthAdjustment);
 	reduceStrength(attackerStrengthAdjustment);
-
-	// Special case where no damage is taken by either army.
-	if(getTotalStrength() == attackerStrength && defendingNavy.getTotalStrength() == defenderStrength)
-	{
-		assert(attackerStrength < strengthThreshold && defenderStrength < strengthThreshold);
-		assert(attackerStrengthAdjustment == 0 && defenderStrengthAdjustment == 0);
-
-		// Determine strength adjustment.
-		std::uniform_int_distribution<int> dist(0, 1);
-		if(defenderAdjustedStrength > attackerStrength)
-		{
-			++attackerStrengthAdjustment;
-		}
-		else if(defenderAdjustedStrength < attackerStrength)
-		{
-			++defenderStrengthAdjustment;
-		}
-		else if(dist(rng) == 1)
-		{
-			++attackerStrengthAdjustment;
-		}
-		else
-		{
-			++defenderStrengthAdjustment;
-		}
-
-		// Adjust navy strengths.
-		defendingNavy.reduceStrength(defenderStrengthAdjustment);
-		reduceStrength(attackerStrengthAdjustment);
-	}
 }
 
 std::pair<int, int> NavalFleet::calculateMinMaxStaminaCost(const Territory & territory) const

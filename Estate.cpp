@@ -346,14 +346,31 @@ void Estate::setRuler(Player *ruler, bool updatePlayerGrid)
 	// Case ruler is not changed.
 	if(this->ruler == ruler)
 	{
+		if(title == Title::admiral)
+		{
+			if(ruler == nullptr)
+			{
+				std::cout << "NULL" << std::endl;
+			}
+			else
+			{
+				std::cout << "lol" << std::endl;
+			}
+		}
+		assert(title != Title::admiral);
 		return;
 	}
 
+	// Remove fief from previous ruler.
 	if(this->ruler != nullptr)
 	{
 		this->ruler->getRealm().getEstateManager().removeFief(this, updatePlayerGrid);
 	}
+
+	// Change ruler of estate.
 	this->ruler = ruler;
+
+	// Add fief to new ruler.
 	if(this->ruler != nullptr)
 	{
 		this->ruler->getRealm().getEstateManager().addFief(this, updatePlayerGrid);
