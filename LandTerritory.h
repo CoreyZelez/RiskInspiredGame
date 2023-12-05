@@ -20,8 +20,6 @@ public:
 
 	virtual void saveToFile(std::ofstream &file) const override;
 
-	virtual void draw(sf::RenderWindow &window) const override;
-
 	// Save label is identifier in txt file for territory type.
 	virtual std::string getSaveLabel() const override;
 

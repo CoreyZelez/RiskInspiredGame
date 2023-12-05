@@ -10,11 +10,6 @@ Map::Map(std::string name)
 	load(name);
 }
 
-void Map::drawTerritoryMap(sf::RenderWindow &window)
-{
-	territoryManager.draw(window);
-}
-
 void Map::save()
 {
 	saveAs(name);

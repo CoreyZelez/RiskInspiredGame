@@ -1,7 +1,15 @@
-﻿  Game.cpp
+﻿  NavalFleet.cpp
+d:\projects\risktypegame\risktypegame\navalfleet.cpp(88): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\navalfleet.cpp(88): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\navalfleet.cpp(89): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\navalfleet.cpp(89): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\navalfleet.cpp(115): warning C4804: '<=': unsafe use of type 'bool' in operation
+d:\projects\risktypegame\risktypegame\navalfleet.cpp(131): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\navalfleet.cpp(132): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+  RiskTypeGame.cpp
   Generating code
-  1 of 7609 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 7695 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    11 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Release\RiskTypeGame.exe

@@ -1,2 +1,9 @@
-﻿  NavalTerritoryOccupancy.cpp
+﻿  Barony.cpp
+d:\projects\risktypegame\risktypegame\barony.cpp(35): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(35): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(52): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(52): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+  Estate.cpp
+  RiskTypeGame.cpp
+  Generating Code...
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe

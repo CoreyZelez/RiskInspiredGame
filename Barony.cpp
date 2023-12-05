@@ -59,7 +59,7 @@ std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
 
 std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 {
-	assert(getRuler != nullptr);
+	assert(getRuler() != nullptr);
 
 	// Should not be hostile army residing on this territory.
 	// There may however be a hostile army on the naval territory associated with the port.

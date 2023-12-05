@@ -156,7 +156,7 @@ void Estate::saveSubfiefs(std::ofstream &file) const
 
 void Estate::provideSubfiefBonusYields()
 {
-	if(title == Title::baron)
+	if(title == Title::baron || title == Title::admiral)
 	{
 		assert(subfiefs.size() == 0);
 		return;
@@ -346,18 +346,6 @@ void Estate::setRuler(Player *ruler, bool updatePlayerGrid)
 	// Case ruler is not changed.
 	if(this->ruler == ruler)
 	{
-		if(title == Title::admiral)
-		{
-			if(ruler == nullptr)
-			{
-				std::cout << "NULL" << std::endl;
-			}
-			else
-			{
-				std::cout << "lol" << std::endl;
-			}
-		}
-		assert(title != Title::admiral);
 		return;
 	}
 

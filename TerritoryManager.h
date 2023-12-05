@@ -2,12 +2,11 @@
 #include "LandTerritory.h"
 #include "NavalTerritory.h"
 #include <vector>
+#include <unordered_set>
 
 class TerritoryManager
 {
 public:
-	void draw(sf::RenderWindow &window) const;
-
 	void drawPorts(sf::RenderWindow &window) const;
 
 	void save(std::string mapName) const;
@@ -29,6 +28,7 @@ public:
 
 	std::vector<std::unique_ptr<LandTerritory>> &getLandTerritories();
 	std::vector<std::unique_ptr<NavalTerritory>> &getNavalTerritories();
+	const std::vector<const Territory*> getTerritories() const;
 
 private:
 	void calculateAdjacencies();
@@ -42,8 +42,6 @@ private:
 	std::vector<Territory*> territories;
 	std::vector<std::unique_ptr<NavalTerritory>> navalTerritories;
 	std::vector<std::unique_ptr<LandTerritory>> landTerritories;
-
-
 
 	int nextID = 0;  // Next ID to be assigned to newly created territory.
 };

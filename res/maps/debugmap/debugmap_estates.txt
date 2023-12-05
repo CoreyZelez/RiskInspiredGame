@@ -25,6 +25,33 @@ Westtrethlithia
 # territory id
 27
 
+# maridom
+# title
+-1
+# name
+Methvaynia
+# subfiefs
+# territory id
+28
+
+# maridom
+# title
+-1
+# name
+Morethvenmia
+# subfiefs
+# territory id
+29
+
+# maridom
+# title
+-1
+# name
+Sthevaynia
+# subfiefs
+# territory id
+30
+
 # barony
 # title
 1
@@ -401,8 +428,8 @@ Lueghmia
 # name
 Drethdeth
 # subfiefs
-Nilavia
 Tundeth
+Nilavia
 
 # estate
 # title
@@ -410,8 +437,8 @@ Tundeth
 # name
 Carmia
 # subfiefs
-Morethsafrey
 Easheigha
+Morethsafrey
 Fusdrenmar
 
 # estate
@@ -447,8 +474,8 @@ Daytromar
 # name
 Carmar
 # subfiefs
-Folnmor
 Finithilfrey
+Folnmor
 
 # estate
 # title
@@ -457,8 +484,8 @@ Finithilfrey
 Permor
 # subfiefs
 Trosfrey
-Tariltricth
 Percflinmar
+Tariltricth
 
 # estate
 # title
@@ -493,8 +520,8 @@ Carmia
 # name
 Ferthales
 # subfiefs
-thales
 Lertopia
+thales
 
 # estate
 # title
@@ -502,10 +529,10 @@ Lertopia
 # name
 Niladriax
 # subfiefs
+Vosdeth
 Metheigha
 Ferthales
 Carmar
-Vosdeth
 
 # estate
 # title

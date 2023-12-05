@@ -2,6 +2,7 @@
 #include "Estate.h"
 #include "Utility.h"
 #include "LandedEstate.h"
+#include <iostream>
 
 RealmEstateManager::RealmEstateManager(MilitaryManager &militaryManager)
 	: militaryManager(militaryManager)
@@ -17,13 +18,16 @@ void RealmEstateManager::draw(sf::RenderWindow &window) const
 void RealmEstateManager::handleFiefYields()
 {
 	// Provide bonus yields to fiefs contained in subfiefs under this player's control.
-	for(auto &fief : fiefs)
+	for(Estate* fief : fiefs)
 	{
 		fief->provideSubfiefBonusYields();
 	}
 
-	// Yield resources (currently just military units).
-	for(auto &fief : fiefs)
+	// Yield resources (currently just military units and potentially always just military units).
+	// Use a copy of fiefs due to possible resizing when yielding troops as in particular
+	// naval units may occupy an unowned naval territory.
+	std::vector<Estate*> preFiefs = fiefs;
+	for(Estate* fief : preFiefs)
 	{
 		fief->yield(militaryManager);
 	}
@@ -31,6 +35,8 @@ void RealmEstateManager::handleFiefYields()
 
 void RealmEstateManager::addFief(Estate *fief, bool updateGrid)
 {
+	assert(fief != nullptr);
+
 	fiefs.emplace_back(fief);
 	if(updateGrid)
 	{

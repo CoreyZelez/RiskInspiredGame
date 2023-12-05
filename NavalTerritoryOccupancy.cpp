@@ -162,12 +162,17 @@ const NavalFleet* NavalTerritoryOccupancy::getFleet() const
 
 void NavalTerritoryOccupancy::updateMilitaryPosition()
 {
+	const int offset = 50;
 	if(army != nullptr)
 	{
-		army->setSpritePosition(territory.getGrid().getCenter());
+		sf::Vector2f pos = territory.getGrid().getCenter();
+		pos.y += offset;
+		army->setSpritePosition(pos);
 	}
 	if(fleet != nullptr)
 	{
-		fleet->setSpritePosition(territory.getGrid().getCenter());
+		sf::Vector2f pos = territory.getGrid().getCenter();
+		pos.y -= offset;
+		fleet->setSpritePosition(pos);
 	}
 }

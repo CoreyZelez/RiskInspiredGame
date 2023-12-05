@@ -39,15 +39,6 @@ void LandTerritory::saveToFile(std::ofstream &file) const
 	}
 }
 
-void LandTerritory::draw(sf::RenderWindow & window) const
-{
-	Territory::draw(window);
-	if(port != nullptr)
-	{
-		port.get()->draw(window);
-	}
-}
-
 std::unique_ptr<Port>& LandTerritory::getPort()
 {
 	return port;

@@ -4,14 +4,6 @@
 #include <iostream>
 #include <fstream>
 
-void TerritoryManager::draw(sf::RenderWindow &window) const
-{
-	for(const Territory *territory : territories)
-	{
-		territory->draw(window);
-	}
-}
-
 void TerritoryManager::drawPorts(sf::RenderWindow & window) const
 {
 	for(const auto &territory : landTerritories)
@@ -221,6 +213,20 @@ std::vector<std::unique_ptr<LandTerritory>>& TerritoryManager::getLandTerritorie
 std::vector<std::unique_ptr<NavalTerritory>>& TerritoryManager::getNavalTerritories()
 {
 	return navalTerritories;
+}
+
+const std::vector<const Territory*> TerritoryManager::getTerritories() const
+{
+	std::vector<const Territory*> territories;
+	for(auto &territory : landTerritories)
+	{
+		territories.push_back(territory.get());
+	}
+	for(auto &territory : navalTerritories)
+	{
+		territories.push_back(territory.get());
+	}
+	return territories;
 }
 
 void TerritoryManager::calculateAdjacencies()

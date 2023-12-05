@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <memory>
 #include <random>
+#include <iostream>
 
 NavalFleet::NavalFleet(Player &owner, Territory *location, int strength)
 	: MilitaryForce(owner, location, strength, *(TextureManager::getInstance().getTexture("landArmy")))
@@ -90,11 +91,11 @@ void NavalFleet::attack(NavalFleet &defendingNavy, double defenceMultiplier)
 	defenderStrengthAdjustment += guaranteedDamageOnDefender;
 
 	// Apply additional damage if threshold passed.
-	if(defenderStrength >= 3)
+	if(defenderStrength >= 2)
 	{
 		attackerStrengthAdjustment += 1;
 	}
-	if(attackerStrength >= 3)
+	if(attackerStrength >= 2)
 	{
 		defenderStrengthAdjustment += 1;
 	}
@@ -144,9 +145,15 @@ void NavalFleet::attack(NavalFleet &defendingNavy, double defenceMultiplier)
 	reduceStrength(attackerStrengthAdjustment);
 }
 
-std::pair<int, int> NavalFleet::calculateMinMaxStaminaCost(const Territory & territory) const
+std::pair<int, int> NavalFleet::calculateMinMaxStaminaCost(const Territory &territory) const
 {
-	// temp.
-	return { 4, 4 };
+	if(getTerritory().getType() == TerritoryType::naval)
+	{
+		return { 1, 1 };
+	}
+	else
+	{
+		return { INT_MAX, INT_MAX };
+	}
 }
 
