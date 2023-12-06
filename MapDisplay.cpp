@@ -12,6 +12,7 @@ void MapDisplay::draw(sf::RenderWindow &window) const
 	switch(game.getMapMode())
 	{
 	case MapMode::realm:
+		map.getEstateManager().drawUnownedMaridoms(window);
 		for(const auto &player : players)
 		{
 			if(!player.get()->getRealm().getRelationshipManager().hasLiege())

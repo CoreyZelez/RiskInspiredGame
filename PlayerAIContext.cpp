@@ -37,7 +37,7 @@ std::vector<Territory*> PlayerAIContext::getBorderTerritories()
 	return borderTerritories;
 }
 
-const std::set<Territory*> PlayerAIContext::getEnemyAdjacencies(Territory &territory)
+const std::set<Territory*> PlayerAIContext::getEnemyAdjacencies(Territory &territory, bool includeNeutral)
 {
 	const std::set<Territory*>& adjacencies = territory.getDistanceMap().getAdjacencies();
 	std::set<Territory*> enemyAdjacencies;
@@ -46,8 +46,11 @@ const std::set<Territory*> PlayerAIContext::getEnemyAdjacencies(Territory &terri
 	for(std::set<Territory*>::const_iterator iter = adjacencies.begin();
 		iter != adjacencies.end(); ++iter)
 	{
-		if((*iter)->getEstateOwner() != &player 
-			&& (*iter)->getEstateOwner() != nullptr)
+		if(includeNeutral && (*iter)->getEstateOwner() != &player)
+		{
+			enemyAdjacencies.insert(*iter);
+		}
+		else if((*iter)->getEstateOwner() != &player && (*iter)->getEstateOwner() != nullptr)
 		{
 			enemyAdjacencies.insert(*iter);
 		}
@@ -56,7 +59,7 @@ const std::set<Territory*> PlayerAIContext::getEnemyAdjacencies(Territory &terri
 	return enemyAdjacencies;
 }
 
-std::map<const Player*, int> PlayerAIContext::getWeightedThreats(const Territory &territory)
+std::map<const Player*, int> PlayerAIContext::getArmyWeightedThreats(const Territory &territory)
 {
 	const std::set<Territory*>& adjacencies = territory.getDistanceMap().getAdjacencies();
 	std::set<const Player*> enemyPlayers = {};
@@ -78,7 +81,35 @@ std::map<const Player*, int> PlayerAIContext::getWeightedThreats(const Territory
 	for(std::set<const Player*>::const_iterator iter = enemyPlayers.begin(); 
 		iter != enemyPlayers.end(); ++iter)
 	{
-		weightedThreats[*iter] = calculateWeightedThreat(territory, **iter, distanceFactor);
+		weightedThreats[*iter] = calculateArmyWeightedThreat(territory, **iter, distanceFactor);
+	}
+
+	return weightedThreats;
+}
+
+std::map<const Player*, int> PlayerAIContext::getFleetWeightedThreats(const Territory & territory)
+{
+	const std::set<Territory*>& adjacencies = territory.getDistanceMap().getAdjacencies();
+	std::set<const Player*> enemyPlayers = {};
+	std::map<const Player*, int> weightedThreats;
+
+	// Determines enemy players holding adjacent territories.
+	for(std::set<Territory*>::iterator iter = adjacencies.begin();
+		iter != adjacencies.end(); ++iter)
+	{
+		const Player *owner = (*iter)->getEstateOwner();
+		if(owner != nullptr && owner != &player)
+		{
+			enemyPlayers.insert(owner);
+		}
+	}
+
+	// Calculated weighted threats of each enemy player.
+	const int distanceFactor = 1.5;  // Calculation uses squared distance.
+	for(std::set<const Player*>::const_iterator iter = enemyPlayers.begin();
+		iter != enemyPlayers.end(); ++iter)
+	{
+		weightedThreats[*iter] = calculateFleetWeightedThreat(territory, **iter, distanceFactor);
 	}
 
 	return weightedThreats;
@@ -100,6 +131,24 @@ std::map<std::pair<const Territory*, int>, std::vector<LandArmy*>> PlayerAIConte
 		}
 	}
 	return armyBorderDistances;
+}
+
+std::map<std::pair<const Territory*, int>, std::vector<NavalFleet*>> PlayerAIContext::getFleetBorderDistances(int maxDist)
+{
+	std::map<std::pair<const Territory*, int>, std::vector<NavalFleet*>> fleetBorderDistances;
+	std::vector<std::unique_ptr<NavalFleet>> &fleets = player.getMilitaryManager().getFleets();
+	for(const auto &fleet : fleets)
+	{
+		Territory &armyTerritory = fleet.get()->getTerritory();
+		for(const Territory* borderTerritory : getBorderTerritories())
+		{
+			assert(armyTerritory.getEstateOwner() == borderTerritory->getEstateOwner());
+			const int distance = calculateFriendlyDistanceBFS(armyTerritory, *borderTerritory, maxDist);
+			const std::pair<const Territory*, int> key = { borderTerritory, distance };
+			fleetBorderDistances[key].push_back(fleet.get());  // Holds underlying pointer of unique pointer. Be careful.
+		}
+	}
+	return fleetBorderDistances;
 }
 
 int calculateFriendlyDistanceBFS(const Territory &territory1, const Territory &territory2, int maxDist) {
@@ -151,7 +200,7 @@ int calculateFriendlyDistanceBFS(const Territory &territory1, const Territory &t
 	return INT_MAX;
 }
 
-int calculateWeightedThreat(const Territory &territory, const Player &player, const float distanceFactor)
+int calculateArmyWeightedThreat(const Territory &territory, const Player &player, const float distanceFactor)
 {
 	int threatScore = 0;
 	const std::vector<std::unique_ptr<LandArmy>>& armies = player.getMilitaryManager().getArmies();
@@ -163,6 +212,23 @@ int calculateWeightedThreat(const Territory &territory, const Player &player, co
 		if(distance > 0)
 		{
 			threatScore += army.get()->getTotalStrength() / pow(distance, distanceFactor);
+		}
+	}
+	return threatScore;
+}
+
+int calculateFleetWeightedThreat(const Territory & territory, const Player & player, const float distanceFactor)
+{
+	int threatScore = 0;
+	const std::vector<std::unique_ptr<NavalFleet>>& fleets = player.getMilitaryManager().getFleets();
+	for(const auto &fleet : fleets)
+	{
+		const Territory &armyTerritory = fleet.get()->getTerritory();
+		const int distance = territory.getDistanceMap().getDistance(armyTerritory);
+		assert(distance > 0 || army.get()->isDead());
+		if(distance > 0)
+		{
+			threatScore += fleet.get()->getTotalStrength() / pow(distance, distanceFactor);
 		}
 	}
 	return threatScore;

@@ -7,6 +7,7 @@
 
 class Player;
 class Territory;
+enum class TerritoryType;
 
 class MilitaryForce : public Subject
 {
@@ -57,3 +58,4 @@ private:
 
 Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory &sourceTerritory, Territory &targetTerritory, int maxDist);
 
+Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory &sourceTerritory, Territory &targetTerritory, int maxDist, TerritoryType territoryType);

@@ -1,3 +1,57 @@
+# maridom
+# title
+-1
+# name
+Sthensia
+# subfiefs
+# territory id
+25
+
+# maridom
+# title
+-1
+# name
+Mozthsia
+# subfiefs
+# territory id
+26
+
+# maridom
+# title
+-1
+# name
+Westtrethlithia
+# subfiefs
+# territory id
+27
+
+# maridom
+# title
+-1
+# name
+Methvaynia
+# subfiefs
+# territory id
+28
+
+# maridom
+# title
+-1
+# name
+Morethvenmia
+# subfiefs
+# territory id
+29
+
+# maridom
+# title
+-1
+# name
+Sthevaynia
+# subfiefs
+# territory id
+30
+
 # barony
 # title
 1
@@ -329,8 +383,8 @@ Nethohthvia
 # name
 Trosfrey
 # subfiefs
-Nilamor
 Tarfreyia
+Nilamor
 
 # estate
 # title
@@ -338,8 +392,8 @@ Tarfreyia
 # name
 Feymia
 # subfiefs
-Finithvantricth
 Methinidriax
+Finithvantricth
 
 # estate
 # title
@@ -356,8 +410,8 @@ Methtrethheughough
 # name
 Percflinmar
 # subfiefs
-Drethdethia
 Thardrentopia
+Drethdethia
 
 # estate
 # title
@@ -374,8 +428,8 @@ Lueghmia
 # name
 Drethdeth
 # subfiefs
-Nilavia
 Tundeth
+Nilavia
 
 # estate
 # title
@@ -383,9 +437,9 @@ Tundeth
 # name
 Carmia
 # subfiefs
+Easheigha
 Morethsafrey
 Fusdrenmar
-Easheigha
 
 # estate
 # title
@@ -393,8 +447,8 @@ Easheigha
 # name
 Sarlithia
 # subfiefs
-Perlisia
 Ferol
+Perlisia
 
 # estate
 # title
@@ -429,9 +483,9 @@ Folnmor
 # name
 Permor
 # subfiefs
-Tariltricth
-Percflinmar
 Trosfrey
+Percflinmar
+Tariltricth
 
 # estate
 # title
@@ -448,8 +502,8 @@ Feymia
 # name
 Metheigha
 # subfiefs
-Sarlithia
 Drethdeth
+Sarlithia
 
 # estate
 # title
@@ -457,8 +511,8 @@ Drethdeth
 # name
 Vosdeth
 # subfiefs
-Carmia
 Tharvenmor
+Carmia
 
 # estate
 # title
@@ -475,10 +529,10 @@ thales
 # name
 Niladriax
 # subfiefs
-Metheigha
 Vosdeth
-Carmar
+Metheigha
 Ferthales
+Carmar
 
 # estate
 # title
@@ -486,8 +540,8 @@ Ferthales
 # name
 Pantaria
 # subfiefs
-Dayttaria
 Permor
+Dayttaria
 
 # estate
 # title
@@ -495,6 +549,6 @@ Permor
 # name
 Panol
 # subfiefs
-Pantaria
 Niladriax
+Pantaria
 

@@ -11,6 +11,10 @@
 Estate::Estate(Title title)
 	: title(title)
 {
+	if(title == Title::admiral)
+	{
+		this->grid.setBorderMode(BorderMode::feintBorders);
+	}
 	initColor();
 }
 
@@ -18,6 +22,10 @@ Estate::Estate(Title title, const Grid &grid)
 	: title(title)
 {
 	this->grid.addGrid(grid);
+	if(title == Title::admiral)
+	{
+		this->grid.setBorderMode(BorderMode::feintBorders);
+	}
 	initColor();
 }
 
@@ -25,6 +33,10 @@ Estate::Estate(Title title, const Grid &grid, std::string name)
 	: title(title), name(name)
 {
 	this->grid.addGrid(grid);
+	if(title == Title::admiral)
+	{
+		this->grid.setBorderMode(BorderMode::feintBorders);
+	}
 	initColor();
 }
 
@@ -144,7 +156,7 @@ void Estate::saveSubfiefs(std::ofstream &file) const
 
 void Estate::provideSubfiefBonusYields()
 {
-	if(title == Title::baron)
+	if(title == Title::baron || title == Title::admiral)
 	{
 		assert(subfiefs.size() == 0);
 		return;
@@ -247,6 +259,11 @@ const Player* Estate::getRuler() const
 	return ruler;
 }
 
+bool Estate::hasRuler() const
+{
+	return ruler != nullptr;
+}
+
 Title Estate::getTitle() const
 {
 	return title;
@@ -332,11 +349,16 @@ void Estate::setRuler(Player *ruler, bool updatePlayerGrid)
 		return;
 	}
 
+	// Remove fief from previous ruler.
 	if(this->ruler != nullptr)
 	{
 		this->ruler->getRealm().getEstateManager().removeFief(this, updatePlayerGrid);
 	}
+
+	// Change ruler of estate.
 	this->ruler = ruler;
+
+	// Add fief to new ruler.
 	if(this->ruler != nullptr)
 	{
 		this->ruler->getRealm().getEstateManager().addFief(this, updatePlayerGrid);

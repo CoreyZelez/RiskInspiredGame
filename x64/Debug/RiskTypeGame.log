@@ -1,26 +1,9 @@
-﻿  PlayerAIContext.cpp
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(77): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(123): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(165): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-  StrengthSlider.cpp
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(28): warning C4804: '<=': unsafe use of type 'bool' in operation
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(29): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(29): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(56): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(56): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(63): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(63): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(74): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(74): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(82): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(82): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(94): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(94): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(102): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(102): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(114): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(114): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(122): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(122): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
+﻿  Barony.cpp
+d:\projects\risktypegame\risktypegame\barony.cpp(35): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(35): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(52): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(52): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+  Estate.cpp
+  RiskTypeGame.cpp
   Generating Code...
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe

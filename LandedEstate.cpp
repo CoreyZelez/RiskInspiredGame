@@ -26,7 +26,6 @@ void LandedEstate::update(Message message)
 	// Observed territory occupant changed.
 	if(message == Message::newOccupant)
 	{
-		assert(territory.getOccupancyHandler()->getOccupant() != nullptr);
 		setRuler(territory.getOccupancyHandler()->getOccupant());
 	}
 }
@@ -83,10 +82,20 @@ std::unique_ptr<LandArmy> LandedEstate::putArmy(int strength)
 
 std::unique_ptr<NavalFleet> LandedEstate::putFleet(int strength)
 {
-	//temp
-	//temp
-	//temp
+	// Should not be hostile army residing on territory.
+	assert(territory.getOccupancyHandler()->getOccupant() == nullptr
+		|| territory.getOccupancyHandler()->getOccupant() == getRuler());
+
 	std::unique_ptr<NavalFleet> fleet = std::make_unique<NavalFleet>(*getRuler(), &territory, strength);
 	territory.getOccupancyHandler()->occupy(fleet.get());
+
+	// Army merged with pre-existing army on territory.
+	if(fleet->isDead())
+	{
+		return nullptr;
+	}
+
+	// There was no pre-existing army on territory.
+	assert(fleet.get()->getTotalStrength() > 0);
 	return fleet;
 }

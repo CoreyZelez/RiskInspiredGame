@@ -13,6 +13,7 @@ class MilitaryManager;
 
 const std::string estateSaveLabel = "# estate";  // Save label for non landed estate.
 const std::string baronySaveLabel = "# barony";  // Save label for barony.
+const std::string maridomSaveLabel = "# maridom";  // Save label for maridom.
 
 class Estate : public HasUI  
 {
@@ -47,7 +48,8 @@ public:
 	bool hasParent() const;
 
 	bool compareRuler(const Player *player) const;  // For debugging.
-	const Player *getRuler() const;
+	const Player* getRuler() const;
+	bool hasRuler() const;
 
 	Title getTitle() const;
 	std::string getName() const;

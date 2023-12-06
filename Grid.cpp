@@ -20,8 +20,9 @@ Grid::Grid(sf::Color color)
 
 Grid::Grid(sf::Color color,
 	std::unordered_set<sf::Vector2i, Vector2iHash> positions)
-	: color(color), positions(positions)
+	: color(color), positions(positions), borderAndSubBorderPositions(50)
 {
+	assert(this->positions.bucket_count() >= 500);
 	calculateVertices();
 }
 
@@ -44,6 +45,11 @@ void Grid::saveToFile(std::ofstream &file) const
 void Grid::draw(sf::RenderWindow &window) const
 {
 	window.draw(vertices);
+}
+
+const sf::VertexArray& Grid::getVertexArray() const
+{
+	return vertices;
 }
 
 bool Grid::sharesBorder(const Grid &grid) const
@@ -72,6 +78,49 @@ bool Grid::sharesBorder(const Grid &grid) const
 	return false;
 }
 
+std::vector<sf::Vector2f> Grid::getNeighbouringBorderPositions(const Grid &grid) const
+{
+	std::vector<sf::Vector2i> borderPositions = {};
+	for(auto position = borderAndSubBorderPositions.cbegin(); position != borderAndSubBorderPositions.cend(); ++position)
+	{
+		sf::Vector2i l(position->x - 1, position->y);
+		sf::Vector2i r(position->x + 1, position->y);
+		sf::Vector2i u(position->x, position->y - 1);
+		sf::Vector2i d(position->x, position->y + 1);
+		sf::Vector2i lu(position->x - 1, position->y - 1);
+		sf::Vector2i ru(position->x + 1, position->y - 1);
+		sf::Vector2i ld(position->x - 1, position->y + 1);
+		sf::Vector2i rd(position->x + 1, position->y + 1);
+		std::vector<sf::Vector2i> adjacentPositions = { l, u, r, d, lu, ru, ld, rd };
+		for(sf::Vector2i position : adjacentPositions)
+		{
+			if(grid.borderAndSubBorderPositions.count(position) == 1)
+			{
+				borderPositions.push_back(position);
+				break;
+			}
+			else
+			{
+				// Verifies that position does not exist at all in grid since otherwise it would be a border position.
+				assert(grid.positions.count(position) == 0);
+			}
+		}
+	}
+
+	// Convert positions to global coordinates.
+	std::vector<sf::Vector2f> borderCoordinates = {};
+	for(sf::Vector2i position : borderPositions)
+	{
+		borderCoordinates.push_back(calculateWorldCoordinates(position));
+	}
+	return borderCoordinates;
+}
+
+std::unordered_set<sf::Vector2i, Vector2iHash> Grid::getPositions() const
+{
+	return positions;
+}
+
 bool Grid::isEmpty() const
 {
 	return positions.size() == 0;
@@ -86,6 +135,12 @@ bool Grid::containsPosition(sf::Vector2f position) const
 sf::Vector2f Grid::getCenter() const
 {
 	return calculateWorldCoordinates(center);
+}
+
+void Grid::setBorderMode(BorderMode borderMode)
+{
+	this->borderMode = borderMode;
+	setColor(color);  // Updates grid with no border mode.
 }
 
 void Grid::addGrid(const Grid &grid)
@@ -112,9 +167,8 @@ void Grid::removeGrid(const Grid &grid)
 	calculateVertices();
 }
 
-void Grid::addSquare(sf::Vector2f position)
+void Grid::addSquare(sf::Vector2i gridPosition)
 {
-	sf::Vector2i gridPosition = calculateGridCoordinates(position);
 	// Add grid position if not contained in set.
 	if(positions.count(gridPosition) == 0)
 	{
@@ -123,35 +177,22 @@ void Grid::addSquare(sf::Vector2f position)
 	}
 }
 
-void Grid::removeSquare(sf::Vector2f position)
+bool Grid::removeSquare(sf::Vector2f position)
 {
 	sf::Vector2i gridPosition = calculateGridCoordinates(position);
 	// Erase position and recalculate vertices and center if successful.
 	if (positions.erase(gridPosition) == 1)
 	{
-		calculateVertices();  
+		calculateVertices(); 
+		return true;
 	}
+	return false;
 }
 
 void Grid::setColor(sf::Color color)
 {
 	this->color = color;
 	calculateVertices();
-}
-
-sf::Vector2i Grid::calculateGridCoordinates(const sf::Vector2f &position) const
-{
-	const int x = std::floor(position.x / GRID_SQUARE_SIZE);
-	const int y = std::floor(position.y / GRID_SQUARE_SIZE);
-	return sf::Vector2i(x, y);
-}
-
-/* Calculates world coordinate of center of grid square at position. */
-sf::Vector2f Grid::calculateWorldCoordinates(const sf::Vector2i &position) const
-{
-	const float x = position.x * GRID_SQUARE_SIZE + (GRID_SQUARE_SIZE / 2);
-	const float y = position.y * GRID_SQUARE_SIZE + (GRID_SQUARE_SIZE / 2);
-	return sf::Vector2f(x, y);
 }
 
 void Grid::addBordersToSubBorders()
@@ -372,7 +413,7 @@ void Grid::calculateVertices()
 
 Grid loadTerritoryGrid(std::ifstream &file)
 {
-	std::unordered_set<sf::Vector2i, Vector2iHash> positions;
+	std::unordered_set<sf::Vector2i, Vector2iHash> positions(500);
 
 	std::string line;
 	int num1;
@@ -408,4 +449,18 @@ Grid loadTerritoryGrid(std::ifstream &file)
 	grid.addBordersToSubBorders();
 
 	return grid;
+}
+
+sf::Vector2i calculateGridCoordinates(const sf::Vector2f & position)
+{
+	const int x = std::floor(position.x / GRID_SQUARE_SIZE);
+	const int y = std::floor(position.y / GRID_SQUARE_SIZE);
+	return sf::Vector2i(x, y);
+}
+
+sf::Vector2f calculateWorldCoordinates(const sf::Vector2i & position)
+{
+	const float x = position.x * GRID_SQUARE_SIZE + (GRID_SQUARE_SIZE / 2);
+	const float y = position.y * GRID_SQUARE_SIZE + (GRID_SQUARE_SIZE / 2);
+	return sf::Vector2f(x, y);
 }

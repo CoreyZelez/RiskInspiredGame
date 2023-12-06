@@ -4,11 +4,11 @@
 #include <iostream>
 #include <fstream>
 
-void TerritoryManager::draw(sf::RenderWindow &window) const
+void TerritoryManager::drawPorts(sf::RenderWindow & window) const
 {
-	for(const Territory *territory : territories)
+	for(const auto &territory : landTerritories)
 	{
-		territory->draw(window);
+		territory.get()->drawPort(window);
 	}
 }
 
@@ -16,14 +16,19 @@ void TerritoryManager::save(std::string mapName) const
 {
 	std::ofstream file("res/maps/" + mapName + "/" + mapName + "_territories.txt");
 
-	for(const auto& territory : landTerritories)
-	{
-		territory.get()->saveToFile(file);
-	}
-
+	// Save naval territories before land territories since when loading land territories, require naval 
+	// territories to already be loaded such that ports can be successfully loaded for the land territories.
 	for(const auto& territory : navalTerritories)
 	{
 		territory.get()->saveToFile(file);
+		file << std::endl; // Seperates territory save information.
+	}
+
+	// Save land territories.
+	for(const auto& territory : landTerritories)
+	{
+		territory.get()->saveToFile(file);
+		file << std::endl;  // Seperates territory save information.
 	}
 }
 
@@ -108,10 +113,6 @@ bool TerritoryManager::positionClaimed(sf::Vector2f position) const
 	}
 
 	return false;
-}
-
-void TerritoryManager::convertLandsToCoastal()
-{
 }
 
 Territory* TerritoryManager::getTerritory(const sf::Vector2f &position)
@@ -209,6 +210,25 @@ std::vector<std::unique_ptr<LandTerritory>>& TerritoryManager::getLandTerritorie
 	return landTerritories;
 }
 
+std::vector<std::unique_ptr<NavalTerritory>>& TerritoryManager::getNavalTerritories()
+{
+	return navalTerritories;
+}
+
+const std::vector<const Territory*> TerritoryManager::getTerritories() const
+{
+	std::vector<const Territory*> territories;
+	for(auto &territory : landTerritories)
+	{
+		territories.push_back(territory.get());
+	}
+	for(auto &territory : navalTerritories)
+	{
+		territories.push_back(territory.get());
+	}
+	return territories;
+}
+
 void TerritoryManager::calculateAdjacencies()
 {
 	for(auto &territory : territories)
@@ -228,13 +248,24 @@ void TerritoryManager::calculateDistances()
 void TerritoryManager::loadLandTerritory(std::ifstream & file)
 {
 	Grid graphics = loadTerritoryGrid(file);
+
 	int id = loadTerritoryID(file);
-	std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>(id, graphics);
+
+	// Load naval territory associated with port if exists.
+	NavalTerritory* portNavalTerritory = nullptr;
+	if(file.peek() == '#')                             /////////////////////// SUSPICIOUS!!!!! DOES IT WORK????????
+	{
+		int portNavalID = loadPortNavalID(file);
+		portNavalTerritory = getNavalTerritory(portNavalID);
+	}
+
+	std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>(id, graphics, portNavalTerritory);
+	
 	territories.emplace_back(territory.get());
 	landTerritories.emplace_back(std::move(territory));
 
-
-	nextID = std::max(nextID, id + 1);  // Ensure next id greater than all other territory ids.
+	// Ensure next id greater than all other territory ids.
+	nextID = std::max(nextID, id + 1); 
 }
 
 void TerritoryManager::loadNavalTerritory(std::ifstream & file)
@@ -245,7 +276,8 @@ void TerritoryManager::loadNavalTerritory(std::ifstream & file)
 	territories.emplace_back(territory.get());
 	navalTerritories.emplace_back(std::move(territory));
 
-	nextID = std::max(nextID, id + 1);  // Ensure next id greater than all other territory ids.
+	// Ensure next id greater than all other territory ids.
+	nextID = std::max(nextID, id + 1);  
 }
 
 void TerritoryManager::removeTerritory(Territory *territory)
@@ -259,4 +291,16 @@ void TerritoryManager::removeTerritory(Territory *territory)
 		}
 	}
 	assert(false);  // Should only ever be called on a territory that exists in territories.
+}
+
+NavalTerritory* TerritoryManager::getNavalTerritory(int id)
+{
+	for(auto &territory : navalTerritories)
+	{
+		if(territory.get()->getID() == id)
+		{
+			return territory.get();
+		}
+	}
+	return nullptr;
 }

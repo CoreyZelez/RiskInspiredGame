@@ -11,7 +11,7 @@ public:
 	virtual void move(Territory &location, unsigned int strength) override;
 	virtual void moveClosest(Territory &target, unsigned int strength, int maxDist) override;
 
-	// void attack(NavalFleet &defendingArmy, /// double defenceMultiplier);
+	void attack(NavalFleet &defendingNavy, double defenceMultiplier);
 
 protected:
 	virtual std::pair<int, int> calculateMinMaxStaminaCost(const Territory &territory) const override;

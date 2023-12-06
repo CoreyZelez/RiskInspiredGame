@@ -38,9 +38,9 @@ protected:
 	virtual std::string getSaveLabel() const override = 0;
 
 	// Puts new land army owned by ruler onto territory. Returns handle.
-	std::unique_ptr<LandArmy> putArmy(int strength);
+	virtual std::unique_ptr<LandArmy> putArmy(int strength);
 	// Puts new naval fleet owned by ruler onto territory. Returns handle.
-	std::unique_ptr<NavalFleet> putFleet(int strength);
+	virtual std::unique_ptr<NavalFleet> putFleet(int strength);
 
 private:
 	Territory &territory;

@@ -3,6 +3,7 @@
 const std::vector<Title> getOrderedTitles()
 {
 	return {
+		    Title::admiral,
 			Title::baron,
 			Title::count,
 			Title::duke,

@@ -1,6 +1,6 @@
 #include "MapMaker.h"
 #include "ChangeInstance.h"
-#include "ReconcileBaronies.h"
+#include "ReconcileLandedEstates.h"
 #include <assert.h>
 #include <iostream>
 
@@ -18,7 +18,9 @@ MapMaker::MapMaker(std::string mapName)
 	// Changes map maker state.
 	enterEstateMakerCommands.emplace_back(std::make_unique<ChangeInstance<MapMakerState>>(state, MapMakerState::estateMode));
 	// Generates and removes necessary baronies.
-	enterEstateMakerCommands.emplace_back(std::make_unique<ReconcileBaronies>(map.getEstateManager(), map.getTerritoryManager().getLandTerritories()));
+	enterEstateMakerCommands.emplace_back(
+		std::make_unique<ReconcileLandedEstates>(map.getEstateManager(), 
+			map.getTerritoryManager().getLandTerritories(), map.getTerritoryManager().getNavalTerritories()));
 	sf::Vector2f position2(700, 300);
 	sf::Vector2f size2(200, 70);
 	buttons.emplace_back(std::make_unique<CommandButton>(position2, size2, enterEstateMakerCommands));

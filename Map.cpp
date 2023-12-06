@@ -10,11 +10,6 @@ Map::Map(std::string name)
 	load(name);
 }
 
-void Map::drawTerritoryMap(sf::RenderWindow &window)
-{
-	territoryManager.draw(window);
-}
-
 void Map::save()
 {
 	saveAs(name);
@@ -44,7 +39,7 @@ void Map::saveAs(std::string name)
 void Map::load(std::string name)
 {
 	territoryManager.load(name);
-	estateManager.load(name, territoryManager.getLandTerritories());
+	estateManager.load(name, territoryManager.getLandTerritories(), territoryManager.getNavalTerritories());
 }
 
 TerritoryManager& Map::getTerritoryManager()

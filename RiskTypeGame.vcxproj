@@ -167,7 +167,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="LandTerritoryOccupancy.cpp" />
+    <ClCompile Include="Maridom.cpp" />
+    <ClCompile Include="NavalTerritoryOccupancy.cpp" />
     <ClCompile Include="PlayerAIContext.cpp" />
     <ClCompile Include="AIPersonality.cpp" />
     <ClCompile Include="PlayerAIComponent.cpp" />
@@ -205,14 +208,16 @@
     <ClCompile Include="NavalTerritory.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Port.cpp" />
     <ClCompile Include="Realm.cpp" />
     <ClCompile Include="RealmEstateManager.cpp" />
     <ClCompile Include="RealmRelationshipManager.cpp" />
     <ClCompile Include="RealmTest.cpp" />
-    <ClCompile Include="ReconcileBaronies.cpp" />
+    <ClCompile Include="ReconcileLandedEstates.cpp" />
     <ClCompile Include="RichText.cpp" />
     <ClCompile Include="RiskTypeGame.cpp" />
     <ClCompile Include="SimplePlayerAI.cpp" />
+    <ClCompile Include="SpriteGraphicsComponent.cpp" />
     <ClCompile Include="StrengthSlider.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Territory.cpp" />
@@ -229,8 +234,11 @@
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="IOccupiable.h" />
     <ClInclude Include="LandTerritoryOccupancy.h" />
+    <ClInclude Include="Maridom.h" />
+    <ClInclude Include="NavalTerritoryOccupancy.h" />
     <ClInclude Include="PlayerAIContext.h" />
     <ClInclude Include="AIPersonality.h" />
     <ClInclude Include="PlayerAIComponent.h" />
@@ -262,13 +270,15 @@
     <ClInclude Include="MultiPanel.h" />
     <ClInclude Include="NameGenerator.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="Port.h" />
     <ClInclude Include="Realm.h" />
     <ClInclude Include="RealmEstateManager.h" />
     <ClInclude Include="RealmRelationshipManager.h" />
     <ClInclude Include="RealmTest.h" />
-    <ClInclude Include="ReconcileBaronies.h" />
+    <ClInclude Include="ReconcileLandedEstates.h" />
     <ClInclude Include="RichText.h" />
     <ClInclude Include="SimplePlayerAI.h" />
+    <ClInclude Include="SpriteGraphicsComponent.h" />
     <ClInclude Include="StrengthSlider.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="MilitaryForce.h" />

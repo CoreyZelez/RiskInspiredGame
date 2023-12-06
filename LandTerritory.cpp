@@ -3,48 +3,87 @@
 #include "NavalFleet.h"
 #include "Utility.h"
 #include "LandTerritoryOccupancy.h"
+#include "NavalTerritory.h"
 #include <assert.h>
 #include <iostream>
 #include <fstream>
 
+LandTerritory::LandTerritory(int id, Grid graphics, NavalTerritory *navalTerritory)
+	: Territory(id, graphics, std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land)
+{
+	// Create the port.
+	if(navalTerritory != nullptr)
+	{
+		port = std::make_unique<Port>(*this, *navalTerritory);
+	}
+}
+
 LandTerritory::LandTerritory(int id, Grid graphics)
-	: Territory(id, graphics, std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land), landDistanceMap(*this)
+	: LandTerritory(id, graphics, nullptr)
 {
 }
 
 LandTerritory::LandTerritory(int id)
-	: Territory(id, createRandomLandColor(), std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land), landDistanceMap(*this)
+	: Territory(id, createRandomLandColor(), std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land)
 {
 }
 
-void LandTerritory::calculateDistances(const std::vector<Territory*>& territories)
+void LandTerritory::saveToFile(std::ofstream &file) const
 {
-	Territory::calculateDistances(territories);
-
-	// Calculate the distances between adjacent landed territories only.
-	std::vector<Territory*> landTerritories;
-	// Construct landed territories from territories.
-	for(const auto& territory : territories)
+	Territory::saveToFile(file);
+	if(port != nullptr)
 	{
-		if(auto* landedTerritory = dynamic_cast<LandTerritory*>(territory))
-		{
-			landTerritories.push_back(landedTerritory);
-		}
+		// Save the territory ID of the associated naval territory with the port.
+		file << "# port naval id" << std::endl;
+		file << port.get()->getNavalTerritoryID();
 	}
-	landDistanceMap.calculateDistances(landTerritories);
 }
 
-void LandTerritory::setIsCoastal(bool isCoastal)
+std::unique_ptr<Port>& LandTerritory::getPort()
 {
-	this->isCoastal = isCoastal;
+	return port;
 }
 
-bool LandTerritory::getIsCoastal() const
+void LandTerritory::drawPort(sf::RenderWindow & window) const
 {
-	return isCoastal;
+	if(port != nullptr)
+	{
+		port.get()->draw(window);
+	}
 }
 
 std::string LandTerritory::getSaveLabel() const
 {
 	return landSaveLabel;
+}
+
+void LandTerritory::createPort(NavalTerritory &navalTerritory)
+{
+	// Return if grids do not share border.
+	if(!getGrid().sharesBorder(navalTerritory.getGrid()))
+	{
+		return;
+	}
+	port = std::make_unique<Port>(*this, navalTerritory);
+}
+
+void LandTerritory::deletePort()
+{
+	port = nullptr;
+}
+
+bool LandTerritory::hasPort() const
+{
+	return port != nullptr;
+}
+
+int loadPortNavalID(std::ifstream & file)
+{
+	std::string line;
+	int id;
+	std::getline(file, line);
+	assert(line.compare("# port naval id") == 0);
+	file >> id;
+	std::getline(file, line);
+	return id;
 }

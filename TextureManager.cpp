@@ -51,8 +51,15 @@ void TextureManager::clear()
 
 TextureManager::TextureManager()
 {
+	bool result;
+
 	std::string landArmyPath = "res/textures/land army texture.png";
 	std::string landArmyID = "landArmy";
-	bool result = loadTexture(landArmyID, landArmyPath);
+	result = loadTexture(landArmyID, landArmyPath);
+	assert(result);
+
+	std::string portPath = "res/textures/anchor texture.png";
+	std::string portID = "anchor";
+	result = loadTexture(portID, portPath);
 	assert(result);
 }

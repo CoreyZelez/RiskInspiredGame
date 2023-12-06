@@ -12,8 +12,6 @@ class Map
 public:
 	Map(std::string name);
 
-	void drawTerritoryMap(sf::RenderWindow &window);
-
 	void save();
 	void saveAs(std::string name);  // Save map under different name.
 

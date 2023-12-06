@@ -26,6 +26,7 @@ int main()
 	MapMaker mapMaker("test");
 
 	Game game("test");
+
 	GameDisplay gameDisplay = game.createView();
 	GameUI gameUI;
 	GameController gameController(game, gameUI, gameDisplay);
@@ -37,7 +38,6 @@ int main()
 		while(window.pollEvent(event))
 		{
 			InputUtility.handleInputEvent(event);
-
 			if(event.type == sf::Event::Closed)
 			{
 				window.close();
@@ -45,7 +45,10 @@ int main()
 		}
 
 		// Update game.
-		game.update();
+		if(!mapEditorMode)
+		{
+			game.update();
+		}
 
 		// Handle input.
 		window.setView(gameView);
