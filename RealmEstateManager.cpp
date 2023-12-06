@@ -4,9 +4,8 @@
 #include "LandedEstate.h"
 
 RealmEstateManager::RealmEstateManager(MilitaryManager &militaryManager)
-	: militaryManager(militaryManager)
+	: militaryManager(militaryManager), grid(createRandomRealmColor())
 {
-	grid.setColor(createRandomRealmColor());
 }
 
 void RealmEstateManager::draw(sf::RenderWindow &window) const
