@@ -154,16 +154,16 @@ void LandArmy::move(Territory &location, unsigned int strength)
 void LandArmy::moveClosest(Territory &target, unsigned int strength, int maxDist)
 {
 	assert(strength > 0);
-	std::set<Territory*> adjacencies = getTerritory().getDistanceMap().getAdjacencies();
-	// Construct adjacent territories with same owner as army owner.
-	std::set<Territory*> friendlyAdjacencies;  
-	for(Territory* territory : adjacencies)
-	{
-		if(territory->getEstateOwner() == &getOwner())
-		{
-			friendlyAdjacencies.insert(territory);
-		}
-	}
+	// std::set<Territory*> adjacencies = getTerritory().getDistanceMap().getAdjacencies();
+	// // Construct adjacent territories with same owner as army owner.
+	// std::set<Territory*> friendlyAdjacencies;  
+	// for(Territory* territory : adjacencies)
+	// {
+	// 	if(territory->getEstateOwner() == &getOwner())
+	// 	{
+	// 		friendlyAdjacencies.insert(territory);
+	// 	}
+	// }
 
 	Territory& source = getTerritory();
 	Territory* nearest = nearestFriendlyAdjacentTerritoryDijkstra(source, target, maxDist);

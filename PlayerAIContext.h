@@ -7,6 +7,7 @@ class Player;
 class Game;
 class Territory;
 class LandArmy;
+class NavalFleet;
 
 /* Provides information to be used for AI decision making.*/
 class PlayerAIContext
@@ -22,19 +23,31 @@ public:
 	/*
 	Returns adjacent territories to territory that are controlled by an enemy player.
 	*/
-	const std::set<Territory*> getEnemyAdjacencies(Territory &territory);
+	const std::set<Territory*> getEnemyAdjacencies(Territory &territory, bool includeNeutral = false);
 
 	/* 
 	Returns a map of enemy players to int values. Integer values represent
 	a threat score of the enemy player's armies to the territory. Closer and 
 	larger enemy militaries contributed greater values to the score.
 	*/
-	std::map<const Player*, int> getWeightedThreats(const Territory &territory);
+	std::map<const Player*, int> getArmyWeightedThreats(const Territory &territory);
 
 	/*
-	Returns a map of pairs of territory and distance to a vector of land armies
+	Returns a map of enemy players to int values. Integer values represent
+	a threat score of the enemy player's fleets to the territory. Closer and
+	larger enemy fleets contributed greater values to the score.
+	*/
+	std::map<const Player*, int> getFleetWeightedThreats(const Territory &territory);
+
+	/*
+	Returns a map of pairs of territory and distance to a vector of land armies.
 	*/
 	std::map<std::pair<const Territory*, int>, std::vector<LandArmy*>> getArmyBorderDistances(int maxDist);
+
+	/*
+	Returns a map of pairs of territory and distance to a vector of naval fleets.
+	*/
+	std::map<std::pair<const Territory*, int>, std::vector<NavalFleet*>> getFleetBorderDistances(int maxDist);
 
 private:
 	Player &player;
@@ -47,6 +60,7 @@ private:
 	territories owned by the owner of territory1 and territory2.
 	*/
 int calculateFriendlyDistanceBFS(const Territory &territory1, const Territory& territory2, int maxDist);
-int calculateWeightedThreat(const Territory &territory, const Player &player, const float distanceFactor);
+int calculateArmyWeightedThreat(const Territory &territory, const Player &player, const float distanceFactor);
+int calculateFleetWeightedThreat(const Territory &territory, const Player &player, const float distanceFactor);
 int calculateMaxThreat(const std::map<const Player*, int> &threats);
 int calculateTotalThreat(const std::map<const Player*, int> &threats);

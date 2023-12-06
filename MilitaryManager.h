@@ -23,9 +23,12 @@ public:
 
 	// Returns army at territory.
 	LandArmy *getArmy(const Territory *territory);
+	// Returns fleet at territory.
+	NavalFleet *getFleet(const Territory *territory);
 	const std::vector<std::unique_ptr<LandArmy>> &getArmies() const;
 	std::vector<std::unique_ptr<LandArmy>> &getArmies();
-	const std::vector<std::unique_ptr<NavalFleet>> &getNavies() const;
+	const std::vector<std::unique_ptr<NavalFleet>> &getFleets() const;
+	std::vector<std::unique_ptr<NavalFleet>> &getFleets();
 	int getTotalArmyStrength() const;
 	// Returns total army strength for stamina >= minStamina.
 	int getTotalArmyStrength(int minStamina) const;
@@ -44,7 +47,7 @@ private:
 	// IN FUTURE CAN MAKE ARMIES AND NAVIES BE AN STD::MAP WITH TERRITORY THE KEY FOR GREATER EFFICIENCY WITH AI!!!
 	//
 	std::vector<std::unique_ptr<LandArmy>> armies;  
-	std::vector<std::unique_ptr<NavalFleet>> navies;
+	std::vector<std::unique_ptr<NavalFleet>> fleets;
 	//
 	//
 };

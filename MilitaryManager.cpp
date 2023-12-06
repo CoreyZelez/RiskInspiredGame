@@ -45,6 +45,18 @@ LandArmy* MilitaryManager::getArmy(const Territory *territory)
 	return nullptr;
 }
 
+NavalFleet * MilitaryManager::getFleet(const Territory *territory)
+{
+	for(auto &fleet : fleets)
+	{
+		if(&fleet.get()->getTerritory() == territory)
+		{
+			return fleet.get();
+		}
+	}
+	return nullptr;
+}
+
 const std::vector<std::unique_ptr<LandArmy>>& MilitaryManager::getArmies() const
 {
 	return armies;
@@ -55,9 +67,14 @@ std::vector<std::unique_ptr<LandArmy>>& MilitaryManager::getArmies()
 	return armies;
 }
 
-const std::vector<std::unique_ptr<NavalFleet>>& MilitaryManager::getNavies() const
+const std::vector<std::unique_ptr<NavalFleet>>& MilitaryManager::getFleets() const
 {
-	return navies;
+	return fleets;
+}
+
+std::vector<std::unique_ptr<NavalFleet>>& MilitaryManager::getFleets()
+{
+	return fleets;
 }
 
 int MilitaryManager::getTotalArmyStrength() const
@@ -101,8 +118,8 @@ void MilitaryManager::removeDeadMilitaries()
 	}
 
 	// Remove dead naval fleets.
-	auto iterN = navies.begin();
-	while(iterN != navies.end())
+	auto iterN = fleets.begin();
+	while(iterN != fleets.end())
 	{
 		if(!iterN->get()->isDead())
 		{
@@ -113,7 +130,7 @@ void MilitaryManager::removeDeadMilitaries()
 			assert(iterN->get()->getTotalStrength() == 0);
 			assert(militaries.count(iterN->get()) == 1);
 			militaries.erase(iterN->get());
-			iterN = navies.erase(iterN);
+			iterN = fleets.erase(iterN);
 		}
 	}
 }
@@ -125,9 +142,9 @@ void MilitaryManager::resetStaminas()
 		army.get()->resetStamina();
 	}
 
-	for(auto &navy : navies)
+	for(auto &fleet : fleets)
 	{
-		navy.get()->resetStamina();
+		fleet.get()->resetStamina();
 	}
 }
 
@@ -144,7 +161,7 @@ void MilitaryManager::addNavalFleet(std::unique_ptr<NavalFleet> fleet)
 	assert(fleet != nullptr);
 	assert(fleet.get()->getTotalStrength() > 0);
 	militaries.insert(fleet.get());
-	navies.emplace_back(std::move(fleet));
+	fleets.emplace_back(std::move(fleet));
 }
 
 

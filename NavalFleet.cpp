@@ -70,6 +70,18 @@ void NavalFleet::move(Territory &location, unsigned int strength)
 
 void NavalFleet::moveClosest(Territory &target, unsigned int strength, int maxDist)
 {
+	assert(strength > 0);
+	
+	Territory& source = getTerritory();
+	Territory* nearest = nearestFriendlyAdjacentTerritoryDijkstra(source, target, maxDist, TerritoryType::naval);
+	if(nearest != nullptr)
+	{
+		move(*nearest, strength);
+	}
+
+	//////////////////
+	// in future prioritise border territories PERHAPS!
+	//////////////
 }
 
 void NavalFleet::attack(NavalFleet &defendingNavy, double defenceMultiplier)
