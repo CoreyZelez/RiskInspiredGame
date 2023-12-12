@@ -56,6 +56,28 @@ int SimplePlayerAI::calculateLandStrategicValue(const Territory &territory)
 	int totalThreat = calculateTotalThreat(weightedThreats);  
 	strategicValue += maxThreat + totalThreat;
 
+	//
+	//
+	//
+	// IN FUTURE, ADD STRATEGIC VALUE IF ENEMIES POSSESS AN ADJACENT NAVAL TERRITORY AS TO PREPARE
+	// FOR NAVAL ATTACKS IN ADVANCE.
+
+	// Prioritise having land troops on land territories.
+	if(territory.getType() == TerritoryType::naval)
+	{
+		strategicValue /= 4;
+	}
+
+	//
+	//
+	// IN FUTURE CHECK IF NAVAL TERRITORY IS "PURELY NAVAL" IE HAS NAVAL NEIGHBOUR TERRITORIES ONLY
+	// IF SO THEN STRATEGIC VALUE SHOULD EQUAL 0.
+	// ALSO IN FUTURE CONSIDER HAVING LAND ARMIES BE MORE INCLINED TO ATTACK IF ON OCEAN SO THEY
+	// DO NOT SIT IN A VULNERABLE POSITION FOR TOO LONG.
+	//
+	// EVEN BETTER, ONLY HAVE LAND ARMIES MOVE TO A NAVAL TERRITORY IF THEY KNOW THEY WILL BE
+	// MUCH STRONGER THAN THE ADJACENT ENEMY ARMIES POSITIONED ON THE NEIGHJBOUR LAND TERRITORIES.
+
 	// Calculate strategic desire to attack enemy neighbouring territories.
 	const std::set<Territory*> adjacencies = territory.getDistanceMap().getAdjacencies();
 	std::set<const Territory*> enemyTerritories;

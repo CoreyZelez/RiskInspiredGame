@@ -23,9 +23,9 @@ int main()
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS IN TESTING CODE!!!
 	FontManager::getInstance();
 
-	MapMaker mapMaker("empty");
+	MapMaker mapMaker("test");
 
-	Game game("empty");
+	Game game("test");
 
 	GameDisplay gameDisplay = game.createView();
 	GameUI gameUI;
@@ -33,8 +33,6 @@ int main()
 
 	while(window.isOpen())
 	{
-		break;
-
 		// Detect input events.
 		sf::Event event;
 		while(window.pollEvent(event))
