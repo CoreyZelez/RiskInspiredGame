@@ -26,6 +26,13 @@ Grid::Grid(sf::Color color,
 	calculateVertices();
 }
 
+Grid::Grid(std::unordered_set<sf::Vector2i, Vector2iHash> borderPositions)
+	: color(sf::Color::White)
+{
+	positions = borderPositions;
+	borderAndSubBorderPositions = borderPositions;
+}
+
 void Grid::saveToFile(std::ofstream &file) const
 {
 	// Write territory grid square locations.
@@ -183,6 +190,7 @@ bool Grid::removeSquare(sf::Vector2f position)
 	// Erase position and recalculate vertices and center if successful.
 	if (positions.erase(gridPosition) == 1)
 	{
+		borderAndSubBorderPositions.erase(gridPosition);
 		calculateVertices(); 
 		return true;
 	}

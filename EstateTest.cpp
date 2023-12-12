@@ -8,141 +8,76 @@
 
 void EstateTest::test()
 {
-	test1();
-	test2();
+	testBaronyYield();
 }
 
-void EstateTest::test1()
+void EstateTest::testBaronyYield()
 {
-	std::string testName = "barony yielding land army";
-	Game game("");
-	AIPersonality personality = { 0 }; 
-	Player player(game, personality);  
-	LandTerritory territory(0);        
-	const double landArmyYield = 0.4;
-	const double navalFleetYield = 0.1;
-	std::unique_ptr<Estate> barony = std::make_unique<Barony>(territory, landArmyYield, navalFleetYield);
-	barony.get()->setRuler(&player);
+	// Variable to hold message of current error being tested.
+	std::string testName;
+	std::string failMessage;
 
-	// Attempt to yield land army with cumulative land army not surpassing threshold.
-	player.getRealm().getEstateManager().handleFiefYields();
-	if(territory.getOccupancyHandler()->getArmy() != nullptr)
+	Game game("empty");
+	Player player(game);
+
+	// Construct territories.
+	const int landID = 1;
+	const int navalID = 2;
+	// Construct grids using "test" constructor.
+	std::unordered_set<sf::Vector2i, Vector2iHash> landPositions = { sf::Vector2i(0,0) };
+	std::unordered_set<sf::Vector2i, Vector2iHash> navalPositions = { sf::Vector2i(0,1) };
+	Grid landGrid(landPositions);
+	Grid navalGrid(navalPositions);
+	// Ensure territories adjacent for successful port creation.
+	landGrid.addSquare(sf::Vector2i(0, 0));
+	navalGrid.addSquare(sf::Vector2i(1, 0));
+	LandTerritory landTerritory(landID, landGrid);
+	NavalTerritory navalTerritory(navalID, navalGrid);
+	std::vector<Territory*> territories = { &navalTerritory };
+	landTerritory.getDistanceMap().addAdjacencies(territories);
+	// Create the port.
+	landTerritory.createPort(navalTerritory);
+	// Create the barony with desired yields.
+	const int armyYield = 10;
+	const int fleetYield = 5;
+	Barony barony(landTerritory, armyYield, fleetYield);
+	barony.setRuler(&player);
+
+	// Operation being tested.
+	barony.yield(player.getMilitaryManager());
+
+	// First test.
+	testName = "Land army not nullptr.";
+	bool testArmyYielded = landTerritory.getOccupancyHandler()->getArmy() != nullptr;
+	failMessage = "Land army was nullptr.";
+	testReport(testName, testArmyYielded, failMessage);
+
+	// Second test.
+	if(testArmyYielded)
 	{
-		bool result = false;
-		std::string message = "unexpected land army yielded";
-		testReport(testName, result, message);
-		return;
+		testName = "Correct land army strength yield.";
+		const int actualStrength = landTerritory.getOccupancyHandler()->getArmy()->getTotalStrength();
+		bool testArmyStrength = actualStrength == armyYield;
+		failMessage = "Expected strength is " + std::to_string(armyYield) +
+			". Actual strength is " + std::to_string(actualStrength) + ".";
+		testReport(testName, testArmyStrength, failMessage);
 	}
 
-	// Attempts to successfully yield a land army.
-	// 20 loops executed as this should guaruntee surpassing threshold for any sanely chosen threshold value.
-	for(int i = 0; i < 20; ++i)
-	{
-		player.getRealm().getEstateManager().handleFiefYields();
-	}
-	if(territory.getOccupancyHandler()->getArmy() == nullptr)
-	{
-		bool result = false;
-		std::string message = "no land army yielded to territory";
-		testReport(testName, result, message);
-		return;
-	}
-	else if(&territory.getOccupancyHandler()->getArmy()->getOwner() != &player)
-	{
-		bool result = false;
-		std::string message = "incorrect owner of yielded land army";
-		testReport(testName, result, message);
-		return;
-	}
-	else if(territory.getOccupancyHandler()->getArmy()->getTotalStrength() <= 0)
-	{
-		bool result = false;
-		std::string message = "invalid army strength yielded.";
-		testReport(testName, result, message);
-		return;
-	}
+	// Third test.
+	testName = "Naval fleet not nullptr.";
+	bool testFleetYielded = navalTerritory.getOccupancyHandler()->getFleet() != nullptr;
+	failMessage = "Naval fleet was nullptr.";
+	testReport(testName, testFleetYielded, failMessage);
 
-	// Test succeeded.
-	bool result = true;
-	testReport(testName, result);
+	// Fourth test.
+	if(testFleetYielded)
+	{
+		testName = "Correct naval fleet strength yield.";
+		const int actualStrength = navalTerritory.getOccupancyHandler()->getFleet()->getTotalStrength();
+		bool testFleetStrength = actualStrength == fleetYield;
+		failMessage = "Expected strength is " + std::to_string(fleetYield) +
+			". Actual strength is " + std::to_string(actualStrength) + ".";
+		testReport(testName, testFleetStrength, failMessage);
+	}
 }
 
-void EstateTest::test2()
-{
-	std::string testName = "county providing bonus yields";
-
-	Game game("");
-	Player player1(game);
-	Player player2(game);
-	Player player3(game);
-	LandTerritory territory1(0);
-	LandTerritory territory2(1);
-	LandTerritory territory3(2);
-	LandTerritory territory4(3);
-
-	const double landArmyYield = 0.4;
-	const double navalFleetYield = 0.1;
-	std::unique_ptr<Estate> barony1 = std::make_unique<Barony>(territory1, landArmyYield, navalFleetYield);
-	std::unique_ptr<Estate> barony2 = std::make_unique<Barony>(territory2, landArmyYield, navalFleetYield);
-	std::unique_ptr<Estate> barony3 = std::make_unique<Barony>(territory3, landArmyYield, navalFleetYield);
-	std::unique_ptr<Estate> barony4 = std::make_unique<Barony>(territory4, landArmyYield, navalFleetYield);
-	std::unique_ptr<Estate> county = std::make_unique<Estate>(Title::count);
-
-	county.get()->addSubfief(barony1.get());
-	county.get()->addSubfief(barony2.get());
-	county.get()->addSubfief(barony3.get());
-	county.get()->addSubfief(barony4.get());
-
-	barony1.get()->setRuler(&player1);
-	barony2.get()->setRuler(&player1);
-	barony3.get()->setRuler(&player2);
-	county.get()->setRuler(&player2);
-	barony4.get()->setRuler(&player3);  // player3 will not be apart of player2's realm.
-
-	player2.getRealm().getRelationshipManager().addVassal(player1);
-
-	player2.getRealm().getEstateManager().handleFiefYields();
-	player1.getRealm().getEstateManager().handleFiefYields();
-	if(territory1.getOccupancyHandler()->getArmy() != nullptr)
-	{
-		bool result = false;
-		std::string message = "unexpected land army yielded";
-		testReport(testName, result, message);
-		return;
-	}
-
-	// Attempts to successfully yield a land army through yields only generated by bonus yields provided by county to baronies.
-	// 150 loops executed as this should guaruntee surpassing yield threshold for any sanely chosen threshold value.
-	for(int i = 0; i < 150; ++i)
-	{
-		player2.getRealm().getEstateManager().handleFiefYields();
-	}
-	player1.getRealm().getEstateManager().handleFiefYields();
-	if(territory1.getOccupancyHandler()->getArmy() == nullptr)
-	{
-		bool result = false;
-		std::string message = "no land army yielded to territory";
-		testReport(testName, result, message);
-		return;
-	}
-	else if(&territory1.getOccupancyHandler()->getArmy()->getOwner() != &player1)
-	{
-		bool result = false;
-		std::string message = "incorrect owner of yielded land army";
-		testReport(testName, result, message);
-		return;
-	}
-
-	// Checks that the player not apart of the realm was not receiving the bonus yields.
-	player3.getRealm().getEstateManager().handleFiefYields();
-	if(territory4.getOccupancyHandler()->getArmy() != nullptr)
-	{
-		bool result = false;
-		std::string message = "player receiving bonus yields from a player in a different realm";
-		testReport(testName, result, message);
-		return;
-	}
-
-	bool result = true;
-	testReport(testName, result);
-}

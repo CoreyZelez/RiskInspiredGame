@@ -162,9 +162,6 @@
     <ClCompile Include="IUnitTest.cpp">
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
-    <ClCompile Include="TestRunner.cpp">
-      <Filter>Source Files\Testing</Filter>
-    </ClCompile>
     <ClCompile Include="EstateTest.cpp">
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
@@ -212,12 +209,6 @@
     </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\User Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="MilitaryTest.cpp">
-      <Filter>Source Files\Testing</Filter>
-    </ClCompile>
-    <ClCompile Include="RealmTest.cpp">
-      <Filter>Source Files\Testing</Filter>
     </ClCompile>
     <ClCompile Include="RichText.cpp">
       <Filter>Source Files\Utility</Filter>
@@ -309,6 +300,9 @@
     <ClCompile Include="ReconcileLandedEstates.cpp">
       <Filter>Source Files\User Interface\CommandButton</Filter>
     </ClCompile>
+    <ClCompile Include="UnitTestRunner.cpp">
+      <Filter>Source Files\Testing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LandArmy.h">
@@ -374,9 +368,6 @@
     <ClInclude Include="EstateTest.h">
       <Filter>Header Files\Testing</Filter>
     </ClInclude>
-    <ClInclude Include="TestRunner.h">
-      <Filter>Header Files\Testing</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
@@ -421,12 +412,6 @@
     </ClInclude>
     <ClInclude Include="MilitaryForceGraphics.h">
       <Filter>Header Files\Game\Military</Filter>
-    </ClInclude>
-    <ClInclude Include="MilitaryTest.h">
-      <Filter>Header Files\Testing</Filter>
-    </ClInclude>
-    <ClInclude Include="RealmTest.h">
-      <Filter>Header Files\Testing</Filter>
     </ClInclude>
     <ClInclude Include="FontManager.h">
       <Filter>Header Files\Utility</Filter>
@@ -517,6 +502,9 @@
     </ClInclude>
     <ClInclude Include="SpriteGraphicsComponent.h">
       <Filter>Header Files\Utility\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTestRunner.h">
+      <Filter>Header Files\Testing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #include "MapMaker.h"
 #include "InputUtility.h"
-#include "TestRunner.h"
+#include "UnitTestRunner.h"
 #include "Game.h"
 #include "TextureManager.h"
 #include "GameController.h"
@@ -23,9 +23,9 @@ int main()
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS IN TESTING CODE!!!
 	FontManager::getInstance();
 
-	MapMaker mapMaker("test");
+	MapMaker mapMaker("empty");
 
-	Game game("test");
+	Game game("empty");
 
 	GameDisplay gameDisplay = game.createView();
 	GameUI gameUI;
@@ -33,6 +33,8 @@ int main()
 
 	while(window.isOpen())
 	{
+		break;
+
 		// Detect input events.
 		sf::Event event;
 		while(window.pollEvent(event))
@@ -91,8 +93,8 @@ int main()
 
 	mapMaker.save();
 
-	TestRunner testRunner;
-	testRunner.runTests();
+	UnitTestRunner unitTestRunner;
+	unitTestRunner.runTests();
 
 	return 0;
 }

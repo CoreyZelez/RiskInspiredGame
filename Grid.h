@@ -31,8 +31,10 @@ class Grid
 {
 public:
 	Grid();
-	Grid(sf::Color color);
+	explicit Grid(sf::Color color);
 	Grid(sf::Color color, std::unordered_set<sf::Vector2i, Vector2iHash> gridPositions);
+	// Constructor for testing purposes. Ensures grid contains border positions.
+	explicit Grid(std::unordered_set<sf::Vector2i, Vector2iHash> borderPositions);
 
 	virtual void saveToFile(std::ofstream &file) const;
 

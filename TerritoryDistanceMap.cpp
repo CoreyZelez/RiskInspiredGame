@@ -2,6 +2,7 @@
 #include "Territory.h"
 #include <assert.h>
 #include <queue>
+#include <iostream>
 
 TerritoryDistanceMap::TerritoryDistanceMap(Territory& territory)
 	: territory(territory)

@@ -383,8 +383,8 @@ Nethohthvia
 # name
 Trosfrey
 # subfiefs
-Tarfreyia
 Nilamor
+Tarfreyia
 
 # estate
 # title
@@ -419,8 +419,8 @@ Drethdethia
 # name
 Tardeth
 # subfiefs
-Nethdrentricth
 Lueghmia
+Nethdrentricth
 
 # estate
 # title
@@ -447,8 +447,8 @@ Fusdrenmar
 # name
 Sarlithia
 # subfiefs
-Ferol
 Perlisia
+Ferol
 
 # estate
 # title
@@ -474,8 +474,8 @@ Daytromar
 # name
 Carmar
 # subfiefs
-Finithilfrey
 Folnmor
+Finithilfrey
 
 # estate
 # title
@@ -483,9 +483,9 @@ Folnmor
 # name
 Permor
 # subfiefs
-Trosfrey
-Percflinmar
 Tariltricth
+Percflinmar
+Trosfrey
 
 # estate
 # title
@@ -520,8 +520,8 @@ Carmia
 # name
 Ferthales
 # subfiefs
-Lertopia
 thales
+Lertopia
 
 # estate
 # title
@@ -529,8 +529,8 @@ thales
 # name
 Niladriax
 # subfiefs
-Vosdeth
 Metheigha
+Vosdeth
 Ferthales
 Carmar
 

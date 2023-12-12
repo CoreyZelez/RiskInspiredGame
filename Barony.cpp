@@ -41,13 +41,18 @@ std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 
 std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
 {
+	if(!landTerritory.hasPort())
+	{
+		return nullptr;
+	}
+
 	// Add navy per turn yield to cumulative yield.
 	cumulativeNavalFleet += navalFleetYield;
 
 	// Yield navy to territory and player if threshold surpassed.
 	// Only yields navy if territory has a port.
 	const int navalFleetThreshold = 2;  // Min cumulative value for yield to take place.
-	if(landTerritory.hasPort() && cumulativeNavalFleet >= navalFleetThreshold)
+	if(cumulativeNavalFleet >= navalFleetThreshold)
 	{
 		const int yield = cumulativeNavalFleet;
 		cumulativeNavalFleet -= yield;
