@@ -5,13 +5,23 @@
 #include <iostream>
 
 RealmEstateManager::RealmEstateManager(MilitaryManager &militaryManager)
-	: militaryManager(militaryManager), grid(createRandomRealmColor())
+	: militaryManager(militaryManager), defaultGridColor(createRandomRealmColor()), grid(defaultGridColor)
 {
 }
 
 void RealmEstateManager::draw(sf::RenderWindow &window) const
 {
 	grid.draw(window);
+}
+
+void RealmEstateManager::setGridColor(const sf::Color &color)
+{
+	grid.setColor(color);
+}
+
+void RealmEstateManager::setGridColorDefault()
+{
+	grid.setColor(defaultGridColor);
 }
 
 void RealmEstateManager::handleFiefYields()

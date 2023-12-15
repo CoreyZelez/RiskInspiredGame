@@ -18,6 +18,9 @@ public:
 
 	void draw(sf::RenderWindow &window) const;
 
+	void setGridColor(const sf::Color &color);
+	void setGridColorDefault();
+
 	void handleFiefYields();
 
 	void addFief(Estate *fief, bool updateGrid = true);
@@ -39,6 +42,7 @@ private:
 	std::vector<Estate*> fiefs;  ///////////////////////////////
 	////////////////////////////////////////////////////////////
 	std::set<Territory*> territories;
+	const sf::Color defaultGridColor;
 	Grid grid;
 };
 

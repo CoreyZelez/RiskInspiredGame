@@ -36,7 +36,9 @@ void GameUIController::handleUICreation(const sf::RenderWindow &window)
 		{
 		case MapMode::realm:
 		{
-			const Realm *realm = game.getRealm(worldPos);
+			// Const version of game so we can call const getRealm function.
+			const Game &constGame = game;
+			const Realm *realm = constGame.getRealm(worldPos);
 			if(realm != nullptr)
 			{
 				gameUI.setLeftUI(realm->getUI(UIType::information));

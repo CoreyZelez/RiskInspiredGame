@@ -216,9 +216,6 @@
     <ClCompile Include="FontManager.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="MapDisplay.cpp">
-      <Filter>Source Files\Game\Map</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\Game\MVC</Filter>
     </ClCompile>
@@ -302,6 +299,9 @@
     </ClCompile>
     <ClCompile Include="UnitTestRunner.cpp">
       <Filter>Source Files\Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="MapDisplay.cpp">
+      <Filter>Source Files\Game\MVC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -422,9 +422,6 @@
     <ClInclude Include="HasUI.h">
       <Filter>Header Files\User Interface</Filter>
     </ClInclude>
-    <ClInclude Include="MapDisplay.h">
-      <Filter>Header Files\Game\Map</Filter>
-    </ClInclude>
     <ClInclude Include="MultiPanel.h">
       <Filter>Header Files\User Interface\Panels</Filter>
     </ClInclude>
@@ -505,6 +502,9 @@
     </ClInclude>
     <ClInclude Include="UnitTestRunner.h">
       <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="MapDisplay.h">
+      <Filter>Header Files\Game\MVC</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

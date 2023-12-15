@@ -11,7 +11,7 @@ Game::Game(std::string mapName)
 void Game::generatePlayers()
 {
 	int humanCnt = 0; // Used temporarily for testing.
-	const int numHumans = 0;
+	const int numHumans = 1;
 	for(auto &barony : map.getEstateManager().getBaronies())
 	{
 		std::unique_ptr<Player> player = std::make_unique<Player>(*this);
@@ -30,6 +30,33 @@ void Game::generatePlayers()
 		}
 		players.emplace_back(std::move(player));
 	}
+}
+
+Realm* Game::getRealm(const sf::Vector2f & position)
+{
+	for(auto &player : players)
+	{
+		Realm &realm = player.get()->getRealm();
+		if(realm.getEstateManager().containsPosition(position))
+		{
+			return &realm;
+		}
+	}
+	return nullptr;
+}
+
+void Game::deselectSelectedRealm()
+{
+	if(selectedRealm != nullptr)
+	{
+		selectedRealm->getEstateManager().setGridColorDefault();
+	}
+	selectedRealm = nullptr;
+}
+
+bool Game::isSelectedRealm() const
+{
+	return selectedRealm != nullptr;
 }
 
 void Game::update()
@@ -146,7 +173,7 @@ const Map& Game::getMap() const
 	return map;
 }
 
-const Realm* Game::getRealm(const sf::Vector2f &position)
+const Realm* Game::getRealm(const sf::Vector2f &position) const
 {
 	for(const auto &player : players)
 	{
@@ -159,10 +186,47 @@ const Realm* Game::getRealm(const sf::Vector2f &position)
 	return nullptr;
 }
 
-const Estate * Game::getEstate(const sf::Vector2f & position, Title title)
+const Estate* Game::getEstate(const sf::Vector2f & position, Title title)
 {
 	const EstateManager &estateManager = map.getEstateManager();
 	return estateManager.getEstate(position, title);
+}
+
+void Game::selectCurrPlayerRealm(bool humanOnly)
+{
+	if(*currPlayer != nullptr)
+	{
+		if(humanOnly && humanPlayerTurn)
+		{
+			assert(currPlayer->get()->getIsHuman());
+			selectedRealm = &currPlayer->get()->getRealm();
+			selectedRealm->getEstateManager().setGridColor(sf::Color::Yellow);
+			return;
+		}
+		else
+		{
+			selectedRealm =  &currPlayer->get()->getRealm();
+			selectedRealm->getEstateManager().setGridColor(sf::Color::Yellow);
+			return;
+		}
+	}
+
+	deselectSelectedRealm();
+}
+
+void Game::selectPlayerRealm(const sf::Vector2f & position)
+{
+	Realm *realm = getRealm(position);
+	if(realm != nullptr)
+	{
+		deselectSelectedRealm();
+		selectedRealm = realm;
+		selectedRealm->getEstateManager().setGridColor(sf::Color::Yellow);
+	}
+	else
+	{
+		deselectSelectedRealm();
+	}
 }
 
 void Game::endHumanPlayerTurn()

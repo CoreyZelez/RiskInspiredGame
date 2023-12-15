@@ -20,7 +20,7 @@ void GameController::handleGameInput(const sf::RenderWindow &window, sf::View &g
 
 	handleInputForGameView(gameView);
 
-	handleInputForMapDisplay();
+	handleInputForMapDisplay(window);
 
 	handleInputForGameDisplay(window);
 
@@ -68,7 +68,7 @@ void GameController::handleInputForGameView(sf::View &view)
 	}
 }
 
-void GameController::handleInputForMapDisplay()
+void GameController::handleInputForMapDisplay(const sf::RenderWindow &window)
 {
 	InputUtility &inputUtility = InputUtility::getInstance();
 
@@ -92,6 +92,33 @@ void GameController::handleInputForMapDisplay()
 	else if(inputUtility.getKeyPressed(sf::Keyboard::F5))
 	{
 		game.setMapMode(MapMode::empire);
+	}
+	else if(inputUtility.getKeyPressed(sf::Keyboard::E))
+	{
+		if(game.getMapMode() == MapMode::selectedRealm)
+		{
+			game.deselectSelectedRealm();
+			game.setMapMode(MapMode::realm);
+		}
+		else
+		{
+			game.setMapMode(MapMode::selectedRealm);
+			game.selectCurrPlayerRealm(true);
+		}
+	}
+	else if(inputUtility.getButtonPressed(sf::Mouse::Left))
+	{
+		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+		sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+
+		if(game.getMapMode() == MapMode::selectedRealm)
+		{
+			game.selectPlayerRealm(worldPos);
+			if(!game.isSelectedRealm())
+			{
+				game.setMapMode(MapMode::realm);
+			}
+		}
 	}
 }
 
