@@ -4,6 +4,7 @@
 #include "LandArmy.h"
 #include "LandTerritory.h"
 #include "NavalTerritory.h"
+#include "Player.h"
 #include <assert.h>
 #include <iostream>
 #include <fstream>
@@ -25,8 +26,18 @@ void Barony::saveToFile(std::ofstream &file) const
 
 std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 {
-	// Add army per turn yield to cumulative yield.
-	cumulativeLandArmy += landArmyYield;
+	// Percent of yielded army allocated to reinforcement.
+	const float armyReinforcementRate = getRuler()->getMilitaryManager().getArmyReinforcementRate();
+
+	double armyReinforcementYield = armyReinforcementRate * landArmyYield;
+	double armyLocalYield = landArmyYield - armyReinforcementYield;
+	assert(armyLocalYield >= 0);
+	assert(armyReinforcementYield >= 0);
+
+	// Adds reinforcements to rulers military manager.
+	getRuler()->getMilitaryManager().addArmyReinforcements(armyReinforcementYield);
+	// Adds local army yield to cumulative yield of this barony.
+	cumulativeLandArmy += armyLocalYield;
 
 	// Yield army to territory and player if threshold surpassed.
 	const int landArmyThreshold = 3;  // Min cumulative value for yield to take place.

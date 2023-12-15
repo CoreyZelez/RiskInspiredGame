@@ -19,6 +19,7 @@ void MilitaryManager::update()
 {
 	removeDeadMilitaries();
 	resetStaminas();
+	distributeArmyReinforcements();
 }
 
 MilitaryForce* MilitaryManager::getMilitary(sf::Vector2f position)
@@ -31,6 +32,20 @@ MilitaryForce* MilitaryManager::getMilitary(sf::Vector2f position)
 		}
 	}
 	return nullptr;
+}
+
+float MilitaryManager::getArmyReinforcementRate() const
+{
+	const float maxRate = 0.9;
+	const int maxRateAttainmentValue = 10;
+	float rate = maxRate * armies.size() / (float)maxRateAttainmentValue;
+	return std::min(rate, maxRate);
+}
+
+void MilitaryManager::addArmyReinforcements(double reinforcements)
+{
+	assert(reinforcements >= 0);
+	armyReinforcements += reinforcements;
 }
 
 LandArmy* MilitaryManager::getArmy(const Territory *territory)
@@ -145,6 +160,29 @@ void MilitaryManager::resetStaminas()
 	for(auto &fleet : fleets)
 	{
 		fleet.get()->resetStamina();
+	}
+}
+
+void MilitaryManager::distributeArmyReinforcements()
+{
+	const int totalReinforcement = armyReinforcements;
+	const int totalArmyStrength = getTotalArmyStrength();
+
+	// Allocates reinforcements to armies.
+	// There may be remaining reinforcement strength after this process.
+	// It will be deferred to next turn.
+	for(auto &army : armies)
+	{
+		// No armies should be dead as they should have been removed prior to calling this function.
+		assert(army != nullptr);
+		assert(army.get()->getTotalStrength() > 0);
+
+		// Allocate reinforcement to armies proportionate to their strength.
+		const double strengthRatio = army.get()->getTotalStrength() / totalArmyStrength;
+		const int reinforcementAmount = totalReinforcement * strengthRatio;
+		armyReinforcements -= reinforcementAmount;
+		assert(armyReinforcements >= 0);
+		army.get()->increaseStrength(reinforcementAmount);
 	}
 }
 

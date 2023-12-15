@@ -1,7 +1,12 @@
-﻿  Game.cpp
+﻿  MilitaryManager.cpp
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(168): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(168): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(182): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(182): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
   Generating code
-  1 of 8016 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  0 of 8021 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Release\RiskTypeGame.exe
