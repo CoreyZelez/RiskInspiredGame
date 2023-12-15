@@ -12,8 +12,8 @@ enum class TerritoryType;
 class MilitaryForce : public Subject
 {
 public:
-	MilitaryForce(Player &owner, Territory *territory, unsigned int strength, const sf::Texture &texture);
-	MilitaryForce(Player &owner, Territory *territory, std::array<unsigned int, 4> staminaStrength, const sf::Texture &texture);
+	MilitaryForce(Player &owner, Territory *territory, unsigned int strength, const std::string &shape);
+	MilitaryForce(Player &owner, Territory *territory, std::array<unsigned int, 4> staminaStrength, const std::string &shape);
 
 	// Draws sprite at position of game world.
 	virtual void draw(sf::RenderWindow &window) const;

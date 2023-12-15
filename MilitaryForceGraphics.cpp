@@ -1,14 +1,16 @@
 #include "MilitaryForceGraphics.h"
 #include "FontManager.h"
 #include "MilitaryForce.h"
+#include "TextureManager.h"
+#include <assert.h>
 
-MilitaryForceGraphics::MilitaryForceGraphics(const sf::Texture &texture, const MilitaryForce &military)
-	: SpriteGraphicsComponent(texture), military(military)
+MilitaryForceGraphics::MilitaryForceGraphics(const std::string &shape, const MilitaryForce &military)
+	: SpriteGraphicsComponent(*getMilitaryShapeTexture(shape)), military(military)
 {
 	// PUT CODE HERE TO STANDARDISE SIZE OF SPRITE IRRESPECTIVE OF TEXTURE!!!
 
 	getSprite().setColor(sf::Color::White);
-	setScale(sf::Vector2f(2, 2));
+	setScale(sf::Vector2f(0.8, 0.8));
 
 	FontManager &fontManager = FontManager::getInstance();
 
@@ -37,6 +39,7 @@ void MilitaryForceGraphics::setPosition(sf::Vector2f position)
 void MilitaryForceGraphics::update()
 {
 	text.setString(std::to_string(military.getTotalStrength()));
+	text.setPosition(calculateTextPosition());
 }
 
 sf::Vector2f MilitaryForceGraphics::calculateTextPosition() const
@@ -50,3 +53,18 @@ sf::Vector2f MilitaryForceGraphics::calculateTextPosition() const
 	return sf::Vector2f(x, y);
 }
 
+const sf::Texture* getMilitaryShapeTexture(const std::string &shape)
+{
+	TextureManager &textureManager = TextureManager::getInstance();
+	const sf::Texture *texture = nullptr;
+	if(shape.compare("circle") == 0)
+	{
+		texture = textureManager.getTexture("circle");
+	}
+	else if(shape.compare("triangle") == 0)
+	{
+		texture = textureManager.getTexture("triangle");
+	}
+	assert(texture != nullptr);
+	return texture;
+}

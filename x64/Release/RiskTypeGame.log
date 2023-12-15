@@ -1,19 +1,7 @@
-﻿  EstateTest.cpp
-  Game.cpp
-  GameController.cpp
-  GameDisplay.cpp
-  GameUIController.cpp
-  MapDisplay.cpp
-  PlayerAIContext.cpp
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(80): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(108): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(172): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(214): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(231): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-  RiskTypeGame.cpp
+﻿  Game.cpp
   Generating code
-  4 of 8014 functions (<0.1%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  1 of 8016 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Release\RiskTypeGame.exe

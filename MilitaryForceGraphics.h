@@ -7,7 +7,7 @@ class MilitaryForce;
 class MilitaryForceGraphics : public SpriteGraphicsComponent
 {
 public:
-	MilitaryForceGraphics(const sf::Texture &texture, const MilitaryForce &military);
+	MilitaryForceGraphics(const std::string &shape, const MilitaryForce &military);
 
 	// Draws the graphics.
 	virtual void draw(sf::RenderWindow &window) const override;
@@ -27,4 +27,7 @@ private:
 	sf::Text text;
 	sf::Font font;
 };
+
+const sf::Texture* getMilitaryShapeTexture(const std::string &shape);
+
 

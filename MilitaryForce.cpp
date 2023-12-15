@@ -2,21 +2,22 @@
 #include "Grid.h"
 #include "Player.h"
 #include "Territory.h"
+#include "TextureManager.h"
 #include <string>
 #include <assert.h>
 #include <iostream>
 #include <queue>
 #include <unordered_map>
 
-MilitaryForce::MilitaryForce(Player &owner, Territory *territory, unsigned int strength, const sf::Texture &texture)
-	: owner(owner), territory(territory), staminaStrength({ 0, 0, 0, strength }), graphics(texture, *this)
+MilitaryForce::MilitaryForce(Player &owner, Territory *territory, unsigned int strength, const std::string &shape)
+	: owner(owner), territory(territory), staminaStrength({ 0, 0, 0, strength }), graphics(shape, *this)
 {
 	assert(territory != nullptr);
 	assert(strength > 0);
 }
 
-MilitaryForce::MilitaryForce(Player & owner, Territory * territory, std::array<unsigned int, 4> staminaStrength, const sf::Texture & texture)
-	: owner(owner), territory(territory), staminaStrength(staminaStrength), graphics(texture, *this)
+MilitaryForce::MilitaryForce(Player & owner, Territory * territory, std::array<unsigned int, 4> staminaStrength, const std::string &shape)
+	: owner(owner), territory(territory), staminaStrength(staminaStrength), graphics(shape, *this)
 {
 	assert(territory != nullptr);
 	assert(getTotalStrength() > 0);
@@ -165,8 +166,6 @@ void MilitaryForce::setSpritePosition(sf::Vector2f position)
 	
 	graphics.setPosition(position);
 }
-
-
 
 Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory& sourceTerritory, Territory& targetTerritory, int maxDist)
 {

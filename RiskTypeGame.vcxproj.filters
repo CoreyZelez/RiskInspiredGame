@@ -410,9 +410,6 @@
     <ClInclude Include="Button.h">
       <Filter>Header Files\User Interface</Filter>
     </ClInclude>
-    <ClInclude Include="MilitaryForceGraphics.h">
-      <Filter>Header Files\Game\Military</Filter>
-    </ClInclude>
     <ClInclude Include="FontManager.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
@@ -505,6 +502,9 @@
     </ClInclude>
     <ClInclude Include="MapDisplay.h">
       <Filter>Header Files\Game\MVC</Filter>
+    </ClInclude>
+    <ClInclude Include="MilitaryForceGraphics.h">
+      <Filter>Header Files\Utility\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

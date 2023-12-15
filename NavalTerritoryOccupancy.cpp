@@ -162,7 +162,7 @@ const NavalFleet* NavalTerritoryOccupancy::getFleet() const
 
 void NavalTerritoryOccupancy::updateMilitaryPosition()
 {
-	const int offset = 50;
+	const int offset = 80;
 	if(army != nullptr)
 	{
 		sf::Vector2f pos = territory.getGrid().getCenter();

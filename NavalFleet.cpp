@@ -8,13 +8,13 @@
 #include <iostream>
 
 NavalFleet::NavalFleet(Player &owner, Territory *location, int strength)
-	: MilitaryForce(owner, location, strength, *(TextureManager::getInstance().getTexture("landArmy")))
+	: MilitaryForce(owner, location, strength, "triangle")
 {
 	assert(location != nullptr);
 }
 
 NavalFleet::NavalFleet(Player & owner, Territory * location, std::array<unsigned int, 4> staminaStrength)
-	: MilitaryForce(owner, location, staminaStrength, *(TextureManager::getInstance().getTexture("landArmy")))
+	: MilitaryForce(owner, location, staminaStrength, "triangle")
 {
 	assert(location != nullptr);
 }
