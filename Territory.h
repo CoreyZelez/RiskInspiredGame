@@ -40,6 +40,7 @@ public:
 	virtual void calculateDistances(const std::vector<Territory*> &territories);
 
 	IOccupiable* getOccupancyHandler();
+	const IOccupiable* getOccupancyHandler() const;
 
 	TerritoryDistanceMap &getDistanceMap();
 	const TerritoryDistanceMap &getDistanceMap() const;

@@ -59,6 +59,11 @@ IOccupiable* Territory::getOccupancyHandler()
 	return occupancyHandler.get();
 }
 
+const IOccupiable * Territory::getOccupancyHandler() const
+{
+	return occupancyHandler.get();
+}
+
 TerritoryDistanceMap& Territory::getDistanceMap()
 {
 	return distanceMap;

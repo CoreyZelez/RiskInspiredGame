@@ -27,7 +27,7 @@ private:
 	NavalTerritory &territory;
 	LandArmy *army;  // Army occupying territory. 
 	NavalFleet *fleet;  // Fleet occupying territory coast. 
-	Player *controller;  // Most recent player to have a naval unit occupying this territory.
+	Player *mostRecentOccupant;  // Most recent player to have a naval unit occupying this territory.
 
 	// Sets positions of military unit sprites.
 	void updateMilitaryPosition();

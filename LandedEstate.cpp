@@ -26,6 +26,7 @@ void LandedEstate::update(Message message)
 	// Observed territory occupant changed.
 	if(message == Message::newOccupant)
 	{
+		assert(territory.getOccupancyHandler()->getOccupant() != nullptr);
 		setRuler(territory.getOccupancyHandler()->getOccupant());
 	}
 }

@@ -16,8 +16,8 @@ private:
 	PlayerAIContext context;
 
 	// Determines the strategic value of the territory for offensive or defensive purposes.
-	int calculateLandStrategicValue(const Territory &territory);
-	int calculateNavalStrategicValue(const Territory &territory);
+	int calculateArmyStrategicValue(const Territory &territory);
+	int calculateFleetStrategicValue(const Territory &territory);
 	void executeArmyAttacks(const std::vector<Territory*> &borderTerritories);
 	void executeArmyAttack(LandArmy &army);
 	void executeArmyMoveOrders(const std::map<Territory*, int> &strategicValues);

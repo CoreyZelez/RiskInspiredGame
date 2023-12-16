@@ -41,6 +41,22 @@ bool TerritoryDistanceMap::isAdjacent(const Territory *territory) const
 	return adjacencies.count(const_cast<Territory*>(territory)) == 1;
 }
 
+bool TerritoryDistanceMap::noEnemyAdjacent(TerritoryType type) const
+{
+	for(const auto &adjacency : adjacencies)
+	{
+		if(adjacency->getType() != type)
+		{
+			continue;
+		}
+		if(adjacency->getEstateOwner() != territory.getEstateOwner())
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 const std::set<Territory*>& TerritoryDistanceMap::getAdjacencies() const
 {
 	return adjacencies;

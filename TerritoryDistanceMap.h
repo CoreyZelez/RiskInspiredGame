@@ -4,6 +4,7 @@
 #include <vector>
 
 class Territory;
+enum class TerritoryType;
 
 class TerritoryDistanceMap
 {
@@ -17,6 +18,9 @@ public:
 	virtual void addAdjacencies(std::vector<Territory*> &territories);
 
 	bool isAdjacent(const Territory *territory) const;
+
+	// Returns true if no adjacent enemy territories.
+	bool noEnemyAdjacent(TerritoryType type) const;
 
 	const std::set<Territory*> &getAdjacencies() const;
 	std::set<Territory*> &getAdjacencies();

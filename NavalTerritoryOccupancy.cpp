@@ -29,7 +29,7 @@ bool NavalTerritoryOccupancy::occupy(LandArmy *army)
 	bool isValid = false;
 
 	// Can successfully occupy with army if army owner is the most recent controller of territory by navy.
-	if(this->controller == &army->getOwner())
+	if(this->mostRecentOccupant == &army->getOwner())
 	{
 		if(this->army == nullptr)
 		{
@@ -116,9 +116,9 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 
 	// Set the controller of this territory as the owner of the occupying naval army.
 	// Notify observers if owner changed.
-	if(this->fleet != nullptr && controller != &this->fleet->getOwner())
+	if(this->fleet != nullptr && mostRecentOccupant != &this->fleet->getOwner())
 	{
-		controller = &this->fleet->getOwner();
+		mostRecentOccupant = &this->fleet->getOwner();
 		territory.notifyObservers(newOccupant);
 	}
 
@@ -130,7 +130,7 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 	}
 
 	// Kill enemy land armies occupying this territory.
-	if(army != nullptr && &army->getOwner() != controller)
+	if(army != nullptr && &army->getOwner() != mostRecentOccupant)
 	{
 		assert(!army->isDead());
 		// Kill the army occupying this territory.
@@ -147,7 +147,8 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 
 Player * NavalTerritoryOccupancy::getOccupant()
 {
-	return controller;
+	return mostRecentOccupant;
+
 }
 
 const LandArmy* NavalTerritoryOccupancy::getArmy() const

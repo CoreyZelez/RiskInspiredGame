@@ -29,8 +29,10 @@ void SimplePlayerAI::handleTurn()
 	for(Territory* territory : borderTerritories)
 	{
 		assert(calculateStrategicValue(*territory) >= 0);
-		navalFleetStrategicValues[territory] = calculateNavalStrategicValue(*territory);
+		navalFleetStrategicValues[territory] = calculateFleetStrategicValue(*territory);
 	}
+	executeFleetMoveOrders(navalFleetStrategicValues);
+	executeFleetMoveOrders(navalFleetStrategicValues);
 	executeFleetMoveOrders(navalFleetStrategicValues);
 
 	// Strategic values relevant to land armies.
@@ -38,12 +40,12 @@ void SimplePlayerAI::handleTurn()
 	for(Territory* territory : borderTerritories)
 	{
 		assert(calculateStrategicValue(*territory) >= 0);
-		landArmyStrategicValues[territory] = calculateLandStrategicValue(*territory);
+		landArmyStrategicValues[territory] = calculateArmyStrategicValue(*territory);
 	}
 	executeArmyMoveOrders(landArmyStrategicValues);
 }
 
-int SimplePlayerAI::calculateLandStrategicValue(const Territory &territory)
+int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
 {
 	Player &player = getPlayer();
 	Game &game = getGame();
@@ -65,7 +67,22 @@ int SimplePlayerAI::calculateLandStrategicValue(const Territory &territory)
 	// Prioritise having land troops on land territories.
 	if(territory.getType() == TerritoryType::naval)
 	{
-		strategicValue /= 4;
+		const float navalStategicValueAdjustmentFactor = 0.1;
+		strategicValue *= navalStategicValueAdjustmentFactor;
+
+		// No reason to station land army on naval territory with no adjacent enemy land territories.
+		if(territory.getDistanceMap().noEnemyAdjacent(TerritoryType::land))
+		{
+			strategicValue = 0;
+		}
+
+		// Dont station army troops if naval territory not well protected enough.
+		const int minFleetStrength = 4;
+		if(territory.getOccupancyHandler()->getFleet() == nullptr ||
+			territory.getOccupancyHandler()->getFleet()->getTotalStrength() < minFleetStrength)
+		{
+			strategicValue = 0;
+		}
 	}
 
 	//
@@ -75,9 +92,12 @@ int SimplePlayerAI::calculateLandStrategicValue(const Territory &territory)
 	// ALSO IN FUTURE CONSIDER HAVING LAND ARMIES BE MORE INCLINED TO ATTACK IF ON OCEAN SO THEY
 	// DO NOT SIT IN A VULNERABLE POSITION FOR TOO LONG.
 	//
-	// EVEN BETTER, ONLY HAVE LAND ARMIES MOVE TO A NAVAL TERRITORY IF THEY KNOW THEY WILL BE
-	// MUCH STRONGER THAN THE ADJACENT ENEMY ARMIES POSITIONED ON THE NEIGHJBOUR LAND TERRITORIES.
+	// ALSO SHOULD CALCULATE ARMY STRATEGIC VALUE OF NAVAL TERRITORIES BASED UPON HOW WEAK THE ENEMY
+	// ARMY ADJACENT TO THE NAVAL TERRITORY IS (ENEMY ARMY IS ON LAND) RATHER THAN HOW STRONG.
+	// THIS LEADS TO MORE EFFECTIVE NAVAL INVASIONS.
 
+	/////////////////////
+	// CURRENTLY DOES NOTHING
 	// Calculate strategic desire to attack enemy neighbouring territories.
 	const std::set<Territory*> adjacencies = territory.getDistanceMap().getAdjacencies();
 	std::set<const Territory*> enemyTerritories;
@@ -90,13 +110,14 @@ int SimplePlayerAI::calculateLandStrategicValue(const Territory &territory)
 			enemyTerritories.insert(*iter);
 		}
 	}
+	////////////////////////
 
 	assert(strategicValue >= 0);
 
 	return strategicValue;
 }
 
-int SimplePlayerAI::calculateNavalStrategicValue(const Territory &territory)
+int SimplePlayerAI::calculateFleetStrategicValue(const Territory &territory)
 {
 	Player &player = getPlayer();
 	Game &game = getGame();
