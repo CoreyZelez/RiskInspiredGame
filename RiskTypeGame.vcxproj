@@ -168,6 +168,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsComponent.cpp" />
+    <ClCompile Include="HashFunctions.cpp" />
     <ClCompile Include="LandTerritoryOccupancy.cpp" />
     <ClCompile Include="Maridom.cpp" />
     <ClCompile Include="NavalTerritoryOccupancy.cpp" />
@@ -233,6 +234,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsComponent.h" />
+    <ClInclude Include="HashFunctions.h" />
     <ClInclude Include="IOccupiable.h" />
     <ClInclude Include="LandTerritoryOccupancy.h" />
     <ClInclude Include="Maridom.h" />

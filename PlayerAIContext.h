@@ -1,6 +1,8 @@
 #pragma once
+#include "HashFunctions.h"
 #include <vector>
 #include <map>
+#include <unordered_map>
 #include <set>
 
 class Player;
@@ -42,12 +44,12 @@ public:
 	/*
 	Returns a map of pairs of territory and distance to a vector of land armies.
 	*/
-	std::map<std::pair<const Territory*, int>, std::vector<LandArmy*>> getArmyBorderDistances(int maxDist);
+	std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, PairTerritoryIntHash> getArmyBorderDistances(int maxDist);
 
 	/*
 	Returns a map of pairs of territory and distance to a vector of naval fleets.
 	*/
-	std::map<std::pair<const Territory*, int>, std::vector<NavalFleet*>> getFleetBorderDistances(int maxDist);
+	std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, PairTerritoryIntHash> getFleetBorderDistances(int maxDist);
 
 private:
 	Player &player;

@@ -264,7 +264,7 @@ void SimplePlayerAI::executeArmyMoveOrders(const std::map<Territory*, int> &stra
 
 	// Distances of each friendly army to borders of own territory with movement inside own territory.
 	const int maxDist = 13;
-	std::map<std::pair<const Territory*, int>, std::vector<LandArmy*>> armyBorderDistances = context.getArmyBorderDistances(maxDist);
+	std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, PairTerritoryIntHash> armyBorderDistances = context.getArmyBorderDistances(maxDist);
 
 	// Partially allocates armies prioritising closest first. Closer armies provide greater allocation.
 	for(int distance = 0; distance <= maxDist; ++distance)
@@ -443,7 +443,7 @@ void SimplePlayerAI::executeFleetMoveOrders(const std::map<Territory*, int>& str
 
 	// Distances of each friendly army to borders of own territory with movement inside own territory.
 	const int maxDist = 13;
-	std::map<std::pair<const Territory*, int>, std::vector<NavalFleet*>> fleetBorderDistances = context.getFleetBorderDistances(maxDist);
+	std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, PairTerritoryIntHash> fleetBorderDistances = context.getFleetBorderDistances(maxDist);
 
 	// Partially allocates armies prioritising closest first. Closer armies provide greater allocation.
 	for(int distance = 0; distance <= maxDist; ++distance)

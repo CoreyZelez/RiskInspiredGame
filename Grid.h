@@ -1,4 +1,5 @@
 #pragma once
+#include "HashFunctions.h"
 #include <SFML/Graphics.hpp>
 #include <unordered_set>
 #include <string>
@@ -6,19 +7,6 @@
 const float GRID_SQUARE_SIZE = 30.0f;  // The width/height of one square of a grid on the map.
 const std::string gridSaveLabel = "# grid positions";
 const std::string defaultColorLabel = "# default color";
-
-// Hash function for sf::Vector2i
-struct Vector2iHash 
-{
-	size_t operator()(const sf::Vector2i& vector) const {
-		// Use the std::hash function to hash the components of sf::Vector2i
-		std::hash<int> hasher;
-		size_t seed = 0;
-		seed ^= hasher(vector.x) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-		seed ^= hasher(vector.y) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-		return seed;
-	}
-};
 
 enum class BorderMode
 {

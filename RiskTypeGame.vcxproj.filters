@@ -303,6 +303,9 @@
     <ClCompile Include="MapDisplay.cpp">
       <Filter>Source Files\Game\MVC</Filter>
     </ClCompile>
+    <ClCompile Include="HashFunctions.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LandArmy.h">
@@ -505,6 +508,9 @@
     </ClInclude>
     <ClInclude Include="MilitaryForceGraphics.h">
       <Filter>Header Files\Utility\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="HashFunctions.h">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

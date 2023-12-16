@@ -115,9 +115,9 @@ std::map<const Player*, int> PlayerAIContext::getFleetWeightedThreats(const Terr
 	return weightedThreats;
 }
 
-std::map<std::pair<const Territory*, int>, std::vector<LandArmy*>> PlayerAIContext::getArmyBorderDistances(int maxDist)
+std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, PairTerritoryIntHash> PlayerAIContext::getArmyBorderDistances(int maxDist)
 {
-	std::map<std::pair<const Territory*, int>, std::vector<LandArmy*>> armyBorderDistances;
+	std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, PairTerritoryIntHash> armyBorderDistances;
 	std::vector<std::unique_ptr<LandArmy>> &armies = player.getMilitaryManager().getArmies();
 	for(const auto &army : armies)
 	{
@@ -133,9 +133,9 @@ std::map<std::pair<const Territory*, int>, std::vector<LandArmy*>> PlayerAIConte
 	return armyBorderDistances;
 }
 
-std::map<std::pair<const Territory*, int>, std::vector<NavalFleet*>> PlayerAIContext::getFleetBorderDistances(int maxDist)
+std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, PairTerritoryIntHash> PlayerAIContext::getFleetBorderDistances(int maxDist)
 {
-	std::map<std::pair<const Territory*, int>, std::vector<NavalFleet*>> fleetBorderDistances;
+	std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, PairTerritoryIntHash> fleetBorderDistances;
 	std::vector<std::unique_ptr<NavalFleet>> &fleets = player.getMilitaryManager().getFleets();
 	for(const auto &fleet : fleets)
 	{
