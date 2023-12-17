@@ -7,6 +7,8 @@
 #include <sstream>
 #include <string>
 #include <unordered_map>
+#include <algorithm>
+#include <execution>
 
 Grid::Grid()
 	: color(sf::Color::White)
@@ -228,6 +230,12 @@ bool Grid::isBorder(sf::Vector2i position) const
 	sf::Vector2i rd = position + sf::Vector2i(1, 1);
 	std::vector<sf::Vector2i> adjacentPositions = { l, r, u, d, lu, ld, ru, rd };
 
+	////// Using parallel algorithm to check adjacent positions in parallel
+	////return std::any_of(std::execution::par, adjacentPositions.begin(), adjacentPositions.end(), [this](const sf::Vector2i& pos) 
+	////{
+	////	return positions.count(pos) == 0;
+	////});
+
 	for(const sf::Vector2i &position : adjacentPositions)
 	{
 		if(positions.count(position) == 0)
@@ -371,8 +379,9 @@ void Grid::calculateVertices()
 		triangles[5].position = sf::Vector2f(left, bottom);
 	
 		// define the 6 matching texture coordinates
+		// We check that it is in borderAndSubBorderPositions first as it is cheaper than checking isBorder.
 		if((borderMode == BorderMode::feintBorders || borderMode == BorderMode::darkBorders) 
-			&& isBorder(position))
+			&& borderAndSubBorderPositions.count(position) > 0 && isBorder(position))
 		{
 			if(borderMode == BorderMode::feintBorders)
 			{

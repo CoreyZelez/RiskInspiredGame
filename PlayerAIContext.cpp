@@ -119,15 +119,17 @@ std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, Pai
 {
 	std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, PairTerritoryIntHash> armyBorderDistances;
 	std::vector<std::unique_ptr<LandArmy>> &armies = player.getMilitaryManager().getArmies();
+	const std::vector<Territory*> borderTerritoriesVec = getBorderTerritories();
+	const std::unordered_set<const Territory*> borderTerritories(borderTerritoriesVec.begin(), borderTerritoriesVec.end());
 	for(const auto &army : armies)
 	{
 		Territory &armyTerritory = army.get()->getTerritory();
-		for(const Territory* borderTerritory : getBorderTerritories())
+		std::unordered_map<const Territory*, int> distances = calculateFriendlyDistancesBFS(armyTerritory, borderTerritories, maxDist);
+		// Add army to armyBorderDistances.
+		for(const Territory *territory : borderTerritories)
 		{
-			assert(armyTerritory.getEstateOwner() == borderTerritory->getEstateOwner());
-			const int distance = calculateFriendlyDistanceBFS(armyTerritory, *borderTerritory, maxDist);
-			const std::pair<const Territory*, int> key = { borderTerritory, distance };
-			armyBorderDistances[key].push_back(army.get());  // Holds underlying pointer of unique pointer. Be careful.
+			std::pair<const Territory*, int> key(territory, distances[territory]);
+			armyBorderDistances[key].push_back(army.get());
 		}
 	}
 	return armyBorderDistances;
@@ -135,17 +137,25 @@ std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, Pai
 
 std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, PairTerritoryIntHash> PlayerAIContext::getFleetBorderDistances(int maxDist)
 {
+	//
+	//
+	// WARNING! RETURNS DISTANCES TO LAND TERRITORIES AS WELL!!! SHOULD PROBALY EXCLUDE I WOULD IMAGINE!!!!!!!!!!
+	//
+	//
 	std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, PairTerritoryIntHash> fleetBorderDistances;
 	std::vector<std::unique_ptr<NavalFleet>> &fleets = player.getMilitaryManager().getFleets();
+	const std::vector<Territory*> borderTerritoriesVec = getBorderTerritories();
+	const std::unordered_set<const Territory*> borderTerritories(borderTerritoriesVec.begin(), borderTerritoriesVec.end());
 	for(const auto &fleet : fleets)
 	{
-		Territory &armyTerritory = fleet.get()->getTerritory();
-		for(const Territory* borderTerritory : getBorderTerritories())
+		Territory &fleetTerritory = fleet.get()->getTerritory();
+		std::unordered_map<const Territory*, int> distances = calculateFriendlyDistancesBFS(fleetTerritory, borderTerritories, maxDist);
+		// Add army to armyBorderDistances.
+		for(const Territory *territory : borderTerritories)
 		{
-			assert(armyTerritory.getEstateOwner() == borderTerritory->getEstateOwner());
-			const int distance = calculateFriendlyDistanceBFS(armyTerritory, *borderTerritory, maxDist);
-			const std::pair<const Territory*, int> key = { borderTerritory, distance };
-			fleetBorderDistances[key].push_back(fleet.get());  // Holds underlying pointer of unique pointer. Be careful.
+			assert(fleetTerritory.getEstateOwner() == territory->getEstateOwner());
+			std::pair<const Territory*, int> key(territory, distances[territory]);
+			fleetBorderDistances[key].push_back(fleet.get());
 		}
 	}
 	return fleetBorderDistances;
@@ -198,6 +208,65 @@ int calculateFriendlyDistanceBFS(const Territory &territory1, const Territory &t
 
 	// If territory2 is not reachable from territory1, return -1 or some special value
 	return INT_MAX;
+}
+
+std::unordered_map<const Territory*, int> calculateFriendlyDistancesBFS(const Territory &sourceTerritory, const std::unordered_set<const Territory*>& territories, int maxDist)
+{
+	std::unordered_map<const Territory*, int> distances;
+
+	// Create a queue for BFS.
+	std::queue<const Territory*> bfsQueue;
+
+	// Create a set to keep track of visited territories.
+	std::unordered_set<const Territory*> visited;
+
+	// Enqueue the starting territory.
+	bfsQueue.push(&sourceTerritory);
+	visited.insert(&sourceTerritory);
+
+	// Perform BFS until maxDist exceeded or distance for every required territory is found.
+	int distance = 0;
+	while(!bfsQueue.empty() && (territories.size() > distances.size())) 
+	{
+		// Process all territories at the current distance.
+		int currentQueueSize = bfsQueue.size();
+		for(int i = 0; i < currentQueueSize; ++i) {
+			const Territory* currentTerritory = bfsQueue.front();
+			bfsQueue.pop();
+
+			// Check if we reached territory2.
+			if(territories.count(currentTerritory) == 1 && distances.count(currentTerritory) == 0) 
+			{
+				distances[currentTerritory] = distance;
+			}
+
+			// Enqueue adjacent territories with the same owner.
+			for(const Territory* neighbor : currentTerritory->getDistanceMap().getAdjacencies()) {
+				if(visited.find(neighbor) == visited.end() && neighbor->getEstateOwner() == sourceTerritory.getEstateOwner()) {
+					bfsQueue.push(neighbor);
+					visited.insert(neighbor);
+				}
+			}
+		}
+
+		// Move to the next distance level.
+		++distance;
+		if(distance > maxDist)
+		{
+			break;
+		}
+	}
+
+	// Set INT_MAX for territories which were not traversed as they exceed maxDist.
+	for(const auto &territory : territories)
+	{
+		if(distances.count(territory) == 0)
+		{
+			distances[territory] = INT_MAX;
+		}
+	}
+
+	return distances;
 }
 
 int calculateArmyWeightedThreat(const Territory &territory, const Player &player, const float distanceFactor)

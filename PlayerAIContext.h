@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include <unordered_map>
+#include <unordered_set>
 #include <set>
 
 class Player;
@@ -57,11 +58,14 @@ private:
 	int maxDist = 13;
 };
 
-/*
-	Returns the distance between the two territories using bfs strictly traversing only
-	territories owned by the owner of territory1 and territory2.
-	*/
+// Returns the distance between the two territories using bfs strictly traversing only
+// territories owned by the owner of territory1 and territory2.
 int calculateFriendlyDistanceBFS(const Territory &territory1, const Territory& territory2, int maxDist);
+
+// Returns the distance between the source territory and the target territories in an unordered_map. Only allows 
+// traversal between territories owned by source territory owner.
+std::unordered_map<const Territory*, int> calculateFriendlyDistancesBFS(const Territory &sourceTerritory, const std::unordered_set<const Territory*> &territories, int maxDist);
+
 int calculateArmyWeightedThreat(const Territory &territory, const Player &player, const float distanceFactor);
 int calculateFleetWeightedThreat(const Territory &territory, const Player &player, const float distanceFactor);
 int calculateMaxThreat(const std::map<const Player*, int> &threats);
