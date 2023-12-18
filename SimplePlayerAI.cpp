@@ -24,16 +24,17 @@ void SimplePlayerAI::handleTurn()
 	// Redetermine border territories as now territories potentially gained after attacks.
 	borderTerritories = context.getBorderTerritories();
 
-	// Strategic values relevant to naval fleets.
-	std::map<Territory*, int> navalFleetStrategicValues;
-	for(Territory* territory : borderTerritories)
+	// Execute naval fleets movements, calculating strategic values each time.
+	for(int i = 0; i < 3; ++i)
 	{
-		assert(calculateStrategicValue(*territory) >= 0);
-		navalFleetStrategicValues[territory] = calculateFleetStrategicValue(*territory);
+		std::map<Territory*, int> navalFleetStrategicValues;
+		for(Territory* territory : borderTerritories)
+		{
+			assert(calculateStrategicValue(*territory) >= 0);
+			navalFleetStrategicValues[territory] = calculateFleetStrategicValue(*territory);
+		}
+		executeFleetMoveOrders(navalFleetStrategicValues);
 	}
-	executeFleetMoveOrders(navalFleetStrategicValues);
-	executeFleetMoveOrders(navalFleetStrategicValues);
-	executeFleetMoveOrders(navalFleetStrategicValues);
 
 	// Strategic values relevant to land armies.
 	std::map<Territory*, int> landArmyStrategicValues;
@@ -42,7 +43,7 @@ void SimplePlayerAI::handleTurn()
 		assert(calculateStrategicValue(*territory) >= 0);
 		landArmyStrategicValues[territory] = calculateArmyStrategicValue(*territory);
 	}
-	executeArmyMoveOrders(landArmyStrategicValues);
+	// executeArmyMoveOrders(landArmyStrategicValues);
 }
 
 int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)

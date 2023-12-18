@@ -140,7 +140,10 @@ std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, Pai
 	std::mutex mutex;  // Declare a mutex for thread safety.
 	std::vector<std::thread> threads;  // Store threads for joining later
 	
-	std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, PairTerritoryIntHash> armyBorderDistances;
+	// minBuckets is chosen based upon observation of maximum buckets needed when running game.
+	// In future may need to alter or make more dynamic
+	const size_t minBuckets = 500;
+	std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, PairTerritoryIntHash> armyBorderDistances(minBuckets);
 	std::vector<std::unique_ptr<LandArmy>> &armies = player.getMilitaryManager().getArmies();
 	const std::vector<Territory*> borderTerritoriesVec = getBorderTerritories();
 	const std::unordered_set<const Territory*> borderTerritories(borderTerritoriesVec.begin(), borderTerritoriesVec.end());
@@ -157,7 +160,8 @@ std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, Pai
 	{
 		thread.join();
 	}
-	
+	std::cout << armyBorderDistances.bucket_count() << std::endl;
+
 	return armyBorderDistances;
 }
 
@@ -220,7 +224,10 @@ std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, P
 	std::mutex mutex;  // Declare a mutex for thread safety.
 	std::vector<std::thread> threads;  // Store threads for joining later.
 	
-	std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, PairTerritoryIntHash> fleetBorderDistances;
+	// minBuckets is chosen based upon observation of maximum buckets needed when running game.
+	// In future may need to alter or make more dynamic
+	const size_t minBuckets = 500;
+	std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, PairTerritoryIntHash> fleetBorderDistances(minBuckets);
 	std::vector<std::unique_ptr<NavalFleet>> &fleets = player.getMilitaryManager().getFleets();
 	const std::vector<Territory*> borderTerritoriesVec = getBorderTerritories();
 	const std::unordered_set<const Territory*> borderTerritories(borderTerritoriesVec.begin(), borderTerritoriesVec.end());
