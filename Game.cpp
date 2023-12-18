@@ -90,9 +90,15 @@ void Game::update()
 		if(currPlayer->get()->getIsHuman())
 		{
 			humanPlayerTurn = true;
-			return;
+			break;
 		}
 	}
+
+	// Iterate through all players, updating their realms vertex arrays if thier realm changed.
+	for(auto &player : players)
+	{
+		player.get()->getRealm().getEstateManager().updateGrid();
+    }
 }
 
 GameState Game::getState() const

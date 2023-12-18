@@ -14,6 +14,11 @@ void RealmEstateManager::draw(sf::RenderWindow &window) const
 	grid.draw(window);
 }
 
+void RealmEstateManager::updateGrid()
+{
+	grid.update();
+}
+
 void RealmEstateManager::setGridColor(const sf::Color &color)
 {
 	grid.setColor(color);
@@ -49,7 +54,7 @@ void RealmEstateManager::addFief(Estate *fief, bool updateGrid)
 	fiefs.emplace_back(fief);
 	if(updateGrid)
 	{
-		grid.addGrid(fief->getGrid());
+		grid.addGrid(fief->getGrid(), updateGrid);
 	}
 
 	// Add territory to realm territories if estate is landed estate.
@@ -67,7 +72,7 @@ void RealmEstateManager::removeFief(Estate *fief, bool updateGrid)
 		{
 			if(updateGrid)
 			{
-				grid.removeGrid(fief->getGrid());
+				grid.removeGrid(fief->getGrid(), updateGrid);
 			}
 
 			// Remove territory from realm territories if estate is landed estate.

@@ -25,7 +25,7 @@ size_t PairTerritoryIntHash::operator()(const std::pair<const Territory*, int>& 
 	return seed;
 }
 
-size_t Vector2fHash::operator()(const sf::Vector2f & vector) const
+size_t Vector2fHash::operator()(const sf::Vector2f& vector) const
 {
 	std::hash<int> hasher;
 	size_t seed = 1;
@@ -33,3 +33,5 @@ size_t Vector2fHash::operator()(const sf::Vector2f & vector) const
 	seed ^= hasher(vector.y) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 	return seed;
 }
+
+

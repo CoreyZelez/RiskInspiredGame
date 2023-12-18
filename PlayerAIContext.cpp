@@ -118,41 +118,20 @@ std::map<const Player*, int> PlayerAIContext::getFleetWeightedThreats(const Terr
 	return weightedThreats;
 }
 
-std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, PairTerritoryIntHash> PlayerAIContext::getArmyBorderDistances(int maxDist)
+std::unordered_map<const Territory*, std::unordered_map<int, std::vector<LandArmy*>>> PlayerAIContext::getArmyBorderDistances(int maxDist)
 {
-	////std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, PairTerritoryIntHash> armyBorderDistances;
-	////std::vector<std::unique_ptr<LandArmy>> &armies = player.getMilitaryManager().getArmies();
-	////const std::vector<Territory*> borderTerritoriesVec = getBorderTerritories();
-	////const std::unordered_set<const Territory*> borderTerritories(borderTerritoriesVec.begin(), borderTerritoriesVec.end());
-	////for(const auto &army : armies)
-	////{
-	////	Territory &armyTerritory = army.get()->getTerritory();
-	////	std::unordered_map<const Territory*, int> distances = calculateFriendlyDistancesBFS(armyTerritory, borderTerritories, maxDist);
-	////	// Add army to armyBorderDistances.
-	////	for(const Territory *territory : borderTerritories)
-	////	{
-	////		std::pair<const Territory*, int> key(territory, distances[territory]);
-	////		armyBorderDistances[key].push_back(army.get());
-	////	}
-	////}
-	////return armyBorderDistances;
-
 	std::mutex mutex;  // Declare a mutex for thread safety.
 	std::vector<std::thread> threads;  // Store threads for joining later
 	
 	// minBuckets is chosen based upon observation of maximum buckets needed when running game.
 	// In future may need to alter or make more dynamic
-	const size_t minBuckets = 500;
-	std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, PairTerritoryIntHash> armyBorderDistances(minBuckets);
-	std::vector<std::unique_ptr<LandArmy>> &armies = player.getMilitaryManager().getArmies();
-	const std::vector<Territory*> borderTerritoriesVec = getBorderTerritories();
-	const std::unordered_set<const Territory*> borderTerritories(borderTerritoriesVec.begin(), borderTerritoriesVec.end());
-	
-	// Launch a thread for each army
-	for(auto& army : armies)
+	const size_t minBuckets = 50;
+	std::unordered_map<const Territory*, std::unordered_map<int, std::vector<LandArmy*>>> armyBorderDistances(minBuckets);
+	const std::vector<Territory*> borderTerritories = getBorderTerritories();
+	// Launch a thread for each territory to determine its distance to each army.
+	for(const Territory *territory : borderTerritories)
 	{
-		threads.emplace_back(&PlayerAIContext::getIndividualArmyBorderDistances, this, std::ref(army), std::ref(armyBorderDistances), 
-			std::cref(borderTerritories), maxDist, std::ref(mutex));
+		threads.emplace_back(&PlayerAIContext::determineTerritoryArmyDistances, this, std::ref(*territory), std::ref(armyBorderDistances), maxDist, std::ref(mutex));
 	}
 	
 	// Wait for all threads to finish
@@ -160,91 +139,99 @@ std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, Pai
 	{
 		thread.join();
 	}
-	std::cout << armyBorderDistances.bucket_count() << std::endl;
 
 	return armyBorderDistances;
 }
 
-void PlayerAIContext::getIndividualArmyBorderDistances(std::unique_ptr<LandArmy>& army, std::unordered_map<std::pair<const Territory*, int>,
-	std::vector<LandArmy*>, PairTerritoryIntHash>& armyBorderDistances, const std::unordered_set<const Territory*>& borderTerritories, int maxDist, std::mutex &mutex)
+void PlayerAIContext::determineTerritoryArmyDistances(const Territory &territory, 
+	std::unordered_map<const Territory*, std::unordered_map<int, std::vector<LandArmy*>>>& armyTerritoryDistances, int maxDist, std::mutex & mutex)
 {
-	Territory &armyTerritory = army->getTerritory();
-	std::unordered_map<const Territory*, int> distances = calculateFriendlyDistancesBFS(armyTerritory, borderTerritories, maxDist);
+	// Holds distance of each army to territory.
+	std::unordered_map<int, std::vector<LandArmy*>> armyDistances;
+	const std::vector<std::unique_ptr<LandArmy>> &armies = player.getMilitaryManager().getArmies();
+	std::unordered_set<const Territory*> armyTerritories;
 
-	// Add army to armyBorderDistances.
-	for(const Territory *territory : borderTerritories)
+	// Determine all army territories
+	for(const auto &army : armies)
 	{
-		std::pair<const Territory*, int> key(territory, distances[territory]);
-		// Use a mutex to protect the shared data structure.
-		std::lock_guard<std::mutex> lock(mutex);
-		armyBorderDistances[key].push_back(army.get());
+		const Territory *armyTerritory = &army.get()->getTerritory();
+		armyTerritories.insert(armyTerritory);
 	}
+
+	// Friendly distances of territory to set of territories occupied by friendly army.
+	// We use this more complex procedure rather than calling calculateFriendlyDistanceBFS on each army territory individually since
+	// it means we only have to run BFS once rather than once per army.
+	std::unordered_map<const Territory*, int> territoryDistances = calculateFriendlyDistancesBFS(territory, armyTerritories, maxDist);
+
+	// Determine distances to specific armies.
+	for(const auto &army : armies)
+	{
+		const Territory *armyTerritory = &army.get()->getTerritory();
+		const int distance = territoryDistances[armyTerritory];
+		armyDistances[distance].push_back(army.get());
+	}
+
+	std::lock_guard<std::mutex> lock(mutex);
+	armyTerritoryDistances[&territory] = armyDistances;
 }
 
-void PlayerAIContext::getIndividualFleetBorderDistances(std::unique_ptr<NavalFleet>& fleet, std::unordered_map<std::pair<const Territory*, int>, 
-	std::vector<NavalFleet*>, PairTerritoryIntHash>& fleetBorderDistances, const std::unordered_set<const Territory*>& borderTerritories, int maxDist, std::mutex &mutex)
+void PlayerAIContext::determineTerritoryFleetDistances(const Territory & territory, std::unordered_map<const Territory*, 
+	std::unordered_map<int, std::vector<NavalFleet*>>>& fleetTerritoryDistances, int maxDist, std::mutex & mutex)
 {
-	Territory &fleetTerritory = fleet.get()->getTerritory();
-	std::unordered_map<const Territory*, int> distances = calculateFriendlyDistancesBFS(fleetTerritory, borderTerritories, maxDist);
-	// Add army to armyBorderDistances.
-	for(const Territory *territory : borderTerritories)
+	// Holds distance of each army to territory.
+	std::unordered_map<int, std::vector<NavalFleet*>> fleetDistances;
+	const std::vector<std::unique_ptr<NavalFleet>> &fleets = player.getMilitaryManager().getFleets();
+	std::unordered_set<const Territory*> fleetTerritories;
+
+	// Determine all army territories
+	for(const auto &fleet : fleets)
 	{
-		assert(fleetTerritory.getEstateOwner() == territory->getEstateOwner());
-		std::pair<const Territory*, int> key(territory, distances[territory]);
-		std::lock_guard<std::mutex> lock(mutex);
-		fleetBorderDistances[key].push_back(fleet.get());
+		const Territory *armyTerritory = &fleet.get()->getTerritory();
+		fleetTerritories.insert(armyTerritory);
 	}
+
+	// Friendly distances of territory to set of territories occupied by friendly army.
+	// We use this more complex procedure rather than calling calculateFriendlyDistanceBFS on each army territory individually since
+	// it means we only have to run BFS once rather than once per army.
+	std::unordered_map<const Territory*, int> territoryDistances = calculateFriendlyDistancesBFS(territory, fleetTerritories, maxDist);
+
+	// Determine distances to specific armies.
+	for(const auto &fleet : fleets)
+	{
+		const Territory *fleetTerritory = &fleet.get()->getTerritory();
+		const int distance = territoryDistances[fleetTerritory];
+		fleetDistances[distance].push_back(fleet.get());
+	}
+
+	std::lock_guard<std::mutex> lock(mutex);
+	fleetTerritoryDistances[&territory] = fleetDistances;
 }
 
-std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, PairTerritoryIntHash> PlayerAIContext::getFleetBorderDistances(int maxDist)
+
+std::unordered_map<const Territory*, std::unordered_map<int, std::vector<NavalFleet*>>> PlayerAIContext::getFleetBorderDistances(int maxDist)
 {
-	
-	
 	//WARNING! RETURNS DISTANCES TO LAND TERRITORIES AS WELL!!! SHOULD PROBALY EXCLUDE I WOULD IMAGINE!!!!!!!!!!
 	
-	
-	////std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, PairTerritoryIntHash> fleetBorderDistances;
-	////std::vector<std::unique_ptr<NavalFleet>> &fleets = player.getMilitaryManager().getFleets();
-	////const std::vector<Territory*> borderTerritoriesVec = getBorderTerritories();
-	////const std::unordered_set<const Territory*> borderTerritories(borderTerritoriesVec.begin(), borderTerritoriesVec.end());
-	////for(const auto &fleet : fleets)
-	////{
-	////	Territory &fleetTerritory = fleet.get()->getTerritory();
-	////	std::unordered_map<const Territory*, int> distances = calculateFriendlyDistancesBFS(fleetTerritory, borderTerritories, maxDist);
-	////	// Add army to armyBorderDistances.
-	////	for(const Territory *territory : borderTerritories)
-	////	{
-	////		assert(fleetTerritory.getEstateOwner() == territory->getEstateOwner());
-	////		std::pair<const Territory*, int> key(territory, distances[territory]);
-	////		fleetBorderDistances[key].push_back(fleet.get());
-	////	}
-	////}
-	////return fleetBorderDistances;
-
 	std::mutex mutex;  // Declare a mutex for thread safety.
-	std::vector<std::thread> threads;  // Store threads for joining later.
-	
+	std::vector<std::thread> threads;  // Store threads for joining later
+
 	// minBuckets is chosen based upon observation of maximum buckets needed when running game.
 	// In future may need to alter or make more dynamic
-	const size_t minBuckets = 500;
-	std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, PairTerritoryIntHash> fleetBorderDistances(minBuckets);
-	std::vector<std::unique_ptr<NavalFleet>> &fleets = player.getMilitaryManager().getFleets();
-	const std::vector<Territory*> borderTerritoriesVec = getBorderTerritories();
-	const std::unordered_set<const Territory*> borderTerritories(borderTerritoriesVec.begin(), borderTerritoriesVec.end());
-	
-	// Launch a thread for each army
-	for(auto &fleet : fleets)
+	const size_t minBuckets = 50;
+	std::unordered_map<const Territory*, std::unordered_map<int, std::vector<NavalFleet*>>> fleetBorderDistances(minBuckets);
+	const std::vector<Territory*> borderTerritories = getBorderTerritories();
+	// Launch a thread for each territory to determine its distance to each army.
+	for(const Territory *territory : borderTerritories)
 	{
-		threads.emplace_back(&PlayerAIContext::getIndividualFleetBorderDistances, this, std::ref(fleet), std::ref(fleetBorderDistances),
-			std::cref(borderTerritories), maxDist, std::ref(mutex));
+		threads.emplace_back(&PlayerAIContext::determineTerritoryFleetDistances, this, std::ref(*territory), std::ref(fleetBorderDistances), maxDist, std::ref(mutex));
 	}
-	
+
 	// Wait for all threads to finish
 	for(auto& thread : threads)
 	{
 		thread.join();
 	}
-	
+
 	return fleetBorderDistances;
 }
 

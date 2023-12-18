@@ -29,14 +29,19 @@ Grid::Grid(sf::Color color,
 }
 
 
-//
-///
-// WTF IS THIS CONSTRUCTOR?
-//
-// FIND WHERE IT IS USED IF AT ALL!!!
-Grid::Grid(std::unordered_set<sf::Vector2i, Vector2iHash> borderPositions)
-	: color(sf::Color::White), positions(borderPositions), borderPositions(borderPositions)
+Grid::Grid(std::unordered_set<sf::Vector2i, Vector2iHash> positions)
+	: color(sf::Color::White), positions(positions)
 {
+	initBorders();
+}
+
+void Grid::update()
+{
+	if(outdated)
+	{
+		calculateVertices();
+		outdated = false;
+	}
 }
 
 void Grid::saveToFile(std::ofstream &file) const
@@ -57,6 +62,7 @@ void Grid::saveToFile(std::ofstream &file) const
 
 void Grid::draw(sf::RenderWindow &window) const
 {
+	assert(!outdated);
 	window.draw(vertices);
 }
 
@@ -193,6 +199,10 @@ void Grid::addGrid(const Grid &grid, bool updateVertices)
 	{
 		calculateVertices();
 	}
+	else
+	{
+		outdated = true;
+	}
 }
 
 void Grid::removeGrid(const Grid &grid, bool updateVertices)
@@ -225,7 +235,10 @@ void Grid::removeGrid(const Grid &grid, bool updateVertices)
 	{
 		calculateVertices();
 	}
-
+	else
+	{
+		outdated = true;
+	}
 }
 
 void Grid::addPosition(sf::Vector2i gridPosition, bool updateVertices)
@@ -254,6 +267,10 @@ void Grid::addPosition(sf::Vector2i gridPosition, bool updateVertices)
 		{
 			calculateVertices();
 		}
+		else
+		{
+			outdated = true;
+		}
 	}
 }
 
@@ -281,6 +298,10 @@ bool Grid::removeSquare(sf::Vector2f position, bool updateVertices)
 		if(updateVertices)
 		{
 			calculateVertices();
+		}
+		else
+		{
+			outdated = true;
 		}
 
 		return true;

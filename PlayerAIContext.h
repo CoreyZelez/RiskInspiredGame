@@ -46,25 +46,26 @@ public:
 	/*
 	Returns a map of pairs of territory and distance to a vector of land armies.
 	*/
-	std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, PairTerritoryIntHash> getArmyBorderDistances(int maxDist);
+	std::unordered_map<const Territory*, std::unordered_map<int, std::vector<LandArmy*>>> getArmyBorderDistances(int maxDist);
 
 	/*
 	Returns a map of pairs of territory and distance to a vector of naval fleets.
 	*/
-	std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, PairTerritoryIntHash> getFleetBorderDistances(int maxDist);
+	std::unordered_map<const Territory*, std::unordered_map<int, std::vector<NavalFleet*>>> getFleetBorderDistances(int maxDist);
 
 private:
 	Player &player;
 	Game &game;
 	int maxDist = 13;
 
-	void getIndividualArmyBorderDistances(std::unique_ptr<LandArmy>& army,
-		std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, PairTerritoryIntHash>& armyBorderDistances,
-		const std::unordered_set<const Territory*>& borderTerritories, int maxDist, std::mutex &mutex);
+	// Adds an unordered maps to armyTerritoryDistances specifying the distance of every friendly army to the specified territory.
+	void determineTerritoryArmyDistances(const Territory &territory,
+		std::unordered_map<const Territory*, std::unordered_map<int, std::vector<LandArmy*>>> &armyTerritoryDistances, 
+		int maxDist, std::mutex &mutex);
 
-	void getIndividualFleetBorderDistances(std::unique_ptr<NavalFleet>& fleet,
-		std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, PairTerritoryIntHash>& fleetBorderDistances,
-		const std::unordered_set<const Territory*>& borderTerritories, int maxDist, std::mutex &mutex);
+	void determineTerritoryFleetDistances(const Territory &territory,
+		std::unordered_map<const Territory*, std::unordered_map<int, std::vector<NavalFleet*>>> &fleetTerritoryDistances,
+		int maxDist, std::mutex &mutex);
 };
 
 // Returns the distance between the two territories using bfs strictly traversing only

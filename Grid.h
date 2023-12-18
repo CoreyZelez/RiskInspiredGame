@@ -21,28 +21,20 @@ public:
 	Grid();
 	explicit Grid(sf::Color color);
 	Grid(sf::Color color, std::unordered_set<sf::Vector2i, Vector2iHash> gridPositions);
-	// Constructor for testing purposes. Ensures grid contains border positions.
-	explicit Grid(std::unordered_set<sf::Vector2i, Vector2iHash> borderPositions);
+	// Constructor for testing purposes. 
+	explicit Grid(std::unordered_set<sf::Vector2i, Vector2iHash> positions);
 
-	///////////////////////
-	// CAN WE ADD THIS TO THE CONSTRUCTOR(S) I THINK WE CAN!!!!!!
-	//
-	//
-	//
+	void update();
+
+	// 
 	void initBorders();
-	//
-	//
-	//
-	/////////////
 
 	virtual void saveToFile(std::ofstream &file) const;
 
-	// WORK TO REMOVE THIS. SHOULD COMBINE ALL VERTEX ARRAYS FROM EACH GRID INTO SINGLE VERTEX ARRAY AND DRAW THAT.
+	//// MAYBE WORK TO REMOVE THIS. SHOULD MAYBE COMBINE ALL VERTEX ARRAYS FROM EACH GRID INTO SINGLE VERTEX ARRAY AND DRAW THAT.
 	void draw(sf::RenderWindow &window) const;
 
 	const sf::VertexArray& getVertexArray() const;
-
-	// select()  // grid becomes selected and displays border in different colour.
 
 	void setBorderMode(BorderMode borderMode);
 
@@ -81,6 +73,7 @@ private:
 	std::unordered_set<sf::Vector2i, Vector2iHash> positions;  // Positions on map grid occupys. 
 	std::unordered_set<sf::Vector2i, Vector2iHash> subBorderPositions;  // Positions that form sub border or border.
 	std::unordered_set<sf::Vector2i, Vector2iHash> borderPositions;  // Positions that form sub border or border.
+	bool outdated = false;  // Indicated that calculateVertices must be called before next time grid is drawn.
 	sf::Vector2i center;  // Center position in game world.
 	sf::VertexArray vertices;
 	sf::Color color;

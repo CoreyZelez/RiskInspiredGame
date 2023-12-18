@@ -18,13 +18,15 @@ public:
 
 	void draw(sf::RenderWindow &window) const;
 
+	void updateGrid();
+
 	void setGridColor(const sf::Color &color);
 	void setGridColorDefault();
 
 	void handleFiefYields();
 
-	void addFief(Estate *fief, bool updateGrid = true);
-	void removeFief(Estate *fief, bool updateGrid = true);
+	void addFief(Estate *fief, bool updateGrid = false);
+	void removeFief(Estate *fief, bool updateGrid = false);
 
 	// Returns true if realm grid contains specified world position.
 	bool containsPosition(const sf::Vector2f &position) const;

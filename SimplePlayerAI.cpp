@@ -43,7 +43,7 @@ void SimplePlayerAI::handleTurn()
 		assert(calculateStrategicValue(*territory) >= 0);
 		landArmyStrategicValues[territory] = calculateArmyStrategicValue(*territory);
 	}
-	// executeArmyMoveOrders(landArmyStrategicValues);
+	executeArmyMoveOrders(landArmyStrategicValues);
 }
 
 int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
@@ -265,7 +265,7 @@ void SimplePlayerAI::executeArmyMoveOrders(const std::map<Territory*, int> &stra
 
 	// Distances of each friendly army to borders of own territory with movement inside own territory.
 	const int maxDist = 13;
-	std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, PairTerritoryIntHash> armyBorderDistances = context.getArmyBorderDistances(maxDist);
+	std::unordered_map<const Territory*, std::unordered_map<int, std::vector<LandArmy*>>> armyBorderDistances = context.getArmyBorderDistances(maxDist);
 
 	// Partially allocates armies prioritising closest first. Closer armies provide greater allocation.
 	for(int distance = 0; distance <= maxDist; ++distance)
@@ -283,8 +283,7 @@ void SimplePlayerAI::executeArmyMoveOrders(const std::map<Territory*, int> &stra
 			}
 
 			// Move armies of specified distance towards the territory.
-			std::pair<const Territory*, int> key = { &territory, distance };
-			std::vector<LandArmy*> &currDistArmies = armyBorderDistances[key];  
+			std::vector<LandArmy*> &currDistArmies = armyBorderDistances[&territory][distance];
 			for(int i = 0; i < currDistArmies.size(); ++i)
 			{
 
@@ -444,7 +443,7 @@ void SimplePlayerAI::executeFleetMoveOrders(const std::map<Territory*, int>& str
 
 	// Distances of each friendly army to borders of own territory with movement inside own territory.
 	const int maxDist = 13;
-	std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, PairTerritoryIntHash> fleetBorderDistances = context.getFleetBorderDistances(maxDist);
+	std::unordered_map<const Territory*, std::unordered_map<int, std::vector<NavalFleet*>>> fleetBorderDistances = context.getFleetBorderDistances(maxDist);
 
 	// Partially allocates armies prioritising closest first. Closer armies provide greater allocation.
 	for(int distance = 0; distance <= maxDist; ++distance)
@@ -461,9 +460,8 @@ void SimplePlayerAI::executeFleetMoveOrders(const std::map<Territory*, int>& str
 				continue;
 			}
 
-			// Move armies of specified distance towards the territory.
-			std::pair<const Territory*, int> key = { &territory, distance };
-			std::vector<NavalFleet*> &currDistFleets = fleetBorderDistances[key];
+			// Move fleets of specified distance towards the territory.
+			std::vector<NavalFleet*> &currDistFleets = fleetBorderDistances[&territory][distance];
 			for(int i = 0; i < currDistFleets.size(); ++i)
 			{
 

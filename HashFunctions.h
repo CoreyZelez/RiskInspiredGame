@@ -19,3 +19,4 @@ struct PairTerritoryIntHash
 {
 	size_t operator()(const std::pair<const Territory*, int>& key) const;
 };
+
