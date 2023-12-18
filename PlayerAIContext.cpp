@@ -355,6 +355,11 @@ int calculateArmyWeightedThreat(const Territory &territory, const Player &player
 		assert(distance > 0 || army.get()->isDead());
 		if(distance > 0)
 		{
+			// For avoiding integer overflow.
+			if(distance == INT_MAX)
+			{
+				continue;
+			}
 			threatScore += army.get()->getTotalStrength() / pow(distance, distanceFactor);
 		}
 	}
@@ -372,6 +377,11 @@ int calculateFleetWeightedThreat(const Territory & territory, const Player & pla
 		assert(distance > 0 || army.get()->isDead());
 		if(distance > 0)
 		{
+			// For avoiding integer overflow.
+			if(distance == INT_MAX)
+			{
+				continue;
+			}
 			threatScore += fleet.get()->getTotalStrength() / pow(distance, distanceFactor);
 		}
 	}

@@ -39,7 +39,7 @@ public:
 	// Provides bonus yields to subfiefs. Yield dependant on title.
 	virtual void provideSubfiefBonusYields();
 
-	void setRuler(Player *ruler, bool updatePlayerGrid = true);
+	void setRuler(Player *ruler);
 
 	void addSubfief(Estate *subfief);
 	void removeSubfief(Estate *subfief);

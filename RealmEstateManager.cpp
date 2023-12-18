@@ -47,14 +47,16 @@ void RealmEstateManager::handleFiefYields()
 	}
 }
 
-void RealmEstateManager::addFief(Estate *fief, bool updateGrid)
+void RealmEstateManager::addFief(Estate *fief)
 {
 	assert(fief != nullptr);
 
 	fiefs.emplace_back(fief);
-	if(updateGrid)
+
+	// Only update grid if estate landed.
+	if(dynamic_cast<LandedEstate*>(fief) != nullptr)
 	{
-		grid.addGrid(fief->getGrid(), updateGrid);
+		grid.addGrid(fief->getGrid(), false);
 	}
 
 	// Add territory to realm territories if estate is landed estate.
@@ -64,15 +66,16 @@ void RealmEstateManager::addFief(Estate *fief, bool updateGrid)
 	}
 }
 
-void RealmEstateManager::removeFief(Estate *fief, bool updateGrid)
+void RealmEstateManager::removeFief(Estate *fief)
 {
 	for(auto iter = fiefs.begin(); iter != fiefs.end(); ++iter)
 	{
 		if(*iter == fief)
 		{
-			if(updateGrid)
+			// Only update grid if estate landed.
+			if(dynamic_cast<LandedEstate*>(fief) != nullptr)
 			{
-				grid.removeGrid(fief->getGrid(), updateGrid);
+				grid.removeGrid(fief->getGrid(), false);
 			}
 
 			// Remove territory from realm territories if estate is landed estate.

@@ -341,7 +341,7 @@ Player* Estate::getRuler()
 	return ruler;
 }
 
-void Estate::setRuler(Player *ruler, bool updatePlayerGrid)
+void Estate::setRuler(Player *ruler)
 {
 	// Case ruler is not changed.
 	if(this->ruler == ruler)
@@ -352,7 +352,7 @@ void Estate::setRuler(Player *ruler, bool updatePlayerGrid)
 	// Remove fief from previous ruler.
 	if(this->ruler != nullptr)
 	{
-		this->ruler->getRealm().getEstateManager().removeFief(this, updatePlayerGrid);
+		this->ruler->getRealm().getEstateManager().removeFief(this);
 	}
 
 	// Change ruler of estate.
@@ -361,7 +361,7 @@ void Estate::setRuler(Player *ruler, bool updatePlayerGrid)
 	// Add fief to new ruler.
 	if(this->ruler != nullptr)
 	{
-		this->ruler->getRealm().getEstateManager().addFief(this, updatePlayerGrid);
+		this->ruler->getRealm().getEstateManager().addFief(this);
 	}
 
 	// Tell upper estate(s) to check whether uppermost liege of ruler (possibly ruler themselves) should gain control of it.
@@ -398,7 +398,7 @@ void Estate::handleAllocation()
 		// WARNING: RELIES ON FACT THAT LOWER ESTATE TITLE IS A LANDED ESTATE AND UPPER ESTATES ARE NOT.
 		const bool updatePlayerGrid = false;  // Don't update player grid since estate not landed.
 		////
-		setRuler(ruler, updatePlayerGrid);
+		setRuler(ruler);
 	}
 }
 
@@ -406,19 +406,12 @@ void Estate::handleRevocation()
 {
 	assert(ruler != nullptr);
 
-	bool revoked = false;
-
 	// Revokes estate if any subfief of estate is not apart of ruler's realm.
 	for(const Estate *subfief : subfiefs)
 	{
-
 		if(subfief->ruler == nullptr || &subfief->ruler->getRealm().getRelationshipManager().getUpperRealmRuler())
 		{
-			// WARNING: RELIES ON FACT THAT LOWER ESTATE TITLE IS A LANDED ESTATE AND UPPER ESTATES ARE NOT.
-			const bool updatePlayerGrid = false;  // Don't update player grid since estate not landed.
-			////
-			setRuler(nullptr, updatePlayerGrid);
-			revoked = true;
+			setRuler(nullptr);
 			break;
 		}
 	}

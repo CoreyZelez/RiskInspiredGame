@@ -26,9 +26,6 @@ public:
 
 	void update();
 
-	// 
-	void initBorders();
-
 	virtual void saveToFile(std::ofstream &file) const;
 
 	//// MAYBE WORK TO REMOVE THIS. SHOULD MAYBE COMBINE ALL VERTEX ARRAYS FROM EACH GRID INTO SINGLE VERTEX ARRAY AND DRAW THAT.
@@ -79,9 +76,14 @@ private:
 	sf::Color color;
 	BorderMode borderMode = BorderMode::darkBorders;
 
-	bool isBorder(sf::Vector2i position) const;  // Returns true if grid position on grid border.
-	void calculateVertices();  // Calculates vertices for vertex array from square positions.
-	std::vector<sf::Vector2i> getAdjacentPositions() const;  // Returns positions adjacent to border positions not contained in grid.
+	// Determines which positions are borders and adds them to borderPositions.
+	void initBorders();
+	// Returns true if grid position on grid border.
+	bool isBorder(sf::Vector2i position) const;  
+	// Calculates vertices for vertex array from square positions.
+	void calculateVertices();  
+	// Returns positions adjacent to border positions not contained in grid.
+	std::vector<sf::Vector2i> getAdjacentPositions() const; 
 };
 
 Grid loadTerritoryGrid(std::ifstream &file);

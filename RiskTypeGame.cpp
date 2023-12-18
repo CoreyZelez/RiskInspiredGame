@@ -23,7 +23,7 @@ int main()
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS IN TESTING CODE!!!
 	FontManager::getInstance();
 
-	MapMaker mapMaker("test");
+	MapMaker mapMaker("debugmap");
 
 	Game game("test");
 

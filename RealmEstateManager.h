@@ -25,8 +25,8 @@ public:
 
 	void handleFiefYields();
 
-	void addFief(Estate *fief, bool updateGrid = false);
-	void removeFief(Estate *fief, bool updateGrid = false);
+	void addFief(Estate *fief);
+	void removeFief(Estate *fief);
 
 	// Returns true if realm grid contains specified world position.
 	bool containsPosition(const sf::Vector2f &position) const;

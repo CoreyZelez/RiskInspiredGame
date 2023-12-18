@@ -165,7 +165,7 @@ void Grid::addGrid(const Grid &grid, bool updateVertices)
 		}
 	}
 
-	// Determing border and sub-border positions amongst candidate border positions.
+	// Determine border and sub-border positions amongst candidate border positions.
 	for(const auto &position : candidateBorderPositions)
 	{
 		if(isBorder(position))
@@ -194,7 +194,7 @@ void Grid::addGrid(const Grid &grid, bool updateVertices)
 		}
 	}
 
-	// JUST AN IDEA WHAT TO DO FOR DIFFERENTIATING GAME FROM MAP MAKER HANDLING OF GRIDS
+	// Determine whether to upgrade grid straight away or defer for later.
 	if(updateVertices)
 	{
 		calculateVertices();
@@ -586,7 +586,6 @@ Grid loadTerritoryGrid(std::ifstream &file)
 
 	Grid grid(defaultColor, positions);
 	grid.calculateCenter();
-	grid.initBorders();
 
 	return grid;
 }
