@@ -70,6 +70,11 @@ void Game::update()
 	// Waiting for human player to end their turn.
 	if(humanPlayerTurn)
 	{
+		// Iterate through all players, updating their realms vertex arrays if thier realm changed.
+		for(auto &player : players)
+		{
+			player.get()->getRealm().getEstateManager().updateGrid();
+		}
 		return;
 	}
 

@@ -1,15 +1,7 @@
-﻿  Grid.cpp
-d:\projects\risktypegame\risktypegame\grid.cpp(455): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\grid.cpp(455): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\grid.cpp(486): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
-d:\projects\risktypegame\risktypegame\grid.cpp(507): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
-d:\projects\risktypegame\risktypegame\grid.cpp(595): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\grid.cpp(595): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\grid.cpp(596): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\grid.cpp(596): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+﻿  Game.cpp
   Generating code
-  10 of 9372 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 9372 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    28 functions had inline decision re-evaluated but remain unchanged
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Release\RiskTypeGame.exe
