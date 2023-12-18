@@ -34,11 +34,11 @@ sf::Vector2f Port::determineSpritePosition(const LandTerritory &landTerritory, c
 
 	// Positions within land territory that border naval territory.
 	// The sprite of the port will lie on one of these positions.
-	std::vector<sf::Vector2f> borderingPositions = landTerritory.getGrid().getNeighbouringBorderPositions(navalTerritory.getGrid());
+	std::unordered_set<sf::Vector2f, Vector2fHash> borderingPositions = landTerritory.getGrid().getNeighbouringBorderPositions(navalTerritory.getGrid());
 
 	// Calculate average position of border positions.
 	sf::Vector2f averagePosition;
-	for(sf::Vector2f position : borderingPositions)
+	for(const sf::Vector2f &position : borderingPositions)
 	{
 		averagePosition.x += position.x;
 		averagePosition.y += position.y;
@@ -48,7 +48,7 @@ sf::Vector2f Port::determineSpritePosition(const LandTerritory &landTerritory, c
 
 	// Determine the closest bordering position to the average position of all bordering points.
 	// This position is our choice for the sprite position.
-	sf::Vector2f closestPosition = borderingPositions[0];
+	sf::Vector2f closestPosition = *borderingPositions.begin();
 	float closestMetric = std::pow(std::abs(closestPosition.x - averagePosition.x), 2) + std::pow(std::abs(closestPosition.y - averagePosition.y), 2);
 	for(sf::Vector2f position : borderingPositions)
 	{

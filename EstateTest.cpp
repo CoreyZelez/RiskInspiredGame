@@ -29,8 +29,8 @@ void EstateTest::testBaronyYield()
 	Grid landGrid(landPositions);
 	Grid navalGrid(navalPositions);
 	// Ensure territories adjacent for successful port creation.
-	landGrid.addSquare(sf::Vector2i(0, 0));
-	navalGrid.addSquare(sf::Vector2i(1, 0));
+	landGrid.addPosition(sf::Vector2i(0, 0));
+	navalGrid.addPosition(sf::Vector2i(1, 0));
 	LandTerritory landTerritory(landID, landGrid);
 	NavalTerritory navalTerritory(navalID, navalGrid);
 	std::vector<Territory*> territories = { &navalTerritory };

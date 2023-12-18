@@ -24,6 +24,17 @@ public:
 	// Constructor for testing purposes. Ensures grid contains border positions.
 	explicit Grid(std::unordered_set<sf::Vector2i, Vector2iHash> borderPositions);
 
+	///////////////////////
+	// CAN WE ADD THIS TO THE CONSTRUCTOR(S) I THINK WE CAN!!!!!!
+	//
+	//
+	//
+	void initBorders();
+	//
+	//
+	//
+	/////////////
+
 	virtual void saveToFile(std::ofstream &file) const;
 
 	// WORK TO REMOVE THIS. SHOULD COMBINE ALL VERTEX ARRAYS FROM EACH GRID INTO SINGLE VERTEX ARRAY AND DRAW THAT.
@@ -36,21 +47,22 @@ public:
 	void setBorderMode(BorderMode borderMode);
 
 	// Adds parameter grid positions to this grids positions.
-	void addGrid(const Grid &grid);  
+	void addGrid(const Grid &grid, bool updateVertices = true);
 
 	// Removes parameter grid positions from this grids positions.
-	void removeGrid(const Grid &grid);  
+	void removeGrid(const Grid &grid, bool updateVertices = true);
 
-	// Adds grid square at position in world.
-	void addSquare(sf::Vector2i gridPosition);
+	// Adds grid square at position in world. Should only be used by mapmaker.
+	// Additionally requires subBorderPositions is empty
+	void addPosition(sf::Vector2i gridPosition, bool updateVertices = true);
 
 	// Removes grid square at position in world. Returns true if a square is removed.
-	bool removeSquare(sf::Vector2f position);  
+	bool removeSquare(sf::Vector2f position, bool updateVertices = true);
 
 	bool sharesBorder(const Grid &grid) const;
 
 	// Returns world coordinates of positions that lie on border with specified grid.
-	std::vector<sf::Vector2f> getNeighbouringBorderPositions(const Grid &grid) const;
+	std::unordered_set<sf::Vector2f, Vector2fHash> getNeighbouringBorderPositions(const Grid &grid) const;
 
 	// Returns grid positions.
 	std::unordered_set<sf::Vector2i, Vector2iHash> getPositions() const;
@@ -64,12 +76,11 @@ public:
 	void setColor(sf::Color color);
 
 	void calculateCenter();  
-	// Borders are added to subBorders. 
-	void addBordersToSubBorders();  // Necessary for calculating adjacencies efficiently.
 
 private:
 	std::unordered_set<sf::Vector2i, Vector2iHash> positions;  // Positions on map grid occupys. 
-	std::unordered_set<sf::Vector2i, Vector2iHash> borderAndSubBorderPositions;  // Positions that form sub border or border.
+	std::unordered_set<sf::Vector2i, Vector2iHash> subBorderPositions;  // Positions that form sub border or border.
+	std::unordered_set<sf::Vector2i, Vector2iHash> borderPositions;  // Positions that form sub border or border.
 	sf::Vector2i center;  // Center position in game world.
 	sf::VertexArray vertices;
 	sf::Color color;
@@ -77,6 +88,7 @@ private:
 
 	bool isBorder(sf::Vector2i position) const;  // Returns true if grid position on grid border.
 	void calculateVertices();  // Calculates vertices for vertex array from square positions.
+	std::vector<sf::Vector2i> getAdjacentPositions() const;  // Returns positions adjacent to border positions not contained in grid.
 };
 
 Grid loadTerritoryGrid(std::ifstream &file);
@@ -84,5 +96,7 @@ Grid loadTerritoryGrid(std::ifstream &file);
 sf::Vector2i calculateGridCoordinates(const sf::Vector2f &position);
 // Converts vector world position to grid position.
 sf::Vector2f calculateWorldCoordinates(const sf::Vector2i &position);  
+
+std::vector<sf::Vector2i> calculateAdjacentPositions(const sf::Vector2i &position);
 
 

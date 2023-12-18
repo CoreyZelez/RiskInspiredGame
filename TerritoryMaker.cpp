@@ -253,7 +253,7 @@ void TerritoryMaker::addPosition(const sf::RenderWindow & window)
 		{
 			if(claimedPositions.count(position) == 0)
 			{
-				selectedTerritory->getGrid().addSquare(position);
+				selectedTerritory->getGrid().addPosition(position);
 				claimedPositions.insert(position);
 			}
 		}

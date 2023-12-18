@@ -22,17 +22,21 @@ Grid::Grid(sf::Color color)
 
 Grid::Grid(sf::Color color,
 	std::unordered_set<sf::Vector2i, Vector2iHash> positions)
-	: color(color), positions(positions), borderAndSubBorderPositions(50)
+	: color(color), positions(positions)
 {
-	assert(this->positions.bucket_count() >= 500);
+	initBorders();
 	calculateVertices();
 }
 
+
+//
+///
+// WTF IS THIS CONSTRUCTOR?
+//
+// FIND WHERE IT IS USED IF AT ALL!!!
 Grid::Grid(std::unordered_set<sf::Vector2i, Vector2iHash> borderPositions)
-	: color(sf::Color::White)
+	: color(sf::Color::White), positions(borderPositions), borderPositions(borderPositions)
 {
-	positions = borderPositions;
-	borderAndSubBorderPositions = borderPositions;
 }
 
 void Grid::saveToFile(std::ofstream &file) const
@@ -63,22 +67,13 @@ const sf::VertexArray& Grid::getVertexArray() const
 
 bool Grid::sharesBorder(const Grid &grid) const
 {
-	for(const sf::Vector2i &position : borderAndSubBorderPositions)
+	for(const sf::Vector2i &position : borderPositions)
 	{
-		sf::Vector2i l = sf::Vector2i(position.x - 1, position.y);
-		sf::Vector2i r = sf::Vector2i(position.x + 1, position.y);
-		sf::Vector2i u = sf::Vector2i(position.x, position.y - 1);
-		sf::Vector2i d = sf::Vector2i(position.x, position.y + 1);
-		sf::Vector2i lu = sf::Vector2i(position.x - 1, position.y - 1);
-		sf::Vector2i ld = sf::Vector2i(position.x - 1, position.y + 1);
-		sf::Vector2i ru = sf::Vector2i(position.x + 1, position.y - 1);
-		sf::Vector2i rd = sf::Vector2i(position.x + 1, position.y + 1);
-
-		std::vector<sf::Vector2i> adjacentPositions = { l, r, u, d, lu, ld, ru, rd };
+		std::vector<sf::Vector2i> adjacentPositions = calculateAdjacentPositions(position);
 
 		for(const sf::Vector2i &adjacentPosition : adjacentPositions)
 		{
-			if(grid.borderAndSubBorderPositions.count(adjacentPosition) == 1)
+			if(grid.borderPositions.count(adjacentPosition) == 1)
 			{
 				return true;
 			}
@@ -87,25 +82,18 @@ bool Grid::sharesBorder(const Grid &grid) const
 	return false;
 }
 
-std::vector<sf::Vector2f> Grid::getNeighbouringBorderPositions(const Grid &grid) const
+std::unordered_set<sf::Vector2f, Vector2fHash> Grid::getNeighbouringBorderPositions(const Grid &grid) const
 {
-	std::vector<sf::Vector2i> borderPositions = {};
-	for(auto position = borderAndSubBorderPositions.cbegin(); position != borderAndSubBorderPositions.cend(); ++position)
+	std::unordered_set<sf::Vector2i, Vector2iHash> neighbouringBorderPositions = {};
+	for(auto position = borderPositions.cbegin(); position != borderPositions.cend(); ++position)
 	{
-		sf::Vector2i l(position->x - 1, position->y);
-		sf::Vector2i r(position->x + 1, position->y);
-		sf::Vector2i u(position->x, position->y - 1);
-		sf::Vector2i d(position->x, position->y + 1);
-		sf::Vector2i lu(position->x - 1, position->y - 1);
-		sf::Vector2i ru(position->x + 1, position->y - 1);
-		sf::Vector2i ld(position->x - 1, position->y + 1);
-		sf::Vector2i rd(position->x + 1, position->y + 1);
-		std::vector<sf::Vector2i> adjacentPositions = { l, u, r, d, lu, ru, ld, rd };
+		std::vector<sf::Vector2i> adjacentPositions = calculateAdjacentPositions(*position);
+
 		for(sf::Vector2i position : adjacentPositions)
 		{
-			if(grid.borderAndSubBorderPositions.count(position) == 1)
+			if(grid.borderPositions.count(position) == 1)
 			{
-				borderPositions.push_back(position);
+				neighbouringBorderPositions.insert(position);
 				break;
 			}
 			else
@@ -117,12 +105,12 @@ std::vector<sf::Vector2f> Grid::getNeighbouringBorderPositions(const Grid &grid)
 	}
 
 	// Convert positions to global coordinates.
-	std::vector<sf::Vector2f> borderCoordinates = {};
-	for(sf::Vector2i position : borderPositions)
+	std::unordered_set<sf::Vector2f, Vector2fHash> neighbouringBorderCoordinates = {};
+	for(const sf::Vector2i &position : neighbouringBorderPositions)
 	{
-		borderCoordinates.push_back(calculateWorldCoordinates(position));
+		neighbouringBorderCoordinates.insert(calculateWorldCoordinates(position));
 	}
-	return borderCoordinates;
+	return neighbouringBorderCoordinates;
 }
 
 std::unordered_set<sf::Vector2i, Vector2iHash> Grid::getPositions() const
@@ -152,50 +140,152 @@ void Grid::setBorderMode(BorderMode borderMode)
 	setColor(color);  // Updates grid with no border mode.
 }
 
-void Grid::addGrid(const Grid &grid)
+void Grid::addGrid(const Grid &grid, bool updateVertices)
 {
+	// Border positions from parameter grid that may possibly be border positions of this grid once added.
+	std::vector<sf::Vector2i> candidateBorderPositions = {};
+	// Iterate through positions determining sub-border positions and candidate border positions.
 	for(auto iter = grid.positions.cbegin(); iter != grid.positions.cend(); ++iter)
 	{
 		positions.insert(*iter);
-
-		if(grid.borderAndSubBorderPositions.count(*iter) > 0 || grid.isBorder(*iter))
+		// Only a border position of parameter grid can become border position of this grid.
+		if(grid.borderPositions.count(*iter) == 1)
 		{
-			borderAndSubBorderPositions.insert(*iter);
+			candidateBorderPositions.push_back(*iter);
+		}
+		else if(grid.subBorderPositions.count(*iter) == 1)
+		{
+			subBorderPositions.insert(*iter);
 		}
 	}
 
-	calculateVertices();
-}
-
-void Grid::removeGrid(const Grid &grid)
-{
-	for(auto position : grid.positions)
+	// Determing border and sub-border positions amongst candidate border positions.
+	for(const auto &position : candidateBorderPositions)
 	{
-		positions.erase(position);
+		if(isBorder(position))
+		{
+			borderPositions.insert(position);
+		}
+		else
+		{
+			subBorderPositions.insert(position);
+		}
 	}
-	calculateVertices();
-}
 
-void Grid::addSquare(sf::Vector2i gridPosition)
-{
-	// Add grid position if not contained in set.
-	if(positions.count(gridPosition) == 0)
+	// Transfer border positions that become sub-border positions due to added grid.
+	const std::vector<sf::Vector2i> potentialBorderToSubBorderPositions = grid.getAdjacentPositions();
+	for(const sf::Vector2i &candidatePosition : potentialBorderToSubBorderPositions)
 	{
-		positions.emplace(gridPosition);
+		// Determine where the candidate position is currently classified as a border position.
+		if(borderPositions.count(candidatePosition) == 1)
+		{
+			// Transfer the position if it is no longer a border position.
+			if(!isBorder(candidatePosition))
+			{
+				borderPositions.erase(candidatePosition);
+				subBorderPositions.insert(candidatePosition);
+			}
+		}
+	}
+
+	// JUST AN IDEA WHAT TO DO FOR DIFFERENTIATING GAME FROM MAP MAKER HANDLING OF GRIDS
+	if(updateVertices)
+	{
 		calculateVertices();
 	}
 }
 
-bool Grid::removeSquare(sf::Vector2f position)
+void Grid::removeGrid(const Grid &grid, bool updateVertices)
 {
+	for(const sf::Vector2i &position : grid.positions)
+	{
+		positions.erase(position);
+		subBorderPositions.erase(position);
+		borderPositions.erase(position);
+	}
+
+	// Transfer sub-border positions that become border positions due to removed grid.
+	const std::vector<sf::Vector2i> potentialSubBorderToBorderPositions = grid.getAdjacentPositions();
+	for(const sf::Vector2i &candidatePosition : potentialSubBorderToBorderPositions)
+	{
+		// Determine where the candidate position is currently classified as a border position.
+		if(subBorderPositions.count(candidatePosition) == 1)
+		{
+			// Transfer the position if it is no longer a border position.
+			if(isBorder(candidatePosition))
+			{
+				subBorderPositions.erase(candidatePosition);
+				borderPositions.insert(candidatePosition);
+			}
+		}
+	}
+
+	// JUST AN IDEA WHAT TO DO FOR DIFFERENTIATING GAME FROM MAP MAKER HANDLING OF GRIDS
+	if(updateVertices)
+	{
+		calculateVertices();
+	}
+
+}
+
+void Grid::addPosition(sf::Vector2i gridPosition, bool updateVertices)
+{
+	assert(subBorderPositions.size() == 0);
+	// Add grid position if not contained in set.
+	if(positions.count(gridPosition) == 0)
+	{
+		positions.insert(gridPosition);
+		if(isBorder(gridPosition))
+		{
+			borderPositions.insert(gridPosition);
+		}
+
+		// Convert border positions adjacent to position to non-border positions if necessary.
+		std::vector<sf::Vector2i> adjacencies = calculateAdjacentPositions(gridPosition);
+		for(const sf::Vector2i &adjacency : adjacencies)
+		{
+			if(borderPositions.count(adjacency) == 1 && !isBorder(adjacency))
+			{
+				borderPositions.erase(adjacency);
+			}
+		}
+
+		if(updateVertices)
+		{
+			calculateVertices();
+		}
+	}
+}
+
+
+bool Grid::removeSquare(sf::Vector2f position, bool updateVertices)
+{
+	assert(subBorderPositions.size() == 0);
+
 	sf::Vector2i gridPosition = calculateGridCoordinates(position);
 	// Erase position and recalculate vertices and center if successful.
 	if (positions.erase(gridPosition) == 1)
 	{
-		borderAndSubBorderPositions.erase(gridPosition);
-		calculateVertices(); 
+		borderPositions.erase(gridPosition);
+
+		// Convert ordinary positions adjacent to position to border positions if necessary.
+		std::vector<sf::Vector2i> adjacencies = calculateAdjacentPositions(gridPosition);
+		for(const sf::Vector2i &adjacency : adjacencies)
+		{
+			if(positions.count(adjacency) == 1 && borderPositions.count(adjacency) == 0 && isBorder(adjacency))
+			{
+				borderPositions.insert(adjacency);
+			}
+		}
+
+		if(updateVertices)
+		{
+			calculateVertices();
+		}
+
 		return true;
 	}
+
 	return false;
 }
 
@@ -205,13 +295,14 @@ void Grid::setColor(sf::Color color)
 	calculateVertices();
 }
 
-void Grid::addBordersToSubBorders()
+void Grid::initBorders()
 {
+	assert(borders.size() == 0);
 	for(auto position : positions)
 	{
 		if(isBorder(position))
 		{
-			borderAndSubBorderPositions.insert(position);
+			borderPositions.insert(position);
 		}
 	}
 }
@@ -220,21 +311,7 @@ bool Grid::isBorder(sf::Vector2i position) const
 {
 	assert(positions.count(position) == 1);
 
-	sf::Vector2i l = position + sf::Vector2i(-1, 0);
-	sf::Vector2i r = position + sf::Vector2i(1, 0);
-	sf::Vector2i u = position + sf::Vector2i(0, -1);
-	sf::Vector2i d = position + sf::Vector2i(0, 1);
-	sf::Vector2i lu = position + sf::Vector2i(-1, -1);
-	sf::Vector2i ld = position + sf::Vector2i(-1, 1);
-	sf::Vector2i ru = position + sf::Vector2i(1, -1);
-	sf::Vector2i rd = position + sf::Vector2i(1, 1);
-	std::vector<sf::Vector2i> adjacentPositions = { l, r, u, d, lu, ld, ru, rd };
-
-	////// Using parallel algorithm to check adjacent positions in parallel
-	////return std::any_of(std::execution::par, adjacentPositions.begin(), adjacentPositions.end(), [this](const sf::Vector2i& pos) 
-	////{
-	////	return positions.count(pos) == 0;
-	////});
+	std::vector<sf::Vector2i> adjacentPositions = calculateAdjacentPositions(position);
 
 	for(const sf::Vector2i &position : adjacentPositions)
 	{
@@ -381,7 +458,7 @@ void Grid::calculateVertices()
 		// define the 6 matching texture coordinates
 		// We check that it is in borderAndSubBorderPositions first as it is cheaper than checking isBorder.
 		if((borderMode == BorderMode::feintBorders || borderMode == BorderMode::darkBorders) 
-			&& borderAndSubBorderPositions.count(position) > 0 && isBorder(position))
+			&& borderPositions.count(position) == 1)
 		{
 			if(borderMode == BorderMode::feintBorders)
 			{
@@ -404,7 +481,7 @@ void Grid::calculateVertices()
 				triangles[5].color = borderColor;
 			}
 		}
-		else if(borderMode == BorderMode::darkBorders && borderAndSubBorderPositions.count(position) > 0)
+		else if(borderMode == BorderMode::darkBorders && subBorderPositions.count(position) == 1)
 		{
 			const sf::Color borderColor(color.r * 0.4, color.g * 0.4, color.b * 0.4);
 			triangles[0].color = borderColor;
@@ -428,9 +505,36 @@ void Grid::calculateVertices()
 	}
 }
 
+std::vector<sf::Vector2i> Grid::getAdjacentPositions() const
+{
+	// Adjacent positions to this grid.
+	std::vector<sf::Vector2i> adjacencies;
+	for(const sf::Vector2i &position : positions)
+	{
+		sf::Vector2i l = sf::Vector2i(position.x - 1, position.y);
+		sf::Vector2i r = sf::Vector2i(position.x + 1, position.y);
+		sf::Vector2i u = sf::Vector2i(position.x, position.y - 1);
+		sf::Vector2i d = sf::Vector2i(position.x, position.y + 1);
+		sf::Vector2i lu = sf::Vector2i(position.x - 1, position.y - 1);
+		sf::Vector2i ld = sf::Vector2i(position.x - 1, position.y + 1);
+		sf::Vector2i ru = sf::Vector2i(position.x + 1, position.y - 1);
+		sf::Vector2i rd = sf::Vector2i(position.x + 1, position.y + 1);
+
+		std::vector<sf::Vector2i> candidateAdjacencies = { l, r, u, d, lu, ld, ru, rd };
+		for(sf::Vector2i &candidateAdjacency : candidateAdjacencies)
+		{
+			if(positions.count(candidateAdjacency) == 0)
+			{
+				adjacencies.push_back(candidateAdjacency);
+			}
+		}
+	}
+	return adjacencies;
+}
+
 Grid loadTerritoryGrid(std::ifstream &file)
 {
-	std::unordered_set<sf::Vector2i, Vector2iHash> positions(500);
+	std::unordered_set<sf::Vector2i, Vector2iHash> positions;
 
 	std::string line;
 	int num1;
@@ -461,9 +565,7 @@ Grid loadTerritoryGrid(std::ifstream &file)
 
 	Grid grid(defaultColor, positions);
 	grid.calculateCenter();
-
-	// Necessary for efficient computation of adjacencies.
-	grid.addBordersToSubBorders();
+	grid.initBorders();
 
 	return grid;
 }
@@ -480,4 +582,18 @@ sf::Vector2f calculateWorldCoordinates(const sf::Vector2i & position)
 	const float x = position.x * GRID_SQUARE_SIZE + (GRID_SQUARE_SIZE / 2);
 	const float y = position.y * GRID_SQUARE_SIZE + (GRID_SQUARE_SIZE / 2);
 	return sf::Vector2f(x, y);
+}
+
+std::vector<sf::Vector2i> calculateAdjacentPositions(const sf::Vector2i &position)
+{
+	sf::Vector2i l = sf::Vector2i(position.x - 1, position.y);
+	sf::Vector2i r = sf::Vector2i(position.x + 1, position.y);
+	sf::Vector2i u = sf::Vector2i(position.x, position.y - 1);
+	sf::Vector2i d = sf::Vector2i(position.x, position.y + 1);
+	sf::Vector2i lu = sf::Vector2i(position.x - 1, position.y - 1);
+	sf::Vector2i ld = sf::Vector2i(position.x - 1, position.y + 1);
+	sf::Vector2i ru = sf::Vector2i(position.x + 1, position.y - 1);
+	sf::Vector2i rd = sf::Vector2i(position.x + 1, position.y + 1);
+
+	return { l, r, u, d, lu, ld, ru, rd };
 }

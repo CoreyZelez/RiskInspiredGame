@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <set>
+#include <mutex>
 
 class Player;
 class Game;
@@ -56,6 +57,14 @@ private:
 	Player &player;
 	Game &game;
 	int maxDist = 13;
+
+	void getIndividualArmyBorderDistances(std::unique_ptr<LandArmy>& army,
+		std::unordered_map<std::pair<const Territory*, int>, std::vector<LandArmy*>, PairTerritoryIntHash>& armyBorderDistances,
+		const std::unordered_set<const Territory*>& borderTerritories, int maxDist, std::mutex &mutex);
+
+	void getIndividualFleetBorderDistances(std::unique_ptr<NavalFleet>& fleet,
+		std::unordered_map<std::pair<const Territory*, int>, std::vector<NavalFleet*>, PairTerritoryIntHash>& fleetBorderDistances,
+		const std::unordered_set<const Territory*>& borderTerritories, int maxDist, std::mutex &mutex);
 };
 
 // Returns the distance between the two territories using bfs strictly traversing only
