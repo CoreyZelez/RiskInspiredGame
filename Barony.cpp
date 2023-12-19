@@ -114,8 +114,12 @@ std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 
 void Barony::receiveBonusYield(const float &bonus)
 {
-	cumulativeLandArmy += landArmyYield * bonus;
-	cumulativeNavalFleet += navalFleetYield * bonus;
+	// Yield all land army units as reinforcements.
+	const float armyReinforcements = landArmyYield * bonus;
+	getRuler()->getMilitaryManager().addArmyReinforcements(armyReinforcements);
+
+	const float fleetYield = navalFleetYield * bonus;
+	cumulativeNavalFleet += fleetYield;
 }
 
 std::string Barony::getSaveLabel() const

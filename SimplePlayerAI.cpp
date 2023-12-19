@@ -482,6 +482,11 @@ void SimplePlayerAI::executeFleetMoveOrders(const std::map<Territory*, int>& str
 				// In future prioritise border territories!!!
 				const float moveRatio = 0.7;
 				int moveStrength = freeToMove[&fleet] * moveRatio;
+				// Ensure move strength not 0 if any amount of army is free to move.
+				if(moveStrength == 0 && freeToMove[&fleet] <= 2)
+				{
+					moveStrength = freeToMove[&fleet];
+				}
 				const int maximumAllocation = strategicValue / strategicValuePerUnit;
 				// Move strength is capped by maximum allocation amount derived from territory priority.
 				moveStrength = std::min(moveStrength, maximumAllocation);
