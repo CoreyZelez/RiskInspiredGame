@@ -165,7 +165,8 @@ void MilitaryManager::resetStaminas()
 
 void MilitaryManager::distributeArmyReinforcements()
 {
-	const int totalReinforcement = armyReinforcements;
+	// Number of reinforcements available prior to allocation.
+	const int totalReinforcementAmount = armyReinforcements;
 	const int totalArmyStrength = getTotalArmyStrength();
 
 	// Allocates reinforcements to armies.
@@ -178,8 +179,9 @@ void MilitaryManager::distributeArmyReinforcements()
 		assert(army.get()->getTotalStrength() > 0);
 
 		// Allocate reinforcement to armies proportionate to their strength.
-		const double strengthRatio = army.get()->getTotalStrength() / totalArmyStrength;
-		const int reinforcementAmount = totalReinforcement * strengthRatio;
+		const float strengthRatio = (float)army.get()->getTotalStrength() / (float)totalArmyStrength;
+		int reinforcementAmount = (float)totalReinforcementAmount * strengthRatio;
+		reinforcementAmount = std::max(reinforcementAmount, (int)armyReinforcements);
 		armyReinforcements -= reinforcementAmount;
 		assert(armyReinforcements >= 0);
 		army.get()->increaseStrength(reinforcementAmount);
