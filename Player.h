@@ -28,8 +28,8 @@ public:
 
 private:
 	Game &game;
+	std::unique_ptr<PlayerAIComponent> AIComponent;
 	MilitaryManager militaryManager;
 	Realm realm;
-	std::unique_ptr<PlayerAIComponent> AIComponent;
 	bool isHuman = false;
 };

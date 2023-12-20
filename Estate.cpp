@@ -317,7 +317,7 @@ void Estate::receiveBonusYield(const float &bonus)
 	for(auto &subfief : subfiefs)
 	{
 		// Only provides bonus yield to subfief if owner is this ruler or a (direct or indirect) vassal of this ruler.
-		if(subfief->ruler == ruler || subfief->ruler->getRealm().getRelationshipManager().isVassal(*ruler, false))
+		if(subfief->ruler == ruler || subfief->ruler->getRealm().isVassal(*ruler, false))
 		{
 			subfief->receiveBonusYield(bonus);
 		}
@@ -349,10 +349,10 @@ void Estate::setRuler(Player *ruler)
 		return;
 	}
 
-	// Remove fief from previous ruler.
+	// Remove estate from previous ruler.
 	if(this->ruler != nullptr)
 	{
-		this->ruler->getRealm().getEstateManager().removeFief(this);
+		this->ruler->getRealm().removeEstate(this);
 	}
 
 	// Change ruler of estate.
@@ -361,7 +361,7 @@ void Estate::setRuler(Player *ruler)
 	// Add fief to new ruler.
 	if(this->ruler != nullptr)
 	{
-		this->ruler->getRealm().getEstateManager().addFief(this);
+		this->ruler->getRealm().addEstate(this);
 	}
 
 	// Tell upper estate(s) to check whether uppermost liege of ruler (possibly ruler themselves) should gain control of it.
@@ -409,7 +409,7 @@ void Estate::handleRevocation()
 	// Revokes estate if any subfief of estate is not apart of ruler's realm.
 	for(const Estate *subfief : subfiefs)
 	{
-		if(subfief->ruler == nullptr || &subfief->ruler->getRealm().getRelationshipManager().getUpperRealmRuler())
+		if(subfief->ruler == nullptr || &subfief->ruler->getRealm().getUpperRealmRuler())
 		{
 			setRuler(nullptr);
 			break;
@@ -422,8 +422,8 @@ Player* Estate::getLowerEstatesUpperRealmRuler()
 	if(subfiefs.size() == 0)
 	{
 		assert(ruler != nullptr);  // All lowest level estates should have a ruler (in current game design).
-		assert(&ruler->getRealm().getRelationshipManager().getUpperRealmRuler() != nullptr);
-		return &ruler->getRealm().getRelationshipManager().getUpperRealmRuler();
+		assert(&ruler->getRealm().getUpperRealmRuler() != nullptr);
+		return &ruler->getRealm().getUpperRealmRuler();
 	}
 
 	// Check that subfiefs have a ruler. If not, impossible for all lower estates to belong to same realm.
@@ -472,7 +472,7 @@ void Estate::handleLowerEstateChange(const Estate &subfief)
 		handleRevocation();
 	}
 	// This estate already apart of same upper realm.
-	else if(ruler->getRealm().getRelationshipManager().sameUpperRealm(*subfief.ruler))
+	else if(ruler->getRealm().sameUpperRealm(*subfief.ruler))
 	{
 		// Do nothing.
 	}

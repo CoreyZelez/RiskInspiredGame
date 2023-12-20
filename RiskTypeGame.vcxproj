@@ -210,8 +210,9 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Port.cpp" />
     <ClCompile Include="Realm.cpp" />
-    <ClCompile Include="RealmEstateManager.cpp" />
-    <ClCompile Include="RealmRelationshipManager.cpp" />
+    <ClCompile Include="PlayerEstateManager.cpp" />
+    <ClCompile Include="RealmGrid.cpp" />
+    <ClCompile Include="VassalManager.cpp" />
     <ClCompile Include="ReconcileLandedEstates.cpp" />
     <ClCompile Include="RichText.cpp" />
     <ClCompile Include="RiskTypeGame.cpp" />
@@ -271,8 +272,9 @@
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Port.h" />
     <ClInclude Include="Realm.h" />
-    <ClInclude Include="RealmEstateManager.h" />
-    <ClInclude Include="RealmRelationshipManager.h" />
+    <ClInclude Include="PlayerEstateManager.h" />
+    <ClInclude Include="RealmGrid.h" />
+    <ClInclude Include="VassalManager.h" />
     <ClInclude Include="ReconcileLandedEstates.h" />
     <ClInclude Include="RichText.h" />
     <ClInclude Include="SimplePlayerAI.h" />

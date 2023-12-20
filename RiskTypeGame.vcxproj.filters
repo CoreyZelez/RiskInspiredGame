@@ -258,12 +258,6 @@
     <ClCompile Include="SimplePlayerAI.cpp">
       <Filter>Source Files\Game\Player\AI</Filter>
     </ClCompile>
-    <ClCompile Include="RealmEstateManager.cpp">
-      <Filter>Source Files\Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="RealmRelationshipManager.cpp">
-      <Filter>Source Files\Game\Player</Filter>
-    </ClCompile>
     <ClCompile Include="LandTerritoryOccupancy.cpp">
       <Filter>Source Files\Game\Territory</Filter>
     </ClCompile>
@@ -305,6 +299,15 @@
     </ClCompile>
     <ClCompile Include="HashFunctions.cpp">
       <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerEstateManager.cpp">
+      <Filter>Source Files\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="VassalManager.cpp">
+      <Filter>Source Files\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="RealmGrid.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -449,12 +452,6 @@
     <ClInclude Include="UIPanel.h">
       <Filter>Header Files\User Interface\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="RealmRelationshipManager.h">
-      <Filter>Header Files\Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="RealmEstateManager.h">
-      <Filter>Header Files\Game\Player</Filter>
-    </ClInclude>
     <ClInclude Include="AIPersonality.h">
       <Filter>Header Files\Game\Player\AI</Filter>
     </ClInclude>
@@ -511,6 +508,15 @@
     </ClInclude>
     <ClInclude Include="HashFunctions.h">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerEstateManager.h">
+      <Filter>Header Files\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="VassalManager.h">
+      <Filter>Header Files\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="RealmGrid.h">
+      <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -39,6 +39,7 @@ public:
 	// Provides bonus yields to subfiefs. Yield dependant on title.
 	virtual void provideSubfiefBonusYields();
 
+	// Changes the ruler of this estate, making necessary adjustments to realms of involved players.
 	void setRuler(Player *ruler);
 
 	void addSubfief(Estate *subfief);

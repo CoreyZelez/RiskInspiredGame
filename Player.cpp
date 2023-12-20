@@ -19,7 +19,7 @@ Player::Player(Game& game)
 void Player::handleTurn()
 {
 	militaryManager.update();
-	realm.getEstateManager().handleFiefYields();
+	realm.handleMilitaryYields();
 
 	if(!isHuman)
 	{

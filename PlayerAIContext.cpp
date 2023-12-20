@@ -16,7 +16,7 @@ PlayerAIContext::PlayerAIContext(Player &player, Game &game)
 
 std::vector<Territory*> PlayerAIContext::getBorderTerritories()
 {
-	std::set<Territory*> &realmTerritories = player.getRealm().getEstateManager().getTerritories();
+	const std::unordered_set<Territory*> realmTerritories = player.getRealm().getTerritories();
 	std::vector<Territory*> borderTerritories = {};
 
 	for(Territory* territory : realmTerritories)

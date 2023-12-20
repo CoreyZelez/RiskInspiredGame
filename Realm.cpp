@@ -9,20 +9,18 @@
 #include <assert.h>
 #include <iostream>
 
-Realm::Realm(Player &player)
-	: player(player), estateManager(player.getMilitaryManager()), relationshipManager(player)
+Realm::Realm(Player &ruler)
+	: ruler(ruler), rulerEstateManager(realmGrid, ruler.getMilitaryManager()), vassalManager(ruler, realmGrid)
 {
 }
 
 void Realm::draw(sf::RenderWindow &window) const
 {
+	realmGrid.draw(window);
+	// Draw vassal realms on over entire realm grid if specified.
 	if(drawVassalRealms)
 	{
-		relationshipManager.drawVassalRealms(window);
-	}
-	else
-	{
-		estateManager.draw(window);
+		vassalManager.drawVassalRealms(window);
 	}
 }
 
@@ -38,7 +36,7 @@ std::unique_ptr<UIEntity> Realm::getUI(UIType type) const
 		nameText << sf::Text::Regular << sf::Color::White << "Name: "
 			<< sf::Color::Yellow << "tempName";
 
-		std::map<Title, int> titleCounts = estateManager.getTitleCounts();
+		std::map<Title, int> titleCounts = getTitleCounts();
 
 		// Barony count text.
 		sfe::RichText baronyCntText(font);
@@ -90,25 +88,127 @@ std::unique_ptr<UIEntity> Realm::getUI(UIType type) const
 	return nullptr;
 }
 
-RealmEstateManager& Realm::getEstateManager()
+void Realm::handleMilitaryYields()
 {
-	return estateManager;
+	rulerEstateManager.handleMilitaryYields();
+	// vassalManager.handleMililtaryYields();
 }
 
-const RealmEstateManager& Realm::getEstateManager() const
+bool Realm::isVassal(const Player &player, bool direct) const
 {
-	return estateManager;
+	if(liege == &player)
+	{
+		return true;
+	}
+
+	// Don't check vassals if determining whether this->ruler is a direct vassal.
+	if(direct)
+	{
+		return false;
+	}
+
+	// Check if this->ruler is vassal of players vassals.
+	for(const Player *vassal : player.getRealm().vassalManager.getVassals())
+	{
+		if(isVassal(*vassal, false))
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
-RealmRelationshipManager& Realm::getRelationshipManager()
+bool Realm::sameUpperRealm(const Player &player) const
 {
-	return relationshipManager;
+	const Player &upperLiege1 = player.getRealm().getUpperRealmRuler();
+	const Player &upperLiege2 = ruler.getRealm().getUpperRealmRuler();
+	return &upperLiege1 == &upperLiege2;
 }
 
-const RealmRelationshipManager & Realm::getRelationshipManager() const
+Player& Realm::getUpperRealmRuler()
 {
-	return relationshipManager;
+	Player *upperLiege = &ruler;
+	while(upperLiege->getRealm().liege != nullptr)
+	{
+		upperLiege = liege;
+	}
+	return *upperLiege;
 }
+
+const Player & Realm::getUpperRealmRuler() const
+{
+	const Player *upperLiege = &ruler;
+	while(upperLiege->getRealm().liege != nullptr)
+	{
+		upperLiege = liege;
+	}
+	return *upperLiege;
+}
+
+void Realm::addEstate(Estate *estate)
+{
+	// TEMPORARY FUNCTION IMPLEMENTATION. IN FUTURE MUST CONSIDER VASSALS!!!
+	rulerEstateManager.addEstate(estate);
+}
+
+void Realm::removeEstate(Estate *estate)
+{
+	// TEMPORARY FUNCTION IMPLEMENTATION. IN FUTURE MUST CONSIDER VASSALS!!!
+	rulerEstateManager.removeEstate(estate);
+}
+
+std::unordered_set<Territory*> Realm::getTerritories()
+{
+	std::unordered_set<Territory*> realmTerritories;
+	const std::unordered_set<Territory*> &rulerTerritories = rulerEstateManager.getTerritories(); 
+	const std::unordered_set<Territory*> &vassalTerritories = vassalManager.getTerritories();
+	realmTerritories = rulerTerritories;
+	realmTerritories.insert(vassalTerritories.begin(), vassalTerritories.end());
+	return realmTerritories;
+}
+
+void Realm::updateGrid()
+{
+	realmGrid.updateGrid();
+}
+
+bool Realm::containsPosition(const sf::Vector2f &position) const
+{
+	return realmGrid.containsPosition(position);
+}
+
+void Realm::setGridColor(const sf::Color & color)
+{
+	realmGrid.setGridColor(color);
+}
+
+void Realm::setGridColorDefault()
+{
+	realmGrid.setGridColorDefault();
+}
+
+bool Realm::hasLiege() const
+{
+	return liege != nullptr;
+}
+
+void Realm::setLiege(Player *player)
+{
+	liege = player;
+}
+
+std::map<Title, int> Realm::getTitleCounts() const
+{
+	std::map<Title, int> realmTitleCounts;
+	std::map<Title, int> rulerTitleCounts = rulerEstateManager.getTitleCounts();
+	std::map<Title, int> vassalsTitleCounts = vassalManager.getTitleCounts();
+	realmTitleCounts.insert(rulerTitleCounts.begin(), rulerTitleCounts.end());
+	realmTitleCounts.insert(vassalsTitleCounts.begin(), vassalsTitleCounts.end());
+	return realmTitleCounts;
+
+}
+
 
 
 

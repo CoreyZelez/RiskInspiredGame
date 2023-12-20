@@ -20,7 +20,7 @@ void Game::generatePlayers()
 		// Provide starting yields for each player.
 		for(int i = 0; i < 20; ++i)
 		{
-			player.get()->getRealm().getEstateManager().handleFiefYields();
+			player.get()->getRealm().handleMilitaryYields();
 		}
 
 		if(humanCnt < numHumans)
@@ -37,7 +37,7 @@ Realm* Game::getRealm(const sf::Vector2f & position)
 	for(auto &player : players)
 	{
 		Realm &realm = player.get()->getRealm();
-		if(realm.getEstateManager().containsPosition(position))
+		if(realm.containsPosition(position))
 		{
 			return &realm;
 		}
@@ -49,7 +49,7 @@ void Game::deselectSelectedRealm()
 {
 	if(selectedRealm != nullptr)
 	{
-		selectedRealm->getEstateManager().setGridColorDefault();
+		selectedRealm->setGridColorDefault();
 	}
 	selectedRealm = nullptr;
 }
@@ -73,7 +73,7 @@ void Game::update()
 		// Iterate through all players, updating their realms vertex arrays if thier realm changed.
 		for(auto &player : players)
 		{
-			player.get()->getRealm().getEstateManager().updateGrid();
+			player.get()->getRealm().updateGrid();
 		}
 		return;
 	}
@@ -102,7 +102,7 @@ void Game::update()
 	// Iterate through all players, updating their realms vertex arrays if thier realm changed.
 	for(auto &player : players)
 	{
-		player.get()->getRealm().getEstateManager().updateGrid();
+		player.get()->getRealm().updateGrid();
     }
 }
 
@@ -189,7 +189,7 @@ const Realm* Game::getRealm(const sf::Vector2f &position) const
 	for(const auto &player : players)
 	{
 		const Realm &realm = player.get()->getRealm();
-		if(realm.getEstateManager().containsPosition(position))
+		if(realm.containsPosition(position))
 		{
 			return &realm;
 		}
@@ -211,13 +211,13 @@ void Game::selectCurrPlayerRealm(bool humanOnly)
 		{
 			assert(currPlayer->get()->getIsHuman());
 			selectedRealm = &currPlayer->get()->getRealm();
-			selectedRealm->getEstateManager().setGridColor(sf::Color::Yellow);
+			selectedRealm->setGridColor(sf::Color::Yellow);
 			return;
 		}
 		else
 		{
 			selectedRealm =  &currPlayer->get()->getRealm();
-			selectedRealm->getEstateManager().setGridColor(sf::Color::Yellow);
+			selectedRealm->setGridColor(sf::Color::Yellow);
 			return;
 		}
 	}
@@ -232,7 +232,7 @@ void Game::selectPlayerRealm(const sf::Vector2f & position)
 	{
 		deselectSelectedRealm();
 		selectedRealm = realm;
-		selectedRealm->getEstateManager().setGridColor(sf::Color::Yellow);
+		selectedRealm->setGridColor(sf::Color::Yellow);
 	}
 	else
 	{
