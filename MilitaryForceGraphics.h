@@ -19,15 +19,16 @@ public:
 	virtual void setPosition(sf::Vector2f position) override;
 
 private:
+	const MilitaryForce &military; 
+	sf::Text text;
+	const sf::Vector2f textOffset;
+	sf::Font font;
+
 	// Calculate the position for the text relative to the sprite.
 	sf::Vector2f calculateTextPosition() const;
 
-	const MilitaryForce &military; 
+	static const sf::Texture* getMilitaryShapeTexture(const std::string &shape);
 
-	sf::Text text;
-	sf::Font font;
+	static sf::Vector2f getMilitaryShapeTextOffset(const std::string &shape);
 };
-
-const sf::Texture* getMilitaryShapeTexture(const std::string &shape);
-
 

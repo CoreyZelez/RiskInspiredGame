@@ -1,0 +1,65 @@
+# barony
+# title
+1
+# name
+Topitaria
+# subfiefs
+# territory id
+1
+# land army yield
+0.528768
+# naval fleet yield
+0.362119
+
+# barony
+# title
+1
+# name
+Ventohthdriax
+# subfiefs
+# territory id
+2
+# land army yield
+0.452614
+# naval fleet yield
+0.29241
+
+# barony
+# title
+1
+# name
+Hethiadriax
+# subfiefs
+# territory id
+3
+# land army yield
+0.741969
+# naval fleet yield
+0.481132
+
+# barony
+# title
+1
+# name
+Daytlithia
+# subfiefs
+# territory id
+4
+# land army yield
+0.742615
+# naval fleet yield
+0.263871
+
+# barony
+# title
+1
+# name
+Hethiariheughough
+# subfiefs
+# territory id
+5
+# land army yield
+0.5651
+# naval fleet yield
+0.250281
+

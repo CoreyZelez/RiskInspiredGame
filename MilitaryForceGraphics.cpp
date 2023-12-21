@@ -5,7 +5,7 @@
 #include <assert.h>
 
 MilitaryForceGraphics::MilitaryForceGraphics(const std::string &shape, const MilitaryForce &military)
-	: SpriteGraphicsComponent(*getMilitaryShapeTexture(shape)), military(military)
+	: SpriteGraphicsComponent(*getMilitaryShapeTexture(shape)), military(military), textOffset(getMilitaryShapeTextOffset(shape))
 {
 	// PUT CODE HERE TO STANDARDISE SIZE OF SPRITE IRRESPECTIVE OF TEXTURE!!!
 
@@ -44,16 +44,14 @@ void MilitaryForceGraphics::update()
 
 sf::Vector2f MilitaryForceGraphics::calculateTextPosition() const
 {
-	const int yTextAdjustment = 7;
-
 	sf::FloatRect textBounds = text.getLocalBounds();
 	sf::FloatRect spriteBounds = getSprite().getGlobalBounds();
-	float x = spriteBounds.left + (spriteBounds.width - textBounds.width) / 2.0f;
-	float y = spriteBounds.top + (spriteBounds.height / 2.0f) - textBounds.height + yTextAdjustment;
+	float x = spriteBounds.left + ((spriteBounds.width - textBounds.width) / 2.0f) + textOffset.x;
+	float y = spriteBounds.top + ((spriteBounds.height) / 2.0f) - textBounds.height + textOffset.y;
 	return sf::Vector2f(x, y);
 }
 
-const sf::Texture* getMilitaryShapeTexture(const std::string &shape)
+const sf::Texture* MilitaryForceGraphics::getMilitaryShapeTexture(const std::string &shape)
 {
 	TextureManager &textureManager = TextureManager::getInstance();
 	const sf::Texture *texture = nullptr;
@@ -68,3 +66,17 @@ const sf::Texture* getMilitaryShapeTexture(const std::string &shape)
 	assert(texture != nullptr);
 	return texture;
 }
+
+sf::Vector2f MilitaryForceGraphics::getMilitaryShapeTextOffset(const std::string &shape)
+{
+	sf::Vector2f displacement(0, 0);
+
+	if(shape.compare("triangle") == 0)
+	{
+		displacement = sf::Vector2f(0, 30);
+	}
+
+	return displacement;
+}
+
+

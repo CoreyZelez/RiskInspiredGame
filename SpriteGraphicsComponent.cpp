@@ -5,6 +5,8 @@ SpriteGraphicsComponent::SpriteGraphicsComponent(const sf::Texture & texture)
 	sprite.setTexture(texture);
 }
 
+
+
 void SpriteGraphicsComponent::draw(sf::RenderWindow & window) const
 {
 	window.draw(sprite);
@@ -33,12 +35,12 @@ bool SpriteGraphicsComponent::containsPosition(sf::Vector2f position) const
 	return sprite.getGlobalBounds().contains(position);
 }
 
-sf::Sprite & SpriteGraphicsComponent::getSprite()
+sf::Sprite& SpriteGraphicsComponent::getSprite()
 {
 	return sprite;
 }
 
-const sf::Sprite & SpriteGraphicsComponent::getSprite() const
+const sf::Sprite& SpriteGraphicsComponent::getSprite() const
 {
 	return sprite;
 }

@@ -27,6 +27,5 @@ protected:
 
 private:
 	sf::Sprite sprite;
-
 };
 

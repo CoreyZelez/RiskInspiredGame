@@ -1,7 +1,16 @@
-﻿  Game.cpp
+﻿  Barony.cpp
+d:\projects\risktypegame\risktypegame\barony.cpp(46): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(46): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(68): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(68): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(118): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(118): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(121): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(121): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+  SpriteGraphicsComponent.cpp
   Generating code
-  2 of 9679 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  41 of 9680 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+    12 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Release\RiskTypeGame.exe

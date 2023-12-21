@@ -91,7 +91,9 @@ std::unique_ptr<UIEntity> Realm::getUI(UIType type) const
 void Realm::handleMilitaryYields()
 {
 	rulerEstateManager.handleMilitaryYields();
-	// vassalManager.handleMililtaryYields();
+	// VASSAL MILITARY YIELDS HANDLED BY VASSALS
+	// SHOULD GIVE MILITARY TO LIEGES REINFORCEMENTS 
+	// AND YIELD TO THEIR RESERVES. SEE TXT.
 }
 
 bool Realm::isVassal(const Player &player, bool direct) const
@@ -136,7 +138,7 @@ Player& Realm::getUpperRealmRuler()
 	return *upperLiege;
 }
 
-const Player & Realm::getUpperRealmRuler() const
+const Player& Realm::getUpperRealmRuler() const
 {
 	const Player *upperLiege = &ruler;
 	while(upperLiege->getRealm().liege != nullptr)

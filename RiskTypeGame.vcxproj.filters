@@ -285,9 +285,6 @@
     <ClCompile Include="SpriteGraphicsComponent.cpp">
       <Filter>Source Files\Utility\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="MilitaryForceGraphics.cpp">
-      <Filter>Source Files\Utility\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="ReconcileLandedEstates.cpp">
       <Filter>Source Files\User Interface\CommandButton</Filter>
     </ClCompile>
@@ -308,6 +305,9 @@
     </ClCompile>
     <ClCompile Include="RealmGrid.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MilitaryForceGraphics.cpp">
+      <Filter>Source Files\Game\Military</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -503,9 +503,6 @@
     <ClInclude Include="MapDisplay.h">
       <Filter>Header Files\Game\MVC</Filter>
     </ClInclude>
-    <ClInclude Include="MilitaryForceGraphics.h">
-      <Filter>Header Files\Utility\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="HashFunctions.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
@@ -517,6 +514,9 @@
     </ClInclude>
     <ClInclude Include="RealmGrid.h">
       <Filter>Header Files\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MilitaryForceGraphics.h">
+      <Filter>Header Files\Game\Military</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
