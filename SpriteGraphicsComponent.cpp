@@ -5,8 +5,6 @@ SpriteGraphicsComponent::SpriteGraphicsComponent(const sf::Texture & texture)
 	sprite.setTexture(texture);
 }
 
-
-
 void SpriteGraphicsComponent::draw(sf::RenderWindow & window) const
 {
 	window.draw(sprite);
