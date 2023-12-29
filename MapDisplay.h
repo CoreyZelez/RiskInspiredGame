@@ -1,6 +1,7 @@
 #pragma once
 #include "Map.h"
 #include <SFML/Graphics.hpp>
+#include <deque>
 
 enum class MapMode
 {
@@ -28,7 +29,7 @@ public:
 private:
 	const Game &game;
 	const Map &map;
-	const std::vector<std::unique_ptr<Player>> &players;
+	const std::vector<std::unique_ptr<Player>>&players;
 };
 
 

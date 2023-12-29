@@ -243,7 +243,7 @@ Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory& sourceTerritory, 
 	return nullptr;
 }
 
-Territory * nearestFriendlyAdjacentTerritoryDijkstra(Territory & sourceTerritory, Territory & targetTerritory, int maxDist, TerritoryType territoryType)
+Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory & sourceTerritory, Territory & targetTerritory, int maxDist, TerritoryType territoryType)
 {
 
 	// Ensure territories have the same owner.

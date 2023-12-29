@@ -13,6 +13,22 @@ SimplePlayerAI::SimplePlayerAI(Game &game, Player &player)
 
 void SimplePlayerAI::handleTurn()
 {
+	if(getPlayer().getRealm().hasLiege())
+	{
+		handleTurnVassal();
+	}
+	else
+	{
+		handleTurnNonVassal();
+	}
+}
+
+void SimplePlayerAI::handleTurnVassal()
+{
+}
+
+void SimplePlayerAI::handleTurnNonVassal()
+{
 	Player &player = getPlayer();
 	Game &game = getGame();
 
@@ -30,7 +46,11 @@ void SimplePlayerAI::handleTurn()
 		std::map<Territory*, int> navalFleetStrategicValues;
 		for(Territory* territory : borderTerritories)
 		{
-			assert(calculateStrategicValue(*territory) >= 0);
+			if(territory->getType() != TerritoryType::naval)
+			{
+				continue;
+			}
+			assert(calculateFleetStrategicValue(*territory) >= 0);
 			navalFleetStrategicValues[territory] = calculateFleetStrategicValue(*territory);
 		}
 		executeFleetMoveOrders(navalFleetStrategicValues);
@@ -40,7 +60,7 @@ void SimplePlayerAI::handleTurn()
 	std::map<Territory*, int> landArmyStrategicValues;
 	for(Territory* territory : borderTerritories)
 	{
-		assert(calculateStrategicValue(*territory) >= 0);
+		assert(calculateArmyStrategicValue(*territory) >= 0);
 		landArmyStrategicValues[territory] = calculateArmyStrategicValue(*territory);
 	}
 	executeArmyMoveOrders(landArmyStrategicValues);
@@ -156,7 +176,9 @@ void SimplePlayerAI::executeArmyAttacks(const std::vector<Territory*> &borderTer
 	// Iterate over border territories and execute attacks by armies stationed at these territories.
 	for(const Territory *territory : borderTerritories)
 	{
-		assert(territory->getEstateOwner() == &player);
+		// Only players without a liege can execute army attacks.
+		assert(!player.getRealm().hasLiege());
+		assert(territory->getEstateOwner()->getRealm().sameUpperRealm(player));
 
 		LandArmy *army = player.getMilitaryManager().getArmy(territory);
 		if(army != nullptr)
@@ -337,7 +359,9 @@ void SimplePlayerAI::executeFleetAttacks(const std::vector<Territory*>& borderTe
 	// Iterate over border territories and execute attacks by armies stationed at these territories.
 	for(const Territory *territory : borderTerritories)
 	{
-		assert(territory->getEstateOwner() == &player);
+		// Only players without a liege can execute army attacks.
+		assert(!player.getRealm().hasLiege());
+		assert(territory->getEstateOwner()->getRealm().sameUpperRealm(player));
 
 		NavalFleet *fleet = player.getMilitaryManager().getFleet(territory);
 		if(fleet != nullptr)
@@ -437,9 +461,9 @@ void SimplePlayerAI::executeFleetMoveOrders(const std::map<Territory*, int>& str
 		freeToMove[fleet.get()] = fleet.get()->getStrength(navalMoveCost);
 	}
 
-	// Armies are added through movement so only iterate up to pre movement number of armies. 
+	// Fleets are added through movement so only iterate up to pre movement number of armies. 
 	const int numFleets = fleets.size();
-	assert(numFleets > 0);
+	assert(numFleets >= 0);
 
 	// Distances of each friendly army to borders of own territory with movement inside own territory.
 	const int maxDist = 13;
@@ -471,7 +495,7 @@ void SimplePlayerAI::executeFleetMoveOrders(const std::map<Territory*, int>& str
 				// assert(distance = bfsfriendly(army, territory))
 				assert(remainingStrategicValues.count(&territory) == 1);
 				assert(strategicValue > 0);
-				assert(freeToMove[&fleet] <= army.getStrength(landMoveCost));
+				// assert(freeToMove[&fleet] <= fleet.getStrength(landMoveCost));
 
 				if(freeToMove[&fleet] == 0)
 				{

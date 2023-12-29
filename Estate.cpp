@@ -4,6 +4,8 @@
 #include "NameGenerator.h"
 #include "InformationPanel.h"
 #include "FontManager.h"
+#include "LandedEstate.h"
+#include "Realm.h"
 #include <assert.h>
 #include <iostream>
 #include <fstream>
@@ -11,7 +13,7 @@
 Estate::Estate(Title title)
 	: title(title)
 {
-	if(title == Title::admiral)
+	if(title == Title::maridom)
 	{
 		this->grid.setBorderMode(BorderMode::feintBorders);
 	}
@@ -22,7 +24,7 @@ Estate::Estate(Title title, const Grid &grid)
 	: title(title)
 {
 	this->grid.addGrid(grid);
-	if(title == Title::admiral)
+	if(title == Title::maridom)
 	{
 		this->grid.setBorderMode(BorderMode::feintBorders);
 	}
@@ -33,7 +35,7 @@ Estate::Estate(Title title, const Grid &grid, std::string name)
 	: title(title), name(name)
 {
 	this->grid.addGrid(grid);
-	if(title == Title::admiral)
+	if(title == Title::maridom)
 	{
 		this->grid.setBorderMode(BorderMode::feintBorders);
 	}
@@ -87,11 +89,11 @@ std::unique_ptr<UIEntity> Estate::getUI(UIType type) const
 		// Title text map.
 		std::map<Title, std::string> titleStringMap = 
 		{
-		{ Title::baron, "Barony" },
-		{ Title::count, "County" },
-		{ Title::duke, "Duchy" },
-		{ Title::king, "Kingdom" },
-		{ Title::emperor, "Empire" } 
+		{ Title::barony, "Barony" },
+		{ Title::county, "County" },
+		{ Title::duchy, "Duchy" },
+		{ Title::kingdom, "Kingdom" },
+		{ Title::empire, "Empire" } 
 		};
 
 		// Title text.
@@ -99,43 +101,43 @@ std::unique_ptr<UIEntity> Estate::getUI(UIType type) const
 		titleText << sf::Text::Regular << sf::Color::White << "type: "
 			<< sf::Color::Yellow << titleStringMap[title];
 
-		std::map<Title, int> titleCounts = getSubfiefTitleCounts();
+		std::map<Title, int> titleCounts = getLowerEstateTitleCounts();
 
 		// Barony count text.
 		sfe::RichText baronyCntText(font);
 		baronyCntText << sf::Text::Regular << sf::Color::White << "Number of Barony subfiefs: "
-			<< sf::Color::Yellow << std::to_string(titleCounts[Title::baron]);
+			<< sf::Color::Yellow << std::to_string(titleCounts[Title::barony]);
 
 		// County count text.
 		sfe::RichText countyCntText(font);
 		countyCntText << sf::Text::Regular << sf::Color::White << "Number of County subfiefs: "
-			<< sf::Color::Yellow << std::to_string(titleCounts[Title::count]);
+			<< sf::Color::Yellow << std::to_string(titleCounts[Title::county]);
 
 		// Duchy count text.
 		sfe::RichText duchyCntText(font);
 		duchyCntText << sf::Text::Regular << sf::Color::White << "Number of Duchy subfiefs: "
-			<< sf::Color::Yellow << std::to_string(titleCounts[Title::duke]);
+			<< sf::Color::Yellow << std::to_string(titleCounts[Title::duchy]);
 
 		// Kingdom count text.
 		sfe::RichText kingdomCntText(font);
 		kingdomCntText << sf::Text::Regular << sf::Color::White << "Number of Kingdom subfiefs: "
-			<< sf::Color::Yellow << std::to_string(titleCounts[Title::king]);
+			<< sf::Color::Yellow << std::to_string(titleCounts[Title::kingdom]);
 
 
 		std::vector<sfe::RichText> texts = { nameText, titleText };
-		if(title == Title::emperor)
+		if(title == Title::empire)
 		{
 			texts.push_back(kingdomCntText);
 		}
-		if(title >= Title::king)
+		if(title >= Title::kingdom)
 		{
 			texts.push_back(duchyCntText);
 		}
-		if(title >= Title::duke)
+		if(title >= Title::duchy)
 		{
 			texts.push_back(countyCntText);
 		}
-		if(title >= Title::count)
+		if(title >= Title::county)
 		{
 			texts.push_back(baronyCntText);
 		}
@@ -156,7 +158,7 @@ void Estate::saveSubfiefs(std::ofstream &file) const
 
 void Estate::provideSubfiefBonusYields()
 {
-	if(title == Title::baron || title == Title::admiral)
+	if(title == Title::barony || title == Title::maridom)
 	{
 		assert(subfiefs.size() == 0);
 		return;
@@ -165,16 +167,16 @@ void Estate::provideSubfiefBonusYields()
 	float bonus = 0;
 	switch(title)
 	{
-	case Title::count:
+	case Title::county:
 		bonus = 0.5f;
 		break;
-	case Title::duke:
+	case Title::duchy:
 		bonus = 0.5f;
 		break;
-	case Title::king:
+	case Title::kingdom:
 		bonus = 0.3f;
 		break;
-	case Title::emperor:
+	case Title::empire:
 		bonus = 0.2f;
 		break;
 	}
@@ -187,7 +189,9 @@ void Estate::yield(MilitaryManager &militaryManager)
 {
 }
 
-/* Function empty as (currently) non landed estates do not generate military directly. */
+/* 
+ *Function empty as non landed estates do not generate military directly. 
+ */
 void Estate::generateMilitary(MilitaryManager &militaryManager)
 {
 }
@@ -239,6 +243,21 @@ void Estate::removeSubfief(Estate *subfief)
 	}
 }
 
+std::unordered_set<const Estate*> Estate::getLowerEstates() const
+{
+	std::unordered_set<const Estate*> lowerEstates;
+
+	for(const Estate* subfief : subfiefs)
+	{
+		lowerEstates.insert(subfief);
+		std::unordered_set<const Estate*> subfiefLowerEstates = subfief->getLowerEstates();
+		lowerEstates.insert(subfiefLowerEstates.begin(), subfiefLowerEstates.end());
+	}
+
+	return lowerEstates;
+
+}
+
 void Estate::setParent(Estate *parent)
 {
 	this->parent = parent;
@@ -247,6 +266,11 @@ void Estate::setParent(Estate *parent)
 bool Estate::hasParent() const
 {
 	return parent != nullptr;
+}
+
+const Estate* Estate::getParent() const
+{
+	return parent;
 }
 
 bool Estate::compareRuler(const Player *player) const
@@ -284,6 +308,29 @@ const Grid& Estate::getGrid() const
 	return grid;
 }
 
+int Estate::calculateLandedSubfiefOwnershipCount(const Player &player) const
+{
+	int count = 0;
+	for(const Estate *estate : subfiefs)
+	{
+		const LandedEstate *landedEstate = dynamic_cast<const LandedEstate*>(estate);
+		if(landedEstate != nullptr)
+		{
+			// Since current estate is landed we can directly check for ownership by either ruler or a vassal.
+			if(landedEstate->getRuler() == &player || (ruler != nullptr && landedEstate->getRuler()->getRealm().isVassal(*ruler, false)))
+			{
+				++count;
+			}
+		}
+		else
+		{
+			// Add the count of ownership of landed subfiefs of current estates subfiefs, noting the current estate itself is unlanded.
+			count += estate->calculateLandedSubfiefOwnershipCount(player);
+		}
+	}
+	return count;
+}
+
 void Estate::initColor()
 {
 	const sf::Color baronyColor(210, 19, 0);
@@ -294,19 +341,19 @@ void Estate::initColor()
 
 	switch(title)
 	{
-	case Title::baron:
+	case Title::barony:
 		this->grid.setColor(baronyColor);
 		break;
-	case Title::count:
+	case Title::county:
 		this->grid.setColor(countyColor);
 		break;
-	case Title::duke:
+	case Title::duchy:
 		this->grid.setColor(dukedomColor);
 		break;
-	case Title::king:
+	case Title::kingdom:
 		this->grid.setColor(kingdomColor);
 		break;
-	case Title::emperor:
+	case Title::empire:
 		this->grid.setColor(empireColor);
 		break;
 	}
@@ -341,10 +388,15 @@ Player* Estate::getRuler()
 	return ruler;
 }
 
-void Estate::setRuler(Player *ruler)
+void Estate::setOwnership(Player *ruler)
 {
 	// Case ruler is not changed.
 	if(this->ruler == ruler)
+	{
+		return;
+	}
+	// Case rulers are not nullptr and apart of same upper realm.
+	if(ruler != nullptr && this->ruler != nullptr && ruler->getRealm().sameUpperRealm(*this->ruler))
 	{
 		return;
 	}
@@ -352,19 +404,24 @@ void Estate::setRuler(Player *ruler)
 	// Remove estate from previous ruler.
 	if(this->ruler != nullptr)
 	{
-		this->ruler->getRealm().removeEstate(this);
+		this->ruler->getRealm().removeEstate(*this);
+		this->ruler = nullptr;
 	}
 
-	// Change ruler of estate.
-	this->ruler = ruler;
-
-	// Add fief to new ruler.
-	if(this->ruler != nullptr)
+	// Add estate to new ruler's realm and set the ruler of the realm.
+	if(ruler != nullptr)
 	{
-		this->ruler->getRealm().addEstate(this);
+		// newRuler is the player which ruler confers this estate to, possibly themselves.
+		Player *newRuler = &ruler->getRealm().addEstate(*this);
+		assert(newRuler != nullptr);
+		this->ruler = newRuler;
+	}
+	else
+	{
+		this->ruler = nullptr;
 	}
 
-	// Tell upper estate(s) to check whether uppermost liege of ruler (possibly ruler themselves) should gain control of it.
+	// Recurse on parent estates to handle possible ownership changes due to change in lower estate, namely this estate..
 	if(parent != nullptr)
 	{
 		/// THIS FUNCTION MAY BE GETTING CALLED MULTIPLE TIMES UNNECESSARILY. SEE HANDLE ALLOCATION.
@@ -372,19 +429,19 @@ void Estate::setRuler(Player *ruler)
 	}
 }
 
-void Estate::recursiveGetSubfiefTitleCounts(std::map<Title, int>& subfiefTitleCounts) const
+void Estate::recursiveGetLowerEstateTitleCounts(std::map<Title, int>& subfiefTitleCounts) const
 {
 	for(const auto &subfief : subfiefs)
 	{
 		++subfiefTitleCounts[subfief->getTitle()];
-		subfief->recursiveGetSubfiefTitleCounts(subfiefTitleCounts);
+		subfief->recursiveGetLowerEstateTitleCounts(subfiefTitleCounts);
 	}
 }
 
-std::map<Title, int> Estate::getSubfiefTitleCounts() const
+std::map<Title, int> Estate::getLowerEstateTitleCounts() const
 {
 	std::map<Title, int> counts;
-	recursiveGetSubfiefTitleCounts(counts);
+	recursiveGetLowerEstateTitleCounts(counts);
 	return counts;
 }
 
@@ -393,26 +450,9 @@ void Estate::handleAllocation()
 	Player *ruler = getLowerEstatesUpperRealmRuler();
 	if(ruler != nullptr)
 	{
-		assert(ruler->getRealm().getRelationshipManager().hasLiege() == false);
+		assert(ruler->getRealm().hasLiege() == false);
 		// Ruler's realm contains every lowest level estate of this estate thus gets granted this estate.
-		// WARNING: RELIES ON FACT THAT LOWER ESTATE TITLE IS A LANDED ESTATE AND UPPER ESTATES ARE NOT.
-		////
-		setRuler(ruler);
-	}
-}
-
-void Estate::handleRevocation()
-{
-	assert(ruler != nullptr);
-
-	// Revokes estate if any subfief of estate is not apart of ruler's realm.
-	for(const Estate *subfief : subfiefs)
-	{
-		if(subfief->ruler == nullptr || &subfief->ruler->getRealm().getUpperRealmRuler())
-		{
-			setRuler(nullptr);
-			break;
-		}
+		setOwnership(ruler);
 	}
 }
 
@@ -425,7 +465,7 @@ Player* Estate::getLowerEstatesUpperRealmRuler()
 		return &ruler->getRealm().getUpperRealmRuler();
 	}
 
-	// Check that subfiefs have a ruler. If not, impossible for all lower estates to belong to same realm.
+	// Check that all subfiefs have a ruler. If not, impossible for all lower estates to belong to same realm.
 	for(Estate *subfief : subfiefs)
 	{
 		if(subfief->ruler == nullptr)
@@ -465,26 +505,15 @@ void Estate::handleLowerEstateChange(const Estate &subfief)
 		// ruler who has no liege and lower estate belongs to their realm.
 		handleAllocation();
 	}
-	// A lower fief was revoked.
-	else if(subfief.ruler == nullptr)
-	{
-		handleRevocation();
-	}
 	// This estate already apart of same upper realm.
-	else if(ruler->getRealm().sameUpperRealm(*subfief.ruler))
+	else if(subfief.ruler != nullptr && ruler->getRealm().sameUpperRealm(*subfief.ruler))
 	{
 		// Do nothing.
 	}
-	// Estate apart of enemy upper realm. Potentially requires revocation.
+	// A lower fief was revoked or estate apart of enemy upper realm. Potentially requires revocation.
 	else 
 	{
-		handleRevocation();
+		setOwnership(nullptr);
 	}
-
-	///// Handle ownership changes of upper estates.
-	///if(parent != nullptr)
-	///{
-	///	parent->handleLowerEstateChange(*this);
-	///}
 }
 

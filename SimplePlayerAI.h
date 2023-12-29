@@ -15,6 +15,9 @@ public:
 private:
 	PlayerAIContext context;
 
+	void handleTurnVassal();
+	void handleTurnNonVassal();
+
 	// Determines the strategic value of the territory for offensive or defensive purposes.
 	int calculateArmyStrategicValue(const Territory &territory);
 	int calculateFleetStrategicValue(const Territory &territory);

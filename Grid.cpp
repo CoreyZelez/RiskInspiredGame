@@ -318,7 +318,7 @@ void Grid::setColor(sf::Color color)
 
 void Grid::initBorders()
 {
-	assert(borders.size() == 0);
+	assert(borderPositions.size() == 0);
 	for(auto position : positions)
 	{
 		if(isBorder(position))

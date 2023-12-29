@@ -78,7 +78,7 @@ void EstateMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 	{
 		if(state == EstateMakerState::none || state == EstateMakerState::selectEstate)
 		{
-			selectedTitle = Title::count;
+			selectedTitle = Title::county;
 			changeState(EstateMakerState::selectEstate);
 		}
 	}
@@ -86,7 +86,7 @@ void EstateMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 	{
 		if(state == EstateMakerState::none || state == EstateMakerState::selectEstate)
 		{
-			selectedTitle = Title::duke;
+			selectedTitle = Title::duchy;
 			changeState(EstateMakerState::selectEstate);
 		}
 	}
@@ -94,7 +94,7 @@ void EstateMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 	{
 		if(state == EstateMakerState::none || state == EstateMakerState::selectEstate)
 		{
-			selectedTitle = Title::king;
+			selectedTitle = Title::kingdom;
 			changeState(EstateMakerState::selectEstate);
 		}
 	}
@@ -102,7 +102,7 @@ void EstateMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 	{
 		if(state == EstateMakerState::none || state == EstateMakerState::selectEstate)
 		{
-			selectedTitle = Title::emperor;
+			selectedTitle = Title::empire;
 			changeState(EstateMakerState::selectEstate);
 		}
 	}

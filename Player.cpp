@@ -3,16 +3,17 @@
 #include "NavalFleet.h"
 #include "SimplePlayerAI.h"
 #include "Estate.h"
+#include "Game.h"
 #include <assert.h>
 #include <iostream>
 
 Player::Player(Game &game, AIPersonality personality)
-	: game(game), realm(*this)
+	: game(game), realm(game, *this)
 {
 }
 
 Player::Player(Game& game)
-	: game(game), realm(*this), AIComponent(std::make_unique<SimplePlayerAI>(game, *this))
+	: game(game), realm(game, *this), AIComponent(std::make_unique<SimplePlayerAI>(game, *this))
 {
 }
 

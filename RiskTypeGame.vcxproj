@@ -167,6 +167,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EstateAllocator.cpp" />
+    <ClCompile Include="EstateAllocatorUnitTest.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="HashFunctions.cpp" />
     <ClCompile Include="LandTerritoryOccupancy.cpp" />
@@ -234,6 +236,8 @@
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EstateAllocator.h" />
+    <ClInclude Include="EstateAllocatorUnitTest.h" />
     <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="HashFunctions.h" />
     <ClInclude Include="IOccupiable.h" />

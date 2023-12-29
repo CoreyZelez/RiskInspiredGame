@@ -1,7 +1,7 @@
 #include "GameDisplay.h"
 #include "Game.h"
 
-GameDisplay::GameDisplay(const Game &game, const Map &map, const std::vector<std::unique_ptr<Player>>& players)
+GameDisplay::GameDisplay(const Game & game, const Map & map, const std::vector<std::unique_ptr<Player>>& players)
 	: game(game), MapDisplay(game, map, players), players(players)
 {
 }

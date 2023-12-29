@@ -21,7 +21,9 @@ std::vector<Territory*> PlayerAIContext::getBorderTerritories()
 
 	for(Territory* territory : realmTerritories)
 	{
-		assert(territory->getEstateOwner() == &player);
+		//const Player &lig = territory->getEstateOwner()->getRealm().getUpperRealmRuler();
+		//assert(&lig == &player);
+		assert(territory->getEstateOwner()->getRealm().sameUpperRealm(player));
 
 		// Add territory to border territories if one of its adjacencies is enemy owned.
 		const std::set<Territory*> &adjacencies = territory->getDistanceMap().getAdjacencies();
@@ -90,7 +92,7 @@ std::map<const Player*, int> PlayerAIContext::getArmyWeightedThreats(const Terri
 	return weightedThreats;
 }
 
-std::map<const Player*, int> PlayerAIContext::getFleetWeightedThreats(const Territory & territory)
+std::map<const Player*, int> PlayerAIContext::getFleetWeightedThreats(const Territory &territory)
 {
 	const std::set<Territory*>& adjacencies = territory.getDistanceMap().getAdjacencies();
 	std::set<const Player*> enemyPlayers = {};
@@ -374,7 +376,7 @@ int calculateFleetWeightedThreat(const Territory & territory, const Player & pla
 	{
 		const Territory &armyTerritory = fleet.get()->getTerritory();
 		const int distance = territory.getDistanceMap().getDistance(armyTerritory);
-		assert(distance > 0 || army.get()->isDead());
+		assert(distance > 0 || fleet.get()->isDead());
 		if(distance > 0)
 		{
 			// For avoiding integer overflow.

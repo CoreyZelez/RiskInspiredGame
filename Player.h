@@ -5,7 +5,6 @@
 #include <vector>
 #include <memory>
 
-class Estate;
 class Game;
 
 class Player
@@ -14,7 +13,7 @@ public:
 	// Smart AI player.
 	Player(Game &game, AIPersonality personality);
 	// Simple AI player.
-	Player(Game &game);
+	explicit Player(Game &game);
 
 	void handleTurn();
 

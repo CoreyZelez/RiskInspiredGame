@@ -27,7 +27,7 @@ void LandedEstate::update(Message message)
 	if(message == Message::newOccupant)
 	{
 		assert(territory.getOccupancyHandler()->getOccupant() != nullptr);
-		setRuler(territory.getOccupancyHandler()->getOccupant());
+		setOwnership(territory.getOccupancyHandler()->getOccupant());
 	}
 }
 

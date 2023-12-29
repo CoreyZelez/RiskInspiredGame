@@ -48,6 +48,32 @@ void MilitaryManager::addArmyReinforcements(double reinforcements)
 	armyReinforcements += reinforcements;
 }
 
+void MilitaryManager::addArmyReserves(double reserves)
+{
+    assert(reserves >= 0);
+    armyReinforcements += reserves;
+}
+
+float MilitaryManager::getFleetReinforcementRate() const
+{
+	const float maxRate = 0.9;
+	const int maxRateAttainmentValue = 10;
+	float rate = maxRate * fleets.size() / (float)maxRateAttainmentValue;
+	return std::min(rate, maxRate);
+}
+
+void MilitaryManager::addFleetReinforcements(double reinforcements)
+{
+	assert(reinforcements >= 0);
+	fleetReinforcements += reinforcements;
+}
+
+void MilitaryManager::addFleetReserves(double reserves)
+{
+	assert(reserves >= 0);
+	fleetReinforcements += reserves;
+}
+
 LandArmy* MilitaryManager::getArmy(const Territory *territory)
 {
 	for(auto &army : armies)
@@ -180,8 +206,8 @@ void MilitaryManager::distributeArmyReinforcements()
 
 		// Allocate reinforcement to armies proportionate to their strength.
 		const float strengthRatio = (float)army.get()->getTotalStrength() / (float)totalArmyStrength;
-		int reinforcementAmount = (float)totalReinforcementAmount * strengthRatio;
-		reinforcementAmount = std::max(reinforcementAmount, (int)armyReinforcements);
+		int reinforcementAmount = (float)totalReinforcementAmount * strengthRatio;  
+		reinforcementAmount = std::min(reinforcementAmount, (int)armyReinforcements);
 		armyReinforcements -= reinforcementAmount;
 		assert(armyReinforcements >= 0);
 		army.get()->increaseStrength(reinforcementAmount);

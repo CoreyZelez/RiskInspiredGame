@@ -47,7 +47,7 @@ void GameUIController::handleUICreation(const sf::RenderWindow &window)
 		}
 		case MapMode::barony:
 		{
-			const Estate *estate = game.getEstate(worldPos, Title::baron);
+			const Estate *estate = game.getEstate(worldPos, Title::barony);
 			if(estate != nullptr)
 			{
 				gameUI.setLeftUI(estate->getUI(UIType::information));
@@ -56,7 +56,7 @@ void GameUIController::handleUICreation(const sf::RenderWindow &window)
 		}
 		case MapMode::county:
 		{
-			const Estate *estate = game.getEstate(worldPos, Title::count);
+			const Estate *estate = game.getEstate(worldPos, Title::county);
 			if(estate != nullptr)
 			{
 				gameUI.setLeftUI(estate->getUI(UIType::information));
@@ -65,7 +65,7 @@ void GameUIController::handleUICreation(const sf::RenderWindow &window)
 		}
 		case MapMode::duchy:
 		{
-			const Estate *estate = game.getEstate(worldPos, Title::duke);
+			const Estate *estate = game.getEstate(worldPos, Title::duchy);
 			if(estate != nullptr)
 			{
 				gameUI.setLeftUI(estate->getUI(UIType::information));
@@ -74,7 +74,7 @@ void GameUIController::handleUICreation(const sf::RenderWindow &window)
 		}
 		case MapMode::kingdom:
 		{
-			const Estate *estate = game.getEstate(worldPos, Title::king);
+			const Estate *estate = game.getEstate(worldPos, Title::kingdom);
 			if(estate != nullptr)
 			{
 				gameUI.setLeftUI(estate->getUI(UIType::information));
@@ -83,7 +83,7 @@ void GameUIController::handleUICreation(const sf::RenderWindow &window)
 		}
 		case MapMode::empire:
 		{
-			const Estate *estate = game.getEstate(worldPos, Title::emperor);
+			const Estate *estate = game.getEstate(worldPos, Title::empire);
 			if(estate != nullptr)
 			{
 				gameUI.setLeftUI(estate->getUI(UIType::information));

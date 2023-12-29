@@ -104,8 +104,12 @@ std::pair<int, int> LandArmy::calculateMinMaxStaminaCost(const Territory &territ
 
 void LandArmy::move(Territory &location, unsigned int strength)
 {
-	assert(strength > 0);
 	assert(strength <= getTotalStrength());
+
+	if(strength == 0)
+	{
+		return;
+	}
 
 	// Attempt to move to current location.
 	if(&location == &getTerritory())

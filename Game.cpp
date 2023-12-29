@@ -5,7 +5,6 @@ Game::Game(std::string mapName)
 	: map(mapName)
 {
 	generatePlayers();
-	currPlayer = players.begin();
 }
 
 void Game::generatePlayers()
@@ -14,21 +13,21 @@ void Game::generatePlayers()
 	const int numHumans = 0;
 	for(auto &barony : map.getEstateManager().getBaronies())
 	{
-		std::unique_ptr<Player> player = std::make_unique<Player>(*this);
-		barony.get()->setRuler(player.get());
+		Player &player = createPlayer(); 
+
+		barony.get()->setOwnership(&player);
 
 		// Provide starting yields for each player.
 		for(int i = 0; i < 20; ++i)
 		{
-			player.get()->getRealm().handleMilitaryYields();
+			player.getRealm().handleMilitaryYields();
 		}
 
 		if(humanCnt < numHumans)
 		{
 			++humanCnt;
-			player.get()->setHuman();
+			player.setHuman();
 		}
-		players.emplace_back(std::move(player));
 	}
 }
 
@@ -79,20 +78,24 @@ void Game::update()
 	}
 
 	// Iterate through players handling their turns until a human player is reached.
-	while(currPlayer != players.end() && turnCnt < maxTurns)
+	while(currPlayer != players.size() && turnCnt < maxTurns)
 	{
+		// We test this here rather than the loop condition to ensure players are
+		// never removed from the players vector during iteration.
+		assert(currPlayer < players.size());
+
 		++turnCnt;
 		++currPlayer;
 
-		if(currPlayer == players.end())
+		if(currPlayer == players.size())
 		{
-			currPlayer = players.begin();
+			currPlayer = 0;
 		}
 
-		currPlayer->get()->handleTurn();
+		players[currPlayer].get()->handleTurn();
 
 		// Need to wait for user input to complete turn.
-		if(currPlayer->get()->getIsHuman())
+		if(players[currPlayer].get()->getIsHuman())
 		{
 			humanPlayerTurn = true;
 			break;
@@ -109,6 +112,12 @@ void Game::update()
 GameState Game::getState() const
 {
 	return state;
+}
+
+Player& Game::createPlayer()
+{
+	players.emplace_back(std::make_unique<Player>(*this));
+	return *players.back().get();
 }
 
 void Game::setMapMode(MapMode mapMode)
@@ -139,10 +148,10 @@ void Game::selectMilitary(sf::Vector2f position)
 		assert(selectedMilitary == nullptr);
 		return;
 	}
-	assert(currPlayer->get()->getIsHuman());
+	assert(players[currPlayer].get()->getIsHuman());
 
 	// Select military.
-	selectedMilitary = currPlayer->get()->getMilitaryManager().getMilitary(position);
+	selectedMilitary = players[currPlayer].get()->getMilitaryManager().getMilitary(position);
 
 	// Set game state.
 	if(selectedMilitary != nullptr)
@@ -205,18 +214,18 @@ const Estate* Game::getEstate(const sf::Vector2f & position, Title title)
 
 void Game::selectCurrPlayerRealm(bool humanOnly)
 {
-	if(*currPlayer != nullptr)
+	if(currPlayer != players.size())
 	{
 		if(humanOnly && humanPlayerTurn)
 		{
-			assert(currPlayer->get()->getIsHuman());
-			selectedRealm = &currPlayer->get()->getRealm();
+			assert(players[currPlayer].get()->getIsHuman());
+			selectedRealm = &players[currPlayer].get()->getRealm();
 			selectedRealm->setGridColor(sf::Color::Yellow);
 			return;
 		}
 		else
 		{
-			selectedRealm =  &currPlayer->get()->getRealm();
+			selectedRealm =  &players[currPlayer].get()->getRealm();
 			selectedRealm->setGridColor(sf::Color::Yellow);
 			return;
 		}

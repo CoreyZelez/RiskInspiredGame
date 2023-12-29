@@ -3,11 +3,21 @@
 const std::vector<Title> getOrderedTitles()
 {
 	return {
-		    Title::admiral,
-			Title::baron,
-			Title::count,
-			Title::duke,
-			Title::king,
-			Title::emperor
+		    Title::maridom,
+			Title::barony,
+			Title::county,
+			Title::duchy,
+			Title::kingdom,
+			Title::empire
+	};
+}
+
+const std::vector<Title> getOrderedUnlandedTitles()
+{
+	return {
+			Title::county,
+			Title::duchy,
+			Title::kingdom,
+			Title::empire
 	};
 }

@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "Game.h"
 
-MapDisplay::MapDisplay(const Game &game, const Map &map, const std::vector<std::unique_ptr<Player>> &players)
+MapDisplay::MapDisplay(const Game & game, const Map & map, const std::vector<std::unique_ptr<Player>>& players)
 	: game(game), map(map), players(players)
 {
 }
@@ -32,16 +32,16 @@ void MapDisplay::draw(sf::RenderWindow &window) const
 		}
 		break;
 	case MapMode::county:
-		map.getEstateManager().draw(window, Title::count);
+		map.getEstateManager().draw(window, Title::county);
 		break;
 	case MapMode::duchy:
-		map.getEstateManager().draw(window, Title::duke);
+		map.getEstateManager().draw(window, Title::duchy);
 		break;
 	case MapMode::kingdom:
-		map.getEstateManager().draw(window, Title::king);
+		map.getEstateManager().draw(window, Title::kingdom);
 		break;
 	case MapMode::empire:
-		map.getEstateManager().draw(window, Title::emperor);
+		map.getEstateManager().draw(window, Title::empire);
 		break;
 	}
 }

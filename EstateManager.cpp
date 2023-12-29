@@ -38,8 +38,8 @@ void EstateManager::draw(sf::RenderWindow &window, Title title) const
 
 void EstateManager::draw(sf::RenderWindow &window) const
 {
-	// Following code problematic if more titles equal in prominence to Title::baron are added.
-	assert(static_cast<int>(Title::baron) == 1);
+	// Following code problematic if more titles equal in prominence to Title::barony are added.
+	assert(static_cast<int>(Title::barony) == 1);
 
 	for(const auto &element : estates)
 	{
@@ -53,13 +53,13 @@ void EstateManager::draw(sf::RenderWindow &window) const
 void EstateManager::drawUnownedMaridoms(sf::RenderWindow &window) const
 {
 	// Determine if there are any maridoms that can be drawn.
-	auto it = estates.find(Title::admiral);
+	auto it = estates.find(Title::maridom);
 	if(it == estates.end())
 	{
 		return;
 	}
 
-	for(const auto &maridom : estates.at(Title::admiral))
+	for(const auto &maridom : estates.at(Title::maridom))
 	{
 		if(!maridom.get()->hasRuler())
 		{
@@ -120,7 +120,7 @@ void EstateManager::load(std::string mapName, std::vector<std::unique_ptr<LandTe
 	}
 
 	// Set color of maridoms to greyish blue.
-	setTitleColor(Title::admiral, sf::Color(90, 130, 255));
+	setTitleColor(Title::maridom, sf::Color(90, 130, 255));
 }
 
 void EstateManager::loadBarony(std::ifstream &file, std::vector<std::unique_ptr<LandTerritory>>& landTerritories)
@@ -132,7 +132,7 @@ void EstateManager::loadBarony(std::ifstream &file, std::vector<std::unique_ptr<
 	assert(line.compare("# title") == 0);
 	std::getline(file, line);
 	assert(line[0] != '#');
-	assert(static_cast<Title>(std::stoi(line)) == Title::baron);
+	assert(static_cast<Title>(std::stoi(line)) == Title::barony);
 	Title title = static_cast<Title>(std::stoi(line));
 
 	// Load barony name.
@@ -184,7 +184,7 @@ void EstateManager::loadBarony(std::ifstream &file, std::vector<std::unique_ptr<
 		barony->addSubfief(getFief(subfiefName));
 	}
 	// Add the barony to estates.
-	estates[Title::baron].emplace_back(std::move(barony));
+	estates[Title::barony].emplace_back(std::move(barony));
 }
 
 void EstateManager::loadMaridom(std::ifstream & file, std::vector<std::unique_ptr<NavalTerritory>>& navalTerritories)
@@ -196,7 +196,7 @@ void EstateManager::loadMaridom(std::ifstream & file, std::vector<std::unique_pt
 	assert(line.compare("# title") == 0);
 	std::getline(file, line);
 	assert(line[0] != '#');
-	assert(static_cast<Title>(std::stoi(line)) == Title::admiral);
+	assert(static_cast<Title>(std::stoi(line)) == Title::maridom);
 	Title title = static_cast<Title>(std::stoi(line));
 
 	// Load maridom name.
@@ -236,7 +236,7 @@ void EstateManager::loadMaridom(std::ifstream & file, std::vector<std::unique_pt
 		maridom->addSubfief(getFief(subfiefName));
 	}
 	// Add the barony to estates.
-	estates[Title::admiral].emplace_back(std::move(maridom));
+	estates[Title::maridom].emplace_back(std::move(maridom));
 }
 
 void EstateManager::loadEstate(std::ifstream &file)
@@ -319,7 +319,7 @@ void EstateManager::reconcileBaronies(const std::vector<std::unique_ptr<LandTerr
 		barony.get()->initName(generateName());
 
 		allocatedTerritoryIDs.insert(territory.get()->getID());  // Ensures ID cannot be reused for other landed estate.
-		estates[Title::baron].emplace_back(std::move(barony));
+		estates[Title::barony].emplace_back(std::move(barony));
 	}
 }
 
@@ -339,19 +339,19 @@ void EstateManager::reconcileMaridoms(const std::vector<std::unique_ptr<NavalTer
 		maridom.get()->initName(generateName());
 
 		allocatedTerritoryIDs.insert(territory.get()->getID());  // Ensures ID cannot be reused for other landed estate.
-		estates[Title::admiral].emplace_back(std::move(maridom));
+		estates[Title::maridom].emplace_back(std::move(maridom));
 	}
 }
 
 std::vector<std::unique_ptr<Estate>>& EstateManager::getBaronies()
 {
-	// assert(estates.count(Title::baron) != 0);  // THIS ASSERT IS NOT VALID FOR UNIT TESTS!
-	return estates[Title::baron];
+	// assert(estates.count(Title::barony) != 0);  // THIS ASSERT IS NOT VALID FOR UNIT TESTS!
+	return estates[Title::barony];
 }
 
 Estate* EstateManager::createEstate(Title title)
 {
-	assert(title != Title::baron);
+	assert(title != Title::barony);
 
 	std::unique_ptr<Estate> estate = std::make_unique<Estate>(title);
 	NameGenerator nameGenerator;
@@ -395,10 +395,10 @@ const Estate* EstateManager::getEstate(sf::Vector2f position, Title title)  cons
 
 Estate* EstateManager::getLowerEstate(sf::Vector2f position, Title title, bool allowParent)
 {
-	// Following code problematic if more titles equal in prominence to Title::baron are added.
-	assert(static_cast<int>(Title::baron) == 1);
+	// Following code problematic if more titles equal in prominence to Title::barony are added.
+	assert(static_cast<int>(Title::barony) == 1);
 	Title underTitle = title - 1;  // Title directly under parameter title.
-	for(Title currTitle = underTitle; currTitle >= Title::baron; currTitle--)
+	for(Title currTitle = underTitle; currTitle >= Title::barony; currTitle--)
 	{
 		for(auto &estate : estates[currTitle])
 		{
@@ -420,34 +420,34 @@ void EstateManager::makeColored(Title title, bool setLower)
 	const sf::Color kingdomColor(245, 179, 0);
 	const sf::Color empireColor(245, 0, 0);
 
-	setTitleColor(Title::baron, grey);
-	setTitleColor(Title::count, grey);
-	setTitleColor(Title::duke, grey);
-	setTitleColor(Title::king, grey);
-	setTitleColor(Title::emperor, grey);
+	setTitleColor(Title::barony, grey);
+	setTitleColor(Title::county, grey);
+	setTitleColor(Title::duchy, grey);
+	setTitleColor(Title::kingdom, grey);
+	setTitleColor(Title::empire, grey);
 
-	if(title == Title::baron || (Title::baron < title && setLower))
+	if(title == Title::barony || (Title::barony < title && setLower))
 	{
-		setTitleColor(Title::baron, baronyColor);
+		setTitleColor(Title::barony, baronyColor);
 	}
-	if(title == Title::count || (Title::count < title && setLower))
+	if(title == Title::county || (Title::county < title && setLower))
 	{
-		setTitleColor(Title::count, countyColor);
-
-	}
-	if(title == Title::duke || (Title::duke < title && setLower))
-	{
-		setTitleColor(Title::duke, dukedomColor);
+		setTitleColor(Title::county, countyColor);
 
 	}
-	if(title == Title::king || (Title::king < title && setLower))
+	if(title == Title::duchy || (Title::duchy < title && setLower))
 	{
-		setTitleColor(Title::king, kingdomColor);
+		setTitleColor(Title::duchy, dukedomColor);
 
 	}
-	if(title == Title::emperor || (Title::emperor < title && setLower))
+	if(title == Title::kingdom || (Title::kingdom < title && setLower))
 	{
-		setTitleColor(Title::emperor, empireColor);
+		setTitleColor(Title::kingdom, kingdomColor);
+
+	}
+	if(title == Title::empire || (Title::empire < title && setLower))
+	{
+		setTitleColor(Title::empire, empireColor);
 	}
 }
 

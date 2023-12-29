@@ -3,7 +3,7 @@
 #include "NavalFleet.h"
 #include "LandArmy.h"
 Maridom::Maridom(NavalTerritory &territory)
-	: LandedEstate(Title::admiral, territory)
+	: LandedEstate(Title::maridom, territory)
 {
 }
 

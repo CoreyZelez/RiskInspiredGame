@@ -4,6 +4,7 @@
 #include "HasUI.h"
 #include <set>
 #include <memory>
+#include <unordered_set>
 #include <SFML/Graphics.hpp>
 
 class Player;
@@ -39,24 +40,45 @@ public:
 	// Provides bonus yields to subfiefs. Yield dependant on title.
 	virtual void provideSubfiefBonusYields();
 
-	// Changes the ruler of this estate, making necessary adjustments to realms of involved players.
-	void setRuler(Player *ruler);
+	// Changes the ownership of the estate by adding the estate to ruler's realm and setting the new owner
+	// as the player which ruler grants the estate to (possibly the ruler themself).
+	void setOwnership(Player *ruler);
 
+	// Adds a subfief to this estate.
 	void addSubfief(Estate *subfief);
+	// Removes a subfief from this estate.
 	void removeSubfief(Estate *subfief);
 
-	void setParent(Estate *parent);
-	bool hasParent() const;
+	// Returns unordered set of all lower estates contained within this estate.
+	std::unordered_set<const Estate*> getLowerEstates() const;
 
-	bool compareRuler(const Player *player) const;  // For debugging.
+	// Changes the parent estate.
+	void setParent(Estate *parent);
+	// Returns true if parent estate is nullptr.
+	bool hasParent() const;
+	// Returns the parent estate.
+	const Estate* getParent() const;
+
+	// Compares player with ruler for debugging puposes.
+	bool compareRuler(const Player *player) const;  
+	// Returns the direct ruler of this estate.
 	const Player* getRuler() const;
+	// Returns true if estate has a ruler.
 	bool hasRuler() const;
 
+	// Returns title of estate.
 	Title getTitle() const;
+
+	// Returns estate name.
 	std::string getName() const;
 
+	// Returns the associated graphical grid of this estate.
 	Grid& getGrid();
+	// Returns the associated graphical grid of this estate.
 	const Grid& getGrid() const;
+
+	// Returns the number of landed indirect subfiefs of this estate apart of specified players realm, not necessarily directly controlled.
+	int calculateLandedSubfiefOwnershipCount(const Player &player) const;
 
 protected:
 	void initColor();
@@ -80,17 +102,19 @@ private:
 
 	// Alocates estate to ruler who's realm owns every lower estate entirely.
 	void handleAllocation();
-	// Revokes estate from ruler if a threshold of lower estate ownership is not surpassed.
-	void handleRevocation();
 	// Returns player who's realm contains EVERY lower estate of this estate. Otherwise nullptr.
 	Player* getLowerEstatesUpperRealmRuler();
 	// Gets notified of ownership change of a lower estate and updates ownership accordingly.
 	void handleLowerEstateChange(const Estate &subfief);
 
-	void recursiveGetSubfiefTitleCounts(std::map<Title, int> &subfiefTitleCounts) const;
-	std::map<Title, int> getSubfiefTitleCounts() const;
+	// Determines the counts of all lower estates of estate.
+	std::map<Title, int> getLowerEstateTitleCounts() const;
+	// Recursively determines the counts of all lower estates of estate.
+	void recursiveGetLowerEstateTitleCounts(std::map<Title, int> &subfiefTitleCounts) const;
 
 	void saveSubfiefs(std::ofstream &file) const;
 
 };
+
+
 
