@@ -92,7 +92,7 @@ int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
 		strategicValue *= navalStategicValueAdjustmentFactor;
 
 		// No reason to station land army on naval territory with no adjacent enemy land territories.
-		if(territory.getDistanceMap().noEnemyAdjacent(TerritoryType::land))
+		if(!territory.getDistanceMap().hasEnemyAdjacencies(TerritoryType::land))
 		{
 			strategicValue = 0;
 		}
@@ -126,7 +126,8 @@ int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
 	for(std::set<Territory*>::iterator iter = adjacencies.begin();
 		iter != adjacencies.end(); ++iter)
 	{
-		if((*iter)->getEstateOwner() != &player)
+		const Player *estateOwner = (*iter)->getEstateOwner();
+		if(sameRealm(&player, estateOwner))
 		{
 			enemyTerritories.insert(*iter);
 		}
@@ -151,6 +152,8 @@ int SimplePlayerAI::calculateFleetStrategicValue(const Territory &territory)
 	int totalThreat = calculateTotalThreat(weightedThreats);
 	strategicValue += maxThreat + totalThreat;
 
+	/////////////////
+	//CURRENTLY DOES NOTHING
 	// Calculate strategic desire to attack enemy neighbouring territories.
 	const std::set<Territory*> adjacencies = territory.getDistanceMap().getAdjacencies();
 	std::set<const Territory*> enemyTerritories;
@@ -158,11 +161,13 @@ int SimplePlayerAI::calculateFleetStrategicValue(const Territory &territory)
 	for(std::set<Territory*>::iterator iter = adjacencies.begin();
 		iter != adjacencies.end(); ++iter)
 	{
-		if((*iter)->getEstateOwner() != &player)
+		const Player *estateOwner = (*iter)->getEstateOwner();
+		if(sameRealm(&player, estateOwner))
 		{
 			enemyTerritories.insert(*iter);
 		}
 	}
+	/////////////////////////
 
 	assert(strategicValue >= 0);
 
@@ -178,7 +183,7 @@ void SimplePlayerAI::executeArmyAttacks(const std::vector<Territory*> &borderTer
 	{
 		// Only players without a liege can execute army attacks.
 		assert(!player.getRealm().hasLiege());
-		assert(territory->getEstateOwner()->getRealm().sameUpperRealm(player));
+		assert(sameRealm(&player, territory->getEstateOwner()));
 
 		LandArmy *army = player.getMilitaryManager().getArmy(territory);
 		if(army != nullptr)
@@ -361,7 +366,7 @@ void SimplePlayerAI::executeFleetAttacks(const std::vector<Territory*>& borderTe
 	{
 		// Only players without a liege can execute army attacks.
 		assert(!player.getRealm().hasLiege());
-		assert(territory->getEstateOwner()->getRealm().sameUpperRealm(player));
+		assert(sameRealm(territory->getEstateOwner(), &player));
 
 		NavalFleet *fleet = player.getMilitaryManager().getFleet(territory);
 		if(fleet != nullptr)
@@ -377,12 +382,11 @@ void SimplePlayerAI::executeFleetAttack(NavalFleet &fleet)
 	int availableStrength = fleet.getStrength(attackStamina);
 	Territory &territory = fleet.getTerritory();
 	// Enemy adjacencies include neutral/unowned territories.
-	const std::set<Territory*> enemyTerritories = context.getEnemyAdjacencies(territory, true); 
+	const std::set<Territory*> enemyTerritories = context.getEnemyAdjacencies(territory); 
 	for(std::set<Territory*>::iterator iter = enemyTerritories.begin();
 		iter != enemyTerritories.end(); ++iter)
 	{
 		// Handle case when adjacent territory is a NavalTerritory.
-		// CAN JUST CALL GETTYPE() RATHER THAN CASTING?	
 		NavalTerritory* navalTerritory = dynamic_cast<NavalTerritory*>(*iter);
 		if(navalTerritory != nullptr)
 		{

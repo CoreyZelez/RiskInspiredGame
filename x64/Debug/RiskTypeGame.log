@@ -1,144 +1,27 @@
-﻿  Barony.cpp
-d:\projects\risktypegame\risktypegame\barony.cpp(49): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(49): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(79): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(79): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(136): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(136): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(140): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(140): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(146): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(146): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(149): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\projects\risktypegame\risktypegame\barony.cpp(149): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-  Estate.cpp
-  EstateAllocator.cpp
-  EstateAllocatorUnitTest.cpp
-  EstateMaker.cpp
-  EstateManager.cpp
-  EstateTest.cpp
-  Game.cpp
-  GameController.cpp
-  GameDisplay.cpp
-  GameUIController.cpp
-  Grid.cpp
-d:\projects\risktypegame\risktypegame\grid.cpp(455): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\grid.cpp(455): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\grid.cpp(486): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
-d:\projects\risktypegame\risktypegame\grid.cpp(507): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
-d:\projects\risktypegame\risktypegame\grid.cpp(595): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\grid.cpp(595): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\grid.cpp(596): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\grid.cpp(596): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
-  HashFunctions.cpp
-d:\projects\risktypegame\risktypegame\hashfunctions.cpp(32): warning C4244: 'argument': conversion from 'const T' to 'const _Kty', possible loss of data
-          with
-          [
-              T=float
-          ]
-          and
-          [
-              _Kty=int
-          ]
-d:\projects\risktypegame\risktypegame\hashfunctions.cpp(33): warning C4244: 'argument': conversion from 'const T' to 'const _Kty', possible loss of data
-          with
-          [
-              T=float
-          ]
-          and
-          [
-              _Kty=int
-          ]
-  LandArmy.cpp
-d:\projects\risktypegame\risktypegame\landarmy.cpp(55): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\landarmy.cpp(56): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-  LandTerritory.cpp
-  LandTerritoryOccupancy.cpp
-  LandedEstate.cpp
-  Map.cpp
-  MapDisplay.cpp
-  MapMaker.cpp
-  Generating Code...
-d:\projects\risktypegame\risktypegame\title.h(39): warning C4172: returning address of local variable or temporary: originalTitle
-d:\projects\risktypegame\risktypegame\barony.cpp(90): warning C4715: 'Barony::yieldNavalFleet': not all control paths return a value
-  Compiling...
-  Maridom.cpp
-  MilitaryForce.cpp
-  MilitaryForceGraphics.cpp
-d:\projects\risktypegame\risktypegame\militaryforcegraphics.cpp(13): warning C4305: 'argument': truncation from 'double' to 'T'
-          with
-          [
-              T=float
-          ]
-  MilitaryManager.cpp
-d:\projects\risktypegame\risktypegame\militarymanager.cpp(39): warning C4305: 'initializing': truncation from 'double' to 'float'
-d:\projects\risktypegame\risktypegame\militarymanager.cpp(59): warning C4305: 'initializing': truncation from 'double' to 'float'
-d:\projects\risktypegame\risktypegame\militarymanager.cpp(195): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\militarymanager.cpp(195): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\militarymanager.cpp(209): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  NavalFleet.cpp
-d:\projects\risktypegame\risktypegame\navalfleet.cpp(100): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\navalfleet.cpp(100): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\navalfleet.cpp(101): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\navalfleet.cpp(101): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\navalfleet.cpp(127): warning C4804: '<=': unsafe use of type 'bool' in operation
-d:\projects\risktypegame\risktypegame\navalfleet.cpp(143): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\navalfleet.cpp(144): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-  NavalTerritory.cpp
-  NavalTerritoryOccupancy.cpp
-  Player.cpp
-  PlayerAIContext.cpp
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(85): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(113): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(259): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(309): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(365): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\playeraicontext.cpp(387): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-  PlayerEstateManager.cpp
-d:\projects\risktypegame\risktypegame\playerestatemanager.cpp(105): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Port.cpp
-  Realm.cpp
-  RealmGrid.cpp
-  ReconcileLandedEstates.cpp
-  SimplePlayerAI.cpp
+﻿  SimplePlayerAI.cpp
 d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(91): warning C4305: 'initializing': truncation from 'double' to 'float'
 d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(92): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(208): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(218): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(285): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(285): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(318): warning C4018: '<=': signed/unsigned mismatch
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(327): warning C4305: 'initializing': truncation from 'double' to 'float'
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(328): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(334): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(334): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(215): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(225): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(292): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(292): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(325): warning C4018: '<=': signed/unsigned mismatch
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(334): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(335): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(341): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(341): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(348): warning C4018: '<=': signed/unsigned mismatch
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(393): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(403): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(465): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(465): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(507): warning C4305: 'initializing': truncation from 'double' to 'float'
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(508): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(348): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(348): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(355): warning C4018: '<=': signed/unsigned mismatch
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(399): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(409): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(471): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(471): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(513): warning C4305: 'initializing': truncation from 'double' to 'float'
 d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(514): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(514): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(521): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(521): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
-d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(528): warning C4018: '<=': signed/unsigned mismatch
-  SpriteGraphicsComponent.cpp
-  StrengthSlider.cpp
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(43): warning C4804: '<=': unsafe use of type 'bool' in operation
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(44): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(44): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
-  Territory.cpp
-  TerritoryDistanceMap.cpp
-  TerritoryMaker.cpp
-  Generating Code...
-  Compiling...
-  TerritoryManager.cpp
-  Title.cpp
-  Utility.cpp
-  VassalManager.cpp
-  Generating Code...
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(520): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(520): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(527): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(527): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(534): warning C4018: '<=': signed/unsigned mismatch
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe

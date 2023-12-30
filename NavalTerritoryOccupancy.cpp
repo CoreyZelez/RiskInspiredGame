@@ -130,12 +130,11 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 	}
 
 	// Kill enemy land armies occupying this territory.
-	if(army != nullptr && &army->getOwner() != mostRecentOccupant)
+	if((army != nullptr) && (&army->getOwner() != mostRecentOccupant))
 	{
 		assert(!army->isDead());
 		// Kill the army occupying this territory.
 		army->clearStrength();  
-		assert(army->isDead());
 		army = nullptr;
 	}
 

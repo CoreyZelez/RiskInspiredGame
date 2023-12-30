@@ -57,3 +57,15 @@ const Realm& Player::getRealm() const
 {
 	return realm;
 }
+
+bool sameRealm(const Player *player1, const Player * player2)
+{
+	if(player1 == nullptr || player2 == nullptr)
+	{
+		return false;
+	}
+	else
+	{
+		return player1->getRealm().sameUpperRealm(*player2);
+	}
+}

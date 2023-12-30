@@ -25,7 +25,7 @@ int main()
 
 	MapMaker mapMaker("empty");
 
-	Game game("debugmap");
+	Game game("test");
 
 	GameDisplay gameDisplay = game.createView();
 	GameUI gameUI;

@@ -1,5 +1,6 @@
 #include "TerritoryDistanceMap.h"
 #include "Territory.h"
+#include "Player.h"
 #include <assert.h>
 #include <queue>
 #include <iostream>
@@ -41,20 +42,36 @@ bool TerritoryDistanceMap::isAdjacent(const Territory *territory) const
 	return adjacencies.count(const_cast<Territory*>(territory)) == 1;
 }
 
-bool TerritoryDistanceMap::noEnemyAdjacent(TerritoryType type) const
+bool TerritoryDistanceMap::hasEnemyAdjacencies(TerritoryType type) const
 {
+	assert(territory.getEstateOwner() != nullptr);
 	for(const auto &adjacency : adjacencies)
 	{
+		const Player* estateOwner = adjacency->getEstateOwner();
 		if(adjacency->getType() != type)
 		{
 			continue;
 		}
-		if(adjacency->getEstateOwner() != territory.getEstateOwner())
+		else if(!sameRealm(territory.getEstateOwner(), adjacency->getEstateOwner()))
 		{
-			return false;
+			return true;
 		}
 	}
-	return true;
+	return false;
+}
+
+bool TerritoryDistanceMap::hasEnemyAdjacencies() const
+{
+	assert(territory.getEstateOwner() != nullptr);
+	for(const auto &adjacency : adjacencies)
+	{
+		const Player* estateOwner = adjacency->getEstateOwner();
+		if(!sameRealm(territory.getEstateOwner(), adjacency->getEstateOwner()))
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 const std::set<Territory*>& TerritoryDistanceMap::getAdjacencies() const

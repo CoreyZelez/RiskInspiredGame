@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Game.h"
 #include "Territory.h"
+#include "Player.h"
 #include <queue>
 #include <set>
 #include <iostream>
@@ -21,29 +22,23 @@ std::vector<Territory*> PlayerAIContext::getBorderTerritories()
 
 	for(Territory* territory : realmTerritories)
 	{
-		//const Player &lig = territory->getEstateOwner()->getRealm().getUpperRealmRuler();
-		//assert(&lig == &player);
-		assert(territory->getEstateOwner()->getRealm().sameUpperRealm(player));
+		assert(sameRealm(&player, territory->getEstateOwner()));
 
 		// Add territory to border territories if one of its adjacencies is enemy owned.
-		const std::set<Territory*> &adjacencies = territory->getDistanceMap().getAdjacencies();
-		for(const auto &adjacency : adjacencies)
+		if(territory->getDistanceMap().hasEnemyAdjacencies())
 		{
-			// Checks whether adjacent territory is apart of realms territories.
-			if(realmTerritories.count(const_cast<Territory*>(adjacency)) == 0)
-			{
-				// Territory is border territory since an adjacent territory is apart of enemy player realm.
-				borderTerritories.push_back(territory);
-				break;
-			}
+			// Territory is border territory since an adjacent territory is apart of enemy player realm.
+			borderTerritories.push_back(territory);
 		}
 	}
 
 	return borderTerritories;
 }
 
-const std::set<Territory*> PlayerAIContext::getEnemyAdjacencies(Territory &territory, bool includeNeutral)
+const std::set<Territory*> PlayerAIContext::getEnemyAdjacencies(Territory &territory)
 {
+	const Player *territoryEstateOwner = territory.getEstateOwner();
+
 	const std::set<Territory*>& adjacencies = territory.getDistanceMap().getAdjacencies();
 	std::set<Territory*> enemyAdjacencies;
 
@@ -51,22 +46,21 @@ const std::set<Territory*> PlayerAIContext::getEnemyAdjacencies(Territory &terri
 	for(std::set<Territory*>::const_iterator iter = adjacencies.begin();
 		iter != adjacencies.end(); ++iter)
 	{
-		if(includeNeutral && (*iter)->getEstateOwner() != &player)
-		{
-			enemyAdjacencies.insert(*iter);
-		}
-		else if((*iter)->getEstateOwner() != &player && (*iter)->getEstateOwner() != nullptr)
+		const Player *adjacencyEstateOwner = (*iter)->getEstateOwner();
+		if(!sameRealm(territoryEstateOwner, adjacencyEstateOwner))
 		{
 			enemyAdjacencies.insert(*iter);
 		}
 	}
+
+	assert((enemyAdjacencies.size() > 0) == territory.getDistanceMap().hasEnemyAdjacencies());
 
 	return enemyAdjacencies;
 }
 
 std::map<const Player*, int> PlayerAIContext::getArmyWeightedThreats(const Territory &territory)
 {
-	const std::set<Territory*>& adjacencies = territory.getDistanceMap().getAdjacencies();
+	const std::set<Territory*> adjacencies = territory.getDistanceMap().getAdjacencies();
 	std::set<const Player*> enemyPlayers = {};
 	std::map<const Player*, int> weightedThreats;
 
@@ -75,7 +69,7 @@ std::map<const Player*, int> PlayerAIContext::getArmyWeightedThreats(const Terri
 		iter != adjacencies.end(); ++iter)
 	{
 		const Player *owner = (*iter)->getEstateOwner(); 
-		if(owner != nullptr && owner != &player)
+		if(owner != nullptr && !sameRealm(&player, owner))
 		{
 			enemyPlayers.insert(owner);
 		}
@@ -103,7 +97,7 @@ std::map<const Player*, int> PlayerAIContext::getFleetWeightedThreats(const Terr
 		iter != adjacencies.end(); ++iter)
 	{
 		const Player *owner = (*iter)->getEstateOwner();
-		if(owner != nullptr && owner != &player)
+		if(owner != nullptr && !sameRealm(&player, owner))
 		{
 			enemyPlayers.insert(owner);
 		}
@@ -239,8 +233,11 @@ std::unordered_map<const Territory*, std::unordered_map<int, std::vector<NavalFl
 
 int calculateFriendlyDistanceBFS(const Territory &territory1, const Territory &territory2, int maxDist) 
 {
-	// Ensure territories have the same owner
-	assert(territory1.getEstateOwner() == territory2.getEstateOwner());
+	// Ensure territories belong to same realm.
+	assert(sameRealm(territory1.getEstateOwner(), territory2.getEstateOwner()));
+
+	// Player whos territories we traverse.
+	const Player *player1 = territory1.getEstateOwner();
 
 	// Create a queue for BFS.
 	std::queue<const Territory*> bfsQueue;
@@ -257,20 +254,25 @@ int calculateFriendlyDistanceBFS(const Territory &territory1, const Territory &t
 	while(!bfsQueue.empty()) {
 		// Process all territories at the current distance
 		int currentQueueSize = bfsQueue.size();
-		for(int i = 0; i < currentQueueSize; ++i) {
+		for(int i = 0; i < currentQueueSize; ++i) 
+		{
 			const Territory* currentTerritory = bfsQueue.front();
 			bfsQueue.pop();
 
 			// Check if we reached territory2
-			if(currentTerritory == &territory2) {
+			if(currentTerritory == &territory2) 
+			{
 				return distance;
 			}
 
-			// Enqueue adjacent territories with the same owner
-			for(const Territory* neighbor : currentTerritory->getDistanceMap().getAdjacencies()) {
-				if(visited.find(neighbor) == visited.end() && neighbor->getEstateOwner() == territory1.getEstateOwner()) {
-					bfsQueue.push(neighbor);
-					visited.insert(neighbor);
+			// Enqueue adjacent territories belonging to same upper realm.
+			for(const Territory* neighbour : currentTerritory->getDistanceMap().getAdjacencies()) 
+			{
+				const Player *neighbourPlayer = neighbour->getEstateOwner();
+				if(visited.find(neighbour) == visited.end() && sameRealm(player1, neighbourPlayer))
+				{
+					bfsQueue.push(neighbour);
+					visited.insert(neighbour);
 				}
 			}
 		}
@@ -289,6 +291,7 @@ int calculateFriendlyDistanceBFS(const Territory &territory1, const Territory &t
 
 std::unordered_map<const Territory*, int> calculateFriendlyDistancesBFS(const Territory &sourceTerritory, const std::unordered_set<const Territory*>& territories, int maxDist)
 {
+	const Player *player = sourceTerritory.getEstateOwner();
 	std::unordered_map<const Territory*, int> distances;
 
 	// Create a queue for BFS.
@@ -318,10 +321,13 @@ std::unordered_map<const Territory*, int> calculateFriendlyDistancesBFS(const Te
 			}
 
 			// Enqueue adjacent territories with the same owner.
-			for(const Territory* neighbor : currentTerritory->getDistanceMap().getAdjacencies()) {
-				if(visited.find(neighbor) == visited.end() && neighbor->getEstateOwner() == sourceTerritory.getEstateOwner()) {
-					bfsQueue.push(neighbor);
-					visited.insert(neighbor);
+			for(const Territory* neighbour : currentTerritory->getDistanceMap().getAdjacencies()) 
+			{
+				const Player *neighbourPlayer = neighbour->getEstateOwner();
+				if(visited.find(neighbour) == visited.end() && sameRealm(player, neighbourPlayer))
+				{
+					bfsQueue.push(neighbour);
+					visited.insert(neighbour);
 				}
 			}
 		}

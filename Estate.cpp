@@ -317,7 +317,8 @@ int Estate::calculateLandedSubfiefOwnershipCount(const Player &player) const
 		if(landedEstate != nullptr)
 		{
 			// Since current estate is landed we can directly check for ownership by either ruler or a vassal.
-			if(landedEstate->getRuler() == &player || (ruler != nullptr && landedEstate->getRuler()->getRealm().isVassal(*ruler, false)))
+			if(landedEstate->getRuler() == &player || 
+				(landedEstate->getRuler() != nullptr && landedEstate->getRuler()->getRealm().isVassal(*ruler, false)))
 			{
 				++count;
 			}
@@ -395,8 +396,8 @@ void Estate::setOwnership(Player *ruler)
 	{
 		return;
 	}
-	// Case rulers are not nullptr and apart of same upper realm.
-	if(ruler != nullptr && this->ruler != nullptr && ruler->getRealm().sameUpperRealm(*this->ruler))
+	// Case rulers are friendly. If any ruler is nullptr they are considered non-friendly.
+	if(sameRealm(ruler, this->ruler))
 	{
 		return;
 	}
@@ -505,8 +506,8 @@ void Estate::handleLowerEstateChange(const Estate &subfief)
 		// ruler who has no liege and lower estate belongs to their realm.
 		handleAllocation();
 	}
-	// This estate already apart of same upper realm.
-	else if(subfief.ruler != nullptr && ruler->getRealm().sameUpperRealm(*subfief.ruler))
+	// This estate already apart of same realm.
+	else if(sameRealm(ruler, subfief.ruler))
 	{
 		// Do nothing.
 	}

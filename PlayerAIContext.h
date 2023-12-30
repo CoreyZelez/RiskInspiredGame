@@ -20,37 +20,41 @@ public:
 	PlayerAIContext(Player &player, Game &game);
 
 	/*
-	Returns vector of owned territories that lie on player's border.
-	*/
+	 * Returns vector of owned territories that lie on player's border.
+	 */
 	std::vector<Territory*> getBorderTerritories();
 
-	/*
-	Returns adjacent territories to territory that are controlled by an enemy player.
-	*/
-	const std::set<Territory*> getEnemyAdjacencies(Territory &territory, bool includeNeutral = false);
+
+	///////
+	// THIS FUNCTION CAN BE PERFORMED BY THE TERRITORY CLASS!!!
+	// IN FUTURE MOVE IT.
+	////
+	// Returns adjacent territories to territory that are controlled by an enemy player.
+	// Considers unoccupied territories as enemy territories.
+	const std::set<Territory*> getEnemyAdjacencies(Territory &territory);
 
 	/* 
-	Returns a map of enemy players to int values. Integer values represent
-	a threat score of the enemy player's armies to the territory. Closer and 
-	larger enemy militaries contributed greater values to the score.
-	*/
+	 * Returns a map of enemy players to int values. Integer values represent
+	 * a threat score of the enemy player's armies to the territory. Closer and 
+	 * larger enemy militaries contributed greater values to the score.
+	 */
 	std::map<const Player*, int> getArmyWeightedThreats(const Territory &territory);
 
 	/*
-	Returns a map of enemy players to int values. Integer values represent
-	a threat score of the enemy player's fleets to the territory. Closer and
-	larger enemy fleets contributed greater values to the score.
-	*/
+	 * Returns a map of enemy players to int values. Integer values represent
+	 * a threat score of the enemy player's fleets to the territory. Closer and
+	 * larger enemy fleets contributed greater values to the score.
+	 */
 	std::map<const Player*, int> getFleetWeightedThreats(const Territory &territory);
 
 	/*
-	Returns a map of pairs of territory and distance to a vector of land armies.
-	*/
+	 * Returns a map of pairs of territory and distance to a vector of land armies.
+	 */
 	std::unordered_map<const Territory*, std::unordered_map<int, std::vector<LandArmy*>>> getArmyBorderDistances(int maxDist);
 
 	/*
-	Returns a map of pairs of territory and distance to a vector of naval fleets.
-	*/
+	 * Returns a map of pairs of territory and distance to a vector of naval fleets.
+	 */
 	std::unordered_map<const Territory*, std::unordered_map<int, std::vector<NavalFleet*>>> getFleetBorderDistances(int maxDist);
 
 private:

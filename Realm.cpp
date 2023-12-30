@@ -154,7 +154,7 @@ const Player& Realm::getUpperRealmRuler() const
 	const Player *upperLiege = &ruler;
 	while(upperLiege->getRealm().liege != nullptr)
 	{
-		upperLiege = liege;
+		upperLiege = upperLiege->getRealm().liege;
 	}
 	return *upperLiege;
 }
@@ -174,13 +174,14 @@ Player& Realm::addEstate(Estate &estate)
 
 void Realm::removeEstate(Estate &estate)
 {
-	// TEMPORARY FUNCTION IMPLEMENTATION. 
 	if(rulerEstateManager.containsEstate(estate))
 	{
+		assert(estate.compareRuler(&ruler));
 		rulerEstateManager.removeEstate(estate);
 	}
 	else
 	{
+		assert(!estate.compareRuler(&ruler));
 		assert(vassalManager.containsEstate(estate));
 		vassalManager.removeEstate(estate);
 	}

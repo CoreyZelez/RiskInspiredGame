@@ -19,8 +19,13 @@ public:
 
 	bool isAdjacent(const Territory *territory) const;
 
-	// Returns true if no adjacent enemy territories.
-	bool noEnemyAdjacent(TerritoryType type) const;
+	// Returns true if any adjacent territory of given type is hostile.
+	// Nullptr owner is considered hostile.
+	bool hasEnemyAdjacencies(TerritoryType type) const;
+
+	// Returns true if any adjacent territory is hostile.
+	// Nullptr owner is considered hostile.
+	bool hasEnemyAdjacencies() const;
 
 	const std::set<Territory*> &getAdjacencies() const;
 	std::set<Territory*> &getAdjacencies();

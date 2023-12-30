@@ -32,3 +32,7 @@ private:
 	Realm realm;
 	bool isHuman = false;
 };
+
+// Returns true if players share the same upper realm i.e. are friendly.
+// Returns false if either player is nullptr.
+bool sameRealm(const Player *player1, const Player *player2);
