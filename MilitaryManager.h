@@ -47,17 +47,8 @@ public:
 	void addNavalFleet(std::unique_ptr<NavalFleet> fleet);
 
 private:
-	void removeDeadMilitaries();
-	void resetStaminas();
-	// Distributes army reinforcements to preexisting armies proportionate to strength.
-	void distributeArmyReinforcements();
-
-	// BE CAREFUL DELETING FROM BELOW LISTS AS POINTERS POTENTIALLY HELD IN TERRITORIES!!!
-	std::set<MilitaryForce*> militaries;  // Holds handle to every army and navy in manager.
-
-	//
-	// IN FUTURE MAYBE CAN MAKE ARMIES AND NAVIES BE AN STD::MAP WITH TERRITORY THE KEY FOR GREATER EFFICIENCY WITH AI!!!
-	//
+	// Holds handle to every army and navy in manager.
+	std::set<MilitaryForce*> militaries;  
 	std::vector<std::unique_ptr<LandArmy>> armies;  
 	std::vector<std::unique_ptr<NavalFleet>> fleets;
 
@@ -69,5 +60,10 @@ private:
 	double fleetReinforcements = 0;
 	// Fleet strength held in reserve for various possible actions.
 	double fleetReserves = 0;
+
+	void removeDeadMilitaries();
+	void resetStaminas();
+	// Distributes army reinforcements to preexisting armies proportionate to strength.
+	void distributeArmyReinforcements();
 };
 

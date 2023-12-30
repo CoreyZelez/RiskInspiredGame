@@ -20,7 +20,7 @@ void PlayerEstateManager::handleMilitaryYields()
 		estate->provideSubfiefBonusYields();
 	}
 
-	// Yield resources (currently just military units and potentially always just military units).
+	// Yield resources.
 	// Use a copy of fiefs due to possible resizing when yielding troops as in particular
 	// naval units may occupy an unowned naval territory.
 	std::unordered_set<Estate*> preEstates = estates;

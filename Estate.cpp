@@ -171,7 +171,7 @@ void Estate::provideSubfiefBonusYields()
 		bonus = 0.5f;
 		break;
 	case Title::duchy:
-		bonus = 0.5f;
+		bonus = 0.4f;
 		break;
 	case Title::kingdom:
 		bonus = 0.3f;

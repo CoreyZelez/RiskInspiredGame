@@ -54,6 +54,7 @@ std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 	else
 	{
 		// Yield entirely to reserves since ruler is a vassal.
+		getRuler()->getMilitaryManager().addArmyReserves(landArmyYield);
 	}
 
 	return nullptr;
@@ -86,6 +87,7 @@ std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
 	else
 	{
 		// Yield entirely to reserves since ruler is a vassal.
+		getRuler()->getMilitaryManager().addFleetReserves(navalFleetYield);
 	}
 }
 
