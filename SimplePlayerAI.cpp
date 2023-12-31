@@ -390,9 +390,9 @@ void SimplePlayerAI::executeFleetAttack(NavalFleet &fleet)
 		NavalTerritory* navalTerritory = dynamic_cast<NavalTerritory*>(*iter);
 		if(navalTerritory != nullptr)
 		{
-			const LandArmy *enemyArmy = navalTerritory->getOccupancyHandler()->getArmy();
+			const NavalFleet *enemyFleet = navalTerritory->getOccupancyHandler()->getFleet();
 
-			if(enemyArmy == nullptr)
+			if(enemyFleet == nullptr)
 			{
 				int attackStrength = 0.3 * availableStrength;
 
@@ -402,7 +402,7 @@ void SimplePlayerAI::executeFleetAttack(NavalFleet &fleet)
 				}
 				fleet.move(*navalTerritory, attackStrength);
 			}
-			else if(enemyArmy->getTotalStrength() < 0.1 * availableStrength)
+			else if(enemyFleet->getTotalStrength() < 0.1 * availableStrength)
 			{
 				int attackStrength = 0.4 * availableStrength;
 				if(attackStrength == 0)
@@ -411,7 +411,7 @@ void SimplePlayerAI::executeFleetAttack(NavalFleet &fleet)
 				}
 				fleet.move(*navalTerritory, attackStrength);
 			}
-			else if(enemyArmy->getTotalStrength() < 0.6 * availableStrength)
+			else if(enemyFleet->getTotalStrength() < 0.6 * availableStrength)
 			{
 				fleet.move(*navalTerritory, availableStrength);
 			}
