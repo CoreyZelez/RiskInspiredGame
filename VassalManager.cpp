@@ -22,7 +22,7 @@ void VassalManager::drawVassalRealms(sf::RenderWindow &window) const
 Player& VassalManager::createVassal(Barony &barony)
 {
 	Player& newVassal = game.createPlayer();
-	newVassal.getRealm().setLiege(&ruler);
+	newVassal.setLiege(&ruler);
 	vassals.push_back(&newVassal);
 	conferEstate(newVassal, barony);
 	return newVassal;

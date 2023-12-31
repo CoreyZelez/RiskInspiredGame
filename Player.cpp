@@ -28,6 +28,26 @@ void Player::handleTurn()
 	}
 }
 
+bool Player::hasLiege() const
+{
+	return liege != nullptr;
+}
+
+const Player* Player::getLiege() const
+{
+	return liege;
+}
+
+Player * Player::getLiege()
+{
+	return liege;
+}
+
+void Player::setLiege(Player * player)
+{
+	liege = player;
+}
+
 void Player::setHuman()
 {
 	isHuman = true;
@@ -58,7 +78,62 @@ const Realm& Player::getRealm() const
 	return realm;
 }
 
-bool sameRealm(const Player *player1, const Player * player2)
+bool Player::sameUpperLiege(const Player &player) const
+{
+	const Player &upperLiege1 = getUpperLiege();
+	const Player &upperLiege2 = player.getUpperLiege();
+	return &upperLiege1 == &upperLiege2;
+}
+
+Player& Player::getUpperLiege()
+{
+	Player *upperLiege = this;
+	while(upperLiege->liege != nullptr)
+	{
+		upperLiege = upperLiege->liege;
+	}
+	return *upperLiege;
+}
+
+const Player& Player::getUpperLiege() const
+{
+	const Player *upperLiege = this;
+	while(upperLiege->liege != nullptr)
+	{
+		upperLiege = upperLiege->liege;
+	}
+	return *upperLiege;
+}
+
+bool Player::isVassal(const Player &player, bool direct) const
+{
+	if(liege == &player)
+	{
+		return true;
+	}
+
+	// Don't check vassals if determining whether this->ruler is a direct vassal.
+	if(direct)
+	{
+		return false;
+	}
+
+	// Check if realm's ruler is an indirect vassal of player.
+	// Iterates through liege hierarchy of ruler to check for occurrence of player.
+	const Player *currLiege = liege;
+	while(currLiege != nullptr)
+	{
+		if(currLiege == &player)
+		{
+			return true;
+		}
+		currLiege = currLiege->liege;
+	}
+
+	return false;
+}
+
+bool sameRealm(const Player *player1, const Player *player2)
 {
 	if(player1 == nullptr || player2 == nullptr)
 	{
@@ -66,6 +141,8 @@ bool sameRealm(const Player *player1, const Player * player2)
 	}
 	else
 	{
-		return player1->getRealm().sameUpperRealm(*player2);
+		return player1->sameUpperLiege(*player2);
 	}
 }
+
+

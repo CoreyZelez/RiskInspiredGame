@@ -15,7 +15,7 @@ void MapDisplay::draw(sf::RenderWindow &window) const
 		map.getEstateManager().drawUnownedMaridoms(window);
 		for(const auto &player : players)
 		{
-			if(!player.get()->getRealm().hasLiege())
+			if(!player.get()->hasLiege())
 			{
 				player.get()->getRealm().draw(window);
 			}
@@ -25,7 +25,7 @@ void MapDisplay::draw(sf::RenderWindow &window) const
 		map.getEstateManager().drawUnownedMaridoms(window);
 		for(const auto &player : players)
 		{
-			if(!player.get()->getRealm().hasLiege())
+			if(!player.get()->hasLiege())
 			{
 				player.get()->getRealm().draw(window);
 			}

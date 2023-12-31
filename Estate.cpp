@@ -318,7 +318,7 @@ int Estate::calculateLandedSubfiefOwnershipCount(const Player &player) const
 		{
 			// Since current estate is landed we can directly check for ownership by either ruler or a vassal.
 			if(landedEstate->getRuler() == &player || 
-				(landedEstate->getRuler() != nullptr && landedEstate->getRuler()->getRealm().isVassal(*ruler, false)))
+				(landedEstate->getRuler() != nullptr && landedEstate->getRuler()->isVassal(*ruler, false)))
 			{
 				++count;
 			}
@@ -365,7 +365,7 @@ void Estate::receiveBonusYield(const float &bonus)
 	for(auto &subfief : subfiefs)
 	{
 		// Only provides bonus yield to subfief if owner is this ruler or a (direct or indirect) vassal of this ruler.
-		if(subfief->ruler == ruler || subfief->ruler->getRealm().isVassal(*ruler, false))
+		if(subfief->ruler == ruler || subfief->ruler->isVassal(*ruler, false))
 		{
 			subfief->receiveBonusYield(bonus);
 		}
@@ -462,8 +462,8 @@ Player* Estate::getLowerEstatesUpperRealmRuler()
 	if(subfiefs.size() == 0)
 	{
 		assert(ruler != nullptr);  // All lowest level estates should have a ruler (in current game design).
-		assert(&ruler->getRealm().getUpperRealmRuler() != nullptr);
-		return &ruler->getRealm().getUpperRealmRuler();
+		assert(&ruler->getUpperLiege() != nullptr);
+		return &ruler->getUpperLiege();
 	}
 
 	// Check that all subfiefs have a ruler. If not, impossible for all lower estates to belong to same realm.

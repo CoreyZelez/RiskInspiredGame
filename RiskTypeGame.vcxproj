@@ -171,6 +171,7 @@
     <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="HashFunctions.cpp" />
     <ClCompile Include="LandTerritoryOccupancy.cpp" />
+    <ClCompile Include="LiegePolicy.cpp" />
     <ClCompile Include="Maridom.cpp" />
     <ClCompile Include="NavalTerritoryOccupancy.cpp" />
     <ClCompile Include="PlayerAIContext.cpp" />
@@ -233,6 +234,7 @@
     <ClCompile Include="UIEntity.cpp" />
     <ClCompile Include="UIPanel.cpp" />
     <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="VassalPolicy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EstateAllocatorUnitTest.h" />
@@ -240,6 +242,7 @@
     <ClInclude Include="HashFunctions.h" />
     <ClInclude Include="IOccupiable.h" />
     <ClInclude Include="LandTerritoryOccupancy.h" />
+    <ClInclude Include="LiegePolicy.h" />
     <ClInclude Include="Maridom.h" />
     <ClInclude Include="NavalTerritoryOccupancy.h" />
     <ClInclude Include="PlayerAIContext.h" />
@@ -305,6 +308,7 @@
     <ClInclude Include="UIEntity.h" />
     <ClInclude Include="UIPanel.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="VassalPolicy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

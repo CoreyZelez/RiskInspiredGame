@@ -13,7 +13,7 @@ SimplePlayerAI::SimplePlayerAI(Game &game, Player &player)
 
 void SimplePlayerAI::handleTurn()
 {
-	if(getPlayer().getRealm().hasLiege())
+	if(getPlayer().hasLiege())
 	{
 		handleTurnVassal();
 	}

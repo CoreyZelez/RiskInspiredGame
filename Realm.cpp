@@ -97,61 +97,6 @@ void Realm::handleMilitaryYields()
 	rulerEstateManager.handleMilitaryYields();
 }
 
-bool Realm::isVassal(const Player &player, bool direct) const
-{
-	if(liege == &player)
-	{
-		return true;
-	}
-
-	// Don't check vassals if determining whether this->ruler is a direct vassal.
-	if(direct)
-	{
-		return false;
-	}
-
-	// Check if realm's ruler is an indirect vassal of player.
-	// Iterates through liege hierarchy of ruler to check for occurrence of player.
-	const Player *currLiege = ruler.getRealm().getLiege();
-	while(currLiege != nullptr)
-	{
-		if(currLiege == &player)
-		{
-			return true;
-		}
-		currLiege = currLiege->getRealm().getLiege();
-	}
-
-	return false;
-}
-
-bool Realm::sameUpperRealm(const Player &player) const
-{
-	const Player &upperLiege1 = player.getRealm().getUpperRealmRuler();
-	const Player &upperLiege2 = ruler.getRealm().getUpperRealmRuler();
-	return &upperLiege1 == &upperLiege2;
-}
-
-Player& Realm::getUpperRealmRuler()
-{
-	Player *upperLiege = &ruler;
-	while(upperLiege->getRealm().liege != nullptr)
-	{
-		upperLiege = upperLiege->getRealm().liege;
-	}
-	return *upperLiege;
-}
-
-const Player& Realm::getUpperRealmRuler() const
-{
-	const Player *upperLiege = &ruler;
-	while(upperLiege->getRealm().liege != nullptr)
-	{
-		upperLiege = upperLiege->getRealm().liege;
-	}
-	return *upperLiege;
-}
-
 Player& Realm::addEstate(Estate &estate)
 {
 	const LandedEstate* landedEstate = dynamic_cast<const LandedEstate*>(&estate);
@@ -181,9 +126,9 @@ void Realm::removeEstate(Estate &estate)
 
 	// Recurse upon lieges to ensure estate and associated territory if landed is removed
 	// from all upper liege realms.
-	if(liege != nullptr)
+	if(ruler.getLiege() != nullptr)
 	{
-		liege->getRealm().removeEstate(estate);
+		ruler.getLiege()->getRealm().removeEstate(estate);
 	}
 
 	LandedEstate *landedEstate = dynamic_cast<LandedEstate*>(&estate);
@@ -232,21 +177,6 @@ void Realm::setGridColor(const sf::Color & color)
 void Realm::setGridColorDefault()
 {
 	realmGrid.setGridColorDefault();
-}
-
-bool Realm::hasLiege() const
-{
-	return liege != nullptr;
-}
-
-const Player * Realm::getLiege() const
-{
-	return liege;
-}
-
-void Realm::setLiege(Player *player)
-{
-	liege = player;
 }
 
 Title Realm::getHighestRulerTitle() const
@@ -439,7 +369,7 @@ Player& getGreatestUnlandedEstateInfluence(const Estate &estate, const std::vect
 			const Player* lowerEstateRuler = lowerEstate->getRuler();
 			assert(lowerEstateRuler != nullptr);
 			// Add influence score to player if player is a ruler of lower estate or has a direct or indirect vassal ruling lower estate.
-			if(player == lowerEstateRuler || lowerEstateRuler->getRealm().isVassal(*player, false))
+			if(player == lowerEstateRuler || lowerEstateRuler->isVassal(*player, false))
 			{
 				const Title title = lowerEstate->getTitle();
 				influenceScores[player] += subfiefInfluenceContributions[title];

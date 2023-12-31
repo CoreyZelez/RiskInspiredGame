@@ -27,7 +27,7 @@ void Barony::saveToFile(std::ofstream &file) const
 
 std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 {
-	if(!getRuler()->getRealm().hasLiege())
+	if(!getRuler()->hasLiege())
 	{
 		// Percent of yielded army allocated to reinforcement.
 		const float armyReinforcementRate = getRuler()->getMilitaryManager().getArmyReinforcementRate();
@@ -62,7 +62,7 @@ std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 
 std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
 {
-	if(!getRuler()->getRealm().hasLiege())
+	if(!getRuler()->hasLiege())
 	{
 		if(!landTerritory.hasPort())
 		{
@@ -132,7 +132,7 @@ std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 
 void Barony::receiveBonusYield(const float &bonus)
 {
-	if(!getRuler()->getRealm().hasLiege())
+	if(!getRuler()->hasLiege())
 	{
 		// Yield all land army units as reinforcements.
 		const float armyReinforcements = landArmyYield * bonus;

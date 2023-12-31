@@ -23,21 +23,6 @@ public:
 	// Handles yields of ruler estates.
 	void handleMilitaryYields();
 
-	// Returns true if realm owner is a indirect or direct vassal of player. Optionally specify direct vassal only.
-	bool isVassal(const Player &player, bool direct = true) const;
-	// Returns true if player belongs to same upper realm as this->player.
-	bool sameUpperRealm(const Player &player) const;
-	// Returns the ruler of the upper most realm which player belongs to.
-	Player& getUpperRealmRuler();
-	// Returns the ruler of the upper most realm which player belongs to.
-	const Player& getUpperRealmRuler() const;
-	// Returns true if liege is not nullptr.
-	bool hasLiege() const;
-	// Returns liege.
-	const Player* getLiege() const;
-	// Sets liege.
-	void setLiege(Player *player);
-
 	// Adds estate to realm, conferring to ruler or a vassal. 
 	// Returns the player which estate is conferred to for territory to.
 	Player& addEstate(Estate &estate);
@@ -63,7 +48,6 @@ public:
 
 private:
 	Player &ruler;  // Ruler of this realm.
-	Player *liege = nullptr;  // Liege of ruler of this realm.
 	PlayerEstateManager rulerEstateManager;  // Manages estates directly controlled by ruler.
 	VassalManager vassalManager;  // Manages vassals and their estates.
 	RealmGrid realmGrid;  // Grid of entire realm estates.
