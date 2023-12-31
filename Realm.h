@@ -8,13 +8,14 @@
 #include <vector>
 
 class Player;
+class LiegePolicy;
 class Estate;
 class Game;
 
 class Realm : public HasUI
 {
 public:
-	Realm(Game &game, Player &ruler);
+	Realm(Game &game, Player &ruler, const LiegePolicy &liegePolicy);
 
 	void draw(sf::RenderWindow &window) const;
 
@@ -48,18 +49,11 @@ public:
 
 private:
 	Player &ruler;  // Ruler of this realm.
+	const LiegePolicy &liegePolicy;
 	PlayerEstateManager rulerEstateManager;  // Manages estates directly controlled by ruler.
 	VassalManager vassalManager;  // Manages vassals and their estates.
 	RealmGrid realmGrid;  // Grid of entire realm estates.
 	bool drawVassalRealms = false;  // Specifies to draw realms of vassals over entire realm grid.
-
-	// Limit on rulers directly controlled baronies.
-	int rulerBaronyLimit = 3;
-	// Limit on rulers controlled unlanded estates. Estate with title greater than realms
-	// highest estate title is automatically granted to ruler despite limit.
-	int rulerUnlandedLimit = 7;
-	// Limit on rulers number of vassals.
-	int rulerVassalLimit = 14;
 
 	// Confers the estate to ruler or a vassal. Returns the player estate is conferred to.
 	// This function does not update the estates ownership. It should only be called by the 

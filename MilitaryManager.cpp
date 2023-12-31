@@ -42,16 +42,16 @@ float MilitaryManager::getArmyReinforcementRate() const
 	return std::min(rate, maxRate);
 }
 
-void MilitaryManager::addArmyReinforcements(double reinforcements)
+void MilitaryManager::addArmyReinforcements(double amount)
 {
-	assert(reinforcements >= 0);
-	armyReinforcements += reinforcements;
+	assert(amount >= 0);
+	armyReinforcements += amount;
 }
 
-void MilitaryManager::addArmyReserves(double reserves)
+void MilitaryManager::addArmyReserves(double amount)
 {
-    assert(reserves >= 0);
-    armyReinforcements += reserves;
+    assert(amount >= 0);
+    armyReinforcements += amount;
 }
 
 float MilitaryManager::getFleetReinforcementRate() const
@@ -62,16 +62,16 @@ float MilitaryManager::getFleetReinforcementRate() const
 	return std::min(rate, maxRate);
 }
 
-void MilitaryManager::addFleetReinforcements(double reinforcements)
+void MilitaryManager::addFleetReinforcements(double amount)
 {
-	assert(reinforcements >= 0);
-	fleetReinforcements += reinforcements;
+	assert(amount >= 0);
+	amount += amount;
 }
 
-void MilitaryManager::addFleetReserves(double reserves)
+void MilitaryManager::addFleetReserves(double amount)
 {
-	assert(reserves >= 0);
-	fleetReinforcements += reserves;
+	assert(amount >= 0);
+	amount += amount;
 }
 
 LandArmy* MilitaryManager::getArmy(const Territory *territory)
@@ -129,12 +129,33 @@ int MilitaryManager::getTotalArmyStrength() const
 	return totalStrength;
 }
 
+int MilitaryManager::getTotalFleetStrength() const
+{
+	int totalStrength = 0;
+	for(const auto &fleet : fleets)
+	{
+		totalStrength += fleet.get()->getTotalStrength();
+	}
+	assert(totalStrength == getTotalArmyStrength(0));
+	return totalStrength;
+}
+
 int MilitaryManager::getTotalArmyStrength(int minStamina) const
 {
 	int totalStrength = 0;
 	for(const auto &army : armies)
 	{
 		totalStrength += army.get()->getStrength(minStamina);
+	}
+	return totalStrength;
+}
+
+int MilitaryManager::getTotalFleetStrength(int minStamina) const
+{
+	int totalStrength = 0;
+	for(const auto &fleet : fleets)
+	{
+		totalStrength += fleet.get()->getStrength(minStamina);
 	}
 	return totalStrength;
 }
@@ -211,6 +232,31 @@ void MilitaryManager::distributeArmyReinforcements()
 		armyReinforcements -= reinforcementAmount;
 		assert(armyReinforcements >= 0);
 		army.get()->increaseStrength(reinforcementAmount);
+	}
+}
+
+void MilitaryManager::distributeFleetReinforcements()
+{
+	// Number of reinforcements available prior to allocation.
+	const int totalReinforcementAmount = fleetReinforcements;
+	const int totalFleetStrength = getTotalFleetStrength();
+
+	// Allocates reinforcements to armies.
+	// There may be remaining reinforcement strength after this process.
+	// It will be deferred to next turn.
+	for(auto &fleet : fleets)
+	{
+		// No armies should be dead as they should have been removed prior to calling this function.
+		assert(fleet != nullptr);
+		assert(fleet.get()->getTotalStrength() > 0);
+
+		// Allocate reinforcement to armies proportionate to their strength.
+		const float strengthRatio = (float)fleet.get()->getTotalStrength() / (float)totalFleetStrength;
+		int reinforcementAmount = (float)totalReinforcementAmount * strengthRatio;
+		reinforcementAmount = std::min(reinforcementAmount, (int)fleetReinforcements);
+		fleetReinforcements -= reinforcementAmount;
+		assert(fleetReinforcements >= 0);
+		fleet.get()->increaseStrength(reinforcementAmount);
 	}
 }
 

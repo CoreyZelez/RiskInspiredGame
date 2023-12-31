@@ -19,6 +19,11 @@ public:
 
 	void handleTurn();
 
+	// Handles distribution of army reserves to player and their liege. Recurses to upper-most liege.
+	void handleReserveArmyYield(double amount);
+	// Handles distribution of fleet reserves to player and their liege. Recurses to upper-most liege.
+	void handleReserveFleetYield(double amount);
+
 	// Returns true if realm owner is a vassal of player. Optionally specify direct vassal only.
 	bool isVassal(const Player &player, bool direct = true) const;
 	// Returns true if player belongs to same upper realm as this->player.

@@ -6,15 +6,16 @@
 #include "FontManager.h"
 #include "RichText.h"
 #include "InformationPanel.h"
+#include "LiegePolicy.h"
 #include "Game.h"
 #include "Barony.h"
 #include <assert.h>
 #include <iostream>
 #include <unordered_map>
 
-Realm::Realm(Game &game, Player &ruler)
+Realm::Realm(Game &game, Player &ruler, const LiegePolicy &liegePolicy)
 	: ruler(ruler), rulerEstateManager(ruler.getMilitaryManager())
-	, vassalManager(game, ruler)
+	, vassalManager(game, ruler), liegePolicy(liegePolicy)
 {
 }
 
@@ -199,13 +200,13 @@ Player & Realm::allocate(Estate & estate)
 	else if(estateTitle == Title::barony)
 	{
 		// Confer barony to ruler.
-		if(rulerTitleCounts[Title::barony] < rulerBaronyLimit)
+		if(rulerTitleCounts[Title::barony] < liegePolicy.rulerBaronyLimit)
 		{
 			rulerEstateManager.addEstate(estate);
 			return ruler;
 		}
 		// Confer barony to new vassal.
-		else if(vassalManager.getVassals().size() < rulerVassalLimit)
+		else if(vassalManager.getVassals().size() < liegePolicy.rulerVassalLimit)
 		{
 			Barony *barony = dynamic_cast<Barony*>(&estate);
 			assert(barony != nullptr);  // Must hold as the estate title is barony.
@@ -245,7 +246,7 @@ Player & Realm::allocate(Estate & estate)
 			return ruler;
 		}
 		// Confer to ruler.
-		else if(countUnlandedEstates(rulerTitleCounts) < rulerUnlandedLimit)
+		else if(countUnlandedEstates(rulerTitleCounts) < liegePolicy.rulerUnlandedLimit)
 		{
 			rulerEstateManager.addEstate(estate);
 			return ruler;

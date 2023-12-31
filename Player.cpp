@@ -8,12 +8,12 @@
 #include <iostream>
 
 Player::Player(Game &game, AIPersonality personality)
-	: game(game), realm(game, *this)
+	: game(game), realm(game, *this, liegePolicy)
 {
 }
 
 Player::Player(Game& game)
-	: game(game), realm(game, *this), AIComponent(std::make_unique<SimplePlayerAI>(game, *this))
+	: game(game), realm(game, *this, liegePolicy), AIComponent(std::make_unique<SimplePlayerAI>(game, *this))
 {
 }
 
@@ -25,6 +25,52 @@ void Player::handleTurn()
 	if(!isHuman)
 	{
 		AIComponent.get()->handleTurn();
+	}
+}
+
+void Player::handleReserveArmyYield(double amount)
+{
+	if(liege != nullptr)
+	{
+		// Army amount yielded to player liege.
+		const double liegeYield = amount * vassalPolicy.liegeLevyContribution;
+		assert(liegeYield >= 0);
+		// Army amount yielded to player reserves.
+		const double playerYield = amount - liegeYield;
+		assert(vassalYield >= 0);
+
+		// Recurse on liege.
+		liege->handleReserveArmyYield(liegeYield);
+		// Add army to reserves since player has a liege.
+		militaryManager.addArmyReserves(playerYield);
+	}
+	else
+	{
+		// No liege so add army to reinforcements rather than reserves.
+		militaryManager.addArmyReinforcements(amount);
+	}
+}
+
+void Player::handleReserveFleetYield(double amount)
+{
+	if(liege != nullptr)
+	{
+		// Army amount yielded to player liege.
+		const double liegeYield = amount * vassalPolicy.liegeLevyContribution;
+		assert(liegeYield >= 0);
+		// Army amount yielded to player reserves.
+		const double playerYield = amount - liegeYield;
+		assert(vassalYield >= 0);
+
+		// Recurse on liege.
+		liege->handleReserveFleetYield(liegeYield);
+		// Add army to reserves since player has a liege.
+		militaryManager.addFleetReserves(playerYield);
+	}
+	else
+	{
+		// No liege so add army to reinforcements rather than reserves.
+		militaryManager.addFleetReinforcements(amount);
 	}
 }
 

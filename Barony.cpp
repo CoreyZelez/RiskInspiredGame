@@ -53,8 +53,8 @@ std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 	}
 	else
 	{
-		// Yield entirely to reserves since ruler is a vassal.
-		getRuler()->getMilitaryManager().addArmyReserves(landArmyYield);
+		// Yield to reserves and provide levies to liege. 
+		getRuler()->handleReserveArmyYield(landArmyYield);
 	}
 
 	return nullptr;
@@ -81,14 +81,14 @@ std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
 			cumulativeNavalFleet -= yield;
 			return putFleet(yield);
 		}
-
-		return nullptr;
 	}
 	else
 	{
-		// Yield entirely to reserves since ruler is a vassal.
-		getRuler()->getMilitaryManager().addFleetReserves(navalFleetYield);
+		// Yield to reserves and provide levies to liege. 
+		getRuler()->handleReserveFleetYield(navalFleetYield);
 	}
+
+	return nullptr;
 }
 
 std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
@@ -144,12 +144,12 @@ void Barony::receiveBonusYield(const float &bonus)
 	}
 	else
 	{
-		// Yield all land army units to reserves since ruler is a vassal.
+		// Yield army to reserves and provide levies to liege. 
 		const float armyReserves = landArmyYield * bonus;
-		getRuler()->getMilitaryManager().addArmyReserves(armyReserves);
-		// Yield all naval fleet units to reserves since ruler is a vassal.
+		getRuler()->handleReserveArmyYield(landArmyYield);
+		// Yield fleet to reserves and provide levies to liege. 
 		const float fleetReserves = navalFleetYield * bonus;
-		getRuler()->getMilitaryManager().addFleetReserves(fleetReserves);
+		getRuler()->handleReserveFleetYield(landArmyYield);
 	}
 }
 
