@@ -36,7 +36,7 @@ public:
 	virtual bool containsPosition(const sf::Vector2f &position) const;
 
 	// Yields any resources directly associated with estate. This does not include subfief resources.
-	virtual void yield(MilitaryManager &militaryManager);
+	virtual void yield();
 	// Provides bonus yields to subfiefs. Yield dependant on title.
 	virtual void provideSubfiefBonusYields();
 

@@ -31,7 +31,7 @@ void LandedEstate::update(Message message)
 	}
 }
 
-void LandedEstate::yield(MilitaryManager &militaryManager)
+void LandedEstate::yield()
 {
 	// Yields army if able to territory associated with estate.
 	std::unique_ptr<LandArmy> landArmy = yieldLandArmy();
@@ -39,11 +39,11 @@ void LandedEstate::yield(MilitaryManager &militaryManager)
 	std::unique_ptr<NavalFleet> navalFleet = yieldNavalFleet();
 	if(landArmy != nullptr)
 	{
-		militaryManager.addLandArmy(std::move(landArmy));
+		landArmy.get()->getOwner().getMilitaryManager().addLandArmy(std::move(landArmy));
 	}
 	if(navalFleet != nullptr)
 	{
-		militaryManager.addNavalFleet(std::move(navalFleet));
+		navalFleet.get()->getOwner().getMilitaryManager().addNavalFleet(std::move(navalFleet));
 	}
 }
 
@@ -67,7 +67,9 @@ std::unique_ptr<LandArmy> LandedEstate::putArmy(int strength)
 	assert(territory.getOccupancyHandler()->getOccupant() == nullptr 
 		|| territory.getOccupancyHandler()->getOccupant() == getRuler());
 
-	std::unique_ptr<LandArmy> army = std::make_unique<LandArmy>(*getRuler(), &territory, strength);
+	// Yield army to upper liege.
+	Player &upperLiege = getRuler()->getUpperLiege();
+	std::unique_ptr<LandArmy> army = std::make_unique<LandArmy>(upperLiege, &territory, strength);
 	territory.getOccupancyHandler()->occupy(army.get());
 
 	// Army merged with pre-existing army on territory.

@@ -185,7 +185,7 @@ void Estate::provideSubfiefBonusYields()
 	this->receiveBonusYield(bonus);
 }
 
-void Estate::yield(MilitaryManager &militaryManager)
+void Estate::yield()
 {
 }
 
@@ -391,11 +391,6 @@ Player* Estate::getRuler()
 
 void Estate::setOwnership(Player *ruler)
 {
-	// Case ruler is not changed.
-	if(this->ruler == ruler)
-	{
-		return;
-	}
 	// Case rulers are friendly. If any ruler is nullptr they are considered non-friendly.
 	if(sameRealm(ruler, this->ruler))
 	{
@@ -451,7 +446,7 @@ void Estate::handleAllocation()
 	Player *ruler = getLowerEstatesUpperRealmRuler();
 	if(ruler != nullptr)
 	{
-		assert(ruler->getRealm().hasLiege() == false);
+		assert(ruler->hasLiege() == false);
 		// Ruler's realm contains every lowest level estate of this estate thus gets granted this estate.
 		setOwnership(ruler);
 	}

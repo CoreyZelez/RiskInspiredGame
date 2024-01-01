@@ -61,31 +61,23 @@ std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 }
 
 std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
-{
-	if(!getRuler()->hasLiege())
+{	
+	if(!landTerritory.hasPort())
 	{
-		if(!landTerritory.hasPort())
-		{
-			return nullptr;
-		}
-
-		// Add navy per turn yield to cumulative yield.
-		cumulativeNavalFleet += navalFleetYield;
-
-		// Yield navy to territory and player if threshold surpassed.
-		// Only yields navy if territory has a port.
-		const int navalFleetThreshold = 2;  // Min cumulative value for yield to take place.
-		if(cumulativeNavalFleet >= navalFleetThreshold)
-		{
-			const int yield = cumulativeNavalFleet;
-			cumulativeNavalFleet -= yield;
-			return putFleet(yield);
-		}
+		return nullptr;
 	}
-	else
+
+	// Add navy per turn yield to cumulative yield.
+	cumulativeNavalFleet += navalFleetYield;
+
+	// Yield navy to territory and upper most liege of player if threshold surpassed.
+	// Only yields navy if territory has a port.
+	const int navalFleetThreshold = 4;  // Min cumulative value for yield to take place.
+	if(cumulativeNavalFleet >= navalFleetThreshold)
 	{
-		// Yield to reserves and provide levies to liege. 
-		getRuler()->handleReserveFleetYield(navalFleetYield);
+		const int yield = cumulativeNavalFleet;
+		cumulativeNavalFleet -= yield;
+		return putFleet(yield);
 	}
 
 	return nullptr;
@@ -98,7 +90,7 @@ std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 	// Should not be hostile army residing on this territory.
 	// There may however be a hostile army on the naval territory associated with the port.
 	assert(getTerritory().getOccupancyHandler()->getOccupant() == nullptr
-		|| getTerritory().getOccupancyHandler()->getOccupant() == getRuler());
+		|| sameRealm(getRuler(), getTerritory().getOccupancyHandler()->getOccupant()));
 
 	// Estate does not generate naval units if no port.
 	if(landTerritory.getPort() == nullptr)
@@ -109,12 +101,14 @@ std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 	// Territory we place the fleet on.
 	NavalTerritory &navalTerritory = landTerritory.getPort().get()->getNavalTerritory();
 
-	std::unique_ptr<NavalFleet> fleet = std::make_unique<NavalFleet>(*getRuler(), &navalTerritory, strength);
+	// Yield fleet to upper liege.
+	Player &upperLiege = getRuler()->getUpperLiege();
+	std::unique_ptr<NavalFleet> fleet = std::make_unique<NavalFleet>(upperLiege, &navalTerritory, strength);
 	// Attempt occupancy.
 	navalTerritory.getOccupancyHandler()->occupy(fleet.get());
 	// Repeatedly reattempy occupancy of naval territory until success or death of fleet.
 	// This is necessary since first attempt to occupy may fail whilst fleet still alive thus has no where to return to.
-	while(!fleet.get()->isDead() && navalTerritory.getOccupancyHandler()->getOccupant() != getRuler())
+	while(!fleet.get()->isDead() && !sameRealm(navalTerritory.getOccupancyHandler()->getOccupant(), getRuler()))
 	{
 		navalTerritory.getOccupancyHandler()->occupy(fleet.get());
 	}
@@ -147,9 +141,9 @@ void Barony::receiveBonusYield(const float &bonus)
 		// Yield army to reserves and provide levies to liege. 
 		const float armyReserves = landArmyYield * bonus;
 		getRuler()->handleReserveArmyYield(landArmyYield);
-		// Yield fleet to reserves and provide levies to liege. 
-		const float fleetReserves = navalFleetYield * bonus;
-		getRuler()->handleReserveFleetYield(landArmyYield);
+		// Yield all naval fleets to this barony and by extension the upper liege. 
+		const float fleetYield = navalFleetYield * bonus;
+		cumulativeNavalFleet += fleetYield;
 	}
 }
 

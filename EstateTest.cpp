@@ -44,7 +44,7 @@ void EstateTest::testBaronyYield()
 	barony.setOwnership(&player);
 
 	// Operation being tested.
-	barony.yield(player.getMilitaryManager());
+	barony.yield();
 
 	// First test.
 	testName = "Land army not nullptr.";

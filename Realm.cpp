@@ -14,15 +14,14 @@
 #include <unordered_map>
 
 Realm::Realm(Game &game, Player &ruler, const LiegePolicy &liegePolicy)
-	: ruler(ruler), rulerEstateManager(ruler.getMilitaryManager())
-	, vassalManager(game, ruler), liegePolicy(liegePolicy)
+	: ruler(ruler), vassalManager(game, ruler), liegePolicy(liegePolicy)
 {
 }
 
 void Realm::draw(sf::RenderWindow &window) const
 {
 	realmGrid.draw(window);
-	// Draw vassal realms on over entire realm grid if specified.
+	// Draw vassal realms on top of entire realm grid if specified.
 	if(drawVassalRealms)
 	{
 		vassalManager.drawVassalRealms(window);

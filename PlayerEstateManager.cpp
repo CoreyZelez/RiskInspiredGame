@@ -7,11 +7,6 @@
 #include <unordered_set>
 #include <iostream>
 
-PlayerEstateManager::PlayerEstateManager(MilitaryManager &militaryManager)
-	: militaryManager(militaryManager), estates(), territories()
-{
-}
-
 void PlayerEstateManager::handleMilitaryYields()
 {
 	// Provide bonus yields to fiefs contained in subfiefs under this player's control.
@@ -26,7 +21,7 @@ void PlayerEstateManager::handleMilitaryYields()
 	std::unordered_set<Estate*> preEstates = estates;
 	for(Estate* fief : preEstates)
 	{
-		fief->yield(militaryManager);
+		fief->yield();
 	}
 }
 

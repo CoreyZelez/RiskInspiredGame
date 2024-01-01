@@ -76,7 +76,7 @@ std::map<const Player*, int> PlayerAIContext::getArmyWeightedThreats(const Terri
 	}
 
 	// Calculated weighted threats of each enemy player.
-	const int distanceFactor = 1.5;  // Calculation uses squared distance.
+	const float distanceFactor = 1.5;  // Calculation uses squared distance.
 	for(std::set<const Player*>::const_iterator iter = enemyPlayers.begin(); 
 		iter != enemyPlayers.end(); ++iter)
 	{
@@ -104,7 +104,7 @@ std::map<const Player*, int> PlayerAIContext::getFleetWeightedThreats(const Terr
 	}
 
 	// Calculated weighted threats of each enemy player.
-	const int distanceFactor = 1.5;  // Calculation uses squared distance.
+	const float distanceFactor = 1.5;  // Calculation uses squared distance.
 	for(std::set<const Player*>::const_iterator iter = enemyPlayers.begin();
 		iter != enemyPlayers.end(); ++iter)
 	{

@@ -14,6 +14,7 @@ MilitaryForce::MilitaryForce(Player &owner, Territory *territory, unsigned int s
 {
 	assert(territory != nullptr);
 	assert(strength > 0);
+	assert(!owner.hasLiege());
 }
 
 MilitaryForce::MilitaryForce(Player & owner, Territory * territory, std::array<unsigned int, 4> staminaStrength, const std::string &shape)

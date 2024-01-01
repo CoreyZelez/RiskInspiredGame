@@ -20,7 +20,7 @@ private:
 	void setTextPositions(sf::Vector2f position);
 
 	std::vector<sfe::RichText> texts;
-	const float borderPadding = 10;
+	const float borderPadding = 6;
 	const float textPadding = -2;
 };
 

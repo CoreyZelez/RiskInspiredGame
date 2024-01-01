@@ -18,7 +18,7 @@ public:
 	virtual void update(Message message) override;
 
 	// Yields any resources directly associated with estate. This does not include subfief resources.
-	virtual void yield(MilitaryManager &militaryManager) override;
+	virtual void yield() override;
 
 	// Creates land army on some territory and returns handle to army.
 	virtual std::unique_ptr<LandArmy> yieldLandArmy() = 0;

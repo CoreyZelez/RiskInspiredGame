@@ -14,8 +14,6 @@ class Territory;
 class PlayerEstateManager
 {
 public:
-	PlayerEstateManager(MilitaryManager &militaryManager);
-
 	void handleMilitaryYields();
 
 	void addEstate(Estate &estate);
@@ -32,7 +30,6 @@ public:
 	Title getHighestTitle() const;
 
 private:
-	MilitaryManager &militaryManager;
 	std::unordered_set<Estate*> estates;  // Player owned non-vassal estates.
 	std::unordered_set<Territory*> territories;  // Territories spanned by all ruler owned (non-vassal) estates.
 };

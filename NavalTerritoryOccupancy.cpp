@@ -2,6 +2,7 @@
 #include "NavalFleet.h"
 #include "LandArmy.h"
 #include <assert.h>
+#include <iostream>
 
 NavalTerritoryOccupancy::NavalTerritoryOccupancy(NavalTerritory &territory)
 	: territory(territory)
@@ -85,13 +86,12 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 	// Case fleets have same owner.
 	else if(&(fleet->getOwner()) == &(this->fleet->getOwner()))
 	{
+		assert(fleet != this->fleet);
 		const int initialStrengthSum = fleet->getTotalStrength() + this->fleet->getTotalStrength();
-
 		// Absorb strength of army into this->fleet.
 		assert(fleet->getTotalStrength() > 0);
 		this->fleet->increaseStrength(fleet->getStaminaStrength());
 		fleet->clearStrength();  // Sets strength to 0.
-
 		const int finalStrengthSum = fleet->getTotalStrength() + this->fleet->getTotalStrength();
 		assert(initialStrengthSum == finalStrengthSum);  // Strength sum should remain unchanged.
 

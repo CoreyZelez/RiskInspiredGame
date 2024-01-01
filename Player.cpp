@@ -37,7 +37,7 @@ void Player::handleReserveArmyYield(double amount)
 		assert(liegeYield >= 0);
 		// Army amount yielded to player reserves.
 		const double playerYield = amount - liegeYield;
-		assert(vassalYield >= 0);
+		assert(playerYield >= 0);
 
 		// Recurse on liege.
 		liege->handleReserveArmyYield(liegeYield);
@@ -60,7 +60,7 @@ void Player::handleReserveFleetYield(double amount)
 		assert(liegeYield >= 0);
 		// Army amount yielded to player reserves.
 		const double playerYield = amount - liegeYield;
-		assert(vassalYield >= 0);
+		assert(playerYield >= 0);
 
 		// Recurse on liege.
 		liege->handleReserveFleetYield(liegeYield);

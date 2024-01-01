@@ -4,13 +4,13 @@
 #include <iostream>
 
 InformationPanel::InformationPanel(std::vector<sfe::RichText> texts)
-	: UIPanel(sf::Color(20, 20, 20, 180)), texts(texts)
+	: UIPanel(sf::Color(30, 30, 30, 225)), texts(texts)
 {
 	float backgroundWidth = 0;
 	float backgroundHeight = 0; 
 	for(sfe::RichText &text : this->texts)
 	{
-		text.setCharacterSize(14);  // All texts have same font size.
+		text.setCharacterSize(12);  
 	
 		const float width = text.getGlobalBounds().width;
 		if(width > backgroundWidth)
