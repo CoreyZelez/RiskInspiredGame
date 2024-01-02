@@ -22,7 +22,7 @@ void Realm::draw(sf::RenderWindow &window) const
 {
 	realmGrid.draw(window);
 	// Draw vassal realms on top of entire realm grid if specified.
-	if(drawVassalRealms)
+	if(vassalView)
 	{
 		vassalManager.drawVassalRealms(window);
 	}
@@ -164,9 +164,21 @@ void Realm::updateGrid()
 	realmGrid.updateGrid();
 }
 
-bool Realm::containsPosition(const sf::Vector2f &position) const
+bool Realm::containsPosition(const sf::Vector2f &position, bool considerVassalView) const
 {
-	return realmGrid.containsPosition(position);
+	if(considerVassalView && vassalView)
+	{
+		return rulerEstateManager.landedEstatesContainsPosition(position);
+	}
+	else
+	{
+		return realmGrid.containsPosition(position);
+	}
+}
+
+void Realm::setVassalView(bool vassalView)
+{
+	this->vassalView = vassalView;
 }
 
 void Realm::setGridColor(const sf::Color & color)

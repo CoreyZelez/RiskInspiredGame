@@ -80,6 +80,19 @@ bool PlayerEstateManager::containsEstate(const Estate &estate) const
 	return (estates.count(const_cast<Estate*>(&estate)) == 1);
 }
 
+bool PlayerEstateManager::landedEstatesContainsPosition(const sf::Vector2f &position) const
+{
+	for(const Estate* estate : estates)
+	{
+		const LandedEstate *landedEstate = dynamic_cast<const LandedEstate*>(estate);
+		if(landedEstate != nullptr && landedEstate->containsPosition(position))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 std::map<Title, int> PlayerEstateManager::getTitleCounts() const
 {
 	std::map<Title, int> counts;

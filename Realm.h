@@ -40,8 +40,13 @@ public:
 
 	void updateGrid();
 
-	// Returns true if realm grid contains specified world position.
-	bool containsPosition(const sf::Vector2f &position) const;
+	// Returns true if realm contains specified world position. Can choose whether to consider vassalView boolean
+	// which in the case that vassalView is true, the function will only return true if the position to the landed 
+	// estates directly controlled by the ruler.
+	bool containsPosition(const sf::Vector2f &position, bool considerVassalView = false) const;
+
+	void setVassalView(bool vassalView);
+
 	// Changes color of realms grid.
 	void setGridColor(const sf::Color &color);
 	// Sets color of realm grid to default color.
@@ -53,7 +58,7 @@ private:
 	PlayerEstateManager rulerEstateManager;  // Manages estates directly controlled by ruler.
 	VassalManager vassalManager;  // Manages vassals and their estates.
 	RealmGrid realmGrid;  // Grid of entire realm estates.
-	bool drawVassalRealms = false;  // Specifies to draw realms of vassals over entire realm grid.
+	bool vassalView = false;  // Specifies to draw realms of vassals over entire realm grid.
 
 	// Confers the estate to ruler or a vassal. Returns the player estate is conferred to.
 	// This function does not update the estates ownership. It should only be called by the 

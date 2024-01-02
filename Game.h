@@ -37,12 +37,18 @@ public:
 	void moveSelectedMilitary(sf::Vector2f position);
 	// Sets selectedPlayer as currPlayer. Allows ensuring human, setting to nullptr if not human.
 	void selectCurrPlayerRealm(bool humanOnly);
+
 	// Sets selectedPlayer to realm at specified position.
 	void selectPlayerRealm(const sf::Vector2f &position);
 	// Deslects selected realm and resets its grid color to default color.
 	void deselectSelectedRealm();
 	// Returns true if there is a selected realm.
 	bool isSelectedRealm() const;
+
+	// Sets vassal view for the realm at world position.
+	void setVassalView(const sf::Vector2f &position);
+	// Sets the vassal view for every realm to false.
+	void resetVassalViews();
 
 	// Gets the map the game is played on.
 	const Map &getMap() const;

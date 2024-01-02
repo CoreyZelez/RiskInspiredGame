@@ -23,6 +23,8 @@ public:
 	std::unordered_set<const Estate*> getEstates() const;
 	bool containsEstate(const Estate& estate) const;
 
+	// Returns true if any of landed estates in estates contains the position.
+	bool landedEstatesContainsPosition(const sf::Vector2f &position) const;
 
 	// Return title counts of directly controlled (non-vassal) estates.
 	std::map<Title, int> getTitleCounts() const;

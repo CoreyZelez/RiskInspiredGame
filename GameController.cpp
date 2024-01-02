@@ -75,6 +75,8 @@ void GameController::handleInputForMapDisplay(const sf::RenderWindow &window)
 	// Handle ending of human player turn.
 	if(inputUtility.getKeyPressed(sf::Keyboard::F1))
 	{
+		game.resetVassalViews();
+		game.deselectSelectedRealm();
 		game.setMapMode(MapMode::realm);
 	}
 	else if(inputUtility.getKeyPressed(sf::Keyboard::F2))
@@ -104,6 +106,19 @@ void GameController::handleInputForMapDisplay(const sf::RenderWindow &window)
 		{
 			game.setMapMode(MapMode::selectedRealm);
 			game.selectCurrPlayerRealm(true);
+		}
+	}
+	else if(inputUtility.getKeyDown(sf::Keyboard::LControl))
+	{
+		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+		sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+
+		if(inputUtility.getButtonPressed(sf::Mouse::Left))
+		{
+			if(game.getMapMode() == MapMode::realm)
+			{
+				game.setVassalView(worldPos);
+			}
 		}
 	}
 	else if(inputUtility.getButtonPressed(sf::Mouse::Left))

@@ -58,6 +58,30 @@ bool Game::isSelectedRealm() const
 	return selectedRealm != nullptr;
 }
 
+void Game::setVassalView(const sf::Vector2f & position)
+{
+	for(const auto &player : players)
+	{
+		Realm &realm = player.get()->getRealm();
+		const bool vassalView = true;
+		if(realm.containsPosition(position, vassalView))
+		{
+			realm.setVassalView(true);
+			return;
+		}
+	}
+}
+
+void Game::resetVassalViews()
+{
+	for(const auto &player : players)
+	{
+		Realm &realm = player.get()->getRealm();
+		const bool vassalView = true;
+		realm.setVassalView(false);
+	}
+}
+
 void Game::update()
 {
 	///////////////////////////////
@@ -234,19 +258,22 @@ void Game::selectCurrPlayerRealm(bool humanOnly)
 	deselectSelectedRealm();
 }
 
-void Game::selectPlayerRealm(const sf::Vector2f & position)
+void Game::selectPlayerRealm(const sf::Vector2f &position)
 {
-	Realm *realm = getRealm(position);
-	if(realm != nullptr)
+	const bool considerVassalView = true;
+	for(auto &player : players)
 	{
-		deselectSelectedRealm();
-		selectedRealm = realm;
-		selectedRealm->setGridColor(sf::Color::Yellow);
+		Realm &realm = player.get()->getRealm(); 
+		if(realm.containsPosition(position, considerVassalView))
+		{
+			deselectSelectedRealm();
+			selectedRealm = &realm;
+			selectedRealm->setGridColor(sf::Color::Yellow);
+			return;
+		}
 	}
-	else
-	{
-		deselectSelectedRealm();
-	}
+
+	deselectSelectedRealm();
 }
 
 void Game::endHumanPlayerTurn()
