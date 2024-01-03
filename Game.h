@@ -52,8 +52,9 @@ public:
 
 	// Gets the map the game is played on.
 	const Map &getMap() const;
-	// Gets player realm which contains a given world position.
-	const Realm* getRealm(const sf::Vector2f &position) const;
+	// Gets player realm which contains a given world position. Can additionally consider whether vassal view
+	// is active for the realm.
+	const Realm* getRealm(const sf::Vector2f &position, bool considerVassalView = false) const;
 	// Gets estate of specified title at a given world position.
 	const Estate* getEstate(const sf::Vector2f &position, Title title);
 

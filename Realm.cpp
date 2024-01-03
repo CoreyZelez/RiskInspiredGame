@@ -44,23 +44,23 @@ std::unique_ptr<UIEntity> Realm::getUI(UIType type) const
 
 		// Barony count text.
 		sfe::RichText baronyCntText(font);
-		baronyCntText << sf::Text::Regular << sf::Color::White << "Number of Baronies: "
+		baronyCntText << sf::Text::Regular << sf::Color::White << "Total number of Baronies: "
 			<< sf::Color::Yellow << std::to_string(titleCounts[Title::barony]);
 		// County count text.
 		sfe::RichText countyCntText(font);
-		countyCntText << sf::Text::Regular << sf::Color::White << "Number of Counties: "
+		countyCntText << sf::Text::Regular << sf::Color::White << "Total number of Counties: "
 			<< sf::Color::Yellow << std::to_string(titleCounts[Title::county]);
 		// Duchy count text.
 		sfe::RichText duchyCntText(font);
-		duchyCntText << sf::Text::Regular << sf::Color::White << "Number of Duchies: "
+		duchyCntText << sf::Text::Regular << sf::Color::White << "Total number of Duchies: "
 			<< sf::Color::Yellow << std::to_string(titleCounts[Title::duchy]);
 		// Kingdom count text.
 		sfe::RichText kingdomCntText(font);
-		kingdomCntText << sf::Text::Regular << sf::Color::White << "Number of Kingdoms: "
+		kingdomCntText << sf::Text::Regular << sf::Color::White << "Total number of Kingdoms: "
 			<< sf::Color::Yellow << std::to_string(titleCounts[Title::kingdom]);
 		// Empire count text.
 		sfe::RichText empireCntText(font);
-		empireCntText << sf::Text::Regular << sf::Color::White << "Number of Empires: "
+		empireCntText << sf::Text::Regular << sf::Color::White << "Total number of Empires: "
 			<< sf::Color::Yellow << std::to_string(titleCounts[Title::empire]);
 
 		std::vector<sfe::RichText> texts = { nameText };
@@ -279,8 +279,19 @@ std::map<Title, int> Realm::getTitleCounts() const
 	std::map<Title, int> realmTitleCounts;
 	std::map<Title, int> rulerTitleCounts = rulerEstateManager.getTitleCounts();
 	std::map<Title, int> vassalsTitleCounts = vassalManager.getTitleCounts();
-	realmTitleCounts.insert(rulerTitleCounts.begin(), rulerTitleCounts.end());
-	realmTitleCounts.insert(vassalsTitleCounts.begin(), vassalsTitleCounts.end());
+
+	for(auto &pair : rulerTitleCounts)
+	{
+		const Title title = pair.first;
+		const int count = pair.second;
+		realmTitleCounts[title] += count;
+	}
+	for(auto &pair : vassalsTitleCounts)
+	{
+		const Title title = pair.first;
+		const int count = pair.second;
+		realmTitleCounts[title] += count;
+	}
 	return realmTitleCounts;
 
 }

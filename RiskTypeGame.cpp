@@ -19,6 +19,7 @@ int main()
 	sf::View gameView = window.getDefaultView();
 	sf::View UIView = window.getDefaultView();
 
+	UIView.zoom(2);
 	InputUtility &InputUtility = InputUtility::getInstance();
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS IN TESTING CODE!!!
 	FontManager::getInstance();
@@ -28,7 +29,7 @@ int main()
 	Game game("test");
 
 	GameDisplay gameDisplay = game.createView();
-	GameUI gameUI;
+	GameUI gameUI(UIView);
 	GameController gameController(game, gameUI, gameDisplay);
 
 	while(window.isOpen())
@@ -59,7 +60,7 @@ int main()
 		else
 		{
 			gameController.handleGameInput(window, gameView);
-			window.setView(UIView);
+			//window.setView(UIView);  // DONT THINK THIS IS NEEDED
 			gameController.handleUIInput(window, UIView);
 		}
 

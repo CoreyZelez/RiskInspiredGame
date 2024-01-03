@@ -2,6 +2,11 @@
 #include "UIPanel.h"
 #include <iostream>
 
+GameUI::GameUI(const sf::View & UIView)
+	: UIView(UIView)
+{
+}
+
 void GameUI::draw(sf::RenderWindow &window) const
 {
 	if(leftUI != nullptr)
@@ -36,19 +41,19 @@ void GameUI::notifyButtonDown(sf::Mouse::Button button, sf::Vector2f position)
 
 void GameUI::setLeftUI(std::unique_ptr<UIEntity> entity)
 {
+	float leftMostCoordinate = UIView.getCenter().x - UIView.getSize().x / 2.0f;
 	leftUI = std::move(entity);
-	leftUI.get()->setPosition(sf::Vector2f(0, 400));
+	leftUI.get()->setPosition(sf::Vector2f(leftMostCoordinate, 400));
 }
 
 void GameUI::setRightUI(std::unique_ptr<UIEntity> entity)
 {
-	rightUI = std::move(entity);
+	// rightUI = std::move(entity);
 }
 
 void GameUI::setBottomUI(std::unique_ptr<UIEntity> entity)
 {
-	bottomUI = std::move(entity);
-	bottomUI.get()->setPosition(sf::Vector2f(650, 800));
+	// bottomUI = std::move(entity);
 }
 
 void GameUI::clearBottomUI()

@@ -98,7 +98,7 @@ std::unique_ptr<UIEntity> Estate::getUI(UIType type) const
 
 		// Title text.
 		sfe::RichText titleText(font);
-		titleText << sf::Text::Regular << sf::Color::White << "type: "
+		titleText << sf::Text::Regular << sf::Color::White << "Type: "
 			<< sf::Color::Yellow << titleStringMap[title];
 
 		std::map<Title, int> titleCounts = getLowerEstateTitleCounts();

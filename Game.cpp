@@ -217,12 +217,12 @@ const Map& Game::getMap() const
 	return map;
 }
 
-const Realm* Game::getRealm(const sf::Vector2f &position) const
+const Realm* Game::getRealm(const sf::Vector2f &position, bool considerVassalView) const
 {
 	for(const auto &player : players)
 	{
 		const Realm &realm = player.get()->getRealm();
-		if(realm.containsPosition(position))
+		if(realm.containsPosition(position, considerVassalView))
 		{
 			return &realm;
 		}

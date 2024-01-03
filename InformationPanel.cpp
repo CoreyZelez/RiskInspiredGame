@@ -10,7 +10,7 @@ InformationPanel::InformationPanel(std::vector<sfe::RichText> texts)
 	float backgroundHeight = 0; 
 	for(sfe::RichText &text : this->texts)
 	{
-		text.setCharacterSize(12);  
+		text.setCharacterSize(27);  
 	
 		const float width = text.getGlobalBounds().width;
 		if(width > backgroundWidth)

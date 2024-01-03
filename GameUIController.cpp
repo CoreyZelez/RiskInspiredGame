@@ -38,7 +38,8 @@ void GameUIController::handleUICreation(const sf::RenderWindow &window)
 		{
 			// Const version of game so we can call const getRealm function.
 			const Game &constGame = game;
-			const Realm *realm = constGame.getRealm(worldPos);
+			const bool considerVassalView = true;
+			const Realm *realm = constGame.getRealm(worldPos, considerVassalView);
 			if(realm != nullptr)
 			{
 				gameUI.setLeftUI(realm->getUI(UIType::information));
