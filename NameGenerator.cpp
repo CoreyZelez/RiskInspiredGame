@@ -3,27 +3,34 @@
 #include <random>
 #include <ctime>
 
-NameGenerator::NameGenerator() {
+NameGenerator::NameGenerator(const std::string &folderName)
+{
 	// Seed the random number generator
 	std::srand(static_cast<unsigned int>(std::time(nullptr)));
-
-	// Read words from text files into vectors
-	prefixes = readWordsFromFile("res/generators/names/estates/prefixes.txt");
-	midfixes = readWordsFromFile("res/generators/names/estates/midfixes.txt");
-	suffixes = readWordsFromFile("res/generators/names/estates/suffixes.txt");
+	readFixes(folderName);
 }
 
-std::vector<std::string> NameGenerator::readWordsFromFile(const std::string& filename) const {
+std::vector<std::string> readWordsFromFile(const std::string& filename)
+{
 	std::vector<std::string> words;
 	std::ifstream file(filename);
 	if(file.is_open()) {
 		std::string word;
-		while(std::getline(file, word)) {
+		while(std::getline(file, word)) 
+		{
 			words.push_back(word);
 		}
 		file.close();
 	}
 	return words;
+}
+
+void NameGenerator::readFixes(const std::string folderName)
+{
+	// Read words from text files into vectors
+	prefixes = readWordsFromFile("res/generators/names/" + folderName + "/prefixes.txt");
+	midfixes = readWordsFromFile("res/generators/names/" + folderName + "/midfixes.txt");
+	suffixes = readWordsFromFile("res/generators/names/"+ folderName + "/suffixes.txt");
 }
 
 std::string NameGenerator::generateRandomName()

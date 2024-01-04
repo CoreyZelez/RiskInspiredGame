@@ -11,6 +11,11 @@
 #include <iostream>
 #include <string>
 
+EstateManager::EstateManager()
+	: nameGenerator("estates")
+{
+}
+
 void EstateManager::draw(sf::RenderWindow &window, Title title) const
 {
 	// Draw all estates. 
@@ -354,7 +359,6 @@ Estate* EstateManager::createEstate(Title title)
 	assert(title != Title::barony);
 
 	std::unique_ptr<Estate> estate = std::make_unique<Estate>(title);
-	NameGenerator nameGenerator;
 	estate.get()->initName(generateName());
 
 	Estate *e = estate.get();
@@ -453,7 +457,6 @@ void EstateManager::makeColored(Title title, bool setLower)
 
 std::string EstateManager::generateName()
 {
-	static NameGenerator nameGenerator;
 	std::string name;
 	// LOOP POTENTIALLY NEVER TERMINATES IN PARTICULAR IF THERE IS NOT ENOUGH POSSIBLE NAMES.
 	while(true)

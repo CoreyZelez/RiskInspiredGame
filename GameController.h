@@ -20,6 +20,7 @@ private:
 	void handleInputForHumanPlayer(const sf::RenderWindow &window);
 
 	GameUIController gameUIController;
+	GameUI &gameUI;
 	Game &game;
 	GameDisplay &gameDisplay;
 	sf::Clock inputClock;  // Clock tracking time since last time input handled.

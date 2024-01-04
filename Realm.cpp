@@ -7,14 +7,15 @@
 #include "RichText.h"
 #include "InformationPanel.h"
 #include "LiegePolicy.h"
+#include "NameGenerator.h"
 #include "Game.h"
 #include "Barony.h"
 #include <assert.h>
 #include <iostream>
 #include <unordered_map>
 
-Realm::Realm(Game &game, Player &ruler, const LiegePolicy &liegePolicy)
-	: ruler(ruler), vassalManager(game, ruler), liegePolicy(liegePolicy)
+Realm::Realm(Game &game, Player &ruler, const LiegePolicy &liegePolicy, const std::string &name)
+	: ruler(ruler), vassalManager(game, ruler), liegePolicy(liegePolicy), name(name)
 {
 }
 
@@ -37,8 +38,8 @@ std::unique_ptr<UIEntity> Realm::getUI(UIType type) const
 
 		// Name text.
 		sfe::RichText nameText(font);
-		nameText << sf::Text::Regular << sf::Color::White << "Name: "
-			<< sf::Color::Yellow << "tempName";
+		nameText << sf::Text::Regular << sf::Color::White << "Realm name: "
+			<< sf::Color::Yellow << name;
 
 		std::map<Title, int> titleCounts = getTitleCounts();
 
@@ -85,6 +86,20 @@ std::unique_ptr<UIEntity> Realm::getUI(UIType type) const
 		{
 			texts.push_back(empireCntText);
 		}
+
+		// Ruler direct owned baronies text.
+		const int directBaronyCnt = rulerEstateManager.getTitleCounts()[Title::barony];
+		sfe::RichText directBaronyCntText(font);
+		directBaronyCntText << sf::Text::Regular << sf::Color::White << "Ruler directly controlled baronies: "
+			<< sf::Color::Yellow << std::to_string(directBaronyCnt);
+		texts.push_back(directBaronyCntText);
+
+		// Ruler direct vassal count text.
+		const int directVassalCnt = vassalManager.getVassals().size();
+		sfe::RichText directVassalCntText(font);
+		directVassalCntText << sf::Text::Regular << sf::Color::White << "Ruler directly controlled vassals: "
+			<< sf::Color::Yellow << std::to_string(directVassalCnt);
+		texts.push_back(directVassalCntText);
 
 		return std::make_unique<InformationPanel>(texts);
 	}

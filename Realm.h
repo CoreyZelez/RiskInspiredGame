@@ -15,7 +15,7 @@ class Game;
 class Realm : public HasUI
 {
 public:
-	Realm(Game &game, Player &ruler, const LiegePolicy &liegePolicy);
+	Realm(Game &game, Player &ruler, const LiegePolicy &liegePolicy, const std::string &name);
 
 	void draw(sf::RenderWindow &window) const;
 
@@ -53,6 +53,7 @@ public:
 	void setGridColorDefault();
 
 private:
+	const std::string name;
 	Player &ruler;  // Ruler of this realm.
 	const LiegePolicy &liegePolicy;
 	PlayerEstateManager rulerEstateManager;  // Manages estates directly controlled by ruler.

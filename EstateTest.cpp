@@ -18,7 +18,7 @@ void EstateTest::testBaronyYield()
 	std::string failMessage;
 
 	Game game("empty");
-	Player player(game);
+	Player player(game, "");
 
 	// Construct territories.
 	const int landID = 1;

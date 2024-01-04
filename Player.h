@@ -13,9 +13,9 @@ class Player
 {
 public:
 	// Smart AI player.
-	Player(Game &game, AIPersonality personality);
+	Player(Game &game, AIPersonality personality, const std::string &realmName);
 	// Simple AI player.
-	explicit Player(Game &game);
+	Player(Game &game, const std::string &realmName);
 
 	void handleTurn();
 

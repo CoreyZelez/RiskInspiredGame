@@ -2,10 +2,11 @@
 #include "InputUtility.h"
 #include "GameDisplay.h"
 #include "Game.h"
+#include "GameUI.h"
 #include <iostream>
 
 GameController::GameController(Game &game, GameUI &gameUI, GameDisplay &gameDisplay)
-	: game(game), gameDisplay(gameDisplay), gameUIController(game, gameUI)
+	: game(game), gameDisplay(gameDisplay), gameUIController(game, gameUI), gameUI(gameUI)
 {
 }
 
@@ -18,13 +19,13 @@ void GameController::handleGameInput(const sf::RenderWindow &window, sf::View &g
 {
 	InputUtility &inputUtility = InputUtility::getInstance();
 
+	gameUIController.handleUICreation(window);
+
 	handleInputForGameView(gameView);
 
 	handleInputForMapDisplay(window);
 
 	handleInputForGameDisplay(window);
-
-	gameUIController.handleUICreation(window);
 
 	// POTENTIAL RISK (MAYBE) FOR RACE CONDITIONS WHEN IMPLEMENTING MULTITHREADING.
 	handleInputForHumanPlayer(window);
@@ -75,24 +76,29 @@ void GameController::handleInputForMapDisplay(const sf::RenderWindow &window)
 	// Handle ending of human player turn.
 	if(inputUtility.getKeyPressed(sf::Keyboard::F1))
 	{
+		gameUI.resetLeftUI();
 		game.resetVassalViews();
 		game.deselectSelectedRealm();
 		game.setMapMode(MapMode::realm);
 	}
 	else if(inputUtility.getKeyPressed(sf::Keyboard::F2))
 	{
+		gameUI.resetLeftUI();
 		game.setMapMode(MapMode::county);
 	}
 	else if(inputUtility.getKeyPressed(sf::Keyboard::F3))
 	{
+		gameUI.resetLeftUI();
 		game.setMapMode(MapMode::duchy);
 	}
 	else if(inputUtility.getKeyPressed(sf::Keyboard::F4))
 	{
+		gameUI.resetLeftUI();
 		game.setMapMode(MapMode::kingdom);
 	}
 	else if(inputUtility.getKeyPressed(sf::Keyboard::F5))
 	{
+		gameUI.resetLeftUI();
 		game.setMapMode(MapMode::empire);
 	}
 	else if(inputUtility.getKeyPressed(sf::Keyboard::E))
@@ -112,9 +118,9 @@ void GameController::handleInputForMapDisplay(const sf::RenderWindow &window)
 	{
 		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 		sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
-
 		if(inputUtility.getButtonPressed(sf::Mouse::Left))
 		{
+			gameUI.resetLeftUI();
 			if(game.getMapMode() == MapMode::realm)
 			{
 				game.setVassalView(worldPos);

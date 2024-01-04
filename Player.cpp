@@ -7,13 +7,13 @@
 #include <assert.h>
 #include <iostream>
 
-Player::Player(Game &game, AIPersonality personality)
-	: game(game), realm(game, *this, liegePolicy)
+Player::Player(Game &game, AIPersonality personality, const std::string &realmName)
+	: game(game), realm(game, *this, liegePolicy, realmName)
 {
 }
 
-Player::Player(Game& game)
-	: game(game), realm(game, *this, liegePolicy), AIComponent(std::make_unique<SimplePlayerAI>(game, *this))
+Player::Player(Game& game, const std::string &realmName)
+	: game(game), realm(game, *this, liegePolicy, realmName), AIComponent(std::make_unique<SimplePlayerAI>(game, *this))
 {
 }
 

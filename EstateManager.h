@@ -2,6 +2,7 @@
 #include "Title.h"
 #include "Estate.h"
 #include "LandedEstate.h"
+#include "NameGenerator.h"
 #include <memory>
 #include <vector>
 #include <string>
@@ -17,6 +18,7 @@ class TerritoryManager;
 class EstateManager
 {
 public:
+	EstateManager();
 	void draw(sf::RenderWindow &window, Title title) const;  // Draws all estates with estates of title drawn over all other titles.
 	void draw(sf::RenderWindow &window) const;  // Draws all estates without a parent estate.
 	void drawUnownedMaridoms(sf::RenderWindow &window) const;
@@ -49,6 +51,11 @@ public:
 	void makeColored(Title title, bool setLower);  // Makes estate grids colored for specified title(s). Other estates made grey.
 
 private:
+	NameGenerator nameGenerator;
+	std::map<Title, std::vector<std::unique_ptr<Estate>>, TitleComparer> estates;
+	std::unordered_set<int> allocatedTerritoryIDs;
+	std::unordered_set<std::string> allocatedEstateNames;
+
 	std::string generateName();
 
 	Estate *getFief(std::string name);
@@ -60,8 +67,4 @@ private:
 	std::vector<std::string> loadSubfiefNames(std::ifstream &file);
 
 	void setTitleColor(Title title, sf::Color color);  // Sets any estates grid with title to color.
-
-	std::map<Title, std::vector<std::unique_ptr<Estate>>, TitleComparer> estates;
-	std::unordered_set<int> allocatedTerritoryIDs;
-	std::unordered_set<std::string> allocatedEstateNames;
 };

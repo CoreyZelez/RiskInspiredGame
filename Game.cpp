@@ -2,7 +2,7 @@
 #include <iostream>
 
 Game::Game(std::string mapName)
-	: map(mapName)
+	: map(mapName), nameGenerator("realms")
 {
 	generatePlayers();
 }
@@ -140,7 +140,8 @@ GameState Game::getState() const
 
 Player& Game::createPlayer()
 {
-	players.emplace_back(std::make_unique<Player>(*this));
+	const std::string realmName = nameGenerator.generateRandomName();
+	players.emplace_back(std::make_unique<Player>(*this, realmName));
 	return *players.back().get();
 }
 

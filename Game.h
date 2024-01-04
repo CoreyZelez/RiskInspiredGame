@@ -2,6 +2,7 @@
 #include "Map.h"
 #include "Player.h"
 #include "GameDisplay.h"
+#include "NameGenerator.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <deque>
@@ -78,6 +79,7 @@ private:
 	MapMode mapMode = MapMode::realm;
 	DisplayOptions displayOptions;
 	GameState state;
+	NameGenerator nameGenerator;
 	std::vector<std::unique_ptr<Player>> players;
 	int currPlayer = 0;  // Index of current player.
 	Realm *selectedRealm;
@@ -85,6 +87,7 @@ private:
 	MilitaryForce *selectedMilitary = nullptr;  // Military selected for movement.
 	unsigned int selectedStrength;  // Strength of selected military to move.
 
+	void generateRealmName();
 	// Creates one player per barony and assignes the players the barony.
 	void generatePlayers();  
 	// Returns the realm at position in game world.

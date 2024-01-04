@@ -46,6 +46,11 @@ void GameUI::setLeftUI(std::unique_ptr<UIEntity> entity)
 	leftUI.get()->setPosition(sf::Vector2f(leftMostCoordinate, 400));
 }
 
+void GameUI::resetLeftUI()
+{
+	leftUI = nullptr;
+}
+
 void GameUI::setRightUI(std::unique_ptr<UIEntity> entity)
 {
 	// rightUI = std::move(entity);

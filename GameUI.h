@@ -13,6 +13,7 @@ public:
 
 	void notifyButtonDown(sf::Mouse::Button button, sf::Vector2f position);
 	void setLeftUI(std::unique_ptr<UIEntity> entity);
+	void resetLeftUI();
 	void setRightUI(std::unique_ptr<UIEntity> entity);
 	void setBottomUI(std::unique_ptr<UIEntity> entity);
 	bool noBottomUI();
