@@ -22,7 +22,7 @@ std::vector<Territory*> PlayerAIContext::getBorderTerritories()
 
 	for(Territory* territory : realmTerritories)
 	{
-		assert(sameRealm(&player, territory->getEstateOwner()));
+		assert(sameUpperRealm(&player, territory->getEstateOwner()));
 
 		// Add territory to border territories if one of its adjacencies is enemy owned.
 		if(territory->getDistanceMap().hasEnemyAdjacencies())
@@ -47,7 +47,7 @@ const std::set<Territory*> PlayerAIContext::getEnemyAdjacencies(Territory &terri
 		iter != adjacencies.end(); ++iter)
 	{
 		const Player *adjacencyEstateOwner = (*iter)->getEstateOwner();
-		if(!sameRealm(territoryEstateOwner, adjacencyEstateOwner))
+		if(!sameUpperRealm(territoryEstateOwner, adjacencyEstateOwner))
 		{
 			enemyAdjacencies.insert(*iter);
 		}
@@ -69,7 +69,7 @@ std::map<const Player*, int> PlayerAIContext::getArmyWeightedThreats(const Terri
 		iter != adjacencies.end(); ++iter)
 	{
 		const Player *owner = (*iter)->getEstateOwner(); 
-		if(owner != nullptr && !sameRealm(&player, owner))
+		if(owner != nullptr && !sameUpperRealm(&player, owner))
 		{
 			enemyPlayers.insert(owner);
 		}
@@ -97,7 +97,7 @@ std::map<const Player*, int> PlayerAIContext::getFleetWeightedThreats(const Terr
 		iter != adjacencies.end(); ++iter)
 	{
 		const Player *owner = (*iter)->getEstateOwner();
-		if(owner != nullptr && !sameRealm(&player, owner))
+		if(owner != nullptr && !sameUpperRealm(&player, owner))
 		{
 			enemyPlayers.insert(owner);
 		}
@@ -234,7 +234,7 @@ std::unordered_map<const Territory*, std::unordered_map<int, std::vector<NavalFl
 int calculateFriendlyDistanceBFS(const Territory &territory1, const Territory &territory2, int maxDist) 
 {
 	// Ensure territories belong to same realm.
-	assert(sameRealm(territory1.getEstateOwner(), territory2.getEstateOwner()));
+	assert(sameUpperRealm(territory1.getEstateOwner(), territory2.getEstateOwner()));
 
 	// Player whos territories we traverse.
 	const Player *player1 = territory1.getEstateOwner();
@@ -269,7 +269,7 @@ int calculateFriendlyDistanceBFS(const Territory &territory1, const Territory &t
 			for(const Territory* neighbour : currentTerritory->getDistanceMap().getAdjacencies()) 
 			{
 				const Player *neighbourPlayer = neighbour->getEstateOwner();
-				if(visited.find(neighbour) == visited.end() && sameRealm(player1, neighbourPlayer))
+				if(visited.find(neighbour) == visited.end() && sameUpperRealm(player1, neighbourPlayer))
 				{
 					bfsQueue.push(neighbour);
 					visited.insert(neighbour);
@@ -324,7 +324,7 @@ std::unordered_map<const Territory*, int> calculateFriendlyDistancesBFS(const Te
 			for(const Territory* neighbour : currentTerritory->getDistanceMap().getAdjacencies()) 
 			{
 				const Player *neighbourPlayer = neighbour->getEstateOwner();
-				if(visited.find(neighbour) == visited.end() && sameRealm(player, neighbourPlayer))
+				if(visited.find(neighbour) == visited.end() && sameUpperRealm(player, neighbourPlayer))
 				{
 					bfsQueue.push(neighbour);
 					visited.insert(neighbour);

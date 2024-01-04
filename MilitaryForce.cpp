@@ -171,7 +171,7 @@ void MilitaryForce::setSpritePosition(sf::Vector2f position)
 Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory& sourceTerritory, Territory& targetTerritory, int maxDist)
 {
 	// Ensure territories have the same owner
-	assert(sameRealm(sourceTerritory.getEstateOwner(), targetTerritory.getEstateOwner()));
+	assert(sameUpperRealm(sourceTerritory.getEstateOwner(), targetTerritory.getEstateOwner()));
 
 	const Player* player = sourceTerritory.getEstateOwner();
 
@@ -217,7 +217,7 @@ Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory& sourceTerritory, 
 		for(Territory* neighbor : currentTerritory->getDistanceMap().getAdjacencies())
 		{
 			// Check if the neighbor is friendly.
-			if(sameRealm(player, neighbor->getEstateOwner()))
+			if(sameUpperRealm(player, neighbor->getEstateOwner()))
 			{
 				// Calculate the tentative distance to the neighbor
 				int tentativeDistance = currentDistance + 1;

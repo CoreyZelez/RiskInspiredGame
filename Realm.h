@@ -32,7 +32,7 @@ public:
 	// Returns highest ruler title of any estate's title in realm.
 	Title getHighestRulerTitle() const;
 
-	// CONSEIDER HOLDING SETS FOR THE BELOW TWO FUNCTIONS IN REALM CLASS SO CAN RETURN REFERENCE. FOR OPTIMISAT5ION REASONS!!!
+	// CONSIDER HOLDING SETS FOR THE BELOW TWO FUNCTIONS IN REALM CLASS SO CAN RETURN REFERENCE. FOR OPTIMISAT5ION REASONS!!!
 	// Returns unordered set of all territories in realm, including those associated with both ruler owned and vassal estates.
 	std::unordered_set<Territory*> getTerritories();
 	// Returns unordered set of all estates in realm, including both ruler and vassal owned estates.
@@ -68,6 +68,9 @@ private:
 
 	// Returns combined title counts of ruler estates and vassal estates.
 	std::map<Title, int> getTitleCounts() const;
+
+	// Returns true if the barony must be conferred to the ruler.
+	bool mustConferBaronyToRuler(Barony &barony) const;
 };
 
 // Returns the player with the greatest influence over the specified barony from a parameter vector of players.

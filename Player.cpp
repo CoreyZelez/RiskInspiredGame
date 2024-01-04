@@ -183,7 +183,7 @@ bool Player::isVassal(const Player &player, bool direct) const
 	return false;
 }
 
-bool sameRealm(const Player *player1, const Player *player2)
+bool sameUpperRealm(const Player *player1, const Player *player2)
 {
 	if(player1 == nullptr || player2 == nullptr)
 	{

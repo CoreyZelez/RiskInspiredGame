@@ -52,7 +52,7 @@ bool TerritoryDistanceMap::hasEnemyAdjacencies(TerritoryType type) const
 		{
 			continue;
 		}
-		else if(!sameRealm(territory.getEstateOwner(), adjacency->getEstateOwner()))
+		else if(!sameUpperRealm(territory.getEstateOwner(), adjacency->getEstateOwner()))
 		{
 			return true;
 		}
@@ -66,7 +66,7 @@ bool TerritoryDistanceMap::hasEnemyAdjacencies() const
 	for(const auto &adjacency : adjacencies)
 	{
 		const Player* estateOwner = adjacency->getEstateOwner();
-		if(!sameRealm(territory.getEstateOwner(), adjacency->getEstateOwner()))
+		if(!sameUpperRealm(territory.getEstateOwner(), adjacency->getEstateOwner()))
 		{
 			return true;
 		}

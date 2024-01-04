@@ -120,7 +120,7 @@ int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
 		bool allAdjacentLandIsFriendly = true;
 		for(const Territory* adjacency : adjacencies)
 		{
-			const bool isFriendly = sameRealm(&player, adjacency->getEstateOwner());
+			const bool isFriendly = sameUpperRealm(&player, adjacency->getEstateOwner());
 			if(adjacency->getType() == TerritoryType::land && !isFriendly)
 			{
 				allAdjacentLandIsFriendly = false;
@@ -154,7 +154,7 @@ int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
 		iter != adjacencies.end(); ++iter)
 	{
 		const Player *estateOwner = (*iter)->getEstateOwner();
-		if(sameRealm(&player, estateOwner))
+		if(sameUpperRealm(&player, estateOwner))
 		{
 			enemyTerritories.insert(*iter);
 		}
@@ -189,7 +189,7 @@ int SimplePlayerAI::calculateFleetStrategicValue(const Territory &territory)
 		iter != adjacencies.end(); ++iter)
 	{
 		const Player *estateOwner = (*iter)->getEstateOwner();
-		if(sameRealm(&player, estateOwner))
+		if(sameUpperRealm(&player, estateOwner))
 		{
 			enemyTerritories.insert(*iter);
 		}
@@ -210,7 +210,7 @@ void SimplePlayerAI::executeArmyAttacks(const std::vector<Territory*> &borderTer
 	{
 		// Only players without a liege can execute army attacks.
 		assert(!player.hasLiege());
-		assert(sameRealm(&player, territory->getEstateOwner()));
+		assert(sameUpperRealm(&player, territory->getEstateOwner()));
 
 		LandArmy *army = player.getMilitaryManager().getArmy(territory);
 		if(army != nullptr)
@@ -393,7 +393,7 @@ void SimplePlayerAI::executeFleetAttacks(const std::vector<Territory*>& borderTe
 	{
 		// Only players without a liege can execute army attacks.
 		assert(!player.hasLiege());
-		assert(sameRealm(territory->getEstateOwner(), &player));
+		assert(sameUpperRealm(territory->getEstateOwner(), &player));
 
 		NavalFleet *fleet = player.getMilitaryManager().getFleet(territory);
 		if(fleet != nullptr)

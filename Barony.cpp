@@ -90,7 +90,7 @@ std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 	// Should not be hostile army residing on this territory.
 	// There may however be a hostile army on the naval territory associated with the port.
 	assert(getTerritory().getOccupancyHandler()->getOccupant() == nullptr
-		|| sameRealm(getRuler(), getTerritory().getOccupancyHandler()->getOccupant()));
+		|| sameUpperRealm(getRuler(), getTerritory().getOccupancyHandler()->getOccupant()));
 
 	// Estate does not generate naval units if no port.
 	if(landTerritory.getPort() == nullptr)
@@ -108,7 +108,7 @@ std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 	navalTerritory.getOccupancyHandler()->occupy(fleet.get());
 	// Repeatedly reattempy occupancy of naval territory until success or death of fleet.
 	// This is necessary since first attempt to occupy may fail whilst fleet still alive thus has no where to return to.
-	while(!fleet.get()->isDead() && !sameRealm(navalTerritory.getOccupancyHandler()->getOccupant(), getRuler()))
+	while(!fleet.get()->isDead() && !sameUpperRealm(navalTerritory.getOccupancyHandler()->getOccupant(), getRuler()))
 	{
 		navalTerritory.getOccupancyHandler()->occupy(fleet.get());
 	}

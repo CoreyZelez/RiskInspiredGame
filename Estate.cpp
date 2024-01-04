@@ -308,7 +308,7 @@ const Grid& Estate::getGrid() const
 	return grid;
 }
 
-int Estate::calculateLandedSubfiefOwnershipCount(const Player &player) const
+int Estate::calculateLandedSubfiefOwnershipCount(const Player &player, bool requireDirectControl) const
 {
 	int count = 0;
 	for(const Estate *estate : subfiefs)
@@ -317,8 +317,13 @@ int Estate::calculateLandedSubfiefOwnershipCount(const Player &player) const
 		if(landedEstate != nullptr)
 		{
 			// Since current estate is landed we can directly check for ownership by either ruler or a vassal.
-			if(landedEstate->getRuler() == &player || 
-				(landedEstate->getRuler() != nullptr && landedEstate->getRuler()->isVassal(*ruler, false)))
+			if(!requireDirectControl && (estate->ruler == &player ||
+				(estate->ruler != nullptr && estate->getRuler()->isVassal(player, false))))
+			{
+				++count;
+			}
+			// When require direct control, only check if ruler is the player.
+			else if(requireDirectControl && estate->ruler == &player)
 			{
 				++count;
 			}
@@ -326,7 +331,7 @@ int Estate::calculateLandedSubfiefOwnershipCount(const Player &player) const
 		else
 		{
 			// Add the count of ownership of landed subfiefs of current estates subfiefs, noting the current estate itself is unlanded.
-			count += estate->calculateLandedSubfiefOwnershipCount(player);
+			count += estate->calculateLandedSubfiefOwnershipCount(player, requireDirectControl);
 		}
 	}
 	return count;
@@ -392,7 +397,7 @@ Player* Estate::getRuler()
 void Estate::setOwnership(Player *ruler)
 {
 	// Case rulers are friendly. If any ruler is nullptr they are considered non-friendly.
-	if(sameRealm(ruler, this->ruler))
+	if(sameUpperRealm(ruler, this->ruler))
 	{
 		return;
 	}
@@ -502,7 +507,7 @@ void Estate::handleLowerEstateChange(const Estate &subfief)
 		handleAllocation();
 	}
 	// This estate already apart of same realm.
-	else if(sameRealm(ruler, subfief.ruler))
+	else if(sameUpperRealm(ruler, subfief.ruler))
 	{
 		// Do nothing.
 	}

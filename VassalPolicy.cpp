@@ -8,6 +8,4 @@ void VassalPolicy::handleLiegeInfluenceChange(const LiegePolicy &liegePolicy)
 	liegeInfluence += (liegeLevyContribution - liegePolicy.vassalLevy) / liegePolicy.vassalLevy + reductionConstant;
 	const double reductionFactor = 0.99;
 	liegeInfluence *= reductionFactor;
-
-	std::cout << liegeInfluence << std::endl;
 }
