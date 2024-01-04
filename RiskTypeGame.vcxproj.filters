@@ -531,10 +531,10 @@
       <Filter>Header Files\Testing</Filter>
     </ClInclude>
     <ClInclude Include="LiegePolicy.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
     <ClInclude Include="VassalPolicy.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

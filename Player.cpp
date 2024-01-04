@@ -19,6 +19,10 @@ Player::Player(Game& game, const std::string &realmName)
 
 void Player::handleTurn()
 {
+	if(liege != nullptr)
+	{
+		vassalPolicy.handleLiegeInfluenceChange(liege->liegePolicy);
+	}
 	militaryManager.update();
 	realm.handleMilitaryYields();
 
