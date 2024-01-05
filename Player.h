@@ -49,6 +49,8 @@ public:
 	const MilitaryManager& getMilitaryManager() const;
 	Realm& getRealm();
 	const Realm& getRealm() const;
+	const LiegePolicy &getLiegePolicy() const;
+	const VassalPolicy &getVassalPolicy() const;
 
 private:
 	Game &game;

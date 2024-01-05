@@ -313,10 +313,10 @@
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
     <ClCompile Include="LiegePolicy.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Player</Filter>
     </ClCompile>
     <ClCompile Include="VassalPolicy.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

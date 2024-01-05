@@ -6,6 +6,7 @@
 #include "VassalManager.h"
 #include "RealmGrid.h"
 #include <vector>
+#include <unordered_map>
 
 class Player;
 class LiegePolicy;
@@ -69,12 +70,25 @@ private:
 	// Returns combined title counts of ruler estates and vassal estates.
 	std::map<Title, int> getTitleCounts() const;
 
-	// Returns true if the barony must be conferred to the ruler.
-	bool mustConferBaronyToRuler(Barony &barony) const;
+	// Returns true if the barony is to be conferred to the ruler.
+	bool shouldConferBaronyToRuler(Barony &barony) const;
+
+	// Returns the vassal with the highest varony conferral score. This is the vassal
+	// which the barony should be conferred to.
+	Player* getHighestBaronyConferralScoreVassal(const Barony &barony) const;
+
+	// Returns positive conferral contribution score from vassals number of controlled baronies. 
+	// Vassals are awarded contribution score for having relatively smaller realms.
+	double realmSizeBaronyConferralContribution(const Player &vassal) const;
+	// Returns conferral contribution from vassal owning related estates to barony.
+	double realmEstatesInfluenceBaronyConferralContribution(const Player &vassal, const Barony &barony) const;
+
 };
 
 // Returns the player with the greatest influence over the specified barony from a parameter vector of players.
 Player &getGreatestBaronyInfluence(const Barony &barony, const std::vector<Player*> &players);
+// Returns the player's barony influence.
+int calculateBaronyInfluence(const Barony &barony, const Player &player, std::unordered_map<Title, int> &influenceContributions);
 
 // Returns the player with the greatest influence over the specified unlanded estate from a parameter vector of players.
 Player &getGreatestUnlandedEstateInfluence(const Estate &estate, const std::vector<Player*> &players);

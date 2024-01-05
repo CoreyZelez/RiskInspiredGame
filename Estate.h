@@ -77,9 +77,9 @@ public:
 	// Returns the associated graphical grid of this estate.
 	const Grid& getGrid() const;
 
-	// Returns the number of landed direct or indirect subfiefs of this estate apart of specified players realm. 
+	// Returns the number of barony subfiefs of this estate apart of specified players realm. 
 	// Optionally specify directly controlled by player.
-	int calculateLandedSubfiefOwnershipCount(const Player &player, bool requireDirectControl) const;
+	int calculateBaronySubfiefOwnershipCount(const Player &player, bool requireDirectControl) const;
 
 protected:
 	void initColor();

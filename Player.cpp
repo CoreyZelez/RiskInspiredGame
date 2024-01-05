@@ -128,6 +128,16 @@ const Realm& Player::getRealm() const
 	return realm;
 }
 
+const LiegePolicy& Player::getLiegePolicy() const
+{
+	return liegePolicy;
+}
+
+const VassalPolicy& Player::getVassalPolicy() const
+{
+	return vassalPolicy;
+}
+
 bool Player::sameUpperLiege(const Player &player) const
 {
 	const Player &upperLiege1 = getUpperLiege();

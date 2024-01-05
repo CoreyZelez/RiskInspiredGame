@@ -4,7 +4,7 @@
 #include "NameGenerator.h"
 #include "InformationPanel.h"
 #include "FontManager.h"
-#include "LandedEstate.h"
+#include "Barony.h"
 #include "Realm.h"
 #include <assert.h>
 #include <iostream>
@@ -308,14 +308,14 @@ const Grid& Estate::getGrid() const
 	return grid;
 }
 
-int Estate::calculateLandedSubfiefOwnershipCount(const Player &player, bool requireDirectControl) const
+int Estate::calculateBaronySubfiefOwnershipCount(const Player &player, bool requireDirectControl) const
 {
 	int count = 0;
 	for(const Estate *estate : subfiefs)
 	{
-		const LandedEstate *landedEstate = dynamic_cast<const LandedEstate*>(estate);
-		if(landedEstate != nullptr)
+		if(estate->title == Title::barony)
 		{
+			assert(dynamic_cast<const Barony*>(estate) != nullptr);
 			// Since current estate is landed we can directly check for ownership by either ruler or a vassal.
 			if(!requireDirectControl && (estate->ruler == &player ||
 				(estate->ruler != nullptr && estate->getRuler()->isVassal(player, false))))
@@ -331,7 +331,7 @@ int Estate::calculateLandedSubfiefOwnershipCount(const Player &player, bool requ
 		else
 		{
 			// Add the count of ownership of landed subfiefs of current estates subfiefs, noting the current estate itself is unlanded.
-			count += estate->calculateLandedSubfiefOwnershipCount(player, requireDirectControl);
+			count += estate->calculateBaronySubfiefOwnershipCount(player, requireDirectControl);
 		}
 	}
 	return count;

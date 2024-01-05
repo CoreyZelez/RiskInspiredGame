@@ -227,9 +227,8 @@ Player& Realm::allocate(Estate &estate)
 	{
 		Barony *barony = dynamic_cast<Barony*>(&estate);
 		assert(barony != nullptr);  // Must hold as the estate title is barony.
-		//const bool conferRuler = conferBaronyToRuler(*barony);
 		// Confer barony to ruler.
-		if(rulerTitleCounts[Title::barony] < liegePolicy.rulerBaronyLimit)
+		if(shouldConferBaronyToRuler(*barony))
 		{
 			rulerEstateManager.addEstate(estate);
 			return ruler;
@@ -246,8 +245,9 @@ Player& Realm::allocate(Estate &estate)
 			const std::vector<Player*> vassals = vassalManager.getVassals();
 			assert(vassals.size() > 0);
 			// Vassal which barony is conferred to.
-			Player &vassal = getGreatestBaronyInfluence(*barony, vassals);
-			return vassalManager.conferEstate(vassal, estate);
+			Player *vassal = getHighestBaronyConferralScoreVassal(*barony);
+			assert(vassal != nullptr);
+			return vassalManager.conferEstate(*vassal, estate);
 		}
 	}
 	else
@@ -310,11 +310,19 @@ std::map<Title, int> Realm::getTitleCounts() const
 
 }
 
-bool Realm::mustConferBaronyToRuler(Barony &barony) const
+bool Realm::shouldConferBaronyToRuler(Barony &barony) const
 {
-	// The maximum number of baronies ruler can control per specified estate.
-	// These limits are only enforced if the ruler has no vassals and will not
-	// create any new vassals.
+	if(liegePolicy.rulerVassalLimit == 0 && vassalManager.getVassals().size() == 0)
+	{
+		return true;
+	}
+	else if(liegePolicy.rulerBaronyLimit <= rulerEstateManager.getTitleCounts()[Title::barony])
+	{
+		return false;
+	}
+
+	// The maximum number of landed estates ruler can control per specified estate. Limits only enforced
+	// when ruler has no vassals and will not create new vassals.
 	std::unordered_map<Title, int> rulerBaronyLimits;
 	rulerBaronyLimits[Title::county] = 1;
 	rulerBaronyLimits[Title::duchy] = 3;
@@ -323,10 +331,94 @@ bool Realm::mustConferBaronyToRuler(Barony &barony) const
 	const Estate *upperEstate = barony.getParent();
 	while(upperEstate != nullptr)
 	{
-		const bool directControlledOnly = true;
-		upperEstate->calculateLandedSubfiefOwnershipCount(ruler, directControlledOnly);
+		const Title title = upperEstate->getTitle();
+		const int landedEstateCount = upperEstate->calculateBaronySubfiefOwnershipCount(ruler, true);
+		if(landedEstateCount >= rulerBaronyLimits[title])
+		{
+			return false;
+		}
+		upperEstate = upperEstate->getParent();
 	}
-	return false;
+	return true;
+}
+
+Player* Realm::getHighestBaronyConferralScoreVassal(const Barony &barony) const
+{
+	const std::vector<Player*> &vassals = vassalManager.getVassals();
+	if(vassals.size() == 0)
+	{
+		return nullptr;
+	}
+
+	std::unordered_map<Player*, double> conferralScores;
+	for(Player *vassal : vassals)
+	{
+		// No vassal should be estateless.
+		assert(!vassal->getRealm().getEstates().empty());
+
+		conferralScores[vassal] += realmSizeBaronyConferralContribution(*vassal);
+		conferralScores[vassal] += vassal->getVassalPolicy().liegeInfluence;
+		conferralScores[vassal] += realmEstatesInfluenceBaronyConferralContribution(*vassal, barony);
+	}
+
+	Player *maxScoreVassal = nullptr;
+	double maxScore = DBL_MIN * -1;
+	for(Player *vassal : vassals)
+	{
+		if(conferralScores[vassal] > maxScore)
+		{
+			maxScoreVassal = vassal;
+			maxScore = conferralScores[vassal];
+		}
+	}
+
+	assert(maxScoreVassal != nullptr);
+	return maxScoreVassal;
+}
+
+double Realm::realmSizeBaronyConferralContribution(const Player &vassal) const
+{
+	// Total baronies in ruler realm.
+	const int realmBaronies = getTitleCounts()[Title::barony];
+	// Percent of total realm baronies vassal controls that results in 0 contribution to conferral score.
+	assert(vassalManager.getVassals().size() != 0);
+	const double equilibriumRealmProportion = (double)1 / vassalManager.getVassals().size();
+	assert(equilibriumRealmProportion > 0);
+	// Total baronies in vassal realm.
+	const int vassalRealmBaronies = vassal.getRealm().getTitleCounts()[Title::barony];
+	// Proportion vassal realm encompasses lieges realm.
+	const double vassalRealmProportion = (double)vassalRealmBaronies / realmBaronies;
+	const double residualRealmProportion = equilibriumRealmProportion - vassalRealmProportion;
+	const double conferralScoreContributionRatio = residualRealmProportion / equilibriumRealmProportion;
+	// Conferral score contribution cannot be greater than this value. 
+	const double maximalConferralScoreContribution = 100;
+	double conferralScoreContribution = conferralScoreContributionRatio * maximalConferralScoreContribution;
+	// Do not want conferral score contribution to drop below 0.
+	if(conferralScoreContribution < 0)
+	{
+		conferralScoreContribution = 0;
+	}
+	return conferralScoreContribution;
+}
+
+double Realm::realmEstatesInfluenceBaronyConferralContribution(const Player &vassal, const Barony &barony) const
+{
+	// Influence score contributions of baronies which share estate of given title.
+	std::unordered_map<Title, int> influenceContributions;
+	influenceContributions[Title::county] = 14;
+	influenceContributions[Title::duchy] = 5;
+	influenceContributions[Title::kingdom] = 2;
+	influenceContributions[Title::empire] = 1;
+	const double liegeBaronyInfluence = calculateBaronyInfluence(barony, vassal, influenceContributions);
+	const double vassalBaronyInfluence = calculateBaronyInfluence(barony, vassal, influenceContributions);
+	assert(liegeBaronyInfluence > vassalBaronyInfluence);
+	const double maxConferralContribution = 100;
+	// Reduction constant ensures vassal not awarded too high contribution in case where liege influence is very
+	// small due to small amount of related baronies controlled.
+	const double reductionConstant = 40;
+	const double baronyConferralContributionRatio = vassalBaronyInfluence / (liegeBaronyInfluence + reductionConstant);
+	const double baronyConferralContribution = baronyConferralContributionRatio * maxConferralContribution;
+	return baronyConferralContribution;
 }
 
 /*
@@ -338,7 +430,6 @@ Player& getGreatestBaronyInfluence(const Barony &barony, const std::vector<Playe
 {
 	assert(players.size() > 0);
 
-	std::unordered_map<const Player*, int> influenceScores;
 	// Influence score contributions of baronies which share estate of given title.
 	std::unordered_map<Title, int> influenceContributions;
 	influenceContributions[Title::county] = 14;
@@ -346,24 +437,11 @@ Player& getGreatestBaronyInfluence(const Barony &barony, const std::vector<Playe
 	influenceContributions[Title::kingdom] = 2;
 	influenceContributions[Title::empire] = 1;
 
-	// Calculate influence scores of each player.
-	for(const Estate *upperEstate = barony.getParent(); upperEstate != nullptr; upperEstate = upperEstate->getParent())
+	// Calculate influence score for each player.
+	std::unordered_map<const Player*, int> influenceScores;
+	for(const Player* player : players)
 	{
-		const Title title = upperEstate->getTitle();
-		assert(influenceContributions[title] > 0);
-
-		for(const Player* player : players)
-		{
-			// Number of owned landed subfief estates of upper estate.
-			const int landedEstateCount = upperEstate->calculateLandedSubfiefOwnershipCount(*player, false);
-			const int influenceContribution = landedEstateCount * influenceContributions[title];
-			if(title == Title::kingdom)
-			{
-				std::cout << landedEstateCount << " " << influenceContribution << std::endl;
-			}
-			assert(influenceContribution >= 0);
-			influenceScores[player] += influenceContribution;
-		}
+		influenceScores[player] = calculateBaronyInfluence(barony, *player, influenceContributions);
 	}
 
 	// Player with the most influence.
@@ -382,6 +460,26 @@ Player& getGreatestBaronyInfluence(const Barony &barony, const std::vector<Playe
 	}
 
 	return *maxInfluencePlayer;
+}
+
+int calculateBaronyInfluence(const Barony & barony, const Player & player, std::unordered_map<Title, int>& influenceContributions)
+{
+	// Calculate influence scores of player.
+	int influenceScore = 0;
+	for(const Estate *upperEstate = barony.getParent(); upperEstate != nullptr; upperEstate = upperEstate->getParent())
+	{
+		const Title title = upperEstate->getTitle();
+		assert(influenceContributions[title] > 0);
+
+		// Number of owned landed subfief estates of upper estate.
+		const int landedEstateCount = upperEstate->calculateBaronySubfiefOwnershipCount(player, false);
+		const int influenceContribution = landedEstateCount * influenceContributions[title];
+
+		assert(influenceContribution >= 0);
+		influenceScore += influenceContribution;
+	}
+
+	return influenceScore;
 }
 
 /*
@@ -413,7 +511,7 @@ Player& getGreatestUnlandedEstateInfluence(const Estate &estate, const std::vect
 		for(const Player* player : players)
 		{
 			// Number of owned landed subfief estates of upper estate.
-			const int landedEstateCount = upperEstate->calculateLandedSubfiefOwnershipCount(*player, false);
+			const int landedEstateCount = upperEstate->calculateBaronySubfiefOwnershipCount(*player, false);
 			const int influenceContribution = landedEstateCount * parentEstateBaronyInfluence;
 			assert(influenceContribution >= 0);
 			influenceScores[player] += influenceContribution;
