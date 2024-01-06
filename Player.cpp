@@ -17,6 +17,16 @@ Player::Player(Game& game, const std::string &realmName)
 {
 }
 
+bool Player::gameOver() const
+{
+	if(getRealm().getEstates().size() == 0)
+	{
+		assert(liege == nullptr);
+		return true;
+	}
+	return false;
+}
+
 void Player::handleTurn()
 {
 	if(liege != nullptr)

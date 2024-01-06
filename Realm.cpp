@@ -152,6 +152,13 @@ void Realm::removeEstate(Estate &estate)
 	{
 		realmGrid.removeGrid(landedEstate->getGrid());
 	}
+
+	// Remove ruler as vassal of liege if no estates remaining in realm.
+	if(ruler.getLiege() != nullptr && getEstates().empty())
+	{
+		ruler.getLiege()->getRealm().vassalManager.removeEstatelessVassal(ruler);
+		ruler.setLiege(nullptr);
+	}
 }
 
 std::unordered_set<Territory*> Realm::getTerritories()
@@ -356,13 +363,13 @@ Player* Realm::getHighestBaronyConferralScoreVassal(const Barony &barony) const
 		// No vassal should be estateless.
 		assert(!vassal->getRealm().getEstates().empty());
 
-		conferralScores[vassal] += realmSizeBaronyConferralContribution(*vassal);
-		conferralScores[vassal] += vassal->getVassalPolicy().liegeInfluence;
-		conferralScores[vassal] += realmEstatesInfluenceBaronyConferralContribution(*vassal, barony);
+		conferralScores[vassal] += ruler.getLiegePolicy().baronyConferralLiegeInfluenceWeight * vassal->getVassalPolicy().liegeInfluence;
+		conferralScores[vassal] += ruler.getLiegePolicy().baronyConferralRealmSizeWeight * realmSizeBaronyConferralContribution(*vassal);
+		conferralScores[vassal] += ruler.getLiegePolicy().baronyConferralRelatedEstatesWeight * realmEstatesInfluenceBaronyConferralContribution(*vassal, barony);
 	}
 
 	Player *maxScoreVassal = nullptr;
-	double maxScore = DBL_MIN * -1;
+	double maxScore = -100000;
 	for(Player *vassal : vassals)
 	{
 		if(conferralScores[vassal] > maxScore)
@@ -389,15 +396,26 @@ double Realm::realmSizeBaronyConferralContribution(const Player &vassal) const
 	// Proportion vassal realm encompasses lieges realm.
 	const double vassalRealmProportion = (double)vassalRealmBaronies / realmBaronies;
 	const double residualRealmProportion = equilibriumRealmProportion - vassalRealmProportion;
-	const double conferralScoreContributionRatio = residualRealmProportion / equilibriumRealmProportion;
+	double conferralScoreContributionRatio = residualRealmProportion / equilibriumRealmProportion;
 	// Conferral score contribution cannot be greater than this value. 
 	const double maximalConferralScoreContribution = 100;
-	double conferralScoreContribution = conferralScoreContributionRatio * maximalConferralScoreContribution;
-	// Do not want conferral score contribution to drop below 0.
-	if(conferralScoreContribution < 0)
+	double conferralScoreContribution;
+	if(conferralScoreContributionRatio > 0)
 	{
-		conferralScoreContribution = 0;
+		conferralScoreContribution = conferralScoreContributionRatio * maximalConferralScoreContribution;
 	}
+	else
+	{
+		// conferralScoreContribution = 0;
+		const double maximalNegativeConferralScoreContribution = -200;
+		const double negativeContriutionMaximalRatio = -0.6;
+		if(conferralScoreContributionRatio < negativeContriutionMaximalRatio)
+		{
+			conferralScoreContributionRatio = negativeContriutionMaximalRatio;
+		}
+		conferralScoreContribution = -conferralScoreContributionRatio * maximalNegativeConferralScoreContribution;
+	}
+
 	return conferralScoreContribution;
 }
 

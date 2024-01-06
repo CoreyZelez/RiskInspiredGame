@@ -28,6 +28,12 @@ Player& VassalManager::createVassal(Barony &barony)
 	return newVassal;
 }
 
+void VassalManager::removeEstatelessVassal(const Player &vassal)
+{
+	assert(vassal.getRealm().getEstates().empty());
+	vassals.erase(std::remove(vassals.begin(), vassals.end(), &vassal), vassals.end());
+}
+
 Player& VassalManager::conferEstate(Player& vassal, Estate &estate)
 {
 	// Ensure vassal is actually apart of vassal manager.

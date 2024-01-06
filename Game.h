@@ -87,7 +87,6 @@ private:
 	MilitaryForce *selectedMilitary = nullptr;  // Military selected for movement.
 	unsigned int selectedStrength;  // Strength of selected military to move.
 
-	void generateRealmName();
 	// Creates one player per barony and assignes the players the barony.
 	void generatePlayers();  
 	// Returns the realm at position in game world.

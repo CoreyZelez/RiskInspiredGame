@@ -90,30 +90,39 @@ void Game::update()
 	int turnCnt = 0;
 	///////////////////////////////
 
+	// Iterate through all players, updating their realms vertex arrays if their realm changed.
+	auto iter = players.begin();
+	while(iter != players.end())
+	{
+		if(*iter != nullptr)
+		{
+			iter->get()->getRealm().updateGrid();
+			++iter;
+		}
+	}
+
 	// Waiting for human player to end their turn.
 	if(humanPlayerTurn)
 	{
-		// Iterate through all players, updating their realms vertex arrays if thier realm changed.
-		for(auto &player : players)
-		{
-			player.get()->getRealm().updateGrid();
-		}
 		return;
 	}
 
 	// Iterate through players handling their turns until a human player is reached.
-	while(currPlayer != players.size() && turnCnt < maxTurns)
+	while(turnCnt < maxTurns)
 	{
-		// We test this here rather than the loop condition to ensure players are
-		// never removed from the players vector during iteration.
-		assert(currPlayer < players.size());
-
 		++turnCnt;
 		++currPlayer;
 
 		if(currPlayer == players.size())
 		{
 			currPlayer = 0;
+		}
+
+		if(players[currPlayer].get()->gameOver())
+		{
+			players.erase(players.begin() + currPlayer);
+			--currPlayer;
+			continue;
 		}
 
 		players[currPlayer].get()->handleTurn();
@@ -126,11 +135,16 @@ void Game::update()
 		}
 	}
 
-	// Iterate through all players, updating their realms vertex arrays if thier realm changed.
-	for(auto &player : players)
+	// Iterate through all players, updating their realms vertex arrays if their realm changed.
+	iter = players.begin();
+	while(iter != players.end())
 	{
-		player.get()->getRealm().updateGrid();
-    }
+		if(*iter != nullptr)
+		{
+			iter->get()->getRealm().updateGrid();
+			++iter;
+		}
+	}
 }
 
 GameState Game::getState() const

@@ -17,6 +17,8 @@ public:
 	// Simple AI player.
 	Player(Game &game, const std::string &realmName);
 
+	bool gameOver() const;
+
 	void handleTurn();
 
 	// Handles distribution of army reserves to player and their liege. Recurses to upper-most liege.
