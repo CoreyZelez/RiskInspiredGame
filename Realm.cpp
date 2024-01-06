@@ -372,6 +372,7 @@ Player* Realm::getHighestBaronyConferralScoreVassal(const Barony &barony) const
 	double maxScore = -100000;
 	for(Player *vassal : vassals)
 	{
+		assert(conferralScores[vassal] > -1000);
 		if(conferralScores[vassal] > maxScore)
 		{
 			maxScoreVassal = vassal;
@@ -385,35 +386,41 @@ Player* Realm::getHighestBaronyConferralScoreVassal(const Barony &barony) const
 
 double Realm::realmSizeBaronyConferralContribution(const Player &vassal) const
 {
+	assert(vassalManager.getVassals().size() != 0);
+
 	// Total baronies in ruler realm.
 	const int realmBaronies = getTitleCounts()[Title::barony];
 	// Percent of total realm baronies vassal controls that results in 0 contribution to conferral score.
-	assert(vassalManager.getVassals().size() != 0);
 	const double equilibriumRealmProportion = (double)1 / vassalManager.getVassals().size();
 	assert(equilibriumRealmProportion > 0);
 	// Total baronies in vassal realm.
 	const int vassalRealmBaronies = vassal.getRealm().getTitleCounts()[Title::barony];
 	// Proportion vassal realm encompasses lieges realm.
 	const double vassalRealmProportion = (double)vassalRealmBaronies / realmBaronies;
+	// Residual value.
 	const double residualRealmProportion = equilibriumRealmProportion - vassalRealmProportion;
-	double conferralScoreContributionRatio = residualRealmProportion / equilibriumRealmProportion;
-	// Conferral score contribution cannot be greater than this value. 
-	const double maximalConferralScoreContribution = 100;
 	double conferralScoreContribution;
-	if(conferralScoreContributionRatio > 0)
+	if(residualRealmProportion > 0)
 	{
-		conferralScoreContribution = conferralScoreContributionRatio * maximalConferralScoreContribution;
+		const double contributionUpperBound = 100;
+		double conferralScoreContributionRatio = residualRealmProportion / equilibriumRealmProportion;
+		assert(conferralScoreContributionRatio > 0);
+		conferralScoreContribution = conferralScoreContributionRatio * contributionUpperBound;
 	}
 	else
 	{
-		// conferralScoreContribution = 0;
-		const double maximalNegativeConferralScoreContribution = -200;
-		const double negativeContriutionMaximalRatio = -0.6;
-		if(conferralScoreContributionRatio < negativeContriutionMaximalRatio)
+		const double contributionLowerBound = -100;
+		assert(baseConferralScoreContributionRatio < 0);
+		// Ratio of residual proportion to equilibrium proportion resulting in maximised negative conferral contribution score.
+		const double negativeContriutionMaximalRatio = -4;
+		double baseConferralScoreContributionRatio = residualRealmProportion / equilibriumRealmProportion;
+		assert(baseConferralScoreContributionRatio < 0);
+		double adjustedConferralScoreContributionRatio = -baseConferralScoreContributionRatio / negativeContriutionMaximalRatio;
+		if(adjustedConferralScoreContributionRatio < -1)
 		{
-			conferralScoreContributionRatio = negativeContriutionMaximalRatio;
+			adjustedConferralScoreContributionRatio = -1;
 		}
-		conferralScoreContribution = -conferralScoreContributionRatio * maximalNegativeConferralScoreContribution;
+		conferralScoreContribution = -adjustedConferralScoreContributionRatio * contributionLowerBound;
 	}
 
 	return conferralScoreContribution;

@@ -86,7 +86,7 @@ void Game::update()
 {
 	///////////////////////////////
 	// Caps number of turns per update call. For testing. 
-	const int maxTurns = 30;
+	const int maxTurns = 10;
 	int turnCnt = 0;
 	///////////////////////////////
 
