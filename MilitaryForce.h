@@ -19,9 +19,8 @@ public:
 	virtual void draw(sf::RenderWindow &window) const;
 
 	virtual void move(Territory &location, unsigned int strength) = 0;
-	/*
-	Moves to the territory along the path withing owners realm to the target territory.
-	*/
+	
+	//Moves to the territory along the path withing owners realm to the target territory.
 	virtual void moveClosest(Territory &target, unsigned int strength, int maxDist) = 0;
 
 	// Returns true if graphical component contains specified world position.
@@ -47,10 +46,13 @@ public:
 	void setTerritory(Territory *territory);
 
 protected:
+	// Updates diplomacy of players involved in troop movement.
+	void updatePlayerDiplomacy(Player *locationEstateOwner);
+
 	virtual std::pair<int, int> calculateMinMaxStaminaCost(const Territory &territory) const = 0;
 
 private:
-	Player &owner;
+	Player &player;
 	Territory *territory;  // Territory military resides at.
 	std::array<unsigned int, 4> staminaStrength;
 	MilitaryForceGraphics graphics;

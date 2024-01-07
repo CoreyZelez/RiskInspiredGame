@@ -9,16 +9,16 @@
 #include <queue>
 #include <unordered_map>
 
-MilitaryForce::MilitaryForce(Player &owner, Territory *territory, unsigned int strength, const std::string &shape)
-	: owner(owner), territory(territory), staminaStrength({ 0, 0, 0, strength }), graphics(shape, *this)
+MilitaryForce::MilitaryForce(Player &player, Territory *territory, unsigned int strength, const std::string &shape)
+	: player(player), territory(territory), staminaStrength({ 0, 0, 0, strength }), graphics(shape, *this)
 {
 	assert(territory != nullptr);
 	assert(strength > 0);
 	assert(!owner.hasLiege());
 }
 
-MilitaryForce::MilitaryForce(Player & owner, Territory * territory, std::array<unsigned int, 4> staminaStrength, const std::string &shape)
-	: owner(owner), territory(territory), staminaStrength(staminaStrength), graphics(shape, *this)
+MilitaryForce::MilitaryForce(Player &player, Territory * territory, std::array<unsigned int, 4> staminaStrength, const std::string &shape)
+	: player(player), territory(territory), staminaStrength(staminaStrength), graphics(shape, *this)
 {
 	assert(territory != nullptr);
 	assert(getTotalStrength() > 0);
@@ -126,7 +126,7 @@ unsigned int MilitaryForce::getStrength(int minStamina) const
 
 Player& MilitaryForce::getOwner() const
 {
-	return owner;
+	return player;
 }
 
 unsigned int MilitaryForce::getTotalStrength() const
@@ -155,6 +155,20 @@ Territory& MilitaryForce::getTerritory() const
 void MilitaryForce::setTerritory(Territory* territory)
 {
 	this->territory = territory;
+}
+
+void MilitaryForce::updatePlayerDiplomacy(Player *locationEstateOwner)
+{
+	if(locationEstateOwner == nullptr)
+	{
+		return;
+	}
+	
+	if(!sameUpperRealm(locationEstateOwner, &player))
+	{
+		locationEstateOwner->addAttackHistory(getOwner());
+		getOwner().addAttackHistory(*locationEstateOwner);
+	}
 }
 
 bool MilitaryForce::containsPosition(sf::Vector2f position) const
@@ -244,7 +258,7 @@ Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory& sourceTerritory, 
 	return nullptr;
 }
 
-Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory & sourceTerritory, Territory & targetTerritory, int maxDist, TerritoryType territoryType)
+Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory &sourceTerritory, Territory &targetTerritory, int maxDist, TerritoryType territoryType)
 {
 
 	// Ensure territories have the same owner.

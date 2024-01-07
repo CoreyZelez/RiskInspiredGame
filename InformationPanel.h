@@ -13,11 +13,10 @@ public:
 	InformationPanel(std::vector<sfe::RichText> texts);
 
 	virtual void draw(sf::RenderWindow &window) const override;
-	virtual void handleLeftClick(sf::Vector2f position) override;
-	virtual void setPosition(sf::Vector2f position) override;
+	virtual void setPosition(sf::Vector2f position, bool center = false) override;
 
 private:
-	void setTextPositions(sf::Vector2f position);
+	void setTextPositions(sf::Vector2f position, bool center);
 
 	std::vector<sfe::RichText> texts;
 	const float borderPadding = 6;

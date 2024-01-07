@@ -210,6 +210,7 @@
     <ClCompile Include="NavalTerritory.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerDiplomacy.cpp" />
     <ClCompile Include="Port.cpp" />
     <ClCompile Include="Realm.cpp" />
     <ClCompile Include="PlayerEstateManager.cpp" />
@@ -275,6 +276,7 @@
     <ClInclude Include="MultiPanel.h" />
     <ClInclude Include="NameGenerator.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="PlayerDiplomacy.h" />
     <ClInclude Include="Port.h" />
     <ClInclude Include="Realm.h" />
     <ClInclude Include="PlayerEstateManager.h" />

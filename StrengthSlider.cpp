@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <iostream>
 StrengthSlider::StrengthSlider(const MilitaryForce & militaryForce, unsigned int &selectedStrength)
-	: militaryForce(militaryForce), selectedStrength(selectedStrength), backgroundBar(sf::Vector2f(600, 60))
+	: militaryForce(militaryForce), selectedStrength(selectedStrength), backgroundBar(sf::Vector2f(1000, 100))
 {
 	sf::Color green(0, 235, 0);
 	sf::Color yellow(215, 215, 180);
@@ -46,8 +46,15 @@ void StrengthSlider::handleButtonDown(sf::Mouse::Button button, sf::Vector2f pos
 	}
 }
 
-void StrengthSlider::setPosition(sf::Vector2f position)
+void StrengthSlider::setPosition(sf::Vector2f position, bool center)
 {
+	if(center)
+	{
+		sf::FloatRect background = backgroundBar.getLocalBounds();
+		sf::Vector2f centerOffset = { -background.width / 2, -background.height / 2 };
+		position.x += centerOffset.x;
+		position.y += centerOffset.y;
+	}
 	backgroundBar.setPosition(position);
 	updateBars();
 }

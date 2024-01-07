@@ -63,6 +63,9 @@ public:
 	bool compareRuler(const Player *player) const;  
 	// Returns the direct ruler of this estate.
 	const Player* getRuler() const;
+	// Returns the direct ruler of this estate.
+	Player* getRuler();
+
 	// Returns true if estate has a ruler.
 	bool hasRuler() const;
 
@@ -89,8 +92,6 @@ protected:
 	// Estate attempts to create military units on map.
 	virtual void generateMilitary(MilitaryManager &militaryManager);
 	virtual std::string getSaveLabel() const;
-
-	Player* getRuler();
 
 private:
 	Player *ruler = nullptr;

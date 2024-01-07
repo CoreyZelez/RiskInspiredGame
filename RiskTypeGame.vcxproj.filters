@@ -318,6 +318,9 @@
     <ClCompile Include="VassalPolicy.cpp">
       <Filter>Source Files\Game\Player</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerDiplomacy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LandArmy.h">
@@ -535,6 +538,9 @@
     </ClInclude>
     <ClInclude Include="VassalPolicy.h">
       <Filter>Header Files\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDiplomacy.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

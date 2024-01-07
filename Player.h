@@ -4,6 +4,7 @@
 #include "PlayerAIComponent.h"
 #include "LiegePolicy.h"
 #include "VassalPolicy.h"
+#include "PlayerDiplomacy.h"
 #include <vector>
 #include <memory>
 
@@ -25,6 +26,9 @@ public:
 	void handleReserveArmyYield(double amount);
 	// Handles distribution of fleet reserves to player and their liege. Recurses to upper-most liege.
 	void handleReserveFleetYield(double amount);
+
+	// Adds attacking player to attackHistory for player diplomacy.
+	void addAttackHistory(Player &enemy);
 
 	// Returns true if realm owner is a vassal of player. Optionally specify direct vassal only.
 	bool isVassal(const Player &player, bool direct = true) const;
@@ -61,6 +65,7 @@ private:
 	LiegePolicy liegePolicy;
 	VassalPolicy vassalPolicy;
 	MilitaryManager militaryManager;
+	PlayerDiplomacy diplomacy;
 	Realm realm;
 	bool isHuman = false;
 };

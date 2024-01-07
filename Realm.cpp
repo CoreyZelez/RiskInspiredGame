@@ -410,7 +410,6 @@ double Realm::realmSizeBaronyConferralContribution(const Player &vassal) const
 	else
 	{
 		const double contributionLowerBound = -100;
-		assert(baseConferralScoreContributionRatio < 0);
 		// Ratio of residual proportion to equilibrium proportion resulting in maximised negative conferral contribution score.
 		const double negativeContriutionMaximalRatio = -4;
 		double baseConferralScoreContributionRatio = residualRealmProportion / equilibriumRealmProportion;

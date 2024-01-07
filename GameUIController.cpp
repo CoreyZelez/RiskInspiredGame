@@ -17,7 +17,8 @@ void GameUIController::handleInput(const sf::RenderWindow &window, sf::View &UIV
 	{
 		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 		sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
-		gameUI.notifyButtonDown(sf::Mouse::Left, worldPos);
+		sf::Vector2f UIPos = window.mapPixelToCoords(mousePos, UIView);
+		gameUI.notifyButtonDown(sf::Mouse::Left, UIPos);
 	}
 }
 

@@ -8,12 +8,13 @@
 #include <iostream>
 
 Player::Player(Game &game, AIPersonality personality, const std::string &realmName)
-	: game(game), realm(game, *this, liegePolicy, realmName)
+	: game(game), realm(game, *this, liegePolicy, realmName), diplomacy(diplomacy)
 {
 }
 
 Player::Player(Game& game, const std::string &realmName)
-	: game(game), realm(game, *this, liegePolicy, realmName), AIComponent(std::make_unique<SimplePlayerAI>(game, *this))
+	: game(game), realm(game, *this, liegePolicy, realmName), 
+	AIComponent(std::make_unique<SimplePlayerAI>(game, *this)), diplomacy(diplomacy)
 {
 }
 
@@ -35,6 +36,7 @@ void Player::handleTurn()
 	}
 	militaryManager.update();
 	realm.handleMilitaryYields();
+	diplomacy.update();
 
 	if(!isHuman)
 	{
@@ -86,6 +88,11 @@ void Player::handleReserveFleetYield(double amount)
 		// No liege so add army to reinforcements rather than reserves.
 		militaryManager.addFleetReinforcements(amount);
 	}
+}
+
+void Player::addAttackHistory(Player &enemy)
+{
+	diplomacy.addAttackHistory(enemy);
 }
 
 bool Player::hasLiege() const

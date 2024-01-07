@@ -10,7 +10,7 @@ public:
 
 	virtual void draw(sf::RenderWindow &window) const override;
 	virtual void handleButtonDown(sf::Mouse::Button button, sf::Vector2f position) override;
-	virtual void setPosition(sf::Vector2f position) override;
+	virtual void setPosition(sf::Vector2f position, bool center = false) override;
 
 
 private:

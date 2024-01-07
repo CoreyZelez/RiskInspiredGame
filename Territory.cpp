@@ -27,7 +27,7 @@ Territory::Territory(int id, sf::Color color, std::unique_ptr<IOccupiable> occup
 	this->grid.setBorderMode(BorderMode::feintBorders);
 }
 
-void Territory::assignLandedEstate(const LandedEstate *estate)
+void Territory::assignLandedEstate(LandedEstate *estate)
 {
 	assert(this->landedEstate == nullptr);
 	landedEstate = estate;
@@ -74,7 +74,16 @@ const TerritoryDistanceMap & Territory::getDistanceMap() const
 	return distanceMap;
 }
 
-const Player* Territory::getEstateOwner() const
+Player* Territory::getEstateOwner() 
+{
+	if(landedEstate == nullptr)
+	{
+		return nullptr;
+	}
+	return landedEstate->getRuler();
+}
+
+const Player * Territory::getEstateOwner() const
 {
 	if(landedEstate == nullptr)
 	{

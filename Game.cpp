@@ -10,7 +10,7 @@ Game::Game(std::string mapName)
 void Game::generatePlayers()
 {
 	int humanCnt = 0; // Used temporarily for testing.
-	const int numHumans = 0;
+	const int numHumans = 1;
 	for(auto &barony : map.getEstateManager().getBaronies())
 	{
 		Player &player = createPlayer(); 

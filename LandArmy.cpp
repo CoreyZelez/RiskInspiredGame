@@ -138,6 +138,9 @@ void LandArmy::move(Territory &location, unsigned int strength)
 	// Attempt occupation of location by new army.
 	location.getOccupancyHandler()->occupy(newArmy.get());
 
+	// Update diplomacy of involved players.
+	updatePlayerDiplomacy(location.getEstateOwner());
+
 	// Refund strength to this->army if deployedArmy is not able to occupy location
 	if(&newArmy.get()->getTerritory() == &getTerritory())
 	{

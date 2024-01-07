@@ -40,19 +40,23 @@ void InformationPanel::draw(sf::RenderWindow &window) const
 	}
 }
 
-void InformationPanel::handleLeftClick(sf::Vector2f position)
+void InformationPanel::setPosition(sf::Vector2f position, bool center)
 {
+	UIPanel::setPosition(position, center);
+	setTextPositions(position, center);
 }
 
-void InformationPanel::setPosition(sf::Vector2f position)
-{
-	UIPanel::setPosition(position);
-	setTextPositions(position);
-}
-
-void InformationPanel::setTextPositions(sf::Vector2f position)
+void InformationPanel::setTextPositions(sf::Vector2f position, bool center)
 {
 	assert(texts.size() > 0);
+
+	if(center)
+	{
+		sf::FloatRect background = getBackground().getLocalBounds();
+		sf::Vector2f centerOffset = { -background.width / 2, -background.height / 2 };
+		position.x += centerOffset.x;
+		position.y += centerOffset.y;
+	}
 
 	const int x = position.x + borderPadding;  // x pos of all texts.
 	const int firstY = position.y + borderPadding;  // y pos of first text.
