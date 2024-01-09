@@ -31,9 +31,12 @@ bool RealmGrid::containsPosition(const sf::Vector2f & position) const
 	return grid.containsPosition(position);
 }
 
-void RealmGrid::setGridColor(const sf::Color & color)
+void RealmGrid::setGridColor(const sf::Color &color)
 {
-	grid.setColor(color);
+	if(grid.getColor() != color)
+	{
+		grid.setColor(color);
+	}
 }
 
 void RealmGrid::setGridColorDefault()

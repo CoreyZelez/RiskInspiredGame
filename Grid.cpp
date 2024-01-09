@@ -62,7 +62,7 @@ void Grid::saveToFile(std::ofstream &file) const
 
 void Grid::draw(sf::RenderWindow &window) const
 {
-	assert(!outdated);
+	//assert(!outdated);
 	window.draw(vertices);
 }
 
@@ -314,6 +314,11 @@ void Grid::setColor(sf::Color color)
 {
 	this->color = color;
 	calculateVertices();
+}
+
+const sf::Color& Grid::getColor() const
+{
+	return color;
 }
 
 void Grid::initBorders()

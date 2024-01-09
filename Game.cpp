@@ -10,7 +10,7 @@ Game::Game(std::string mapName)
 void Game::generatePlayers()
 {
 	int humanCnt = 0; // Used temporarily for testing.
-	const int numHumans = 1;
+	const int numHumans = 0;
 	for(auto &barony : map.getEstateManager().getBaronies())
 	{
 		Player &player = createPlayer(); 
@@ -44,18 +44,39 @@ Realm* Game::getRealm(const sf::Vector2f & position)
 	return nullptr;
 }
 
-void Game::deselectSelectedRealm()
+void Game::setDiplomacyRealmColors()
 {
-	if(selectedRealm != nullptr)
+	if(selectedDiplomacyPlayer == nullptr)
 	{
-		selectedRealm->setGridColorDefault();
+		return;
 	}
-	selectedRealm = nullptr;
+
+	// Set all colors to grey.
+	for(auto &player : players)
+	{
+		player.get()->getRealm().setGridColor(sf::Color(30, 30, 30));
+	}
+	// Set colors of player realms with relationship to selected diplomacy player.
+	selectedDiplomacyPlayer->setDiplomacyColors();
 }
 
-bool Game::isSelectedRealm() const
+void Game::deselectDiplomacyPlayer()
 {
-	return selectedRealm != nullptr;
+	// Reset all grid colors of players to default.
+	if(selectedDiplomacyPlayer != nullptr)
+	{
+		for(auto &player : players)
+		{
+			player.get()->getRealm().setGridColorDefault();
+		}
+		selectedDiplomacyPlayer->getRealm().setGridColorDefault();
+	}
+	selectedDiplomacyPlayer = nullptr;
+}
+
+bool Game::isDiplomacyView() const
+{
+	return selectedDiplomacyPlayer != nullptr;
 }
 
 void Game::setVassalView(const sf::Vector2f & position)
@@ -120,11 +141,19 @@ void Game::update()
 
 		if(players[currPlayer].get()->gameOver())
 		{
+			if(selectedDiplomacyPlayer == players[currPlayer].get())
+			{
+				selectedDiplomacyPlayer = nullptr;
+			}
 			players.erase(players.begin() + currPlayer);
 			--currPlayer;
 			continue;
 		}
 
+		if(selectedDiplomacyPlayer == players[currPlayer].get())
+		{
+			setDiplomacyRealmColors();
+		}
 		players[currPlayer].get()->handleTurn();
 
 		// Need to wait for user input to complete turn.
@@ -257,23 +286,16 @@ void Game::selectCurrPlayerRealm(bool humanOnly)
 	{
 		if(humanOnly && humanPlayerTurn)
 		{
-			assert(players[currPlayer].get()->getIsHuman());
-			selectedRealm = &players[currPlayer].get()->getRealm();
-			selectedRealm->setGridColor(sf::Color::Yellow);
-			return;
-		}
-		else
-		{
-			selectedRealm =  &players[currPlayer].get()->getRealm();
-			selectedRealm->setGridColor(sf::Color::Yellow);
+			selectedDiplomacyPlayer = players[currPlayer].get();
+			setDiplomacyRealmColors();
 			return;
 		}
 	}
 
-	deselectSelectedRealm();
+	deselectDiplomacyPlayer();
 }
 
-void Game::selectPlayerRealm(const sf::Vector2f &position)
+void Game::selectDiplomacyPlayer(const sf::Vector2f &position)
 {
 	const bool considerVassalView = true;
 	for(auto &player : players)
@@ -281,14 +303,14 @@ void Game::selectPlayerRealm(const sf::Vector2f &position)
 		Realm &realm = player.get()->getRealm(); 
 		if(realm.containsPosition(position, considerVassalView))
 		{
-			deselectSelectedRealm();
-			selectedRealm = &realm;
-			selectedRealm->setGridColor(sf::Color::Yellow);
+			deselectDiplomacyPlayer();
+			selectedDiplomacyPlayer = player.get();
+			setDiplomacyRealmColors();
 			return;
 		}
 	}
 
-	deselectSelectedRealm();
+	deselectDiplomacyPlayer();
 }
 
 void Game::endHumanPlayerTurn()

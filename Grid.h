@@ -63,6 +63,7 @@ public:
 	sf::Vector2f getCenter() const;  // Returns center position in game world of territory.
 
 	void setColor(sf::Color color);
+	const sf::Color& getColor() const; 
 
 	void calculateCenter();  
 

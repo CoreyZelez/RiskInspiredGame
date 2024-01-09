@@ -39,12 +39,12 @@ public:
 	// Sets selectedPlayer as currPlayer. Allows ensuring human, setting to nullptr if not human.
 	void selectCurrPlayerRealm(bool humanOnly);
 
-	// Sets selectedPlayer to realm at specified position.
-	void selectPlayerRealm(const sf::Vector2f &position);
+	// Sets selectedDiplomacyPlayer to player with realm at specified position.
+	void selectDiplomacyPlayer(const sf::Vector2f &position);
 	// Deslects selected realm and resets its grid color to default color.
-	void deselectSelectedRealm();
-	// Returns true if there is a selected realm.
-	bool isSelectedRealm() const;
+	void deselectDiplomacyPlayer();
+	// Returns true if there is a selected player for diplomacy map view.
+	bool isDiplomacyView() const;
 
 	// Sets vassal view for the realm at world position.
 	void setVassalView(const sf::Vector2f &position);
@@ -82,7 +82,7 @@ private:
 	NameGenerator nameGenerator;
 	std::vector<std::unique_ptr<Player>> players;
 	int currPlayer = 0;  // Index of current player.
-	Realm *selectedRealm;
+	Player *selectedDiplomacyPlayer;
 	bool humanPlayerTurn = false;  // Specifies that current turn is human player. Game waits for input.
 	MilitaryForce *selectedMilitary = nullptr;  // Military selected for movement.
 	unsigned int selectedStrength;  // Strength of selected military to move.
@@ -91,5 +91,6 @@ private:
 	void generatePlayers();  
 	// Returns the realm at position in game world.
 	Realm *getRealm(const sf::Vector2f &position);
+	void setDiplomacyRealmColors();
 };
 

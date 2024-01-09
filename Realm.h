@@ -72,6 +72,8 @@ private:
 
 	// Returns true if the barony is to be conferred to the ruler.
 	bool shouldConferBaronyToRuler(Barony &barony) const;
+	// Returns true if the barony is to be conferred to a newly created vassal.
+	bool shouldConferBaronyToNewVassal(Barony &barony) const;
 
 	// Returns the vassal with the highest varony conferral score. This is the vassal
 	// which the barony should be conferred to.

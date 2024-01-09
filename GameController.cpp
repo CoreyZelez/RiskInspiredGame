@@ -78,7 +78,7 @@ void GameController::handleInputForMapDisplay(const sf::RenderWindow &window)
 	{
 		gameUI.resetLeftUI();
 		game.resetVassalViews();
-		game.deselectSelectedRealm();
+		game.deselectDiplomacyPlayer();
 		game.setMapMode(MapMode::realm);
 	}
 	else if(inputUtility.getKeyPressed(sf::Keyboard::F2))
@@ -105,7 +105,7 @@ void GameController::handleInputForMapDisplay(const sf::RenderWindow &window)
 	{
 		if(game.getMapMode() == MapMode::selectedRealm)
 		{
-			game.deselectSelectedRealm();
+			game.deselectDiplomacyPlayer();
 			game.setMapMode(MapMode::realm);
 		}
 		else
@@ -134,8 +134,8 @@ void GameController::handleInputForMapDisplay(const sf::RenderWindow &window)
 
 		if(game.getMapMode() == MapMode::selectedRealm)
 		{
-			game.selectPlayerRealm(worldPos);
-			if(!game.isSelectedRealm())
+			game.selectDiplomacyPlayer(worldPos);
+			if(!game.isDiplomacyView())
 			{
 				game.setMapMode(MapMode::realm);
 			}

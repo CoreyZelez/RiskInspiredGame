@@ -319,7 +319,7 @@
       <Filter>Source Files\Game\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayerDiplomacy.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -540,7 +540,7 @@
       <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerDiplomacy.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

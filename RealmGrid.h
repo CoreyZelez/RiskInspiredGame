@@ -25,6 +25,5 @@ public:
 private:
 	const sf::Color defaultGridColor;
 	Grid grid;
-
 };
 

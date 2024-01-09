@@ -1,9 +1,27 @@
-﻿  StrengthSlider.cpp
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(44): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\strengthslider.cpp(44): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+﻿  Game.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  Grid.cpp
+d:\projects\risktypegame\risktypegame\grid.cpp(460): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\grid.cpp(460): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\grid.cpp(491): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+d:\projects\risktypegame\risktypegame\grid.cpp(512): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+d:\projects\risktypegame\risktypegame\grid.cpp(600): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\grid.cpp(600): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\grid.cpp(601): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\grid.cpp(601): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+  MilitaryForce.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  PlayerDiplomacy.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  RiskTypeGame.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
   Generating code
-  1 of 11315 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  26 of 11310 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    8 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Release\RiskTypeGame.exe

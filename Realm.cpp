@@ -13,6 +13,7 @@
 #include <assert.h>
 #include <iostream>
 #include <unordered_map>
+#include <unordered_set>
 
 Realm::Realm(Game &game, Player &ruler, const LiegePolicy &liegePolicy, const std::string &name)
 	: ruler(ruler), vassalManager(game, ruler), liegePolicy(liegePolicy), name(name)
@@ -241,7 +242,7 @@ Player& Realm::allocate(Estate &estate)
 			return ruler;
 		}
 		// Confer barony to new vassal.
-		else if(vassalManager.getVassals().size() < liegePolicy.rulerVassalLimit)
+		else if(shouldConferBaronyToNewVassal(*barony))
 		{
 			// Create a vassal conferring them the barony and return the created vassal.
 			return vassalManager.createVassal(*barony);
@@ -349,6 +350,44 @@ bool Realm::shouldConferBaronyToRuler(Barony &barony) const
 	return true;
 }
 
+/* 
+ * A new vassal is created when the barony is belonging to a county which player's realm contains no other
+ * baronies within. An exception to this rule is when the number of vassals has not reached some minimum. In
+ * that case, create new vassals until minimum number of vassals reached. A new vassal is never created when
+ * the vassal limit is reached or exceeded.
+ */
+bool Realm::shouldConferBaronyToNewVassal(Barony &barony) const
+{
+	const int numVassals = vassalManager.getVassals().size();
+	const int minVassalGuaranteeForNewVassalCreation = 3;
+
+	if(numVassals >= liegePolicy.rulerVassalLimit)
+	{
+		return false;
+	}
+
+	// Confer the barony to a new vassal if a minimum number of vassals are not currently in realm.
+	if(numVassals < minVassalGuaranteeForNewVassalCreation)
+	{
+		return true;
+	}
+
+	const Estate *upperEstate = barony.getParent();
+	if(upperEstate != nullptr && upperEstate->getTitle() == Title::county)
+	{
+		std::unordered_set<const Estate*> lowerEstates = upperEstate->getLowerEstates();
+		for(const Estate *estate : lowerEstates)
+		{
+			if(sameUpperRealm(estate->getRuler(), &ruler))
+			{
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
 Player* Realm::getHighestBaronyConferralScoreVassal(const Barony &barony) const
 {
 	const std::vector<Player*> &vassals = vassalManager.getVassals();
@@ -413,7 +452,7 @@ double Realm::realmSizeBaronyConferralContribution(const Player &vassal) const
 		// Ratio of residual proportion to equilibrium proportion resulting in maximised negative conferral contribution score.
 		const double negativeContriutionMaximalRatio = -4;
 		double baseConferralScoreContributionRatio = residualRealmProportion / equilibriumRealmProportion;
-		assert(baseConferralScoreContributionRatio < 0);
+		assert(baseConferralScoreContributionRatio <= 0);
 		double adjustedConferralScoreContributionRatio = -baseConferralScoreContributionRatio / negativeContriutionMaximalRatio;
 		if(adjustedConferralScoreContributionRatio < -1)
 		{
@@ -435,7 +474,7 @@ double Realm::realmEstatesInfluenceBaronyConferralContribution(const Player &vas
 	influenceContributions[Title::empire] = 1;
 	const double liegeBaronyInfluence = calculateBaronyInfluence(barony, vassal, influenceContributions);
 	const double vassalBaronyInfluence = calculateBaronyInfluence(barony, vassal, influenceContributions);
-	assert(liegeBaronyInfluence > vassalBaronyInfluence);
+	assert(liegeBaronyInfluence >= vassalBaronyInfluence);
 	const double maxConferralContribution = 100;
 	// Reduction constant ensures vassal not awarded too high contribution in case where liege influence is very
 	// small due to small amount of related baronies controlled.

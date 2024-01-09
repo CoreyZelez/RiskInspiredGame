@@ -14,7 +14,7 @@ MilitaryForce::MilitaryForce(Player &player, Territory *territory, unsigned int 
 {
 	assert(territory != nullptr);
 	assert(strength > 0);
-	assert(!owner.hasLiege());
+	assert(!player.hasLiege());
 }
 
 MilitaryForce::MilitaryForce(Player &player, Territory * territory, std::array<unsigned int, 4> staminaStrength, const std::string &shape)
@@ -166,8 +166,15 @@ void MilitaryForce::updatePlayerDiplomacy(Player *locationEstateOwner)
 	
 	if(!sameUpperRealm(locationEstateOwner, &player))
 	{
-		locationEstateOwner->addAttackHistory(getOwner());
-		getOwner().addAttackHistory(*locationEstateOwner);
+		if(locationEstateOwner == nullptr)
+		{
+			return;
+		}
+		// Only handle diplomacy for upper most liege.
+		// In future may want to handle diplomacy for all lieges in hierarchy of given location estate ownership.
+		Player &upperLiege = locationEstateOwner->getUpperLiege();
+		upperLiege.addAttackHistory(player);
+		player.addAttackHistory(upperLiege);
 	}
 }
 
@@ -178,7 +185,6 @@ bool MilitaryForce::containsPosition(sf::Vector2f position) const
 
 void MilitaryForce::setSpritePosition(sf::Vector2f position)
 {
-	
 	graphics.setPosition(position);
 }
 

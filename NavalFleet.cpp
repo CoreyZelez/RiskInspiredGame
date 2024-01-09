@@ -48,11 +48,11 @@ void NavalFleet::move(Territory &location, unsigned int strength)
 		return;
 	}
 
-	// Attempt occupation of location by new fleet.
-	location.getOccupancyHandler()->occupy(newFleet.get());
-
 	// Update diplomacy of involved players.
 	updatePlayerDiplomacy(location.getEstateOwner());
+
+	// Attempt occupation of location by new fleet.
+	location.getOccupancyHandler()->occupy(newFleet.get());
 
 	// Refund strength to this->fleet if deployed fleet is not able to occupy location
 	if(&newFleet.get()->getTerritory() == &getTerritory())

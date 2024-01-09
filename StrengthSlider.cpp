@@ -6,7 +6,7 @@ StrengthSlider::StrengthSlider(const MilitaryForce & militaryForce, unsigned int
 	: militaryForce(militaryForce), selectedStrength(selectedStrength), backgroundBar(sf::Vector2f(1000, 100))
 {
 	sf::Color green(0, 235, 0);
-	sf::Color yellow(215, 215, 180);
+	sf::Color yellow(215, 215, 0);
 	sf::Color orange(215, 107, 0);
 	sf::Color red(225, 0, 0);
 

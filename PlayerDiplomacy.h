@@ -9,7 +9,15 @@ class PlayerDiplomacy
 public:
 	PlayerDiplomacy(Player &player);
 
+	~PlayerDiplomacy();
+
 	void update();
+
+	// Sets colors of players to represent diplomatic relation.
+	void setColors();
+
+	// Removes all diplomatic relations recorded with specified player.
+	void removeDiplomacyWithPlayer(Player &player);
 
 	// Adds attacking player to attackHistory.
 	void addAttackHistory(Player &enemy);

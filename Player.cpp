@@ -8,13 +8,13 @@
 #include <iostream>
 
 Player::Player(Game &game, AIPersonality personality, const std::string &realmName)
-	: game(game), realm(game, *this, liegePolicy, realmName), diplomacy(diplomacy)
+	: game(game), realm(game, *this, liegePolicy, realmName), diplomacy(*this)
 {
 }
 
 Player::Player(Game& game, const std::string &realmName)
 	: game(game), realm(game, *this, liegePolicy, realmName), 
-	AIComponent(std::make_unique<SimplePlayerAI>(game, *this)), diplomacy(diplomacy)
+	AIComponent(std::make_unique<SimplePlayerAI>(game, *this)), diplomacy(*this)
 {
 }
 
@@ -93,6 +93,16 @@ void Player::handleReserveFleetYield(double amount)
 void Player::addAttackHistory(Player &enemy)
 {
 	diplomacy.addAttackHistory(enemy);
+}
+
+void Player::removeDiplomacyWithPlayer(Player & player)
+{
+	diplomacy.removeDiplomacyWithPlayer(player);
+}
+
+void Player::setDiplomacyColors()
+{
+	diplomacy.setColors();
 }
 
 bool Player::hasLiege() const

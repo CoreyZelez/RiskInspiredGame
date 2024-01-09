@@ -63,7 +63,6 @@ void GameUI::setBottomUI(std::unique_ptr<UIEntity> entity)
 	bottomUI = std::move(entity);
 	const double x = UIView.getCenter().x;
 	const double y = 1200;
-	std::cout << y << std::endl;
 	bottomUI.get()->setPosition(sf::Vector2f(x, y), true);
 }
 
