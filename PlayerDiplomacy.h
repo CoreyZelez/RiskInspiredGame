@@ -1,6 +1,8 @@
 #pragma once
 #include <unordered_set>
 #include <map>
+#include <memory>
+#include <vector>
 
 class Player;
 
@@ -14,7 +16,7 @@ public:
 	void update();
 
 	// Sets colors of players to represent diplomatic relation.
-	void setColors();
+	void setColors(const std::vector<std::unique_ptr<Player>> &players);
 
 	// Removes all diplomatic relations recorded with specified player.
 	void removeDiplomacyWithPlayer(Player &player);

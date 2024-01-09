@@ -32,7 +32,7 @@ public:
 	// Removes all diplomatic relations recorded with specified player.
 	void removeDiplomacyWithPlayer(Player &player);
 	// Sets colors of player realms with diplomacy relation to this player.
-	void setDiplomacyColors();
+	void setDiplomacyColors(const std::vector<std::unique_ptr<Player>> &players);
 
 	// Returns true if realm owner is a vassal of player. Optionally specify direct vassal only.
 	bool isVassal(const Player &player, bool direct = true) const;

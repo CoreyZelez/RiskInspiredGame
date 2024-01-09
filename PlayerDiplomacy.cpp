@@ -30,9 +30,12 @@ void PlayerDiplomacy::update()
 	attackHistory[0].clear();
 }
 
-void PlayerDiplomacy::setColors()
+void PlayerDiplomacy::setColors(const std::vector<std::unique_ptr<Player>> &players)
 {
+	std::unordered_set<const Player*> playerColorsSet;
+
 	player.getRealm().setGridColor(sf::Color(0, 94, 255));
+	playerColorsSet.insert(&player);
 
 	// Color of realms recently attacked. Closer to yellow implies longer time since attack.
 	sf::Color warColor(255, 0, 0);
@@ -46,6 +49,18 @@ void PlayerDiplomacy::setColors()
 		for(Player *player : attackHistory[i])
 		{
 			player->getRealm().setGridColor(warColor);
+			playerColorsSet.insert(player);
+		}
+	}
+
+	// Set all remaining realm colors to grey.
+	const sf::Color grey(50, 50, 50);
+	for(auto &player : players)
+	{
+		if(playerColorsSet.count(player.get()) == 0)
+		{
+			player.get()->getRealm().setGridColor(grey);
+			playerColorsSet.insert(player.get());
 		}
 	}
 }

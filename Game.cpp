@@ -51,13 +51,8 @@ void Game::setDiplomacyRealmColors()
 		return;
 	}
 
-	// Set all colors to grey.
-	for(auto &player : players)
-	{
-		player.get()->getRealm().setGridColor(sf::Color(30, 30, 30));
-	}
 	// Set colors of player realms with relationship to selected diplomacy player.
-	selectedDiplomacyPlayer->setDiplomacyColors();
+	selectedDiplomacyPlayer->setDiplomacyColors(players);
 }
 
 void Game::deselectDiplomacyPlayer()

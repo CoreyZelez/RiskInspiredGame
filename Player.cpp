@@ -100,9 +100,9 @@ void Player::removeDiplomacyWithPlayer(Player & player)
 	diplomacy.removeDiplomacyWithPlayer(player);
 }
 
-void Player::setDiplomacyColors()
+void Player::setDiplomacyColors(const std::vector<std::unique_ptr<Player>> &players)
 {
-	diplomacy.setColors();
+	diplomacy.setColors(players);
 }
 
 bool Player::hasLiege() const
