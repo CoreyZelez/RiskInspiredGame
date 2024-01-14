@@ -16,8 +16,8 @@ int main()
 	bool mapEditorMode = false;
 
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
-	sf::View gameView = window.getDefaultView();
-	sf::View UIView = window.getDefaultView();
+	sf::View gameView = window.getDefaultView(); 
+	sf::View UIView = window.getDefaultView();   
 
 	UIView.zoom(2);
 	InputUtility &InputUtility = InputUtility::getInstance();
@@ -86,7 +86,7 @@ int main()
 		if(!mapEditorMode)
 		{
 			gameUI.draw(window);
-		}
+		}  
 		window.display();
 	}
 

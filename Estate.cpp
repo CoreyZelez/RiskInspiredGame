@@ -339,11 +339,13 @@ int Estate::calculateBaronySubfiefOwnershipCount(const Player &player, bool requ
 
 void Estate::initColor()
 {
-	const sf::Color baronyColor(210, 19, 0);
-	const sf::Color countyColor(50, 200, 180);
-	const sf::Color dukedomColor(30, 220, 0);
-	const sf::Color kingdomColor(230, 110, 0);
-	const sf::Color empireColor(240, 0, 140);
+	const int randComponent1 = rand() % 51;
+	const int randComponent2 = rand() % 41;
+	const sf::Color baronyColor(190 + randComponent1, randComponent2, 0);
+	const sf::Color countyColor(50, 170 + randComponent1, 160 + randComponent2);
+	const sf::Color dukedomColor(30, 200 + randComponent1, 0);
+	const sf::Color kingdomColor(210 + randComponent1, 180 + randComponent2, 0);
+	const sf::Color empireColor(200 + randComponent1, 0, 100 + randComponent2);
 
 	switch(title)
 	{
