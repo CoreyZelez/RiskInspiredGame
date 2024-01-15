@@ -227,15 +227,7 @@ void Estate::removeSubfief(Estate *subfief)
 		if(*iter == subfief)
 		{
 			subfiefs.erase(iter);
-
-			//
-	        //
-	        /// IN FUTURE THIS MAY BE INCORRECT TO DO. SHOULD ONLY DO WHEN ADDING BARONIES PROBABLY.
-	        //
-	        //
 			grid.removeGrid(subfief->grid);
-			//
-			//
 			assert(subfief->parent == this);
 			subfief->parent = nullptr;
 			return;
@@ -339,13 +331,16 @@ int Estate::calculateBaronySubfiefOwnershipCount(const Player &player, bool requ
 
 void Estate::initColor()
 {
-	const int randComponent1 = rand() % 51;
+	const int randComponent1 = rand() % 61;
 	const int randComponent2 = rand() % 41;
+	const int randComponent3 = rand() % 41;
+	const int randComponent4 = rand() % 21;
+
 	const sf::Color baronyColor(190 + randComponent1, randComponent2, 0);
 	const sf::Color countyColor(50, 170 + randComponent1, 160 + randComponent2);
-	const sf::Color dukedomColor(30, 200 + randComponent1, 0);
-	const sf::Color kingdomColor(210 + randComponent1, 180 + randComponent2, 0);
-	const sf::Color empireColor(200 + randComponent1, 0, 100 + randComponent2);
+	const sf::Color dukedomColor(30, 190 + randComponent1, 0);
+	const sf::Color kingdomColor(210 + randComponent2, 210 + randComponent3, randComponent4);
+	const sf::Color empireColor(190 + randComponent1, randComponent2, 100 + randComponent3);
 
 	switch(title)
 	{

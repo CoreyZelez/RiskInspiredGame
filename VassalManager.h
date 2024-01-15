@@ -21,12 +21,12 @@ public:
 
 	// void transferVassal
 	// void addVassal(Player &player);
-	// void removeVassal // This is needed for when vassals rebel.
 	// Creates a new player vassal and confers them the barony. Returns created player.
 	Player& createVassal(Barony &barony);
 
 	// Removes specified vassal from vassals. Vassal must not have any estates.
 	void removeEstatelessVassal(const Player &vassal);
+	void removeRebellingVassal(Player &vassal); // This is needed for when vassals rebel.
 
 	// Confers estate to vassal. Returns the vassal player (direct or indirect) which becomes the estates direct owner.
 	Player& conferEstate(Player &vassal, Estate &estate);
@@ -34,6 +34,9 @@ public:
 	// Removes estate from estates and updates territories if necessary.
 	// Assumes estate already removed from vassal's realms.
 	void removeEstate(Estate& estate);
+
+	// Returns sum of all vassal's army reserves.
+	int getTotalArmyReserves() const;
 
 	const std::vector<Player*> &getVassals() const;
 

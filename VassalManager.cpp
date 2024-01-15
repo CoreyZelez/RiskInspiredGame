@@ -30,8 +30,38 @@ Player& VassalManager::createVassal(Barony &barony)
 
 void VassalManager::removeEstatelessVassal(const Player &vassal)
 {
+	// Vassal should not have an empty realm.
 	assert(vassal.getRealm().getEstates().empty());
+
 	vassals.erase(std::remove(vassals.begin(), vassals.end(), &vassal), vassals.end());
+}
+
+void VassalManager::removeRebellingVassal(Player &vassal)
+{
+	// Vassal should not have an empty realm.
+	assert(!vassal.getRealm().getEstates().empty());
+	// Vassal should indeed be in vassals.
+	assert(std::find(vassals.begin(), vassals.end(), &vassal) != vassals.end());
+
+	// Remove vassal's estates from estates.
+	std::unordered_set<const Estate*> vassalEstates = vassal.getRealm().getEstates();
+	for(const Estate* estate : vassalEstates)
+	{
+		assert(estates.count(estate) == 1);
+		assert(const_cast<Estate*>(estate) != nullptr);
+		estates.erase(const_cast<Estate*>(estate));
+	}
+
+	// Remove vassal's territories from territories.
+	std::unordered_set<Territory*> vassalTerritories = vassal.getRealm().getTerritories();
+	for(Territory* territory : vassalTerritories)
+	{
+		territories.erase(territory);
+	}
+
+	// Remove the vassal.
+	vassals.erase(std::remove(vassals.begin(), vassals.end(), &vassal), vassals.end());
+
 }
 
 Player& VassalManager::conferEstate(Player& vassal, Estate &estate)
@@ -65,6 +95,16 @@ void VassalManager::removeEstate(Estate &estate)
 	{
 		territories.erase(&landedEstate->getTerritory());
 	}
+}
+
+int VassalManager::getTotalArmyReserves() const
+{
+	int totalArmyReserves = 0;
+	for(const Player* vassal : vassals)
+	{
+		totalArmyReserves += vassal->getMilitaryManager().getTotalArmyStrength();
+	}
+	return totalArmyReserves;
 }
 
 const std::vector<Player*>& VassalManager::getVassals() const

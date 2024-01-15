@@ -22,6 +22,11 @@ public:
 
 	void handleTurn();
 
+	// Causes vassal player to rebel against liege. Can only rebel given certain conditions met and liege is liegeless.
+	// In future consider implementing for case where liege has a liege. In which case ownership of vassal would be
+	// transferred to the lieges liege. 
+	void rebel();
+
 	// Handles distribution of army reserves to player and their liege. Recurses to upper-most liege.
 	void handleReserveArmyYield(double amount);
 	// Handles distribution of fleet reserves to player and their liege. Recurses to upper-most liege.
@@ -72,6 +77,9 @@ private:
 	PlayerDiplomacy diplomacy;
 	Realm realm;
 	bool isHuman = false;
+
+	// Removes player as vassal.
+	void handleVassalRebellion(Player &vassal);
 };
 
 // Returns true if players share the same upper realm i.e. are friendly.

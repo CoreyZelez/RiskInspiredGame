@@ -25,12 +25,15 @@ public:
 	// Handles yields of ruler estates.
 	void handleMilitaryYields();
 
+	// Removes rebelling vassal from realm.
+	void removeRebellingVassal(Player &vassal);
+
 	// Adds estate to realm, conferring to ruler or a vassal. 
 	// Returns the player which estate is conferred to for territory to.
 	Player& addEstate(Estate &estate);
 	// Removes estate from realm, revoking from either ruler or a vassal depending on who owns it.
 	void removeEstate(Estate &estate);
-	// Returns highest ruler title of any estate's title in realm.
+	// Returns highest ruler title of any estate's title of ruler's personally held estates.
 	Title getHighestRulerTitle() const;
 
 	// CONSIDER HOLDING SETS FOR THE BELOW TWO FUNCTIONS IN REALM CLASS SO CAN RETURN REFERENCE. FOR OPTIMISAT5ION REASONS!!!
@@ -38,6 +41,9 @@ public:
 	std::unordered_set<Territory*> getTerritories();
 	// Returns unordered set of all estates in realm, including both ruler and vassal owned estates.
 	std::unordered_set<const Estate*> getEstates() const;
+
+	// Returns sum of all vassal's army reserves.
+	int getTotalVassalArmyReserves() const;
 
 	void updateGrid();
 

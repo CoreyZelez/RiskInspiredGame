@@ -26,6 +26,11 @@ void RealmGrid::removeGrid(const Grid &grid)
 	this->grid.removeGrid(grid, false);
 }
 
+void RealmGrid::removeGrid(const RealmGrid & grid)
+{
+	removeGrid(grid);
+}
+
 bool RealmGrid::containsPosition(const sf::Vector2f & position) const
 {
 	return grid.containsPosition(position);

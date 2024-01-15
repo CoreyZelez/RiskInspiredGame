@@ -113,6 +113,13 @@ void Realm::handleMilitaryYields()
 	rulerEstateManager.handleMilitaryYields();
 }
 
+void Realm::removeRebellingVassal(Player &vassal)
+{
+	// Remove the vassals realm grid from this grid.
+	realmGrid.removeGrid(vassal.getRealm().realmGrid);
+	vassalManager.removeRebellingVassal(vassal);
+}
+
 Player& Realm::addEstate(Estate &estate)
 {
 	const LandedEstate* landedEstate = dynamic_cast<const LandedEstate*>(&estate);
@@ -180,6 +187,11 @@ std::unordered_set<const Estate*> Realm::getEstates() const
 	realmEstates = rulerEstates;
 	realmEstates.insert(vassalEstates.begin(), vassalEstates.end());
 	return realmEstates;
+}
+
+int Realm::getTotalVassalArmyReserves() const
+{
+	return vassalManager.getTotalArmyReserves();
 }
 
 void Realm::updateGrid()
@@ -327,6 +339,13 @@ bool Realm::shouldConferBaronyToRuler(Barony &barony) const
 	else if(liegePolicy.rulerBaronyLimit <= rulerEstateManager.getTitleCounts()[Title::barony])
 	{
 		return false;
+	}
+
+	// Amount of baronies that are guaranteed to be conferred to ruler regardless of other factors except limit.
+	const int guaranteedConferralAmount = 2;
+	if(liegePolicy.rulerBaronyLimit >= guaranteedConferralAmount && rulerEstateManager.getTitleCounts()[Title::barony] < guaranteedConferralAmount)
+	{
+		return true;
 	}
 
 	// The maximum number of landed estates ruler can control per specified estate. Limits only enforced

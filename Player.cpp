@@ -8,13 +8,13 @@
 #include <iostream>
 
 Player::Player(Game &game, AIPersonality personality, const std::string &realmName)
-	: game(game), realm(game, *this, liegePolicy, realmName), diplomacy(*this)
+	: game(game), realm(game, *this, liegePolicy, realmName), diplomacy(*this), vassalPolicy(*this)
 {
 }
 
 Player::Player(Game& game, const std::string &realmName)
 	: game(game), realm(game, *this, liegePolicy, realmName), 
-	AIComponent(std::make_unique<SimplePlayerAI>(game, *this)), diplomacy(*this)
+	AIComponent(std::make_unique<SimplePlayerAI>(game, *this)), diplomacy(*this), vassalPolicy(*this)
 {
 }
 
@@ -33,6 +33,7 @@ void Player::handleTurn()
 	if(liege != nullptr)
 	{
 		vassalPolicy.handleLiegeInfluenceChange(liege->liegePolicy);
+		vassalPolicy.handleResistanceChange(*liege, liege->liegePolicy);
 	}
 	militaryManager.update();
 	realm.handleMilitaryYields();
@@ -42,6 +43,16 @@ void Player::handleTurn()
 	{
 		AIComponent.get()->handleTurn();
 	}
+}
+
+void Player::rebel()
+{
+	// Player must have a liege.
+	assert(liege != nullptr);
+	// Players liege must not have a liege.
+	assert(liege->liege == nullptr);
+
+	liege->handleVassalRebellion(*this);
 }
 
 void Player::handleReserveArmyYield(double amount)
@@ -163,6 +174,12 @@ const LiegePolicy& Player::getLiegePolicy() const
 const VassalPolicy& Player::getVassalPolicy() const
 {
 	return vassalPolicy;
+}
+
+void Player::handleVassalRebellion(Player &vassal)
+{
+	realm.removeRebellingVassal(vassal);
+	diplomacy.addRebellingVassal(vassal);
 }
 
 bool Player::sameUpperLiege(const Player &player) const

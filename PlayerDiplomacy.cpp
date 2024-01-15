@@ -22,6 +22,8 @@ PlayerDiplomacy::~PlayerDiplomacy()
 
 void PlayerDiplomacy::update()
 {
+	updateRebellingVassals();
+
 	// Shift attack history keys right.
 	for(int i = maxHistory; i >= 1; --i)
 	{
@@ -39,6 +41,8 @@ void PlayerDiplomacy::setColors(const std::vector<std::unique_ptr<Player>> &play
 
 	// Color of realms recently attacked. Closer to yellow implies longer time since attack.
 	sf::Color warColor(255, 0, 0);
+	sf::Color rebelColor(255, 0, 100);
+
 	const int greenIncrement = 255 / (maxHistory + 1);
 	for(int i = 0; i <= maxHistory; ++i)
 	{
@@ -48,7 +52,14 @@ void PlayerDiplomacy::setColors(const std::vector<std::unique_ptr<Player>> &play
 		}
 		for(Player *player : attackHistory[i])
 		{
-			player->getRealm().setGridColor(warColor);
+			if(rebellingVassals.count(player) == 1)
+			{
+				player->getRealm().setGridColor(rebelColor);
+			}
+			else
+			{
+				player->getRealm().setGridColor(warColor);
+			}
 			playerColorsSet.insert(player);
 		}
 	}
@@ -78,6 +89,20 @@ void PlayerDiplomacy::addAttackHistory(Player &enemy)
 		}
 	}
 	attackHistory[0].insert(&enemy);
+}
+
+void PlayerDiplomacy::addRebellingVassal(Player &rebellingVassal)
+{
+	addAttackHistory(rebellingVassal);
+	rebellingVassals.insert(&rebellingVassal);
+}
+
+void PlayerDiplomacy::updateRebellingVassals()
+{
+	for(Player *player : attackHistory[maxHistory])
+	{
+		rebellingVassals.erase(player);
+	}
 }
 
 void PlayerDiplomacy::removeDiplomacyWithPlayer(Player &player)
