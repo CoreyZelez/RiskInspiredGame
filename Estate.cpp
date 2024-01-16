@@ -187,6 +187,7 @@ void Estate::provideSubfiefBonusYields()
 
 void Estate::yield()
 {
+	// Intentionally empty.
 }
 
 /* 
@@ -194,6 +195,7 @@ void Estate::yield()
  */
 void Estate::generateMilitary(MilitaryManager &militaryManager)
 {
+	// Intentionally empty.
 }
 
 std::string Estate::getSaveLabel() const
@@ -427,6 +429,19 @@ void Estate::setOwnership(Player *ruler)
 	}
 }
 
+/* 
+ * Changes the ownership of the estate should not belong to the current ruler's upper most liege's realm.
+ * We do not want to change the owner when the estate does belong to the current ruler's upper most liege's realm.
+ */
+void Estate::ammendOwnership()
+{
+	Player* upperRealmRuler = getLowerEstatesUpperRealmRuler();
+	if(!sameUpperRealm(ruler, upperRealmRuler))
+	{
+		setOwnership(upperRealmRuler);
+	}
+}
+
 void Estate::recursiveGetLowerEstateTitleCounts(std::map<Title, int>& subfiefTitleCounts) const
 {
 	for(const auto &subfief : subfiefs)
@@ -477,8 +492,11 @@ Player* Estate::getLowerEstatesUpperRealmRuler()
 	for(Estate *subfief : subfiefs)
 	{
 		Player *ruler = subfief->getLowerEstatesUpperRealmRuler();
-		assert(ruler != nullptr);
-		if(ruler != nullptr && upperRealmRuler == nullptr)
+		if(ruler == nullptr)
+		{
+			return nullptr;
+		}
+		else if(upperRealmRuler == nullptr)
 		{
 			upperRealmRuler = ruler;
 		}

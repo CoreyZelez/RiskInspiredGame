@@ -59,6 +59,12 @@ void StrengthSlider::setPosition(sf::Vector2f position, bool center)
 	updateBars();
 }
 
+sf::Vector2f StrengthSlider::getDimensions()
+{
+	sf::FloatRect bounds = backgroundBar.getLocalBounds();
+	return sf::Vector2f(bounds.width, bounds.height);
+}
+
 void StrengthSlider::updateSelectedStrength(const int amount)
 {
 	selectedStrength = amount;

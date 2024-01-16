@@ -23,6 +23,12 @@ void UIPanel::setPosition(sf::Vector2f position, bool center)
 	background.setPosition(position);
 }
 
+sf::Vector2f UIPanel::getDimensions()
+{
+	sf::FloatRect bounds = background.getLocalBounds();
+	return sf::Vector2f(bounds.width, bounds.height);
+}
+
 const sf::RectangleShape& UIPanel::getBackground() const
 {
 	return background;

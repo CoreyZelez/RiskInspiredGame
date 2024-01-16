@@ -136,6 +136,8 @@ void Game::update()
 
 		if(players[currPlayer].get()->gameOver())
 		{
+			std::cout << "realm name game " << players[currPlayer].get()->getRealm().getName() << std::endl;
+
 			if(selectedDiplomacyPlayer == players[currPlayer].get())
 			{
 				selectedDiplomacyPlayer = nullptr;

@@ -4,6 +4,7 @@
 #include "LandedEstate.h"
 #include "RealmGrid.h"
 #include "MilitaryManager.h"
+#include "Player.h"
 #include <unordered_set>
 #include <iostream>
 
@@ -78,6 +79,19 @@ std::unordered_set<const Estate*> PlayerEstateManager::getEstates() const
 bool PlayerEstateManager::containsEstate(const Estate &estate) const
 {
 	return (estates.count(const_cast<Estate*>(&estate)) == 1);
+}
+
+void PlayerEstateManager::ammendUnlandedEstateOwnership()
+{
+	for(Estate* estate : estates)
+	{
+		if(dynamic_cast<LandedEstate*>(estate) == nullptr)
+		{
+			continue;
+		}
+				
+		estate->ammendOwnership();
+	}
 }
 
 bool PlayerEstateManager::landedEstatesContainsPosition(const sf::Vector2f &position) const

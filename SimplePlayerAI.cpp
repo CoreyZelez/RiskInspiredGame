@@ -25,6 +25,7 @@ void SimplePlayerAI::handleTurn()
 
 void SimplePlayerAI::handleTurnVassal()
 {
+	executeRebellionAgainstLiege();
 }
 
 void SimplePlayerAI::handleTurnNonVassal()
@@ -561,4 +562,36 @@ void SimplePlayerAI::executeFleetMoveOrders(const std::map<Territory*, int>& str
 			}
 		}
 	}
+}
+
+bool SimplePlayerAI::executeRebellionAgainstLiege()
+{
+	assert(getPlayer().getLiege() != nullptr);
+
+	if(!getPlayer().getVassalPolicy().canRebel())
+	{
+		return false;
+	}
+
+	// Cannot rebel if player's liege themselves has a liege.
+	if(getPlayer().getLiege()->getLiege() != nullptr)
+	{
+		return false;
+	}
+
+	const int liegeStrength = getPlayer().getLiege()->getMilitaryManager().getTotalArmyStrength();
+	const int playerStrength = getPlayer().getMilitaryManager().getTotalArmyStrength();
+	const int resistanceRebellionThreshold = 150;
+	if(playerStrength >= liegeStrength)
+	{
+		getPlayer().rebel();
+		return true;
+	}
+	else if(getPlayer().getVassalPolicy().resistance > resistanceRebellionThreshold)
+	{
+		getPlayer().rebel();
+		return true;
+	}
+
+	return false;
 }

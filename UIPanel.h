@@ -8,6 +8,7 @@ public:
 	UIPanel(sf::Color backgroundColor);
 	virtual void draw(sf::RenderWindow &window) const;
 	virtual void setPosition(sf::Vector2f position, bool center = false) override;
+	virtual sf::Vector2f getDimensions() override;
 
 protected:
 	const sf::RectangleShape& getBackground() const;

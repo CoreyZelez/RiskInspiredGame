@@ -174,6 +174,7 @@
     <ClCompile Include="LiegePolicy.cpp" />
     <ClCompile Include="Maridom.cpp" />
     <ClCompile Include="NavalTerritoryOccupancy.cpp" />
+    <ClCompile Include="IntegerSlider.cpp" />
     <ClCompile Include="PlayerAIContext.cpp" />
     <ClCompile Include="AIPersonality.cpp" />
     <ClCompile Include="PlayerAIComponent.cpp" />
@@ -246,6 +247,7 @@
     <ClInclude Include="LiegePolicy.h" />
     <ClInclude Include="Maridom.h" />
     <ClInclude Include="NavalTerritoryOccupancy.h" />
+    <ClInclude Include="IntegerSlider.h" />
     <ClInclude Include="PlayerAIContext.h" />
     <ClInclude Include="AIPersonality.h" />
     <ClInclude Include="PlayerAIComponent.h" />

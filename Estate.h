@@ -43,6 +43,9 @@ public:
 	// Changes the ownership of the estate by adding the estate to ruler's realm and setting the new owner
 	// as the player which ruler grants the estate to (possibly the ruler themself).
 	void setOwnership(Player *ruler);
+	// Revokes ownership if owner's upper liege's realm does not completely control lower estates and sets
+	// ownership to rightful player if applicable.
+	void ammendOwnership();
 
 	// Adds a subfief to this estate.
 	void addSubfief(Estate *subfief);
@@ -104,10 +107,10 @@ private:
 
 	// Alocates estate to ruler who's realm owns every lower estate entirely.
 	void handleAllocation();
-	// Returns player who's realm contains EVERY lower estate of this estate. Otherwise nullptr.
-	Player* getLowerEstatesUpperRealmRuler();
 	// Gets notified of ownership change of a lower estate and updates ownership accordingly.
 	void handleLowerEstateChange(const Estate &subfief);
+	// Returns player who's realm contains EVERY lower estate of this estate. Otherwise nullptr.
+	Player* getLowerEstatesUpperRealmRuler();
 
 	// Determines the counts of all lower estates of estate.
 	std::map<Title, int> getLowerEstateTitleCounts() const;

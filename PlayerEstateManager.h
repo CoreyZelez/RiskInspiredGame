@@ -23,6 +23,9 @@ public:
 	std::unordered_set<const Estate*> getEstates() const;
 	bool containsEstate(const Estate& estate) const;
 
+	// Ammends ownership of rulers unlanded estates.
+	void ammendUnlandedEstateOwnership();
+
 	// Returns true if any of landed estates in estates contains the position.
 	bool landedEstatesContainsPosition(const sf::Vector2f &position) const;
 

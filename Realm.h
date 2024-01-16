@@ -12,6 +12,7 @@ class Player;
 class LiegePolicy;
 class Estate;
 class Game;
+class MilitaryManager;
 
 class Realm : public HasUI
 {
@@ -25,8 +26,14 @@ public:
 	// Handles yields of ruler estates.
 	void handleMilitaryYields();
 
+	// Yields all army reserves to realm land territories.
+	void yieldArmyReserves();
+
 	// Removes rebelling vassal from realm.
 	void removeRebellingVassal(Player &vassal);
+
+	// Redetermines and updates the ownership of rulers and vassals unlanded estates.
+	void ammendUnlandedEstateOwnership();
 
 	// Adds estate to realm, conferring to ruler or a vassal. 
 	// Returns the player which estate is conferred to for territory to.
@@ -35,12 +42,16 @@ public:
 	void removeEstate(Estate &estate);
 	// Returns highest ruler title of any estate's title of ruler's personally held estates.
 	Title getHighestRulerTitle() const;
+	// Returns combined title counts of ruler estates and vassal estates.
+	std::map<Title, int> getTitleCounts() const;
 
 	// CONSIDER HOLDING SETS FOR THE BELOW TWO FUNCTIONS IN REALM CLASS SO CAN RETURN REFERENCE. FOR OPTIMISAT5ION REASONS!!!
 	// Returns unordered set of all territories in realm, including those associated with both ruler owned and vassal estates.
 	std::unordered_set<Territory*> getTerritories();
 	// Returns unordered set of all estates in realm, including both ruler and vassal owned estates.
 	std::unordered_set<const Estate*> getEstates() const;
+
+	std::string getName() const;
 
 	// Returns sum of all vassal's army reserves.
 	int getTotalVassalArmyReserves() const;
@@ -72,9 +83,6 @@ private:
 	// This function does not update the estates ownership. It should only be called by the 
 	// estate in question so the estate itself can update its ownership.
 	Player& allocate(Estate &estate);
-
-	// Returns combined title counts of ruler estates and vassal estates.
-	std::map<Title, int> getTitleCounts() const;
 
 	// Returns true if the barony is to be conferred to the ruler.
 	bool shouldConferBaronyToRuler(Barony &barony) const;

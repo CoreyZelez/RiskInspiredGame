@@ -10,10 +10,14 @@ public:
 
 	virtual void update(Message message) override;
 
+	// Determine occupyer.
+	virtual void determineOccupation() override;
 	// Handles land army occupation attempt. Returns true if successful.
 	virtual bool occupy(LandArmy *army) override;
 	// Handles navy fleet occupation attempt. Returns true if successful.
 	virtual bool occupy(NavalFleet *fleet) override;
+	// Attempt to occupy until army dies or successfully occupies.
+	virtual void forceOccupy(LandArmy *army) override;
 	// Returns occupant of territory.
 	virtual Player* getOccupant() override;
 	// Returns land army occupying territory.

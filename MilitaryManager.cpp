@@ -34,6 +34,11 @@ MilitaryForce* MilitaryManager::getMilitary(sf::Vector2f position)
 	return nullptr;
 }
 
+void MilitaryManager::removeArmyReserves(double percentRemoved)
+{
+	armyReserves *= (1 - percentRemoved);
+}
+
 float MilitaryManager::getArmyReinforcementRate() const
 {
 	const float maxRate = 0.9;
@@ -121,22 +126,29 @@ std::vector<std::unique_ptr<NavalFleet>>& MilitaryManager::getFleets()
 int MilitaryManager::getTotalArmyStrength() const
 {
 	int totalStrength = 0;
+	totalStrength += armyReserves;
+	totalStrength += armyReinforcements;
 	for(const auto &army : armies)
 	{
 		totalStrength += army.get()->getTotalStrength();
 	}
-	assert(totalStrength == getTotalArmyStrength(0));
 	return totalStrength;
+}
+
+int MilitaryManager::getArmyReserves() const
+{
+	return armyReserves;
 }
 
 int MilitaryManager::getTotalFleetStrength() const
 {
 	int totalStrength = 0;
+	totalStrength += fleetReserves;
+	totalStrength += fleetReinforcements;
 	for(const auto &fleet : fleets)
 	{
 		totalStrength += fleet.get()->getTotalStrength();
 	}
-	assert(totalStrength == getTotalArmyStrength(0));
 	return totalStrength;
 }
 

@@ -80,6 +80,9 @@ private:
 
 	// Removes player as vassal.
 	void handleVassalRebellion(Player &vassal);
+	// Yields player reserves to a proportion of estates.
+	void yieldArmyReserves();
+
 };
 
 // Returns true if players share the same upper realm i.e. are friendly.

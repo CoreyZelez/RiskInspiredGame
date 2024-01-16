@@ -14,6 +14,8 @@ struct VassalPolicy
 	// Adjusts resistance against liege.
 	void handleResistanceChange(const Player &liege, const LiegePolicy &liegePolicy);
 
+	bool canRebel() const;
+
 	// Percent of generated troops granted to liege.
 	double liegeLevyContribution = 0.7;
 

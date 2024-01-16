@@ -21,6 +21,12 @@ void VassalPolicy::handleResistanceChange(const Player &liege, const LiegePolicy
 	// Maximum resistance that can be attained.
 	const double maxResistance = 2 * rebellionThreshold;
 
+	///////////////////////////////
+	// TEMPORARY FOR TESTING
+	//
+	resistance += 1;
+	/////////////////////////
+
 	// Resistance reduces by multiplication factor.
 	// This stops resistance from growing far past the rebellion threshold. 
 	const double resistanceMultiplier = 0.995;
@@ -52,10 +58,16 @@ void VassalPolicy::handleResistanceChange(const Player &liege, const LiegePolicy
 	// Adjust resistance due to liege not having dejure upper title of player's highest title(s).
 
 	// Adjust resistance due to total military strength relative to liege's.
-	const double equilibriumRatio = 2;
+	const double equilibriumRatio = 1;
 	const int totalLiegeArmyStrength = liege.getMilitaryManager().getTotalArmyStrength();
 	const int totalVassalArmyReserves = liege.getRealm().getTotalVassalArmyReserves();
-	if(totalLiegeArmyStrength == 0)
+	// Minimum vassal reserves for any resistance to possibly be generated.
+	const int minVassalReserves = 3;
+	if(totalVassalArmyReserves <= minVassalReserves)
+	{
+		// Do nothing.
+	}
+	else if(totalLiegeArmyStrength == 0)
 	{
 		resistance = maxResistance;
 	}
@@ -77,4 +89,9 @@ void VassalPolicy::handleResistanceChange(const Player &liege, const LiegePolicy
 	{
 		resistance = maxResistance;
 	}
+}
+
+bool VassalPolicy::canRebel() const
+{
+	return resistance >= rebellionThreshold;
 }

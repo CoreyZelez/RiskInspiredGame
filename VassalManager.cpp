@@ -47,7 +47,7 @@ void VassalManager::removeRebellingVassal(Player &vassal)
 	std::unordered_set<const Estate*> vassalEstates = vassal.getRealm().getEstates();
 	for(const Estate* estate : vassalEstates)
 	{
-		assert(estates.count(estate) == 1);
+		assert(estates.count(const_cast<Estate*>(estate)) == 1);
 		assert(const_cast<Estate*>(estate) != nullptr);
 		estates.erase(const_cast<Estate*>(estate));
 	}
@@ -60,8 +60,8 @@ void VassalManager::removeRebellingVassal(Player &vassal)
 	}
 
 	// Remove the vassal.
-	vassals.erase(std::remove(vassals.begin(), vassals.end(), &vassal), vassals.end());
-
+	auto iter = vassals.erase(std::remove(vassals.begin(), vassals.end(), &vassal), vassals.end());
+	assert(iter == vassals.end());
 }
 
 Player& VassalManager::conferEstate(Player& vassal, Estate &estate)
@@ -94,6 +94,14 @@ void VassalManager::removeEstate(Estate &estate)
 	if(landedEstate != nullptr)
 	{
 		territories.erase(&landedEstate->getTerritory());
+	}
+}
+
+void VassalManager::ammendUnlandedEstateOwnership()
+{
+	for(Player *vassal : vassals)
+	{
+		vassal->getRealm().ammendUnlandedEstateOwnership();
 	}
 }
 

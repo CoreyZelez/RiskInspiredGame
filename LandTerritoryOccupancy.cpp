@@ -2,6 +2,7 @@
 #include "LandArmy.h"
 #include "NavalFleet.h"
 #include "LandTerritory.h"
+#include "Player.h"
 #include <assert.h>
 
 LandTerritoryOccupancy::LandTerritoryOccupancy(LandTerritory &territory)
@@ -21,6 +22,19 @@ void LandTerritoryOccupancy::update(Message message)
 		if(fleet != nullptr && fleet->isDead())
 		{
 			fleet = nullptr;
+		}
+	}
+}
+
+void LandTerritoryOccupancy::determineOccupation()
+{
+	const Player *estateOwner = territory.getEstateOwner();
+	if(army != nullptr)
+	{
+		const Player& armyOwner = army->getOwner();
+		if(!sameUpperRealm(estateOwner, &armyOwner))
+		{
+			territory.notifyObservers(newOccupant);
 		}
 	}
 }
@@ -86,6 +100,18 @@ bool LandTerritoryOccupancy::occupy(LandArmy *army)
 bool LandTerritoryOccupancy::occupy(NavalFleet *fleet)
 {
 	return false;
+}
+
+void LandTerritoryOccupancy::forceOccupy(LandArmy *army)
+{
+	// Attempt occupancy.
+	territory.getOccupancyHandler()->occupy(army);
+	// Repeatedly reattempy occupancy of naval territory until success or death of fleet.
+	// This is necessary since first attempt to occupy may fail whilst fleet still alive thus has no where to return to.
+	while(!army->isDead() && !sameUpperRealm(territory.getOccupancyHandler()->getOccupant(), &army->getOwner()))
+	{
+		occupy(army);
+	}
 }
 
 Player* LandTerritoryOccupancy::getOccupant()

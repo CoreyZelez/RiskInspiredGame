@@ -7,13 +7,17 @@
 #include "RichText.h"
 #include "InformationPanel.h"
 #include "LiegePolicy.h"
+#include "LandTerritory.h"
 #include "NameGenerator.h"
 #include "Game.h"
 #include "Barony.h"
 #include <assert.h>
 #include <iostream>
+#include <vector>
 #include <unordered_map>
 #include <unordered_set>
+#include <algorithm>
+#include <random>
 
 Realm::Realm(Game &game, Player &ruler, const LiegePolicy &liegePolicy, const std::string &name)
 	: ruler(ruler), vassalManager(game, ruler), liegePolicy(liegePolicy), name(name)
@@ -113,11 +117,77 @@ void Realm::handleMilitaryYields()
 	rulerEstateManager.handleMilitaryYields();
 }
 
+void Realm::yieldArmyReserves()
+{
+	MilitaryManager &militaryManager = ruler.getMilitaryManager();
+	std::unordered_set<Territory*> territories = getTerritories();
+	std::vector<Territory*> landTerritories;
+	for(Territory *territory : territories)
+	{
+		if(territory->getType() == TerritoryType::land)
+		{
+			assert(dynamic_cast<LandTerritory*>(territory) != nullptr);
+			landTerritories.push_back(territory);
+		}
+	}
+
+	// Cannot yield any armies.
+	if(landTerritories.size() == 0)
+	{
+		return;
+	}
+
+	// Shuffle vector so we yield armies to territories randomly chosen.
+	auto rng = std::default_random_engine{};
+	std::shuffle(std::begin(landTerritories), std::end(landTerritories), rng);
+
+	// Percent of territories militaries are yielded to.
+	const double territoriesYieldRatio = 0.3;
+	const int maxTerritoriesYielded = 10;
+	const int numLandTerritories = landTerritories.size();
+	// Number of territories to yield reserve armies to.
+	int numTerritoriesToYield = std::min(maxTerritoriesYielded, (int)(numLandTerritories * territoriesYieldRatio));
+	numTerritoriesToYield = std::max(numTerritoriesToYield, 1);
+
+	// Army reserves yet to be yielded.
+	const int totalReserves = militaryManager.getArmyReserves();
+	int remainingReserves = totalReserves;
+	militaryManager.removeArmyReserves(1);
+	// Yield armies to territories in order based upon random shuffle.
+	for(int i = 0; i < numTerritoriesToYield; ++i)
+	{
+		int strength = (double)totalReserves / (double)numTerritoriesToYield;
+		if(strength > remainingReserves || i == numTerritoriesToYield - 1)
+		{
+			strength = remainingReserves;
+		}
+		if(strength == 0)
+		{
+			continue;
+		}
+		Territory &territory = *landTerritories[i];
+		std::unique_ptr<LandArmy> army = std::make_unique<LandArmy>(ruler, &territory, strength);
+		// Repeatedly attempt occupation until army dies or territory is occupied. Must force occupy
+		// since territory may have a liege army on it.
+		territory.getOccupancyHandler()->forceOccupy(army.get());
+		if(!army.get()->isDead())
+		{
+			army.get()->getOwner().getMilitaryManager().addLandArmy(std::move(army));
+		}
+	}
+}
+
 void Realm::removeRebellingVassal(Player &vassal)
 {
 	// Remove the vassals realm grid from this grid.
 	realmGrid.removeGrid(vassal.getRealm().realmGrid);
 	vassalManager.removeRebellingVassal(vassal);
+}
+
+void Realm::ammendUnlandedEstateOwnership()
+{
+	rulerEstateManager.ammendUnlandedEstateOwnership();
+	vassalManager.ammendUnlandedEstateOwnership();
 }
 
 Player& Realm::addEstate(Estate &estate)
@@ -187,6 +257,11 @@ std::unordered_set<const Estate*> Realm::getEstates() const
 	realmEstates = rulerEstates;
 	realmEstates.insert(vassalEstates.begin(), vassalEstates.end());
 	return realmEstates;
+}
+
+std::string Realm::getName() const
+{
+	return name;
 }
 
 int Realm::getTotalVassalArmyReserves() const

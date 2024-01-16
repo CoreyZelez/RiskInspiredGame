@@ -1,6 +1,7 @@
 #include "NavalTerritoryOccupancy.h"
 #include "NavalFleet.h"
 #include "LandArmy.h"
+#include "Player.h"
 #include <assert.h>
 #include <iostream>
 
@@ -21,6 +22,19 @@ void NavalTerritoryOccupancy::update(Message message)
 		if(fleet != nullptr && fleet->isDead())
 		{
 			fleet = nullptr;
+		}
+	}
+}
+
+void NavalTerritoryOccupancy::determineOccupation()
+{
+
+	if(fleet != nullptr)
+	{
+		const Player& fleetOwner = fleet->getOwner();
+		if(!sameUpperRealm(mostRecentOccupant, &fleetOwner))
+		{
+			territory.notifyObservers(newOccupant);
 		}
 	}
 }
@@ -142,6 +156,11 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 	updateMilitaryPosition();
 
 	return isValid;  // WARNING CURRENTLY USELESS. IS THIS EVER NEEDED!!!
+}
+
+void NavalTerritoryOccupancy::forceOccupy(LandArmy *army)
+{
+	// Intentionally empty.
 }
 
 Player * NavalTerritoryOccupancy::getOccupant()

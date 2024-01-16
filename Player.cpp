@@ -20,6 +20,7 @@ Player::Player(Game& game, const std::string &realmName)
 
 bool Player::gameOver() const
 {
+	std::cout << "realm name go " << getRealm().getName() << std::endl;
 	if(getRealm().getEstates().size() == 0)
 	{
 		assert(liege == nullptr);
@@ -52,7 +53,25 @@ void Player::rebel()
 	// Players liege must not have a liege.
 	assert(liege->liege == nullptr);
 
-	liege->handleVassalRebellion(*this);
+	Player* oldLiege = liege;
+	// Null liege first since otherwise assert will fail in diplomacy class.
+	liege = nullptr;
+	oldLiege->handleVassalRebellion(*this);
+
+	// Player loses reserves for rebelling.
+	const double reserveRemovalRatio = 0.5;
+	militaryManager.removeArmyReserves(reserveRemovalRatio);
+
+	// Yield military reserves.
+	// Some armies may be yielded to pre-rebelion liege occupied territories. 
+	yieldArmyReserves();
+
+	// Check ownership changes of territories due to pre-rebellion liege armies.
+	std::unordered_set<Territory*> territories = realm.getTerritories();
+	for(Territory *territory : territories)
+	{
+		territory->getOccupancyHandler()->determineOccupation();
+	}
 }
 
 void Player::handleReserveArmyYield(double amount)
@@ -106,7 +125,7 @@ void Player::addAttackHistory(Player &enemy)
 	diplomacy.addAttackHistory(enemy);
 }
 
-void Player::removeDiplomacyWithPlayer(Player & player)
+void Player::removeDiplomacyWithPlayer(Player &player)
 {
 	diplomacy.removeDiplomacyWithPlayer(player);
 }
@@ -180,6 +199,16 @@ void Player::handleVassalRebellion(Player &vassal)
 {
 	realm.removeRebellingVassal(vassal);
 	diplomacy.addRebellingVassal(vassal);
+
+	// We ammend the ownership of unlanded estates since the rebelling vassal take with them baronies which may have formed
+	// estates held by their old liege and the old liege's realm may hold baronies which form estates held by the rebelling vassal.
+	vassal.getRealm().ammendUnlandedEstateOwnership();
+	realm.ammendUnlandedEstateOwnership();
+}
+
+void Player::yieldArmyReserves()
+{
+	realm.yieldArmyReserves();
 }
 
 bool Player::sameUpperLiege(const Player &player) const

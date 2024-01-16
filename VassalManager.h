@@ -35,6 +35,9 @@ public:
 	// Assumes estate already removed from vassal's realms.
 	void removeEstate(Estate& estate);
 
+	// Ammends ownership of vassals unlanded estates.
+	void ammendUnlandedEstateOwnership();
+
 	// Returns sum of all vassal's army reserves.
 	int getTotalArmyReserves() const;
 

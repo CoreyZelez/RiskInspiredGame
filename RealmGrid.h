@@ -16,7 +16,7 @@ public:
 	// Removes grid positions from this grid.
 	void removeGrid(const Grid &grid);
 	// Removes realm grid from this realm grid.
-	void removeGrid(const RealmGrid &grid);
+	void removeGrid(const RealmGrid &realmGrid);
 
 	// Returns true if realm grid contains specified world position.
 	bool containsPosition(const sf::Vector2f &position) const;

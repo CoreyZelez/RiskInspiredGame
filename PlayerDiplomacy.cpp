@@ -22,7 +22,11 @@ PlayerDiplomacy::~PlayerDiplomacy()
 
 void PlayerDiplomacy::update()
 {
-	updateRebellingVassals();
+	// Remove rebelling vassals at end of attack history.
+	for(Player *player : attackHistory[maxHistory])
+	{
+		rebellingVassals.erase(player);
+	}
 
 	// Shift attack history keys right.
 	for(int i = maxHistory; i >= 1; --i)
@@ -93,16 +97,10 @@ void PlayerDiplomacy::addAttackHistory(Player &enemy)
 
 void PlayerDiplomacy::addRebellingVassal(Player &rebellingVassal)
 {
+	rebellingVassal.addAttackHistory(player);
+
 	addAttackHistory(rebellingVassal);
 	rebellingVassals.insert(&rebellingVassal);
-}
-
-void PlayerDiplomacy::updateRebellingVassals()
-{
-	for(Player *player : attackHistory[maxHistory])
-	{
-		rebellingVassals.erase(player);
-	}
 }
 
 void PlayerDiplomacy::removeDiplomacyWithPlayer(Player &player)
@@ -112,4 +110,5 @@ void PlayerDiplomacy::removeDiplomacyWithPlayer(Player &player)
 	{
 		attackHistory[i].erase(&player);
 	}
+	rebellingVassals.erase(&player);
 }
