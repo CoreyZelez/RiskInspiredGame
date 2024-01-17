@@ -331,6 +331,23 @@ int Estate::calculateBaronySubfiefOwnershipCount(const Player &player, bool requ
 	return count;
 }
 
+int Estate::calculateNumberOfSubfiefs(Title title, bool allowIndirect) const
+{
+	int count = 0;
+	for(const Estate *estate : subfiefs)
+	{
+		if(estate->title == title)
+		{
+			++count;
+		}
+		else if(estate->title > title)
+		{
+			count += estate->calculateNumberOfSubfiefs(title, allowIndirect);
+		}
+	}
+	return count;
+}
+
 void Estate::initColor()
 {
 	const int randComponent1 = rand() % 61;

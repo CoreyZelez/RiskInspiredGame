@@ -8,19 +8,18 @@
 #include <iostream>
 
 Player::Player(Game &game, AIPersonality personality, const std::string &realmName)
-	: game(game), realm(game, *this, liegePolicy, realmName), diplomacy(*this), vassalPolicy(*this)
+	: game(game), militaryManager(*this), realm(game, *this, liegePolicy, realmName), diplomacy(*this), vassalPolicy(*this)
 {
 }
 
 Player::Player(Game& game, const std::string &realmName)
-	: game(game), realm(game, *this, liegePolicy, realmName), 
+	: game(game), militaryManager(*this), realm(game, *this, liegePolicy, realmName),
 	AIComponent(std::make_unique<SimplePlayerAI>(game, *this)), diplomacy(*this), vassalPolicy(*this)
 {
 }
 
 bool Player::gameOver() const
 {
-	std::cout << "realm name go " << getRealm().getName() << std::endl;
 	if(getRealm().getEstates().size() == 0)
 	{
 		assert(liege == nullptr);

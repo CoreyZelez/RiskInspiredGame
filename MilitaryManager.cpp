@@ -1,8 +1,14 @@
 #include "MilitaryManager.h"
 #include "LandArmy.h"
 #include "NavalFleet.h"
+#include "Player.h"
 #include <assert.h>
 #include <iostream>
+
+MilitaryManager::MilitaryManager(Player &player)
+	: player(player)
+{
+}
 
 void MilitaryManager::draw(sf::RenderWindow & window) const
 {
@@ -50,13 +56,15 @@ float MilitaryManager::getArmyReinforcementRate() const
 void MilitaryManager::addArmyReinforcements(double amount)
 {
 	assert(amount >= 0);
-	armyReinforcements += amount;
+	const double multiplier = player.getRealm().getEffectiveArmyYieldRatio();
+	armyReinforcements += amount * multiplier;
 }
 
 void MilitaryManager::addArmyReserves(double amount)
 {
     assert(amount >= 0);
-    armyReinforcements += amount;
+	const double multiplier = player.getRealm().getEffectiveArmyYieldRatio();
+    armyReserves += amount * multiplier;
 }
 
 float MilitaryManager::getFleetReinforcementRate() const
@@ -70,13 +78,13 @@ float MilitaryManager::getFleetReinforcementRate() const
 void MilitaryManager::addFleetReinforcements(double amount)
 {
 	assert(amount >= 0);
-	amount += amount;
+	fleetReinforcements += amount;
 }
 
 void MilitaryManager::addFleetReserves(double amount)
 {
 	assert(amount >= 0);
-	amount += amount;
+	fleetReserves += amount;
 }
 
 LandArmy* MilitaryManager::getArmy(const Territory *territory)
@@ -123,11 +131,14 @@ std::vector<std::unique_ptr<NavalFleet>>& MilitaryManager::getFleets()
 	return fleets;
 }
 
-int MilitaryManager::getTotalArmyStrength() const
+int MilitaryManager::getTotalArmyStrength(bool activeOnly) const
 {
 	int totalStrength = 0;
-	totalStrength += armyReserves;
-	totalStrength += armyReinforcements;
+	if(!activeOnly)
+	{
+		totalStrength += armyReserves;
+		totalStrength += armyReinforcements;
+	}
 	for(const auto &army : armies)
 	{
 		totalStrength += army.get()->getTotalStrength();
@@ -140,11 +151,19 @@ int MilitaryManager::getArmyReserves() const
 	return armyReserves;
 }
 
-int MilitaryManager::getTotalFleetStrength() const
+int MilitaryManager::getArmyReinforcements() const
+{
+	return armyReinforcements;
+}
+
+int MilitaryManager::getTotalFleetStrength(bool activeOnly) const
 {
 	int totalStrength = 0;
-	totalStrength += fleetReserves;
-	totalStrength += fleetReinforcements;
+	if(!activeOnly)
+	{
+		totalStrength += fleetReserves;
+		totalStrength += fleetReinforcements;
+	}
 	for(const auto &fleet : fleets)
 	{
 		totalStrength += fleet.get()->getTotalStrength();
@@ -226,7 +245,7 @@ void MilitaryManager::distributeArmyReinforcements()
 {
 	// Number of reinforcements available prior to allocation.
 	const int totalReinforcementAmount = armyReinforcements;
-	const int totalArmyStrength = getTotalArmyStrength();
+	const int totalArmyStrength = getTotalArmyStrength(true);
 
 	// Allocates reinforcements to armies.
 	// There may be remaining reinforcement strength after this process.
@@ -251,7 +270,7 @@ void MilitaryManager::distributeFleetReinforcements()
 {
 	// Number of reinforcements available prior to allocation.
 	const int totalReinforcementAmount = fleetReinforcements;
-	const int totalFleetStrength = getTotalFleetStrength();
+	const int totalFleetStrength = getTotalFleetStrength(true);
 
 	// Allocates reinforcements to armies.
 	// There may be remaining reinforcement strength after this process.

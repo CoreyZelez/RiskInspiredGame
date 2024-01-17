@@ -36,8 +36,5 @@ private:
 	std::unordered_set<Player*> rebellingVassals;
 	// Maximum number of turns which history of attacks is kept for.
 	const int maxHistory = 10;
-
-	// Removes rebelling vassals at maximum attack history.
-	void updateRebellingVassals();
 };
 

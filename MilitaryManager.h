@@ -14,6 +14,8 @@ class NavalFleet;
 class MilitaryManager
 {
 public:
+	MilitaryManager(Player &player);
+
 	void draw(sf::RenderWindow &window) const;
 
 	void update();
@@ -44,12 +46,14 @@ public:
 	const std::vector<std::unique_ptr<NavalFleet>> &getFleets() const;
 	std::vector<std::unique_ptr<NavalFleet>> &getFleets();
 
-	// Returns the total strength of all armies including reserves and reinforcements.
-	int getTotalArmyStrength() const;
+	// Returns the total strength of all armies. Specify activeOnly to include only armies on map.
+	int getTotalArmyStrength(bool activeOnly) const;
 	// Returns strength of army reserves.
 	int getArmyReserves() const;
-	// Returns the total strength of all fleets including reserves and reinforcements.
-	int getTotalFleetStrength() const;
+	// Returns strength of army reinforcements.
+	int getArmyReinforcements() const;
+	// Returns the total strength of all fleets. Specify activeOnly to include only fleets on map.
+	int getTotalFleetStrength(bool activeOnly) const;
 	// Returns total army strength for stamina >= minStamina.
 	int getTotalArmyStrength(int minStamina) const;
 	// Returns total fleet strength for stamina >= minStamina.
@@ -60,6 +64,7 @@ public:
 	void addNavalFleet(std::unique_ptr<NavalFleet> fleet);
 
 private:
+	Player &player;
 	// Holds handle to every army and navy in manager.
 	std::set<MilitaryForce*> militaries;  
 	std::vector<std::unique_ptr<LandArmy>> armies;  

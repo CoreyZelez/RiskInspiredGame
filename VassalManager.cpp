@@ -105,12 +105,22 @@ void VassalManager::ammendUnlandedEstateOwnership()
 	}
 }
 
+int VassalManager::calculateArmySoftCapContribution(double contributionRatio) const
+{
+	int contribution = 0;
+	for(Player *vassal : vassals)
+	{
+		contribution += contributionRatio * vassal->getRealm().calculateArmySoftCap();
+	}
+	return contribution;
+}
+
 int VassalManager::getTotalArmyReserves() const
 {
 	int totalArmyReserves = 0;
 	for(const Player* vassal : vassals)
 	{
-		totalArmyReserves += vassal->getMilitaryManager().getTotalArmyStrength();
+		totalArmyReserves += vassal->getMilitaryManager().getTotalArmyStrength(false);
 	}
 	return totalArmyReserves;
 }

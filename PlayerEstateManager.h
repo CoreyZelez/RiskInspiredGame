@@ -23,6 +23,9 @@ public:
 	std::unordered_set<const Estate*> getEstates() const;
 	bool containsEstate(const Estate& estate) const;
 
+	// Calculates army soft cap contributed by ruler owned estates.
+	int calculateArmySoftCapContribution() const;
+
 	// Ammends ownership of rulers unlanded estates.
 	void ammendUnlandedEstateOwnership();
 

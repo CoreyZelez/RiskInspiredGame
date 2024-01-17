@@ -38,6 +38,9 @@ public:
 	// Ammends ownership of vassals unlanded estates.
 	void ammendUnlandedEstateOwnership();
 
+	// Calculates army soft cap contributed by vassals.
+	int calculateArmySoftCapContribution(double contributionRatio) const;
+
 	// Returns sum of all vassal's army reserves.
 	int getTotalArmyReserves() const;
 

@@ -81,6 +81,36 @@ bool PlayerEstateManager::containsEstate(const Estate &estate) const
 	return (estates.count(const_cast<Estate*>(&estate)) == 1);
 }
 
+int PlayerEstateManager::calculateArmySoftCapContribution() const
+{
+	// Army soft cap contribution per barony subfief (indirect or direct) of specified estate title.
+	std::map<Title, int> titleContributionsPerBaronySubfief;
+	titleContributionsPerBaronySubfief[Title::barony] = 20;  // Consider barony as it's own barony subfief.
+	titleContributionsPerBaronySubfief[Title::county] = 5;
+	titleContributionsPerBaronySubfief[Title::duchy] = 4;
+	titleContributionsPerBaronySubfief[Title::kingdom] = 3;
+	titleContributionsPerBaronySubfief[Title::empire] = 2;
+
+	int softCapContribution = 0;
+	for(const Estate *estate : estates)
+	{
+		// Number of direct or indirect barony subfiefs.
+		int numBaronySubfiefs; 
+		if(estate->getTitle() == Title::barony)
+		{
+			numBaronySubfiefs = 1;
+		}
+		else
+		{
+			numBaronySubfiefs = estate->calculateNumberOfSubfiefs(Title::barony, true);
+		}
+		const int contribution = (double)numBaronySubfiefs * titleContributionsPerBaronySubfief[estate->getTitle()];
+		softCapContribution += contribution;
+	}
+
+	return softCapContribution;
+}
+
 void PlayerEstateManager::ammendUnlandedEstateOwnership()
 {
 	for(Estate* estate : estates)

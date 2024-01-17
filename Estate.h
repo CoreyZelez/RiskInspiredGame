@@ -86,7 +86,9 @@ public:
 	// Returns the number of barony subfiefs of this estate apart of specified players realm. 
 	// Optionally specify directly controlled by player.
 	int calculateBaronySubfiefOwnershipCount(const Player &player, bool requireDirectControl) const;
-
+	// Returns number of subfiefs of specified title. Optionally include indirect subfiefs in count.
+	int calculateNumberOfSubfiefs(Title title, bool allowIndirect) const;
+	
 protected:
 	void initColor();
 

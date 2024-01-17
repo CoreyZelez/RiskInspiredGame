@@ -579,8 +579,8 @@ bool SimplePlayerAI::executeRebellionAgainstLiege()
 		return false;
 	}
 
-	const int liegeStrength = getPlayer().getLiege()->getMilitaryManager().getTotalArmyStrength();
-	const int playerStrength = getPlayer().getMilitaryManager().getTotalArmyStrength();
+	const int liegeStrength = getPlayer().getLiege()->getMilitaryManager().getTotalArmyStrength(false);
+	const int playerStrength = getPlayer().getMilitaryManager().getTotalArmyStrength(false);
 	const int resistanceRebellionThreshold = 150;
 	if(playerStrength >= liegeStrength)
 	{

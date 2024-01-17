@@ -21,12 +21,6 @@ void VassalPolicy::handleResistanceChange(const Player &liege, const LiegePolicy
 	// Maximum resistance that can be attained.
 	const double maxResistance = 2 * rebellionThreshold;
 
-	///////////////////////////////
-	// TEMPORARY FOR TESTING
-	//
-	resistance += 1;
-	/////////////////////////
-
 	// Resistance reduces by multiplication factor.
 	// This stops resistance from growing far past the rebellion threshold. 
 	const double resistanceMultiplier = 0.995;
@@ -39,7 +33,7 @@ void VassalPolicy::handleResistanceChange(const Player &liege, const LiegePolicy
 	// Adjust resistance due to liege levy.
 	const double equilibriumLevy = 0.4;
 	const double residualLevy = liegePolicy.vassalLevy - equilibriumLevy;
-	const double levyResistance = 2 * residualLevy;
+	const double levyResistance = 3 * residualLevy;
 	resistance += levyResistance;
 
 	// Adjust resistance due to difference between liege and players highest title.
@@ -51,7 +45,7 @@ void VassalPolicy::handleResistanceChange(const Player &liege, const LiegePolicy
 	// Relatively more change to resistance when player's title exceeds liege's. 
 	if(titleResistance > 0)
 	{
-		titleResistance *= 2;
+		titleResistance *= 5;
 	}
 	resistance += titleResistance;
 
@@ -59,7 +53,7 @@ void VassalPolicy::handleResistanceChange(const Player &liege, const LiegePolicy
 
 	// Adjust resistance due to total military strength relative to liege's.
 	const double equilibriumRatio = 1;
-	const int totalLiegeArmyStrength = liege.getMilitaryManager().getTotalArmyStrength();
+	const int totalLiegeArmyStrength = liege.getMilitaryManager().getTotalArmyStrength(false);
 	const int totalVassalArmyReserves = liege.getRealm().getTotalVassalArmyReserves();
 	// Minimum vassal reserves for any resistance to possibly be generated.
 	const int minVassalReserves = 3;
@@ -75,7 +69,7 @@ void VassalPolicy::handleResistanceChange(const Player &liege, const LiegePolicy
 	{
 		const double armyRatio = totalVassalArmyReserves / totalLiegeArmyStrength;
 		const double residualRatio = armyRatio - equilibriumRatio;
-		const double armyResistance = residualRatio * 0.1;
+		const double armyResistance = residualRatio * 0.5;
 		resistance += armyResistance;
 	}
 

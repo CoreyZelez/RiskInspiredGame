@@ -114,6 +114,8 @@ std::unique_ptr<UIEntity> Realm::getUI(UIType type) const
 
 void Realm::handleMilitaryYields()
 {
+
+	effectiveArmyYieldRatioOutdated = true;
 	rulerEstateManager.handleMilitaryYields();
 }
 
@@ -165,6 +167,9 @@ void Realm::yieldArmyReserves()
 		{
 			continue;
 		}
+
+		remainingReserves -= strength;
+
 		Territory &territory = *landTerritories[i];
 		std::unique_ptr<LandArmy> army = std::make_unique<LandArmy>(ruler, &territory, strength);
 		// Repeatedly attempt occupation until army dies or territory is occupied. Must force occupy
@@ -576,6 +581,50 @@ double Realm::realmEstatesInfluenceBaronyConferralContribution(const Player &vas
 	const double baronyConferralContributionRatio = vassalBaronyInfluence / (liegeBaronyInfluence + reductionConstant);
 	const double baronyConferralContribution = baronyConferralContributionRatio * maxConferralContribution;
 	return baronyConferralContribution;
+}
+
+int Realm::calculateArmySoftCap() const
+{
+	const int rulerEstateContribution = rulerEstateManager.calculateArmySoftCapContribution();
+	const double vassalContributionRatio = 0.4;
+	const int vassalEstateContribution = vassalManager.calculateArmySoftCapContribution(vassalContributionRatio);
+	const int armySoftCap = rulerEstateContribution + vassalEstateContribution;
+	return armySoftCap;
+}
+
+double Realm::getEffectiveArmyYieldRatio() 
+{
+	if(!effectiveArmyYieldRatioOutdated)
+	{
+		return effectiveArmyYieldRatio;
+	}
+
+	const int totalArmyStrength = ruler.getMilitaryManager().getTotalArmyStrength(false);
+	const int armySoftCap = calculateArmySoftCap();
+	// Minimal value for yield ratio.
+	const double minimumRatio = 0.00;
+	// Ratio of total army strength to soft cap at which army yield ratio will be minimal.
+	const double maximalReductionThresholdMultiplier = 2;
+	if(totalArmyStrength <= armySoftCap)
+	{
+		effectiveArmyYieldRatio = 1;
+		effectiveArmyYieldRatioOutdated = false;
+		return effectiveArmyYieldRatio;
+	}
+	else if(totalArmyStrength <= armySoftCap * maximalReductionThresholdMultiplier)
+	{
+		const double linearFactor = ((double)totalArmyStrength / (double)armySoftCap) / maximalReductionThresholdMultiplier;
+		// Ratio can take values from minimumRatio to 1.
+		effectiveArmyYieldRatio = 1 - linearFactor * (1 - minimumRatio);
+		effectiveArmyYieldRatioOutdated = false;
+		return effectiveArmyYieldRatio;
+	}
+	else
+	{
+		effectiveArmyYieldRatio = minimumRatio;
+		effectiveArmyYieldRatioOutdated = false;
+		return effectiveArmyYieldRatio;
+	}
 }
 
 /*

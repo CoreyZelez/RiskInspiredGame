@@ -23,15 +23,17 @@ public:
 
 	virtual std::unique_ptr<UIEntity> getUI(UIType type) const override;
 
+	// Returns the soft cap on the associated player armies.
+	int calculateArmySoftCap() const;
+	// Returns percent of yielded armies from both vassals and personally owned estates that are retained.
+	double getEffectiveArmyYieldRatio();
 	// Handles yields of ruler estates.
 	void handleMilitaryYields();
-
 	// Yields all army reserves to realm land territories.
 	void yieldArmyReserves();
 
 	// Removes rebelling vassal from realm.
 	void removeRebellingVassal(Player &vassal);
-
 	// Redetermines and updates the ownership of rulers and vassals unlanded estates.
 	void ammendUnlandedEstateOwnership();
 
@@ -78,6 +80,8 @@ private:
 	VassalManager vassalManager;  // Manages vassals and their estates.
 	RealmGrid realmGrid;  // Grid of entire realm estates.
 	bool vassalView = false;  // Specifies to draw realms of vassals over entire realm grid.
+	double effectiveArmyYieldRatio;
+	bool effectiveArmyYieldRatioOutdated = true;
 
 	// Confers the estate to ruler or a vassal. Returns the player estate is conferred to.
 	// This function does not update the estates ownership. It should only be called by the 

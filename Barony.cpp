@@ -33,7 +33,8 @@ std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 		const float armyReinforcementRate = getRuler()->getMilitaryManager().getArmyReinforcementRate();
 
 		double armyReinforcementYield = armyReinforcementRate * landArmyYield;
-		double armyLocalYield = landArmyYield - armyReinforcementYield;
+		const double armyYieldMultiplier = getRuler()->getRealm().getEffectiveArmyYieldRatio();
+		double armyLocalYield = (landArmyYield - armyReinforcementYield) * armyYieldMultiplier;
 		assert(armyLocalYield >= 0);
 		assert(armyReinforcementYield >= 0);
 
@@ -141,6 +142,7 @@ void Barony::receiveBonusYield(const float &bonus)
 		// Yield army to reserves and provide levies to liege. 
 		const float armyReserves = landArmyYield * bonus;
 		getRuler()->handleReserveArmyYield(landArmyYield);
+
 		// Yield all naval fleets to this barony and by extension the upper liege. 
 		const float fleetYield = navalFleetYield * bonus;
 		cumulativeNavalFleet += fleetYield;

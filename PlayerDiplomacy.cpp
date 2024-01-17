@@ -98,7 +98,6 @@ void PlayerDiplomacy::addAttackHistory(Player &enemy)
 void PlayerDiplomacy::addRebellingVassal(Player &rebellingVassal)
 {
 	rebellingVassal.addAttackHistory(player);
-
 	addAttackHistory(rebellingVassal);
 	rebellingVassals.insert(&rebellingVassal);
 }
