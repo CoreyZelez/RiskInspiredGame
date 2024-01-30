@@ -13,6 +13,9 @@ enum class UIType
 class HasUI
 {
 public:
-	virtual std::unique_ptr<UIEntity> getUI(UIType type) const = 0;
+	// Calls const version of this function. Override when needing UI to change object state.
+	virtual std::unique_ptr<UIEntity> createUI(UIType type);
+	// Implement this function for any UI which does not change object state.
+	virtual std::unique_ptr<UIEntity> createUI(UIType type) const;
 };
 

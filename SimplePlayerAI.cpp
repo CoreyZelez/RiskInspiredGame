@@ -80,12 +80,6 @@ int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
 	int totalThreat = calculateTotalThreat(weightedThreats);  
 	strategicValue += maxThreat + totalThreat;
 
-	//
-	//
-	//
-	// IN FUTURE, ADD STRATEGIC VALUE IF ENEMIES POSSESS AN ADJACENT NAVAL TERRITORY AS TO PREPARE
-	// FOR NAVAL ATTACKS IN ADVANCE.
-
 	// Prioritise having land troops on land territories.
 	if(territory.getType() == TerritoryType::naval)
 	{
@@ -97,7 +91,6 @@ int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
 		{
 			strategicValue = 0;
 		}
-
 		
 		// Fleet strength that allows occupying naval territory by land troops.
 		// In future require fleet stronger than adjacent enemy fleets.

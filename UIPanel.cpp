@@ -14,7 +14,7 @@ void UIPanel::setPosition(sf::Vector2f position, bool center)
 {
 	if(center)
 	{
-		sf::FloatRect background = getBackground().getLocalBounds();
+		sf::FloatRect background = getBackground().getGlobalBounds();
 		sf::Vector2f centerOffset = { -background.width / 2, -background.height / 2 };
 		position.x += centerOffset.x;
 		position.y += centerOffset.y;
@@ -25,7 +25,7 @@ void UIPanel::setPosition(sf::Vector2f position, bool center)
 
 sf::Vector2f UIPanel::getDimensions()
 {
-	sf::FloatRect bounds = background.getLocalBounds();
+	sf::FloatRect bounds = background.getGlobalBounds();
 	return sf::Vector2f(bounds.width, bounds.height);
 }
 

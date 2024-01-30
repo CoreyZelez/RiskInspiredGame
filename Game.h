@@ -38,6 +38,12 @@ public:
 	void moveSelectedMilitary(sf::Vector2f position);
 	// Sets selectedPlayer as currPlayer. Allows ensuring human, setting to nullptr if not human.
 	void selectCurrPlayerRealm(bool humanOnly);
+	// Returns realm of current player.
+	Realm& getCurrPlayerRealm();
+	// Returns current player.
+	Player& getCurrPlayer();
+	// Returns true if current player is human.
+	bool currPlayerIsHuman() const;
 
 	// Sets selectedDiplomacyPlayer to player with realm at specified position.
 	void selectDiplomacyPlayer(const sf::Vector2f &position);

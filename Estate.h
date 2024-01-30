@@ -31,7 +31,7 @@ public:
 
 	void draw(sf::RenderWindow &window) const;
 
-	virtual std::unique_ptr<UIEntity> getUI(UIType type) const override;
+	virtual std::unique_ptr<UIEntity> createUI(UIType type) const override;
 
 	virtual bool containsPosition(const sf::Vector2f &position) const;
 

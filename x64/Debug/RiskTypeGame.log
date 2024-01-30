@@ -1,8 +1,247 @@
-﻿  PlayerDiplomacy.cpp
+﻿  LandTerritoryOccupancy.cpp
 d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
   d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  Maridom.cpp
+  NavalTerritoryOccupancy.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  IntegerSlider.cpp
+  PlayerAIContext.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+d:\projects\risktypegame\risktypegame\playeraicontext.cpp(256): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\playeraicontext.cpp(312): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\playeraicontext.cpp(371): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\playeraicontext.cpp(393): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+  EstateManager.cpp
+  EstateTest.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  Game.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  GameController.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  GameUI.cpp
+d:\projects\risktypegame\risktypegame\gameui.cpp(66): warning C4244: 'argument': conversion from 'const double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  GameUIController.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  GameDisplay.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  HasUI.cpp
+  InformationPanel.cpp
+d:\projects\risktypegame\risktypegame\informationpanel.cpp(61): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\risktypegame\risktypegame\informationpanel.cpp(61): warning C4244: 'initializing': conversion from 'T' to 'const int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\risktypegame\risktypegame\informationpanel.cpp(62): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\risktypegame\risktypegame\informationpanel.cpp(62): warning C4244: 'initializing': conversion from 'T' to 'const int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\risktypegame\risktypegame\informationpanel.cpp(64): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+d:\projects\risktypegame\risktypegame\informationpanel.cpp(69): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\risktypegame\risktypegame\informationpanel.cpp(69): warning C4244: 'initializing': conversion from 'T' to 'const int', possible loss of data
+          with
+          [
+              T=float
+          ]
+d:\projects\risktypegame\risktypegame\informationpanel.cpp(70): warning C4244: 'argument': conversion from 'const int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  InteractionPanel.cpp
+  LandedEstate.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  Map.cpp
+  MapDisplay.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  MapMaker.cpp
+  MilitaryForce.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  Generating Code...
+d:\projects\risktypegame\risktypegame\title.h(39): warning C4172: returning address of local variable or temporary: originalTitle
+  Compiling...
+  Barony.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+d:\projects\risktypegame\risktypegame\barony.cpp(50): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(50): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(79): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(79): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(133): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(133): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(137): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(137): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(143): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(143): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(147): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\projects\risktypegame\risktypegame\barony.cpp(147): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+  Estate.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  LandArmy.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+d:\projects\risktypegame\risktypegame\landarmy.cpp(55): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\landarmy.cpp(56): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+  MultiPanel.cpp
+  MilitaryManager.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(50): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(72): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(139): warning C4244: '+=': conversion from 'const double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(140): warning C4244: '+=': conversion from 'const double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(151): warning C4244: 'return': conversion from 'const double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(156): warning C4244: 'return': conversion from 'const double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(164): warning C4244: '+=': conversion from 'const double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(165): warning C4244: '+=': conversion from 'const double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(247): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(247): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(261): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(272): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(272): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\militarymanager.cpp(286): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  NavalFleet.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+d:\projects\risktypegame\risktypegame\navalfleet.cpp(103): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\navalfleet.cpp(103): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\navalfleet.cpp(104): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\navalfleet.cpp(104): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\navalfleet.cpp(130): warning C4804: '<=': unsafe use of type 'bool' in operation
+d:\projects\risktypegame\risktypegame\navalfleet.cpp(146): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\navalfleet.cpp(147): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+  Player.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+d:\projects\risktypegame\risktypegame\integerslider.cpp(58): warning C4804: '<=': unsafe use of type 'bool' in operation
+  d:\projects\risktypegame\risktypegame\integerslider.cpp(42): note: while compiling class template member function 'void IntegerSlider<int>::handleButtonDown(sf::Mouse::Button,sf::Vector2f)'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\type_traits(616): note: see reference to class template instantiation 'IntegerSlider<int>' being compiled
+  d:\projects\risktypegame\risktypegame\player.cpp(34): note: see reference to class template instantiation 'std::is_convertible<IntegerSlider<int> *,_Ty *>' being compiled
+          with
+          [
+              _Ty=UIEntity
+          ]
+  d:\projects\risktypegame\risktypegame\integerslider.cpp(58): note: see reference to variable template 'const bool conjunction_v<std::negation<std::is_array<IntegerSlider<int> > >,std::is_convertible<IntegerSlider<int> *,UIEntity *>,std::is_convertible<std::default_delete<IntegerSlider<int> >,std::default_delete<UIEntity> > >' being compiled
+d:\projects\risktypegame\risktypegame\integerslider.cpp(61): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\memory(2539): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+  d:\projects\risktypegame\risktypegame\player.cpp(36): note: see reference to function template instantiation 'std::unique_ptr<TextDisplay<int>,std::default_delete<_Ty>> std::make_unique<TextDisplay<int>,int&,const char(&)[1],const char(&)[3],const sf::Color&,int,const sf::Color&,int,0>(int &,const char (&)[1],const char (&)[3],const sf::Color &,int &&,const sf::Color &,int &&)' being compiled
+          with
+          [
+              _Ty=TextDisplay<int>
+          ]
+d:\projects\risktypegame\risktypegame\integerslider.cpp(95): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+  d:\projects\risktypegame\risktypegame\integerslider.cpp(94): note: while compiling class template member function 'void IntegerSlider<int>::updateValue(void)'
+  d:\projects\risktypegame\risktypegame\integerslider.cpp(62): note: see reference to function template instantiation 'void IntegerSlider<int>::updateValue(void)' being compiled
+  d:\projects\risktypegame\risktypegame\integerslider.cpp(35): note: while compiling class template member function 'void IntegerSlider<int>::draw(sf::RenderWindow &) const'
+  PlayerDiplomacy.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  Realm.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+d:\projects\risktypegame\risktypegame\realm.cpp(104): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\realm.cpp(104): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\realm.cpp(149): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\realm.cpp(149): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\realm.cpp(161): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\realm.cpp(460): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\realm.cpp(460): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+  PlayerEstateManager.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+d:\projects\risktypegame\risktypegame\playerestatemanager.cpp(107): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\playerestatemanager.cpp(107): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\playerestatemanager.cpp(157): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  TextDisplay.cpp
+  VassalManager.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+d:\projects\risktypegame\risktypegame\vassalmanager.cpp(114): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+  ReconcileLandedEstates.cpp
   RiskTypeGame.cpp
 d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  SimplePlayerAI.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(86): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(87): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(234): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(244): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(311): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(311): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(344): warning C4018: '<=': signed/unsigned mismatch
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(353): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(354): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(360): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(360): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(367): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(367): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(374): warning C4018: '<=': signed/unsigned mismatch
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(418): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(428): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(490): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(490): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(532): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(533): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(539): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(539): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(546): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(546): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+d:\projects\risktypegame\risktypegame\simpleplayerai.cpp(553): warning C4018: '<=': signed/unsigned mismatch
+  StrengthSlider.cpp
+d:\projects\risktypegame\risktypegame\strengthslider.cpp(43): warning C4804: '<=': unsafe use of type 'bool' in operation
+d:\projects\risktypegame\risktypegame\strengthslider.cpp(44): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\strengthslider.cpp(44): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+  Territory.cpp
+  TerritoryDistanceMap.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
+  TerritoryMaker.cpp
+  EstateMaker.cpp
+  Generating Code...
+d:\projects\risktypegame\risktypegame\player.cpp(45): warning C4715: 'Player::createUI': not all control paths return a value
+  Compiling...
+  UIPanel.cpp
+  VassalPolicy.cpp
+d:\projects\risktypegame\risktypegame\realm.h(12): warning C4099: 'LiegePolicy': type name first seen using 'struct' now seen using 'class'
   d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
   Generating Code...
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe

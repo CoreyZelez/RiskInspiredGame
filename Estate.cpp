@@ -74,7 +74,7 @@ void Estate::draw(sf::RenderWindow &window) const
 	}
 }
 
-std::unique_ptr<UIEntity> Estate::getUI(UIType type) const
+std::unique_ptr<UIEntity> Estate::createUI(UIType type) const
 {
 	FontManager &fontManager = FontManager::getInstance();
 	if(type == UIType::information)

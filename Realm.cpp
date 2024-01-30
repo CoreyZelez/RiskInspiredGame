@@ -11,6 +11,7 @@
 #include "NameGenerator.h"
 #include "Game.h"
 #include "Barony.h"
+#include "IntegerSlider.h"
 #include <assert.h>
 #include <iostream>
 #include <vector>
@@ -34,7 +35,7 @@ void Realm::draw(sf::RenderWindow &window) const
 	}
 }
 
-std::unique_ptr<UIEntity> Realm::getUI(UIType type) const
+std::unique_ptr<UIEntity> Realm::createUI(UIType type) const
 {
 	FontManager &fontManager = FontManager::getInstance();
 	if(type == UIType::information)
@@ -114,7 +115,6 @@ std::unique_ptr<UIEntity> Realm::getUI(UIType type) const
 
 void Realm::handleMilitaryYields()
 {
-
 	effectiveArmyYieldRatioOutdated = true;
 	rulerEstateManager.handleMilitaryYields();
 }
@@ -757,7 +757,6 @@ Player& getGreatestUnlandedEstateInfluence(const Estate &estate, const std::vect
 	}
 
 	return *maxInfluencePlayer;
-
 }
 
 int countUnlandedEstates(std::map<Title, int>& estateCounts)

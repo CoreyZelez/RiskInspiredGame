@@ -10,13 +10,15 @@
 
 class Game;
 
-class Player
+class Player : public HasUI
 {
 public:
 	// Smart AI player.
 	Player(Game &game, AIPersonality personality, const std::string &realmName);
 	// Simple AI player.
 	Player(Game &game, const std::string &realmName);
+
+	virtual std::unique_ptr<UIEntity> createUI(UIType type) override;
 
 	bool gameOver() const;
 

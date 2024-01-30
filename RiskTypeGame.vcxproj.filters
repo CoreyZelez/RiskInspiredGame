@@ -324,6 +324,9 @@
     <ClCompile Include="IntegerSlider.cpp">
       <Filter>Source Files\User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="TextDisplay.cpp">
+      <Filter>Source Files\User Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LandArmy.h">
@@ -546,6 +549,9 @@
       <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
     <ClInclude Include="IntegerSlider.h">
+      <Filter>Header Files\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="TextDisplay.h">
       <Filter>Header Files\User Interface</Filter>
     </ClInclude>
   </ItemGroup>

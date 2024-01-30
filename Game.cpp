@@ -9,8 +9,8 @@ Game::Game(std::string mapName)
 
 void Game::generatePlayers()
 {
-	int humanCnt = 0; // Used temporarily for testing.
-	const int numHumans = 0;
+	const int numHumans = 1;
+	int humanCnt = 0; 
 	for(auto &barony : map.getEstateManager().getBaronies())
 	{
 		Player &player = createPlayer(); 
@@ -74,6 +74,12 @@ bool Game::isDiplomacyView() const
 	return selectedDiplomacyPlayer != nullptr;
 }
 
+bool Game::currPlayerIsHuman() const
+{
+	assert(players.size() > 0);
+	return players[currPlayer].get()->getIsHuman();
+}
+
 void Game::setVassalView(const sf::Vector2f & position)
 {
 	for(const auto &player : players)
@@ -101,7 +107,7 @@ void Game::resetVassalViews()
 void Game::update()
 {
 	///////////////////////////////
-	// Caps number of turns per update call. For testing. 
+	// Caps number of turns per update call. For testing maybe... 
 	const int maxTurns = 10;
 	int turnCnt = 0;
 	///////////////////////////////
@@ -288,6 +294,16 @@ void Game::selectCurrPlayerRealm(bool humanOnly)
 	}
 
 	deselectDiplomacyPlayer();
+}
+
+Realm& Game::getCurrPlayerRealm()
+{
+	return players[currPlayer].get()->getRealm();
+}
+
+Player& Game::getCurrPlayer()
+{
+	return *players[currPlayer].get();
 }
 
 void Game::selectDiplomacyPlayer(const sf::Vector2f &position)

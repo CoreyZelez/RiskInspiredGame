@@ -4,6 +4,11 @@
 #include "SimplePlayerAI.h"
 #include "Estate.h"
 #include "Game.h"
+#include "IntegerSlider.h"
+#include "IntegerSlider.cpp"
+#include "TextDisplay.h"
+#include "TextDisplay.cpp"
+#include "InteractionPanel.h"
 #include <assert.h>
 #include <iostream>
 
@@ -16,6 +21,27 @@ Player::Player(Game& game, const std::string &realmName)
 	: game(game), militaryManager(*this), realm(game, *this, liegePolicy, realmName),
 	AIComponent(std::make_unique<SimplePlayerAI>(game, *this)), diplomacy(*this), vassalPolicy(*this)
 {
+}
+
+std::unique_ptr<UIEntity> Player::createUI(UIType type)
+{
+	if(type == UIType::interaction)
+	{
+		std::vector<std::vector<std::unique_ptr<UIEntity>>> entities;
+
+		std::vector<std::unique_ptr<UIEntity>> row1;
+		std::unique_ptr<UIEntity> rulerBaronyLimitSlider = 
+			std::make_unique<IntegerSlider<int>>(0, 10, liegePolicy.rulerBaronyLimit);
+		std::unique_ptr<UIEntity> rulerBaronyLimitTextDisplay = 
+			std::make_unique<TextDisplay<int>>(liegePolicy.rulerBaronyLimit, "", " %", sf::Color::White, 40, sf::Color::Blue, 5);
+		row1.push_back(std::move(rulerBaronyLimitSlider));	  	
+		row1.push_back(std::move(rulerBaronyLimitTextDisplay));
+
+		entities.push_back(std::move(row1));
+
+		std::unique_ptr<UIEntity> panel = std::make_unique<InteractionPanel>(sf::Color(30, 30, 30), std::move(entities));
+		return panel;
+	}
 }
 
 bool Player::gameOver() const

@@ -52,7 +52,7 @@ void InformationPanel::setTextPositions(sf::Vector2f position, bool center)
 
 	if(center)
 	{
-		sf::FloatRect background = getBackground().getLocalBounds();
+		sf::FloatRect background = getBackground().getGlobalBounds();
 		sf::Vector2f centerOffset = { -background.width / 2, -background.height / 2 };
 		position.x += centerOffset.x;
 		position.y += centerOffset.y;

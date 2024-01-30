@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <iostream>
 StrengthSlider::StrengthSlider(const MilitaryForce & militaryForce, unsigned int &selectedStrength)
-	: militaryForce(militaryForce), selectedStrength(selectedStrength), backgroundBar(sf::Vector2f(1000, 100))
+	: militaryForce(militaryForce), selectedStrength(selectedStrength)
 {
 	sf::Color green(0, 235, 0);
 	sf::Color yellow(215, 215, 0);

@@ -56,6 +56,7 @@ void VassalManager::removeRebellingVassal(Player &vassal)
 	std::unordered_set<Territory*> vassalTerritories = vassal.getRealm().getTerritories();
 	for(Territory* territory : vassalTerritories)
 	{
+		assert(vassalTerritories.count(territory) != 0);
 		territories.erase(territory);
 	}
 

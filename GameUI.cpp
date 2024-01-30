@@ -53,9 +53,11 @@ void GameUI::resetLeftUI()
 
 void GameUI::setRightUI(std::unique_ptr<UIEntity> entity)
 {
-	float leftMostCoordinate = UIView.getCenter().x - UIView.getSize().x / 2.0f;
+	const float rightMostX = UIView.getCenter().x + UIView.getSize().x / 2.0f;  // Right most visible position of view.
+	const float width = entity.get()->getDimensions().x;  // Width of UI entity.
+	const float xPos = rightMostX - width / 2;  // x coordinate of UI center.
 	leftUI = std::move(entity);
-	leftUI.get()->setPosition(sf::Vector2f(leftMostCoordinate, 400));
+	leftUI.get()->setPosition(sf::Vector2f(xPos, UIView.getCenter().y), true);
 }
 
 void GameUI::setBottomUI(std::unique_ptr<UIEntity> entity)

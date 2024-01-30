@@ -1,10 +1,11 @@
 #pragma once
 #include "UIEntity.h"
 
-class IntegerSlider : public UIEntity
+template<typename T> class IntegerSlider : public UIEntity
 {
 public:
-	IntegerSlider(int minValue, int maxValue);
+	IntegerSlider(int minValue, int maxValue, T &value);
+	IntegerSlider(int minValue, int maxValue, T &value, double divisor);
 
 	virtual void draw(sf::RenderWindow &window) const override;
 	virtual void handleButtonDown(sf::Mouse::Button button, sf::Vector2f position) override;
@@ -15,8 +16,11 @@ private:
 	const int minValue;
 	const int maxValue;
 	int selectedAmount;
+	T &value;  // Value being modified.
+	double divisor = 1;  // Divisor of slider selected amount applied before altering value.
 	sf::RectangleShape backgroundBar;
 	sf::RectangleShape selectionBar;
-};
 
+	void updateValue();
+};
 

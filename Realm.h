@@ -21,7 +21,7 @@ public:
 
 	void draw(sf::RenderWindow &window) const;
 
-	virtual std::unique_ptr<UIEntity> getUI(UIType type) const override;
+	virtual std::unique_ptr<UIEntity> createUI(UIType type) const override;
 
 	// Returns the soft cap on the associated player armies.
 	int calculateArmySoftCap() const;

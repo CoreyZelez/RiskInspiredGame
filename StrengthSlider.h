@@ -16,7 +16,7 @@ public:
 private:
 	unsigned int &selectedStrength;
 	const MilitaryForce &militaryForce;
-	sf::RectangleShape backgroundBar;
+	sf::RectangleShape backgroundBar = sf::RectangleShape(sf::Vector2f(1000, 100));
 	sf::RectangleShape greenBar;
 	sf::RectangleShape yellowBar;
 	sf::RectangleShape orangeBar;

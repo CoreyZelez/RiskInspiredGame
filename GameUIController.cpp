@@ -43,7 +43,7 @@ void GameUIController::handleUICreation(const sf::RenderWindow &window)
 			const Realm *realm = constGame.getRealm(worldPos, considerVassalView);
 			if(realm != nullptr)
 			{
-				gameUI.setLeftUI(realm->getUI(UIType::information));
+				gameUI.setLeftUI(realm->createUI(UIType::information));
 			}
 			break;
 		}
@@ -52,7 +52,7 @@ void GameUIController::handleUICreation(const sf::RenderWindow &window)
 			const Estate *estate = game.getEstate(worldPos, Title::barony);
 			if(estate != nullptr)
 			{
-				gameUI.setLeftUI(estate->getUI(UIType::information));
+				gameUI.setLeftUI(estate->createUI(UIType::information));
 			}
 			break;
 		}
@@ -61,7 +61,7 @@ void GameUIController::handleUICreation(const sf::RenderWindow &window)
 			const Estate *estate = game.getEstate(worldPos, Title::county);
 			if(estate != nullptr)
 			{
-				gameUI.setLeftUI(estate->getUI(UIType::information));
+				gameUI.setLeftUI(estate->createUI(UIType::information));
 			}
 			break;
 		}
@@ -70,7 +70,7 @@ void GameUIController::handleUICreation(const sf::RenderWindow &window)
 			const Estate *estate = game.getEstate(worldPos, Title::duchy);
 			if(estate != nullptr)
 			{
-				gameUI.setLeftUI(estate->getUI(UIType::information));
+				gameUI.setLeftUI(estate->createUI(UIType::information));
 			}
 			break;
 		}
@@ -79,7 +79,7 @@ void GameUIController::handleUICreation(const sf::RenderWindow &window)
 			const Estate *estate = game.getEstate(worldPos, Title::kingdom);
 			if(estate != nullptr)
 			{
-				gameUI.setLeftUI(estate->getUI(UIType::information));
+				gameUI.setLeftUI(estate->createUI(UIType::information));
 			}
 			break;
 		}
@@ -88,10 +88,19 @@ void GameUIController::handleUICreation(const sf::RenderWindow &window)
 			const Estate *estate = game.getEstate(worldPos, Title::empire);
 			if(estate != nullptr)
 			{
-				gameUI.setLeftUI(estate->getUI(UIType::information));
+				gameUI.setLeftUI(estate->createUI(UIType::information));
 			}
 			break;
 		}
+		}
+	}
+
+	if(inputUtility.getKeyPressed(sf::Keyboard::R))
+	{
+		if(game.currPlayerIsHuman())
+		{
+			Player &player = game.getCurrPlayer();
+			gameUI.setRightUI(player.createUI(UIType::interaction));
 		}
 	}
 
