@@ -49,6 +49,7 @@ int main()
 		if(!mapEditorMode)
 		{
 			game.update();
+			gameUI.update();
 		}
 
 		// Handle input.

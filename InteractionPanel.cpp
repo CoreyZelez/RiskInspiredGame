@@ -33,8 +33,6 @@ InteractionPanel::InteractionPanel(sf::Color backgroundColor, std::vector<std::v
 			rowRight = entity.get()->getDimensions().x + position.x;  // Right position of current entity.
 			const float entityBottom = entity.get()->getDimensions().y + position.y;
 			rowBottom = std::max(rowBottom, entityBottom);
-			std::cout << "x " << position.x;
-			std::cout << "y " << position.y;
 		}
 
 		right = std::max(right, rowRight);
@@ -43,6 +41,17 @@ InteractionPanel::InteractionPanel(sf::Color backgroundColor, std::vector<std::v
 	}
 
 	resizeBackground(right + borderPadding, bottom + borderPadding);
+}
+
+void InteractionPanel::update()
+{
+	for(auto &row : UIEntities)
+	{
+		for(auto &UIEntity : row)
+		{
+			UIEntity.get()->update();
+		}
+	}
 }
 
 void InteractionPanel::draw(sf::RenderWindow &window) const

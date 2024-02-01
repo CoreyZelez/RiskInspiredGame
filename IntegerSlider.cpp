@@ -59,8 +59,11 @@ void IntegerSlider<T>::handleButtonDown(sf::Mouse::Button button, sf::Vector2f p
 		selectedAmount = minValue + std::round(percent * (maxValue - minValue));
 		updateValue();
 
+		// Percent adjusted for rounded value.
+		const float adjustedPercent = (float)(selectedAmount - minValue) / (maxValue - minValue);
+
 		// Update size of selection bar.
-		const float selectionBarWidth = backgroundBar.getGlobalBounds().width * percent;
+		const float selectionBarWidth = backgroundBar.getGlobalBounds().width * adjustedPercent;
 		const float selectionBarHeight = backgroundBar.getGlobalBounds().height;
 		selectionBar.setSize(sf::Vector2f(selectionBarWidth, selectionBarHeight));
 	}

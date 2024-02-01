@@ -4,6 +4,7 @@
 class UIEntity
 {
 public:
+	virtual void update() {};
 	virtual void draw(sf::RenderWindow &window) const = 0;
 	virtual void handleButtonClick(sf::Mouse::Button, sf::Vector2f position) {};
 	virtual void handleButtonDown(sf::Mouse::Button, sf::Vector2f position) {};

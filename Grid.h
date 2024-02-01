@@ -35,6 +35,9 @@ public:
 
 	void setBorderMode(BorderMode borderMode);
 
+	// Specifies every position in grid as a dark position.
+	void setAllPositionsDark();
+
 	// Adds parameter grid positions to this grids positions.
 	void addGrid(const Grid &grid, bool updateVertices = true);
 
@@ -69,6 +72,7 @@ public:
 
 private:
 	std::unordered_set<sf::Vector2i, Vector2iHash> positions;  // Positions on map grid occupys. 
+	std::unordered_set<sf::Vector2i, Vector2iHash> darkPositions;  // Positions of grid which are partially darkened.
 	std::unordered_set<sf::Vector2i, Vector2iHash> subBorderPositions;  // Positions that form sub border or border.
 	std::unordered_set<sf::Vector2i, Vector2iHash> borderPositions;  // Positions that form sub border or border.
 	bool outdated = false;  // Indicated that calculateVertices must be called before next time grid is drawn.
@@ -85,6 +89,8 @@ private:
 	void calculateVertices();  
 	// Returns positions adjacent to border positions not contained in grid.
 	std::vector<sf::Vector2i> getAdjacentPositions() const; 
+	// Returns color adjusted for dark specifier.
+	sf::Color calculateAdjustedColor(const sf::Vector2i &position);
 };
 
 Grid loadTerritoryGrid(std::ifstream &file);

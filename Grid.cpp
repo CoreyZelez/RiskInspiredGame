@@ -146,6 +146,11 @@ void Grid::setBorderMode(BorderMode borderMode)
 	setColor(color);  // Updates grid with no border mode.
 }
 
+void Grid::setAllPositionsDark()
+{
+	darkPositions = positions;
+}
+
 void Grid::addGrid(const Grid &grid, bool updateVertices)
 {
 	// Border positions from parameter grid that may possibly be border positions of this grid once added.
@@ -163,6 +168,12 @@ void Grid::addGrid(const Grid &grid, bool updateVertices)
 		{
 			subBorderPositions.insert(*iter);
 		}
+	}
+
+	// Add the dark positions from the grid.
+	for(auto iter = grid.darkPositions.begin(); iter != grid.darkPositions.end(); ++iter)
+	{
+		darkPositions.insert(*iter);
 	}
 
 	// Determine border and sub-border positions amongst candidate border positions.
@@ -210,6 +221,7 @@ void Grid::removeGrid(const Grid &grid, bool updateVertices)
 	for(const sf::Vector2i &position : grid.positions)
 	{
 		positions.erase(position);
+		darkPositions.erase(position);
 		subBorderPositions.erase(position);
 		borderPositions.erase(position);
 	}
@@ -519,12 +531,13 @@ void Grid::calculateVertices()
 		}
 		else
 		{
-			triangles[0].color = color;
-			triangles[1].color = color;
-			triangles[2].color = color;
-			triangles[3].color = color;
-			triangles[4].color = color;
-			triangles[5].color = color;
+			sf::Color adjustedColor = calculateAdjustedColor(position);
+			triangles[0].color = adjustedColor;
+			triangles[1].color = adjustedColor;
+			triangles[2].color = adjustedColor;
+			triangles[3].color = adjustedColor;
+			triangles[4].color = adjustedColor;
+			triangles[5].color = adjustedColor;
 		}
 
 		++i;
@@ -556,6 +569,19 @@ std::vector<sf::Vector2i> Grid::getAdjacentPositions() const
 		}
 	}
 	return adjacencies;
+}
+
+sf::Color Grid::calculateAdjustedColor(const sf::Vector2i &position)
+{
+	sf::Color adjustedColor = this->color;
+	if(darkPositions.count(position) == 1)
+	{
+		const float darkeningFactor = 0.75;
+		adjustedColor.r *= darkeningFactor;
+		adjustedColor.g *= darkeningFactor;
+		adjustedColor.b *= darkeningFactor;
+	}
+	return adjustedColor;
 }
 
 Grid loadTerritoryGrid(std::ifstream &file)

@@ -1,8 +1,9 @@
-﻿  InteractionPanel.cpp
+﻿  Game.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
   Generating code
-d:\projects\risktypegame\risktypegame\player.cpp(45): warning C4715: 'Player::createUI': not all control paths return a value
-  3 of 11808 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  4 of 11871 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Release\RiskTypeGame.exe

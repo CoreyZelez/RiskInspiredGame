@@ -9,6 +9,7 @@ class GameUI
 public:
 	GameUI(const sf::View &UIView);
 
+	void update();
 	void draw(sf::RenderWindow &window) const;
 
 	void notifyButtonDown(sf::Mouse::Button button, sf::Vector2f position);

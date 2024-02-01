@@ -16,6 +16,7 @@ Estate::Estate(Title title)
 	if(title == Title::maridom)
 	{
 		this->grid.setBorderMode(BorderMode::feintBorders);
+		this->grid.setAllPositionsDark();
 	}
 	initColor();
 }
@@ -27,6 +28,7 @@ Estate::Estate(Title title, const Grid &grid)
 	if(title == Title::maridom)
 	{
 		this->grid.setBorderMode(BorderMode::feintBorders);
+		this->grid.setAllPositionsDark();
 	}
 	initColor();
 }
@@ -38,6 +40,7 @@ Estate::Estate(Title title, const Grid &grid, std::string name)
 	if(title == Title::maridom)
 	{
 		this->grid.setBorderMode(BorderMode::feintBorders);
+		this->grid.setAllPositionsDark();
 	}
 	initColor();
 }

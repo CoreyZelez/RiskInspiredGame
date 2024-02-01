@@ -30,10 +30,17 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 		std::vector<std::vector<std::unique_ptr<UIEntity>>> entities;
 
 		std::vector<std::unique_ptr<UIEntity>> row1;
+
 		std::unique_ptr<UIEntity> rulerBaronyLimitSlider = 
 			std::make_unique<IntegerSlider<int>>(0, 10, liegePolicy.rulerBaronyLimit);
-		std::unique_ptr<UIEntity> rulerBaronyLimitTextDisplay = 
-			std::make_unique<TextDisplay<int>>(liegePolicy.rulerBaronyLimit, "", " %", sf::Color::White, 40, sf::Color::Blue, 5);
+
+		std::unique_ptr<TextDisplay<int>> rulerBaronyLimitTextDisplay =
+			std::make_unique<TextDisplay<int>>(liegePolicy.rulerBaronyLimit, "", "");
+		rulerBaronyLimitTextDisplay.get()->setBackgroundSize(sf::Vector2f(80, 80));
+		rulerBaronyLimitTextDisplay.get()->setBackgroundColor(sf::Color(50, 50, 50));
+		rulerBaronyLimitTextDisplay.get()->setCharacterSize(60);
+		rulerBaronyLimitTextDisplay.get()->setTextColor(sf::Color(200, 200, 200));
+
 		row1.push_back(std::move(rulerBaronyLimitSlider));	  	
 		row1.push_back(std::move(rulerBaronyLimitTextDisplay));
 

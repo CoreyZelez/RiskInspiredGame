@@ -1,28 +1,29 @@
 #include "TextDisplay.h"
 #include "FontManager.h"
+#include <iostream>
 
 template<typename T>
-inline TextDisplay<T>::TextDisplay(T &value, std::string prefix, std::string postfix, sf::Color textColor, int characterSize, sf::Color backgroundColor, float padding)
-	: value(value), prefix(prefix), postfix(postfix), padding(padding)
+inline TextDisplay<T>::TextDisplay(T &value, std::string prefix, std::string postfix)
+	: value(value), prefix(prefix), postfix(postfix)
 {
 	// Initialise text.
 	FontManager &fontManager = FontManager::getInstance();
 	const sf::Font &font = *fontManager.getFont("UIFont1");
-	sfe::RichText text(font);
-	text.setCharacterSize(characterSize);
-	text << sf::Text::Regular << textColor << prefix << std::to_string(value) << postfix;
-	text.setPosition(padding, padding);
+	text = sfe::RichText(font);
+	text << sf::Text::Regular << prefix << std::to_string(value) << postfix;
 
-	// Initialise background rectangle.
-	background.setFillColor(backgroundColor);
-	const float backgroundWidth = text.getGlobalBounds().width + 2 * padding;
-	const float backgroundHeight = text.getGlobalBounds().width + 2 * padding;
-	background = sf::RectangleShape(sf::Vector2f(backgroundWidth, backgroundHeight));
-	background.setPosition(0, 0);
+	// Place UI at origin.
+	setPosition(sf::Vector2f(0, 0));
 }
 
 template<typename T>
-void TextDisplay<T>::draw(sf::RenderWindow & window) const
+void TextDisplay<T>::update()
+{
+	updateText();
+}
+
+template<typename T>
+void TextDisplay<T>::draw(sf::RenderWindow &window) const
 {
 	window.draw(background);
 	window.draw(text);
@@ -37,18 +38,15 @@ void TextDisplay<T>::handleButtonDown(sf::Mouse::Button button, sf::Vector2f pos
 template<typename T>
 void TextDisplay<T>::setPosition(sf::Vector2f position, bool center)
 {
-	sf::Vector2f textPosition = sf::Vector2f(position.x + padding, position.y + padding);
 	if(center)
 	{
 		sf::FloatRect backgroundBounds = background.getGlobalBounds();
 		sf::Vector2f centerOffset = { -backgroundBounds.width / 2, -backgroundBounds.height / 2 };
 		position.x += centerOffset.x;
-		textPosition.x += centerOffset.x;
 		position.y += centerOffset.y;		
-		textPosition.y += centerOffset.y;
 	}
 	background.setPosition(position);
-	text.setPosition(textPosition);
+	centerText();
 }
 
 template<typename T>
@@ -57,3 +55,58 @@ sf::Vector2f TextDisplay<T>::getDimensions()
 	sf::FloatRect bounds = background.getGlobalBounds();
 	return sf::Vector2f(bounds.width, bounds.height);
 }
+
+template<typename T>
+void TextDisplay<T>::setBackgroundSize(sf::Vector2f dimensions)
+{
+	background.setSize(dimensions);
+}
+
+template<typename T>
+void TextDisplay<T>::setBackgroundColor(sf::Color color)
+{
+	background.setFillColor(color);
+}
+
+template<typename T>
+void TextDisplay<T>::setTextColor(sf::Color color)
+{
+	textColor = color;
+	updateText();
+}
+
+template<typename T>
+void TextDisplay<T>::setCharacterSize(int characterSize)
+{
+	text.setCharacterSize(characterSize);
+}
+
+template<typename T>
+void TextDisplay<T>::updateText()
+{
+	text.clear();
+	text << sf::Text::Regular << textColor << prefix << std::to_string(value) << postfix;
+}
+
+template<typename T>
+void TextDisplay<T>::centerText()
+{
+	// Get the position and size of the rectangle shape.
+	sf::Vector2f backgroundPos = background.getPosition();
+	sf::Vector2f backgroundSize = background.getSize();
+
+	// Calculate the center of the rectangle shape.
+	const float centerX = backgroundPos.x + backgroundSize.x / 2;
+	const float centerY = backgroundPos.y + backgroundSize.y / 2;
+
+	// Get the bounds of the text.
+	sf::FloatRect textBounds = text.getLocalBounds();
+
+	// Calculate the new position of the text.
+	float newTextPosX = centerX - textBounds.width / 2;
+	float newTextPosY = centerY - textBounds.height / 2;
+
+	// Set the new position of the text.
+	text.setPosition(sf::Vector2f(newTextPosX, newTextPosY));
+}
+

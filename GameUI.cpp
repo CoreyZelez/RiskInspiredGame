@@ -7,6 +7,22 @@ GameUI::GameUI(const sf::View & UIView)
 {
 }
 
+void GameUI::update()
+{
+	if(leftUI != nullptr)
+	{
+		leftUI.get()->update();
+	}
+	if(bottomUI != nullptr)
+	{
+		bottomUI.get()->update();
+	}
+	if(rightUI != nullptr)
+	{
+		rightUI.get()->update();
+	}	
+}
+
 void GameUI::draw(sf::RenderWindow &window) const
 {
 	if(leftUI != nullptr)
