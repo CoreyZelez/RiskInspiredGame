@@ -1,5 +1,10 @@
 #include "UIPanel.h"
 
+UIPanel::UIPanel()
+	: UIPanel(sf::Color(30, 30, 30))
+{
+}
+
 UIPanel::UIPanel(sf::Color backgroundColor)
 {
 	background.setFillColor(backgroundColor);

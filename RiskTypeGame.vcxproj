@@ -216,6 +216,7 @@
     <ClCompile Include="Realm.cpp" />
     <ClCompile Include="PlayerEstateManager.cpp" />
     <ClCompile Include="RealmGrid.cpp" />
+    <ClCompile Include="NumericTextDisplay.cpp" />
     <ClCompile Include="TextDisplay.cpp" />
     <ClCompile Include="VassalManager.cpp" />
     <ClCompile Include="ReconcileLandedEstates.cpp" />
@@ -284,6 +285,7 @@
     <ClInclude Include="Realm.h" />
     <ClInclude Include="PlayerEstateManager.h" />
     <ClInclude Include="RealmGrid.h" />
+    <ClInclude Include="NumericTextDisplay.h" />
     <ClInclude Include="TextDisplay.h" />
     <ClInclude Include="VassalManager.h" />
     <ClInclude Include="ReconcileLandedEstates.h" />

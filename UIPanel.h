@@ -6,6 +6,7 @@
 class UIPanel : public UIEntity
 {
 public:
+	UIPanel();  // Panel with default standardised background color.
 	UIPanel(sf::Color backgroundColor);
 	virtual void draw(sf::RenderWindow &window) const override;
 	virtual void setPosition(sf::Vector2f position, bool center = false) override;

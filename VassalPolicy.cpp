@@ -27,11 +27,11 @@ void VassalPolicy::handleResistanceChange(const Player &liege, const LiegePolicy
 	resistance *= resistanceMultiplier;
 
 	// Increase resistance by some constant.
-	const double resistanceConstant = 0.3;
+	const double resistanceConstant = 0.4;
 	resistance += resistanceConstant;
 
 	// Adjust resistance due to liege levy.
-	const double equilibriumLevy = 0.4;
+	const double equilibriumLevy = 0.3;
 	const double residualLevy = liegePolicy.vassalLevy - equilibriumLevy;
 	const double levyResistance = 3 * residualLevy;
 	resistance += levyResistance;
@@ -51,7 +51,7 @@ void VassalPolicy::handleResistanceChange(const Player &liege, const LiegePolicy
 
 	// Adjust resistance due to liege not having dejure upper title of player's highest title(s).
 
-	// Adjust resistance due to total military strength relative to liege's.
+	// Adjust resistance due to total military strength relative to liege's of all vassals combined.
 	const double equilibriumRatio = 1;
 	const int totalLiegeArmyStrength = liege.getMilitaryManager().getTotalArmyStrength(false);
 	const int totalVassalArmyReserves = liege.getRealm().getTotalVassalArmyReserves();
@@ -69,7 +69,15 @@ void VassalPolicy::handleResistanceChange(const Player &liege, const LiegePolicy
 	{
 		const double armyRatio = totalVassalArmyReserves / totalLiegeArmyStrength;
 		const double residualRatio = armyRatio - equilibriumRatio;
-		const double armyResistance = residualRatio * 0.5;
+		double armyResistance = residualRatio;
+		if(armyResistance < 0)
+		{
+			armyResistance *= 0.5;
+		}
+		else
+		{
+			armyResistance *= 2;
+		}
 		resistance += armyResistance;
 	}
 

@@ -1,95 +1,87 @@
 #include "TextDisplay.h"
 #include "FontManager.h"
-#include <iostream>
 
-template<typename T>
-inline TextDisplay<T>::TextDisplay(T &value, std::string prefix, std::string postfix)
-	: value(value), prefix(prefix), postfix(postfix)
+TextDisplay::TextDisplay(std::string text)
+	: text(text)
 {
 	// Initialise text.
 	FontManager &fontManager = FontManager::getInstance();
 	const sf::Font &font = *fontManager.getFont("UIFont1");
-	text = sfe::RichText(font);
-	text << sf::Text::Regular << prefix << std::to_string(value) << postfix;
+	richText = sfe::RichText(font);
+	richText << sf::Text::Bold << text;
 
 	// Place UI at origin.
 	setPosition(sf::Vector2f(0, 0));
 }
 
-template<typename T>
-void TextDisplay<T>::update()
-{
-	updateText();
-}
-
-template<typename T>
-void TextDisplay<T>::draw(sf::RenderWindow &window) const
+void TextDisplay::draw(sf::RenderWindow & window) const
 {
 	window.draw(background);
-	window.draw(text);
+	window.draw(richText);
 }
 
-template<typename T>
-void TextDisplay<T>::handleButtonDown(sf::Mouse::Button button, sf::Vector2f position)
-{
-	// Intentionally empty.
-}
-
-template<typename T>
-void TextDisplay<T>::setPosition(sf::Vector2f position, bool center)
+void TextDisplay::setPosition(sf::Vector2f position, bool center)
 {
 	if(center)
 	{
 		sf::FloatRect backgroundBounds = background.getGlobalBounds();
 		sf::Vector2f centerOffset = { -backgroundBounds.width / 2, -backgroundBounds.height / 2 };
 		position.x += centerOffset.x;
-		position.y += centerOffset.y;		
+		position.y += centerOffset.y;
 	}
 	background.setPosition(position);
-	centerText();
+
+	if(alignment == Alignment::left)
+	{
+		leftAlign();
+	}
+	else if(alignment == Alignment::center)
+	{
+		centerText();
+	}
+	else if(alignment == Alignment::right)
+	{
+		// Implement.
+	}
 }
 
-template<typename T>
-sf::Vector2f TextDisplay<T>::getDimensions()
+sf::Vector2f TextDisplay::getDimensions()
 {
 	sf::FloatRect bounds = background.getGlobalBounds();
 	return sf::Vector2f(bounds.width, bounds.height);
 }
 
-template<typename T>
-void TextDisplay<T>::setBackgroundSize(sf::Vector2f dimensions)
+void TextDisplay::setBackgroundSize(sf::Vector2f dimensions)
 {
 	background.setSize(dimensions);
 }
 
-template<typename T>
-void TextDisplay<T>::setBackgroundColor(sf::Color color)
+void TextDisplay::setBackgroundColor(sf::Color color)
 {
 	background.setFillColor(color);
 }
 
-template<typename T>
-void TextDisplay<T>::setTextColor(sf::Color color)
+void TextDisplay::setCharacterSize(int characterSize)
 {
-	textColor = color;
-	updateText();
+	richText.setCharacterSize(characterSize);
 }
 
-template<typename T>
-void TextDisplay<T>::setCharacterSize(int characterSize)
+void TextDisplay::setTextColor(sf::Color color)
 {
-	text.setCharacterSize(characterSize);
+	richText << sf::Text::Regular << color << text;
 }
 
-template<typename T>
-void TextDisplay<T>::updateText()
+void TextDisplay::setPadding(float padding)
 {
-	text.clear();
-	text << sf::Text::Regular << textColor << prefix << std::to_string(value) << postfix;
+	this->padding = padding;
 }
 
-template<typename T>
-void TextDisplay<T>::centerText()
+void TextDisplay::setAlignment(Alignment alignment)
+{
+	this->alignment = alignment;
+}
+
+void TextDisplay::centerText()
 {
 	// Get the position and size of the rectangle shape.
 	sf::Vector2f backgroundPos = background.getPosition();
@@ -100,13 +92,21 @@ void TextDisplay<T>::centerText()
 	const float centerY = backgroundPos.y + backgroundSize.y / 2;
 
 	// Get the bounds of the text.
-	sf::FloatRect textBounds = text.getLocalBounds();
+	sf::FloatRect textBounds = richText.getLocalBounds();
 
 	// Calculate the new position of the text.
 	float newTextPosX = centerX - textBounds.width / 2;
 	float newTextPosY = centerY - textBounds.height / 2;
 
 	// Set the new position of the text.
-	text.setPosition(sf::Vector2f(newTextPosX, newTextPosY));
+	richText.setPosition(sf::Vector2f(newTextPosX, newTextPosY));
 }
 
+void TextDisplay::leftAlign()
+{
+	// Center the text on the background to determine the y position.
+	centerText();
+	const float x = background.getGlobalBounds().left + padding;
+	const float y = richText.getPosition().y;
+	richText.setPosition(x, y);
+}

@@ -6,8 +6,9 @@
 #include "Game.h"
 #include "IntegerSlider.h"
 #include "IntegerSlider.cpp"
+#include "NumericTextDisplay.h"
+#include "NumericTextDisplay.cpp"
 #include "TextDisplay.h"
-#include "TextDisplay.cpp"
 #include "InteractionPanel.h"
 #include <assert.h>
 #include <iostream>
@@ -30,23 +31,73 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 		std::vector<std::vector<std::unique_ptr<UIEntity>>> entities;
 
 		std::vector<std::unique_ptr<UIEntity>> row1;
+		std::unique_ptr<TextDisplay> rulerBaronyLimitHeading =
+			std::make_unique<TextDisplay>("Ruler Barony Limit");
+		rulerBaronyLimitHeading.get()->setBackgroundSize(sf::Vector2f(400, 50));
+		rulerBaronyLimitHeading.get()->setBackgroundColor(sf::Color(47, 47, 47));
+		rulerBaronyLimitHeading.get()->setPadding(10);
+		row1.push_back(std::move(rulerBaronyLimitHeading));
 
+		std::vector<std::unique_ptr<UIEntity>> row3;
+		std::unique_ptr<TextDisplay> rulerUnlandedLimitHeading =
+			std::make_unique<TextDisplay>("Ruler Unlanded Limit");
+		rulerUnlandedLimitHeading.get()->setBackgroundSize(sf::Vector2f(400, 50));
+		rulerUnlandedLimitHeading.get()->setBackgroundColor(sf::Color(47, 47, 47));
+		rulerUnlandedLimitHeading.get()->setPadding(10);
+		row3.push_back(std::move(rulerUnlandedLimitHeading));
+
+		std::vector<std::unique_ptr<UIEntity>> row5;
+		std::unique_ptr<TextDisplay> rulerVassalLimitHeading =
+			std::make_unique<TextDisplay>("Ruler Vassal Limit");
+		rulerVassalLimitHeading.get()->setBackgroundSize(sf::Vector2f(400, 50));
+		rulerVassalLimitHeading.get()->setBackgroundColor(sf::Color(47, 47, 47));
+		rulerVassalLimitHeading.get()->setPadding(10);
+		row5.push_back(std::move(rulerVassalLimitHeading));
+
+		std::vector<std::unique_ptr<UIEntity>> row2;
 		std::unique_ptr<UIEntity> rulerBaronyLimitSlider = 
-			std::make_unique<IntegerSlider<int>>(0, 10, liegePolicy.rulerBaronyLimit);
-
-		std::unique_ptr<TextDisplay<int>> rulerBaronyLimitTextDisplay =
-			std::make_unique<TextDisplay<int>>(liegePolicy.rulerBaronyLimit, "", "");
+			std::make_unique<IntegerSlider<int>>(0, 8, liegePolicy.rulerBaronyLimit);
+		std::unique_ptr<NumericTextDisplay<int>> rulerBaronyLimitTextDisplay =
+			std::make_unique<NumericTextDisplay<int>>(liegePolicy.rulerBaronyLimit, "", "");
 		rulerBaronyLimitTextDisplay.get()->setBackgroundSize(sf::Vector2f(80, 80));
 		rulerBaronyLimitTextDisplay.get()->setBackgroundColor(sf::Color(50, 50, 50));
 		rulerBaronyLimitTextDisplay.get()->setCharacterSize(60);
 		rulerBaronyLimitTextDisplay.get()->setTextColor(sf::Color(200, 200, 200));
+		row2.push_back(std::move(rulerBaronyLimitSlider));
+		row2.push_back(std::move(rulerBaronyLimitTextDisplay));
 
-		row1.push_back(std::move(rulerBaronyLimitSlider));	  	
-		row1.push_back(std::move(rulerBaronyLimitTextDisplay));
+		std::vector<std::unique_ptr<UIEntity>> row4;
+		std::unique_ptr<UIEntity> rulerUnlandedLimitSlider =
+			std::make_unique<IntegerSlider<int>>(0, 12, liegePolicy.rulerUnlandedLimit);
+		std::unique_ptr<NumericTextDisplay<int>> rulerUnlandedLimitTextDisplay =
+			std::make_unique<NumericTextDisplay<int>>(liegePolicy.rulerUnlandedLimit, "", "");
+		rulerUnlandedLimitTextDisplay.get()->setBackgroundSize(sf::Vector2f(80, 80));
+		rulerUnlandedLimitTextDisplay.get()->setBackgroundColor(sf::Color(50, 50, 50));
+		rulerUnlandedLimitTextDisplay.get()->setCharacterSize(60);
+		rulerUnlandedLimitTextDisplay.get()->setTextColor(sf::Color(200, 200, 200));
+		row4.push_back(std::move(rulerUnlandedLimitSlider));
+		row4.push_back(std::move(rulerUnlandedLimitTextDisplay));
+
+		std::vector<std::unique_ptr<UIEntity>> row6;
+		std::unique_ptr<UIEntity> rulerVassalLimitSlider =
+			std::make_unique<IntegerSlider<int>>(0, 30, liegePolicy.rulerVassalLimit);
+		std::unique_ptr<NumericTextDisplay<int>> rulerVassalLimitTextDisplay =
+			std::make_unique<NumericTextDisplay<int>>(liegePolicy.rulerVassalLimit, "", "");
+		rulerVassalLimitTextDisplay.get()->setBackgroundSize(sf::Vector2f(80, 80));
+		rulerVassalLimitTextDisplay.get()->setBackgroundColor(sf::Color(50, 50, 50));
+		rulerVassalLimitTextDisplay.get()->setCharacterSize(60);
+		rulerVassalLimitTextDisplay.get()->setTextColor(sf::Color(200, 200, 200));
+		row6.push_back(std::move(rulerVassalLimitSlider));
+		row6.push_back(std::move(rulerVassalLimitTextDisplay));
 
 		entities.push_back(std::move(row1));
+		entities.push_back(std::move(row2));
+		entities.push_back(std::move(row3));
+		entities.push_back(std::move(row4));
+		entities.push_back(std::move(row5));
+		entities.push_back(std::move(row6));
 
-		std::unique_ptr<UIEntity> panel = std::make_unique<InteractionPanel>(sf::Color(30, 30, 30), std::move(entities));
+		std::unique_ptr<UIEntity> panel = std::make_unique<InteractionPanel>(std::move(entities));
 		return panel;
 	}
 }
@@ -80,6 +131,8 @@ void Player::handleTurn()
 
 void Player::rebel()
 {
+	std::cout << militaryManager.getTotalArmyStrength(true) << " " << militaryManager.getTotalArmyStrength(false) << std::endl;
+
 	// Player must have a liege.
 	assert(liege != nullptr);
 	// Players liege must not have a liege.
@@ -104,17 +157,44 @@ void Player::rebel()
 	{
 		territory->getOccupancyHandler()->determineOccupation();
 	}
+
+	std::cout << militaryManager.getTotalArmyStrength(true) << " " << militaryManager.getTotalArmyStrength(false) << std::endl << std::endl;
 }
 
+void Player::handleReinforcementArmyYield(double amount)
+{
+	assert(liege == nullptr);
+	assert(amount >= 0);
+	const double multiplier = realm.getEffectiveArmyYieldRatio();
+	const double adjustedAmount = amount * multiplier;
+	militaryManager.addArmyReinforcements(adjustedAmount);
+}
+
+void Player::handleReinforcementFleetYield(double amount)
+{
+	assert(liege == nullptr);
+	assert(amount >= 0);
+	militaryManager.addFleetReinforcements(amount);
+	/////////////////////
+	// THIS FUNCTION MUST BE PROPERLY IMPLEMENTED IN FUTURE. SHOULD BE SIMILAR TO handleArmyReinforcentYield function.
+}
+
+/*
+ * Determine adjusted amount based on the effective army yield ratio. This is the actual amount
+ * of armies yielded to both the player and their liege (if any) combined. The amount yielded to
+ * liege is dependent on the pre-adjusted amount and does not exceed the adjusted amount.
+ */
 void Player::handleReserveArmyYield(double amount)
 {
+	// Amount of armies adjusted for yield ratio.
+	double adjustedAmount = amount * getRealm().getEffectiveArmyYieldRatio();
 	if(liege != nullptr)
 	{
 		// Army amount yielded to player liege.
-		const double liegeYield = amount * vassalPolicy.liegeLevyContribution;
+		const double liegeYield = std::min(amount * vassalPolicy.liegeLevyContribution, adjustedAmount);
 		assert(liegeYield >= 0);
 		// Army amount yielded to player reserves.
-		const double playerYield = amount - liegeYield;
+		const double playerYield = adjustedAmount - liegeYield;
 		assert(playerYield >= 0);
 
 		// Recurse on liege.
@@ -125,7 +205,7 @@ void Player::handleReserveArmyYield(double amount)
 	else
 	{
 		// No liege so add army to reinforcements rather than reserves.
-		militaryManager.addArmyReinforcements(amount);
+		militaryManager.addArmyReinforcements(adjustedAmount);
 	}
 }
 

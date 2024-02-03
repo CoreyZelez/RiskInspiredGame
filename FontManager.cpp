@@ -57,4 +57,8 @@ FontManager::FontManager()
 	std::string UIFont1Path = "res/fonts/TimesNewRomanBold.ttf";
 	std::string UIFont1ID = "UIFont1";
 	loadFont(UIFont1ID, UIFont1Path);
+
+	std::string UIFont2Path = "res/fonts/OpenSansCondensedBold.ttf";
+	std::string UIFont2ID = "UIFont2";
+	loadFont(UIFont2ID, UIFont2Path);
 }

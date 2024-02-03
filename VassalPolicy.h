@@ -17,13 +17,13 @@ struct VassalPolicy
 	bool canRebel() const;
 
 	// Percent of generated troops granted to liege.
-	double liegeLevyContribution = 0.7;
+	double liegeLevyContribution = 0.3;
 
 	// Influence over liege for estate conferral. 
 	double liegeInfluence = 0;  
 	// Resistance score. When exceeding threshold, may rebel against liege.
 	double resistance = 0;
 	// Threshold which when surpassed by resistance, vassal may choose to rebel.
-	double rebellionThreshold = 100;
+	const double rebellionThreshold = 100;
 };
 

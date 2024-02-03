@@ -22,5 +22,6 @@ private:
 	sf::RectangleShape selectionBar;
 
 	void updateValue();
+	void updateSelectionBar();
 };
 

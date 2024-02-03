@@ -29,6 +29,10 @@ public:
 	// transferred to the lieges liege. 
 	void rebel();
 
+	// Handles distribution of army reinforcements to player. Player must not have a liege.
+	void handleReinforcementArmyYield(double amount);
+	// Handles distribution of fleet reinforcements to player. Player must not have a liege.
+	void handleReinforcementFleetYield(double amount);
 	// Handles distribution of army reserves to player and their liege. Recurses to upper-most liege.
 	void handleReserveArmyYield(double amount);
 	// Handles distribution of fleet reserves to player and their liege. Recurses to upper-most liege.

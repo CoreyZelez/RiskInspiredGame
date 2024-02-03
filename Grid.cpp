@@ -576,7 +576,7 @@ sf::Color Grid::calculateAdjustedColor(const sf::Vector2i &position)
 	sf::Color adjustedColor = this->color;
 	if(darkPositions.count(position) == 1)
 	{
-		const float darkeningFactor = 0.75;
+		const float darkeningFactor = 0.72;
 		adjustedColor.r *= darkeningFactor;
 		adjustedColor.g *= darkeningFactor;
 		adjustedColor.b *= darkeningFactor;

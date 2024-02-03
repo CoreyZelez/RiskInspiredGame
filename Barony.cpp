@@ -31,17 +31,24 @@ std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 	{
 		// Percent of yielded army allocated to reinforcement.
 		const float armyReinforcementRate = getRuler()->getMilitaryManager().getArmyReinforcementRate();
-
+		// Base reinforcements yield.
 		double armyReinforcementYield = armyReinforcementRate * landArmyYield;
-		const double armyYieldMultiplier = getRuler()->getRealm().getEffectiveArmyYieldRatio();
-		double armyLocalYield = (landArmyYield - armyReinforcementYield) * armyYieldMultiplier;
-		assert(armyLocalYield >= 0);
 		assert(armyReinforcementYield >= 0);
 
-		// Adds reinforcements to rulers military manager.
-		getRuler()->getMilitaryManager().addArmyReinforcements(armyReinforcementYield);
+		const double armyYieldMultiplier = getRuler()->getRealm().getEffectiveArmyYieldRatio();
+		// Base local yield to territory associated with barony.
+		const double armyLocalYield = (landArmyYield - armyReinforcementYield);
+		// Adjust local yield for army yield ratio.
+		const double armyLocalAdjustedYield = armyLocalYield * armyYieldMultiplier;
+		assert(armyLocalAdjustedYield >= 0);
+
+		// Adds reinforcements to rulers military manager. 
+		// Note we provide the base reinforcement yield. The function adjusts for this using the army reinforcement rate as
+		// we did for the local army adjusted yield.
+		getRuler()->handleReinforcementArmyYield(armyReinforcementYield);
+
 		// Adds local army yield to cumulative yield of this barony.
-		cumulativeLandArmy += armyLocalYield;
+		cumulativeLandArmy += armyLocalAdjustedYield;
 
 		// Yield army to territory and player if threshold surpassed.
 		const int landArmyThreshold = 3;  // Min cumulative value for yield to take place.
@@ -131,7 +138,8 @@ void Barony::receiveBonusYield(const float &bonus)
 	{
 		// Yield all land army units as reinforcements.
 		const float armyReinforcements = landArmyYield * bonus;
-		getRuler()->getMilitaryManager().addArmyReinforcements(armyReinforcements);
+		getRuler()->handleReinforcementArmyYield(armyReinforcements);
+		// getRuler()->getMilitaryManager().addArmyReinforcements(armyReinforcements);
 
 		// Yield all naval fleets to this barony.
 		const float fleetYield = navalFleetYield * bonus;

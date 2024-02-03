@@ -85,5 +85,7 @@ private:
 	void distributeArmyReinforcements();
 	// Distributes fleet reinforcements to preexisting fleets proportionate to strength.
 	void distributeFleetReinforcements();
+	// Reduces army and fleet reserves by some factor.
+	void applyReservesReduction();
 };
 

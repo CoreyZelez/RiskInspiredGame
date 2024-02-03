@@ -7,6 +7,7 @@ Simple UI panel containing other UI entities (not panels) for interacting with.
 class InteractionPanel : public UIPanel
 {
 public:
+	InteractionPanel(std::vector<std::vector<std::unique_ptr<UIEntity>>> UIEntities);  // Interaction panel with default background color.
 	InteractionPanel(sf::Color backgroundColor, std::vector<std::vector<std::unique_ptr<UIEntity>>> UIEntities);
 
 	virtual void update() override;

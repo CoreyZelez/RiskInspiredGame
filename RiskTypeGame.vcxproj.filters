@@ -324,6 +324,9 @@
     <ClCompile Include="IntegerSlider.cpp">
       <Filter>Source Files\User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="NumericTextDisplay.cpp">
+      <Filter>Source Files\User Interface</Filter>
+    </ClCompile>
     <ClCompile Include="TextDisplay.cpp">
       <Filter>Source Files\User Interface</Filter>
     </ClCompile>
@@ -551,8 +554,11 @@
     <ClInclude Include="IntegerSlider.h">
       <Filter>Header Files\User Interface</Filter>
     </ClInclude>
-    <ClInclude Include="TextDisplay.h">
+    <ClInclude Include="NumericTextDisplay.h">
       <Filter>Header Files\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="TextDisplay.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

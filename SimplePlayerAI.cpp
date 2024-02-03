@@ -72,7 +72,10 @@ int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
 	Player &player = getPlayer();
 	Game &game = getGame();
 
-	int strategicValue = 0;
+	// Initialise strategic value as nonzero for case where enemy territory has no armies.
+	// This ensures that armies can be allocated to this border territory in case where no 
+	// enemy armies.
+	int strategicValue = 1;
 
 	// Calculate strategic value from threat of attack of territory.
 	std::map<const Player*, int> weightedThreats = context.getArmyWeightedThreats(territory);

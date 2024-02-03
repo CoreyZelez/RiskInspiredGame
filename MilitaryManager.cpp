@@ -26,6 +26,7 @@ void MilitaryManager::update()
 	removeDeadMilitaries();
 	resetStaminas();
 	distributeArmyReinforcements();
+	applyReservesReduction();
 }
 
 MilitaryForce* MilitaryManager::getMilitary(sf::Vector2f position)
@@ -56,15 +57,13 @@ float MilitaryManager::getArmyReinforcementRate() const
 void MilitaryManager::addArmyReinforcements(double amount)
 {
 	assert(amount >= 0);
-	const double multiplier = player.getRealm().getEffectiveArmyYieldRatio();
-	armyReinforcements += amount * multiplier;
+	armyReinforcements += amount;
 }
 
 void MilitaryManager::addArmyReserves(double amount)
 {
     assert(amount >= 0);
-	const double multiplier = player.getRealm().getEffectiveArmyYieldRatio();
-    armyReserves += amount * multiplier;
+    armyReserves += amount;
 }
 
 float MilitaryManager::getFleetReinforcementRate() const
@@ -289,6 +288,13 @@ void MilitaryManager::distributeFleetReinforcements()
 		assert(fleetReinforcements >= 0);
 		fleet.get()->increaseStrength(reinforcementAmount);
 	}
+}
+
+void MilitaryManager::applyReservesReduction()
+{
+	double reductionFactor = 0.995;
+	armyReserves *= reductionFactor;	
+	fleetReserves *= reductionFactor;
 }
 
 void MilitaryManager::addLandArmy(std::unique_ptr<LandArmy> army)
