@@ -3,6 +3,7 @@
 #include "NavalFleet.h"
 #include "LandArmy.h"
 #include "MilitaryManager.h"
+#include "LandTerritory.h"
 #include "Player.h"
 #include <fstream>
 #include <iostream>
@@ -47,6 +48,16 @@ void LandedEstate::yield()
 	}
 }
 
+bool LandedEstate::hasPort() const
+{
+	const LandTerritory *landTerritory = dynamic_cast<LandTerritory*>(&territory);
+	if(landTerritory != nullptr && landTerritory->hasPort())
+	{
+		return true;
+	}
+	return false;
+}
+
 bool LandedEstate::containsPosition(const sf::Vector2f &position) const
 {
 	return territory.getGrid().containsPosition(position);
@@ -85,20 +96,6 @@ std::unique_ptr<LandArmy> LandedEstate::putArmy(int strength)
 
 std::unique_ptr<NavalFleet> LandedEstate::putFleet(int strength)
 {
-	// Should not be hostile army residing on territory.
-	assert(territory.getOccupancyHandler()->getOccupant() == nullptr
-		|| territory.getOccupancyHandler()->getOccupant() == getRuler());
-
-	std::unique_ptr<NavalFleet> fleet = std::make_unique<NavalFleet>(*getRuler(), &territory, strength);
-	territory.getOccupancyHandler()->occupy(fleet.get());
-
-	// Army merged with pre-existing army on territory.
-	if(fleet->isDead())
-	{
-		return nullptr;
-	}
-
-	// There was no pre-existing army on territory.
-	assert(fleet.get()->getTotalStrength() > 0);
-	return fleet;
+	// Intentionally does nothing.
+	return nullptr;
 }

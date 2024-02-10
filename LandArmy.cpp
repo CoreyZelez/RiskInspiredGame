@@ -1,5 +1,6 @@
 #include "LandArmy.h"
 #include "Territory.h"
+#include "IOccupiable.h"
 #include "TextureManager.h"
 #include "Player.h"
 #include <assert.h>
@@ -16,6 +17,12 @@ LandArmy::LandArmy(Player & owner, Territory * location, std::array<unsigned int
 	: MilitaryForce(owner, location, staminaStrength, "circle")
 {
 	assert(location != nullptr);
+}
+
+void LandArmy::removeFromTerritory()
+{
+	// Remove the army from territory and updates the occupancy.
+	getTerritory().getOccupancyHandler()->removeArmy(this);
 }
 
 void LandArmy::attack(LandArmy &defendingArmy, double defenceMultiplier)

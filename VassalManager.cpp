@@ -11,6 +11,20 @@ VassalManager::VassalManager(Game &game, Player &ruler)
 {
 }
 
+VassalManager::~VassalManager()
+{
+}
+
+void VassalManager::setVassalsGameOver()
+{
+	assert(ruler.checkGameOver());
+	for(Player* vassal : vassals)
+	{
+		vassal->setGameOver();
+		vassal->handleGameOver();
+	}
+}
+
 void VassalManager::drawVassalRealms(sf::RenderWindow &window) const
 {
 	for(const Player* vassal : vassals)
@@ -32,7 +46,6 @@ void VassalManager::removeEstatelessVassal(const Player &vassal)
 {
 	// Vassal should not have an empty realm.
 	assert(vassal.getRealm().getEstates().empty());
-
 	vassals.erase(std::remove(vassals.begin(), vassals.end(), &vassal), vassals.end());
 }
 
@@ -112,6 +125,16 @@ int VassalManager::calculateArmySoftCapContribution(double contributionRatio) co
 	for(Player *vassal : vassals)
 	{
 		contribution += contributionRatio * vassal->getRealm().calculateArmySoftCap();
+	}
+	return contribution;
+}
+
+int VassalManager::calculateFleetSoftCapContribution(double contributionRatio) const
+{
+	int contribution = 0;
+	for(Player *vassal : vassals)
+	{
+		contribution += contributionRatio * vassal->getRealm().calculateFleetSoftCap();
 	}
 	return contribution;
 }

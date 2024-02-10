@@ -25,6 +25,12 @@ Realm::Realm(Game &game, Player &ruler, const LiegePolicy &liegePolicy, const st
 {
 }
 
+void Realm::handleGameOver()
+{
+	rulerEstateManager.clearAllMaridomOwnership();
+	vassalManager.setVassalsGameOver();
+}
+
 void Realm::draw(sf::RenderWindow &window) const
 {
 	realmGrid.draw(window);
@@ -115,8 +121,21 @@ std::unique_ptr<UIEntity> Realm::createUI(UIType type) const
 
 void Realm::handleMilitaryYields()
 {
+	// Set yield ratios as outdated so they are recalculated once at beginning of military yield process.
 	effectiveArmyYieldRatioOutdated = true;
+	effectiveFleetYieldRatioOutdated = true;
+
 	rulerEstateManager.handleMilitaryYields();
+
+	// Yield the fleet reinforcements if no fleets are active.
+	// We must do this as th eruler may not own any baronies with a port meaning the ruler will never
+	// be able to generate any naval fleets that themselves can be reinforced.
+	// We only yield fleet reinforcements if it exceeds the minimum threshold.
+	const int fleetReinforcementThreshold = 3;  
+	if(ruler.getMilitaryManager().getFleets().size() == 0 && ruler.getMilitaryManager().getFleetReinforcements() >= fleetReinforcementThreshold)
+	{
+		yieldFleetReinforcements();
+	}
 }
 
 void Realm::yieldArmyReserves()
@@ -262,6 +281,19 @@ std::unordered_set<const Estate*> Realm::getEstates() const
 	realmEstates = rulerEstates;
 	realmEstates.insert(vassalEstates.begin(), vassalEstates.end());
 	return realmEstates;
+}
+
+bool Realm::hasNoBaronies() const
+{
+	std::unordered_set<const Estate*> estates = getEstates();
+	for(const Estate* estate : estates)
+	{
+		if(estate->getTitle() == Title::barony)
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 std::string Realm::getName() const
@@ -583,6 +615,74 @@ double Realm::realmEstatesInfluenceBaronyConferralContribution(const Player &vas
 	return baronyConferralContribution;
 }
 
+void Realm::yieldFleetReinforcements()
+{
+	MilitaryManager &militaryManager = ruler.getMilitaryManager();
+	std::unordered_set<Territory*> territories = getTerritories();
+	std::vector<LandTerritory*> portTerritories;
+	for(Territory *territory : territories)
+	{
+		if(territory->getType() == TerritoryType::land)
+		{
+			LandTerritory* landTerritory = dynamic_cast<LandTerritory*>(territory);
+			assert(landTerritory != nullptr);
+			if(landTerritory->hasPort())
+			{
+				portTerritories.push_back(landTerritory);
+			}
+		}
+	}
+
+	// Cannot yield any fleets.
+	if(portTerritories.size() == 0)
+	{
+		return;
+	}
+
+	// Shuffle vector so we yield fleet to territories randomly chosen.
+	auto rng = std::default_random_engine{};
+	std::shuffle(std::begin(portTerritories), std::end(portTerritories), rng);
+
+	// Percent of territories fleets are yielded to.
+	const double territoriesYieldRatio = 0.3;
+	const int maxTerritoriesYielded = 10;
+	const int numPortTerritories = portTerritories.size();
+	// Number of territories to yield reserve fleets to.
+	int numTerritoriesToYield = std::min(maxTerritoriesYielded, (int)(numPortTerritories * territoriesYieldRatio));
+	numTerritoriesToYield = std::max(numTerritoriesToYield, 1);
+
+	// Fleet reinforcements yet to be yielded.
+	const int totalReinforcements = militaryManager.getFleetReinforcements();
+	int remainingReinforcements = totalReinforcements;
+	militaryManager.removeArmyReserves(1);
+	// Yield armies to territories in order based upon random shuffle.
+	for(int i = 0; i < numTerritoriesToYield; ++i)
+	{
+		int strength = (double)totalReinforcements / (double)numTerritoriesToYield;
+		if(strength > remainingReinforcements || i == numTerritoriesToYield - 1)
+		{
+			strength = remainingReinforcements;
+		}
+		if(strength == 0)
+		{
+			continue;
+		}
+
+		remainingReinforcements -= strength;
+
+		LandTerritory &portTerritory = *portTerritories[i];
+		Territory &navalTerritory = portTerritory.getPort().get()->getNavalTerritory();
+		std::unique_ptr<NavalFleet> fleet = std::make_unique<NavalFleet>(ruler, &navalTerritory, strength);
+		// Repeatedly attempt occupation until army dies or territory is occupied. Must force occupy
+		// since territory may have a liege army on it.
+		navalTerritory.getOccupancyHandler()->forceOccupy(fleet.get());
+		if(!fleet.get()->isDead())
+		{
+			fleet.get()->getOwner().getMilitaryManager().addNavalFleet(std::move(fleet));
+		}
+	}
+}
+
 int Realm::calculateArmySoftCap() const
 {
 	const int rulerEstateContribution = rulerEstateManager.calculateArmySoftCapContribution();
@@ -590,6 +690,15 @@ int Realm::calculateArmySoftCap() const
 	const int vassalEstateContribution = vassalManager.calculateArmySoftCapContribution(vassalContributionRatio);
 	const int armySoftCap = rulerEstateContribution + vassalEstateContribution;
 	return armySoftCap;
+}
+
+int Realm::calculateFleetSoftCap() const
+{
+	const int rulerEstateContribution = rulerEstateManager.calculateFleetSoftCapContribution();
+	const double vassalContributionRatio = 0.6;
+	const int vassalEstateContribution = vassalManager.calculateFleetSoftCapContribution(vassalContributionRatio);
+	const int fleetSoftCap = rulerEstateContribution + vassalEstateContribution;
+	return fleetSoftCap;
 }
 
 double Realm::getEffectiveArmyYieldRatio() 
@@ -624,6 +733,41 @@ double Realm::getEffectiveArmyYieldRatio()
 		effectiveArmyYieldRatio = minimumRatio;
 		effectiveArmyYieldRatioOutdated = false;
 		return effectiveArmyYieldRatio;
+	}
+}
+
+double Realm::getEffectiveFleetYieldRatio()
+{
+	if(!effectiveFleetYieldRatioOutdated)
+	{
+		return effectiveFleetYieldRatio;
+	}
+
+	const int totalFleetStrength = ruler.getMilitaryManager().getTotalFleetStrength(false);
+	const int fleetSoftCap = calculateFleetSoftCap();
+	// Minimal value for yield ratio.
+	const double minimumRatio = 0.00;
+	// Ratio of total fleet strength to soft cap at which army yield ratio will be minimal.
+	const double maximalReductionThresholdMultiplier = 2;
+	if(totalFleetStrength <= fleetSoftCap)
+	{
+		effectiveFleetYieldRatio = 1;
+		effectiveFleetYieldRatioOutdated = false;
+		return effectiveFleetYieldRatio;
+	}
+	else if(totalFleetStrength <= fleetSoftCap * maximalReductionThresholdMultiplier)
+	{
+		const double linearFactor = ((double)totalFleetStrength / (double)fleetSoftCap) / maximalReductionThresholdMultiplier;
+		// Ratio can take values from minimumRatio to 1.
+		effectiveFleetYieldRatio = 1 - linearFactor * (1 - minimumRatio);
+		effectiveFleetYieldRatioOutdated = false;
+		return effectiveFleetYieldRatio;
+	}
+	else
+	{
+		effectiveFleetYieldRatio = minimumRatio;
+		effectiveFleetYieldRatioOutdated = false;
+		return effectiveFleetYieldRatio;
 	}
 }
 

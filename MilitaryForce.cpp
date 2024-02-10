@@ -147,7 +147,12 @@ void MilitaryForce::checkDeath()
 	}
 }
 
-Territory& MilitaryForce::getTerritory() const
+Territory& MilitaryForce::getTerritory() 
+{
+	return *territory;
+}
+
+const Territory & MilitaryForce::getTerritory() const
 {
 	return *territory;
 }

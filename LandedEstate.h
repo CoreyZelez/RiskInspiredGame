@@ -20,6 +20,9 @@ public:
 	// Yields any resources directly associated with estate. This does not include subfief resources.
 	virtual void yield() override;
 
+	// Returns true if associated land territory has a port.
+	bool hasPort() const;
+
 	// Creates land army on some territory and returns handle to army.
 	virtual std::unique_ptr<LandArmy> yieldLandArmy() = 0;
 	// Creates naval fleet on some territory and returns handle to fleet.

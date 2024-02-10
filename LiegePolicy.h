@@ -3,7 +3,7 @@
 struct LiegePolicy
 {
 	// Percent of vassal troops requested by liege.
-	double vassalLevy = 0.7;
+	double vassalLevy = 0.5;
 
 	// Weight for conferral of baronies to vassals considering vassal realm size. Higher weight prioritises smaller realmed vassals.
 	double baronyConferralRealmSizeWeight = 0.1;

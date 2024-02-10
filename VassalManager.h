@@ -16,6 +16,10 @@ class VassalManager
 {
 public:
 	VassalManager(Game &game, Player &ruler);
+	~VassalManager();
+
+	// Set vassals as game over. Must have liege game over.
+	void setVassalsGameOver();
 
 	void drawVassalRealms(sf::RenderWindow &window) const;
 
@@ -40,6 +44,8 @@ public:
 
 	// Calculates army soft cap contributed by vassals.
 	int calculateArmySoftCapContribution(double contributionRatio) const;
+	// Calculates fleet soft cap contributed by vassals.
+	int calculateFleetSoftCapContribution(double contributionRatio) const;
 
 	// Returns sum of all vassal's army reserves.
 	int getTotalArmyReserves() const;

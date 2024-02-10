@@ -30,7 +30,7 @@ protected:
 private:
 	LandTerritory &landTerritory;
 
-	double landArmyYield;  // Yield of land army per turn.
+	double landArmyYield = 0;  // Yield of land army per turn.
 	double navalFleetYield = 0;  // Yield of naval fleets per turn.
 
 	double cumulativeLandArmy = 0;  // Cumulation of land army yields.

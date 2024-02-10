@@ -15,11 +15,21 @@ public:
 	virtual bool occupy(NavalFleet *fleet) = 0;
 	// Attempt to occupy until army dies or successfully occupies.
 	virtual void forceOccupy(LandArmy *army) = 0;
+	// Attempt to occupy until fleet dies or successfully occupies.
+	virtual void forceOccupy(NavalFleet *fleet) = 0;
 	// Returns current occupant of territory.
 	virtual Player* getOccupant() = 0;
 	// Returns land army occupying territory.
 	virtual const LandArmy* getArmy() const = 0;
 	// Returns naval fleet occupying territory.
 	virtual const NavalFleet* getFleet() const = 0;
+	// Removes army.
+	virtual void removeArmy(const LandArmy* army) = 0;
+	// Removes fleet.
+	virtual void removeFleet(const NavalFleet* fleet) = 0;
+
+protected:
+	// Reevaluates the occupant. 
+	virtual void reevaluateOccupancy() = 0;
 };
 

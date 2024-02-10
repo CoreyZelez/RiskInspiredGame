@@ -14,6 +14,11 @@ class Territory;
 class PlayerEstateManager
 {
 public:
+	~PlayerEstateManager();
+
+	// Clears ownership of maridoms for when ruler game over. Cannot own non maridom estates.
+	void clearAllMaridomOwnership();
+
 	void handleMilitaryYields();
 
 	void addEstate(Estate &estate);
@@ -25,6 +30,8 @@ public:
 
 	// Calculates army soft cap contributed by ruler owned estates.
 	int calculateArmySoftCapContribution() const;
+	// Calculates fleet soft cap contributed by ruler owned estates.
+	int calculateFleetSoftCapContribution() const;
 
 	// Ammends ownership of rulers unlanded estates.
 	void ammendUnlandedEstateOwnership();

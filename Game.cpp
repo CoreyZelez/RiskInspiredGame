@@ -140,12 +140,13 @@ void Game::update()
 			currPlayer = 0;
 		}
 
-		if(players[currPlayer].get()->gameOver())
+		if(players[currPlayer].get()->checkGameOver())
 		{
 			if(selectedDiplomacyPlayer == players[currPlayer].get())
 			{
 				selectedDiplomacyPlayer = nullptr;
 			}
+			players[currPlayer].get()->handleGameOver();
 			players.erase(players.begin() + currPlayer);
 			--currPlayer;
 			continue;

@@ -21,12 +21,22 @@ public:
 	virtual bool occupy(NavalFleet *fleet) override;
 	// Attempt to occupy until army dies or successfully occupies.
 	virtual void forceOccupy(LandArmy *army) override;
+	// Attempt to occupy until fleet dies or successfully occupies.
+	virtual void forceOccupy(NavalFleet *fleet) override;
 	// Returns occupant of territory.
 	virtual Player* getOccupant() override;
 	// Returns land army occupying territory.
 	virtual const LandArmy* getArmy() const override;
 	// Returns naval fleet occupying territory.
 	virtual const NavalFleet* getFleet() const override;
+	// Removes army and updates occupancy accordingly.
+	virtual void removeArmy(const LandArmy* army) override;
+	// Removes fleet and updates occupancy accordingly.
+	virtual void removeFleet(const NavalFleet* fleet) override;
+
+protected:
+	// Reevaluates the occupant. Does nothing.
+	virtual void reevaluateOccupancy();
 
 private:
 	double defenceMultiplier = 1.4;  // In future perhaps have complex virtual function to calculate this!

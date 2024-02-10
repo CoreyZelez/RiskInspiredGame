@@ -16,6 +16,8 @@ class MilitaryManager
 public:
 	MilitaryManager(Player &player);
 
+	void handleGameOver();
+
 	void draw(sf::RenderWindow &window) const;
 
 	void update();
@@ -50,8 +52,12 @@ public:
 	int getTotalArmyStrength(bool activeOnly) const;
 	// Returns strength of army reserves.
 	int getArmyReserves() const;
+	// Returns strength of fleet reserves.
+	int getFleetReserves() const;
 	// Returns strength of army reinforcements.
 	int getArmyReinforcements() const;
+	// Returns strength of fleet reinforcements.
+	int getFleetReinforcements() const;
 	// Returns the total strength of all fleets. Specify activeOnly to include only fleets on map.
 	int getTotalFleetStrength(bool activeOnly) const;
 	// Returns total army strength for stamina >= minStamina.

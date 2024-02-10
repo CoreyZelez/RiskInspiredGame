@@ -40,6 +40,8 @@ public:
 	// Provides bonus yields to subfiefs. Yield dependant on title.
 	virtual void provideSubfiefBonusYields();
 
+	// Sets the owner to nullptr. Assumes no subfiefs and that ruler's game is over.
+	void clearOwnership();
 	// Changes the ownership of the estate by adding the estate to ruler's realm and setting the new owner
 	// as the player which ruler grants the estate to (possibly the ruler themself).
 	void setOwnership(Player *ruler);

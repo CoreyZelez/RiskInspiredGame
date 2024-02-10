@@ -17,7 +17,7 @@ struct VassalPolicy
 	bool canRebel() const;
 
 	// Percent of generated troops granted to liege.
-	double liegeLevyContribution = 0.3;
+	double liegeLevyContribution = 0.4;
 
 	// Influence over liege for estate conferral. 
 	double liegeInfluence = 0;  

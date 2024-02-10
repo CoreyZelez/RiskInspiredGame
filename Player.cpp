@@ -102,14 +102,36 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 	}
 }
 
-bool Player::gameOver() const
+bool Player::checkGameOver()
 {
-	if(getRealm().getEstates().size() == 0)
+	if(gameOver)
 	{
-		assert(liege == nullptr);
 		return true;
 	}
-	return false;
+
+	if(liege != nullptr)
+	{
+		return false;
+	}
+
+	// Game is over when liegeless player has no remaining estates on LandTerritory and has no land armies.
+	if(getMilitaryManager().getTotalArmyStrength(0) == 0 && getRealm().hasNoBaronies())
+	{
+		gameOver = true;
+	}
+
+	return gameOver;
+}
+
+void Player::handleGameOver()
+{
+	realm.handleGameOver();
+	militaryManager.handleGameOver();
+}
+
+void Player::setGameOver()
+{
+	gameOver = true;
 }
 
 void Player::handleTurn()
@@ -131,7 +153,7 @@ void Player::handleTurn()
 
 void Player::rebel()
 {
-	std::cout << militaryManager.getTotalArmyStrength(true) << " " << militaryManager.getTotalArmyStrength(false) << std::endl;
+	std::cout << "rebel" << " " << realm.getName() << std::endl;
 
 	// Player must have a liege.
 	assert(liege != nullptr);
@@ -157,8 +179,6 @@ void Player::rebel()
 	{
 		territory->getOccupancyHandler()->determineOccupation();
 	}
-
-	std::cout << militaryManager.getTotalArmyStrength(true) << " " << militaryManager.getTotalArmyStrength(false) << std::endl << std::endl;
 }
 
 void Player::handleReinforcementArmyYield(double amount)
@@ -174,9 +194,9 @@ void Player::handleReinforcementFleetYield(double amount)
 {
 	assert(liege == nullptr);
 	assert(amount >= 0);
-	militaryManager.addFleetReinforcements(amount);
-	/////////////////////
-	// THIS FUNCTION MUST BE PROPERLY IMPLEMENTED IN FUTURE. SHOULD BE SIMILAR TO handleArmyReinforcentYield function.
+	const double multiplier = realm.getEffectiveFleetYieldRatio();
+	const double adjustedAmount = amount * multiplier;
+	militaryManager.addFleetReinforcements(adjustedAmount);
 }
 
 /*
@@ -211,24 +231,26 @@ void Player::handleReserveArmyYield(double amount)
 
 void Player::handleReserveFleetYield(double amount)
 {
+	// Amount of fleet adjusted for yield ratio.
+	double adjustedAmount = amount * getRealm().getEffectiveFleetYieldRatio();
 	if(liege != nullptr)
 	{
-		// Army amount yielded to player liege.
-		const double liegeYield = amount * vassalPolicy.liegeLevyContribution;
+		// Fleet amount yielded to player liege.
+		const double liegeYield = std::min(amount * vassalPolicy.liegeLevyContribution, adjustedAmount);
 		assert(liegeYield >= 0);
-		// Army amount yielded to player reserves.
-		const double playerYield = amount - liegeYield;
+		// Fleet amount yielded to player reserves.
+		const double playerYield = adjustedAmount - liegeYield;
 		assert(playerYield >= 0);
 
 		// Recurse on liege.
 		liege->handleReserveFleetYield(liegeYield);
-		// Add army to reserves since player has a liege.
+		// Add fleet to reserves since player has a liege.
 		militaryManager.addFleetReserves(playerYield);
 	}
 	else
 	{
-		// No liege so add army to reinforcements rather than reserves.
-		militaryManager.addFleetReinforcements(amount);
+		// No liege so add fleet to reinforcements rather than reserves.
+		militaryManager.addFleetReinforcements(adjustedAmount);
 	}
 }
 

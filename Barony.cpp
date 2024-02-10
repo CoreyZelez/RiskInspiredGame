@@ -35,10 +35,10 @@ std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 		double armyReinforcementYield = armyReinforcementRate * landArmyYield;
 		assert(armyReinforcementYield >= 0);
 
-		const double armyYieldMultiplier = getRuler()->getRealm().getEffectiveArmyYieldRatio();
 		// Base local yield to territory associated with barony.
 		const double armyLocalYield = (landArmyYield - armyReinforcementYield);
 		// Adjust local yield for army yield ratio.
+		const double armyYieldMultiplier = getRuler()->getRealm().getEffectiveArmyYieldRatio();
 		const double armyLocalAdjustedYield = armyLocalYield * armyYieldMultiplier;
 		assert(armyLocalAdjustedYield >= 0);
 
@@ -75,17 +75,42 @@ std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
 		return nullptr;
 	}
 
-	// Add navy per turn yield to cumulative yield.
-	cumulativeNavalFleet += navalFleetYield;
-
-	// Yield navy to territory and upper most liege of player if threshold surpassed.
-	// Only yields navy if territory has a port.
-	const int navalFleetThreshold = 4;  // Min cumulative value for yield to take place.
-	if(cumulativeNavalFleet >= navalFleetThreshold)
+	if(!getRuler()->hasLiege())
 	{
-		const int yield = cumulativeNavalFleet;
-		cumulativeNavalFleet -= yield;
-		return putFleet(yield);
+		// Percent of yielded fleet allocated to reinforcement.
+		const float fleetReinforcementRate = getRuler()->getMilitaryManager().getFleetReinforcementRate();
+		// Base reinforcements yield.
+		const double fleetReinforcementYield = fleetReinforcementRate * navalFleetYield;
+		assert(fleetReinforcementYield >= 0);
+
+		// Base local yield to territory associated with barony.
+		const double fleetLocalYield = (navalFleetYield - fleetReinforcementYield);
+		// Adjust local yield for fleet yield ratio.
+		const double fleetYieldMultiplier = getRuler()->getRealm().getEffectiveFleetYieldRatio();
+		const double fleetLocalAdjustedYield = fleetLocalYield * fleetYieldMultiplier;
+		assert(fleetLocalAdjustedYield >= 0);
+
+		// Adds reinforcements to rulers military manager. 
+		// Note we provide the base reinforcement yield. The function adjusts for this using the fleet reinforcement rate as
+		// we did for the local fleet adjusted yield.
+		getRuler()->handleReinforcementFleetYield(fleetReinforcementYield);
+
+		// Adds local fleet yield to cumulative yield of this barony.
+		cumulativeNavalFleet += fleetLocalAdjustedYield;
+
+		// Yield fleet to territory and player if threshold surpassed.
+		const int navalFleetThreshold = 3;  // Min cumulative value for yield to take place.
+		if(cumulativeNavalFleet >= navalFleetThreshold)
+		{
+			const int yield = cumulativeNavalFleet;
+			cumulativeNavalFleet -= yield;
+			return putFleet(yield);
+		}
+	}
+	else
+	{
+		// Yield to reserves and provide levies to liege. 
+		getRuler()->handleReserveFleetYield(navalFleetYield);
 	}
 
 	return nullptr;
@@ -93,7 +118,8 @@ std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
 
 std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 {
-	assert(getRuler() != nullptr);
+	assert(getRuler() != nullptr); 
+	assert(!getRuler()->hasLiege());  // Ruler should not have a liege.
 
 	// Should not be hostile army residing on this territory.
 	// There may however be a hostile army on the naval territory associated with the port.
@@ -109,14 +135,15 @@ std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 	// Territory we place the fleet on.
 	NavalTerritory &navalTerritory = landTerritory.getPort().get()->getNavalTerritory();
 
-	// Yield fleet to upper liege.
-	Player &upperLiege = getRuler()->getUpperLiege();
-	std::unique_ptr<NavalFleet> fleet = std::make_unique<NavalFleet>(upperLiege, &navalTerritory, strength);
+	// Yield fleet.
+	Player &player = *getRuler();
+	std::unique_ptr<NavalFleet> fleet = std::make_unique<NavalFleet>(player, &navalTerritory, strength);
+
 	// Attempt occupancy.
 	navalTerritory.getOccupancyHandler()->occupy(fleet.get());
 	// Repeatedly reattempy occupancy of naval territory until success or death of fleet.
 	// This is necessary since first attempt to occupy may fail whilst fleet still alive thus has no where to return to.
-	while(!fleet.get()->isDead() && !sameUpperRealm(navalTerritory.getOccupancyHandler()->getOccupant(), getRuler()))
+	while(!fleet.get()->isDead() && !sameUpperRealm(navalTerritory.getOccupancyHandler()->getOccupant(), &player))
 	{
 		navalTerritory.getOccupancyHandler()->occupy(fleet.get());
 	}
@@ -139,7 +166,6 @@ void Barony::receiveBonusYield(const float &bonus)
 		// Yield all land army units as reinforcements.
 		const float armyReinforcements = landArmyYield * bonus;
 		getRuler()->handleReinforcementArmyYield(armyReinforcements);
-		// getRuler()->getMilitaryManager().addArmyReinforcements(armyReinforcements);
 
 		// Yield all naval fleets to this barony.
 		const float fleetYield = navalFleetYield * bonus;
@@ -151,9 +177,9 @@ void Barony::receiveBonusYield(const float &bonus)
 		const float armyReserves = landArmyYield * bonus;
 		getRuler()->handleReserveArmyYield(landArmyYield);
 
-		// Yield all naval fleets to this barony and by extension the upper liege. 
+		// Yield all fleets to reserves and provide levies to liege..
 		const float fleetYield = navalFleetYield * bonus;
-		cumulativeNavalFleet += fleetYield;
+		getRuler()->handleReserveFleetYield(fleetYield);
 	}
 }
 

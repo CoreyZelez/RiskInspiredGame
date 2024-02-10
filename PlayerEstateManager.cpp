@@ -5,8 +5,24 @@
 #include "RealmGrid.h"
 #include "MilitaryManager.h"
 #include "Player.h"
+#include "Barony.h"
 #include <unordered_set>
 #include <iostream>
+
+PlayerEstateManager::~PlayerEstateManager()
+{
+}
+
+void PlayerEstateManager::clearAllMaridomOwnership()
+{
+	for(Estate *estate : estates)
+	{
+		assert(estate->getTitle() == Title::maridom);
+		estate->clearOwnership();
+	}
+	estates.clear();
+	// realmgrid.clear
+}
 
 void PlayerEstateManager::handleMilitaryYields()
 {
@@ -111,15 +127,56 @@ int PlayerEstateManager::calculateArmySoftCapContribution() const
 	return softCapContribution;
 }
 
+int PlayerEstateManager::calculateFleetSoftCapContribution() const
+{
+	// Army soft cap contribution per barony subfief (indirect or direct) of specified estate title.
+	std::map<Title, int> titleContributionsPerBaronySubfief;
+	titleContributionsPerBaronySubfief[Title::barony] = 5;  // Consider barony as it's own barony subfief.
+	titleContributionsPerBaronySubfief[Title::county] = 3;
+	titleContributionsPerBaronySubfief[Title::duchy] = 2;
+	titleContributionsPerBaronySubfief[Title::kingdom] = 1;
+	titleContributionsPerBaronySubfief[Title::empire] = 1;
+
+	const int portContribution = 30;
+
+	int softCapContribution = 0;
+	for(const Estate *estate : estates)
+	{
+		// Number of direct or indirect barony subfiefs.
+		int numBaronySubfiefs;
+		if(estate->getTitle() == Title::barony)
+		{
+			// Barony counts as its own subfief.
+			numBaronySubfiefs = 1;
+
+			// Add contribution if barony associated territory contains port.
+			const Barony *barony = dynamic_cast<const Barony*>(estate);
+			assert(barony != nullptr);
+			if(barony->hasPort())
+			{
+				softCapContribution += portContribution;
+			}
+		}
+		else
+		{
+			numBaronySubfiefs = estate->calculateNumberOfSubfiefs(Title::barony, true);
+		}
+		const int contribution = (double)numBaronySubfiefs * titleContributionsPerBaronySubfief[estate->getTitle()];
+		softCapContribution += contribution;
+	}
+
+	return softCapContribution;
+}
+
 void PlayerEstateManager::ammendUnlandedEstateOwnership()
 {
 	for(Estate* estate : estates)
 	{
-		if(dynamic_cast<LandedEstate*>(estate) == nullptr)
+		if(dynamic_cast<LandedEstate*>(estate) != nullptr)
 		{
 			continue;
 		}
-				
+		assert(estate->getTitle() != Title::maridom && estate->getTitle() != Title::barony);
 		estate->ammendOwnership();
 	}
 }

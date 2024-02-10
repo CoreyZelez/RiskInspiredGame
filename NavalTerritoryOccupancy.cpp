@@ -163,6 +163,18 @@ void NavalTerritoryOccupancy::forceOccupy(LandArmy *army)
 	// Intentionally empty.
 }
 
+void NavalTerritoryOccupancy::forceOccupy(NavalFleet * fleet)
+{
+	// Attempt occupancy.
+	territory.getOccupancyHandler()->occupy(fleet);
+	// Repeatedly reattempy occupancy of naval territory until success or death of fleet.
+	// This is necessary since first attempt to occupy may fail whilst fleet still alive thus has no where to return to.
+	while(!fleet->isDead() && !sameUpperRealm(territory.getOccupancyHandler()->getOccupant(), &fleet->getOwner()))
+	{
+		occupy(fleet);
+	}
+}
+
 Player * NavalTerritoryOccupancy::getOccupant()
 {
 	return mostRecentOccupant;
@@ -177,6 +189,28 @@ const LandArmy* NavalTerritoryOccupancy::getArmy() const
 const NavalFleet* NavalTerritoryOccupancy::getFleet() const
 {
 	return fleet;
+}
+
+void NavalTerritoryOccupancy::removeArmy(const LandArmy *army)
+{
+	assert(this->army == army);
+	this->army = nullptr;
+	reevaluateOccupancy();
+}
+
+void NavalTerritoryOccupancy::removeFleet(const NavalFleet *fleet)
+{
+	assert(this->fleet == fleet);
+	this->fleet = nullptr;
+	reevaluateOccupancy();
+}
+
+void NavalTerritoryOccupancy::reevaluateOccupancy()
+{
+	if(army == nullptr && fleet == nullptr)
+	{
+		mostRecentOccupant = nullptr;
+	}
 }
 
 void NavalTerritoryOccupancy::updateMilitaryPosition()

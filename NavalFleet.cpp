@@ -2,6 +2,7 @@
 #include "Territory.h"
 #include "Player.h"
 #include "TextureManager.h"
+#include "Territory.h"
 #include <assert.h>
 #include <memory>
 #include <random>
@@ -17,6 +18,12 @@ NavalFleet::NavalFleet(Player & owner, Territory * location, std::array<unsigned
 	: MilitaryForce(owner, location, staminaStrength, "triangle")
 {
 	assert(location != nullptr);
+}
+
+void NavalFleet::removeFromTerritory()
+{
+	// Remove the fleet from territory and update the occupancy.
+	getTerritory().getOccupancyHandler()->removeFleet(this);
 }
 
 void NavalFleet::move(Territory &location, unsigned int strength)

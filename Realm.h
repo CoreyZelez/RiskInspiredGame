@@ -19,14 +19,20 @@ class Realm : public HasUI
 public:
 	Realm(Game &game, Player &ruler, const LiegePolicy &liegePolicy, const std::string &name);
 
+	void handleGameOver();
+
 	void draw(sf::RenderWindow &window) const;
 
 	virtual std::unique_ptr<UIEntity> createUI(UIType type) const override;
 
 	// Returns the soft cap on the associated player armies.
 	int calculateArmySoftCap() const;
+	// Returns the soft cap on the associated player fleets.
+	int calculateFleetSoftCap() const;
 	// Returns percent of yielded armies from both vassals and personally owned estates that are retained.
 	double getEffectiveArmyYieldRatio();
+	// Returns percent of yielded fleets from both vassals and personally owned estates that are retained.
+	double getEffectiveFleetYieldRatio(); 
 	// Handles yields of ruler estates.
 	void handleMilitaryYields();
 	// Yields all army reserves to realm land territories.
@@ -52,6 +58,8 @@ public:
 	std::unordered_set<Territory*> getTerritories();
 	// Returns unordered set of all estates in realm, including both ruler and vassal owned estates.
 	std::unordered_set<const Estate*> getEstates() const;
+
+	bool hasNoBaronies() const;
 
 	std::string getName() const;
 
@@ -81,7 +89,9 @@ private:
 	RealmGrid realmGrid;  // Grid of entire realm estates.
 	bool vassalView = false;  // Specifies to draw realms of vassals over entire realm grid.
 	double effectiveArmyYieldRatio;
+	double effectiveFleetYieldRatio;
 	bool effectiveArmyYieldRatioOutdated = true;
+	bool effectiveFleetYieldRatioOutdated = true;
 
 	// Confers the estate to ruler or a vassal. Returns the player estate is conferred to.
 	// This function does not update the estates ownership. It should only be called by the 
@@ -102,6 +112,9 @@ private:
 	double realmSizeBaronyConferralContribution(const Player &vassal) const;
 	// Returns conferral contribution from vassal owning related estates to barony.
 	double realmEstatesInfluenceBaronyConferralContribution(const Player &vassal, const Barony &barony) const;
+
+	// Yields all fleet reinforcements at realm ports.
+	void yieldFleetReinforcements();
 
 };
 

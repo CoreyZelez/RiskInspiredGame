@@ -20,7 +20,9 @@ public:
 
 	virtual std::unique_ptr<UIEntity> createUI(UIType type) override;
 
-	bool gameOver() const;
+	bool checkGameOver();
+	void handleGameOver();
+	void setGameOver();
 
 	void handleTurn();
 
@@ -83,6 +85,7 @@ private:
 	PlayerDiplomacy diplomacy;
 	Realm realm;
 	bool isHuman = false;
+	bool gameOver = false;
 
 	// Removes player as vassal.
 	void handleVassalRebellion(Player &vassal);

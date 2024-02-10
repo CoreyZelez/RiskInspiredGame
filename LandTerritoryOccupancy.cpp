@@ -114,6 +114,11 @@ void LandTerritoryOccupancy::forceOccupy(LandArmy *army)
 	}
 }
 
+void LandTerritoryOccupancy::forceOccupy(NavalFleet * fleet)
+{
+	// Intentionally empty.
+}
+
 Player* LandTerritoryOccupancy::getOccupant()
 {
 	if(army != nullptr)
@@ -131,6 +136,27 @@ const LandArmy* LandTerritoryOccupancy::getArmy() const
 const NavalFleet * LandTerritoryOccupancy::getFleet() const
 {
 	return fleet;
+}
+
+void LandTerritoryOccupancy::removeArmy(const LandArmy *army)
+{
+	assert(this->army == army);
+	this->army = nullptr;
+	reevaluateOccupancy();
+}
+
+void LandTerritoryOccupancy::removeFleet(const NavalFleet *fleet)
+{
+	assert(this->fleet == fleet);
+	this->fleet = nullptr;
+	reevaluateOccupancy();
+}
+
+void LandTerritoryOccupancy::reevaluateOccupancy()
+{
+	// Intentionally empty.
+	// Land territory occupant is solely determined by stationed army if any.
+	// In future may have to implement if occupancy remains even when army no longer on territory.
 }
 
 void LandTerritoryOccupancy::updateMilitaryPosition()

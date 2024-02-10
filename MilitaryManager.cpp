@@ -10,6 +10,19 @@ MilitaryManager::MilitaryManager(Player &player)
 {
 }
 
+void MilitaryManager::handleGameOver()
+{
+	for(MilitaryForce *military : militaries)
+	{
+		if(!military->isDead())
+		{
+			military->removeFromTerritory();
+		}
+	}
+	armies.clear();
+	fleets.clear();
+}
+
 void MilitaryManager::draw(sf::RenderWindow & window) const
 {
 	for(auto &military : militaries)
@@ -26,6 +39,7 @@ void MilitaryManager::update()
 	removeDeadMilitaries();
 	resetStaminas();
 	distributeArmyReinforcements();
+	distributeFleetReinforcements();
 	applyReservesReduction();
 }
 
@@ -68,7 +82,7 @@ void MilitaryManager::addArmyReserves(double amount)
 
 float MilitaryManager::getFleetReinforcementRate() const
 {
-	const float maxRate = 0.9;
+	const float maxRate = 0.8;
 	const int maxRateAttainmentValue = 10;
 	float rate = maxRate * fleets.size() / (float)maxRateAttainmentValue;
 	return std::min(rate, maxRate);
@@ -150,9 +164,19 @@ int MilitaryManager::getArmyReserves() const
 	return armyReserves;
 }
 
+int MilitaryManager::getFleetReserves() const
+{
+	return fleetReserves;
+}
+
 int MilitaryManager::getArmyReinforcements() const
 {
 	return armyReinforcements;
+}
+
+int MilitaryManager::getFleetReinforcements() const
+{
+	return fleetReinforcements;
 }
 
 int MilitaryManager::getTotalFleetStrength(bool activeOnly) const
@@ -271,16 +295,15 @@ void MilitaryManager::distributeFleetReinforcements()
 	const int totalReinforcementAmount = fleetReinforcements;
 	const int totalFleetStrength = getTotalFleetStrength(true);
 
-	// Allocates reinforcements to armies.
-	// There may be remaining reinforcement strength after this process.
-	// It will be deferred to next turn.
+	// Allocates reinforcements to fleets.
+	// There may be remaining reinforcement strength after this process. It will be deferred to next turn.
 	for(auto &fleet : fleets)
 	{
-		// No armies should be dead as they should have been removed prior to calling this function.
+		// No fleets should be dead as they should have been removed prior to calling this function.
 		assert(fleet != nullptr);
 		assert(fleet.get()->getTotalStrength() > 0);
 
-		// Allocate reinforcement to armies proportionate to their strength.
+		// Allocate reinforcement to fleets proportionate to their strength.
 		const float strengthRatio = (float)fleet.get()->getTotalStrength() / (float)totalFleetStrength;
 		int reinforcementAmount = (float)totalReinforcementAmount * strengthRatio;
 		reinforcementAmount = std::min(reinforcementAmount, (int)fleetReinforcements);

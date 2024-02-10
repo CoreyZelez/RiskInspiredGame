@@ -188,6 +188,17 @@ void Estate::provideSubfiefBonusYields()
 	this->receiveBonusYield(bonus);
 }
 
+/*
+ * Sets the ruler to nullptr for when the ruler's game is over. 
+ */
+void Estate::clearOwnership()
+{
+	assert(ruler->checkGameOver());
+	assert(subfiefs.size() == 0);
+	assert(title == Title::maridom);
+	ruler = nullptr;
+}
+
 void Estate::yield()
 {
 	// Intentionally empty.
