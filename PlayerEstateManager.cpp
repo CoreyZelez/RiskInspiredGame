@@ -170,8 +170,10 @@ int PlayerEstateManager::calculateFleetSoftCapContribution() const
 
 void PlayerEstateManager::ammendUnlandedEstateOwnership()
 {
+	int index = 0;
 	for(Estate* estate : estates)
 	{
+		std::cout << "index " << index++ << std::endl;
 		if(dynamic_cast<LandedEstate*>(estate) != nullptr)
 		{
 			continue;
