@@ -8,8 +8,8 @@
 template<typename T> class NumericTextDisplay : public UIEntity
 {
 public:
-	NumericTextDisplay(T &value);
-	NumericTextDisplay(T &value, std::string prefix, std::string postfix);
+	NumericTextDisplay(T &value, double multiplier = 1);
+	NumericTextDisplay(T &value, std::string prefix, std::string postfix, double multiplier = 1);
 
 	virtual void update() override;
 	virtual void draw(sf::RenderWindow &window) const override;
@@ -23,11 +23,15 @@ public:
 	void setTextColor(sf::Color color);
 	void setCharacterSize(int characterSize);
 
+	void setNumDecimals(int numDecimals);
+
 private:
 	sf::RectangleShape background;
 	sfe::RichText text;
 	sf::Color textColor;
 	const T& value;
+	double multiplier = 1;
+	int numDecimals = 0;
 	const std::string prefix;
 	const std::string postfix;
 
@@ -37,4 +41,5 @@ private:
 	// Centers text on the background.
 	void centerText();
 };
+
 

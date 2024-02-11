@@ -1,22 +1,24 @@
 #include "NumericTextDisplay.h"
 #include "FontManager.h"
+#include "Utility.h"
 #include <iostream>
 
+
 template<typename T>
-NumericTextDisplay<T>::NumericTextDisplay(T &value)
+NumericTextDisplay<T>::NumericTextDisplay(T &value, double multiplier)
 	: NumericTextDisplay(value, "", "")
 {
 }
 
 template<typename T>
-inline NumericTextDisplay<T>::NumericTextDisplay(T &value, std::string prefix, std::string postfix)
-	: value(value), prefix(prefix), postfix(postfix)
+inline NumericTextDisplay<T>::NumericTextDisplay(T &value, std::string prefix, std::string postfix, double multiplier)
+	: value(value), prefix(prefix), postfix(postfix), multiplier(multiplier)
 {
 	// Initialise text.
 	FontManager &fontManager = FontManager::getInstance();
 	const sf::Font &font = *fontManager.getFont("UIFont1");
 	text = sfe::RichText(font);
-	text << sf::Text::Bold << prefix << std::to_string(value) << postfix;
+	updateText();
 
 	// Place UI at origin.
 	setPosition(sf::Vector2f(0, 0));
@@ -88,10 +90,27 @@ void NumericTextDisplay<T>::setCharacterSize(int characterSize)
 }
 
 template<typename T>
+void NumericTextDisplay<T>::setNumDecimals(int numDecimals)
+{
+	this->numDecimals = numDecimals;
+}
+
+template<typename T>
 void NumericTextDisplay<T>::updateText()
 {
 	text.clear();
-	text << sf::Text::Regular << textColor << prefix << std::to_string(value) << postfix;
+
+	std::string valueStr;
+	if(std::is_same<T, double>::value)
+	{
+		valueStr = doubleToStringWithDecimals((double)value * multiplier, numDecimals);
+	}
+	else
+	{
+		valueStr = std::to_string((T)(value * multiplier));
+	}
+
+	text << sf::Text::Regular << textColor << prefix << valueStr << postfix;
 }
 
 template<typename T>
@@ -115,4 +134,5 @@ void NumericTextDisplay<T>::centerText()
 	// Set the new position of the text.
 	text.setPosition(sf::Vector2f(newTextPosX, newTextPosY));
 }
+
 

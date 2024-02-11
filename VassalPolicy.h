@@ -13,12 +13,11 @@ struct VassalPolicy
 	void handleLiegeInfluenceChange(const LiegePolicy &liegePolicy);
 	// Adjusts resistance against liege.
 	void handleResistanceChange(const Player &liege, const LiegePolicy &liegePolicy);
-
+	// Returns true if resistance exceeds threshold.
 	bool canRebel() const;
 
 	// Percent of generated troops granted to liege.
 	double liegeLevyContribution = 0.4;
-
 	// Influence over liege for estate conferral. 
 	double liegeInfluence = 0;  
 	// Resistance score. When exceeding threshold, may rebel against liege.
