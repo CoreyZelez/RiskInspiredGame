@@ -44,7 +44,7 @@ public:
 	void clearOwnership();
 	// Changes the ownership of the estate by adding the estate to ruler's realm and setting the new owner
 	// as the player which ruler grants the estate to (possibly the ruler themself).
-	void setOwnership(Player *ruler);
+	void setOwnership(Player *ruler, bool recurseOnParents = true);
 	// Revokes ownership if owner's upper liege's realm does not completely control lower estates and sets
 	// ownership to rightful player if applicable.
 	void ammendOwnership();
@@ -79,6 +79,11 @@ public:
 
 	// Returns estate name.
 	std::string getName() const;
+	
+	// Sets color to default color for given title.
+	void setDefaultColor();
+	// Sets color to generic grey color.
+	void setGreyColor();
 
 	// Returns the associated graphical grid of this estate.
 	Grid& getGrid();

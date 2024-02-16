@@ -306,6 +306,11 @@ std::string Estate::getName() const
 	return name;
 }
 
+void Estate::setDefaultColor()
+{
+
+}
+
 Grid& Estate::getGrid()
 {
 	return grid;
@@ -369,6 +374,7 @@ void Estate::initColor()
 	const int randComponent3 = rand() % 41;
 	const int randComponent4 = rand() % 21;
 
+	const sf::Color maridomColor(120, 120, 120);
 	const sf::Color baronyColor(190 + randComponent1, randComponent2, 0);
 	const sf::Color countyColor(50, 170 + randComponent1, 160 + randComponent2);
 	const sf::Color dukedomColor(30, 190 + randComponent1, 0);
@@ -377,6 +383,9 @@ void Estate::initColor()
 
 	switch(title)
 	{
+	case Title::maridom:
+		this->grid.setColor(maridomColor);
+		break;
 	case Title::barony:
 		this->grid.setColor(baronyColor);
 		break;
@@ -424,7 +433,7 @@ Player* Estate::getRuler()
 	return ruler;
 }
 
-void Estate::setOwnership(Player *ruler)
+void Estate::setOwnership(Player *ruler, bool recurseOnParents)
 {
 	// Case rulers are friendly. If any ruler is nullptr they are considered non-friendly.
 	if(sameUpperRealm(ruler, this->ruler))
@@ -453,7 +462,7 @@ void Estate::setOwnership(Player *ruler)
 	}
 
 	// Recurse on parent estates to handle possible ownership changes due to change in lower estate, namely this estate..
-	if(parent != nullptr)
+	if(recurseOnParents && parent != nullptr)
 	{
 		/// THIS FUNCTION MAY BE GETTING CALLED MULTIPLE TIMES UNNECESSARILY. SEE HANDLE ALLOCATION.
 		parent->handleLowerEstateChange(*this);
@@ -469,7 +478,9 @@ void Estate::ammendOwnership()
 	Player* upperRealmRuler = getLowerEstatesUpperRealmRuler();
 	if(!sameUpperRealm(ruler, upperRealmRuler))
 	{
-		setOwnership(upperRealmRuler);
+		// We do not recurse on parents as they will be iterated over in ammendUnlandedEstateOwnership regardless
+		// and we do not want to alter the estates vector size.
+		setOwnership(upperRealmRuler, false);
 	}
 }
 

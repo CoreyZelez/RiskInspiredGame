@@ -210,7 +210,7 @@ void Realm::removeRebellingVassal(Player &vassal)
 
 void Realm::ammendUnlandedEstateOwnership()
 {
-	rulerEstateManager.ammendUnlandedEstateOwnership();
+ 	rulerEstateManager.ammendUnlandedEstateOwnership();
 	vassalManager.ammendUnlandedEstateOwnership();
 }
 

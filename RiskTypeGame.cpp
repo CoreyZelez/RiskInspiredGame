@@ -15,7 +15,7 @@ int main()
 {
 	bool mapEditorMode = false;
 
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Sovereign Chaos", sf::Style::Fullscreen);
 	sf::View gameView = window.getDefaultView(); 
 	sf::View UIView = window.getDefaultView();   
 

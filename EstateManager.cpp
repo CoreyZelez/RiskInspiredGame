@@ -123,9 +123,6 @@ void EstateManager::load(std::string mapName, std::vector<std::unique_ptr<LandTe
 			loadMaridom(file, navalTerritories);
 		}
 	}
-
-	// Set color of maridoms to greyish blue.
-	setTitleColor(Title::maridom, sf::Color(90, 130, 255));
 }
 
 void EstateManager::loadBarony(std::ifstream &file, std::vector<std::unique_ptr<LandTerritory>>& landTerritories)
@@ -417,7 +414,7 @@ Estate* EstateManager::getLowerEstate(sf::Vector2f position, Title title, bool a
 
 void EstateManager::makeColored(Title title, bool setLower)
 {
-	const sf::Color grey(100, 100, 100);
+	const sf::Color grey(90, 90, 90);
 	const sf::Color baronyColor(189, 19, 0);
 	const sf::Color countyColor(167, 218, 0);
 	const sf::Color dukedomColor(41, 245, 0);

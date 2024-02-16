@@ -9,7 +9,7 @@ Game::Game(std::string mapName)
 
 void Game::generatePlayers()
 {
-	const int numHumans = 0;
+	const int numHumans = 1;
 	int humanCnt = 0; 
 	for(auto &barony : map.getEstateManager().getBaronies())
 	{
@@ -108,8 +108,8 @@ void Game::update()
 {
 	///////////////////////////////
 	// Caps number of turns per update call. For testing maybe... 
-	const int maxTurns = 10;
-	int turnCnt = 0;
+	const int maxTurns = 1;
+	double turnCnt = 0;
 	///////////////////////////////
 
 	// Iterate through all players, updating their realms vertex arrays if their realm changed.
@@ -135,9 +135,16 @@ void Game::update()
 		++turnCnt;
 		++currPlayer;
 
+
 		if(currPlayer == players.size())
 		{
 			currPlayer = 0;
+		}
+
+		// Reduce turnCnt to reduce time spend simulating vassal turns (due to drawing expense).
+		if(players[currPlayer].get()->hasLiege())
+		{
+			turnCnt -= 0.95;
 		}
 
 		if(players[currPlayer].get()->checkGameOver())

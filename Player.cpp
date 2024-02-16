@@ -70,6 +70,24 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 		rulerRealmSizeWeightHeading.get()->setPadding(10);
 		row7.push_back(std::move(rulerRealmSizeWeightHeading));
 
+		// Barony conferral realm size weight heading.
+		std::vector<std::unique_ptr<UIEntity>> row9;
+		std::unique_ptr<TextDisplay> rulerLiegeInfluenceWeightHeading =
+			std::make_unique<TextDisplay>("Barony Conferral Liege Influence Weight");
+		rulerLiegeInfluenceWeightHeading.get()->setBackgroundSize(sf::Vector2f(headingWidth, 50));
+		rulerLiegeInfluenceWeightHeading.get()->setBackgroundColor(sf::Color(47, 47, 47));
+		rulerLiegeInfluenceWeightHeading.get()->setPadding(10);
+		row9.push_back(std::move(rulerLiegeInfluenceWeightHeading));
+
+		// Barony conferral related estates weight heading.
+		std::vector<std::unique_ptr<UIEntity>> row11;
+		std::unique_ptr<TextDisplay> rulerLiegeRelatedEstatesHeading =
+			std::make_unique<TextDisplay>("Barony Conferral Related Estates Weight");
+		rulerLiegeRelatedEstatesHeading.get()->setBackgroundSize(sf::Vector2f(headingWidth, 50));
+		rulerLiegeRelatedEstatesHeading.get()->setBackgroundColor(sf::Color(47, 47, 47));
+		rulerLiegeRelatedEstatesHeading.get()->setPadding(10);
+		row11.push_back(std::move(rulerLiegeRelatedEstatesHeading));
+
 		// Barony limit slider.
 		std::vector<std::unique_ptr<UIEntity>> row2;
 		std::unique_ptr<UIEntity> rulerBaronyLimitSlider = 
@@ -109,9 +127,10 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 		row6.push_back(std::move(rulerVassalLimitSlider));
 		row6.push_back(std::move(rulerVassalLimitTextDisplay));
 
+		const double divisor = 100;
+
 		// Barony conferral realm size weight slider.
 		std::vector<std::unique_ptr<UIEntity>> row8;
-		const double divisor = 100;
 		std::unique_ptr<UIEntity> rulerRealmSizeWeightSlider =
 			std::make_unique<IntegerSlider<double>>(0, 100, liegePolicy.baronyConferralRealmSizeWeight, divisor);
 		std::unique_ptr<NumericTextDisplay<double>> rulerRealmSizeWeightTextDisplay =
@@ -123,6 +142,32 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 		row8.push_back(std::move(rulerRealmSizeWeightSlider));
 		row8.push_back(std::move(rulerRealmSizeWeightTextDisplay));
 
+		// Barony conferral liege influence weight slider.
+		std::vector<std::unique_ptr<UIEntity>> row10;
+		std::unique_ptr<UIEntity> rulerLiegeInfluenceWeightSlider =
+			std::make_unique<IntegerSlider<double>>(0, 100, liegePolicy.baronyConferralLiegeInfluenceWeight, divisor);
+		std::unique_ptr<NumericTextDisplay<double>> rulerLiegeInfluenceWeightTextDisplay =
+			std::make_unique<NumericTextDisplay<double>>(liegePolicy.baronyConferralLiegeInfluenceWeight, "", "%", divisor);
+		rulerLiegeInfluenceWeightTextDisplay.get()->setBackgroundSize(sf::Vector2f(textDisplayWidth, 80));
+		rulerLiegeInfluenceWeightTextDisplay.get()->setBackgroundColor(sf::Color(50, 50, 50));
+		rulerLiegeInfluenceWeightTextDisplay.get()->setCharacterSize(60);
+		rulerLiegeInfluenceWeightTextDisplay.get()->setTextColor(sf::Color(200, 200, 200));
+		row10.push_back(std::move(rulerLiegeInfluenceWeightSlider));
+		row10.push_back(std::move(rulerLiegeInfluenceWeightTextDisplay));
+
+		// Barony conferral liege influence weight slider.
+		std::vector<std::unique_ptr<UIEntity>> row12;
+		std::unique_ptr<UIEntity> rulerRelatedEstatesWeightSlider =
+			std::make_unique<IntegerSlider<double>>(0, 100, liegePolicy.baronyConferralRelatedEstatesWeight, divisor);
+		std::unique_ptr<NumericTextDisplay<double>> rulerRelatedEstatesTextDisplay =
+			std::make_unique<NumericTextDisplay<double>>(liegePolicy.baronyConferralRelatedEstatesWeight, "", "%", divisor);
+		rulerRelatedEstatesTextDisplay.get()->setBackgroundSize(sf::Vector2f(textDisplayWidth, 80));
+		rulerRelatedEstatesTextDisplay.get()->setBackgroundColor(sf::Color(50, 50, 50));
+		rulerRelatedEstatesTextDisplay.get()->setCharacterSize(60);
+		rulerRelatedEstatesTextDisplay.get()->setTextColor(sf::Color(200, 200, 200));
+		row12.push_back(std::move(rulerRelatedEstatesWeightSlider));
+		row12.push_back(std::move(rulerRelatedEstatesTextDisplay));
+
 		entities.push_back(std::move(row1));
 		entities.push_back(std::move(row2));
 		entities.push_back(std::move(row3));
@@ -131,6 +176,10 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 		entities.push_back(std::move(row6));
 		entities.push_back(std::move(row7));
 		entities.push_back(std::move(row8));
+		entities.push_back(std::move(row9));
+		entities.push_back(std::move(row10));
+		entities.push_back(std::move(row11));
+		entities.push_back(std::move(row12));
 
 		std::unique_ptr<UIEntity> panel = std::make_unique<InteractionPanel>(std::move(entities));
 		return panel;

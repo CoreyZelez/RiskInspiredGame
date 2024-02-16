@@ -45,7 +45,8 @@ std::string NameGenerator::generateRandomName()
 
 	// Construct the name.
 	name += prefixes[prefixDist(gen)];
-	if(std::rand() % 2 == 0) {
+	if(std::rand() % 2 == 0) 
+	{
 		name += midfixes[midfixDist(gen)];
 	}
 	name += suffixes[suffixDist(gen)];
