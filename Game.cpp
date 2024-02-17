@@ -108,7 +108,7 @@ void Game::update()
 {
 	///////////////////////////////
 	// Caps number of turns per update call. For testing maybe... 
-	const int maxTurns = 1;
+	const int maxTurns = 3;
 	double turnCnt = 0;
 	///////////////////////////////
 
@@ -144,7 +144,7 @@ void Game::update()
 		// Reduce turnCnt to reduce time spend simulating vassal turns (due to drawing expense).
 		if(players[currPlayer].get()->hasLiege())
 		{
-			turnCnt -= 0.95;
+			turnCnt -= 0.8;
 		}
 
 		if(players[currPlayer].get()->checkGameOver())

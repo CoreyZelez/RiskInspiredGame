@@ -29,8 +29,9 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 	if(type == UIType::interaction)
 	{
 		const int textDisplayWidth = 120;
-		const int sliderWidth = 120847843;
-		const int headingWidth = 500;
+		const int sliderWidth = 120424223;
+		const int headingWidth = 600;
+		const int headingCharacterSize = 40;
 
 		std::vector<std::vector<std::unique_ptr<UIEntity>>> entities;
 
@@ -41,6 +42,7 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 		rulerBaronyLimitHeading.get()->setBackgroundSize(sf::Vector2f(headingWidth, 50));
 		rulerBaronyLimitHeading.get()->setBackgroundColor(sf::Color(47, 47, 47));
 		rulerBaronyLimitHeading.get()->setPadding(10);
+		rulerBaronyLimitHeading.get()->setCharacterSize(headingCharacterSize);
 		row1.push_back(std::move(rulerBaronyLimitHeading));
 
 		// Unlanded limit slider heading.
@@ -50,6 +52,7 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 		rulerUnlandedLimitHeading.get()->setBackgroundSize(sf::Vector2f(headingWidth, 50));
 		rulerUnlandedLimitHeading.get()->setBackgroundColor(sf::Color(47, 47, 47));
 		rulerUnlandedLimitHeading.get()->setPadding(10);
+		rulerUnlandedLimitHeading.get()->setCharacterSize(headingCharacterSize);
 		row3.push_back(std::move(rulerUnlandedLimitHeading));
 
 		// Vassal limit slider heading.
@@ -59,34 +62,40 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 		rulerVassalLimitHeading.get()->setBackgroundSize(sf::Vector2f(headingWidth, 50));
 		rulerVassalLimitHeading.get()->setBackgroundColor(sf::Color(47, 47, 47));
 		rulerVassalLimitHeading.get()->setPadding(10);
+		rulerVassalLimitHeading.get()->setCharacterSize(headingCharacterSize);
 		row5.push_back(std::move(rulerVassalLimitHeading));
 
 		// Barony conferral realm size weight heading.
 		std::vector<std::unique_ptr<UIEntity>> row7;
 		std::unique_ptr<TextDisplay> rulerRealmSizeWeightHeading =
-			std::make_unique<TextDisplay>("Barony Conferral Realm Size Weight");
+			std::make_unique<TextDisplay>("Realm Size Weight");
 		rulerRealmSizeWeightHeading.get()->setBackgroundSize(sf::Vector2f(headingWidth, 50));
 		rulerRealmSizeWeightHeading.get()->setBackgroundColor(sf::Color(47, 47, 47));
 		rulerRealmSizeWeightHeading.get()->setPadding(10);
+		rulerRealmSizeWeightHeading.get()->setCharacterSize(headingCharacterSize);
 		row7.push_back(std::move(rulerRealmSizeWeightHeading));
 
-		// Barony conferral realm size weight heading.
+		// Barony conferral liege influence weight heading.
 		std::vector<std::unique_ptr<UIEntity>> row9;
 		std::unique_ptr<TextDisplay> rulerLiegeInfluenceWeightHeading =
-			std::make_unique<TextDisplay>("Barony Conferral Liege Influence Weight");
+			std::make_unique<TextDisplay>("Liege Influence Weight");
 		rulerLiegeInfluenceWeightHeading.get()->setBackgroundSize(sf::Vector2f(headingWidth, 50));
 		rulerLiegeInfluenceWeightHeading.get()->setBackgroundColor(sf::Color(47, 47, 47));
 		rulerLiegeInfluenceWeightHeading.get()->setPadding(10);
+		rulerLiegeInfluenceWeightHeading.get()->setCharacterSize(headingCharacterSize);
 		row9.push_back(std::move(rulerLiegeInfluenceWeightHeading));
 
 		// Barony conferral related estates weight heading.
 		std::vector<std::unique_ptr<UIEntity>> row11;
 		std::unique_ptr<TextDisplay> rulerLiegeRelatedEstatesHeading =
-			std::make_unique<TextDisplay>("Barony Conferral Related Estates Weight");
+			std::make_unique<TextDisplay>("Related Estates Weight");
 		rulerLiegeRelatedEstatesHeading.get()->setBackgroundSize(sf::Vector2f(headingWidth, 50));
 		rulerLiegeRelatedEstatesHeading.get()->setBackgroundColor(sf::Color(47, 47, 47));
 		rulerLiegeRelatedEstatesHeading.get()->setPadding(10);
+		rulerLiegeRelatedEstatesHeading.get()->setCharacterSize(headingCharacterSize);
 		row11.push_back(std::move(rulerLiegeRelatedEstatesHeading));
+
+		int characterSize = 80;
 
 		// Barony limit slider.
 		std::vector<std::unique_ptr<UIEntity>> row2;
@@ -96,7 +105,7 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 			std::make_unique<NumericTextDisplay<int>>(liegePolicy.rulerBaronyLimit, "", "");
 		rulerBaronyLimitTextDisplay.get()->setBackgroundSize(sf::Vector2f(textDisplayWidth, 80));
 		rulerBaronyLimitTextDisplay.get()->setBackgroundColor(sf::Color(50, 50, 50));
-		rulerBaronyLimitTextDisplay.get()->setCharacterSize(60);
+		rulerBaronyLimitTextDisplay.get()->setCharacterSize(characterSize);
 		rulerBaronyLimitTextDisplay.get()->setTextColor(sf::Color(200, 200, 200));
 		row2.push_back(std::move(rulerBaronyLimitSlider));
 		row2.push_back(std::move(rulerBaronyLimitTextDisplay));
@@ -109,7 +118,7 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 			std::make_unique<NumericTextDisplay<int>>(liegePolicy.rulerUnlandedLimit, "", "");
 		rulerUnlandedLimitTextDisplay.get()->setBackgroundSize(sf::Vector2f(textDisplayWidth, 80));
 		rulerUnlandedLimitTextDisplay.get()->setBackgroundColor(sf::Color(50, 50, 50));
-		rulerUnlandedLimitTextDisplay.get()->setCharacterSize(60);
+		rulerUnlandedLimitTextDisplay.get()->setCharacterSize(characterSize);
 		rulerUnlandedLimitTextDisplay.get()->setTextColor(sf::Color(200, 200, 200));
 		row4.push_back(std::move(rulerUnlandedLimitSlider));
 		row4.push_back(std::move(rulerUnlandedLimitTextDisplay));
@@ -122,7 +131,7 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 			std::make_unique<NumericTextDisplay<int>>(liegePolicy.rulerVassalLimit, "", "");
 		rulerVassalLimitTextDisplay.get()->setBackgroundSize(sf::Vector2f(textDisplayWidth, 80));
 		rulerVassalLimitTextDisplay.get()->setBackgroundColor(sf::Color(50, 50, 50));
-		rulerVassalLimitTextDisplay.get()->setCharacterSize(60);
+		rulerVassalLimitTextDisplay.get()->setCharacterSize(characterSize);
 		rulerVassalLimitTextDisplay.get()->setTextColor(sf::Color(200, 200, 200));
 		row6.push_back(std::move(rulerVassalLimitSlider));
 		row6.push_back(std::move(rulerVassalLimitTextDisplay));
@@ -137,7 +146,7 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 			std::make_unique<NumericTextDisplay<double>>(liegePolicy.baronyConferralRealmSizeWeight, "", "%", divisor);
 		rulerRealmSizeWeightTextDisplay.get()->setBackgroundSize(sf::Vector2f(textDisplayWidth, 80));
 		rulerRealmSizeWeightTextDisplay.get()->setBackgroundColor(sf::Color(50, 50, 50));
-		rulerRealmSizeWeightTextDisplay.get()->setCharacterSize(60);
+		rulerRealmSizeWeightTextDisplay.get()->setCharacterSize(characterSize);
 		rulerRealmSizeWeightTextDisplay.get()->setTextColor(sf::Color(200, 200, 200));
 		row8.push_back(std::move(rulerRealmSizeWeightSlider));
 		row8.push_back(std::move(rulerRealmSizeWeightTextDisplay));
@@ -150,7 +159,7 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 			std::make_unique<NumericTextDisplay<double>>(liegePolicy.baronyConferralLiegeInfluenceWeight, "", "%", divisor);
 		rulerLiegeInfluenceWeightTextDisplay.get()->setBackgroundSize(sf::Vector2f(textDisplayWidth, 80));
 		rulerLiegeInfluenceWeightTextDisplay.get()->setBackgroundColor(sf::Color(50, 50, 50));
-		rulerLiegeInfluenceWeightTextDisplay.get()->setCharacterSize(60);
+		rulerLiegeInfluenceWeightTextDisplay.get()->setCharacterSize(characterSize);
 		rulerLiegeInfluenceWeightTextDisplay.get()->setTextColor(sf::Color(200, 200, 200));
 		row10.push_back(std::move(rulerLiegeInfluenceWeightSlider));
 		row10.push_back(std::move(rulerLiegeInfluenceWeightTextDisplay));
@@ -163,7 +172,7 @@ std::unique_ptr<UIEntity> Player::createUI(UIType type)
 			std::make_unique<NumericTextDisplay<double>>(liegePolicy.baronyConferralRelatedEstatesWeight, "", "%", divisor);
 		rulerRelatedEstatesTextDisplay.get()->setBackgroundSize(sf::Vector2f(textDisplayWidth, 80));
 		rulerRelatedEstatesTextDisplay.get()->setBackgroundColor(sf::Color(50, 50, 50));
-		rulerRelatedEstatesTextDisplay.get()->setCharacterSize(60);
+		rulerRelatedEstatesTextDisplay.get()->setCharacterSize(characterSize);
 		rulerRelatedEstatesTextDisplay.get()->setTextColor(sf::Color(200, 200, 200));
 		row12.push_back(std::move(rulerRelatedEstatesWeightSlider));
 		row12.push_back(std::move(rulerRelatedEstatesTextDisplay));

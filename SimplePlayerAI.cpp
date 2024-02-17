@@ -170,11 +170,18 @@ int SimplePlayerAI::calculateFleetStrategicValue(const Territory &territory)
 
 	int strategicValue = 0;
 
-	// Calculate strategic value from threat of attack of territory.
+	// Calculate strategic value from threat of attack on territory.
 	std::map<const Player*, int> weightedThreats = context.getFleetWeightedThreats(territory);
 	int maxThreat = calculateMaxThreat(weightedThreats);
 	int totalThreat = calculateTotalThreat(weightedThreats);
 	strategicValue += maxThreat + totalThreat;
+
+	// Add strategic value if enemy adjacencies including unowned exists. 
+	// Ensures unowned territories will not be ignored.
+	if(context.getEnemyAdjacencies(territory).size() > 0)
+	{
+		++strategicValue;
+	}
 
 	/////////////////
 	//CURRENTLY DOES NOTHING

@@ -58,6 +58,28 @@ const std::set<Territory*> PlayerAIContext::getEnemyAdjacencies(Territory &terri
 	return enemyAdjacencies;
 }
 
+const std::set<const Territory*> PlayerAIContext::getEnemyAdjacencies(const Territory &territory) const
+{
+	const Player *territoryEstateOwner = territory.getEstateOwner();
+
+	const std::set<Territory*>& adjacencies = territory.getDistanceMap().getAdjacencies();
+	std::set<const Territory*> enemyAdjacencies;
+
+	// Adds adjacent territories to enemyAdjacencies owned by enemy players.
+	for(auto iter = adjacencies.begin(); iter != adjacencies.end(); ++iter)
+	{
+		const Player *adjacencyEstateOwner = (*iter)->getEstateOwner();
+		if(!sameUpperRealm(territoryEstateOwner, adjacencyEstateOwner))
+		{
+			enemyAdjacencies.insert(*iter);
+		}
+	}
+
+	assert((enemyAdjacencies.size() > 0) == territory.getDistanceMap().hasEnemyAdjacencies());
+
+	return enemyAdjacencies;
+}
+
 std::map<const Player*, int> PlayerAIContext::getArmyWeightedThreats(const Territory &territory)
 {
 	const std::set<Territory*> adjacencies = territory.getDistanceMap().getAdjacencies();
