@@ -39,10 +39,8 @@ void NavalTerritoryOccupancy::determineOccupation()
 	}
 }
 
-bool NavalTerritoryOccupancy::occupy(LandArmy *army)
+void NavalTerritoryOccupancy::occupy(LandArmy *army)
 {
-	bool isValid = false;
-
 	// Can successfully occupy with army if army owner is the most recent controller of territory by navy.
 	if(this->mostRecentOccupant == &army->getOwner())
 	{
@@ -50,7 +48,7 @@ bool NavalTerritoryOccupancy::occupy(LandArmy *army)
 		{
 			this->army = army;
 			army->setTerritory(&territory);
-			isValid = true;
+
 			// Observer methods.
 			this->army->addObserver(this);  // Observe army so it can be set to nullptr when it dies.
 		}
@@ -68,8 +66,6 @@ bool NavalTerritoryOccupancy::occupy(LandArmy *army)
 
 			const int finalStrengthSum = army->getTotalStrength() + this->army->getTotalStrength();
 			assert(initialStrengthSum == finalStrengthSum);  // Strength sum should remain unchanged.
-
-			isValid = true;
 		}
 	}
 
@@ -79,21 +75,17 @@ bool NavalTerritoryOccupancy::occupy(LandArmy *army)
 
 	// Update the positions of military unit sprites.
 	updateMilitaryPosition();
-
-	return isValid;  // WARNING CURRENTLY USELESS. IS THIS EVER NEEDED!!!
 }
 
-bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
+void NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 {
-	bool isValid = false;
-
 	assert(fleet != nullptr);
 
 	if(this->fleet == nullptr)
 	{
 		this->fleet = fleet;
 		this->fleet->setTerritory(&territory);
-		isValid = true;
+
 		// Observer methods.
 		this->fleet->addObserver(this);  // Observe army so it can be set to nullptr when it dies.
 	}
@@ -108,8 +100,6 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 		fleet->clearStrength();  // Sets strength to 0.
 		const int finalStrengthSum = fleet->getTotalStrength() + this->fleet->getTotalStrength();
 		assert(initialStrengthSum == finalStrengthSum);  // Strength sum should remain unchanged.
-
-		isValid = true;
 	}
 	// Case fleets have different owner.
 	else
@@ -122,7 +112,7 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 		{
 			this->fleet = fleet;
 			this->fleet->setTerritory(&territory);
-			isValid = true;
+
 			// Observer methods.
 			this->fleet->addObserver(this);  // Observe army so it can be set to nullptr when it dies.
 		}
@@ -154,8 +144,6 @@ bool NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 
 	// Update the positions of military unit sprites.
 	updateMilitaryPosition();
-
-	return isValid;  // WARNING CURRENTLY USELESS. IS THIS EVER NEEDED!!!
 }
 
 void NavalTerritoryOccupancy::forceOccupy(LandArmy *army)

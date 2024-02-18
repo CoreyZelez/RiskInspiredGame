@@ -16,9 +16,9 @@ public:
 	// Determine occupyer.
 	virtual void determineOccupation() override;
 	// Handles land army occupation attempt. Returns true if successful.
-	virtual bool occupy(LandArmy *army) override;
+	virtual void occupy(LandArmy *army) override;
 	// Handles navy fleet occupation attempt. Returns true if successful.
-	virtual bool occupy(NavalFleet *fleet) override;
+	virtual void occupy(NavalFleet *fleet) override;
 	// Attempt to occupy until army dies or successfully occupies.
 	virtual void forceOccupy(LandArmy *army) override;
 	// Attempt to occupy until fleet dies or successfully occupies.
@@ -47,5 +47,11 @@ private:
 
 	// Sets positions of military unit sprites.
 	void updateMilitaryPosition();
+
+	// Sets new occupying army.
+	void updateOccupyingArmy(LandArmy *army);
+
+	// Applys occupation cost to the occupying army.
+	void applyArmyOccupationCost();
 };
 

@@ -4,6 +4,7 @@
 #include "SimplePlayerAI.h"
 #include "Estate.h"
 #include "Game.h"
+#include "GameplaySettings.h"
 #include "IntegerSlider.h"
 #include "IntegerSlider.cpp"
 #include "NumericTextDisplay.h"
@@ -378,6 +379,11 @@ Player * Player::getLiege()
 void Player::setLiege(Player * player)
 {
 	liege = player;
+}
+
+const GameplaySettings & Player::getGameplaySettings() const
+{
+	return game.getGameplaySettings();
 }
 
 void Player::setHuman()

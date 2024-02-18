@@ -9,6 +9,7 @@
 #include <memory>
 
 class Game;
+class GameplaySettings;
 
 class Player : public HasUI
 {
@@ -64,6 +65,9 @@ public:
 	Player* getLiege();
 	// Sets liege.
 	void setLiege(Player *player);
+
+	// Returns gameplay settings.
+	const GameplaySettings &getGameplaySettings() const;
 
 	void setHuman();
 	bool getIsHuman() const;

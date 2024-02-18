@@ -15,7 +15,7 @@ int main()
 {
 	bool mapEditorMode = false;
 
-	sf::RenderWindow window(sf::VideoMode(2560, 1440), "Sovereign Chaos", sf::Style::Fullscreen);
+	sf::RenderWindow window(sf::VideoMode(2560, 1440), "Sovereign Chaos");//, sf::Style::Fullscreen);
 	sf::View gameView = window.getDefaultView(); 
 	sf::View UIView = window.getDefaultView();   
 

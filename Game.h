@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "GameDisplay.h"
 #include "NameGenerator.h"
+#include "GameplaySettings.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <deque>
@@ -24,6 +25,7 @@ class Game
 {
 public:
 	Game(std::string mapName);
+	Game(GameplaySettings gameplaySettings, std::string mapName);
 
 	void update(); 
 
@@ -57,6 +59,8 @@ public:
 	// Sets the vassal view for every realm to false.
 	void resetVassalViews();
 
+	const GameplaySettings &getGameplaySettings() const;
+
 	// Gets the map the game is played on.
 	const Map &getMap() const;
 	// Gets player realm which contains a given world position. Can additionally consider whether vassal view
@@ -81,6 +85,7 @@ public:
 	GameDisplay createView() const;
 
 private: 
+	const GameplaySettings gameplaySettings;
 	Map map; 
 	MapMode mapMode = MapMode::realm;
 	DisplayOptions displayOptions;

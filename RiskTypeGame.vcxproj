@@ -168,6 +168,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="EstateAllocatorUnitTest.cpp" />
+    <ClCompile Include="GameplaySettings.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="HashFunctions.cpp" />
     <ClCompile Include="LandTerritoryOccupancy.cpp" />
@@ -242,6 +243,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EstateAllocatorUnitTest.h" />
+    <ClInclude Include="GameplaySettings.h" />
     <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="HashFunctions.h" />
     <ClInclude Include="IOccupiable.h" />

@@ -1,15 +1,21 @@
 #include "Game.h"
+#include "GameplaySettings.h"
 #include <iostream>
 
 Game::Game(std::string mapName)
-	: map(mapName), nameGenerator("realms")
+	: Game(GameplaySettings(), mapName)
+{
+}
+
+Game::Game(GameplaySettings gameplaySettings, std::string mapName)
+	: gameplaySettings(gameplaySettings), map(mapName), nameGenerator("realms")
 {
 	generatePlayers();
 }
 
 void Game::generatePlayers()
 {
-	const int numHumans = 1;
+	const int numHumans = 0;
 	int humanCnt = 0; 
 	for(auto &barony : map.getEstateManager().getBaronies())
 	{
@@ -102,6 +108,11 @@ void Game::resetVassalViews()
 		const bool vassalView = true;
 		realm.setVassalView(false);
 	}
+}
+
+const GameplaySettings & Game::getGameplaySettings() const
+{
+	return gameplaySettings;
 }
 
 void Game::update()

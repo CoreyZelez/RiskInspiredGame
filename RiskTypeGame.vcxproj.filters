@@ -330,6 +330,9 @@
     <ClCompile Include="TextDisplay.cpp">
       <Filter>Source Files\User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="GameplaySettings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LandArmy.h">
@@ -558,6 +561,9 @@
       <Filter>Header Files\User Interface</Filter>
     </ClInclude>
     <ClInclude Include="TextDisplay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameplaySettings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

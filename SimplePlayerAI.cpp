@@ -3,6 +3,7 @@
 #include "Territory.h"
 #include "LandTerritory.h"
 #include "NavalTerritory.h"
+#include "GameplaySettings.h"
 #include <iostream>
 #include <algorithm>
 
@@ -226,48 +227,109 @@ void SimplePlayerAI::executeArmyAttacks(const std::vector<Territory*> &borderTer
 
 void SimplePlayerAI::executeArmyAttack(LandArmy &army)
 {
+	const GameplaySettings &gameplaySettings = getPlayer().getGameplaySettings();
+
 	const int attackStamina = 3;
-	int availableStrength = army.getStrength(attackStamina);
+	int availableAttackStrength = army.getStrength(attackStamina);
 	Territory &territory = army.getTerritory();
+
+	// Don't attack if available strength less than occupancy cost with excess.
+	const int minStrengthThreshold = gameplaySettings.landHostileOccupancyCost + 2;
+	if(availableAttackStrength <= minStrengthThreshold)
+	{
+		return;
+	}
+
+	// Enemy territories adjacent to army terrritory.
 	const std::set<Territory*> enemyTerritories = context.getEnemyAdjacencies(territory);
+
+	// Determine maximum usable strength across all army attacks.
+	int maximumAttackStrengthAllocation = 0;
+	if(enemyTerritories.size() > 1)
+	{
+		// Ensure percentage of army is left on this territory.
+		const int totalArmyStrength = army.getTotalStrength();
+		maximumAttackStrengthAllocation = totalArmyStrength * 0.9;
+
+		// Ensure remaining troops exceeds a minimum value.
+		const int remainder = totalArmyStrength - maximumAttackStrengthAllocation;
+		const int minimumRemainderStrength = 3;
+		if(remainder < minimumRemainderStrength)
+		{
+			maximumAttackStrengthAllocation = minimumRemainderStrength;
+		}
+
+		if(availableAttackStrength > maximumAttackStrengthAllocation)
+		{
+			availableAttackStrength = maximumAttackStrengthAllocation;
+		}
+	}
+
+	// Iterate over adjacent enemy territories and attack under certain conditions.
 	for(std::set<Territory*>::iterator iter = enemyTerritories.begin();
 		iter != enemyTerritories.end(); ++iter)
 	{
+		const int priorStrength = army.getTotalStrength();
+
 		// Handle case when adjacent territory is a LandTerritory.
 		LandTerritory* landTerritory = dynamic_cast<LandTerritory*>(*iter);
 		if(landTerritory != nullptr)
 		{
 			const LandArmy *enemyArmy = landTerritory->getOccupancyHandler()->getArmy();
 
+			// No enemy army.
 			if(enemyArmy == nullptr)
 			{
-				int attackStrength = 0.3 * availableStrength;
+				// Only attack with small portion of army since no enemy army.
+				int attackStrength = 0.3 * availableAttackStrength;
 
-				if(attackStrength <= 1)
+				// Ensure attack strength at least the min strength threshold.
+				if(attackStrength <= minStrengthThreshold)
 				{
-					attackStrength = availableStrength;
+					attackStrength = minStrengthThreshold;
 				}
+
 				army.move(*landTerritory, attackStrength);
 			}
-			else if(enemyArmy->getTotalStrength() < 0.1 * availableStrength)
+			// Relatively weak enemy army.
+			else if(enemyArmy->getTotalStrength() < 0.1 * availableAttackStrength)
 			{
-				int attackStrength = 0.4 * availableStrength;
-				if(attackStrength == 0)
+				// Only attack with small portion of army since no enemy army.
+				int attackStrength = 0.4 * availableAttackStrength;
+
+				// Ensure attack strength at least the min strength threshold.
+				if(attackStrength <= minStrengthThreshold)
 				{
-					attackStrength = 1;
+					attackStrength = minStrengthThreshold;
 				}
+
 				army.move(*landTerritory, attackStrength);
 			}
-			else if(enemyArmy->getTotalStrength() < 0.6 * availableStrength)
+			// Relatively strong enemy army.
+			else if(enemyArmy->getTotalStrength() < 0.6 * availableAttackStrength)
 			{
-				army.move(*landTerritory, availableStrength);
+				army.move(*landTerritory, availableAttackStrength);
 			}
 		}
 
+		////////////
+		const int postStrength = army.getTotalStrength();
+		
+		const int strengthChange = postStrength - priorStrength;
+		availableAttackStrength -= strengthChange;
+		/////////////////////
+		/////////////////////////////////
+		// The below option makes for stronger AI. The above option makes for more aggressive weaker AI
+		// In future for a harder difficulty than simple AI selection, consider using a combination
+		// of both AI options.
+		//////////
 		// Update strength.
-		availableStrength = army.getStrength(attackStamina);
+		// availableAttackStrength = army.getStrength(attackStamina);
+		///////////
+
+
 		// Return since army has no strength left for attacking with.
-		if(availableStrength == 0)
+		if(availableAttackStrength == 0)
 		{
 			return;
 		}

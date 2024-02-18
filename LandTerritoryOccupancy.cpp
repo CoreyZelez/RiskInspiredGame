@@ -3,7 +3,9 @@
 #include "NavalFleet.h"
 #include "LandTerritory.h"
 #include "Player.h"
+#include "GameplaySettings.h"
 #include <assert.h>
+#include <iostream>
 
 LandTerritoryOccupancy::LandTerritoryOccupancy(LandTerritory &territory)
 	: territory(territory)
@@ -39,18 +41,38 @@ void LandTerritoryOccupancy::determineOccupation()
 	}
 }
 
-bool LandTerritoryOccupancy::occupy(LandArmy *army)
+void LandTerritoryOccupancy::occupy(LandArmy *army)
 {
 	bool isValid = false;
 
+	// Case no pre existing occupying army on terriory
 	if(this->army == nullptr)
 	{
-		this->army = army;
-		army->setTerritory(&territory);
-		isValid = true;
-		// Observer methods.
-		this->army->addObserver(this);  // Observe army so it can be set to nullptr when it dies.
-		territory.notifyObservers(newOccupant);
+		// Determine whether occupation is friendly or hostile.
+		const Player *estateOwner = territory.getEstateOwner();
+		const Player *armyOwner = &army->getOwner();
+		bool friendly = sameUpperRealm(estateOwner, armyOwner);
+		if(friendly) 
+		{
+			updateOccupyingArmy(army);
+		}
+		else
+		{
+			const int occupancyCost = army->getOwner().getGameplaySettings().landHostileOccupancyCost;
+
+			// Army occupies territory and is applied occupancy strength reduction cost.
+			if(army->getTotalStrength() >= occupancyCost)
+			{
+				updateOccupyingArmy(army);
+				applyArmyOccupationCost();
+			}
+			else
+			{
+				// Army not strong enough to occupy. Strength returned to source territory, see move function.			
+				// Do nothing.
+			}
+		}
+		
 	}
 	// Case armies have same owner.
 	else if(&(army->getOwner()) == &(this->army->getOwner()))
@@ -64,42 +86,45 @@ bool LandTerritoryOccupancy::occupy(LandArmy *army)
 
 		const int finalStrengthSum = army->getTotalStrength() + this->army->getTotalStrength();
 		assert(initialStrengthSum == finalStrengthSum);  // Strength sum should remain unchanged.
-
-		isValid = true;
 	}
 	// Case armies have different owner.
 	else
 	{
-		// Temporarily implemented as always attack. In future potentially not as there may be friendly sharing of troop territory.
 		army->attack(*this->army, defenceMultiplier);
-		// Attacking army occupys land if defending army killed.
+
+		// Attacking army occupys land if defending army killed and strength at occupancy cost threshold.
 		// this->army nullptr implies dead since it's pointer was nulled by territory in response to its death.
 		if(this->army == nullptr && !army->isDead())
 		{
-			this->army = army;
-			army->setTerritory(&territory);
-			isValid = true;
-			// Observer methods.
-			this->army->addObserver(this);  // Observe army so it can be set to nullptr when it dies.
-			territory.notifyObservers(newOccupant);
+			const int occupancyCost = army->getOwner().getGameplaySettings().landHostileOccupancyCost;
+
+			// Army occupies territory and is applied occupancy strength reduction cost.
+			if(army->getTotalStrength() >= occupancyCost)
+			{
+				updateOccupyingArmy(army);
+				applyArmyOccupationCost();
+			}
+			else
+			{
+				// Army not strong enough to occupy. Strength returned to source territory, see move function.			
+				// Do nothing.
+			}
 		}
 	}
 
 	// Remove pointer to army if army is dead.
-	if(army != nullptr && army->isDead())
+	if(this->army != nullptr && this->army->isDead())
 	{
-		army = nullptr;
+		this->army = nullptr;
 	}
 
 	// Update the positions of military unit sprites.
 	updateMilitaryPosition();
-
-	return isValid;  // WARNING CURRENTLY USELESS. IS THIS EVER NEEDED!!!
 }
 
-bool LandTerritoryOccupancy::occupy(NavalFleet *fleet)
+void LandTerritoryOccupancy::occupy(NavalFleet *fleet)
 {
-	return false;
+	// Intentionally empty.
 }
 
 void LandTerritoryOccupancy::forceOccupy(LandArmy *army)
@@ -165,4 +190,22 @@ void LandTerritoryOccupancy::updateMilitaryPosition()
 	{
 		army->setSpritePosition(territory.getGrid().getCenter());
 	}
+}
+
+void LandTerritoryOccupancy::updateOccupyingArmy(LandArmy *army)
+{
+	this->army = army;
+	army->setTerritory(&territory);
+
+	// Observer methods.
+	this->army->addObserver(this);  // Observe army so it can be set to nullptr when it dies.
+	territory.notifyObservers(newOccupant);
+}
+
+void LandTerritoryOccupancy::applyArmyOccupationCost()
+{
+	const int occupancyCost = army->getOwner().getGameplaySettings().landHostileOccupancyCost;
+
+	// Reduce strength of army due to occupancy cost. Army possibly dies.
+	this->army->reduceStrength(occupancyCost);
 }

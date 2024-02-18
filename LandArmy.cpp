@@ -3,6 +3,7 @@
 #include "IOccupiable.h"
 #include "TextureManager.h"
 #include "Player.h"
+#include "GameplaySettings.h"
 #include <assert.h>
 #include <random>
 #include <iostream>
@@ -27,74 +28,57 @@ void LandArmy::removeFromTerritory()
 
 void LandArmy::attack(LandArmy &defendingArmy, double defenceMultiplier)
 {
+	const GameplaySettings &gameplaySettings = getOwner().getGameplaySettings();
+
+	assert(getTotalStrength() > gameplaySettings.landHostileOccupancyCost);
+
+	// Determine adjusted strength of both attacker and defender.
 	const double defenderStrength = static_cast<double>(defendingArmy.getTotalStrength());
-	const double defenderAdjustedStrength = defenderStrength * defenceMultiplier;  // defender strength.
+	const double defenderAdjustedStrength = defenderStrength * defenceMultiplier;  
 	const double attackerStrength = getTotalStrength();
-	assert(defenderStrength > 0);
-	assert(attackerStrength > 0);
+	const double attackerAdjustedStrength = attackerStrength;  // No adjustment to attacker strength.
+	assert(defenderStrength > 0 && defenderAdjustedStrength > 0);
+	assert(attackerStrength > 0 && attackerAdjustedStrength > 0);
 
-	int defenderStrengthAdjustment = 0;
-	int attackerStrengthAdjustment = 0;
+	// Max and min percent of total strength armies lose.
+	const double adjustedStrengthsRatio = attackerAdjustedStrength / defenderAdjustedStrength;
+	const double maxMultiplierFactor = 0.4 * gameplaySettings.lossMultiplier;
+	const double minMultiplierFactor = 0.2 * gameplaySettings.lossMultiplier;
+	const double maxDefenderLossMultiplier = maxMultiplierFactor * adjustedStrengthsRatio;
+	const double minDefenderLossMultiplier = minMultiplierFactor * adjustedStrengthsRatio;
+	const double maxAttackerLossMultiplier = maxMultiplierFactor / adjustedStrengthsRatio;
+	const double minAttackerLossMultiplier = minMultiplierFactor / adjustedStrengthsRatio;
 
-	// Adjust strengths for passing a given threshold.
-	const double strengthThreshold = 3;  // Threshold for guaranteed damage on opponent.
-	const int thresholdAdjustmentValue = 1;  // Strength adjustment for opponent passing threshold.
-	if(defenderAdjustedStrength >= strengthThreshold)
-	{
-		attackerStrengthAdjustment += thresholdAdjustmentValue;
-	}
-	if(attackerStrength >= strengthThreshold)
-	{
-		defenderStrengthAdjustment += thresholdAdjustmentValue;
-	}
-
-	// Partially randomised damage to each army.
-	const double strengthRatio = attackerStrength / defenderAdjustedStrength;
-	const double maxMultiplier = 0.4;
-	const double minMultiplier = 0.2;
-	const double maxAttacker = maxMultiplier * strengthRatio;
-	const double minAttacker = minMultiplier * strengthRatio;
-	const double maxDefender = maxMultiplier / strengthRatio;
-	const double minDefender = minMultiplier / strengthRatio;
+	// Calculate strength adjustments. Partially randomised.
 	std::mt19937 rng(std::random_device{}());
-	std::uniform_real_distribution<double> attackerDist(minAttacker, maxAttacker);  // Percent of strength defending army loses.
-	std::uniform_real_distribution<double> defenderDist(minDefender, maxDefender);  // Percent of strength attacking army loses.
-	defenderStrengthAdjustment += std::round(attackerDist(rng) * defenderStrength);
-	attackerStrengthAdjustment += std::round(defenderDist(rng) * attackerStrength);
+	std::uniform_real_distribution<double> defenderLossDist(minDefenderLossMultiplier, maxDefenderLossMultiplier);  // Percent of strength defending army loses.
+	std::uniform_real_distribution<double> attackerLossDist(minAttackerLossMultiplier, maxAttackerLossMultiplier);  // Percent of strength attacking army loses.
+	int defenderStrengthAdjustment = std::round(defenderLossDist(rng) * defenderAdjustedStrength);
+	int attackerStrengthAdjustment = std::round(attackerLossDist(rng) * attackerAdjustedStrength);
+
 	assert(defenderStrengthAdjustment >= 0);
 	assert(attackerStrengthAdjustment >= 0);
+
+	// Special case where no damage was calculated for either army.
+	if(defenderStrengthAdjustment == 0 && attackerStrengthAdjustment == 0)
+	{
+		// Attacker takes guaranteed damage.
+		++attackerStrengthAdjustment;
+		
+		// Apply damage to weaker army.
+		if(attackerAdjustedStrength < defenderAdjustedStrength)
+		{
+			++attackerStrengthAdjustment;
+		}
+		else if(attackerAdjustedStrength > defenderAdjustedStrength)
+		{
+			++defenderStrengthAdjustment;
+		}
+	}
+
+	// Apply reductions to strength of armies.
 	defendingArmy.reduceStrength(defenderStrengthAdjustment);
 	reduceStrength(attackerStrengthAdjustment);
-
-	// Special case where no damage is taken by either army.
-	if(getTotalStrength() == attackerStrength && defendingArmy.getTotalStrength() == defenderStrength)
-	{
-		assert(attackerStrength < strengthThreshold && defenderStrength < strengthThreshold);
-		assert(attackerStrengthAdjustment == 0 && defenderStrengthAdjustment == 0);
-
-		// Determine strength adjustment.
-		std::uniform_int_distribution<int> dist(0, 1);
-		if(defenderAdjustedStrength > attackerStrength)
-		{
-			++attackerStrengthAdjustment;
-		}
-		else if(defenderAdjustedStrength < attackerStrength)
-		{
-			++defenderStrengthAdjustment;
-		}
-		else if(dist(rng) == 1)
-		{
-			++attackerStrengthAdjustment;
-		}
-		else
-		{
-			++defenderStrengthAdjustment;
-		}
-
-		// Adjust army strengths.
-		defendingArmy.reduceStrength(defenderStrengthAdjustment);
-		reduceStrength(attackerStrengthAdjustment);
-	}
 }
 
 std::pair<int, int> LandArmy::calculateMinMaxStaminaCost(const Territory &territory) const
@@ -113,7 +97,15 @@ void LandArmy::move(Territory &location, unsigned int strength)
 {
 	assert(strength <= getTotalStrength());
 
+	const GameplaySettings &gameplaySettings = getOwner().getGameplaySettings();
+
 	if(strength == 0)
+	{
+		return;
+	}
+
+	// Strength must exceed min hostile occupancy cost when moving to enemy or unowned location.
+	if(!sameUpperRealm(&getOwner(), location.getEstateOwner()) && strength < gameplaySettings.landHostileOccupancyCost)
 	{
 		return;
 	}
