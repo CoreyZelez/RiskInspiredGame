@@ -1,29 +1,18 @@
 #include "MapMaker.h"
 #include "ChangeInstance.h"
 #include "ReconcileLandedEstates.h"
+#include "InputUtility.h"
 #include <assert.h>
 #include <iostream>
 
 MapMaker::MapMaker(std::string mapName)
 	: map(mapName), territoryMaker(map.getTerritoryManager()), estateMaker(map.getEstateManager())
 {
-	// Button for entering territory maker.
-	std::unique_ptr<Command> enterTerritoryMaker = std::make_unique<ChangeInstance<MapMakerState>>(state, MapMakerState::territoryMode);
-	sf::Vector2f position1(300, 300);
-	sf::Vector2f size1(200, 70);
-	buttons.emplace_back(std::make_unique<CommandButton>(position1, size1, enterTerritoryMaker));
+}
 
-	// Button for entering estate maker.
-	std::vector<std::unique_ptr<Command>> enterEstateMakerCommands;
-	// Changes map maker state.
-	enterEstateMakerCommands.emplace_back(std::make_unique<ChangeInstance<MapMakerState>>(state, MapMakerState::estateMode));
-	// Generates and removes necessary baronies.
-	enterEstateMakerCommands.emplace_back(
-		std::make_unique<ReconcileLandedEstates>(map.getEstateManager(), 
-			map.getTerritoryManager().getLandTerritories(), map.getTerritoryManager().getNavalTerritories()));
-	sf::Vector2f position2(700, 300);
-	sf::Vector2f size2(200, 70);
-	buttons.emplace_back(std::make_unique<CommandButton>(position2, size2, enterEstateMakerCommands));
+MapMaker::~MapMaker()
+{
+	save();
 }
 
 void MapMaker::save()
@@ -45,13 +34,10 @@ void MapMaker::draw(sf::RenderWindow &window)
 {
 	switch(state)
 	{
-	case MapMakerState::none:
-		drawButtons(window);
-		break;
-	case MapMakerState::territoryMode:
+	case MapMakerState::TerritoryMode:
 		territoryMaker.draw(window);
 		break;
-	case MapMakerState::estateMode:
+	case MapMakerState::EstateMode:
 		estateMaker.draw(window);
 		break;
 	}
@@ -59,32 +45,34 @@ void MapMaker::draw(sf::RenderWindow &window)
 
 void MapMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 {
+	InputUtility &inputUtility = InputUtility::getInstance();
+
+	// Change map maker mode.
+	if(inputUtility.getKeyPressed(sf::Keyboard::Tab))
+	{
+		switch(state)
+		{
+		case MapMakerState::TerritoryMode:
+			// Ensure all estates are reconciled with created and deleted territories.
+			map.getEstateManager().reconcileBaronies(map.getTerritoryManager().getLandTerritories());
+			map.getEstateManager().reconcileMaridoms(map.getTerritoryManager().getNavalTerritories());
+			state = MapMakerState::EstateMode;
+			break;
+		case MapMakerState::EstateMode:
+			state = MapMakerState::TerritoryMode;
+			break;
+		}
+
+	}
+
 	switch(state)
 	{
-	case MapMakerState::none:
-		handleButtonInput(window);
-		break;
-	case MapMakerState::territoryMode:
+	case MapMakerState::TerritoryMode:
 		territoryMaker.handleInput(window, view);
 		break;
-	case MapMakerState::estateMode:
+	case MapMakerState::EstateMode:
 		estateMaker.handleInput(window, view);
 		break;
 	}
 }
 
-void MapMaker::handleButtonInput(const sf::RenderWindow &window)
-{
-	for(auto &button : buttons)
-	{
-		button.get()->handleInput(window);
-	}
-}
-
-void MapMaker::drawButtons(sf::RenderWindow &window)
-{
-	for(auto &button : buttons)
-	{
-		button.get()->draw(window);
-	}
-}

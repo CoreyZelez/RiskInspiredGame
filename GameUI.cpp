@@ -58,8 +58,11 @@ void GameUI::notifyButtonDown(sf::Mouse::Button button, sf::Vector2f position)
 void GameUI::setLeftUI(std::unique_ptr<UIEntity> entity)
 {
 	float leftMostCoordinate = UIView.getCenter().x - UIView.getSize().x / 2.0f;
+	const float width = entity.get()->getDimensions().x;  // Width of UI entity.
+	const float xPos = leftMostCoordinate + width / 2;  // x coordinate of UI center.
+	const float yPos = UIView.getCenter().y;
 	leftUI = std::move(entity);
-	leftUI.get()->setPosition(sf::Vector2f(leftMostCoordinate, 400));
+	leftUI.get()->setPosition(sf::Vector2f(xPos, yPos), true);
 }
 
 void GameUI::resetLeftUI()
@@ -72,8 +75,9 @@ void GameUI::setRightUI(std::unique_ptr<UIEntity> entity)
 	const float rightMostX = UIView.getCenter().x + UIView.getSize().x / 2.0f;  // Right most visible position of view.
 	const float width = entity.get()->getDimensions().x;  // Width of UI entity.
 	const float xPos = rightMostX - width / 2;  // x coordinate of UI center.
-	leftUI = std::move(entity);
-	leftUI.get()->setPosition(sf::Vector2f(xPos, UIView.getCenter().y), true);
+	const float yPos = UIView.getCenter().y;
+	rightUI = std::move(entity);
+	rightUI.get()->setPosition(sf::Vector2f(xPos, yPos), true);
 }
 
 void GameUI::setBottomUI(std::unique_ptr<UIEntity> entity)

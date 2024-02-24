@@ -13,7 +13,7 @@
 
 int main()
 {
-	bool mapEditorMode = false;
+	bool mapEditorMode = true;
 
 	sf::RenderWindow window(sf::VideoMode(2560, 1440), "Sovereign Chaos");//, sf::Style::Fullscreen);
 	sf::View gameView = window.getDefaultView(); 
@@ -22,9 +22,9 @@ int main()
 	UIView.zoom(3);
 	InputUtility &InputUtility = InputUtility::getInstance();
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS IN TESTING CODE!!!
-	FontManager::getInstance();
+	FontManager::getInstance(); 
 
-	MapMaker mapMaker("empty");
+	MapMaker mapMaker("test");
 
 	Game game("test");
 

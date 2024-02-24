@@ -11,7 +11,7 @@ class NavalTerritory;
 enum class TerritoryMakerState
 {
 	none,
-	editTerritory,  // Adjust shape of territory by adding or removing grid squares.
+	editTerritoryGrid,  // Adjust shape of territory by adding or removing grid squares.
 	createPort  // Create port by selecting a land naval territory pair.
 };
 

@@ -29,13 +29,13 @@ void TerritoryMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 
 	handleInputForView(view);
 
-	if(inputUtility.getButtonPressed(sf::Mouse::Right))
-	{
-		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-		sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+	sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
 
-		// Select territories for port creation.
-		if(state == TerritoryMakerState::createPort)
+	// Select territories for port creation.
+	if(state == TerritoryMakerState::createPort)
+	{
+		if(inputUtility.getButtonPressed(sf::Mouse::Right))
 		{
 			assert(portTerritories.first == nullptr || portTerritories.second == nullptr);
 
@@ -66,61 +66,71 @@ void TerritoryMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 				portTerritories.second = nullptr;
 				state = TerritoryMakerState::none;
 			}
-
 		}
 	}
-	if(inputUtility.getButtonDown(sf::Mouse::Right))
-	{
-		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-		sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+	
 
+	if(state == TerritoryMakerState::editTerritoryGrid)
+	{
 		// Remove territory square at mouse position.
-		if(state == TerritoryMakerState::editTerritory)
+		if(inputUtility.getButtonDown(sf::Mouse::Right))
 		{
-		// Remove square if any and update claimed positions if square is removed.
-		removePosition(window);
+			removePosition(window);
 		}
-		// Select territory for modification.
-		else if(state == TerritoryMakerState::none)
+		if(inputUtility.getButtonDown(sf::Mouse::Left))
 		{
-		selectedTerritory = territoryManager.getLandTerritory(worldPos);
-		if(selectedTerritory == nullptr)
-		{
-			selectedTerritory = territoryManager.getNavalTerritory(worldPos);
+			addPosition(window);
 		}
-		if(selectedTerritory != nullptr)
+	}
+
+	if(state == TerritoryMakerState::none)
+	{
+		if(inputUtility.getButtonDown(sf::Mouse::Right))
 		{
-			state = TerritoryMakerState::editTerritory;
+			sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+			sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+
+			// Select territory for modification.
+			selectedTerritory = territoryManager.getLandTerritory(worldPos);
+			if(selectedTerritory == nullptr)
+			{
+				selectedTerritory = territoryManager.getNavalTerritory(worldPos);
+			}
+			if(selectedTerritory != nullptr)
+			{
+				state = TerritoryMakerState::editTerritoryGrid;
+				updateFixedTerritoriesVertices();
+			}
+		}
+
+		if(inputUtility.getKeyPressed(sf::Keyboard::L))
+		{
+			// Create a new territory.
+			territoryManager.removeEmptyTerritories();
+			selectedTerritory = territoryManager.createLandTerritory();
+			state = TerritoryMakerState::editTerritoryGrid;
 			updateFixedTerritoriesVertices();
 		}
+
+		// Create naval territory.
+		if(inputUtility.getKeyPressed(sf::Keyboard::N))
+		{
+			territoryManager.removeEmptyTerritories();
+			selectedTerritory = territoryManager.createNavalTerritory();
+			state = TerritoryMakerState::editTerritoryGrid;
+			updateFixedTerritoriesVertices();
 		}
 	}
-	if(inputUtility.getButtonDown(sf::Mouse::Left))
-	{
-		addPosition(window);
-	}
-	if(inputUtility.getKeyPressed(sf::Keyboard::L))
-	{
-		// Create a new territory.
-		territoryManager.removeEmptyTerritories();
-		selectedTerritory = territoryManager.createLandTerritory();
-		state = TerritoryMakerState::editTerritory;
-		updateFixedTerritoriesVertices();
-	}
-	if(inputUtility.getKeyPressed(sf::Keyboard::N))
-	{
-		// Create a new territory.
-		territoryManager.removeEmptyTerritories();
-		selectedTerritory = territoryManager.createNavalTerritory();
-		state = TerritoryMakerState::editTerritory;
-		updateFixedTerritoriesVertices();
-	}
+
+	// Deselect territory and return to neutral state.
 	if(inputUtility.getKeyPressed(sf::Keyboard::Enter))
 	{
 		selectedTerritory = nullptr;
 		state = TerritoryMakerState::none;
 		updateFixedTerritoriesVertices();
 	}
+
+	// Port creation.
 	if(inputUtility.getKeyPressed(sf::Keyboard::P))
 	{
 		if(state == TerritoryMakerState::none)
@@ -247,7 +257,7 @@ void TerritoryMaker::addPosition(const sf::RenderWindow & window)
 	std::vector<sf::Vector2i> gridPositions = determineBrushGridPositions(mouseGridPosition);
 
 	// Add territory square at grid positions derived from brush.
-	if(state == TerritoryMakerState::editTerritory)
+	if(state == TerritoryMakerState::editTerritoryGrid)
 	{
 		for(sf::Vector2i position : gridPositions)
 		{

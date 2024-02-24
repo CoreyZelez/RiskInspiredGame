@@ -323,6 +323,19 @@ void EstateManager::reconcileBaronies(const std::vector<std::unique_ptr<LandTerr
 		allocatedTerritoryIDs.insert(territory.get()->getID());  // Ensures ID cannot be reused for other landed estate.
 		estates[Title::barony].emplace_back(std::move(barony));
 	}
+
+	// Remove baronies with empty territory grids.
+	std::vector<std::unique_ptr<Estate>> newBaronies;
+	for(auto &estate : estates[Title::barony])
+	{
+		Barony *barony = dynamic_cast<Barony*>(estate.get());
+		assert(barony != nullptr);
+		if(!barony->getTerritory().getGrid().isEmpty())
+		{
+			newBaronies.emplace_back(std::move(estate));
+		}
+	}
+	estates[Title::barony] = std::move(newBaronies);
 }
 
 void EstateManager::reconcileMaridoms(const std::vector<std::unique_ptr<NavalTerritory>>& navalTerritories)
@@ -343,6 +356,19 @@ void EstateManager::reconcileMaridoms(const std::vector<std::unique_ptr<NavalTer
 		allocatedTerritoryIDs.insert(territory.get()->getID());  // Ensures ID cannot be reused for other landed estate.
 		estates[Title::maridom].emplace_back(std::move(maridom));
 	}
+
+	// Remove maridoms with empty territory grids.
+	std::vector<std::unique_ptr<Estate>> newMaridoms;
+	for(auto &estate : estates[Title::maridom])
+	{
+		Maridom *maridom = dynamic_cast<Maridom*>(estate.get());
+		assert(maridom != nullptr);
+		if(!maridom->getTerritory().getGrid().isEmpty())
+		{
+			newMaridoms.emplace_back(std::move(estate));
+		}
+	}
+	estates[Title::maridom] = std::move(newMaridoms);
 }
 
 std::vector<std::unique_ptr<Estate>>& EstateManager::getBaronies()

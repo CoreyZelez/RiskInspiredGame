@@ -330,8 +330,17 @@
     <ClCompile Include="TextDisplay.cpp">
       <Filter>Source Files\User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Source Files\Game\Territory</Filter>
+    </ClCompile>
+    <ClCompile Include="LandTerritoryFeatures.cpp">
+      <Filter>Source Files\Game\Territory</Filter>
+    </ClCompile>
+    <ClCompile Include="Culture.cpp">
+      <Filter>Source Files\Game\Territory</Filter>
+    </ClCompile>
     <ClCompile Include="GameplaySettings.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\MVC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -563,8 +572,17 @@
     <ClInclude Include="TextDisplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Header Files\Game\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="Culture.h">
+      <Filter>Header Files\Game\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="LandTerritoryFeatures.h">
+      <Filter>Header Files\Game\Territory</Filter>
+    </ClInclude>
     <ClInclude Include="GameplaySettings.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\MVC</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

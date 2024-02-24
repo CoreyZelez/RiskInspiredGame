@@ -313,10 +313,10 @@ void SimplePlayerAI::executeArmyAttack(LandArmy &army)
 		}
 
 		////////////
-		const int postStrength = army.getTotalStrength();
-		
-		const int strengthChange = postStrength - priorStrength;
-		availableAttackStrength -= strengthChange;
+		// const int postStrength = army.getTotalStrength();
+		// 
+		// const int strengthChange = postStrength - priorStrength;
+		// availableAttackStrength -= strengthChange;
 		/////////////////////
 		/////////////////////////////////
 		// The below option makes for stronger AI. The above option makes for more aggressive weaker AI
@@ -324,7 +324,7 @@ void SimplePlayerAI::executeArmyAttack(LandArmy &army)
 		// of both AI options.
 		//////////
 		// Update strength.
-		// availableAttackStrength = army.getStrength(attackStamina);
+		availableAttackStrength = army.getStrength(attackStamina);
 		///////////
 
 

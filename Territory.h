@@ -3,6 +3,7 @@
 #include "Grid.h"
 #include "IOccupiable.h"
 #include "TerritoryDistanceMap.h"
+#include "LandTerritoryFeatures.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
@@ -67,6 +68,7 @@ private:
 	LandedEstate *landedEstate = nullptr; 
 	std::unique_ptr<IOccupiable> occupancyHandler;  // Handles military occupancy of territory.
 	TerritoryDistanceMap distanceMap;  // Stores information about distances to any territory.
+	LandTerritoryFeatures features;
 };
 
 int loadTerritoryID(std::ifstream &file);

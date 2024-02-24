@@ -3,7 +3,7 @@
 #include <iostream>
 
 template<typename T>
-IntegerSlider<T>::IntegerSlider(int minValue, int maxValue, T &value)
+IntegerSlider<T>::IntegerSlider(int minValue, int maxValue, T &value, sf::Vector2f dimensions)
 	: minValue(minValue), maxValue(maxValue), value(value), selectedAmount(value)
 {
 	assert(selectedAmount / divisor == value);
@@ -14,26 +14,26 @@ IntegerSlider<T>::IntegerSlider(int minValue, int maxValue, T &value)
 	backgroundBar.setFillColor(grey);
 	selectionBar.setFillColor(beige);
 
-	backgroundBar.setSize(sf::Vector2f(600, 80));
-	selectionBar.setSize(sf::Vector2f(600, 80));
+	backgroundBar.setSize(dimensions);
+	selectionBar.setSize(dimensions);
 
 	updateSelectionBar();
 }
 
 template<typename T>
-IntegerSlider<T>::IntegerSlider(int minValue, int maxValue, T &value, double divisor)
+IntegerSlider<T>::IntegerSlider(int minValue, int maxValue, T &value, double divisor, sf::Vector2f dimensions)
 	: minValue(minValue), maxValue(maxValue), value(value), selectedAmount(value * divisor), divisor(divisor)
 {
+	assert(selectedAmount / divisor == value);
+
 	sf::Color grey(150, 150, 150);
 	sf::Color beige(200, 190, 150);
-
-	assert(selectedAmount / divisor == value);
 
 	backgroundBar.setFillColor(grey);
 	selectionBar.setFillColor(beige);
 
-	backgroundBar.setSize(sf::Vector2f(600, 80));
-	selectionBar.setSize(sf::Vector2f(600, 80));
+	backgroundBar.setSize(dimensions);
+	selectionBar.setSize(dimensions);
 
 	updateSelectionBar();
 }

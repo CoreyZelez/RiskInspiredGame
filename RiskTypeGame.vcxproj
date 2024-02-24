@@ -167,10 +167,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Culture.cpp" />
     <ClCompile Include="EstateAllocatorUnitTest.cpp" />
     <ClCompile Include="GameplaySettings.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="HashFunctions.cpp" />
+    <ClCompile Include="LandTerritoryFeatures.cpp" />
     <ClCompile Include="LandTerritoryOccupancy.cpp" />
     <ClCompile Include="LiegePolicy.cpp" />
     <ClCompile Include="Maridom.cpp" />
@@ -218,6 +220,7 @@
     <ClCompile Include="PlayerEstateManager.cpp" />
     <ClCompile Include="RealmGrid.cpp" />
     <ClCompile Include="NumericTextDisplay.cpp" />
+    <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TextDisplay.cpp" />
     <ClCompile Include="VassalManager.cpp" />
     <ClCompile Include="ReconcileLandedEstates.cpp" />
@@ -242,11 +245,13 @@
     <ClCompile Include="VassalPolicy.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Culture.h" />
     <ClInclude Include="EstateAllocatorUnitTest.h" />
     <ClInclude Include="GameplaySettings.h" />
     <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="HashFunctions.h" />
     <ClInclude Include="IOccupiable.h" />
+    <ClInclude Include="LandTerritoryFeatures.h" />
     <ClInclude Include="LandTerritoryOccupancy.h" />
     <ClInclude Include="LiegePolicy.h" />
     <ClInclude Include="Maridom.h" />
@@ -288,6 +293,7 @@
     <ClInclude Include="PlayerEstateManager.h" />
     <ClInclude Include="RealmGrid.h" />
     <ClInclude Include="NumericTextDisplay.h" />
+    <ClInclude Include="Terrain.h" />
     <ClInclude Include="TextDisplay.h" />
     <ClInclude Include="VassalManager.h" />
     <ClInclude Include="ReconcileLandedEstates.h" />

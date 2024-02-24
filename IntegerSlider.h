@@ -4,8 +4,8 @@
 template<typename T> class IntegerSlider : public UIEntity
 {
 public:
-	IntegerSlider(int minValue, int maxValue, T &value);
-	IntegerSlider(int minValue, int maxValue, T &value, double divisor);
+	IntegerSlider(int minValue, int maxValue, T &value, sf::Vector2f dimensions);
+	IntegerSlider(int minValue, int maxValue, T &value, double divisor, sf::Vector2f dimensions);
 
 	virtual void draw(sf::RenderWindow &window) const override;
 	virtual void handleButtonDown(sf::Mouse::Button button, sf::Vector2f position) override;

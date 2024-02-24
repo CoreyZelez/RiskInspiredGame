@@ -111,6 +111,8 @@ void NumericTextDisplay<T>::updateText()
 	}
 
 	text << sf::Text::Regular << textColor << prefix << valueStr << postfix;
+
+	centerText();
 }
 
 template<typename T>

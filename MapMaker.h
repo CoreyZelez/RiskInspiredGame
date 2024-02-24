@@ -7,17 +7,18 @@
 #include <memory>
 #include <vector>
 
-enum class MapMakerState
-{
-	none,
-	territoryMode,
-	estateMode
-};
-
 class MapMaker
 {
+	enum class MapMakerState
+	{
+		TerritoryMode,
+		EstateMode
+	};
+
 public:
 	MapMaker(std::string mapName);
+
+	~MapMaker();
 
 	void save();
 	void saveAs(std::string mapName);
@@ -28,15 +29,9 @@ public:
 	void handleInput(const sf::RenderWindow &window, sf::View &view);
 
 private:
-	void handleButtonInput(const sf::RenderWindow &window);
-	void drawButtons(sf::RenderWindow &window);
-
 	Map map;
-	MapMakerState state = MapMakerState::none;
-
+	MapMakerState state = MapMakerState::TerritoryMode;
 	TerritoryMaker territoryMaker;
 	EstateMaker estateMaker;
-
-	std::vector<std::unique_ptr<CommandButton>> buttons;
 };
 

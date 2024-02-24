@@ -24,5 +24,7 @@ private:
 	const float horizontalEntityPadding = 30;
 	// Padding of background panel edges to UI entities.
 	const float verticalEntityPadding = 10;
+
+	void init();
 };
 
