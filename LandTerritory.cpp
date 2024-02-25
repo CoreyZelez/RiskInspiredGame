@@ -4,9 +4,21 @@
 #include "Utility.h"
 #include "LandTerritoryOccupancy.h"
 #include "NavalTerritory.h"
+#include "TerrainFactory.h"
+#include "CultureFactory.h"
 #include <assert.h>
 #include <iostream>
 #include <fstream>
+
+LandTerritory::LandTerritory(int id, Grid graphics, LandTerritoryFeatures features, NavalTerritory *navalTerritory)
+	: Territory(id, graphics, std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land), features(features)
+{
+	// Create the port.
+	if(navalTerritory != nullptr)
+	{
+		port = std::make_unique<Port>(*this, *navalTerritory);
+	}
+}
 
 LandTerritory::LandTerritory(int id, Grid graphics, NavalTerritory *navalTerritory)
 	: Territory(id, graphics, std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land)
@@ -16,6 +28,8 @@ LandTerritory::LandTerritory(int id, Grid graphics, NavalTerritory *navalTerrito
 	{
 		port = std::make_unique<Port>(*this, *navalTerritory);
 	}
+
+	initDefaultFeatures();
 }
 
 LandTerritory::LandTerritory(int id, Grid graphics)
@@ -26,16 +40,22 @@ LandTerritory::LandTerritory(int id, Grid graphics)
 LandTerritory::LandTerritory(int id)
 	: Territory(id, createRandomLandColor(), std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land)
 {
+	initDefaultFeatures();
 }
 
 void LandTerritory::saveToFile(std::ofstream &file) const
 {
 	Territory::saveToFile(file);
+
+	// Save features.
+	features.saveToFile(file);
+
+	// Save port.
 	if(port != nullptr)
 	{
 		// Save the territory ID of the associated naval territory with the port.
 		file << "# port naval id" << std::endl;
-		file << port.get()->getNavalTerritoryID();
+		file << port.get()->getNavalTerritoryID() << std::endl;
 	}
 }
 
@@ -44,7 +64,7 @@ std::unique_ptr<Port>& LandTerritory::getPort()
 	return port;
 }
 
-void LandTerritory::drawPort(sf::RenderWindow & window) const
+void LandTerritory::drawPort(sf::RenderWindow &window) const
 {
 	if(port != nullptr)
 	{
@@ -97,6 +117,17 @@ bool LandTerritory::hasPort() const
 	return port != nullptr;
 }
 
+void LandTerritory::initDefaultFeatures()
+{
+	features.prosperity = 100;
+	features.coreProsperity = 100;
+
+	TerrainFactory terrainFactory;
+	CultureFactory cultureFactory;
+	features.terrain = terrainFactory.createTerrain(0);
+	features.culture = cultureFactory.createCulture(-1); 
+}
+
 int loadPortNavalID(std::ifstream & file)
 {
 	std::string line;
@@ -106,4 +137,43 @@ int loadPortNavalID(std::ifstream & file)
 	file >> id;
 	std::getline(file, line);
 	return id;
+}
+
+LandTerritoryFeatures loadLandTerritoryFeatures(std::ifstream & file)
+{
+	LandTerritoryFeatures features;
+
+	std::string line;
+
+	// Prosperity.
+	std::getline(file, line);
+	assert(line.compare("# prosperity") == 0);
+	std::getline(file, line);
+	features.prosperity = std::stoi(line);
+
+	// Core prosperity.
+	std::getline(file, line);
+	assert(line.compare("# core prosperity") == 0);
+	std::getline(file, line);
+	features.coreProsperity = std::stoi(line);
+
+	// Terrain.
+	std::getline(file, line);
+	assert(line.compare("# terrain id") == 0);
+	std::getline(file, line);
+	int terrainID = std::stoi(line);
+	TerrainFactory terrainFactory;
+	assert(terrainFactory.hasTerrain(terrainID));
+	features.terrain = terrainFactory.createTerrain(terrainID);
+
+	// Culture
+	std::getline(file, line);
+	assert(line.compare("# culture id") == 0);
+	std::getline(file, line);
+	int cultureID = std::stoi(line);
+	CultureFactory cultureFactory;
+	assert(cultureFactory.hasCulture(terrainID));
+	features.culture = cultureFactory.createCulture(cultureID);
+
+	return features;
 }

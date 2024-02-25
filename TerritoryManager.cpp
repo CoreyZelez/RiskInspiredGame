@@ -267,15 +267,18 @@ void TerritoryManager::loadLandTerritory(std::ifstream & file)
 
 	int id = loadTerritoryID(file);
 
+	LandTerritoryFeatures features = loadLandTerritoryFeatures(file);
+
 	// Load naval territory associated with port if exists.
 	NavalTerritory* portNavalTerritory = nullptr;
-	if(file.peek() == '#')                             /////////////////////// SUSPICIOUS!!!!! DOES IT WORK????????
+	if(file.peek() == '#')                             
 	{
 		int portNavalID = loadPortNavalID(file);
 		portNavalTerritory = getNavalTerritory(portNavalID);
 	}
 
-	std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>(id, graphics, portNavalTerritory);
+	std::unique_ptr<LandTerritory> territory = 
+	 	std::make_unique<LandTerritory>(id, graphics, features, portNavalTerritory);
 	
 	territories.emplace_back(territory.get());
 	landTerritories.emplace_back(std::move(territory));

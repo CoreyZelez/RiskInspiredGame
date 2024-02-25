@@ -13,6 +13,7 @@ class NavalTerritory;
 class LandTerritory : public Territory 
 {
 public:
+	LandTerritory(int id, Grid graphics, LandTerritoryFeatures features, NavalTerritory *navalTerritory);
 	LandTerritory(int id, Grid graphics, NavalTerritory *navalTerritory);
 	LandTerritory(int id, Grid graphics);
 	explicit LandTerritory(int id);
@@ -36,6 +37,10 @@ public:
 private:
 	LandTerritoryFeatures features;
 	std::unique_ptr<Port> port = nullptr;
+
+	void initDefaultFeatures();
 };
 
 int loadPortNavalID(std::ifstream &file);
+
+LandTerritoryFeatures loadLandTerritoryFeatures(std::ifstream &file);

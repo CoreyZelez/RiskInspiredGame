@@ -168,6 +168,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Culture.cpp" />
+    <ClCompile Include="CultureFactory.cpp" />
     <ClCompile Include="EstateAllocatorUnitTest.cpp" />
     <ClCompile Include="GameplaySettings.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
@@ -247,6 +248,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Culture.h" />
+    <ClInclude Include="CultureFactory.h" />
     <ClInclude Include="EstateAllocatorUnitTest.h" />
     <ClInclude Include="GameplaySettings.h" />
     <ClInclude Include="GraphicsComponent.h" />
