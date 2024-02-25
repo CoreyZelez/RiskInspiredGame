@@ -2,6 +2,7 @@
 #include "Map.h"
 #include "Territory.h"
 #include "InputUtility.h"
+#include "TerrainFactory.h"
 #include <assert.h>
 #include <iostream>
 #include <thread>
@@ -15,11 +16,22 @@ TerritoryMaker::TerritoryMaker(TerritoryManager &territoryManager)
 void TerritoryMaker::draw(sf::RenderWindow &window) const
 {
 	// fixedTerritoryVertices does not include the territory vertices of the selected territory.
-	window.draw(fixedTerritoryVertices);
-	if(selectedTerritory != nullptr)
+
+	if(state == TerritoryMakerState::none || state == TerritoryMakerState::editTerritoryGrid)
 	{
-		selectedTerritory->getGrid().draw(window);
+		territoryManager.draw(window);
+		return;
+		window.draw(fixedTerritoryVertices);
+		if(selectedTerritory != nullptr)
+		{
+			selectedTerritory->getGrid().draw(window);
+		}
 	}
+	else
+	{
+		territoryManager.draw(window);
+	}
+
 	territoryManager.drawPorts(window);
 }
 
@@ -29,122 +41,27 @@ void TerritoryMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 
 	handleInputForView(view);
 
-	sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
-
-	// Select territories for port creation.
-	if(state == TerritoryMakerState::createPort)
-	{
-		if(inputUtility.getButtonPressed(sf::Mouse::Right))
-		{
-			assert(portTerritories.first == nullptr || portTerritories.second == nullptr);
-
-			if(portTerritories.first == nullptr)
-			{
-				portTerritories.first = territoryManager.getLandTerritory(worldPos);
-				if(portTerritories.first == nullptr)
-				{
-					portTerritories.second = nullptr;
-					state = TerritoryMakerState::none;
-				}
-			}
-			else if(portTerritories.second == nullptr)
-			{
-				portTerritories.second = territoryManager.getNavalTerritory(worldPos);
-				if(portTerritories.second == nullptr)
-				{
-					portTerritories.first = nullptr;
-					state = TerritoryMakerState::none;
-				}
-			}
-
-			if(portTerritories.first != nullptr && portTerritories.second != nullptr)
-			{
-				// Create the port. Port is not created if territories not adjacent.
-				portTerritories.first->createPort(*portTerritories.second);
-				portTerritories.first = nullptr;
-				portTerritories.second = nullptr;
-				state = TerritoryMakerState::none;
-			}
-		}
-	}
+	handleInputForStateChange();
 	
+	handleInputForTerritorySelection(window);
+	handleInputForTerritoryCreation();
+	handleInputForTerritoryGridEdits(window);
 
-	if(state == TerritoryMakerState::editTerritoryGrid)
-	{
-		// Remove territory square at mouse position.
-		if(inputUtility.getButtonDown(sf::Mouse::Right))
-		{
-			removePosition(window);
-		}
-		if(inputUtility.getButtonDown(sf::Mouse::Left))
-		{
-			addPosition(window);
-		}
-	}
+	handleInputForTerrainChange(window);
 
-	if(state == TerritoryMakerState::none)
-	{
-		if(inputUtility.getButtonDown(sf::Mouse::Right))
-		{
-			sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-			sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
-
-			// Select territory for modification.
-			selectedTerritory = territoryManager.getLandTerritory(worldPos);
-			if(selectedTerritory == nullptr)
-			{
-				selectedTerritory = territoryManager.getNavalTerritory(worldPos);
-			}
-			if(selectedTerritory != nullptr)
-			{
-				state = TerritoryMakerState::editTerritoryGrid;
-				updateFixedTerritoriesVertices();
-			}
-		}
-
-		if(inputUtility.getKeyPressed(sf::Keyboard::L))
-		{
-			// Create a new territory.
-			territoryManager.removeEmptyTerritories();
-			selectedTerritory = territoryManager.createLandTerritory();
-			state = TerritoryMakerState::editTerritoryGrid;
-			updateFixedTerritoriesVertices();
-		}
-
-		// Create naval territory.
-		if(inputUtility.getKeyPressed(sf::Keyboard::N))
-		{
-			territoryManager.removeEmptyTerritories();
-			selectedTerritory = territoryManager.createNavalTerritory();
-			state = TerritoryMakerState::editTerritoryGrid;
-			updateFixedTerritoriesVertices();
-		}
-	}
-
-	// Deselect territory and return to neutral state.
-	if(inputUtility.getKeyPressed(sf::Keyboard::Enter))
-	{
-		selectedTerritory = nullptr;
-		state = TerritoryMakerState::none;
-		updateFixedTerritoriesVertices();
-	}
-
-	// Port creation.
-	if(inputUtility.getKeyPressed(sf::Keyboard::P))
-	{
-		if(state == TerritoryMakerState::none)
-		{
-			state = TerritoryMakerState::createPort;
-			portTerritories = { nullptr, nullptr };
-		}
-	}
-	if(inputUtility.getKeyPressed(sf::Keyboard::B))
-	{
-		progressBrushSize();
-	}
+	handleInputForPortCreation(window);
 
 	inputClock.restart();
+}
+
+void TerritoryMaker::changeState(TerritoryMakerState state)
+{
+	this->state = state;
+
+	if(state == TerritoryMakerState::editTerrain)
+	{
+		territoryManager.setDrawMode(TerritoryDrawMode::terrain);
+	}
 }
 
 void TerritoryMaker::handleInputForView(sf::View &view) const
@@ -180,6 +97,228 @@ void TerritoryMaker::handleInputForView(sf::View &view) const
 	else if(inputUtility.getMouseScrollDirection() == -1)
 	{
 		view.zoom(1 + zoom);
+	}
+}
+
+void TerritoryMaker::handleInputForStateChange()
+{
+	InputUtility &inputUtility = InputUtility::getInstance();
+
+	// Deselect territory if any selected and return to neutral state.
+	if(inputUtility.getKeyPressed(sf::Keyboard::Enter))
+	{
+		selectedTerritory = nullptr;
+		changeState(TerritoryMakerState::none);
+		updateFixedTerritoriesVertices();
+	}
+
+	// Cannot change state until selected territory is saved.
+	if(selectedTerritory != nullptr)
+	{
+		return;
+	}
+
+	// Enter terrain editor.
+	if(inputUtility.getKeyPressed(sf::Keyboard::Z))
+	{
+		changeState(TerritoryMakerState::editTerrain);
+	}
+
+	// Enter core prosperity editor.
+	if(inputUtility.getKeyPressed(sf::Keyboard::X))
+	{
+		changeState(TerritoryMakerState::editCoreProsperity);
+	}
+
+	// Enter culture editor.
+	if(inputUtility.getKeyPressed(sf::Keyboard::C))
+	{
+		changeState(TerritoryMakerState::editCulture);
+	}
+
+	// Port creation.
+	if(inputUtility.getKeyPressed(sf::Keyboard::P))
+	{
+		if(state == TerritoryMakerState::none)
+		{
+			changeState(TerritoryMakerState::createPort);
+			portTerritories = { nullptr, nullptr };
+		}
+	}
+}
+
+void TerritoryMaker::handleInputForPortCreation(const sf::RenderWindow &window)
+{
+	if(state != TerritoryMakerState::createPort)
+	{
+		return;
+	}
+
+	sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+
+	InputUtility &inputUtility = InputUtility::getInstance();
+	if(inputUtility.getButtonPressed(sf::Mouse::Right))
+	{
+		assert(portTerritories.first == nullptr || portTerritories.second == nullptr);
+
+		if(portTerritories.first == nullptr)
+		{
+			portTerritories.first = territoryManager.getLandTerritory(worldPos);
+			if(portTerritories.first == nullptr)
+			{
+				portTerritories.second = nullptr;
+				state = TerritoryMakerState::none;
+			}
+		}
+		else if(portTerritories.second == nullptr)
+		{
+			portTerritories.second = territoryManager.getNavalTerritory(worldPos);
+			if(portTerritories.second == nullptr)
+			{
+				portTerritories.first = nullptr;
+				state = TerritoryMakerState::none;
+			}
+		}
+
+		if(portTerritories.first != nullptr && portTerritories.second != nullptr)
+		{
+			// Create the port. Port is not created if territories not adjacent.
+			portTerritories.first->createPort(*portTerritories.second);
+			portTerritories.first = nullptr;
+			portTerritories.second = nullptr;
+			state = TerritoryMakerState::none;
+		}
+	}
+}
+
+void TerritoryMaker::handleInputForTerritorySelection(const sf::RenderWindow &window)
+{
+	if(state != TerritoryMakerState::none)
+	{
+		return;
+	}
+
+	sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+
+	InputUtility &inputUtility = InputUtility::getInstance();
+
+	if(inputUtility.getButtonDown(sf::Mouse::Right))
+	{
+		// Select territory for modification.
+		selectedTerritory = territoryManager.getLandTerritory(worldPos);
+		if(selectedTerritory == nullptr)
+		{
+			selectedTerritory = territoryManager.getNavalTerritory(worldPos);
+		}
+		if(selectedTerritory != nullptr)
+		{
+			state = TerritoryMakerState::editTerritoryGrid;
+			updateFixedTerritoriesVertices();
+		}
+	}
+}
+
+void TerritoryMaker::handleInputForTerritoryCreation()
+{
+	if(state != TerritoryMakerState::none)
+	{
+		return;
+	}
+
+	InputUtility &inputUtility = InputUtility::getInstance();
+
+	if(inputUtility.getKeyPressed(sf::Keyboard::L))
+	{
+		// Create a new territory.
+		territoryManager.removeEmptyTerritories();
+		selectedTerritory = territoryManager.createLandTerritory();
+		state = TerritoryMakerState::editTerritoryGrid;
+		updateFixedTerritoriesVertices();
+	}
+
+	// Create naval territory.
+	if(inputUtility.getKeyPressed(sf::Keyboard::N))
+	{
+		territoryManager.removeEmptyTerritories();
+		selectedTerritory = territoryManager.createNavalTerritory();
+		state = TerritoryMakerState::editTerritoryGrid;
+		updateFixedTerritoriesVertices();
+	}
+}
+
+void TerritoryMaker::handleInputForTerritoryGridEdits(const sf::RenderWindow &window)
+{
+	if(state != TerritoryMakerState::editTerritoryGrid)
+	{
+		return;
+	}
+
+	InputUtility &inputUtility = InputUtility::getInstance();
+
+	// Remove territory square at mouse position.
+	if(inputUtility.getButtonDown(sf::Mouse::Right))
+	{
+		removePosition(window);
+	}
+	if(inputUtility.getButtonDown(sf::Mouse::Left))
+	{
+		addPosition(window);
+	}
+}
+
+void TerritoryMaker::handleInputForTerrainChange(const sf::RenderWindow &window)
+{
+	if(state != TerritoryMakerState::editTerrain)
+	{
+		return;
+	}
+
+	sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+
+	InputUtility &inputUtility = InputUtility::getInstance();
+
+	if(inputUtility.getButtonDown(sf::Mouse::Left))
+	{
+		// Select territory for terrain change.
+		LandTerritory *territory = territoryManager.getLandTerritory(worldPos);
+
+		// Change terrain.
+		if(territory != nullptr)
+		{
+			territory->setTerrain(selectedTerrain);
+		}
+	}
+ 
+	std::vector<sf::Keyboard::Key> terrainKeys =
+	{
+		sf::Keyboard::Num1,
+		sf::Keyboard::Num2,
+		sf::Keyboard::Num3,
+		sf::Keyboard::Num4,
+		sf::Keyboard::Num5,
+		sf::Keyboard::Num6,
+		sf::Keyboard::Num7,
+		sf::Keyboard::Num8
+	};
+
+	int terrainNum = 0;
+	for(sf::Keyboard::Key key : terrainKeys)
+	{
+		handleTerrainKeyPress(key, terrainNum);
+		++terrainNum;
+	}
+}
+
+void TerritoryMaker::handleTerrainKeyPress(sf::Keyboard::Key key, int terrainNum)
+{
+	InputUtility &inputUtility = InputUtility::getInstance();
+	TerrainFactory factory;
+	if(inputUtility.getKeyPressed(key) && factory.hasTerrain(terrainNum) != 0)
+	{
+		selectedTerrain = factory.createTerrain(terrainNum); 
 	}
 }
 

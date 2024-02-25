@@ -57,6 +57,26 @@ std::string LandTerritory::getSaveLabel() const
 	return landSaveLabel;
 }
 
+void LandTerritory::setDrawMode(TerritoryDrawMode mode)
+{
+	Territory::setDrawMode(mode);
+
+	switch(mode)
+	{
+	case TerritoryDrawMode::terrain:
+		getGrid().setColor(features.terrain.color);
+	}
+}
+
+void LandTerritory::setTerrain(Terrain terrain)
+{
+	features.terrain = terrain;
+	if(getDrawMode() == TerritoryDrawMode::terrain)
+	{
+		getGrid().setColor(features.terrain.color);
+	}
+}
+
 void LandTerritory::createPort(NavalTerritory &navalTerritory)
 {
 	// Return if grids do not share border.

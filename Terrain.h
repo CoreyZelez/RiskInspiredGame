@@ -4,6 +4,7 @@
 
 struct Terrain
 {
+	int id;  
 	std::string name;
 	sf::Color color;
 	double defenceMultiplier;

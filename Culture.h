@@ -4,6 +4,7 @@
 
 struct Culture
 {
+	int id; 
 	std::string name;
 	sf::Color color;
 };

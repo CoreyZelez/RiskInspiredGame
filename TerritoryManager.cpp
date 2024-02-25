@@ -59,6 +59,22 @@ void TerritoryManager::load(std::string mapName)
 	calculateDistances();
 }
 
+void TerritoryManager::draw(sf::RenderWindow &window) const
+{
+	for(const Territory *territory : territories)
+	{
+		territory->draw(window);
+	}
+}
+
+void TerritoryManager::setDrawMode(TerritoryDrawMode mode)
+{
+	for(Territory *territory : territories)
+	{
+		territory->setDrawMode(mode);
+	}
+}
+
 void TerritoryManager::removeEmptyTerritories()
 {
 	// Remove empty land territories.

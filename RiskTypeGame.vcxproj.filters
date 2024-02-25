@@ -342,6 +342,9 @@
     <ClCompile Include="GameplaySettings.cpp">
       <Filter>Source Files\Game\MVC</Filter>
     </ClCompile>
+    <ClCompile Include="TerrainFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LandArmy.h">
@@ -583,6 +586,9 @@
     </ClInclude>
     <ClInclude Include="GameplaySettings.h">
       <Filter>Header Files\Game\MVC</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainFactory.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

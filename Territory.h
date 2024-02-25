@@ -3,7 +3,6 @@
 #include "Grid.h"
 #include "IOccupiable.h"
 #include "TerritoryDistanceMap.h"
-#include "LandTerritoryFeatures.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
@@ -23,6 +22,13 @@ enum class TerritoryType
 	naval
 };
 
+enum class TerritoryDrawMode
+{
+	terrain,
+	culture,
+	prosperity
+};
+
 class Territory : public Subject
 {
 public:
@@ -39,6 +45,9 @@ public:
 	void assignLandedEstate(LandedEstate *estate);
 
 	virtual void calculateDistances(const std::vector<Territory*> &territories);
+
+	virtual void setDrawMode(TerritoryDrawMode mode);
+	TerritoryDrawMode getDrawMode() const;
 
 	IOccupiable* getOccupancyHandler();
 	const IOccupiable* getOccupancyHandler() const;
@@ -64,11 +73,11 @@ public:
 private:
 	int id;  // ID representing territory in text file.
 	Grid grid;
+	TerritoryDrawMode drawMode;
 	TerritoryType type;
 	LandedEstate *landedEstate = nullptr; 
 	std::unique_ptr<IOccupiable> occupancyHandler;  // Handles military occupancy of territory.
 	TerritoryDistanceMap distanceMap;  // Stores information about distances to any territory.
-	LandTerritoryFeatures features;
 };
 
 int loadTerritoryID(std::ifstream &file);

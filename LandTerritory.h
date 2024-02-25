@@ -3,6 +3,7 @@
 #include "Observer.h"
 #include "Subject.h"
 #include "Port.h"
+#include "LandTerritoryFeatures.h"
 #include <memory>
 
 class NavalFleet;
@@ -23,6 +24,9 @@ public:
 	// Save label is identifier in txt file for territory type.
 	virtual std::string getSaveLabel() const override;
 
+	virtual void setDrawMode(TerritoryDrawMode mode) override;
+	void setTerrain(Terrain terrain);
+
 	std::unique_ptr<Port> &getPort();
 	void drawPort(sf::RenderWindow &window) const;
 	void createPort(NavalTerritory &navalTerritory);
@@ -30,6 +34,7 @@ public:
 	bool hasPort() const;
 
 private:
+	LandTerritoryFeatures features;
 	std::unique_ptr<Port> port = nullptr;
 };
 

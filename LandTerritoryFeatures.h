@@ -7,7 +7,7 @@ struct LandTerritoryFeatures
 {
 	int prosperity;  // Current prosperity of territory. Core prosperity tends to this slowly.
 	int coreProsperity;  // Underlying prosperity of territory. Prosperity tends to this quickly.
-	const Culture culture;
-	const Terrain terrain;
+	Culture culture;
+	Terrain terrain;
 };
 

@@ -38,6 +38,16 @@ void Territory::calculateDistances(const std::vector<Territory*>& territories)
 	distanceMap.calculateDistances(territories);
 }
 
+void Territory::setDrawMode(TerritoryDrawMode mode)
+{
+	drawMode = mode;
+}
+
+TerritoryDrawMode Territory::getDrawMode() const
+{
+	return drawMode;
+}
+
 void Territory::saveToFile(std::ofstream &file) const
 {
 	assert(file.is_open());

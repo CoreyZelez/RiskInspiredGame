@@ -12,6 +12,9 @@ public:
 	void save(std::string mapName) const;
 	void load(std::string mapName);
 
+	void draw(sf::RenderWindow &window) const;
+	void setDrawMode(TerritoryDrawMode mode);
+
 	void removeEmptyTerritories();
 
 	bool positionClaimed(sf::Vector2f position) const;  // Returns true if any territory contains the world position.

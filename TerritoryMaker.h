@@ -1,7 +1,10 @@
 #pragma once
+#include "Grid.h"
+#include "Terrain.h"
+#include "Culture.h"
 #include <SFML/Graphics.hpp>
 #include <unordered_set>
-#include "Grid.h"
+#include <map>
 
 class Territory;
 class TerritoryManager;
@@ -12,7 +15,10 @@ enum class TerritoryMakerState
 {
 	none,
 	editTerritoryGrid,  // Adjust shape of territory by adding or removing grid squares.
-	createPort  // Create port by selecting a land naval territory pair.
+	createPort,  // Create port by selecting a land naval territory pair.
+	editCulture,
+	editTerrain,
+	editCoreProsperity
 };
 
 class TerritoryMaker
@@ -25,25 +31,37 @@ public:
 	void handleInput(const sf::RenderWindow &window, sf::View &view);
 
 private:
-	void handleInputForView(sf::View &view) const;
-
 	TerritoryManager &territoryManager;
 
-	// Territory currently being modified.
-	Territory *selectedTerritory = nullptr; 
-	// Territories chosen for creation of port.
-	std::pair<LandTerritory*, NavalTerritory*> portTerritories = { nullptr, nullptr };
-	// Territory maker state representing how user input should be interpreted.
 	TerritoryMakerState state = TerritoryMakerState::none;
-	// Width of square positions when adding or removing territory squares.
-	int brushSize = 3;
-	// Grid positions claimed by any territory 
-	std::unordered_set<sf::Vector2i, Vector2iHash> claimedPositions;
-	// Clock tracking time since last time input handled.
-	sf::Clock inputClock;  
 
-	// Vertex array of all territories excluding territory currently being modified.
-	sf::VertexArray fixedTerritoryVertices;
+	Territory *selectedTerritory = nullptr;  // Territory currently being modified.
+
+	std::pair<LandTerritory*, NavalTerritory*> portTerritories = { nullptr, nullptr };  // Territories chosen for creation of port.
+
+	int brushSize = 3;  // Width of square positions when adding or removing territory squares.
+
+	std::unordered_set<sf::Vector2i, Vector2iHash> claimedPositions;  // Grid positions claimed by any territory 
+	sf::VertexArray fixedTerritoryVertices;	 // Vertex array of all territories excluding territory currently being modified.
+
+	std::vector<Culture> cultures;
+	int selectedCulture = 0;  // Index of selected culture.
+
+	Terrain selectedTerrain;  // Index of selected culture.
+
+	sf::Clock inputClock;  	// Clock tracking time since last time input handled.
+
+	void changeState(TerritoryMakerState state);
+
+	void handleInputForView(sf::View &view) const;
+	void handleInputForStateChange();
+	void handleInputForPortCreation(const sf::RenderWindow &window);
+	void handleInputForTerritorySelection(const sf::RenderWindow &window);
+	void handleInputForTerritoryCreation();
+	void handleInputForTerritoryGridEdits(const sf::RenderWindow &window);
+	void handleInputForTerrainChange(const sf::RenderWindow &window);
+
+	void handleTerrainKeyPress(sf::Keyboard::Key key, int terrainNum);
 
 	void initClaimedPositions();
 	void updateFixedTerritoriesVertices();

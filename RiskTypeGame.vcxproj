@@ -221,6 +221,7 @@
     <ClCompile Include="RealmGrid.cpp" />
     <ClCompile Include="NumericTextDisplay.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="TerrainFactory.cpp" />
     <ClCompile Include="TextDisplay.cpp" />
     <ClCompile Include="VassalManager.cpp" />
     <ClCompile Include="ReconcileLandedEstates.cpp" />
@@ -294,6 +295,7 @@
     <ClInclude Include="RealmGrid.h" />
     <ClInclude Include="NumericTextDisplay.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="TerrainFactory.h" />
     <ClInclude Include="TextDisplay.h" />
     <ClInclude Include="VassalManager.h" />
     <ClInclude Include="ReconcileLandedEstates.h" />
