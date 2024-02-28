@@ -44,10 +44,9 @@ private:
 	std::unordered_set<sf::Vector2i, Vector2iHash> claimedPositions;  // Grid positions claimed by any territory 
 	sf::VertexArray fixedTerritoryVertices;	 // Vertex array of all territories excluding territory currently being modified.
 
-	std::vector<Culture> cultures;
-	int selectedCulture = 0;  // Index of selected culture.
+	Culture selectedCulture;  
 
-	Terrain selectedTerrain;  // Index of selected culture.
+	Terrain selectedTerrain;  
 
 	sf::Clock inputClock;  	// Clock tracking time since last time input handled.
 
@@ -60,8 +59,10 @@ private:
 	void handleInputForTerritoryCreation();
 	void handleInputForTerritoryGridEdits(const sf::RenderWindow &window);
 	void handleInputForTerrainChange(const sf::RenderWindow &window);
+	void handleInputForCultureChange(const sf::RenderWindow &window);
 
 	void handleTerrainKeyPress(sf::Keyboard::Key key, int terrainNum);
+	void handleCultureKeyPress(sf::Keyboard::Key key, int cultureNum);
 
 	void initClaimedPositions();
 	void updateFixedTerritoriesVertices();

@@ -95,7 +95,7 @@ void GameUIController::handleUICreation(const sf::RenderWindow &window)
 		}
 	}
 
-	if(inputUtility.getKeyPressed(sf::Keyboard::R))
+	if(inputUtility.getKeyPressed(sf::Keyboard::T))
 	{
 		if(game.currPlayerIsHuman())
 		{

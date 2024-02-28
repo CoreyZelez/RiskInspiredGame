@@ -343,10 +343,10 @@
       <Filter>Source Files\Game\MVC</Filter>
     </ClCompile>
     <ClCompile Include="TerrainFactory.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Territory</Filter>
     </ClCompile>
     <ClCompile Include="CultureFactory.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Territory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -575,9 +575,6 @@
     <ClInclude Include="NumericTextDisplay.h">
       <Filter>Header Files\User Interface</Filter>
     </ClInclude>
-    <ClInclude Include="TextDisplay.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Terrain.h">
       <Filter>Header Files\Game\Territory</Filter>
     </ClInclude>
@@ -591,10 +588,13 @@
       <Filter>Header Files\Game\MVC</Filter>
     </ClInclude>
     <ClInclude Include="TerrainFactory.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\Territory</Filter>
     </ClInclude>
     <ClInclude Include="CultureFactory.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="TextDisplay.h">
+      <Filter>Header Files\User Interface</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

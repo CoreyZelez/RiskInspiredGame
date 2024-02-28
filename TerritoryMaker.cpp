@@ -3,6 +3,7 @@
 #include "Territory.h"
 #include "InputUtility.h"
 #include "TerrainFactory.h"
+#include "CultureFactory.h"
 #include <assert.h>
 #include <iostream>
 #include <thread>
@@ -48,6 +49,7 @@ void TerritoryMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 	handleInputForTerritoryGridEdits(window);
 
 	handleInputForTerrainChange(window);
+	handleInputForCultureChange(window);
 
 	handleInputForPortCreation(window);
 
@@ -61,6 +63,10 @@ void TerritoryMaker::changeState(TerritoryMakerState state)
 	if(state == TerritoryMakerState::editTerrain)
 	{
 		territoryManager.setDrawMode(TerritoryDrawMode::terrain);
+	}
+	else if(state == TerritoryMakerState::editCulture)
+	{
+		territoryManager.setDrawMode(TerritoryDrawMode::culture);
 	}
 }
 
@@ -312,6 +318,50 @@ void TerritoryMaker::handleInputForTerrainChange(const sf::RenderWindow &window)
 	}
 }
 
+void TerritoryMaker::handleInputForCultureChange(const sf::RenderWindow & window)
+{
+	if(state != TerritoryMakerState::editCulture)
+	{
+		return;
+	}
+
+	sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+
+	InputUtility &inputUtility = InputUtility::getInstance();
+
+	if(inputUtility.getButtonDown(sf::Mouse::Left))
+	{
+		// Select territory for culture change.
+		LandTerritory *territory = territoryManager.getLandTerritory(worldPos);
+
+		// Change culture.
+		if(territory != nullptr)
+		{
+			territory->setCulture(selectedCulture);
+		}
+	}
+
+	std::vector<sf::Keyboard::Key> cultureKeys =
+	{
+		sf::Keyboard::Num1,
+		sf::Keyboard::Num2,
+		sf::Keyboard::Num3,
+		sf::Keyboard::Num4,
+		sf::Keyboard::Num5,
+		sf::Keyboard::Num6,
+		sf::Keyboard::Num7,
+		sf::Keyboard::Num8
+	};
+
+	int terrainNum = 0;
+	for(sf::Keyboard::Key key : cultureKeys)
+	{
+		handleCultureKeyPress(key, terrainNum);
+		++terrainNum;
+	}
+}
+
 void TerritoryMaker::handleTerrainKeyPress(sf::Keyboard::Key key, int terrainNum)
 {
 	InputUtility &inputUtility = InputUtility::getInstance();
@@ -319,6 +369,16 @@ void TerritoryMaker::handleTerrainKeyPress(sf::Keyboard::Key key, int terrainNum
 	if(inputUtility.getKeyPressed(key) && factory.hasTerrain(terrainNum) != 0)
 	{
 		selectedTerrain = factory.createTerrain(terrainNum); 
+	}
+}
+
+void TerritoryMaker::handleCultureKeyPress(sf::Keyboard::Key key, int cultureNum)
+{
+	InputUtility &inputUtility = InputUtility::getInstance();
+	CultureFactory factory;
+	if(inputUtility.getKeyPressed(key) && factory.hasCulture(cultureNum) != 0)
+	{
+		selectedCulture = factory.createCulture(cultureNum);
 	}
 }
 

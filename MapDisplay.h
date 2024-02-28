@@ -14,7 +14,9 @@ enum class MapMode
 	duchy,
 	kingdom,
 	empire,
-	prosperity
+	prosperity,
+	terrain,
+	culture
 };
 
 class Game;

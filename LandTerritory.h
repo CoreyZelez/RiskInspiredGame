@@ -26,7 +26,9 @@ public:
 	virtual std::string getSaveLabel() const override;
 
 	virtual void setDrawMode(TerritoryDrawMode mode) override;
+
 	void setTerrain(Terrain terrain);
+	void setCulture(Culture culture);
 
 	std::unique_ptr<Port> &getPort();
 	void drawPort(sf::RenderWindow &window) const;

@@ -114,6 +114,21 @@ void GameController::handleInputForMapDisplay(const sf::RenderWindow &window)
 			game.selectCurrPlayerRealm(true);
 		}
 	}
+	else if(inputUtility.getKeyPressed(sf::Keyboard::R))
+	{
+		gameUI.resetLeftUI();
+		game.setMapMode(MapMode::terrain);
+	}
+	else if(inputUtility.getKeyPressed(sf::Keyboard::F))
+	{
+		gameUI.resetLeftUI();
+		game.setMapMode(MapMode::prosperity);
+	}
+	else if(inputUtility.getKeyPressed(sf::Keyboard::C))
+	{
+		gameUI.resetLeftUI();
+		game.setMapMode(MapMode::culture);
+	}
 	else if(inputUtility.getKeyDown(sf::Keyboard::LControl))
 	{
 		sf::Vector2i mousePos = sf::Mouse::getPosition(window);

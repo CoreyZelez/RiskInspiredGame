@@ -119,7 +119,7 @@ void Game::update()
 {
 	///////////////////////////////
 	// Caps number of turns per update call. For testing maybe... 
-	const int maxTurns = 3;
+	const int maxTurns = 5;
 	double turnCnt = 0;
 	///////////////////////////////
 
@@ -210,6 +210,19 @@ Player& Game::createPlayer()
 
 void Game::setMapMode(MapMode mapMode)
 {
+	switch(mapMode)
+	{
+	case MapMode::terrain:
+		map.getTerritoryManager().setDrawMode(TerritoryDrawMode::terrain);
+		break;
+	case MapMode::culture:
+		map.getTerritoryManager().setDrawMode(TerritoryDrawMode::culture);
+		break;
+	case MapMode::prosperity:
+		map.getTerritoryManager().setDrawMode(TerritoryDrawMode::prosperity);
+		break;
+	}
+
 	this->mapMode = mapMode;
 }
 

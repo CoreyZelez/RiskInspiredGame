@@ -85,6 +85,13 @@ void LandTerritory::setDrawMode(TerritoryDrawMode mode)
 	{
 	case TerritoryDrawMode::terrain:
 		getGrid().setColor(features.terrain.color);
+		break;
+	case TerritoryDrawMode::culture:
+		getGrid().setColor(features.culture.color);
+		break;
+	case TerritoryDrawMode::prosperity:
+		// IMPLEMENT: SET COLOR BASED ON LEVEL OF PROSPERITY. 
+		break;
 	}
 }
 
@@ -94,6 +101,15 @@ void LandTerritory::setTerrain(Terrain terrain)
 	if(getDrawMode() == TerritoryDrawMode::terrain)
 	{
 		getGrid().setColor(features.terrain.color);
+	}
+}
+
+void LandTerritory::setCulture(Culture culture)
+{
+	features.culture = culture;
+	if(getDrawMode() == TerritoryDrawMode::culture)
+	{
+		getGrid().setColor(features.culture.color);
 	}
 }
 

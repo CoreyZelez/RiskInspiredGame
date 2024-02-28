@@ -43,6 +43,15 @@ void MapDisplay::draw(sf::RenderWindow &window) const
 	case MapMode::empire:
 		map.getEstateManager().draw(window, Title::empire);
 		break;
+	case MapMode::terrain:
+		map.getTerritoryManager().draw(window);
+		break;
+	case MapMode::culture:
+		map.getTerritoryManager().draw(window);
+		break;
+	case MapMode::prosperity:
+		map.getTerritoryManager().draw(window);
+		break;
 	}
 }
 
