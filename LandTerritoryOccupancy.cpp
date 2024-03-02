@@ -90,7 +90,8 @@ void LandTerritoryOccupancy::occupy(LandArmy *army)
 	// Case armies have different owner.
 	else
 	{
-		army->attack(*this->army, defenceMultiplier);
+		//const double defenceMultiplier = territory.getFeatures().terrain.defenceMultiplier;
+		army->attack(*this->army, territory.getTerrain());
 
 		// Attacking army occupys land if defending army killed and strength at occupancy cost threshold.
 		// this->army nullptr implies dead since it's pointer was nulled by territory in response to its death.

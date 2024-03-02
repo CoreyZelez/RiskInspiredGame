@@ -1,16 +1,13 @@
 #pragma once
-#include "Terrain.h"
-#include <string>
+#include "Factory.h"
+#include "Factory.cpp"
+#include <SFML/Graphics.hpp>
 
-class TerrainFactory
+class Terrain;
+
+class TerrainFactory : public Factory<int, Terrain>
+
 {
 public:
 	TerrainFactory();
-
-	Terrain createTerrain(int id) const;
-	bool hasTerrain(int id) const;
-
-private:
-	std::map<int, Terrain> terrains;
 };
-

@@ -8,9 +8,12 @@ struct LandTerritoryFeatures
 {
 	void saveToFile(std::ofstream &file) const;
 
-	int prosperity;  // Current prosperity of territory. Core prosperity tends to this slowly.
-	int coreProsperity;  // Underlying prosperity of territory. Prosperity tends to this quickly.
-	Terrain terrain;
-	Culture culture;
+	double prosperity;  // Current prosperity of territory. Core prosperity tends to this slowly.
+	double coreProsperity;  // Underlying prosperity of territory. Prosperity tends to this quickly.
+	Terrain terrain = { -1, "temporary", sf::Color(40, 40, 40), 0, 0 };
+	Culture culture = { -1, "temporary", sf::Color(40, 40, 40) };
 };
+
+sf::Color determineProsperityColor(double prosperity);
+
 

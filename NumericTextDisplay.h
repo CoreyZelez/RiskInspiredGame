@@ -2,9 +2,7 @@
 #include "UIEntity.h"
 #include "RichText.h"
 
-/*
- * Displays text relating to some primitive type within a box.
- */
+// Displays text relating to some primitive type within a box.
 template<typename T> class NumericTextDisplay : public UIEntity
 {
 public:

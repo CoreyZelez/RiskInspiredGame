@@ -91,6 +91,7 @@ void LandTerritory::setDrawMode(TerritoryDrawMode mode)
 		break;
 	case TerritoryDrawMode::prosperity:
 		// IMPLEMENT: SET COLOR BASED ON LEVEL OF PROSPERITY. 
+		getGrid().setColor(determineProsperityColor(features.prosperity));
 		break;
 	}
 }
@@ -100,7 +101,7 @@ void LandTerritory::setTerrain(Terrain terrain)
 	features.terrain = terrain;
 	if(getDrawMode() == TerritoryDrawMode::terrain)
 	{
-		getGrid().setColor(features.terrain.color);
+		getGrid().setColor(terrain.color);
 	}
 }
 
@@ -109,7 +110,17 @@ void LandTerritory::setCulture(Culture culture)
 	features.culture = culture;
 	if(getDrawMode() == TerritoryDrawMode::culture)
 	{
-		getGrid().setColor(features.culture.color);
+		getGrid().setColor(culture.color);
+	}
+}
+
+void LandTerritory::setProsperities(int prosperity)
+{
+	features.coreProsperity = prosperity;
+	features.prosperity = prosperity;
+	if(getDrawMode() == TerritoryDrawMode::prosperity)
+	{
+		getGrid().setColor(determineProsperityColor(prosperity));
 	}
 }
 
@@ -133,15 +144,18 @@ bool LandTerritory::hasPort() const
 	return port != nullptr;
 }
 
+const Terrain& LandTerritory::getTerrain() const
+{
+	return features.terrain;
+}
+
 void LandTerritory::initDefaultFeatures()
 {
 	features.prosperity = 100;
 	features.coreProsperity = 100;
 
-	TerrainFactory terrainFactory;
-	CultureFactory cultureFactory;
-	features.terrain = terrainFactory.createTerrain(0);
-	features.culture = cultureFactory.createCulture(-1); 
+	features.terrain;
+	features.culture; 
 }
 
 int loadPortNavalID(std::ifstream & file)
@@ -180,7 +194,7 @@ LandTerritoryFeatures loadLandTerritoryFeatures(std::ifstream & file)
 	int terrainID = std::stoi(line);
 	TerrainFactory terrainFactory;
 	assert(terrainFactory.hasTerrain(terrainID));
-	features.terrain = terrainFactory.createTerrain(terrainID);
+	features.terrain = terrainFactory.create(terrainID);
 
 	// Culture
 	std::getline(file, line);
@@ -189,7 +203,22 @@ LandTerritoryFeatures loadLandTerritoryFeatures(std::ifstream & file)
 	int cultureID = std::stoi(line);
 	CultureFactory cultureFactory;
 	assert(cultureFactory.hasCulture(terrainID));
-	features.culture = cultureFactory.createCulture(cultureID);
+	features.culture = cultureFactory.create(cultureID);
 
 	return features;
+}
+
+void adjustLandTerrain(LandTerritory &landTerritory, const Terrain &terrain)
+{
+	landTerritory.setTerrain(terrain);
+}
+
+void adjustLandCulture(LandTerritory &landTerritory, const Culture &culture)
+{
+	landTerritory.setCulture(culture);
+}
+
+void adjustLandProsperities(LandTerritory &landTerritory, const int &prosperity)
+{
+	landTerritory.setProsperities(prosperity);
 }

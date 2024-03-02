@@ -342,7 +342,16 @@
     <ClCompile Include="GameplaySettings.cpp">
       <Filter>Source Files\Game\MVC</Filter>
     </ClCompile>
+    <ClCompile Include="Factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LandTerritoryFeatureEditor.cpp">
+      <Filter>Source Files\Game\Map\MapMaker</Filter>
+    </ClCompile>
     <ClCompile Include="TerrainFactory.cpp">
+      <Filter>Source Files\Game\Territory</Filter>
+    </ClCompile>
+    <ClCompile Include="ProsperityFactory.cpp">
       <Filter>Source Files\Game\Territory</Filter>
     </ClCompile>
     <ClCompile Include="CultureFactory.cpp">
@@ -394,9 +403,6 @@
     </ClInclude>
     <ClInclude Include="Barony.h">
       <Filter>Header Files\Game\Estate</Filter>
-    </ClInclude>
-    <ClInclude Include="IMilitaryFactory.h">
-      <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="Grid.h">
       <Filter>Header Files\Game\Map</Filter>
@@ -587,14 +593,23 @@
     <ClInclude Include="GameplaySettings.h">
       <Filter>Header Files\Game\MVC</Filter>
     </ClInclude>
-    <ClInclude Include="TerrainFactory.h">
-      <Filter>Header Files\Game\Territory</Filter>
+    <ClInclude Include="TextDisplay.h">
+      <Filter>Header Files\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="LandTerritoryFeatureEditor.h">
+      <Filter>Header Files\Game\Map\MapMaker</Filter>
     </ClInclude>
     <ClInclude Include="CultureFactory.h">
       <Filter>Header Files\Game\Territory</Filter>
     </ClInclude>
-    <ClInclude Include="TextDisplay.h">
-      <Filter>Header Files\User Interface</Filter>
+    <ClInclude Include="ProsperityFactory.h">
+      <Filter>Header Files\Game\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainFactory.h">
+      <Filter>Header Files\Game\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>Header Files\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

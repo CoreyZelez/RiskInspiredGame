@@ -14,6 +14,8 @@ public:
 	// Save label is identifier in txt file for territory type.
 	virtual std::string getSaveLabel() const override;
 
+	virtual void setDrawMode(TerritoryDrawMode mode) override;
+
 protected:
 
 private:

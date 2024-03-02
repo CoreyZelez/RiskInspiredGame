@@ -1,11 +1,10 @@
 #pragma once
 #include "Estate.h"
 #include "Observer.h"
-#include "IMilitaryFactory.h"
 
 class Territory;
 
-class LandedEstate : public Estate, public Observer, public IMilitaryFactory
+class LandedEstate : public Estate, public Observer
 {
 public:
 	LandedEstate(Title title, Territory &territory);

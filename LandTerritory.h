@@ -29,12 +29,16 @@ public:
 
 	void setTerrain(Terrain terrain);
 	void setCulture(Culture culture);
+	// Sets prosperity and core prosperity value to the same.
+	void setProsperities(int prosperity);
 
 	std::unique_ptr<Port> &getPort();
 	void drawPort(sf::RenderWindow &window) const;
 	void createPort(NavalTerritory &navalTerritory);
 	void deletePort();
 	bool hasPort() const;
+
+	const Terrain& getTerrain() const;
 
 private:
 	LandTerritoryFeatures features;
@@ -46,3 +50,11 @@ private:
 int loadPortNavalID(std::ifstream &file);
 
 LandTerritoryFeatures loadLandTerritoryFeatures(std::ifstream &file);
+
+void adjustLandTerrain(LandTerritory &landTerritory, const Terrain& terrain);
+
+void adjustLandCulture(LandTerritory &landTerritory, const Culture& culture);
+
+// Adjusts both prosperity and core prosperity.
+void adjustLandProsperities(LandTerritory &landTerritory, const int &prosperity);
+

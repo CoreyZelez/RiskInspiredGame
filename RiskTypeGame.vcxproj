@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -170,9 +170,11 @@
     <ClCompile Include="Culture.cpp" />
     <ClCompile Include="CultureFactory.cpp" />
     <ClCompile Include="EstateAllocatorUnitTest.cpp" />
+    <ClCompile Include="Factory.cpp" />
     <ClCompile Include="GameplaySettings.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="HashFunctions.cpp" />
+    <ClCompile Include="LandTerritoryFeatureEditor.cpp" />
     <ClCompile Include="LandTerritoryFeatures.cpp" />
     <ClCompile Include="LandTerritoryOccupancy.cpp" />
     <ClCompile Include="LiegePolicy.cpp" />
@@ -217,6 +219,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerDiplomacy.cpp" />
     <ClCompile Include="Port.cpp" />
+    <ClCompile Include="ProsperityFactory.cpp" />
     <ClCompile Include="Realm.cpp" />
     <ClCompile Include="PlayerEstateManager.cpp" />
     <ClCompile Include="RealmGrid.cpp" />
@@ -250,10 +253,12 @@
     <ClInclude Include="Culture.h" />
     <ClInclude Include="CultureFactory.h" />
     <ClInclude Include="EstateAllocatorUnitTest.h" />
+    <ClInclude Include="Factory.h" />
     <ClInclude Include="GameplaySettings.h" />
     <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="HashFunctions.h" />
     <ClInclude Include="IOccupiable.h" />
+    <ClInclude Include="LandTerritoryFeatureEditor.h" />
     <ClInclude Include="LandTerritoryFeatures.h" />
     <ClInclude Include="LandTerritoryOccupancy.h" />
     <ClInclude Include="LiegePolicy.h" />
@@ -276,7 +281,6 @@
     <ClInclude Include="GameUIController.h" />
     <ClInclude Include="GameDisplay.h" />
     <ClInclude Include="HasUI.h" />
-    <ClInclude Include="IMilitaryFactory.h" />
     <ClInclude Include="InformationPanel.h" />
     <ClInclude Include="InputUtility.h" />
     <ClInclude Include="InteractionPanel.h" />
@@ -292,6 +296,7 @@
     <ClInclude Include="Observer.h" />
     <ClInclude Include="PlayerDiplomacy.h" />
     <ClInclude Include="Port.h" />
+    <ClInclude Include="ProsperityFactory.h" />
     <ClInclude Include="Realm.h" />
     <ClInclude Include="PlayerEstateManager.h" />
     <ClInclude Include="RealmGrid.h" />

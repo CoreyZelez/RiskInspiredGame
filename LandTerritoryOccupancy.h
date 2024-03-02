@@ -39,8 +39,6 @@ protected:
 	virtual void reevaluateOccupancy();
 
 private:
-	double defenceMultiplier = 1.4;  // In future perhaps have complex virtual function to calculate this!
-
 	LandTerritory &territory;
 	LandArmy *army;  // Army occupying territory. 
 	NavalFleet *fleet;  // Fleet occupying territory coast. 

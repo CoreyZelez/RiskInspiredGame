@@ -1,16 +1,13 @@
 #pragma once
-#include "Culture.h"
-#include <string>
+#include "Factory.h"
+#include "Factory.cpp"
+#include <SFML/Graphics.hpp>
 
-class CultureFactory
+class Culture;
+
+class CultureFactory : public Factory<int, Culture>
+
 {
 public:
 	CultureFactory();
-
-	Culture createCulture(int id) const;
-	bool hasCulture(int id) const;
-
-private:
-	std::map<int, Culture> cultures;
 };
-

@@ -2,6 +2,8 @@
 #include "Grid.h"
 #include "Terrain.h"
 #include "Culture.h"
+#include "LandTerritoryFeatureEditor.h"
+#include "LandTerritoryFeatureEditor.cpp"
 #include <SFML/Graphics.hpp>
 #include <unordered_set>
 #include <map>
@@ -18,7 +20,7 @@ enum class TerritoryMakerState
 	createPort,  // Create port by selecting a land naval territory pair.
 	editCulture,
 	editTerrain,
-	editCoreProsperity
+	editProsperities
 };
 
 class TerritoryMaker
@@ -32,37 +34,26 @@ public:
 
 private:
 	TerritoryManager &territoryManager;
-
 	TerritoryMakerState state = TerritoryMakerState::none;
-
 	Territory *selectedTerritory = nullptr;  // Territory currently being modified.
-
 	std::pair<LandTerritory*, NavalTerritory*> portTerritories = { nullptr, nullptr };  // Territories chosen for creation of port.
-
 	int brushSize = 3;  // Width of square positions when adding or removing territory squares.
-
 	std::unordered_set<sf::Vector2i, Vector2iHash> claimedPositions;  // Grid positions claimed by any territory 
 	sf::VertexArray fixedTerritoryVertices;	 // Vertex array of all territories excluding territory currently being modified.
-
-	Culture selectedCulture;  
-
-	Terrain selectedTerrain;  
-
 	sf::Clock inputClock;  	// Clock tracking time since last time input handled.
 
-	void changeState(TerritoryMakerState state);
+	LandTerritoryFeatureEditor<Terrain> terrainEditor;
+	LandTerritoryFeatureEditor<Culture> cultureEditor;
+	LandTerritoryFeatureEditor<int> prosperityEditor;
 
+	void changeState(TerritoryMakerState state);
 	void handleInputForView(sf::View &view) const;
 	void handleInputForStateChange();
+
 	void handleInputForPortCreation(const sf::RenderWindow &window);
 	void handleInputForTerritorySelection(const sf::RenderWindow &window);
 	void handleInputForTerritoryCreation();
 	void handleInputForTerritoryGridEdits(const sf::RenderWindow &window);
-	void handleInputForTerrainChange(const sf::RenderWindow &window);
-	void handleInputForCultureChange(const sf::RenderWindow &window);
-
-	void handleTerrainKeyPress(sf::Keyboard::Key key, int terrainNum);
-	void handleCultureKeyPress(sf::Keyboard::Key key, int cultureNum);
 
 	void initClaimedPositions();
 	void updateFixedTerritoriesVertices();

@@ -4,6 +4,7 @@
 #include "TextureManager.h"
 #include "Player.h"
 #include "GameplaySettings.h"
+#include "Terrain.h"
 #include <assert.h>
 #include <random>
 #include <iostream>
@@ -26,17 +27,21 @@ void LandArmy::removeFromTerritory()
 	getTerritory().getOccupancyHandler()->removeArmy(this);
 }
 
-void LandArmy::attack(LandArmy &defendingArmy, double defenceMultiplier)
+void LandArmy::attack(LandArmy &defendingArmy, const Terrain &terrain)
 {
 	const GameplaySettings &gameplaySettings = getOwner().getGameplaySettings();
 
 	assert(getTotalStrength() > gameplaySettings.landHostileOccupancyCost);
 
+	// Strength multipliers.
+	double defenceMultiplier = terrain.defenceMultiplier;
+	double attackMultiplier = terrain.attackMultiplier;
+
 	// Determine adjusted strength of both attacker and defender.
 	const double defenderStrength = static_cast<double>(defendingArmy.getTotalStrength());
 	const double defenderAdjustedStrength = defenderStrength * defenceMultiplier;  
 	const double attackerStrength = getTotalStrength();
-	const double attackerAdjustedStrength = attackerStrength;  // No adjustment to attacker strength.
+	const double attackerAdjustedStrength = attackerStrength * attackMultiplier; 
 	assert(defenderStrength > 0 && defenderAdjustedStrength > 0);
 	assert(attackerStrength > 0 && attackerAdjustedStrength > 0);
 

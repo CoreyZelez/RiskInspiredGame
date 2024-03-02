@@ -1,3 +1,4 @@
+#pragma once
 #include "NumericTextDisplay.h"
 #include "FontManager.h"
 #include "Utility.h"
