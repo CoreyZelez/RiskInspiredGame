@@ -15,7 +15,7 @@ Game::Game(GameplaySettings gameplaySettings, std::string mapName)
 
 void Game::generatePlayers()
 {
-	const int numHumans = 1;
+	const int numHumans = 0;
 	int humanCnt = 0; 
 	for(auto &barony : map.getEstateManager().getBaronies())
 	{
@@ -119,7 +119,7 @@ void Game::update()
 {
 	///////////////////////////////
 	// Caps number of turns per update call. For testing maybe... 
-	const int maxTurns = 5;
+	const int maxTurns = 8;
 	double turnCnt = 0;
 	///////////////////////////////
 

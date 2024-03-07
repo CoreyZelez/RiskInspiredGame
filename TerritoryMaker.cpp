@@ -285,9 +285,14 @@ void TerritoryMaker::handleInputForTerritoryGridEdits(const sf::RenderWindow &wi
 	{
 		removePosition(window);
 	}
-	if(inputUtility.getButtonDown(sf::Mouse::Left))
+	else if(inputUtility.getButtonDown(sf::Mouse::Left))
 	{
 		addPosition(window);
+	}
+
+	if(inputUtility.getKeyPressed(sf::Keyboard::B) || inputUtility.getButtonPressed(sf::Mouse::Button::XButton1))
+	{
+		progressBrushSize();
 	}
 }
 

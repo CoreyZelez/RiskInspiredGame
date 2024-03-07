@@ -34,10 +34,18 @@ void SimplePlayerAI::handleTurnNonVassal()
 	Player &player = getPlayer();
 	Game &game = getGame();
 
-	// Execute attacks.
 	std::vector<Territory*> borderTerritories = context.getBorderTerritories();
+
+	// Execute army attacks.
 	executeArmyAttacks(borderTerritories);
-	executeFleetAttacks(borderTerritories);
+
+	// Execute fleet attacks.
+	for(int i = 0; i < 3; ++i)
+	{
+		// Redetermine border territories as now territories potentially gained after attacks.
+		borderTerritories = context.getBorderTerritories();
+		executeFleetAttacks(borderTerritories);
+	}
 
 	// Redetermine border territories as now territories potentially gained after attacks.
 	borderTerritories = context.getBorderTerritories();
@@ -76,13 +84,15 @@ int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
 	// Initialise strategic value as nonzero for case where enemy territory has no armies.
 	// This ensures that armies can be allocated to this border territory in case where no 
 	// enemy armies.
-	int strategicValue = 1;
+	// 10 chosen to ensure enough armies allocated to territory to pass attack threshold.
+	int strategicValue = 10;  
 
 	// Calculate strategic value from threat of attack of territory.
 	std::map<const Player*, int> weightedThreats = context.getArmyWeightedThreats(territory);
 	int maxThreat = calculateMaxThreat(weightedThreats);  
 	int totalThreat = calculateTotalThreat(weightedThreats);  
-	strategicValue += maxThreat + totalThreat;
+	int threatMultiplier = 10;  // Ensures initial starting strategic value becomes negligible.
+	strategicValue += threatMultiplier * (maxThreat + totalThreat);
 
 	// Prioritise having land troops on land territories.
 	if(territory.getType() == TerritoryType::naval)
@@ -286,10 +296,14 @@ void SimplePlayerAI::executeArmyAttack(LandArmy &army)
 				// Ensure attack strength at least the min strength threshold.
 				if(attackStrength <= minStrengthThreshold)
 				{
+					// Not attackStrength may exceed availableAttackStrength after this step.
 					attackStrength = minStrengthThreshold;
 				}
 
-				army.move(*landTerritory, attackStrength);
+				if(attackStrength <= availableAttackStrength)
+				{
+					army.move(*landTerritory, attackStrength);
+				}
 			}
 			// Relatively weak enemy army.
 			else if(enemyArmy->getTotalStrength() < 0.1 * availableAttackStrength)
@@ -344,10 +358,10 @@ void SimplePlayerAI::executeArmyMoveOrders(const std::map<Territory*, int> &stra
 
 	// Find sum of strategic values.
 	int totalStrategicValue = 0; 
-	for(const auto& pair : strategicValues)
+	for(const auto& [territory, strategicValue] : strategicValues)
 	{
-		assert(pair.second >= 0);
-		totalStrategicValue += pair.second;
+		assert(strategicValue >= 0);
+		totalStrategicValue += strategicValue;
 	}
 
 	/////////////////

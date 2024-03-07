@@ -3,9 +3,9 @@
 
 CultureFactory::CultureFactory()
 {
-	Culture none = { -1, "none", sf::Color(60, 60, 60) };
-	Culture temp = { 0, "temp", sf::Color(200, 30, 60) };
-	add(none.id, none);
+	Culture temp = { -1, "temp", sf::Color(30, 30, 30) };
+	Culture none = { 0, "none", sf::Color(60, 60, 60) };
 	add(temp.id, temp);
+	add(none.id, none);
 }
 

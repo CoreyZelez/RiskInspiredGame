@@ -1,9 +1,10 @@
 #pragma once
 #include "AIPersonality.h"
+#include <vector>
 
 class Player;
 class Game;
-
+class Territory;
 
 class PlayerAIComponent
 {

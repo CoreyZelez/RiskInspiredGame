@@ -249,6 +249,15 @@ void Player::handleTurn()
 
 void Player::rebel()
 {
+	// TEMP
+	// TEMP
+	// TEMP
+	return;
+	// TEMP
+	// TEMP
+	// TEMP
+
+
 	// Player must have a liege.
 	assert(liege != nullptr);
 	// Players liege must not have a liege.
@@ -260,7 +269,7 @@ void Player::rebel()
 	oldLiege->handleVassalRebellion(*this);
 
 	// Player loses reserves for rebelling.
-	const double reserveRemovalRatio = 0.5;
+	const double reserveRemovalRatio = 0.4;
 	militaryManager.removeArmyReserves(reserveRemovalRatio);
 
 	// Yield military reserves.

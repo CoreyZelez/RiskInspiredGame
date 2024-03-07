@@ -93,7 +93,7 @@ std::map<const Player*, int> PlayerAIContext::getArmyWeightedThreats(const Terri
 		const Player *owner = (*iter)->getEstateOwner(); 
 		if(owner != nullptr && !sameUpperRealm(&player, owner))
 		{
-			enemyPlayers.insert(owner);
+			enemyPlayers.insert(&owner->getUpperLiege());
 		}
 	}
 

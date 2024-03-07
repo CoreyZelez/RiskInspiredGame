@@ -193,7 +193,7 @@ LandTerritoryFeatures loadLandTerritoryFeatures(std::ifstream & file)
 	std::getline(file, line);
 	int terrainID = std::stoi(line);
 	TerrainFactory terrainFactory;
-	assert(terrainFactory.hasTerrain(terrainID));
+	assert(terrainFactory.has(terrainID));
 	features.terrain = terrainFactory.create(terrainID);
 
 	// Culture
@@ -202,7 +202,7 @@ LandTerritoryFeatures loadLandTerritoryFeatures(std::ifstream & file)
 	std::getline(file, line);
 	int cultureID = std::stoi(line);
 	CultureFactory cultureFactory;
-	assert(cultureFactory.hasCulture(terrainID));
+	assert(cultureFactory.has(cultureID));
 	features.culture = cultureFactory.create(cultureID);
 
 	return features;

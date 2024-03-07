@@ -31,7 +31,7 @@ void LandArmy::attack(LandArmy &defendingArmy, const Terrain &terrain)
 {
 	const GameplaySettings &gameplaySettings = getOwner().getGameplaySettings();
 
-	assert(getTotalStrength() > gameplaySettings.landHostileOccupancyCost);
+	assert(getTotalStrength() >= gameplaySettings.landHostileOccupancyCost);
 
 	// Strength multipliers.
 	double defenceMultiplier = terrain.defenceMultiplier;
@@ -155,7 +155,10 @@ void LandArmy::move(Territory &location, unsigned int strength)
 	else
 	{
 		// Add the army to the military manager of owning player.
-		getOwner().getMilitaryManager().addLandArmy(std::move(newArmy));
+		if(!newArmy.get()->isDead())
+		{
+			getOwner().getMilitaryManager().addLandArmy(std::move(newArmy));
+		}
 	}
 
 	// After any strength refunds we check if the army is dead to trigger death related events.
