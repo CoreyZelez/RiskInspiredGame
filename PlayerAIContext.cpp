@@ -138,7 +138,7 @@ std::map<const Player*, int> PlayerAIContext::getFleetWeightedThreats(const Terr
 
 std::unordered_map<const Territory*, std::unordered_map<int, std::vector<LandArmy*>>> PlayerAIContext::getArmyBorderDistances(int maxDist)
 {
-	std::mutex mutex;  // Declare a mutex for thread safety.
+	std::mutex mutex; 
 	std::vector<std::thread> threads;  // Store threads for joining later
 	
 	// minBuckets is chosen based upon observation of maximum buckets needed when running game.
@@ -157,8 +157,40 @@ std::unordered_map<const Territory*, std::unordered_map<int, std::vector<LandArm
 	{
 		thread.join();
 	}
-
+	
 	return armyBorderDistances;
+
+	//// Create twice as many threads compared to cpu limit.
+	//// Do this to promote more time spent with maximum thread number usage.
+	//size_t numThreads = 2 * std::thread::hardware_concurrency();
+	//std::vector<std::thread> threads;
+	//std::mutex mutex;
+	//
+	//const size_t minBuckets = 50;
+	//std::unordered_map<const Territory*, std::unordered_map<int, std::vector<LandArmy*>>> armyBorderDistances(minBuckets);
+	//const std::vector<Territory*> borderTerritories = getBorderTerritories();
+	//
+    //size_t currentIndex = 0;
+    //while (currentIndex < borderTerritories.size()) 
+	//{
+	//	const Territory *territory = borderTerritories[currentIndex];
+	//
+	//	// Create threads for calculation of territory army distances.
+    //    for (size_t i = threads.size(); i < numThreads && currentIndex < borderTerritories.size(); ++i, ++currentIndex) 
+	//	{
+	//		threads.emplace_back(&PlayerAIContext::determineTerritoryArmyDistances, this, std::ref(*territory), 
+	//			std::ref(armyBorderDistances), maxDist, std::ref(mutex));
+	//	}
+	//
+	//	// Join threads.
+	//	for(auto& thread : threads)
+	//	{
+	//		thread.join();
+	//	}
+	//	threads.clear();  
+    //}
+	//
+    //return armyBorderDistances;
 }
 
 void PlayerAIContext::determineTerritoryArmyDistances(const Territory &territory, 

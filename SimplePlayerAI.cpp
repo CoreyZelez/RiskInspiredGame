@@ -647,7 +647,7 @@ bool SimplePlayerAI::executeRebellionAgainstLiege()
 {
 	assert(getPlayer().getLiege() != nullptr);
 
-	if(!getPlayer().getVassalPolicy().canRebel())
+	if(!getPlayer().getVassalPolicy().vassalResistance.canRebel())
 	{
 		return false;
 	}
@@ -666,7 +666,7 @@ bool SimplePlayerAI::executeRebellionAgainstLiege()
 		getPlayer().rebel();
 		return true;
 	}
-	else if(getPlayer().getVassalPolicy().resistance > resistanceRebellionThreshold)
+	else if(getPlayer().getVassalPolicy().vassalResistance.getResistance() > resistanceRebellionThreshold)
 	{
 		getPlayer().rebel();
 		return true;

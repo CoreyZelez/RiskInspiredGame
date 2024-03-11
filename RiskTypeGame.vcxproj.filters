@@ -357,6 +357,9 @@
     <ClCompile Include="CultureFactory.cpp">
       <Filter>Source Files\Game\Territory</Filter>
     </ClCompile>
+    <ClCompile Include="VassalResistance.cpp">
+      <Filter>Source Files\Game\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LandArmy.h">
@@ -610,6 +613,9 @@
     </ClInclude>
     <ClInclude Include="Factory.h">
       <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="VassalResistance.h">
+      <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

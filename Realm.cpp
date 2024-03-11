@@ -216,6 +216,25 @@ void Realm::ammendUnlandedEstateOwnership()
 
 Player& Realm::addEstate(Estate &estate)
 {
+	switch(estate.getTitle())
+	{
+	case Title::barony:
+		notifyObservers(receivedBarony);
+		break;
+	case Title::county:
+		notifyObservers(receivedCounty);
+		break;
+	case Title::duchy:
+		notifyObservers(receivedDuchy);
+		break;
+	case Title::kingdom:
+		notifyObservers(receivedKingdom);
+		break;
+	case Title::empire:
+		notifyObservers(receivedEmpire);
+		break;
+	}
+
 	const LandedEstate* landedEstate = dynamic_cast<const LandedEstate*>(&estate);
 	// Update realm grid if estate is landed.
 	if(landedEstate != nullptr)
@@ -229,6 +248,25 @@ Player& Realm::addEstate(Estate &estate)
 
 void Realm::removeEstate(Estate &estate)
 {
+	switch(estate.getTitle())
+	{
+	case Title::barony:
+		notifyObservers(lostBarony);
+		break;
+	case Title::county:
+		notifyObservers(lostCounty);
+		break;
+	case Title::duchy:
+		notifyObservers(lostDuchy);
+		break;
+	case Title::kingdom:
+		notifyObservers(lostKingdom);
+		break;
+	case Title::empire:
+		notifyObservers(lostEmpire);
+		break;
+	}
+
 	if(rulerEstateManager.containsEstate(estate))
 	{
 		assert(estate.compareRuler(&ruler));

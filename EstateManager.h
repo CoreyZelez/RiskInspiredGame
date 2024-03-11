@@ -66,5 +66,6 @@ private:
 	std::string loadName(std::ifstream &file);
 	std::vector<std::string> loadSubfiefNames(std::ifstream &file);
 
+	void setTitleColor(Title title);  // Sets any estates grid with title to pre defined color.
 	void setTitleColor(Title title, sf::Color color);  // Sets any estates grid with title to color.
 };

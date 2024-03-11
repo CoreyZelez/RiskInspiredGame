@@ -127,7 +127,6 @@ private:
 	void recursiveGetLowerEstateTitleCounts(std::map<Title, int> &subfiefTitleCounts) const;
 
 	void saveSubfiefs(std::ofstream &file) const;
-
 };
 
 

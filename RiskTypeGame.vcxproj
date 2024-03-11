@@ -224,6 +224,7 @@
     <ClCompile Include="PlayerEstateManager.cpp" />
     <ClCompile Include="RealmGrid.cpp" />
     <ClCompile Include="NumericTextDisplay.cpp" />
+    <ClCompile Include="VassalResistance.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TerrainFactory.cpp" />
     <ClCompile Include="TextDisplay.cpp" />
@@ -301,6 +302,7 @@
     <ClInclude Include="PlayerEstateManager.h" />
     <ClInclude Include="RealmGrid.h" />
     <ClInclude Include="NumericTextDisplay.h" />
+    <ClInclude Include="VassalResistance.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TerrainFactory.h" />
     <ClInclude Include="TextDisplay.h" />

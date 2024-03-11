@@ -235,7 +235,7 @@ void Player::handleTurn()
 	if(liege != nullptr)
 	{
 		vassalPolicy.handleLiegeInfluenceChange(liege->liegePolicy);
-		vassalPolicy.handleResistanceChange(*liege, liege->liegePolicy);
+		vassalPolicy.vassalResistance.update(*liege, liege->liegePolicy);
 	}
 	militaryManager.update();
 	realm.handleMilitaryYields();
@@ -249,15 +249,6 @@ void Player::handleTurn()
 
 void Player::rebel()
 {
-	// TEMP
-	// TEMP
-	// TEMP
-	return;
-	// TEMP
-	// TEMP
-	// TEMP
-
-
 	// Player must have a liege.
 	assert(liege != nullptr);
 	// Players liege must not have a liege.

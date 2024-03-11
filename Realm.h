@@ -1,7 +1,8 @@
 #pragma once
+#include "HasUI.h"
+#include "Subject.h"
 #include "Title.h"
 #include "Grid.h"
-#include "HasUI.h"
 #include "PlayerEstateManager.h"
 #include "VassalManager.h"
 #include "RealmGrid.h"
@@ -14,7 +15,7 @@ class Estate;
 class Game;
 class MilitaryManager;
 
-class Realm : public HasUI
+class Realm : public HasUI, public Subject
 {
 public:
 	Realm(Game &game, Player &ruler, const LiegePolicy &liegePolicy, const std::string &name);
