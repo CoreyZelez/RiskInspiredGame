@@ -7,7 +7,7 @@ class LandArmy : public MilitaryForce
 {
 public:
 	LandArmy(Player &owner, Territory *location, int strength);
-	LandArmy(Player &owner, Territory *location, std::array<unsigned int, 4> staminaStrength);
+	LandArmy(Player &owner, Territory *location, StaminaArray staminaStrength);
 
 	virtual void removeFromTerritory() override;
 
@@ -15,6 +15,9 @@ public:
 	virtual void moveClosest(Territory &target, unsigned int strength, int maxDist) override;
 
 	void attack(LandArmy &defendingArmy, const Terrain &terrain);
+
+	static int getLandMoveStaminaCost();
+	static int getAttackStaminaCost();
 
 protected:
 	virtual std::pair<int, int> calculateMinMaxStaminaCost(const Territory &territory) const override;

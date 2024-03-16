@@ -14,7 +14,7 @@ NavalFleet::NavalFleet(Player &owner, Territory *location, int strength)
 	assert(location != nullptr);
 }
 
-NavalFleet::NavalFleet(Player & owner, Territory * location, std::array<unsigned int, 4> staminaStrength)
+NavalFleet::NavalFleet(Player & owner, Territory * location, std::array<unsigned int, 3> staminaStrength)
 	: MilitaryForce(owner, location, staminaStrength, "triangle")
 {
 	assert(location != nullptr);
@@ -46,7 +46,7 @@ void NavalFleet::move(Territory &location, unsigned int strength)
 	// Determine stamina strength array of fleet being moved.
 	// It is possible that the total strength of this fleet is 0. We do not yet trigger any death related events
 	// however as it is possible for strength to be refunded to this fleet.
-	std::array<unsigned int, 4> expendedStrength = expendStrength(strength, location);
+	std::array<unsigned int, 3> expendedStrength = expendStrength(strength, location);
 	// Naval fleet attempting location occupation.
 	std::unique_ptr<NavalFleet> newFleet = std::make_unique<NavalFleet>(getOwner(), &getTerritory(), expendedStrength);
 	// Only proceed if new army strength is greater than 0.
@@ -64,7 +64,7 @@ void NavalFleet::move(Territory &location, unsigned int strength)
 	// Refund strength to this->fleet if deployed fleet is not able to occupy location
 	if(&newFleet.get()->getTerritory() == &getTerritory())
 	{
-		std::array<unsigned int, 4> strengthRefund = newFleet.get()->getStaminaStrength();
+		std::array<unsigned int, 3> strengthRefund = newFleet.get()->getStaminaStrength();
 		increaseStrength(strengthRefund);
 		newFleet.reset();
 	}
@@ -167,15 +167,20 @@ void NavalFleet::attack(NavalFleet &defendingNavy, double defenceMultiplier)
 	reduceStrength(attackerStrengthAdjustment);
 }
 
+int NavalFleet::getNavalMoveStaminaCost()
+{
+	return 1;
+}
+
+int NavalFleet::getAttackStaminaCost()
+{
+	return 1;
+}
+
 std::pair<int, int> NavalFleet::calculateMinMaxStaminaCost(const Territory &territory) const
 {
-	if(getTerritory().getType() == TerritoryType::naval)
-	{
-		return { 1, 1 };
-	}
-	else
-	{
-		return { INT_MAX, INT_MAX };
-	}
+	return { 1, 1 };
 }
+
+
 

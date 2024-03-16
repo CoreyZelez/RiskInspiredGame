@@ -13,7 +13,7 @@ StrengthSlider::StrengthSlider(const MilitaryForce & militaryForce, unsigned int
 	backgroundBar.setFillColor(sf::Color(40, 40, 40));
 	greenBar.setFillColor(green);
 	yellowBar.setFillColor(yellow);
-	orangeBar.setFillColor(orange);
+	// orangeBar.setFillColor(orange);
 	redBar.setFillColor(red);
 }
 
@@ -21,7 +21,7 @@ void StrengthSlider::draw(sf::RenderWindow &window) const
 {
 	window.draw(backgroundBar);
 	window.draw(redBar);
-	window.draw(orangeBar);
+	// window.draw(orangeBar);
 	window.draw(yellowBar);
 	window.draw(greenBar);
 }
@@ -76,9 +76,9 @@ void StrengthSlider::updateBars()
 	const float maxWidth = backgroundBar.getGlobalBounds().width;
 	const int totalStrength = militaryForce.getTotalStrength();
 	int remainingStrength = selectedStrength;
-	const int greenStrength = militaryForce.getStaminaStrength()[3];
-	const int yellowStrength = militaryForce.getStaminaStrength()[2];
-	const int orangeStrength = militaryForce.getStaminaStrength()[1];
+	const int greenStrength = militaryForce.getStaminaStrength()[2];
+	const int yellowStrength = militaryForce.getStaminaStrength()[1];
+	// const int orangeStrength = militaryForce.getStaminaStrength()[1];
 	const int redStrength = militaryForce.getStaminaStrength()[0];
 	assert(greenStrength + yellowStrength + orangeStrength + redStrength
 		== militaryForce.getTotalStrength());
@@ -121,33 +121,13 @@ void StrengthSlider::updateBars()
 		yellowBar.setSize(sf::Vector2f(widthYellow, backgroundBar.getSize().y));
 	}
 
-	// Sets orange bar.
-	if(remainingStrength > orangeStrength)
-	{
-		remainingStrength -= orangeStrength;
-		const float strengthRatio = (float)orangeStrength / (float)totalStrength;
-		const float widthOrange = maxWidth * strengthRatio;
-		const sf::Vector2f orangePosition(yellowBar.getPosition().x + yellowBar.getSize().x, backgroundBar.getPosition().y);
-		orangeBar.setPosition(orangePosition);
-		orangeBar.setSize(sf::Vector2f(widthOrange, backgroundBar.getSize().y));
-	}
-	else
-	{
-		const float strengthRatio = (float)remainingStrength / (float)totalStrength;
-		remainingStrength = 0;
-		const float widthOrange = maxWidth * strengthRatio;
-		const sf::Vector2f orangePosition(yellowBar.getPosition().x + yellowBar.getSize().x, backgroundBar.getPosition().y);
-		orangeBar.setPosition(orangePosition);
-		orangeBar.setSize(sf::Vector2f(widthOrange, backgroundBar.getSize().y));
-	}
-
 	// Sets red bar.
 	if(remainingStrength > redStrength)
 	{
-		remainingStrength -= orangeStrength;
+		remainingStrength -= yellowStrength;
 		const float strengthRatio = (float)redStrength / (float)totalStrength;
 		const float widthRed = maxWidth * strengthRatio;
-		const sf::Vector2f redPosition(orangeBar.getPosition().x + orangeBar.getSize().x, backgroundBar.getPosition().y);
+		const sf::Vector2f redPosition(yellowBar.getPosition().x + yellowBar.getSize().x, backgroundBar.getPosition().y);
 		redBar.setPosition(redPosition);
 		redBar.setSize(sf::Vector2f(widthRed, backgroundBar.getSize().y));
 	}
@@ -156,7 +136,7 @@ void StrengthSlider::updateBars()
 		const float strengthRatio = (float)remainingStrength / (float)totalStrength;
 		remainingStrength = 0;
 		const float widthRed = maxWidth * strengthRatio;
-		const sf::Vector2f redPosition(orangeBar.getPosition().x + orangeBar.getSize().x, backgroundBar.getPosition().y);
+		const sf::Vector2f redPosition(yellowBar.getPosition().x + yellowBar.getSize().x, backgroundBar.getPosition().y);
 		redBar.setPosition(redPosition);
 		redBar.setSize(sf::Vector2f(widthRed, backgroundBar.getSize().y));
 	}

@@ -5,7 +5,7 @@ class NavalFleet : public MilitaryForce
 {
 public:
 	NavalFleet(Player &owner, Territory *location, int strength);
-	NavalFleet(Player &owner, Territory *location, std::array<unsigned int, 4> staminaStrength);
+	NavalFleet(Player &owner, Territory *location, std::array<unsigned int, 3> staminaStrength);
 
 	virtual void removeFromTerritory() override;
 
@@ -13,6 +13,9 @@ public:
 	virtual void moveClosest(Territory &target, unsigned int strength, int maxDist) override;
 
 	void attack(NavalFleet &defendingNavy, double defenceMultiplier);
+
+	static int getNavalMoveStaminaCost();
+	static int getAttackStaminaCost();
 
 protected:
 	virtual std::pair<int, int> calculateMinMaxStaminaCost(const Territory &territory) const override;

@@ -10,14 +10,14 @@
 #include <unordered_map>
 
 MilitaryForce::MilitaryForce(Player &player, Territory *territory, unsigned int strength, const std::string &shape)
-	: player(player), territory(territory), staminaStrength({ 0, 0, 0, strength }), graphics(shape, *this)
+	: player(player), territory(territory), staminaStrength({ 0, 0, strength }), graphics(shape, *this)
 {
 	assert(territory != nullptr);
 	assert(strength > 0);
 	assert(!player.hasLiege());
 }
 
-MilitaryForce::MilitaryForce(Player &player, Territory * territory, std::array<unsigned int, 4> staminaStrength, const std::string &shape)
+MilitaryForce::MilitaryForce(Player &player, Territory *territory, StaminaArray staminaStrength, const std::string &shape)
 	: player(player), territory(territory), staminaStrength(staminaStrength), graphics(shape, *this)
 {
 	assert(territory != nullptr);
@@ -34,7 +34,7 @@ void MilitaryForce::resetStamina()
 	assert(staminaStrength.size() == 4);
 	assert(!isDead());
 	assert(getTotalStrength() > 0);
-	staminaStrength = { 0, 0, 0, getTotalStrength() };
+	staminaStrength = { 0, 0, getTotalStrength() };
 }
 
 void MilitaryForce::reduceStrength(unsigned int amount)
@@ -67,17 +67,17 @@ void MilitaryForce::clearStrength()
 	notifyObservers(deadMilitary);
 }
 
-std::array<unsigned int, 4> MilitaryForce::getStaminaStrength() const
+std::array<unsigned int, 3> MilitaryForce::getStaminaStrength() const
 {
 	return staminaStrength;
 }
 
-std::array<unsigned int, 4> MilitaryForce::expendStrength(unsigned int amount, const Territory &territory)
+StaminaArray MilitaryForce::expendStrength(unsigned int amount, const Territory &territory)
 {
 	const std::pair<int, int> minMaxStaminaCost = calculateMinMaxStaminaCost(territory);
 	const int minStaminaCost = minMaxStaminaCost.first;
 	const int maxStaminaCost = minMaxStaminaCost.second;
-	std::array<unsigned int, 4> newStaminaStrength = { 0 };
+	StaminaArray newStaminaStrength = { 0 };
 	for(int stamina = minStaminaCost; stamina < staminaStrength.size(); ++stamina)
 	{
 		const int newStamina = std::max(stamina - maxStaminaCost, 0);
@@ -105,7 +105,7 @@ void MilitaryForce::increaseStrength(unsigned int strengthAmount)
 	graphics.update();
 }
 
-void MilitaryForce::increaseStrength(std::array<unsigned int, 4> staminaStrength)
+void MilitaryForce::increaseStrength(std::array<unsigned int, 3> staminaStrength)
 {
 	for(int stamina = 0; stamina < this->staminaStrength.size(); ++stamina)
 	{
@@ -181,6 +181,11 @@ void MilitaryForce::updatePlayerDiplomacy(Player *locationEstateOwner)
 		upperLiege.addAttackHistory(player);
 		player.addAttackHistory(upperLiege);
 	}
+}
+
+int MilitaryForce::getMaximumStamina() const
+{
+	return staminaStrength.size();
 }
 
 bool MilitaryForce::containsPosition(sf::Vector2f position) const

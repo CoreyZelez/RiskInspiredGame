@@ -15,7 +15,7 @@ LandArmy::LandArmy(Player &owner, Territory *location, int strength)
 	assert(location != nullptr);
 }
 
-LandArmy::LandArmy(Player & owner, Territory * location, std::array<unsigned int, 4> staminaStrength)
+LandArmy::LandArmy(Player & owner, Territory * location, StaminaArray staminaStrength)
 	: MilitaryForce(owner, location, staminaStrength, "circle")
 {
 	assert(location != nullptr);
@@ -86,15 +86,25 @@ void LandArmy::attack(LandArmy &defendingArmy, const Terrain &terrain)
 	reduceStrength(attackerStrengthAdjustment);
 }
 
+int LandArmy::getLandMoveStaminaCost() 
+{
+	return MAX_STAMINA;
+}
+
+int LandArmy::getAttackStaminaCost()
+{
+	return MAX_STAMINA;
+}
+
 std::pair<int, int> LandArmy::calculateMinMaxStaminaCost(const Territory &territory) const
 {
 	if(getTerritory().getType() == TerritoryType::land || territory.getType() == TerritoryType::land)
 	{
-		return { 3, 3 };
+		return { MAX_STAMINA, MAX_STAMINA };
 	}
 	else
 	{
-		return { 1, 2 };
+		return { MAX_STAMINA, MAX_STAMINA };
 	}
 }
 
@@ -130,7 +140,7 @@ void LandArmy::move(Territory &location, unsigned int strength)
 	// Determine stamina strength array of army being moved.
 	// It is possible that the total strength of this army is 0. We do not yet trigger any death related events
 	// however as it is possible for strength to be refunded to this army.
-	std::array<unsigned int, 4> expendedStrength = expendStrength(strength, location);
+	std::array<unsigned int, 3> expendedStrength = expendStrength(strength, location);
 	// Land army attempting location occupation.
 	std::unique_ptr<LandArmy> newArmy = std::make_unique<LandArmy>(getOwner(), &getTerritory(), expendedStrength);  
 	// Only proceed if new army strength is greater than 0.
@@ -148,7 +158,7 @@ void LandArmy::move(Territory &location, unsigned int strength)
 	// Refund strength to this->army if deployedArmy is not able to occupy location
 	if(&newArmy.get()->getTerritory() == &getTerritory())
 	{
-		std::array<unsigned int, 4> strengthRefund = newArmy.get()->getStaminaStrength();
+		std::array<unsigned int, 3> strengthRefund = newArmy.get()->getStaminaStrength();
 		increaseStrength(strengthRefund);
 		newArmy.reset();
 	}

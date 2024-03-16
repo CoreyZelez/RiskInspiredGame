@@ -9,11 +9,14 @@ class Player;
 class Territory;
 enum class TerritoryType;
 
+const int MAX_STAMINA = 2;
+using StaminaArray = std::array<unsigned int, MAX_STAMINA + 1>;
+
 class MilitaryForce : public Subject
 {
 public:
 	MilitaryForce(Player &owner, Territory *territory, unsigned int strength, const std::string &shape);
-	MilitaryForce(Player &owner, Territory *territory, std::array<unsigned int, 4> staminaStrength, const std::string &shape);
+	MilitaryForce(Player &owner, Territory *territory, StaminaArray staminaStrength, const std::string &shape);
 
 	virtual void removeFromTerritory() = 0;
 
@@ -34,10 +37,10 @@ public:
 	void reduceStrength(unsigned int amount);
 	// Kills the unit by setting strength 0.
 	void clearStrength();
-	std::array<unsigned int, 4> getStaminaStrength() const;
-	std::array<unsigned int, 4> expendStrength(unsigned int amount, const Territory &territory);
+	std::array<unsigned int, 3> getStaminaStrength() const;
+	std::array<unsigned int, 3> expendStrength(unsigned int amount, const Territory &territory);
 	void increaseStrength(unsigned int strengthAmount);
-	void increaseStrength(std::array<unsigned int, 4> staminaStrength);
+	void increaseStrength(std::array<unsigned int, 3> staminaStrength);
 	unsigned int getStrength(int minStamina) const;
 	unsigned int getTotalStrength() const;
 	bool isDead() const;
@@ -54,10 +57,12 @@ protected:
 
 	virtual std::pair<int, int> calculateMinMaxStaminaCost(const Territory &territory) const = 0;
 
+	int getMaximumStamina() const;
+
 private:
 	Player &player;
 	Territory *territory;  // Territory military resides at.
-	std::array<unsigned int, 4> staminaStrength;
+	StaminaArray staminaStrength;
 	MilitaryForceGraphics graphics;
 };
 

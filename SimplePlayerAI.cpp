@@ -239,7 +239,7 @@ void SimplePlayerAI::executeArmyAttack(LandArmy &army)
 {
 	const GameplaySettings &gameplaySettings = getPlayer().getGameplaySettings();
 
-	const int attackStamina = 3;
+	const int attackStamina = LandArmy::getAttackStaminaCost();
 	int availableAttackStrength = army.getStrength(attackStamina);
 	Territory &territory = army.getTerritory();
 
@@ -364,13 +364,8 @@ void SimplePlayerAI::executeArmyMoveOrders(const std::map<Territory*, int> &stra
 		totalStrategicValue += strategicValue;
 	}
 
-	/////////////////
-	// NOT VALID FOR NAVAL MOVEMENT!!!
-	/////
-	const int landMoveCost = 3;
-	/////////
-
 	// Total strength of player's land military that is available for movement.
+	const int landMoveCost = LandArmy::getLandMoveStaminaCost();
 	const int totalAvailableArmyStrength = player.getMilitaryManager().getTotalArmyStrength(landMoveCost);
 	assert(totalAvailableArmyStrength >= 0);
 	if(totalAvailableArmyStrength == 0)
@@ -485,7 +480,7 @@ void SimplePlayerAI::executeFleetAttacks(const std::vector<Territory*>& borderTe
 
 void SimplePlayerAI::executeFleetAttack(NavalFleet &fleet)
 {
-	const int attackStamina = 3;
+	const int attackStamina = NavalFleet::getAttackStaminaCost();
 	int availableStrength = fleet.getStrength(attackStamina);
 	Territory &territory = fleet.getTerritory();
 	// Enemy adjacencies include neutral/unowned territories.
