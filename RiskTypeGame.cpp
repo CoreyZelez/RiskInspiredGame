@@ -25,7 +25,7 @@ int main()
 	FontManager::getInstance(); 
 
 	MapMaker mapMaker("empty");
-	Game game("test");
+	Game game("small1");
 
 	GameDisplay gameDisplay = game.createView();
 	GameUI gameUI(UIView);

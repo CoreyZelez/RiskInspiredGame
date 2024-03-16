@@ -34,6 +34,6 @@ struct LiegePolicy
 	// Resistance at which vassals may rebel.
 	int resistanceThreshold = 100;
 	const int baseResistanceThreshold = 100;
-	const int maximumResistanceThreshold = 250;
+	const int maximumResistanceThreshold = 300;
 };
 

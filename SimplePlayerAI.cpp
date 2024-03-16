@@ -655,7 +655,7 @@ bool SimplePlayerAI::executeRebellionAgainstLiege()
 
 	// Simple AI always rebels when possible.
 	const int resistanceThreshold = getPlayer().getLiege()->getLiegePolicy().resistanceThreshold;
-	std::cout << resistanceThreshold << std::endl;
+	std::cout << "resistance threshold " << resistanceThreshold << std::endl;
 	if(getPlayer().getVassalPolicy().vassalResistance.getResistance() > resistanceThreshold)
 	{
 		getPlayer().rebel();
