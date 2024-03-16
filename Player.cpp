@@ -15,13 +15,13 @@
 #include <iostream>
 
 Player::Player(Game &game, AIPersonality personality, const std::string &realmName)
-	: game(game), militaryManager(*this), realm(game, *this, liegePolicy, realmName), diplomacy(*this), vassalPolicy(*this)
+	: game(game), militaryManager(*this), realm(game, *this, liegePolicy, realmName), diplomacy(*this), vassalPolicy(*this), liegePolicy(*this)
 {
 }
 
 Player::Player(Game& game, const std::string &realmName)
 	: game(game), militaryManager(*this), realm(game, *this, liegePolicy, realmName),
-	AIComponent(std::make_unique<SimplePlayerAI>(game, *this)), diplomacy(*this), vassalPolicy(*this)
+	AIComponent(std::make_unique<SimplePlayerAI>(game, *this)), diplomacy(*this), vassalPolicy(*this), liegePolicy(*this)
 {
 }
 
@@ -232,13 +232,18 @@ void Player::setGameOver()
 
 void Player::handleTurn()
 {
+	liegePolicy.update();
+
 	if(liege != nullptr)
 	{
 		vassalPolicy.handleLiegeInfluenceChange(liege->liegePolicy);
 		vassalPolicy.vassalResistance.update(*liege, liege->liegePolicy);
 	}
+
 	militaryManager.update();
+
 	realm.handleMilitaryYields();
+
 	diplomacy.update();
 
 	if(!isHuman)
@@ -253,6 +258,8 @@ void Player::rebel()
 	assert(liege != nullptr);
 	// Players liege must not have a liege.
 	assert(liege->liege == nullptr);
+	// Resistance must have passed liege threshold.
+	assert(vassalPolicy.vassalResistance.canRebel());
 
 	Player* oldLiege = liege;
 	// Null liege first since otherwise assert will fail in diplomacy class.
@@ -430,6 +437,8 @@ const VassalPolicy& Player::getVassalPolicy() const
 
 void Player::handleVassalRebellion(Player &vassal)
 {
+	liegePolicy.adjustResistanceThreshold(vassal);
+
 	realm.removeRebellingVassal(vassal);
 	diplomacy.addRebellingVassal(vassal);
 

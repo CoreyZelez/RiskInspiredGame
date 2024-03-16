@@ -1,7 +1,18 @@
 #pragma once
 
+class Player;
+
 struct LiegePolicy
 {
+	explicit LiegePolicy(const Player &player);
+
+	void update();
+
+	// Increments resistance threshold dependant upon a rebelling vassal.
+	void adjustResistanceThreshold(const Player &rebellingVassal);
+
+	const Player &player;
+
 	// Percent of vassal troops requested by liege.
 	double vassalLevy = 0.5;
 
@@ -19,5 +30,10 @@ struct LiegePolicy
 	int rulerUnlandedLimit = 6;
 	// Limit on rulers number of vassals.
 	int rulerVassalLimit = 14;
+
+	// Resistance at which vassals may rebel.
+	int resistanceThreshold = 100;
+	const int baseResistanceThreshold = 100;
+	const int maximumResistanceThreshold = 250;
 };
 

@@ -19,7 +19,6 @@ public:
 
 private:
 	const Player &player;
-	const double rebellionThreshold = 100;
 	double resistance = 0;
 };
 

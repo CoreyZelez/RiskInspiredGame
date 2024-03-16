@@ -75,7 +75,6 @@ void VassalResistance::update(const Player &liege, const LiegePolicy &liegePolic
 	assert(player.hasLiege());
 
 	double resistanceChange = 0;
-	const double maxResistance = 2 * rebellionThreshold;  // Maximum resistance that can be attained.
 
 	// Resistance reduces by multiplication factor.
 	// This stops resistance from growing far past the rebellion threshold. 
@@ -126,7 +125,7 @@ void VassalResistance::update(const Player &liege, const LiegePolicy &liegePolic
 	}
 	else if(totalLiegeArmyStrength == 0)
 	{
-		resistanceChange = maxResistance;
+		resistanceChange += 100;
 	}
 	else
 	{
@@ -151,15 +150,11 @@ void VassalResistance::update(const Player &liege, const LiegePolicy &liegePolic
 	{
 		resistance = 0;
 	}
-	// Resistance cannot surpass maximum.
-	else if(resistance > maxResistance)
-	{
-		resistance = maxResistance;
-	}
 }
 
 bool VassalResistance::canRebel() const
 {
+	const int rebellionThreshold = player.getLiege()->getLiegePolicy().resistanceThreshold;
 	return resistance >= rebellionThreshold;
 }
 

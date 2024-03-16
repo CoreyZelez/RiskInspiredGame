@@ -658,15 +658,10 @@ bool SimplePlayerAI::executeRebellionAgainstLiege()
 		return false;
 	}
 
-	const int liegeStrength = getPlayer().getLiege()->getMilitaryManager().getTotalArmyStrength(false);
-	const int playerStrength = getPlayer().getMilitaryManager().getTotalArmyStrength(false);
-	const int resistanceRebellionThreshold = 150;
-	if(playerStrength >= liegeStrength)
-	{
-		getPlayer().rebel();
-		return true;
-	}
-	else if(getPlayer().getVassalPolicy().vassalResistance.getResistance() > resistanceRebellionThreshold)
+	// Simple AI always rebels when possible.
+	const int resistanceThreshold = getPlayer().getLiege()->getLiegePolicy().resistanceThreshold;
+	std::cout << resistanceThreshold << std::endl;
+	if(getPlayer().getVassalPolicy().vassalResistance.getResistance() > resistanceThreshold)
 	{
 		getPlayer().rebel();
 		return true;
