@@ -60,6 +60,9 @@ public:
 	// Returns unordered set of all estates in realm, including both ruler and vassal owned estates.
 	std::unordered_set<const Estate*> getEstates() const;
 
+	// Returns vassal view.
+	bool getVassalView() const;
+
 	bool hasNoBaronies() const;
 
 	std::string getName() const;

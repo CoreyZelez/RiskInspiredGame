@@ -40,7 +40,7 @@ void SimplePlayerAI::handleTurnNonVassal()
 	executeArmyAttacks(borderTerritories);
 
 	// Execute fleet attacks.
-	for(int i = 0; i < 3; ++i)
+	for(int i = 0; i < 2; ++i)
 	{
 		// Redetermine border territories as now territories potentially gained after attacks.
 		borderTerritories = context.getBorderTerritories();
@@ -51,7 +51,7 @@ void SimplePlayerAI::handleTurnNonVassal()
 	borderTerritories = context.getBorderTerritories();
 
 	// Execute naval fleets movements, calculating strategic values each time.
-	for(int i = 0; i < 3; ++i)
+	for(int i = 0; i < 2; ++i)
 	{
 		std::map<Territory*, int> navalFleetStrategicValues;
 		for(Territory* territory : borderTerritories)
@@ -544,8 +544,8 @@ void SimplePlayerAI::executeFleetMoveOrders(const std::map<Territory*, int>& str
 
 	const int navalMoveCost = 1;
 
-	// Total strength of player's land military that is available for movement.
-	const int totalAvailableNavyStrength = player.getMilitaryManager().getTotalArmyStrength(navalMoveCost);
+	// Total strength of player's naval fleets that is available for movement.
+	const int totalAvailableNavyStrength = player.getMilitaryManager().getTotalFleetStrength(navalMoveCost);
 	assert(totalAvailableNavyStrength >= 0);
 	if(totalAvailableNavyStrength == 0)
 	{

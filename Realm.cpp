@@ -321,6 +321,11 @@ std::unordered_set<const Estate*> Realm::getEstates() const
 	return realmEstates;
 }
 
+bool Realm::getVassalView() const
+{
+	return vassalView;
+}
+
 bool Realm::hasNoBaronies() const
 {
 	std::unordered_set<const Estate*> estates = getEstates();

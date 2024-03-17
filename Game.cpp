@@ -119,7 +119,7 @@ void Game::update()
 {
 	///////////////////////////////
 	// Caps number of turns per update call. For testing maybe... 
-	const int maxTurns = 4;
+	const int maxTurns = 10;
 	double turnCnt = 0;
 	///////////////////////////////
 
@@ -184,15 +184,28 @@ void Game::update()
 		}
 	}
 
-	// Iterate through all players, updating their realms vertex arrays if their realm changed.
+	// Iterate through all players, updating their realms vertex arrays if their realm changed and they are to be drawn.
 	iter = players.begin();
 	while(iter != players.end())
 	{
-		if(*iter != nullptr)
+		if(*iter == nullptr)
 		{
-			iter->get()->getRealm().updateGrid();
-			++iter;
+			continue;
 		}
+
+		Player &player = *iter->get();
+
+		// Do not update realm grid if player has liege and vassal view is not active.
+		if(player.getLiege() != nullptr && player.getLiege()->getRealm().getVassalView())
+		{
+			iter++;
+			continue;
+		}
+
+		// Update realm grid.
+		player.getRealm().updateGrid();
+
+		iter++;
 	}
 }
 
