@@ -287,6 +287,39 @@ void Grid::addPosition(sf::Vector2i gridPosition, bool updateVertices)
 }
 
 
+void Grid::removePosition(sf::Vector2i gridPosition, bool updateVertices)
+{
+	assert(subBorderPositions.size() == 0);
+	// Removes grid position if contained in set.
+	if(positions.count(gridPosition) == 1)
+	{
+		positions.erase(gridPosition);
+		if(isBorder(gridPosition))
+		{
+			borderPositions.erase(gridPosition);
+		}
+
+		// Convert positions adjacent to removed position to border positions if necessary.
+		std::vector<sf::Vector2i> adjacencies = calculateAdjacentPositions(gridPosition);
+		for(const sf::Vector2i &adjacency : adjacencies)
+		{
+			if(borderPositions.count(adjacency) == 1 && isBorder(adjacency))
+			{
+				borderPositions.insert(adjacency);
+			}
+		}
+
+		if(updateVertices)
+		{
+			calculateVertices();
+		}
+		else
+		{
+			outdated = true;
+		}
+	}
+}
+
 bool Grid::removeSquare(sf::Vector2f position, bool updateVertices)
 {
 	assert(subBorderPositions.size() == 0);

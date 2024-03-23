@@ -370,30 +370,44 @@ void TerritoryMaker::addPosition(const sf::RenderWindow & window)
 	std::vector<sf::Vector2i> gridPositions = determineBrushGridPositions(mouseGridPosition);
 
 	// Add territory square at grid positions derived from brush.
-	if(state == TerritoryMakerState::editTerritoryGrid)
+
+	for(sf::Vector2i position : gridPositions)
 	{
-		for(sf::Vector2i position : gridPositions)
+		if(claimedPositions.count(position) == 0)
 		{
-			if(claimedPositions.count(position) == 0)
-			{
-				selectedTerritory->getGrid().addPosition(position);
-				claimedPositions.insert(position);
-			}
+			selectedTerritory->getGrid().addPosition(position, false);
+			claimedPositions.insert(position);
 		}
 	}
+
+	selectedTerritory->getGrid().update();
 }
 
 void TerritoryMaker::removePosition(const sf::RenderWindow &window)
 {
 	sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+	sf::Vector2i mouseGridPosition = calculateGridCoordinates(worldPos);
 
-	// Remove square if any and update claimed positions if square is removed.
-	if(selectedTerritory->getGrid().removeSquare(worldPos))
+	std::vector<sf::Vector2i> gridPositions = determineBrushGridPositions(mouseGridPosition);
+
+	for(sf::Vector2i position : gridPositions)
 	{
-		sf::Vector2i position = calculateGridCoordinates(worldPos);
-		claimedPositions.erase(position);
+		if(claimedPositions.count(position) == 1)
+		{
+			selectedTerritory->getGrid().removePosition(position, false);
+			claimedPositions.erase(position);
+		}
 	}
+
+	selectedTerritory->getGrid().update();
+
+	//// Remove square if any and update claimed positions if square is removed.
+	//if(selectedTerritory->getGrid().removeSquare(worldPos))
+	//{
+	//	sf::Vector2i position = calculateGridCoordinates(worldPos);
+	//	claimedPositions.erase(position);
+	//}
 }
 
 

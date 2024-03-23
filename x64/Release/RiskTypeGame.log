@@ -6,8 +6,8 @@ d:\projects\risktypegame\risktypegame\liegepolicy.h(6): warning C4099: 'LiegePol
 d:\projects\risktypegame\risktypegame\gameplaysettings.h(4): warning C4099: 'GameplaySettings': type name first seen using 'class' now seen using 'struct'
   d:\projects\risktypegame\risktypegame\gameplaysettings.h(3): note: see declaration of 'GameplaySettings'
   Generating code
-  2 of 12755 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 12755 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Release\RiskTypeGame.exe

@@ -169,7 +169,6 @@
   <ItemGroup>
     <ClCompile Include="Culture.cpp" />
     <ClCompile Include="CultureFactory.cpp" />
-    <ClCompile Include="EstateAllocatorUnitTest.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="GameplaySettings.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
@@ -224,6 +223,7 @@
     <ClCompile Include="PlayerEstateManager.cpp" />
     <ClCompile Include="RealmGrid.cpp" />
     <ClCompile Include="NumericTextDisplay.cpp" />
+    <ClCompile Include="RealmTest.cpp" />
     <ClCompile Include="VassalResistance.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TerrainFactory.cpp" />
@@ -253,7 +253,6 @@
   <ItemGroup>
     <ClInclude Include="Culture.h" />
     <ClInclude Include="CultureFactory.h" />
-    <ClInclude Include="EstateAllocatorUnitTest.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="GameplaySettings.h" />
     <ClInclude Include="GraphicsComponent.h" />
@@ -302,6 +301,7 @@
     <ClInclude Include="PlayerEstateManager.h" />
     <ClInclude Include="RealmGrid.h" />
     <ClInclude Include="NumericTextDisplay.h" />
+    <ClInclude Include="RealmTest.h" />
     <ClInclude Include="VassalResistance.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TerrainFactory.h" />

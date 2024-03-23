@@ -25,7 +25,7 @@ int main()
 	FontManager::getInstance(); 
 
 	MapMaker mapMaker("empty");
-	Game game("small1");
+	Game game("thesmall");
 
 	GameDisplay gameDisplay = game.createView();
 	GameUI gameUI(UIView);
@@ -60,7 +60,6 @@ int main()
 		else
 		{
 			gameController.handleGameInput(window, gameView);
-			//window.setView(UIView);  // DONT THINK THIS IS NEEDED
 			gameController.handleUIInput(window, UIView);
 		}
 

@@ -37,7 +37,7 @@ void Game::generatePlayers()
 	}
 }
 
-Realm* Game::getRealm(const sf::Vector2f & position)
+Realm* Game::getRealm(const sf::Vector2f &position)
 {
 	for(auto &player : players)
 	{
@@ -119,7 +119,7 @@ void Game::update()
 {
 	///////////////////////////////
 	// Caps number of turns per update call. For testing maybe... 
-	const int maxTurns = 10;
+	const int maxTurns = 2;
 	double turnCnt = 0;
 	///////////////////////////////
 

@@ -48,6 +48,10 @@ public:
 	// Additionally requires subBorderPositions is empty
 	void addPosition(sf::Vector2i gridPosition, bool updateVertices = true);
 
+	// Removes grid square at position in world. Should only be used by mapmaker.
+	// Additionally requires subBorderPositions is empty
+	void removePosition(sf::Vector2i gridPosition, bool updateVertices = true);
+
 	// Removes grid square at position in world. Returns true if a square is removed.
 	bool removeSquare(sf::Vector2f position, bool updateVertices = true);
 
