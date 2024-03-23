@@ -339,6 +339,11 @@ bool Realm::hasNoBaronies() const
 	return true;
 }
 
+bool Realm::gridIsOutdated() const
+{
+	return realmGrid.isOutdated();
+}
+
 std::string Realm::getName() const
 {
 	return name;

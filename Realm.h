@@ -65,6 +65,8 @@ public:
 
 	bool hasNoBaronies() const;
 
+	bool gridIsOutdated() const;
+
 	std::string getName() const;
 
 	// Returns sum of all vassal's army reserves.

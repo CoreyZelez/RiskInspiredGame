@@ -62,8 +62,11 @@ public:
 
 	// Returns grid positions.
 	std::unordered_set<sf::Vector2i, Vector2iHash> getPositions() const;
+	
+	// Empty is true if there are no grid positions.
+	bool isEmpty() const;  
 
-	bool isEmpty() const;  // Empty is true if there are no grid positions.
+	bool isOutdated() const;
 
 	bool containsPosition(sf::Vector2f position) const;  // Returns true if any grid square contains position.
 

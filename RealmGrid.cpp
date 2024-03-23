@@ -36,6 +36,11 @@ bool RealmGrid::containsPosition(const sf::Vector2f & position) const
 	return grid.containsPosition(position);
 }
 
+bool RealmGrid::isOutdated() const
+{
+	return grid.isOutdated();
+}
+
 void RealmGrid::setGridColor(const sf::Color &color)
 {
 	if(grid.getColor() != color)

@@ -21,6 +21,8 @@ public:
 	// Returns true if realm grid contains specified world position.
 	bool containsPosition(const sf::Vector2f &position) const;
 
+	bool isOutdated() const;
+
 	void setGridColor(const sf::Color &color);
 	void setGridColorDefault();
 

@@ -129,6 +129,11 @@ bool Grid::isEmpty() const
 	return positions.size() == 0;
 }
 
+bool Grid::isOutdated() const
+{
+	return outdated;
+}
+
 bool Grid::containsPosition(sf::Vector2f position) const
 {
 	sf::Vector2i gridPosition = calculateGridCoordinates(position);

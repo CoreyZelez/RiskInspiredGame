@@ -1,6 +1,8 @@
 #include "Game.h"
 #include "GameplaySettings.h"
 #include <iostream>
+#include <thread>
+#include <vector>
 
 Game::Game(std::string mapName)
 	: Game(GameplaySettings(), mapName)
@@ -119,7 +121,7 @@ void Game::update()
 {
 	///////////////////////////////
 	// Caps number of turns per update call. For testing maybe... 
-	const int maxTurns = 2;
+	const int maxTurns = 4;
 	double turnCnt = 0;
 	///////////////////////////////
 
@@ -184,28 +186,63 @@ void Game::update()
 		}
 	}
 
-	// Iterate through all players, updating their realms vertex arrays if their realm changed and they are to be drawn.
-	iter = players.begin();
+	//// Iterate through all players, updating their realms vertex arrays if their realm changed and they are to be drawn.
+	//iter = players.begin();
+	//while(iter != players.end())
+	//{
+	//	if(*iter == nullptr)
+	//	{
+	//		continue;
+	//	}
+	//
+	//	Player &player = *iter->get();
+	//
+	//	// Do not update realm grid if player has liege and vassal view is not active.
+	//	if(player.getLiege() != nullptr && player.getLiege()->getRealm().getVassalView())
+	//	{
+	//		iter++;
+	//		continue;
+	//	}
+	//
+	//	// Update realm grid.
+	//	player.getRealm().updateGrid();
+	//
+	//	iter++;
+	//}
+
+	updateGrids();
+}
+
+void Game::updateGrids()
+{
+	std::vector<std::thread> threads;
+
+	// Iterate through all players, creating a thread for each
+	auto iter = players.begin();
 	while(iter != players.end())
 	{
 		if(*iter == nullptr)
-		{
-			continue;
-		}
-
-		Player &player = *iter->get();
-
-		// Do not update realm grid if player has liege and vassal view is not active.
-		if(player.getLiege() != nullptr && player.getLiege()->getRealm().getVassalView())
 		{
 			iter++;
 			continue;
 		}
 
-		// Update realm grid.
-		player.getRealm().updateGrid();
+		Player &player = *iter->get();
+
+		bool gridOutdated = player.getRealm().gridIsOutdated();
+		bool gridDraw = player.getLiege() == nullptr || !player.getLiege()->getRealm().getVassalView();
+		if(gridDraw && gridOutdated) 
+		{
+			threads.emplace_back([&player]() { player.getRealm().updateGrid(); });
+		}
 
 		iter++;
+	}
+
+	// Join all threads to wait for them to complete
+	for(auto& thread : threads) 
+	{
+		thread.join();
 	}
 }
 
