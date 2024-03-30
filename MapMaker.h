@@ -7,6 +7,8 @@
 #include <memory>
 #include <vector>
 
+class GameplaySettings;
+
 class MapMaker
 {
 	enum class MapMakerState
@@ -22,7 +24,7 @@ public:
 
 	void save();
 	void saveAs(std::string mapName);
-	void load(std::string mapName);
+	void load(std::string mapName, const GameplaySettings &gameplaySettings);
 
 	void draw(sf::RenderWindow &window);
 

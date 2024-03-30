@@ -40,7 +40,7 @@ void EstateTest::testBaronyYield()
 	// Create the barony with desired yields.
 	const int armyYield = 10;
 	const int fleetYield = 5;
-	Barony barony(landTerritory, armyYield, fleetYield);
+	Barony barony(landTerritory);
 	barony.setOwnership(&player);
 
 	// Operation being tested.

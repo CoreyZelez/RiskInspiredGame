@@ -7,10 +7,12 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
+class GameplaySettings;
+
 class Map
 {
 public:
-	Map(std::string name);
+	Map(std::string name, const GameplaySettings *gameSettings = nullptr);
 
 	void save();
 	void saveAs(std::string name);  // Save map under different name.
@@ -21,7 +23,7 @@ public:
 	const EstateManager &getEstateManager()const ;
 
 private:
-	void load(std::string name);
+	void load(std::string name, const GameplaySettings *gameSettings);
 
 	std::string name;
 	TerritoryManager territoryManager;

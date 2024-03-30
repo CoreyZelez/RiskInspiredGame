@@ -1,5 +1,6 @@
 #include "TerritoryManager.h"
 #include "Territory.h"
+#include "GameplaySettings.h"
 #include <assert.h>
 #include <iostream>
 #include <fstream>
@@ -32,7 +33,7 @@ void TerritoryManager::save(std::string mapName) const
 	}
 }
 
-void TerritoryManager::load(std::string mapName)
+void TerritoryManager::load(std::string mapName, const GameplaySettings *gameplaySettings)
 {
 	std::ifstream file("res/maps/" + mapName + "/" + mapName + "_territories.txt");
 	std::string line;
@@ -45,7 +46,7 @@ void TerritoryManager::load(std::string mapName)
 		}
 		else if(line.compare(landSaveLabel) == 0)
 		{
-			loadLandTerritory(file);
+			loadLandTerritory(file, gameplaySettings);
 		}
 		else if(line.compare(navalSaveLabel) == 0)
 		{
@@ -261,13 +262,13 @@ void TerritoryManager::calculateDistances()
 	}
 }
 
-void TerritoryManager::loadLandTerritory(std::ifstream & file)
+void TerritoryManager::loadLandTerritory(std::ifstream & file, const GameplaySettings *gameplaySettings)
 {
 	Grid graphics = loadTerritoryGrid(file);
 
 	int id = loadTerritoryID(file);
 
-	LandTerritoryFeatures features = loadLandTerritoryFeatures(file);
+	LandTerritoryFeatures features = loadLandTerritoryFeatures(file, gameplaySettings);
 
 	// Load naval territory associated with port if exists.
 	NavalTerritory* portNavalTerritory = nullptr;

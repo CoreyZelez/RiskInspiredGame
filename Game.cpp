@@ -10,7 +10,7 @@ Game::Game(std::string mapName)
 }
 
 Game::Game(GameplaySettings gameplaySettings, std::string mapName)
-	: gameplaySettings(gameplaySettings), map(mapName), nameGenerator("realms")
+	: gameplaySettings(gameplaySettings), map(mapName, &this->gameplaySettings), nameGenerator("realms")
 {
 	generatePlayers();
 }
@@ -185,30 +185,6 @@ void Game::update()
 			break;
 		}
 	}
-
-	//// Iterate through all players, updating their realms vertex arrays if their realm changed and they are to be drawn.
-	//iter = players.begin();
-	//while(iter != players.end())
-	//{
-	//	if(*iter == nullptr)
-	//	{
-	//		continue;
-	//	}
-	//
-	//	Player &player = *iter->get();
-	//
-	//	// Do not update realm grid if player has liege and vassal view is not active.
-	//	if(player.getLiege() != nullptr && player.getLiege()->getRealm().getVassalView())
-	//	{
-	//		iter++;
-	//		continue;
-	//	}
-	//
-	//	// Update realm grid.
-	//	player.getRealm().updateGrid();
-	//
-	//	iter++;
-	//}
 
 	updateGrids();
 }

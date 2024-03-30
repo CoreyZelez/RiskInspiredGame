@@ -10,23 +10,16 @@
 #include <iostream>
 #include <fstream>
 
-Barony::Barony(LandTerritory &landTerritory, double landArmyYield, double navalFleetYield)
+Barony::Barony(LandTerritory &landTerritory)
 	: LandedEstate(Title::barony, landTerritory),
-	landArmyYield(landArmyYield), navalFleetYield(navalFleetYield), landTerritory(landTerritory)
+	landTerritory(landTerritory)
 {
-}
-
-void Barony::saveToFile(std::ofstream &file) const
-{
-	LandedEstate::saveToFile(file);
-	file << "# land army yield" << std::endl;
-	file << landArmyYield << std::endl;
-	file << "# naval fleet yield" << std::endl;
-	file << navalFleetYield << std::endl;
 }
 
 std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 {
+	const double landArmyYield = landTerritory.getFeatures().calculateArmyYield();
+
 	if(!getRuler()->hasLiege())
 	{
 		// Percent of yielded army allocated to reinforcement.
@@ -74,6 +67,8 @@ std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
 	{
 		return nullptr;
 	}
+
+	const double navalFleetYield = landTerritory.getFeatures().calculateFleetYield();
 
 	if(!getRuler()->hasLiege())
 	{
@@ -161,6 +156,9 @@ std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 
 void Barony::receiveBonusYield(const float &bonus)
 {
+	const double landArmyYield = landTerritory.getFeatures().calculateArmyYield();
+	const double navalFleetYield = landTerritory.getFeatures().calculateFleetYield();
+
 	if(!getRuler()->hasLiege())
 	{
 		// Yield all land army units as reinforcements.

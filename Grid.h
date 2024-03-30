@@ -68,7 +68,10 @@ public:
 
 	bool isOutdated() const;
 
-	bool containsPosition(sf::Vector2f position) const;  // Returns true if any grid square contains position.
+	// Returns true if any grid contains world position.
+	bool containsPosition(sf::Vector2f position) const;  
+	// Returns true if any grid contains frid position.
+	bool containsPosition(sf::Vector2i position) const;  
 
 	sf::Vector2f getCenter() const;  // Returns center position in game world of territory.
 
@@ -95,7 +98,7 @@ private:
 	// Calculates vertices for vertex array from square positions.
 	void calculateVertices();  
 	// Returns positions adjacent to border positions not contained in grid.
-	std::vector<sf::Vector2i> getAdjacentPositions() const; 
+	std::unordered_set<sf::Vector2i, Vector2iHash> getAdjacentPositions() const;
 	// Returns color adjusted for dark specifier.
 	sf::Color calculateAdjustedColor(const sf::Vector2i &position);
 };

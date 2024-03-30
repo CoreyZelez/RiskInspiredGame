@@ -4,13 +4,17 @@
 #include <vector>
 #include <unordered_set>
 
+class GameplaySettings;
+
 class TerritoryManager
 {
 public:
 	void drawPorts(sf::RenderWindow &window) const;
 
 	void save(std::string mapName) const;
-	void load(std::string mapName);
+
+	// Load territories. Specify gameplay settings when loaded for a game.
+	void load(std::string mapName, const GameplaySettings *gameplaySettings = nullptr);
 
 	void draw(sf::RenderWindow &window) const;
 	void setDrawMode(TerritoryDrawMode mode);
@@ -37,9 +41,12 @@ private:
 	void calculateAdjacencies();
 	void calculateDistances();
 
-	void loadLandTerritory(std::ifstream &file);
+	void loadLandTerritory(std::ifstream &file, const GameplaySettings *gameplaySettings);
+
 	void loadNavalTerritory(std::ifstream &file);
+
 	void removeTerritory(Territory *territory);
+
 	NavalTerritory *getNavalTerritory(int id);
 
 	std::vector<Territory*> territories;

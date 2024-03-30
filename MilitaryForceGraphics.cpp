@@ -75,6 +75,10 @@ sf::Vector2f MilitaryForceGraphics::getMilitaryShapeTextOffset(const std::string
 	{
 		displacement = sf::Vector2f(0, 30);
 	}
+	else if(shape.compare("circle") == 0)
+	{
+		displacement = sf::Vector2f(-1, 4);
+	}
 
 	return displacement;
 }

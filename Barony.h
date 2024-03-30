@@ -9,11 +9,9 @@ class LandTerritory;
 class Barony : public LandedEstate
 {
 public:
-	Barony(LandTerritory &landTerritory, double landArmyYield, double navalFleetYield);
+	Barony(LandTerritory &landTerritory);
 
 	virtual ~Barony() = default;
-
-	virtual void saveToFile(std::ofstream &file) const override;
 
 	virtual std::unique_ptr<LandArmy> yieldLandArmy() override;
 	virtual std::unique_ptr<NavalFleet> yieldNavalFleet() override;
@@ -29,9 +27,6 @@ protected:
 
 private:
 	LandTerritory &landTerritory;
-
-	double landArmyYield = 0;  // Yield of land army per turn.
-	double navalFleetYield = 0;  // Yield of naval fleets per turn.
 
 	double cumulativeLandArmy = 0;  // Cumulation of land army yields.
 	double cumulativeNavalFleet = 0;  // Cumulation of naval fleet yields.

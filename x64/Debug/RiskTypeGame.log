@@ -1,12 +1,11 @@
-﻿  LandArmy.cpp
-d:\projects\risktypegame\risktypegame\liegepolicy.h(4): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
-  d:\projects\risktypegame\risktypegame\liegepolicy.h(3): note: see declaration of 'LiegePolicy'
-d:\projects\risktypegame\risktypegame\gameplaysettings.h(4): warning C4099: 'GameplaySettings': type name first seen using 'class' now seen using 'struct'
-  d:\projects\risktypegame\risktypegame\gameplaysettings.h(3): note: see declaration of 'GameplaySettings'
-d:\projects\risktypegame\risktypegame\terrain.h(6): warning C4099: 'Terrain': type name first seen using 'class' now seen using 'struct'
-  d:\projects\risktypegame\risktypegame\terrain.h(5): note: see declaration of 'Terrain'
-d:\projects\risktypegame\risktypegame\landarmy.cpp(34): warning C4018: '>=': signed/unsigned mismatch
-d:\projects\risktypegame\risktypegame\landarmy.cpp(61): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\landarmy.cpp(62): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\projects\risktypegame\risktypegame\landarmy.cpp(113): warning C4018: '<': signed/unsigned mismatch
+﻿  Factory.cpp
+  MilitaryForce.cpp
+d:\projects\risktypegame\risktypegame\liegepolicy.h(6): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+  d:\projects\risktypegame\risktypegame\liegepolicy.h(5): note: see declaration of 'LiegePolicy'
+d:\projects\risktypegame\risktypegame\militaryforce.cpp(188): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  StrengthSlider.cpp
+d:\projects\risktypegame\risktypegame\strengthslider.cpp(43): warning C4804: '<=': unsafe use of type 'bool' in operation
+d:\projects\risktypegame\risktypegame\strengthslider.cpp(44): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\projects\risktypegame\risktypegame\strengthslider.cpp(44): warning C4244: 'initializing': conversion from 'float' to 'const int', possible loss of data
+  Generating Code...
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe

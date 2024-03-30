@@ -21,7 +21,8 @@ LandTerritory::LandTerritory(int id, Grid graphics, LandTerritoryFeatures featur
 }
 
 LandTerritory::LandTerritory(int id, Grid graphics, NavalTerritory *navalTerritory)
-	: Territory(id, graphics, std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land)
+	: Territory(id, graphics, std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land), 
+	features(nullptr)
 {
 	// Create the port.
 	if(navalTerritory != nullptr)
@@ -38,7 +39,8 @@ LandTerritory::LandTerritory(int id, Grid graphics)
 }
 
 LandTerritory::LandTerritory(int id)
-	: Territory(id, createRandomLandColor(), std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land)
+	: Territory(id, createRandomLandColor(), std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land), 
+	features(nullptr)
 {
 	initDefaultFeatures();
 }
@@ -124,6 +126,11 @@ void LandTerritory::setProsperities(int prosperity)
 	}
 }
 
+const LandTerritoryFeatures& LandTerritory::getFeatures() const
+{
+	return features;
+}
+
 void LandTerritory::createPort(NavalTerritory &navalTerritory)
 {
 	// Return if grids do not share border.
@@ -169,9 +176,9 @@ int loadPortNavalID(std::ifstream & file)
 	return id;
 }
 
-LandTerritoryFeatures loadLandTerritoryFeatures(std::ifstream & file)
+LandTerritoryFeatures loadLandTerritoryFeatures(std::ifstream & file, const GameplaySettings *gameplaySettings)
 {
-	LandTerritoryFeatures features;
+	LandTerritoryFeatures features(gameplaySettings);
 
 	std::string line;
 

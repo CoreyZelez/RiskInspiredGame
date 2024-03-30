@@ -2,6 +2,7 @@
 #include "ChangeInstance.h"
 #include "ReconcileLandedEstates.h"
 #include "InputUtility.h"
+#include "GameplaySettings.h"
 #include <assert.h>
 #include <iostream>
 
@@ -25,7 +26,7 @@ void MapMaker::saveAs(std::string mapName)
 	map.saveAs(mapName);
 }
 
-void MapMaker::load(std::string mapName)
+void MapMaker::load(std::string mapName, const GameplaySettings &gameplaySettings)
 {
 	map = Map("mapName");
 }

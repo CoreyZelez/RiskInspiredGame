@@ -430,7 +430,7 @@ void SimplePlayerAI::executeArmyMoveOrders(const std::map<Territory*, int> &stra
 				}
 
 				// Move army to friendly territory closest to territory.
-				// In future prioritise border territories!!!
+				// In future prioritise border territories when distances equivalent!!!
 				const float moveRatio = 0.7;
 				int moveStrength = freeToMove[&army] * moveRatio;
 				// Ensure move strength not 0 if any amount of army is free to move.
@@ -452,7 +452,11 @@ void SimplePlayerAI::executeArmyMoveOrders(const std::map<Territory*, int> &stra
 						strategicValue = 0;
 						break;
 					}
+
+					///////////////////////////////////
+					// UNDER PARELELISATION OF MOVECLOSEST THIS ASSERT LIKELY CANNOT BE HERE!
 					assert(freeToMove[&army] <= army.getStrength(landMoveCost));
+					///////////////////////////////////
 				}
 			}
 		}

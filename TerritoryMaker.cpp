@@ -395,8 +395,11 @@ void TerritoryMaker::removePosition(const sf::RenderWindow &window)
 	{
 		if(claimedPositions.count(position) == 1)
 		{
+			if(selectedTerritory->getGrid().containsPosition(position))
+			{
+				claimedPositions.erase(position);
+			}
 			selectedTerritory->getGrid().removePosition(position, false);
-			claimedPositions.erase(position);
 		}
 	}
 

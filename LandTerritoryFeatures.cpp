@@ -1,4 +1,12 @@
 #include "LandTerritoryFeatures.h"
+#include "GameplaySettings.h"
+#include <assert.h>
+#include <iostream>
+
+LandTerritoryFeatures::LandTerritoryFeatures(const GameplaySettings *gameplaySettings)
+	: gameplaySettings(gameplaySettings)
+{
+}
 
 void LandTerritoryFeatures::saveToFile(std::ofstream &file) const
 {
@@ -13,6 +21,44 @@ void LandTerritoryFeatures::saveToFile(std::ofstream &file) const
 
 	file << "# culture id" << std::endl;
 	file << culture.id << std::endl;
+}
+
+double LandTerritoryFeatures::calculateArmyYield() const
+{
+	// Gameplay settings must be known.
+	assert(gameplaySettings != nullptr);
+
+	double yield = 0;
+
+	if(prosperity < 100)
+	{
+		yield = 0.5 + (prosperity / 100);  // Maximum is 1.5.
+	}
+	else if(prosperity < 200)
+	{
+		yield = 1.5 + ((prosperity - 100) / 50);  // Maximum is 3.5.
+	}
+	else
+	{
+		yield = 3.5 + ((prosperity - 200) / 30);
+	}
+
+	yield *= gameplaySettings->armyYieldMultiplier;
+
+	return yield;
+}
+
+double LandTerritoryFeatures::calculateFleetYield() const
+{
+	// Gameplay settings must be known.
+	assert(gameplaySettings != nullptr);
+
+	double yield = 0;
+
+	yield = 0.2 + (prosperity / 150);
+	yield *= gameplaySettings->fleetYieldMultiplier;
+
+	return yield;
 }
 
 sf::Color determineProsperityColor(double prosperity)

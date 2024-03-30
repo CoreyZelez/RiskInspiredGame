@@ -166,19 +166,13 @@ void EstateManager::loadBarony(std::ifstream &file, std::vector<std::unique_ptr<
 	}
 
 	// Load the land army yield.
-	std::getline(file, line);
-	assert(line.compare("# land army yield") == 0);
-	std::getline(file, line);
-	const double landArmyYield = std::stod(line);
+	const double landArmyYield = territory->getFeatures().calculateArmyYield();
 
 	// Load the naval fleet yield.
-	std::getline(file, line);
-	assert(line.compare("# naval fleet yield") == 0);
-	std::getline(file, line);
-	const double navalFleetYield = std::stod(line);
+	const double navalFleetYield = territory->getFeatures().calculateFleetYield();
 
 	// Create the barony.
-	std::unique_ptr<Estate> barony = std::make_unique<Barony>(*territory, landArmyYield, navalFleetYield);
+	std::unique_ptr<Estate> barony = std::make_unique<Barony>(*territory);
 	barony.get()->initName(name);
 	// Add the subfiefs.
 	for(std::string &subfiefName : subfiefNames)
@@ -301,12 +295,6 @@ std::string EstateManager::loadName(std::ifstream & file)
 
 void EstateManager::reconcileBaronies(const std::vector<std::unique_ptr<LandTerritory>> &landTerritories)
 {
-	// TEMPORARY RNG FOR BARONIES!!!
-	std::random_device rd;
-	std::mt19937 mt(rd());
-	std::uniform_real_distribution<double> armyYieldDist(0.4, 0.9);
-	std::uniform_real_distribution<double> fleetYieldDist(0.2, 0.5);
-
 	for(auto &territory : landTerritories)
 	{
 		// Territory already allocated to a landed estate.
@@ -315,7 +303,7 @@ void EstateManager::reconcileBaronies(const std::vector<std::unique_ptr<LandTerr
 			continue;
 		}
 
-		std::unique_ptr<Estate> barony = std::make_unique<Barony>(*territory.get(), armyYieldDist(mt), fleetYieldDist(mt));
+		std::unique_ptr<Estate> barony = std::make_unique<Barony>(*territory.get());
 
 		// Generate name for barony.
 		barony.get()->initName(generateName());

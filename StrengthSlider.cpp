@@ -80,8 +80,7 @@ void StrengthSlider::updateBars()
 	const int yellowStrength = militaryForce.getStaminaStrength()[1];
 	// const int orangeStrength = militaryForce.getStaminaStrength()[1];
 	const int redStrength = militaryForce.getStaminaStrength()[0];
-	assert(greenStrength + yellowStrength + orangeStrength + redStrength
-		== militaryForce.getTotalStrength());
+	assert(greenStrength + yellowStrength + redStrength == militaryForce.getTotalStrength());
 
 	// Sets green bar.
 	if(remainingStrength > greenStrength)
