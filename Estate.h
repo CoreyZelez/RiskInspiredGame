@@ -20,6 +20,7 @@ class Estate : public HasUI
 {
 public:
 	Estate(Title title);
+	Estate(Title title, sf::Color color);
 	Estate(Title title, const Grid &grid);
 	Estate(Title title, const Grid &grid, std::string name);
 

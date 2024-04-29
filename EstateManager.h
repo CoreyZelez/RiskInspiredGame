@@ -64,6 +64,7 @@ private:
 	void loadMaridom(std::ifstream &file, std::vector<std::unique_ptr<NavalTerritory>>& navalTerritories);
 	void loadEstate(std::ifstream &file);
 	std::string loadName(std::ifstream &file);
+	sf::Color loadColor(std::ifstream &file);
 	std::vector<std::string> loadSubfiefNames(std::ifstream &file);
 
 	void setTitleColor(Title title);  // Sets any estates grid with title to pre defined color.

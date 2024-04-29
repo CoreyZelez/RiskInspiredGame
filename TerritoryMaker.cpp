@@ -338,6 +338,10 @@ void TerritoryMaker::progressBrushSize()
 	{
 		brushSize = 9;
 	}
+	else if(brushSize == 9)
+	{
+		brushSize = 20;
+	}
 	else
 	{
 		brushSize = 1;

@@ -10,6 +10,7 @@
 #include <assert.h>
 #include <iostream>
 #include <string>
+#include <sstream>
 
 EstateManager::EstateManager()
 	: nameGenerator("estates")
@@ -140,6 +141,9 @@ void EstateManager::loadBarony(std::ifstream &file, std::vector<std::unique_ptr<
 	// Load barony name.
 	std::string name = loadName(file);
 
+	// Load barony color.
+	sf::Color color = loadColor(file);
+
 	// Load names of subfiefs of barony.
 	std::vector<std::string> subfiefNames = loadSubfiefNames(file);
 
@@ -198,6 +202,9 @@ void EstateManager::loadMaridom(std::ifstream & file, std::vector<std::unique_pt
 	// Load maridom name.
 	std::string name = loadName(file);
 
+	// Load maridom color.
+	sf::Color color = loadColor(file);
+
 	// Load names of subfiefs of maridom.
 	std::vector<std::string> subfiefNames = loadSubfiefNames(file);
 
@@ -249,11 +256,14 @@ void EstateManager::loadEstate(std::ifstream &file)
 	// Load name.
 	std::string name = loadName(file);
 
+	// Load color.
+	sf::Color color = loadColor(file);
+
 	// Load the names of the subfiefs.
 	std::vector<std::string> subfiefNames = loadSubfiefNames(file);
 
 	// Create the estate.
-	std::unique_ptr<Estate> estate = std::make_unique<Estate>(title);
+	std::unique_ptr<Estate> estate = std::make_unique<Estate>(title, color);
 	estate.get()->initName(name);
 	// Add the subfiefs.
 	bool hasSubfief = false;
@@ -291,6 +301,26 @@ std::string EstateManager::loadName(std::ifstream & file)
 	// Ensure name cannot be reused.
 	allocatedEstateNames.insert(name);
 	return name;
+}
+
+sf::Color EstateManager::loadColor(std::ifstream & file)
+{
+	std::string line;
+
+	std::getline(file, line);
+	assert(line.compare("# color") == 0);
+	std::getline(file, line);
+	assert(line[0] != '#');
+
+	std::istringstream iss(line);
+	int r, g, b;
+	char delimiter;
+	if(!(iss >> r >> delimiter >> g >> delimiter >> b)) 
+	{
+		std::cerr << "Error: Invalid input format" << std::endl;
+	}
+
+	return sf::Color(r, g, b);
 }
 
 void EstateManager::reconcileBaronies(const std::vector<std::unique_ptr<LandTerritory>> &landTerritories)

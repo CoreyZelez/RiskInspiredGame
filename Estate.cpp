@@ -21,6 +21,18 @@ Estate::Estate(Title title)
 	initColor();
 }
 
+Estate::Estate(Title title, sf::Color color)
+	: title(title)
+{
+	if(title == Title::maridom)
+	{
+		this->grid.setBorderMode(BorderMode::feintBorders);
+		this->grid.setAllPositionsDark();
+	}
+
+	this->grid.setColor(color);
+}
+
 Estate::Estate(Title title, const Grid &grid)
 	: title(title)
 {
@@ -61,6 +73,8 @@ void Estate::saveToFile(std::ofstream &file) const
 	file << static_cast<int>(title) << std::endl;
 	file << "# name" << std::endl;
 	file << name << std::endl;
+	file << "# color" << std::endl;
+	file << (int)getGrid().getColor().r << " " << (int)getGrid().getColor().g << " " << (int)getGrid().getColor().b << std::endl;
 	file << "# subfiefs" << std::endl;
 	saveSubfiefs(file);
 }
