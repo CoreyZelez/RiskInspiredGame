@@ -122,6 +122,13 @@ void EstateMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 			changeState(EstateMakerState::none);
 		}
 	}
+	else if(inputUtility.getKeyDown(sf::Keyboard::O) && inputUtility.getKeyPressed(sf::Keyboard::P))
+	{
+		if(selectedTitle != Title::noTitle)
+		{
+			estateManager.randomiseTitleColor(selectedTitle);
+		}
+	}
 
 	inputClock.restart();
 }

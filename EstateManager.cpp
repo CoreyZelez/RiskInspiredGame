@@ -311,15 +311,9 @@ sf::Color EstateManager::loadColor(std::ifstream & file)
 	assert(line.compare("# color") == 0);
 	std::getline(file, line);
 	assert(line[0] != '#');
-
 	std::istringstream iss(line);
 	int r, g, b;
-	char delimiter;
-	if(!(iss >> r >> delimiter >> g >> delimiter >> b)) 
-	{
-		std::cerr << "Error: Invalid input format" << std::endl;
-	}
-
+	iss >> r >> g >> b;
 	return sf::Color(r, g, b);
 }
 
@@ -458,40 +452,34 @@ Estate* EstateManager::getLowerEstate(sf::Vector2f position, Title title, bool a
 
 void EstateManager::makeColored(Title title, bool setLower)
 {
-	const int randComponent1 = rand() % 61;
-	const int randComponent2 = rand() % 41;
-	const int randComponent3 = rand() % 41;
-	const int randComponent4 = rand() % 21;
-
-	const sf::Color grey(90, 90, 90);
-	setTitleColor(Title::barony, grey);
-	setTitleColor(Title::county, grey);
-	setTitleColor(Title::duchy, grey);
-	setTitleColor(Title::kingdom, grey);
-	setTitleColor(Title::empire, grey);
+	setTitleGreyColor(Title::barony);
+	setTitleGreyColor(Title::county);
+	setTitleGreyColor(Title::duchy);
+	setTitleGreyColor(Title::kingdom);
+	setTitleGreyColor(Title::empire);
 
 	if(title == Title::barony || (Title::barony < title && setLower))
 	{
-		setTitleColor(Title::barony);
+		setTitleDefaultColor(Title::barony);
 	}
 	if(title == Title::county || (Title::county < title && setLower))
 	{
-		setTitleColor(Title::county);
+		setTitleDefaultColor(Title::county);
 
 	}
 	if(title == Title::duchy || (Title::duchy < title && setLower))
 	{
-		setTitleColor(Title::duchy);
+		setTitleDefaultColor(Title::duchy);
 
 	}
 	if(title == Title::kingdom || (Title::kingdom < title && setLower))
 	{
-		setTitleColor(Title::kingdom);
+		setTitleDefaultColor(Title::kingdom);
 
 	}
 	if(title == Title::empire || (Title::empire < title && setLower))
 	{
-		setTitleColor(Title::empire);
+		setTitleDefaultColor(Title::empire);
 	}
 }
 
@@ -544,7 +532,23 @@ std::vector<std::string> EstateManager::loadSubfiefNames(std::ifstream &file)
 	return names;
 }
 
-void EstateManager::setTitleColor(Title title)
+void EstateManager::setTitleDefaultColor(Title title)
+{
+	for(auto &estate : estates[title])
+	{
+		estate.get()->setGridColorDefault();
+	}
+}
+
+void EstateManager::setTitleGreyColor(Title title)
+{
+	for(auto &estate : estates[title])
+	{
+		estate.get()->setGridColorGrey();
+	}
+}
+
+void EstateManager::randomiseTitleColor(Title title)
 {
 	for(auto &estate : estates[title])
 	{
@@ -558,48 +562,40 @@ void EstateManager::setTitleColor(Title title)
 		case Title::maridom:
 		{
 			const sf::Color maridomColor(120, 120, 120);
-			estate.get()->getGrid().setColor(maridomColor);
+			estate.get()->setDefaultColor(maridomColor);
 			break;
 		}
 		case Title::barony:
 		{
 			const sf::Color baronyColor(190 + randComponent1, randComponent2, 0);
-			estate.get()->getGrid().setColor(baronyColor);
+			estate.get()->setDefaultColor(baronyColor);
 			break;
 		}
 		case Title::county:
 		{
 			const sf::Color countyColor(50, 170 + randComponent1, 160 + randComponent2);
-			estate.get()->getGrid().setColor(countyColor);
+			estate.get()->setDefaultColor(countyColor);
 			break;
 		}
 		case Title::duchy:
 		{
 			const sf::Color dukedomColor(30, 190 + randComponent1, 0);
-			estate.get()->getGrid().setColor(dukedomColor);
+			estate.get()->setDefaultColor(dukedomColor);
 			break;
 		}
 		case Title::kingdom:
 		{
 			const sf::Color kingdomColor(210 + randComponent2, 210 + randComponent3, randComponent4);
-			estate.get()->getGrid().setColor(kingdomColor);
+			estate.get()->setDefaultColor(kingdomColor);
 			break;
 		}
 		case Title::empire:
 		{
 			const sf::Color empireColor(190 + randComponent1, randComponent2, 100 + randComponent3);
-			estate.get()->getGrid().setColor(empireColor);
+			estate.get()->setDefaultColor(empireColor);
 			break;
 		}
 		}
-	}
-}
-
-void EstateManager::setTitleColor(Title title, sf::Color color)
-{
-	for(auto &estate : estates[title])
-	{
-		estate.get()->getGrid().setColor(color);
 	}
 }
 

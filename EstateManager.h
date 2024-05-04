@@ -49,6 +49,7 @@ public:
 	Estate* getLowerEstate(sf::Vector2f position, Title title, bool allowParent);  // Returns pointer to estate at world position.
 
 	void makeColored(Title title, bool setLower);  // Makes estate grids colored for specified title(s). Other estates made grey.
+	void randomiseTitleColor(Title title);  // Sets any estates grid with title to pre defined color.
 
 private:
 	NameGenerator nameGenerator;
@@ -67,6 +68,6 @@ private:
 	sf::Color loadColor(std::ifstream &file);
 	std::vector<std::string> loadSubfiefNames(std::ifstream &file);
 
-	void setTitleColor(Title title);  // Sets any estates grid with title to pre defined color.
-	void setTitleColor(Title title, sf::Color color);  // Sets any estates grid with title to color.
+	void setTitleDefaultColor(Title title);
+	void setTitleGreyColor(Title title);
 };

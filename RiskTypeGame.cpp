@@ -13,7 +13,7 @@
 
 int main()
 {
-	bool mapEditorMode = true;
+	bool mapEditorMode = false;
 
 	sf::RenderWindow window(sf::VideoMode(2560, 1440), "Sovereign Chaos", sf::Style::Fullscreen);
 	sf::View gameView = window.getDefaultView(); 
@@ -24,8 +24,8 @@ int main()
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS IN TESTING CODE!!!
 	FontManager::getInstance(); 
 
-	MapMaker mapMaker("Minirth");
-	Game game("empty");
+	MapMaker mapMaker("empty");
+	Game game("Minirth");
 
 	GameDisplay gameDisplay = game.createView();
 	GameUI gameUI(UIView);

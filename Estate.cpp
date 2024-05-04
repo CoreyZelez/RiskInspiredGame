@@ -22,7 +22,7 @@ Estate::Estate(Title title)
 }
 
 Estate::Estate(Title title, sf::Color color)
-	: title(title)
+	: title(title), defaultColor(color)
 {
 	if(title == Title::maridom)
 	{
@@ -74,7 +74,7 @@ void Estate::saveToFile(std::ofstream &file) const
 	file << "# name" << std::endl;
 	file << name << std::endl;
 	file << "# color" << std::endl;
-	file << (int)getGrid().getColor().r << " " << (int)getGrid().getColor().g << " " << (int)getGrid().getColor().b << std::endl;
+	file << (int)defaultColor.r << " " << (int)defaultColor.g << " " << (int)defaultColor.b << std::endl;
 	file << "# subfiefs" << std::endl;
 	saveSubfiefs(file);
 }
@@ -320,9 +320,21 @@ std::string Estate::getName() const
 	return name;
 }
 
-void Estate::setDefaultColor()
+void Estate::setDefaultColor(sf::Color color)
 {
+	this->defaultColor = color;
+	this->grid.setColor(color);
+}
 
+void Estate::setGridColorDefault()
+{
+	this->grid.setColor(defaultColor);
+}
+
+void Estate::setGridColorGrey()
+{
+	sf::Color greyColor(90, 90, 90);
+	this->grid.setColor(greyColor);
 }
 
 Grid& Estate::getGrid()

@@ -80,11 +80,14 @@ public:
 
 	// Returns estate name.
 	std::string getName() const;
+
+	// Changes default color of grid.
+	void setDefaultColor(sf::Color color);
 	
 	// Sets color to default color for given title.
-	void setDefaultColor();
+	void setGridColorDefault();
 	// Sets color to generic grey color.
-	void setGreyColor();
+	void setGridColorGrey();
 
 	// Returns the associated graphical grid of this estate.
 	Grid& getGrid();
@@ -113,6 +116,7 @@ private:
 	std::set<Estate*> subfiefs;
 	std::string name = "";
 	Grid grid;
+	sf::Color defaultColor;  // Default color of estate.
 	bool drawSubfiefs = false;
 
 	// Alocates estate to ruler who's realm owns every lower estate entirely.
