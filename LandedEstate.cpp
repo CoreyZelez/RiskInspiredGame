@@ -15,6 +15,13 @@ LandedEstate::LandedEstate(Title title, Territory &territory)
 	this->territory.assignLandedEstate(this);
 }
 
+LandedEstate::LandedEstate(Title title, Territory & territory, sf::Color color)
+	: Estate(title, territory.getGrid(), color), territory(territory)
+{
+	this->territory.addObserver(this);
+	this->territory.assignLandedEstate(this);
+}
+
 void LandedEstate::saveToFile(std::ofstream & file) const
 {
 	Estate::saveToFile(file);

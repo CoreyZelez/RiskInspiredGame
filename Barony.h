@@ -2,6 +2,7 @@
 #include "LandedEstate.h"
 #include "LandTerritory.h"
 #include <memory>
+#include <SFML/Graphics.hpp>
 
 class CoastalTerritory;
 class LandTerritory;
@@ -10,6 +11,7 @@ class Barony : public LandedEstate
 {
 public:
 	Barony(LandTerritory &landTerritory);
+	Barony(LandTerritory &landTerritory, sf::Color color);
 
 	virtual ~Barony() = default;
 

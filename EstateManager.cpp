@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <random>
 
 EstateManager::EstateManager()
 	: nameGenerator("estates")
@@ -176,7 +177,7 @@ void EstateManager::loadBarony(std::ifstream &file, std::vector<std::unique_ptr<
 	const double navalFleetYield = territory->getFeatures().calculateFleetYield();
 
 	// Create the barony.
-	std::unique_ptr<Estate> barony = std::make_unique<Barony>(*territory);
+	std::unique_ptr<Estate> barony = std::make_unique<Barony>(*territory, color);
 	barony.get()->initName(name);
 	// Add the subfiefs.
 	for(std::string &subfiefName : subfiefNames)
@@ -393,7 +394,7 @@ Estate* EstateManager::createEstate(Title title)
 {
 	assert(title != Title::barony);
 
-	std::unique_ptr<Estate> estate = std::make_unique<Estate>(title);
+	std::unique_ptr<Estate> estate = std::make_unique<Estate>(title, generateRandomEstateColor(title));
 	estate.get()->initName(generateName());
 
 	Estate *e = estate.get();
@@ -552,50 +553,137 @@ void EstateManager::randomiseTitleColor(Title title)
 {
 	for(auto &estate : estates[title])
 	{
-		const int randComponent1 = rand() % 61;
-		const int randComponent2 = rand() % 41;
-		const int randComponent3 = rand() % 41;
-		const int randComponent4 = rand() % 21;
-
-		switch(title)
-		{
-		case Title::maridom:
-		{
-			const sf::Color maridomColor(120, 120, 120);
-			estate.get()->setDefaultColor(maridomColor);
-			break;
-		}
-		case Title::barony:
-		{
-			const sf::Color baronyColor(190 + randComponent1, randComponent2, 0);
-			estate.get()->setDefaultColor(baronyColor);
-			break;
-		}
-		case Title::county:
-		{
-			const sf::Color countyColor(50, 170 + randComponent1, 160 + randComponent2);
-			estate.get()->setDefaultColor(countyColor);
-			break;
-		}
-		case Title::duchy:
-		{
-			const sf::Color dukedomColor(30, 190 + randComponent1, 0);
-			estate.get()->setDefaultColor(dukedomColor);
-			break;
-		}
-		case Title::kingdom:
-		{
-			const sf::Color kingdomColor(210 + randComponent2, 210 + randComponent3, randComponent4);
-			estate.get()->setDefaultColor(kingdomColor);
-			break;
-		}
-		case Title::empire:
-		{
-			const sf::Color empireColor(190 + randComponent1, randComponent2, 100 + randComponent3);
-			estate.get()->setDefaultColor(empireColor);
-			break;
-		}
-		}
+		estate.get()->setDefaultColor(generateRandomEstateColor(title));
 	}
 }
 
+sf::Color generateRandomEstateColor(Title title)
+{
+	std::random_device rd;
+	std::mt19937 gen(rd()); 
+
+	if(title == Title::maridom)
+	{
+		return sf::Color(120, 120, 120);
+	}
+	if(title == Title::barony)
+	{
+		std::uniform_int_distribution<int> redDist(20, 50);
+		std::uniform_int_distribution<int> blueDist(200, 230);
+		std::uniform_int_distribution<int> greenDist(0, 40);
+		return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
+	}
+	else if(title == Title::county)
+	{
+		if(rand() % 3 == 0)
+		{
+			std::uniform_int_distribution<int> redDist(20, 50);
+			std::uniform_int_distribution<int> blueDist(180, 220);
+			std::uniform_int_distribution<int> greenDist(100, 180);
+			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
+		}
+		else if(rand() % 2 == 0)
+		{
+			std::uniform_int_distribution<int> redDist(20, 50);
+			std::uniform_int_distribution<int> blueDist(150, 200);
+			std::uniform_int_distribution<int> greenDist(180, 230);
+			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
+		}
+		else
+		{
+			std::uniform_int_distribution<int> redDist(20, 50);
+			std::uniform_int_distribution<int> blueDist(120, 160);
+			std::uniform_int_distribution<int> greenDist(110, 140);
+			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
+		}
+	}
+	else if(title == Title::duchy)
+	{
+		if(rand() % 4 == 0)
+		{
+			std::uniform_int_distribution<int> redDist(20, 50);
+			std::uniform_int_distribution<int> blueDist(110, 170);
+			std::uniform_int_distribution<int> greenDist(180, 240);
+			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
+		}
+		else if(rand() % 3 == 0)
+		{
+			std::uniform_int_distribution<int> redDist(20, 40);
+			std::uniform_int_distribution<int> blueDist(20, 80);
+			std::uniform_int_distribution<int> greenDist(150, 180);
+			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
+		}
+		else if(rand() % 2 == 0)
+		{
+			std::uniform_int_distribution<int> redDist(90, 130);
+			std::uniform_int_distribution<int> blueDist(20, 80);
+			std::uniform_int_distribution<int> greenDist(110, 140);
+			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
+		}
+		else
+		{
+			std::uniform_int_distribution<int> redDist(20, 50);
+			std::uniform_int_distribution<int> blueDist(20, 40);
+			std::uniform_int_distribution<int> greenDist(190, 250);
+			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
+		}
+	}
+	else if(title == Title::kingdom)
+	{
+		if(rand() % 4 == 0)
+		{
+			std::uniform_int_distribution<int> redDist(200, 240);
+			std::uniform_int_distribution<int> blueDist(20, 50);
+			std::uniform_int_distribution<int> greenDist(110, 150);
+			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
+		}
+		else if(rand() % 3 == 0)
+		{
+			std::uniform_int_distribution<int> redDist(220, 240);
+			std::uniform_int_distribution<int> blueDist(20, 50);
+			std::uniform_int_distribution<int> greenDist(180, 230);
+			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
+		}
+		else if(rand() % 2 == 0)
+		{
+			std::uniform_int_distribution<int> redDist(160, 180);
+			std::uniform_int_distribution<int> blueDist(20, 50);
+			std::uniform_int_distribution<int> greenDist(0, 110);
+			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
+		}
+		else
+		{
+			std::uniform_int_distribution<int> redDist(210, 250);
+			std::uniform_int_distribution<int> blueDist(20, 40);
+			std::uniform_int_distribution<int> greenDist(20, 50);
+			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
+		}
+	}
+	else if(title == Title::empire)
+	{
+		if(rand() % 3 == 0)
+		{
+			std::uniform_int_distribution<int> redDist(180, 240);
+			std::uniform_int_distribution<int> blueDist(80, 140);
+			std::uniform_int_distribution<int> greenDist(10, 50);
+			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
+		}
+		else if(rand() % 3 == 0)
+		{
+			std::uniform_int_distribution<int> redDist(170, 240);
+			std::uniform_int_distribution<int> blueDist(10, 50);
+			std::uniform_int_distribution<int> greenDist(60, 140);
+			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
+		}
+		else
+		{
+			std::uniform_int_distribution<int> redDist(90, 130);
+			std::uniform_int_distribution<int> blueDist(200, 255);
+			std::uniform_int_distribution<int> greenDist(10, 50);
+			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
+		}
+	}
+	
+	assert(false);
+	return sf::Color(255, 255, 255);
+}

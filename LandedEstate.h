@@ -8,6 +8,7 @@ class LandedEstate : public Estate, public Observer
 {
 public:
 	LandedEstate(Title title, Territory &territory);
+	LandedEstate(Title title, Territory &territory, sf::Color color);
 
 	virtual ~LandedEstate() = default;
 

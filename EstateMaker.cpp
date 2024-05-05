@@ -73,6 +73,18 @@ void EstateMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 				estate->addSubfief(subfief);
 			}
 		}
+		else if(state == EstateMakerState::editColors)
+		{
+			Estate *estate = estateManager.getEstate(worldPos, selectedTitle, false);
+		}
+	}
+	else if(inputUtility.getKeyPressed(sf::Keyboard::Num1))
+	{
+		if(state == EstateMakerState::none || state == EstateMakerState::selectEstate)
+		{
+			selectedTitle = Title::barony;
+			changeState(EstateMakerState::selectEstate);
+		}
 	}
 	else if(inputUtility.getKeyPressed(sf::Keyboard::Num2))
 	{
@@ -141,9 +153,7 @@ void EstateMaker::changeState(EstateMakerState state)
 	}
 	else if(state == EstateMakerState::editEstate)
 	{
-		////
-		estateManager.makeColored(selectedTitle, true);  // In future change this for more efficiency for larger maps!!!
-		////
+		estateManager.makeColored(selectedTitle, true);  
 
 		// Change the color of selected estate to be unique of other estates.
 		const sf::Color selectedEstateColor(240, 240, 0);
@@ -188,3 +198,4 @@ void EstateMaker::handleInputForView(sf::View &view) const
 		view.zoom(1 + zoom);
 	}
 }
+

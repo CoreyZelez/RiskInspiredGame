@@ -38,7 +38,7 @@ public:
 	std::vector<std::unique_ptr<Estate>>& getBaronies();
 
 	Estate* createEstate(Title title);  // Creates estate with title and returns handle.
-	///void removeEstate(Estate *estate);  // Removes estate.
+	//void removeEstate(Estate *estate);  // Removes estate.
 
 	// Returns pointer to estate at world position. Allows specifying parent.
 	Estate* getEstate(sf::Vector2f position, Title title, bool allowParent);  
@@ -71,3 +71,5 @@ private:
 	void setTitleDefaultColor(Title title);
 	void setTitleGreyColor(Title title);
 };
+
+sf::Color generateRandomEstateColor(Title title);

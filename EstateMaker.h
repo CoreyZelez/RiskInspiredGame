@@ -9,7 +9,8 @@ enum class EstateMakerState
 {
 	none,
 	selectEstate,  // For choosing estate of some specified title.
-	editEstate  // For editing a selected estate.
+	editEstate,  // For editing a selected estate.
+	editColors
 };
 
 class EstateMaker
@@ -31,3 +32,4 @@ private:
 	EstateMakerState state = EstateMakerState::none;
 	sf::Clock inputClock;  // Clock tracking time since last time input handled.
 };
+

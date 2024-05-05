@@ -33,6 +33,19 @@ Estate::Estate(Title title, sf::Color color)
 	this->grid.setColor(color);
 }
 
+Estate::Estate(Title title, const Grid & grid, sf::Color color)
+	: title(title), defaultColor(color)
+{
+	this->grid.addGrid(grid);
+	if(title == Title::maridom)
+	{
+		this->grid.setBorderMode(BorderMode::feintBorders);
+		this->grid.setAllPositionsDark();
+	}
+
+	this->grid.setColor(color);
+}
+
 Estate::Estate(Title title, const Grid &grid)
 	: title(title)
 {

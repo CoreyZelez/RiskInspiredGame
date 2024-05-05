@@ -16,6 +16,11 @@ Barony::Barony(LandTerritory &landTerritory)
 {
 }
 
+Barony::Barony(LandTerritory & landTerritory, sf::Color color)
+	: LandedEstate(Title::barony, landTerritory, color), landTerritory(landTerritory)
+{
+}
+
 std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 {
 	const double landArmyYield = landTerritory.getFeatures().calculateArmyYield();
