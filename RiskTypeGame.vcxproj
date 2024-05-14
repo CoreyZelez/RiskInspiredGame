@@ -167,6 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CompositeGrid.cpp" />
     <ClCompile Include="Culture.cpp" />
     <ClCompile Include="CultureFactory.cpp" />
     <ClCompile Include="Factory.cpp" />
@@ -251,6 +252,7 @@
     <ClCompile Include="VassalPolicy.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CompositeGrid.h" />
     <ClInclude Include="Culture.h" />
     <ClInclude Include="CultureFactory.h" />
     <ClInclude Include="Factory.h" />
