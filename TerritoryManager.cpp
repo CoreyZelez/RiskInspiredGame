@@ -264,7 +264,7 @@ void TerritoryManager::calculateDistances()
 
 void TerritoryManager::loadLandTerritory(std::ifstream & file, const GameplaySettings *gameplaySettings)
 {
-	Grid graphics = loadTerritoryGrid(file);
+	EditorGrid graphics = loadTerritoryGrid(file);
 
 	int id = loadTerritoryID(file);
 
@@ -290,7 +290,7 @@ void TerritoryManager::loadLandTerritory(std::ifstream & file, const GameplaySet
 
 void TerritoryManager::loadNavalTerritory(std::ifstream & file)
 {
-	Grid graphics = loadTerritoryGrid(file);
+	EditorGrid graphics = loadTerritoryGrid(file);
 	int id = loadTerritoryID(file);
 	std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>(id, graphics);
 	territories.emplace_back(territory.get());

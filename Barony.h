@@ -7,6 +7,7 @@
 class CoastalTerritory;
 class LandTerritory;
 
+
 class Barony : public LandedEstate
 {
 public:

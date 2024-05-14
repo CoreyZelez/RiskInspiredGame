@@ -13,9 +13,9 @@ class NavalTerritory;
 class LandTerritory : public Territory 
 {
 public:
-	LandTerritory(int id, Grid graphics, LandTerritoryFeatures features, NavalTerritory *navalTerritory);
-	LandTerritory(int id, Grid graphics, NavalTerritory *navalTerritory);
-	LandTerritory(int id, Grid graphics);
+	LandTerritory(int id, EditorGrid graphics, LandTerritoryFeatures features, NavalTerritory *navalTerritory);
+	LandTerritory(int id, EditorGrid graphics, NavalTerritory *navalTerritory);
+	LandTerritory(int id, EditorGrid graphics);
 	explicit LandTerritory(int id);
 
 	virtual ~LandTerritory() = default;

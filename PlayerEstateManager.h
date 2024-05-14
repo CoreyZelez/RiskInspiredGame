@@ -1,6 +1,6 @@
 #pragma once
 #include "Title.h"
-#include "Grid.h"
+#include "EditorGrid.h"
 #include "HasUI.h"
 #include <vector>
 #include <unordered_set>

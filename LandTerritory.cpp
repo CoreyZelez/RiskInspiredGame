@@ -10,7 +10,7 @@
 #include <iostream>
 #include <fstream>
 
-LandTerritory::LandTerritory(int id, Grid graphics, LandTerritoryFeatures features, NavalTerritory *navalTerritory)
+LandTerritory::LandTerritory(int id, EditorGrid graphics, LandTerritoryFeatures features, NavalTerritory *navalTerritory)
 	: Territory(id, graphics, std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land), features(features)
 {
 	// Create the port.
@@ -20,7 +20,7 @@ LandTerritory::LandTerritory(int id, Grid graphics, LandTerritoryFeatures featur
 	}
 }
 
-LandTerritory::LandTerritory(int id, Grid graphics, NavalTerritory *navalTerritory)
+LandTerritory::LandTerritory(int id, EditorGrid graphics, NavalTerritory *navalTerritory)
 	: Territory(id, graphics, std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land), 
 	features(nullptr)
 {
@@ -33,7 +33,7 @@ LandTerritory::LandTerritory(int id, Grid graphics, NavalTerritory *navalTerrito
 	initDefaultFeatures();
 }
 
-LandTerritory::LandTerritory(int id, Grid graphics)
+LandTerritory::LandTerritory(int id, EditorGrid graphics)
 	: LandTerritory(id, graphics, nullptr)
 {
 }

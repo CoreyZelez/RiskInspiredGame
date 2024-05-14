@@ -17,6 +17,7 @@ Game::Game(GameplaySettings gameplaySettings, std::string mapName)
 
 void Game::generatePlayers()
 {
+
 	const int numHumans = 0;
 	int humanCnt = 0; 
 	for(auto &barony : map.getEstateManager().getBaronies())

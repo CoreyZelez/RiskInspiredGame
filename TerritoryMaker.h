@@ -1,5 +1,5 @@
 #pragma once
-#include "Grid.h"
+#include "EditorGrid.h"
 #include "Terrain.h"
 #include "Culture.h"
 #include "LandTerritoryFeatureEditor.h"
@@ -38,7 +38,7 @@ private:
 	Territory *selectedTerritory = nullptr;  // Territory currently being modified.
 	std::pair<LandTerritory*, NavalTerritory*> portTerritories = { nullptr, nullptr };  // Territories chosen for creation of port.
 	int brushSize = 3;  // Width of square positions when adding or removing territory squares.
-	std::unordered_set<sf::Vector2i, Vector2iHash> claimedPositions;  // Grid positions claimed by any territory 
+	std::unordered_set<sf::Vector2i, Vector2iHash> claimedPositions;  // EditorGrid positions claimed by any territory 
 	sf::VertexArray fixedTerritoryVertices;	 // Vertex array of all territories excluding territory currently being modified.
 	sf::Clock inputClock;  	// Clock tracking time since last time input handled.
 

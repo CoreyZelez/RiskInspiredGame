@@ -1,5 +1,5 @@
 #include "MilitaryForce.h"
-#include "Grid.h"
+#include "EditorGrid.h"
 #include "Player.h"
 #include "Territory.h"
 #include "TextureManager.h"

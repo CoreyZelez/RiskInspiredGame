@@ -5,7 +5,7 @@
 #include <fstream>
 #include <queue>
 
-Territory::Territory(int id, Grid grid, TerritoryType type)
+Territory::Territory(int id, EditorGrid grid, TerritoryType type)
 	: Territory(id, grid, nullptr, type)
 {
 }
@@ -15,7 +15,7 @@ Territory::Territory(int id, sf::Color color, TerritoryType type)
 {
 }
 
-Territory::Territory(int id, Grid grid, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type)
+Territory::Territory(int id, EditorGrid grid, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type)
 	: id(id), grid(grid), occupancyHandler(std::move(occupancyHandler)), distanceMap(*this), type(type)
 {
 	this->grid.setBorderMode(BorderMode::feintBorders);
@@ -102,12 +102,12 @@ const Player * Territory::getEstateOwner() const
 	return landedEstate->getRuler();
 }
 
-Grid& Territory::getGrid()
+EditorGrid& Territory::getGrid()
 {
 	return grid;
 }
 
-const Grid& Territory::getGrid() const
+const EditorGrid& Territory::getGrid() const
 {
 	return grid;
 }

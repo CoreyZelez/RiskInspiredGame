@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Grid.h"
+#include "EditorGrid.h"
 
 class RealmGrid
 {
@@ -12,9 +12,9 @@ public:
 	void updateGrid();
 
 	// Adds parameter grid positions to this grid member.
-	void addGrid(const Grid &grid);
+	void addGrid(const EditorGrid &grid);
 	// Removes grid positions from this grid.
-	void removeGrid(const Grid &grid);
+	void removeGrid(const EditorGrid &grid);
 	// Removes realm grid from this realm grid.
 	void removeGrid(const RealmGrid &realmGrid);
 
@@ -28,6 +28,6 @@ public:
 
 private:
 	const sf::Color defaultGridColor;
-	Grid grid;
+	EditorGrid grid;
 };
 

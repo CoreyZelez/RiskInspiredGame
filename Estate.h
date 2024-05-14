@@ -1,6 +1,6 @@
 #pragma once
 #include "Title.h"
-#include "Grid.h"
+#include "EditorGrid.h"
 #include "HasUI.h"
 #include <set>
 #include <memory>
@@ -21,9 +21,9 @@ class Estate : public HasUI
 public:
 	Estate(Title title);
 	Estate(Title title, sf::Color color);
-	Estate(Title title, const Grid &grid);
-	Estate(Title title, const Grid &grid, sf::Color color);
-	Estate(Title title, const Grid &grid, std::string name);
+	Estate(Title title, const EditorGrid &grid);
+	Estate(Title title, const EditorGrid &grid, sf::Color color);
+	Estate(Title title, const EditorGrid &grid, std::string name);
 
 	virtual ~Estate() = default;
 	
@@ -91,9 +91,9 @@ public:
 	void setGridColorGrey();
 
 	// Returns the associated graphical grid of this estate.
-	Grid& getGrid();
+	EditorGrid& getGrid();
 	// Returns the associated graphical grid of this estate.
-	const Grid& getGrid() const;
+	const EditorGrid& getGrid() const;
 
 	// Returns the number of barony subfiefs of this estate apart of specified players realm. 
 	// Optionally specify directly controlled by player.
@@ -116,7 +116,7 @@ private:
 	Estate *parent;
 	std::set<Estate*> subfiefs;
 	std::string name = "";
-	Grid grid;
+	EditorGrid grid;
 	sf::Color defaultColor;  // Default color of estate.
 	bool drawSubfiefs = false;
 

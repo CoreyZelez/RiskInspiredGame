@@ -33,7 +33,7 @@ Estate::Estate(Title title, sf::Color color)
 	this->grid.setColor(color);
 }
 
-Estate::Estate(Title title, const Grid & grid, sf::Color color)
+Estate::Estate(Title title, const EditorGrid & grid, sf::Color color)
 	: title(title), defaultColor(color)
 {
 	this->grid.addGrid(grid);
@@ -46,7 +46,7 @@ Estate::Estate(Title title, const Grid & grid, sf::Color color)
 	this->grid.setColor(color);
 }
 
-Estate::Estate(Title title, const Grid &grid)
+Estate::Estate(Title title, const EditorGrid &grid)
 	: title(title)
 {
 	this->grid.addGrid(grid);
@@ -58,7 +58,7 @@ Estate::Estate(Title title, const Grid &grid)
 	initColor();
 }
 
-Estate::Estate(Title title, const Grid &grid, std::string name)
+Estate::Estate(Title title, const EditorGrid &grid, std::string name)
 	: title(title), name(name)
 {
 	this->grid.addGrid(grid);
@@ -350,12 +350,12 @@ void Estate::setGridColorGrey()
 	this->grid.setColor(greyColor);
 }
 
-Grid& Estate::getGrid()
+EditorGrid& Estate::getGrid()
 {
 	return grid;
 }
 
-const Grid& Estate::getGrid() const
+const EditorGrid& Estate::getGrid() const
 {
 	return grid;
 }

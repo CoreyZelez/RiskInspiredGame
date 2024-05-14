@@ -6,7 +6,7 @@
 
 
 
-NavalTerritory::NavalTerritory(int id, Grid grid)
+NavalTerritory::NavalTerritory(int id, EditorGrid grid)
 	: Territory(id, grid, std::make_unique<NavalTerritoryOccupancy>(*this),  TerritoryType::naval)
 {
 }

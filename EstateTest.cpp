@@ -26,8 +26,8 @@ void EstateTest::testBaronyYield()
 	// Construct grids using "test" constructor.
 	std::unordered_set<sf::Vector2i, Vector2iHash> landPositions = { sf::Vector2i(0,0) };
 	std::unordered_set<sf::Vector2i, Vector2iHash> navalPositions = { sf::Vector2i(0,1) };
-	Grid landGrid(landPositions);
-	Grid navalGrid(navalPositions);
+	EditorGrid landGrid(landPositions);
+	EditorGrid navalGrid(navalPositions);
 	// Ensure territories adjacent for successful port creation.
 	landGrid.addPosition(sf::Vector2i(0, 0));
 	navalGrid.addPosition(sf::Vector2i(1, 0));

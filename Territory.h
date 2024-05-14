@@ -1,6 +1,6 @@
 #pragma once
 #include "Subject.h"
-#include "Grid.h"
+#include "EditorGrid.h"
 #include "IOccupiable.h"
 #include "TerritoryDistanceMap.h"
 #include <SFML/Graphics.hpp>
@@ -32,9 +32,9 @@ enum class TerritoryDrawMode
 class Territory : public Subject
 {
 public:
-	Territory(int id, Grid grid, TerritoryType type);  // Temporary for testing.
+	Territory(int id, EditorGrid grid, TerritoryType type);  // Temporary for testing.
 	Territory(int id, sf::Color color, TerritoryType type);  // Temporary for testing.
-	Territory(int id, Grid grid, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type);
+	Territory(int id, EditorGrid grid, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type);
 	Territory(int id, sf::Color color, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type);
 	virtual ~Territory() = default;
 
@@ -55,8 +55,8 @@ public:
 	TerritoryDistanceMap &getDistanceMap();
 	const TerritoryDistanceMap &getDistanceMap() const;
 
-	Grid& getGrid();
-	const Grid& getGrid() const;
+	EditorGrid& getGrid();
+	const EditorGrid& getGrid() const;
 
 	TerritoryType getType() const;
 
@@ -72,7 +72,7 @@ public:
 
 private:
 	int id;  // ID representing territory in text file.
-	Grid grid;
+	EditorGrid grid;
 	TerritoryDrawMode drawMode;
 	TerritoryType type;
 	LandedEstate *landedEstate = nullptr; 

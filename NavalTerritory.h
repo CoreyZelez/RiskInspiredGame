@@ -4,7 +4,7 @@
 class NavalTerritory : public Territory
 {
 public:
-	NavalTerritory(int id, Grid grid);
+	NavalTerritory(int id, EditorGrid grid);
 	explicit NavalTerritory(int id);
 
 	virtual ~NavalTerritory() = default;

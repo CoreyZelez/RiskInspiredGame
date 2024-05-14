@@ -156,9 +156,6 @@
     <ClCompile Include="Barony.cpp">
       <Filter>Source Files\Game\Estate</Filter>
     </ClCompile>
-    <ClCompile Include="Grid.cpp">
-      <Filter>Source Files\Game\Map</Filter>
-    </ClCompile>
     <ClCompile Include="IUnitTest.cpp">
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
@@ -361,6 +358,12 @@
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
     <ClCompile Include="CompositeGrid.cpp">
+      <Filter>Source Files\Game\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorGrid.cpp">
+      <Filter>Source Files\Game\Map\MapMaker</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -409,9 +412,6 @@
     </ClInclude>
     <ClInclude Include="Barony.h">
       <Filter>Header Files\Game\Estate</Filter>
-    </ClInclude>
-    <ClInclude Include="Grid.h">
-      <Filter>Header Files\Game\Map</Filter>
     </ClInclude>
     <ClInclude Include="Command.h">
       <Filter>Header Files\User Interface\CommandButton</Filter>
@@ -620,8 +620,14 @@
     <ClInclude Include="RealmTest.h">
       <Filter>Header Files\Testing</Filter>
     </ClInclude>
+    <ClInclude Include="EditorGrid.h">
+      <Filter>Header Files\Game\Map\MapMaker</Filter>
+    </ClInclude>
     <ClInclude Include="CompositeGrid.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Header Files\Game\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

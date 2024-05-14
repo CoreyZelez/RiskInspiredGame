@@ -2,7 +2,7 @@
 #include "HasUI.h"
 #include "Subject.h"
 #include "Title.h"
-#include "Grid.h"
+#include "EditorGrid.h"
 #include "PlayerEstateManager.h"
 #include "VassalManager.h"
 #include "RealmGrid.h"
@@ -92,7 +92,7 @@ private:
 	const LiegePolicy &liegePolicy;
 	PlayerEstateManager rulerEstateManager;  // Manages estates directly controlled by ruler.
 	VassalManager vassalManager;  // Manages vassals and their estates.
-	RealmGrid realmGrid;  // Grid of entire realm estates.
+	RealmGrid realmGrid;  // EditorGrid of entire realm estates.
 	bool vassalView = false;  // Specifies to draw realms of vassals over entire realm grid.
 	double effectiveArmyYieldRatio;
 	double effectiveFleetYieldRatio;

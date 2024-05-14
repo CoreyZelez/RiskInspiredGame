@@ -16,12 +16,12 @@ void RealmGrid::updateGrid()
 	grid.update();
 }
 
-void RealmGrid::addGrid(const Grid &grid)
+void RealmGrid::addGrid(const EditorGrid &grid)
 {
 	this->grid.addGrid(grid, false);
 }
 
-void RealmGrid::removeGrid(const Grid &grid)
+void RealmGrid::removeGrid(const EditorGrid &grid)
 {
 	this->grid.removeGrid(grid, false);
 }
