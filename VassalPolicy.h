@@ -1,7 +1,7 @@
 #pragma once
 #include "VassalResistance.h"
+#include "LiegePolicy.h"
 
-struct LiegePolicy;
 class Player;
 
 struct VassalPolicy

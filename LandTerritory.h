@@ -13,7 +13,7 @@ class NavalTerritory;
 class LandTerritory : public Territory 
 {
 public:
-	LandTerritory(int id, EditorGrid graphics, LandTerritoryFeatures features, NavalTerritory *navalTerritory);
+	LandTerritory(int id, EditorGrid graphics, LandTerritoryFeatures features, NavalTerritory *navalTerritory = nullptr);
 	LandTerritory(int id, EditorGrid graphics, NavalTerritory *navalTerritory);
 	LandTerritory(int id, EditorGrid graphics);
 	explicit LandTerritory(int id);

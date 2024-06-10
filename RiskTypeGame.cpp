@@ -21,8 +21,12 @@ int main()
 
 	UIView.zoom(3);
 	InputUtility &InputUtility = InputUtility::getInstance();
-	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS IN TESTING CODE!!!
 	FontManager::getInstance(); 
+	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS.
+
+	// TESTS
+	UnitTestRunner unitTestRunner;
+	unitTestRunner.runTests();
 
 	MapMaker mapMaker("empty");
 	Game game("The Grand Continent");
@@ -90,9 +94,6 @@ int main()
 	}
 
 	mapMaker.save();
-
-	UnitTestRunner unitTestRunner;
-	unitTestRunner.runTests();
 
 	return 0;
 }

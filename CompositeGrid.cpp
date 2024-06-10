@@ -1,40 +1,63 @@
-#include "CompositeGrid.h"
-
-void CompositeGrid::draw(sf::RenderWindow & window)
-{
-}
-
-void CompositeGrid::addGrid(const Grid &grid)
-{
-	grids.push_back(grid);
-	addAdjacencies(grids.back());
-	addSubBorders(grids.back());
-}
-
-// Removes grid with the specified id.
-void CompositeGrid::removeGrid(int id)
-{
-	// get grid with id. 
-	// this will be the same id as the id of the associated territory grid for instance
-	// in the case of realm grids made up of multiple territory grids.
-	// could alse be a lower estate grid for instance for estate grid. though this second example not needed so far.
-
-	// removeSubBorders(grid)
-
-	// removeAdjacencies(grid)
-}
-
-// Adds the adjacencies to the grid.
-void CompositeGrid::addAdjacencies(const Grid & grid)
-{
-}
-
-// Removes the adjacencies with the grid.
-void CompositeGrid::removeAdjacencies(const Grid &grid)
-{
-}
-
-// Removes sub-borders associated with the grid.
-void CompositeGrid::removeSubBorders(const Grid &grid)
-{
-}
+//#include "CompositeGrid.h"
+//
+//void CompositeGrid::draw(sf::RenderWindow & window)
+//{
+//}
+//
+//void CompositeGrid::addGrid(const Grid &grid)
+//{
+//	auto iter = grids.insert(grid).first;
+//	addAdjacencies(*iter);
+//	updateBorders(*iter, true);
+//}
+//
+//// Removes a grid in grids that shares the same id as the paramter grid (i.e. are identically shaped).
+//void CompositeGrid::removeGrid(const Grid &grid)
+//{
+//	auto iter = grids.begin();
+//	while(iter != grids.end())
+//	{
+//		if(grid.sameId(*iter))
+//		{
+//			// assert(grids share identical positions. make a function for this.)
+//			removeAdjacencies(*iter);
+//			updateBorders(*iter, true);
+//			grids.erase(iter);
+//			break;
+//		}
+//
+//		++iter;
+//	}
+//}
+//
+//// Adds the adjacencies to the grid.
+//void CompositeGrid::addAdjacencies(const Grid &newGrid)
+//{
+//	for(const Grid &grid : grids)
+//	{
+//		if(&grid == &newGrid)
+//		{
+//			continue;
+//		}
+//		else if(newGrid.isAdjacent(grid))
+//		{
+//			gridAdjacencies[&grid].insert(&newGrid);
+//			gridAdjacencies[&newGrid].insert(&grid);
+//		}
+//	}
+//}
+//
+//// Removes the adjacencies with the grid.
+//void CompositeGrid::removeAdjacencies(const Grid &newGrid)
+//{
+//	for(const Grid* grid : gridAdjacencies[&newGrid])
+//	{
+//		gridAdjacencies[grid].erase(&newGrid);
+//	}
+//
+//	gridAdjacencies.erase(&newGrid);
+//}
+//
+//void CompositeGrid::updateBorders(const Grid & grid, bool added)
+//{
+//}

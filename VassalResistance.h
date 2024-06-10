@@ -1,8 +1,8 @@
 #pragma once
 #include "Observer.h"
+#include "LiegePolicy.h"
 
 class Player;
-struct LiegePolicy;
 
 class VassalResistance : public Observer
 {

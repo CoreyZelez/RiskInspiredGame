@@ -24,4 +24,6 @@ struct LandTerritoryFeatures
 
 sf::Color determineProsperityColor(double prosperity);
 
+int getHighProsperityThreshold();
+
 

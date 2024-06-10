@@ -3,7 +3,7 @@
 #include "Factory.cpp"
 #include <SFML/Graphics.hpp>
 
-class Terrain;
+struct Terrain;
 
 class TerrainFactory : public Factory<int, Terrain>
 

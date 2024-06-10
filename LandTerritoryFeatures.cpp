@@ -3,6 +3,8 @@
 #include <assert.h>
 #include <iostream>
 
+const int highProsperityThreshold = 200;  // Threshold at which yields from prosperity are maximally increasing as function of prosperity.
+
 LandTerritoryFeatures::LandTerritoryFeatures(const GameplaySettings *gameplaySettings)
 	: gameplaySettings(gameplaySettings)
 {
@@ -65,7 +67,7 @@ sf::Color determineProsperityColor(double prosperity)
 {
 	const double yellowProsperity = 120;
 	const double greenProsperity = 200; 
-	const double darkGreenProsperity = 300;
+	const double darkGreenProsperity = highProsperityThreshold;
 	if(prosperity < yellowProsperity)
 	{
 		int green = 255 * (prosperity / yellowProsperity);
@@ -82,4 +84,9 @@ sf::Color determineProsperityColor(double prosperity)
 		return sf::Color(0, green, 0);
 	}
 
+}
+
+int getHighProsperityThreshold()
+{
+	return highProsperityThreshold;
 }

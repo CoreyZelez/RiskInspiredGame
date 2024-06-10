@@ -1,9 +1,12 @@
 #include "UnitTestRunner.h"
-#include "EstateTest.h"
+#include "EstateUnitTest.h"
+#include "GridUnitTest.h"
 
 void UnitTestRunner::runTests()
 {
-	EstateTest estateTest;
+	GridUnitTest gridUnitTest;
+	EstateUnitTest estateUnitTest;
 
-	estateTest.test();
+	gridUnitTest.test();
+	estateUnitTest.test();
 }

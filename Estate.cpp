@@ -500,7 +500,7 @@ void Estate::setOwnership(Player *ruler, bool recurseOnParents)
 		this->ruler = nullptr;
 	}
 
-	// Recurse on parent estates to handle possible ownership changes due to change in lower estate, namely this estate..
+	// Recurse on parent estates to handle possible ownership changes due to change in lower estate, namely this estate.
 	if(recurseOnParents && parent != nullptr)
 	{
 		/// THIS FUNCTION MAY BE GETTING CALLED MULTIPLE TIMES UNNECESSARILY. SEE HANDLE ALLOCATION.

@@ -170,10 +170,12 @@
     <ClCompile Include="CompositeGrid.cpp" />
     <ClCompile Include="Culture.cpp" />
     <ClCompile Include="CultureFactory.cpp" />
+    <ClCompile Include="Direction.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="GameplaySettings.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="GridUnitTest.cpp" />
     <ClCompile Include="HashFunctions.cpp" />
     <ClCompile Include="LandTerritoryFeatureEditor.cpp" />
     <ClCompile Include="LandTerritoryFeatures.cpp" />
@@ -189,7 +191,7 @@
     <ClCompile Include="CommandButton.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="EstateManager.cpp" />
-    <ClCompile Include="EstateTest.cpp" />
+    <ClCompile Include="EstateUnitTest.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameController.cpp" />
@@ -225,7 +227,8 @@
     <ClCompile Include="PlayerEstateManager.cpp" />
     <ClCompile Include="RealmGrid.cpp" />
     <ClCompile Include="NumericTextDisplay.cpp" />
-    <ClCompile Include="RealmTest.cpp" />
+    <ClCompile Include="RealmUnitTest.cpp" />
+    <ClCompile Include="UtilitySFML.cpp" />
     <ClCompile Include="VassalResistance.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TerrainFactory.cpp" />
@@ -256,10 +259,12 @@
     <ClInclude Include="CompositeGrid.h" />
     <ClInclude Include="Culture.h" />
     <ClInclude Include="CultureFactory.h" />
+    <ClInclude Include="Direction.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="GameplaySettings.h" />
     <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="GridUnitTest.h" />
     <ClInclude Include="HashFunctions.h" />
     <ClInclude Include="IOccupiable.h" />
     <ClInclude Include="LandTerritoryFeatureEditor.h" />
@@ -277,7 +282,7 @@
     <ClInclude Include="Command.h" />
     <ClInclude Include="ChangeInstance.h" />
     <ClInclude Include="EstateManager.h" />
-    <ClInclude Include="EstateTest.h" />
+    <ClInclude Include="EstateUnitTest.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameController.h" />
@@ -305,7 +310,8 @@
     <ClInclude Include="PlayerEstateManager.h" />
     <ClInclude Include="RealmGrid.h" />
     <ClInclude Include="NumericTextDisplay.h" />
-    <ClInclude Include="RealmTest.h" />
+    <ClInclude Include="RealmUnitTest.h" />
+    <ClInclude Include="UtilitySFML.h" />
     <ClInclude Include="VassalResistance.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TerrainFactory.h" />

@@ -159,9 +159,6 @@
     <ClCompile Include="IUnitTest.cpp">
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
-    <ClCompile Include="EstateTest.cpp">
-      <Filter>Source Files\Testing</Filter>
-    </ClCompile>
     <ClCompile Include="Command.cpp">
       <Filter>Source Files\User Interface\CommandButton</Filter>
     </ClCompile>
@@ -336,9 +333,6 @@
     <ClCompile Include="GameplaySettings.cpp">
       <Filter>Source Files\Game\MVC</Filter>
     </ClCompile>
-    <ClCompile Include="Factory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LandTerritoryFeatureEditor.cpp">
       <Filter>Source Files\Game\Map\MapMaker</Filter>
     </ClCompile>
@@ -354,17 +348,32 @@
     <ClCompile Include="VassalResistance.cpp">
       <Filter>Source Files\Game\Player</Filter>
     </ClCompile>
-    <ClCompile Include="RealmTest.cpp">
-      <Filter>Source Files\Testing</Filter>
-    </ClCompile>
     <ClCompile Include="CompositeGrid.cpp">
       <Filter>Source Files\Game\Map</Filter>
     </ClCompile>
     <ClCompile Include="EditorGrid.cpp">
       <Filter>Source Files\Game\Map\MapMaker</Filter>
     </ClCompile>
-    <ClCompile Include="Grid.cpp">
+    <ClCompile Include="Factory.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="UtilitySFML.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Direction.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EstateUnitTest.cpp">
+      <Filter>Source Files\Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="RealmUnitTest.cpp">
+      <Filter>Source Files\Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="GridUnitTest.cpp">
+      <Filter>Source Files\Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Source Files\Game\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -420,9 +429,6 @@
       <Filter>Header Files\User Interface\CommandButton</Filter>
     </ClInclude>
     <ClInclude Include="IUnitTest.h">
-      <Filter>Header Files\Testing</Filter>
-    </ClInclude>
-    <ClInclude Include="EstateTest.h">
       <Filter>Header Files\Testing</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
@@ -617,9 +623,6 @@
     <ClInclude Include="VassalResistance.h">
       <Filter>Header Files\Game\Player</Filter>
     </ClInclude>
-    <ClInclude Include="RealmTest.h">
-      <Filter>Header Files\Testing</Filter>
-    </ClInclude>
     <ClInclude Include="EditorGrid.h">
       <Filter>Header Files\Game\Map\MapMaker</Filter>
     </ClInclude>
@@ -628,6 +631,21 @@
     </ClInclude>
     <ClInclude Include="Grid.h">
       <Filter>Header Files\Game\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="UtilitySFML.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Direction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RealmUnitTest.h">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="EstateUnitTest.h">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="GridUnitTest.h">
+      <Filter>Header Files\Testing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 #pragma once
 #include "MilitaryForce.h"
 
-class Terrain;
+struct Terrain;
 
 class LandArmy : public MilitaryForce
 {

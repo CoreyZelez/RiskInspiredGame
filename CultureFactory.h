@@ -3,7 +3,7 @@
 #include "Factory.cpp"
 #include <SFML/Graphics.hpp>
 
-class Culture;
+struct Culture;
 
 class CultureFactory : public Factory<int, Culture>
 

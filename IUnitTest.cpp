@@ -1,7 +1,7 @@
 #include "IUnitTest.h"
 #include <iostream>
 
-void IUnitTest::testReport(std::string testName, bool result, std::string failMessage)
+void IUnitTest::testReport(std::string testName, bool result, std::string failMessage) const
 {
 	std::string resultMessage = "pass.";
 	if(!result)
