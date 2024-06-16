@@ -1,8 +1,8 @@
 #include "HashFunctions.h"
-#include "Territory.h" // Include the header where specializations are declared
-#include <functional> // Include necessary headers
+#include "Territory.h" 
+#include "Grid.h"
+#include <functional> 
 
-// Implement Vector2iHash
 size_t Vector2iHash::operator()(const sf::Vector2i& vector) const 
 {
 	std::hash<int> hasher;
@@ -12,8 +12,8 @@ size_t Vector2iHash::operator()(const sf::Vector2i& vector) const
 	return seed;
 }
 
-// Implement PairTerritoryIntHash
-size_t PairTerritoryIntHash::operator()(const std::pair<const Territory*, int>& key) const {
+size_t PairTerritoryIntHash::operator()(const std::pair<const Territory*, int>& key) const 
+{
 	std::hash<int> hasher;
 	size_t seed = 0;
 	// Hash the begin position of the territory grid.
@@ -34,4 +34,7 @@ size_t Vector2fHash::operator()(const sf::Vector2f& vector) const
 	return seed;
 }
 
-
+size_t GridHash::operator()(const Grid &grid) const
+{
+	return std::hash<int>{}(grid.getId());
+}

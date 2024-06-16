@@ -1,63 +1,108 @@
-//#include "CompositeGrid.h"
-//
-//void CompositeGrid::draw(sf::RenderWindow & window)
-//{
-//}
-//
-//void CompositeGrid::addGrid(const Grid &grid)
-//{
-//	auto iter = grids.insert(grid).first;
-//	addAdjacencies(*iter);
-//	updateBorders(*iter, true);
-//}
-//
-//// Removes a grid in grids that shares the same id as the paramter grid (i.e. are identically shaped).
-//void CompositeGrid::removeGrid(const Grid &grid)
-//{
-//	auto iter = grids.begin();
-//	while(iter != grids.end())
-//	{
-//		if(grid.sameId(*iter))
-//		{
-//			// assert(grids share identical positions. make a function for this.)
-//			removeAdjacencies(*iter);
-//			updateBorders(*iter, true);
-//			grids.erase(iter);
-//			break;
-//		}
-//
-//		++iter;
-//	}
-//}
-//
-//// Adds the adjacencies to the grid.
-//void CompositeGrid::addAdjacencies(const Grid &newGrid)
-//{
-//	for(const Grid &grid : grids)
-//	{
-//		if(&grid == &newGrid)
-//		{
-//			continue;
-//		}
-//		else if(newGrid.isAdjacent(grid))
-//		{
-//			gridAdjacencies[&grid].insert(&newGrid);
-//			gridAdjacencies[&newGrid].insert(&grid);
-//		}
-//	}
-//}
-//
-//// Removes the adjacencies with the grid.
-//void CompositeGrid::removeAdjacencies(const Grid &newGrid)
-//{
-//	for(const Grid* grid : gridAdjacencies[&newGrid])
-//	{
-//		gridAdjacencies[grid].erase(&newGrid);
-//	}
-//
-//	gridAdjacencies.erase(&newGrid);
-//}
-//
-//void CompositeGrid::updateBorders(const Grid & grid, bool added)
-//{
-//}
+#include "CompositeGrid.h"
+#include "Grid.h"
+#include <assert.h>
+
+void CompositeGrid::draw(sf::RenderWindow & window)
+{
+}
+
+void CompositeGrid::update()
+{
+	if(!outdated)
+	{
+		return;
+	}
+
+	outdated = false;
+
+	vertices.clear();
+	vertices.setPrimitiveType(sf::Triangles);
+
+	// Batch vertices of each grid.
+	for(auto &[id, grid] : grids)
+	{
+		const sf::VertexArray &gridVertices = grid.getVertices();
+		for(int i = 0; i < gridVertices.getVertexCount(); ++i)
+		{
+			vertices.append(gridVertices[i]);
+		}
+	}
+}
+
+void CompositeGrid::setColor(int gridId, const sf::Color &color)
+{
+	if(grids.count(gridId) == 1)
+	{
+		grids[gridId].setInteriorColor(color);
+	}
+}
+
+void CompositeGrid::addGrid(const Grid &grid)
+{
+	const int id = grid.getId();
+
+	assert(grids.count(id) == 0);
+
+	grids.erase(id);
+	grids.insert(std::make_pair(id, grid));
+	addAdjacencies(id);
+	updateBorders(id, true);
+
+	outdated = true;
+}
+
+// Removes a grid in grids that shares the same id as the paramter grid (i.e. are identically shaped).
+void CompositeGrid::removeGrid(int id)
+{
+	if(grids.count(id) == 0)
+	{
+		return;
+	}
+
+	outdated = true;
+
+	// Update borders based on adjacencies
+	updateBorders(id, false);
+	removeAdjacencies(id);
+	grids.erase(id);
+}
+
+// Adds the adjacencies to the grid with the specified id.
+void CompositeGrid::addAdjacencies(int id)
+{
+	for(const auto &[gridId, grid] : grids)
+	{
+		if(gridId == id)
+		{
+			continue;
+		}
+		else if(grids[id].isAdjacent(grid))
+		{
+			gridAdjacencies[gridId].insert(id);
+			gridAdjacencies[id].insert(gridId);
+		}
+	}
+}
+
+// Removes the adjacencies to the grid with the specified id.
+void CompositeGrid::removeAdjacencies(int id)
+{
+	for(int gridId : gridAdjacencies[id])
+	{
+		gridAdjacencies[gridId].erase(id);
+	}
+
+	gridAdjacencies.erase(id);
+}
+
+void CompositeGrid::updateBorders(int id, bool added)
+{
+	if(added)
+	{
+
+	}
+	else
+	{
+
+	}
+}

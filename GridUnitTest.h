@@ -7,6 +7,13 @@ public:
 	virtual void test() override;
 
 private:
-	void extractInteriorPolygonTest() const;
+	// Test extraction of a square.
+	void extractInteriorPolygonTest1() const;
+
+	// Test extraction polygon shaped like a T tetris block. Interior is 1 wide.
+	void extractInteriorPolygonTest2() const;
+
+	// Extract two simple polygons. 
+	void extractInteriorPolygonsTest1() const;
 };
 

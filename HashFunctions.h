@@ -4,6 +4,7 @@
 
 
 class Territory;
+class Grid;
 
 struct Vector2iHash 
 {
@@ -18,5 +19,10 @@ struct Vector2fHash
 struct PairTerritoryIntHash 
 {
 	size_t operator()(const std::pair<const Territory*, int>& key) const;
+};
+
+struct GridHash
+{
+	size_t operator()(const Grid& grid) const;
 };
 

@@ -15,9 +15,49 @@ Grid::Grid(const std::unordered_set<sf::Vector2i, Vector2iHash> &positions, cons
 {
 }
 
-bool Grid::sameId(const Grid & grid) const
+void Grid::update()
+{
+	if(borderVertices.getVertexCount() > 0 && borderVertices[0].color != borderColor)
+	{
+		for(int i = 0; i < interiorVertices.getVertexCount(); ++i)
+		{
+			borderVertices[i].color = borderColor;
+		}
+	}
+	if(interiorVertices.getVertexCount() > 0 && interiorVertices[0].color != interiorColor)
+	{
+		for(int i = 0; i < interiorVertices.getVertexCount(); ++i)
+		{
+			interiorVertices[i].color = interiorColor;
+		}
+	}
+}
+
+// Does not actually change the color of the vertices. This operation is postponed until update call.
+void Grid::setBorderColor(const sf::Color &color)
+{
+	borderColor = color;
+}
+
+// Does not actually change the color of the vertices. This operation is postponed until update call.
+void Grid::setInteriorColor(const sf::Color &color)
+{
+	interiorColor = color;
+}
+
+int Grid::getId() const
+{
+	return id;
+}
+
+bool Grid::sameId(const Grid &grid) const
 {
 	return id == grid.id;
+}
+
+const sf::VertexArray & Grid::getVertices() const
+{
+	return vertices;
 }
 
 bool Grid::isAdjacent(const Grid & grid) const
@@ -55,7 +95,13 @@ bool isBorderAdjacent(const sf::Vector2i &position,
 
 bool isIsolated(const sf::Vector2i &position, const std::unordered_set<sf::Vector2i, Vector2iHash>& borderPositions)
 {
-	// Check if position is surrounded by border positions.
+	// Only non-border positions are considered isolated.
+	if(borderPositions.count(position) == 1)
+	{
+		return false;
+	}
+
+	// Check if non-border position is surrounded by border positions.
 	bool singular = true;
 	for(const sf::Vector2i &borderOffset : adjacencyOffsets)
 	{
@@ -164,7 +210,14 @@ void extractInteriorPolygon(const sf::Vector2i &start, const sf::Vector2i &offse
 				const sf::Vector2i position = nextPosition(curr, tempDirection);
 				if(traversedInteriorPositions.count(position) == 0 && isBorderAdjacent(position, borderPositions))
 				{
+					// Algorithm will traverse in this untraversed direction from the start position.
 					terminateTraversal = false;
+					if(tempDirection != direction)
+					{
+						direction = tempDirection;
+						// Only add position to polygon if direction changed.
+						polygon.push_back(start);
+					}
 					break;
 				}
 			}
@@ -193,7 +246,12 @@ std::vector<std::vector<sf::Vector2i>> extractInteriorPolygons(const std::unorde
 			// Start is an adjacent point to the border position.
 			const sf::Vector2i start = border + offsetFromBorder;
 
-			if(traversedInteriorPositions.count(start) == 1 || positions.count(start) == 1)
+			if(borderPositions.count(start) == 1)
+			{
+				continue;
+			}
+
+			if(traversedInteriorPositions.count(start) == 1 || positions.count(start) == 0)
 			{
 				continue;
 			}

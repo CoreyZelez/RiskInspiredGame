@@ -8,17 +8,36 @@ enum class Direction;
 class Grid
 {
 public:
-	Grid(const std::unordered_set<sf::Vector2i, Vector2iHash> & positions, const std::unordered_set<sf::Vector2i, Vector2iHash> &borderPositions);
+	Grid(const std::unordered_set<sf::Vector2i, Vector2iHash> &positions, const std::unordered_set<sf::Vector2i, Vector2iHash> &borderPositions);
 
+	Grid() = default;
+
+	void update();
+
+	void setBorderColor(const sf::Color &color);
+	void setInteriorColor(const sf::Color &color);
+
+	int getId() const;
 	bool sameId(const Grid &grid) const;
+
+	const sf::VertexArray& getVertices() const;
+
 	bool isAdjacent(const Grid &grid) const;
 
 private:
 	static int currId;
 
 	int id;
+
+	sf::Color borderColor;
+	sf::Color interiorColor;
+
 	const std::unordered_set<sf::Vector2i, Vector2iHash> borderPositions;  // Coordinates of border positions.
-	sf::VertexArray vertices;
+
+	sf::VertexArray vertices;  // Aggregation of interior and border vertices.
+	sf::VertexArray borderVertices;
+	sf::VertexArray interiorVertices;
+
 	sf::Vector2i center;  // Center coordinates in game world.
 };
 
@@ -40,5 +59,4 @@ void extractInteriorPolygon(const sf::Vector2i &start, const sf::Vector2i &offse
 
 std::vector<std::vector<sf::Vector2i>> extractInteriorPolygons(const std::unordered_set<sf::Vector2i, Vector2iHash> &positions, 
 	const std::unordered_set<sf::Vector2i, Vector2iHash> &borderPositions);
-
 

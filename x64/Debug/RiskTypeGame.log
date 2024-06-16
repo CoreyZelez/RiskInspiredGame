@@ -1,6 +1,24 @@
-﻿  RiskTypeGame.cpp
-d:\projects\risktypegame\risktypegame\liegepolicy.h(6): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
-  d:\projects\risktypegame\risktypegame\liegepolicy.h(5): note: see declaration of 'LiegePolicy'
-d:\projects\risktypegame\risktypegame\gameplaysettings.h(4): warning C4099: 'GameplaySettings': type name first seen using 'class' now seen using 'struct'
-  d:\projects\risktypegame\risktypegame\gameplaysettings.h(3): note: see declaration of 'GameplaySettings'
+﻿  CompositeGrid.cpp
+  Grid.cpp
+  GridUnitTest.cpp
+  HashFunctions.cpp
+d:\projects\risktypegame\risktypegame\hashfunctions.cpp(32): warning C4244: 'argument': conversion from 'const T' to 'const _Kty', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              _Kty=int
+          ]
+d:\projects\risktypegame\risktypegame\hashfunctions.cpp(33): warning C4244: 'argument': conversion from 'const T' to 'const _Kty', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              _Kty=int
+          ]
+  Generating Code...
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe
