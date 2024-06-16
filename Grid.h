@@ -16,6 +16,7 @@ public:
 
 	void setBorderColor(const sf::Color &color);
 	void setInteriorColor(const sf::Color &color);
+	const sf::Color &getInteriorColor() const;
 
 	int getId() const;
 	bool sameId(const Grid &grid) const;
@@ -39,6 +40,11 @@ private:
 	sf::VertexArray interiorVertices;
 
 	sf::Vector2i center;  // Center coordinates in game world.
+
+	// Updates colors of border vertices.
+	void updateBorderVertices();
+	// Updates colors of interior vertices.
+	void updateInteriorVertices();
 };
 
 // Returns true if position is not a border position and is adjacent to a border position.

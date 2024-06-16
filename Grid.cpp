@@ -17,20 +17,8 @@ Grid::Grid(const std::unordered_set<sf::Vector2i, Vector2iHash> &positions, cons
 
 void Grid::update()
 {
-	if(borderVertices.getVertexCount() > 0 && borderVertices[0].color != borderColor)
-	{
-		for(int i = 0; i < interiorVertices.getVertexCount(); ++i)
-		{
-			borderVertices[i].color = borderColor;
-		}
-	}
-	if(interiorVertices.getVertexCount() > 0 && interiorVertices[0].color != interiorColor)
-	{
-		for(int i = 0; i < interiorVertices.getVertexCount(); ++i)
-		{
-			interiorVertices[i].color = interiorColor;
-		}
-	}
+	updateBorderVertices();
+	updateInteriorVertices();
 }
 
 // Does not actually change the color of the vertices. This operation is postponed until update call.
@@ -43,6 +31,11 @@ void Grid::setBorderColor(const sf::Color &color)
 void Grid::setInteriorColor(const sf::Color &color)
 {
 	interiorColor = color;
+}
+
+const sf::Color & Grid::getInteriorColor() const
+{
+	return interiorColor;
 }
 
 int Grid::getId() const
@@ -63,6 +56,33 @@ const sf::VertexArray & Grid::getVertices() const
 bool Grid::isAdjacent(const Grid & grid) const
 {
 	return false;
+}
+
+// Updates colors of all border vertices at once. Border vertex colors are not changed when the change border color
+// function is called. This function handles this and should be invoked once before drawing of grid. This potentially 
+// improves efficiency as a grid color could change multiple times before a draw call when only the final color of the 
+// grid before the draw call is relevant.
+void Grid::updateBorderVertices()
+{
+	if(borderVertices.getVertexCount() > 0 && borderVertices[0].color != borderColor)
+	{
+		for(int i = 0; i < interiorVertices.getVertexCount(); ++i)
+		{
+			borderVertices[i].color = borderColor;
+		}
+	}
+}
+
+// Updates colors of all interior vertices at once. See updateBorderVertices description for usage.
+void Grid::updateInteriorVertices()
+{
+	if(interiorVertices.getVertexCount() > 0 && interiorVertices[0].color != interiorColor)
+	{
+		for(int i = 0; i < interiorVertices.getVertexCount(); ++i)
+		{
+			interiorVertices[i].color = interiorColor;
+		}
+	}
 }
 
 // Returns true if position is not a border position and is adjacent to a border position.

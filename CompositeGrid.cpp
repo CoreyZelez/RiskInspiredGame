@@ -2,8 +2,9 @@
 #include "Grid.h"
 #include <assert.h>
 
-void CompositeGrid::draw(sf::RenderWindow & window)
+void CompositeGrid::draw(sf::RenderWindow &window)
 {
+	window.draw(vertices);
 }
 
 void CompositeGrid::update()
@@ -11,6 +12,11 @@ void CompositeGrid::update()
 	if(!outdated)
 	{
 		return;
+	}
+
+	for(auto &[id, grid] : grids)
+	{
+		grid.update();
 	}
 
 	outdated = false;
@@ -31,20 +37,50 @@ void CompositeGrid::update()
 
 void CompositeGrid::setColor(int gridId, const sf::Color &color)
 {
-	if(grids.count(gridId) == 1)
+	if(grids.at(gridId).getInteriorColor() != color)
 	{
-		grids[gridId].setInteriorColor(color);
+		outdated = true;
+		grids.at(gridId).setInteriorColor(color);
 	}
 }
 
-void CompositeGrid::addGrid(const Grid &grid)
+void CompositeGrid::setBorderColor(const sf::Color & color)
+{
+	if(borderColor != color)
+	{
+		outdated = true;
+		borderColor = color;
+	}
+}
+
+// Sets the border color of each grid to the desired sub-border color as the grid borders will make up
+// the sub-borders of the composite grid.
+void CompositeGrid::setSubBorderColor(const sf::Color & color)
+{
+	if(subBorderColor == color)
+	{
+		return;
+	}
+
+	outdated = true;
+	borderColor = color;
+	for(auto &[id, grid] : grids)
+	{
+		grid.setBorderColor(color);
+	}
+}
+
+void CompositeGrid::addGrid(const Grid &grid, const sf::Color &color)
 {
 	const int id = grid.getId();
 
 	assert(grids.count(id) == 0);
 
-	grids.erase(id);
 	grids.insert(std::make_pair(id, grid));
+
+	grids[id].setInteriorColor(color);
+	grids[id].setBorderColor(subBorderColor);
+
 	addAdjacencies(id);
 	updateBorders(id, true);
 
@@ -99,10 +135,12 @@ void CompositeGrid::updateBorders(int id, bool added)
 {
 	if(added)
 	{
-
+		// check border positions of adjacent grids to be removed from composite grid border.
+		// check border position of newly added grid to be added to composite grid border.
 	}
 	else
 	{
-
+		// check border positions of adjacent grids to be added to composite grid border.
+		// check border position of newly added grid to be removed from composite grid border.
 	}
 }
