@@ -15,5 +15,8 @@ private:
 
 	// Extract two simple polygons. 
 	void extractInteriorPolygonsTest1() const;
+
+	// Constructs a grid shaped as multiple disjoint polygons.
+	void constructorTest1() const;
 };
 

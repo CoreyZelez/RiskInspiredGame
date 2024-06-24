@@ -12,8 +12,6 @@ sf::Color createRandomNavalColor();
 
 sf::Color createRandomRealmColor();
 
-std::string generateRandomEstateName(Title title);
-
 std::string doubleToStringWithDecimals(double value, int decimals);
 
 

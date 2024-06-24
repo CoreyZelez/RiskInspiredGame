@@ -6,8 +6,8 @@ void GridUnitTest::test()
 {
 	extractInteriorPolygonTest1();
 	extractInteriorPolygonTest2();
-
 	extractInteriorPolygonsTest1();
+	constructorTest1();
 }
 
 void GridUnitTest::extractInteriorPolygonTest1() const
@@ -89,7 +89,6 @@ void GridUnitTest::extractInteriorPolygonTest2() const
 void GridUnitTest::extractInteriorPolygonsTest1() const
 {
 	std::unordered_set<sf::Vector2i, Vector2iHash> positions;
-	std::unordered_set<sf::Vector2i, Vector2iHash> borderPositions;
 
 	// Points for first polygon.
 	for(int x = 0; x <= 10; ++x)
@@ -97,11 +96,6 @@ void GridUnitTest::extractInteriorPolygonsTest1() const
 		for(int y = 0; y <= 10; ++y)
 		{
 			positions.insert(sf::Vector2i(x, y));
-
-			if(x == 0 || x == 10 || y == 0 || y == 10)
-			{
-				borderPositions.insert(sf::Vector2i(x, y));
-			}
 		}
 	}
 
@@ -111,11 +105,6 @@ void GridUnitTest::extractInteriorPolygonsTest1() const
 		for(int y = -20; y <= -15; ++y)
 		{
 			positions.insert(sf::Vector2i(x, y));
-
-			if(x == -20 || x == -15 || y == -20 || y == -15)
-			{
-				borderPositions.insert(sf::Vector2i(x, y));
-			}
 		}
 	}
 
@@ -123,21 +112,56 @@ void GridUnitTest::extractInteriorPolygonsTest1() const
 	for(int x = 30; x <= 40; ++x)
 	{
 		positions.insert(sf::Vector2i(x, 30));
-
 		positions.insert(sf::Vector2i(x, 31));
-		borderPositions.insert(sf::Vector2i(x, 31));
-
 		positions.insert(sf::Vector2i(x, 29));
-		borderPositions.insert(sf::Vector2i(x, 29));
-
 	}
 
-	borderPositions.insert(sf::Vector2i(30, 30));
-	borderPositions.insert(sf::Vector2i(40, 30));
+	std::vector<std::vector<sf::Vector2i>> polygons = extractInteriorPolygons(positions, determineBorderPositions(positions));
+}
 
-	std::vector<std::vector<sf::Vector2i>> polygons = extractInteriorPolygons(positions, borderPositions);
+void GridUnitTest::constructorTest1() const
+{
+	std::unordered_set<sf::Vector2i, Vector2iHash> positions;
 
+	// Polygon 1. Intersecting line strips.
+	for (int i = 0; i <= 30; ++i)
+	{
+		positions.insert({ i, 0 });
+		positions.insert({ i, 1 });
+		positions.insert({ i, 2 });
+	}
+	for (int i = -5; i <= 5; ++i)
+	{
+		positions.insert({ 10, i });
+		positions.insert({ 11, i });
+		positions.insert({ 12, i });
+	}
+	for (int i = -10; i <= 10; ++i)
+	{
+		positions.insert({ 20, i });
+		positions.insert({ 21, i });
+		positions.insert({ 22, i });
+	}
 
+	// Polygon 2. Large rectangle.
+	for (int x = 60; x <= 2000; ++x)
+	{
+		for (int y = -100; y <= 800; ++y)
+		{
+			positions.insert({ x, y });
+		}
+	}
+
+	// Polygon 3. Rigid edges.
+	for (int x = -1000; x <= -800; ++x)
+	{
+		for (int y = -1200; y <= x; ++y)
+		{
+			positions.insert({ x, y });
+		}
+	}
+	
+	Grid grid(positions);
 }
 
 

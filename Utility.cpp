@@ -123,11 +123,6 @@ sf::Color createRandomRealmColor()
 	return sf::Color(red, green, blue);
 }
 
-std::string generateRandomEstateName(Title title)
-{
-	return std::string();
-}
-
 std::string doubleToStringWithDecimals(double value, int decimals)
 {
 	std::ostringstream stream;

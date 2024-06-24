@@ -23,19 +23,19 @@ public:
 	void update();
 
 	// Set interior color of grid with specific id.
-	void setColor(int gridId , const sf::Color &color);
+	void setColor(int gridId, const sf::Color &color);
 
 	void setBorderColor(const sf::Color &color);
 	void setSubBorderColor(const sf::Color &color);
 
-	// Adds a grid and specifies its interior color.
+	// Adds a grid and specify its interior color.
 	void addGrid(const Grid &grid, const sf::Color &color);
 	void removeGrid(int gridId);
 
 private:
 	std::unordered_map<int, Grid> grids;
 	std::unordered_map<int, std::unordered_set<int>> gridAdjacencies;
-	std::unordered_set<sf::Vector2i> borders;
+	std::unordered_set<sf::Vector2i, Vector2iHash> borders;
 	sf::VertexArray vertices;
 	sf::Color subBorderColor;
 	sf::Color borderColor;

@@ -1,5 +1,6 @@
 #include "EditorGrid.h"
 #include "Utility.h"
+#include "Grid.h"
 #include <algorithm>
 #include <iostream>
 #include <assert.h>
@@ -526,7 +527,7 @@ void EditorGrid::calculateVertices()
 		// Pointer to the triangles' vertices of the current tile.
 		sf::Vertex* triangles = &vertices[i * 6];
 	
-		// define the 6 corners of the two triangles
+		// Define the 6 corners of the two triangles
 		triangles[0].position = sf::Vector2f(left, top);
 		triangles[1].position = sf::Vector2f(left, bottom);
 		triangles[2].position = sf::Vector2f(right, top);
@@ -534,7 +535,7 @@ void EditorGrid::calculateVertices()
 		triangles[4].position = sf::Vector2f(right, bottom);
 		triangles[5].position = sf::Vector2f(left, bottom);
 	
-		// define the 6 matching texture coordinates
+		// Define the 6 matching texture coordinates
 		// We check that it is in borderAndSubBorderPositions first as it is cheaper than checking isBorder.
 		if((borderMode == BorderMode::feintBorders || borderMode == BorderMode::darkBorders) 
 			&& borderPositions.count(position) == 1)

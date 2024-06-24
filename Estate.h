@@ -135,5 +135,4 @@ private:
 	void saveSubfiefs(std::ofstream &file) const;
 };
 
-
-
+std::string generateRandomEstateName(Title title);

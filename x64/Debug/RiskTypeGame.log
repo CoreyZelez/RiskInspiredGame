@@ -1,24 +1,4 @@
-﻿  CompositeGrid.cpp
-  Grid.cpp
-  GridUnitTest.cpp
-  HashFunctions.cpp
-d:\projects\risktypegame\risktypegame\hashfunctions.cpp(32): warning C4244: 'argument': conversion from 'const T' to 'const _Kty', possible loss of data
-          with
-          [
-              T=float
-          ]
-          and
-          [
-              _Kty=int
-          ]
-d:\projects\risktypegame\risktypegame\hashfunctions.cpp(33): warning C4244: 'argument': conversion from 'const T' to 'const _Kty', possible loss of data
-          with
-          [
-              T=float
-          ]
-          and
-          [
-              _Kty=int
-          ]
-  Generating Code...
+﻿  RiskTypeGame.cpp
+D:\Projects\RiskTypeGame\RiskTypeGame\LiegePolicy.h(5,8): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+D:\Projects\RiskTypeGame\RiskTypeGame\GameplaySettings.h(3,8): warning C4099: 'GameplaySettings': type name first seen using 'class' now seen using 'struct'
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe

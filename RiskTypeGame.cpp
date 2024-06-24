@@ -4,15 +4,70 @@
 #include "Game.h"
 #include "TextureManager.h"
 #include "GameController.h"
-#include "MilitaryManager.h"
 #include "FontManager.h"
-#include "LandArmy.h"
+#include "Grid.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <iostream>
 
 int main()
 {
+	sf::RenderWindow testingWindow(sf::VideoMode(2560, 1440), "TESTING", sf::Style::Default);
+
+	std::unordered_set<sf::Vector2i, Vector2iHash> positions;
+
+	// Polygon 1. Intersecting line strips.
+	for (int i = 32; i <= 44; ++i)
+	{
+		positions.insert({ i, 5 });
+		positions.insert({ i, 6 });
+		positions.insert({ i, 7 });
+	}
+	for (int i = 3; i <= 8; ++i)
+	{
+		positions.insert({ 35, i });
+		positions.insert({ 36, i });
+		positions.insert({ 37, i });
+	}
+
+	// Polygon 2. Rectangle.
+	for (int x = 28; x <= 31; ++x)
+	{
+		for (int y = 5; y <= 10; ++y)
+		{
+			positions.insert({ x, y });
+		}
+	}
+	
+	// Polygon 3. Rigid edges.
+	for (int x = 15; x <= 30; ++x)
+	{
+		for (int y = 8; y <= x - 1; ++y)
+		{
+			positions.insert({ x, y });
+		}
+	}
+
+	Grid grid(positions);
+	grid.setBorderColor(sf::Color::Red);
+	grid.setInteriorColor(sf::Color::Blue);
+	grid.update();
+
+	while (testingWindow.isOpen())
+	{	
+		// Clear window.
+		testingWindow.clear(sf::Color(255, 255, 255));
+
+		grid.draw(testingWindow);
+
+		// Display game.
+		testingWindow.display();
+	}
+
+	// TESTS
+	UnitTestRunner unitTestRunner;
+	unitTestRunner.runTests();
+
 	bool mapEditorMode = false;
 
 	sf::RenderWindow window(sf::VideoMode(2560, 1440), "Sovereign Chaos", sf::Style::Fullscreen);
@@ -23,10 +78,6 @@ int main()
 	InputUtility &InputUtility = InputUtility::getInstance();
 	FontManager::getInstance(); 
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS.
-
-	// TESTS
-	UnitTestRunner unitTestRunner;
-	unitTestRunner.runTests();
 
 	MapMaker mapMaker("empty");
 	Game game("The Grand Continent");

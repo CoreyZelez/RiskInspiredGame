@@ -1,5 +1,6 @@
 #include "CompositeGrid.h"
 #include "Grid.h"
+#include "UtilitySFML.h"
 #include <assert.h>
 
 void CompositeGrid::draw(sf::RenderWindow &window)
@@ -27,12 +28,15 @@ void CompositeGrid::update()
 	// Batch vertices of each grid.
 	for(auto &[id, grid] : grids)
 	{
-		const sf::VertexArray &gridVertices = grid.getVertices();
-		for(int i = 0; i < gridVertices.getVertexCount(); ++i)
-		{
-			vertices.append(gridVertices[i]);
-		}
+		appendVertexArray(vertices, grid.getVertices());
 	}
+
+	/***********************************************************************************************
+	POTENTIALLY GOOD OPTIMISATION IDEA.
+	FOR EACH GRID TRACK ITS START POINT IN THE VERTEX ARRAY.
+	THEN WHEN A GRID COLOR BECOMES OUTDATED, CAN SIMPLY ITERATE THROUGH GRIDS SPECIFIC VERTICES
+	AND CHANGE THE COLORS OF THOSE. AVOIDS HAVING TO REBUILD ENTIRE ARRAY.
+	************************************************************************************************/
 }
 
 void CompositeGrid::setColor(int gridId, const sf::Color &color)

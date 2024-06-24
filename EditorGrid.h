@@ -4,7 +4,6 @@
 #include <unordered_set>
 #include <string>
 
-const float GRID_SQUARE_SIZE = 30.0f;  // The width/height of one square of a grid on the map.
 const std::string gridSaveLabel = "# grid positions";
 const std::string defaultColorLabel = "# default color";
 

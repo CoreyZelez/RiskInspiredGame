@@ -614,3 +614,8 @@ void Estate::handleLowerEstateChange(const Estate &subfief)
 	}
 }
 
+std::string generateRandomEstateName(Title title)
+{
+	return std::string();
+}
+

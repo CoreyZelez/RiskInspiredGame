@@ -3,16 +3,20 @@
 #include <unordered_set>
 #include <SFML/Graphics.hpp>
 
+const float GRID_SQUARE_SIZE = 30.0f;  // Width of each grid square.
+
 enum class Direction;
 
 class Grid
 {
 public:
-	Grid(const std::unordered_set<sf::Vector2i, Vector2iHash> &positions, const std::unordered_set<sf::Vector2i, Vector2iHash> &borderPositions);
+	Grid(const std::unordered_set<sf::Vector2i, Vector2iHash> &positions);
 
 	Grid() = default;
 
 	void update();
+
+	void draw(sf::RenderWindow& window) const;
 
 	void setBorderColor(const sf::Color &color);
 	void setInteriorColor(const sf::Color &color);
@@ -30,10 +34,10 @@ private:
 
 	int id;
 
-	sf::Color borderColor;
-	sf::Color interiorColor;
+	sf::Color borderColor = sf::Color::Black;
+	sf::Color interiorColor = sf::Color::White;
 
-	const std::unordered_set<sf::Vector2i, Vector2iHash> borderPositions;  // Coordinates of border positions.
+	const std::unordered_set<sf::Vector2i, Vector2iHash> borderPositions;  // Grid coordinates of border positions.
 
 	sf::VertexArray vertices;  // Aggregation of interior and border vertices.
 	sf::VertexArray borderVertices;
@@ -41,15 +45,21 @@ private:
 
 	sf::Vector2i center;  // Center coordinates in game world.
 
+	void initBorderVertices(const std::unordered_set<sf::Vector2i, Vector2iHash>& borderPositions); 
+	void initInteriorVertices(const std::unordered_set<sf::Vector2i, Vector2iHash>& positions,
+			const std::unordered_set<sf::Vector2i, Vector2iHash>& borderPositions);
+
 	// Updates colors of border vertices.
 	void updateBorderVertices();
 	// Updates colors of interior vertices.
 	void updateInteriorVertices();
+	// Combines constructs vertex array of all interior and border vertices.
+	void aggregateVertices();
 };
 
 // Returns true if position is not a border position and is adjacent to a border position.
 bool isBorderAdjacent(const sf::Vector2i &position, 
-	const std::unordered_set<sf::Vector2i, Vector2iHash> &borderPositions, bool includeBorders = false);
+	const std::unordered_set<sf::Vector2i, Vector2iHash> &borderPositions, bool includeDiagonals = true, bool includeBorders = false);
 
 // Returns true if adjacent points to position are border positions
 bool isIsolated(const sf::Vector2i &position, const std::unordered_set<sf::Vector2i, Vector2iHash> &borderPositions);
@@ -65,4 +75,32 @@ void extractInteriorPolygon(const sf::Vector2i &start, const sf::Vector2i &offse
 
 std::vector<std::vector<sf::Vector2i>> extractInteriorPolygons(const std::unordered_set<sf::Vector2i, Vector2iHash> &positions, 
 	const std::unordered_set<sf::Vector2i, Vector2iHash> &borderPositions);
+
+// Converts a polygon which has vertices specified in terms of grid coordinates to polygon with vertices specified in
+// terms of world float coordinates. Parameter polygon must have vertices in clockwise order.
+std::vector<sf::Vector2f> convertPolygon(const std::vector<sf::Vector2i> &gridPolygon);
+
+// Adds world points to polygon based on grid points of polygon.
+void addPolygonTraversalPoints(std::vector<sf::Vector2f>& polygon, sf::Vector2i point, Direction direction, Direction newDirection);
+
+// Determines border positions amongs a set of positions.
+std::unordered_set<sf::Vector2i, Vector2iHash> determineBorderPositions(const std::unordered_set<sf::Vector2i, Vector2iHash>& positions);
+
+// Returns the top left world coordinate of a grid cell.
+sf::Vector2f getTopLeftCoordinate(const sf::Vector2i & position);
+// Returns the top right world coordinate of a grid cell.
+sf::Vector2f getTopRightCoordinate(const sf::Vector2i& position);
+// Returns the bottom left world coordinate of a grid cell.
+sf::Vector2f getBottomLeftCoordinate(const sf::Vector2i& position);
+// Returns the bottom right world coordinate of a grid cell.
+sf::Vector2f getBottomRightCoordinate(const sf::Vector2i& position);
+
+// Returns true if points are displaced from eachother either vertically or horizontally.
+bool areLateral(const sf::Vector2i &p1, const sf::Vector2i &p2);
+
+// Returns true if the three points lie on the same vertical or horizontal line in the specified order.
+bool sameLateralLineOrdered(const sf::Vector2i& p1, const sf::Vector2i& p2, const sf::Vector2i& p3);
+
+
+
 

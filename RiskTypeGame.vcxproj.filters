@@ -360,9 +360,6 @@
     <ClCompile Include="UtilitySFML.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Direction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EstateUnitTest.cpp">
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
@@ -374,6 +371,12 @@
     </ClCompile>
     <ClCompile Include="Grid.cpp">
       <Filter>Source Files\Game\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="CompositeGridUnitTest.cpp">
+      <Filter>Source Files\Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="Direction.cpp">
+      <Filter>Source Files\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -635,9 +638,6 @@
     <ClInclude Include="UtilitySFML.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Direction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RealmUnitTest.h">
       <Filter>Header Files\Testing</Filter>
     </ClInclude>
@@ -646,6 +646,12 @@
     </ClInclude>
     <ClInclude Include="GridUnitTest.h">
       <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="CompositeGridUnitTest.h">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="Direction.h">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
