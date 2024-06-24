@@ -544,7 +544,7 @@ bool sameLateralLineOrdered(const sf::Vector2i& p1, const sf::Vector2i& p2, cons
 {
 	bool xOrdered = (p1.x >= p2.x && p2.x >= p3.x) || (p1.x <= p2.x && p2.x <= p3.x);
 	bool yOrdered = (p1.y >= p2.y && p2.y >= p3.y) || (p1.y <= p2.y && p2.y <= p3.y);
-	bool xDifferent = (p1.x - p2.x != 0) && (p2.x - p3.x != 0);
-	bool yDifferent = (p1.y - p2.y != 0) && (p2.y - p3.y != 0);
+	bool xDifferent = (p1.x != p2.x) || (p2.x != p3.x);
+	bool yDifferent = (p1.y != p2.y) || (p2.y != p3.y);
 	return (xOrdered && !yDifferent) || (yOrdered && !xDifferent);
 }

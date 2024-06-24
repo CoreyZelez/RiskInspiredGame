@@ -29,11 +29,24 @@ int main()
 		positions.insert({ 36, i });
 		positions.insert({ 37, i });
 	}
+	for (int i = 3; i <= 20; ++i)
+	{
+		positions.insert({ 44, i });
+		positions.insert({ 45, i });
+		positions.insert({ 46, i });
+	}
+	for (int i = 40; i <= 60; ++i)
+	{
+		positions.insert({ i, 15 });
+		positions.insert({ i, 16 });
+		positions.insert({ i, 17 });
+		positions.insert({ i, 18 });
+	}
 
 	// Polygon 2. Rectangle.
-	for (int x = 28; x <= 31; ++x)
+	for (int x = 33; x <= 50; ++x)
 	{
-		for (int y = 5; y <= 10; ++y)
+		for (int y = 38; y <= 42; ++y)
 		{
 			positions.insert({ x, y });
 		}
@@ -50,7 +63,7 @@ int main()
 
 	Grid grid(positions);
 	grid.setBorderColor(sf::Color::Red);
-	grid.setInteriorColor(sf::Color::Blue);
+	grid.setInteriorColor(sf::Color::Black);
 	grid.update();
 
 	while (testingWindow.isOpen())
