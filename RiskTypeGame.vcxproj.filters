@@ -279,9 +279,6 @@
     <ClCompile Include="SpriteGraphicsComponent.cpp">
       <Filter>Source Files\Utility\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="ReconcileLandedEstates.cpp">
-      <Filter>Source Files\User Interface\CommandButton</Filter>
-    </ClCompile>
     <ClCompile Include="UnitTestRunner.cpp">
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
@@ -377,6 +374,18 @@
     </ClCompile>
     <ClCompile Include="Direction.cpp">
       <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorEstate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorTerritory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorPort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorUtility.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -539,9 +548,6 @@
     <ClInclude Include="TerritoryDistanceMap.h">
       <Filter>Header Files\Game\Territory</Filter>
     </ClInclude>
-    <ClInclude Include="ReconcileLandedEstates.h">
-      <Filter>Header Files\User Interface\CommandButton</Filter>
-    </ClInclude>
     <ClInclude Include="Maridom.h">
       <Filter>Header Files\Game\Estate</Filter>
     </ClInclude>
@@ -652,6 +658,18 @@
     </ClInclude>
     <ClInclude Include="Direction.h">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorEstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorTerritory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorPort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorUtility.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

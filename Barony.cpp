@@ -10,12 +10,6 @@
 #include <iostream>
 #include <fstream>
 
-Barony::Barony(LandTerritory &landTerritory)
-	: LandedEstate(Title::barony, landTerritory),
-	landTerritory(landTerritory)
-{
-}
-
 Barony::Barony(LandTerritory & landTerritory, sf::Color color)
 	: LandedEstate(Title::barony, landTerritory, color), landTerritory(landTerritory)
 {

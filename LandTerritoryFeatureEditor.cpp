@@ -1,12 +1,12 @@
 #pragma once
 #include "LandTerritoryFeatureEditor.h"
 #include "InputUtility.h"
-#include "LandTerritory.h"
+#include "TerritoryMaker.h"
 
 template<typename T>
 LandTerritoryFeatureEditor<T>::LandTerritoryFeatureEditor(LandFeatureAdjustmentFunction<T> adjustmentFunction, 
-	TerritoryManager &territoryManager, Factory<int, T> factory)
-	: adjustmentFunction(adjustmentFunction), territoryManager(territoryManager), factory(factory)
+	TerritoryMaker &territoryMaker, Factory<int, T> factory)
+	: adjustmentFunction(adjustmentFunction), territoryMaker(territoryMaker), factory(factory)
 {
 	keyIDMap[sf::Keyboard::Key::Num1] = 0;
 	keyIDMap[sf::Keyboard::Key::Num2] = 1;
@@ -32,7 +32,7 @@ void LandTerritoryFeatureEditor<T>::handleInput(const sf::RenderWindow &window)
 	if(inputUtility.getButtonDown(sf::Mouse::Left))
 	{
 		// Select land territory for feature change.
-		LandTerritory *territory = territoryManager.getLandTerritory(worldPos);
+		EditorTerritory *territory = territoryMaker.getTerritory(worldPos);
 
 		// Change feature.
 		if(territory != nullptr)

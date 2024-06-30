@@ -1,6 +1,5 @@
 #include "TerritoryMaker.h"
 #include "Map.h"
-#include "Territory.h"
 #include "InputUtility.h"
 #include "ProsperityFactory.h"
 #include "TerrainFactory.h"
@@ -9,12 +8,61 @@
 #include <iostream>
 #include <thread>
 
-TerritoryMaker::TerritoryMaker(TerritoryManager &territoryManager)
-	: territoryManager(territoryManager), claimedPositions(50000), 
-	terrainEditor(adjustLandTerrain, territoryManager, TerrainFactory()), cultureEditor(adjustLandCulture, territoryManager, CultureFactory()), 
-	prosperityEditor(adjustLandProsperities, territoryManager, ProsperityFactory())
+TerritoryMaker::TerritoryMaker()
+	: claimedPositions(50000), terrainEditor(adjustLandTerrain, *this, TerrainFactory()), 
+	cultureEditor(adjustLandCulture, *this, CultureFactory()),
+	prosperityEditor(adjustLandProsperities, *this, ProsperityFactory())
 {
+}
+
+void TerritoryMaker::load(std::string mapName)
+{
+	std::ifstream file("res/maps/" + mapName + "/" + mapName + "_territories.txt");
+	std::string line;
+
+	while (std::getline(file, line))
+	{
+		if (line.size() == 0)  // Line is blank.
+		{
+			continue;
+		}
+		else if (line.compare(landSaveLabel) == 0)
+		{
+			loadLandTerritory(file);
+		}
+		else if (line.compare(navalSaveLabel) == 0)
+		{
+			loadNavalTerritory(file);
+		}
+	}
+
 	initClaimedPositions();
+}
+
+void TerritoryMaker::save(std::string mapName) const
+{
+	std::ofstream file("res/maps/" + mapName + "/" + mapName + "_territories.txt");
+
+	// Save naval before land territories because land depend on naval for port creation.
+	for (const EditorTerritory& territory : territories)
+	{
+		if (territory.getType() == TerritoryType::land)
+		{
+			territory.saveToFile(file);
+			file << std::endl;
+		}
+	}
+
+	// Save land territories.
+	for (const EditorTerritory& territory : territories)
+	{
+		if (territory.getType() == TerritoryType::naval)
+		{
+			territory.saveToFile(file);
+			file << std::endl;
+		}
+	}
+
 }
 
 void TerritoryMaker::draw(sf::RenderWindow &window) const
@@ -23,20 +71,28 @@ void TerritoryMaker::draw(sf::RenderWindow &window) const
 
 	if(state == TerritoryMakerState::none || state == TerritoryMakerState::editTerritoryGrid)
 	{
-		territoryManager.draw(window);
-		return;
-		window.draw(fixedTerritoryVertices);
-		if(selectedTerritory != nullptr)
+		for (const EditorTerritory& territory : territories)
 		{
-			selectedTerritory->getGrid().draw(window);
+			territory.draw(window);
 		}
+		return;
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//window.draw(fixedTerritoryVertices);
+		//if(selectedTerritory != nullptr)
+		//{
+		//	selectedTerritory->getGrid().draw(window);
+		//}
 	}
 	else
 	{
-		territoryManager.draw(window);
+		for (const EditorTerritory& territory : territories)
+		{
+			territory.draw(window);
+		}
 	}
 
-	territoryManager.drawPorts(window);
+	drawPorts(window);
 }
 
 void TerritoryMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
@@ -69,21 +125,61 @@ void TerritoryMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 	inputClock.restart();
 }
 
+std::deque<EditorTerritory>& TerritoryMaker::getTerritories()
+{
+	return territories;
+}
+
+void TerritoryMaker::loadLandTerritory(std::ifstream& file)
+{
+	EditorGrid grid = loadTerritoryGrid(file);
+
+	int id = loadTerritoryID(file);
+	nextID = std::max(id + 1, nextID);
+
+	LandTerritoryFeatures features = loadLandTerritoryFeatures(file, nullptr);
+
+	// Load naval territory associated with port if exists.
+	EditorTerritory *portNavalTerritory = nullptr;
+	if (file.peek() == '#')
+	{
+		int portNavalID = loadPortNavalID(file);
+		portNavalTerritory = getTerritory(portNavalID);
+	}
+
+	territories.emplace_back(EditorTerritory(TerritoryType::land, id, grid, features));
+
+	if (portNavalTerritory != nullptr)
+	{
+		territories.back().createPort(*portNavalTerritory);
+	}
+}
+
+void TerritoryMaker::loadNavalTerritory(std::ifstream& file)
+{
+	EditorGrid grid = loadTerritoryGrid(file);
+
+	int id = loadTerritoryID(file);
+	nextID = std::max(id + 1, nextID);
+
+	territories.emplace_back(EditorTerritory(TerritoryType::naval, id, grid));
+}
+
 void TerritoryMaker::changeState(TerritoryMakerState state)
 {
 	this->state = state;
 
 	if(state == TerritoryMakerState::editTerrain)
 	{
-		territoryManager.setDrawMode(TerritoryDrawMode::terrain);
+		setDrawMode(TerritoryDrawMode::terrain);
 	}
 	else if(state == TerritoryMakerState::editCulture)
 	{
-		territoryManager.setDrawMode(TerritoryDrawMode::culture);
+		setDrawMode(TerritoryDrawMode::culture);
 	}
 	else if(state == TerritoryMakerState::editProsperities)
 	{
-		territoryManager.setDrawMode(TerritoryDrawMode::prosperity);
+		setDrawMode(TerritoryDrawMode::prosperity);
 	}
 }
 
@@ -162,10 +258,9 @@ void TerritoryMaker::handleInputForStateChange()
 	// Port creation.
 	if(inputUtility.getKeyPressed(sf::Keyboard::P))
 	{
-		if(state == TerritoryMakerState::none)
+		if (selectedTerritory != nullptr && selectedTerritory->getType() == TerritoryType::land)
 		{
 			changeState(TerritoryMakerState::createPort);
-			portTerritories = { nullptr, nullptr };
 		}
 	}
 }
@@ -177,40 +272,17 @@ void TerritoryMaker::handleInputForPortCreation(const sf::RenderWindow &window)
 		return;
 	}
 
+	InputUtility& inputUtility = InputUtility::getInstance();
+
 	sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
 
-	InputUtility &inputUtility = InputUtility::getInstance();
 	if(inputUtility.getButtonPressed(sf::Mouse::Right))
 	{
-		assert(portTerritories.first == nullptr || portTerritories.second == nullptr);
-
-		if(portTerritories.first == nullptr)
+		EditorTerritory* navalTerritory = getTerritory(TerritoryType::naval, worldPos);
+		if (navalTerritory != nullptr)
 		{
-			portTerritories.first = territoryManager.getLandTerritory(worldPos);
-			if(portTerritories.first == nullptr)
-			{
-				portTerritories.second = nullptr;
-				state = TerritoryMakerState::none;
-			}
-		}
-		else if(portTerritories.second == nullptr)
-		{
-			portTerritories.second = territoryManager.getNavalTerritory(worldPos);
-			if(portTerritories.second == nullptr)
-			{
-				portTerritories.first = nullptr;
-				state = TerritoryMakerState::none;
-			}
-		}
-
-		if(portTerritories.first != nullptr && portTerritories.second != nullptr)
-		{
-			// Create the port. Port is not created if territories not adjacent.
-			portTerritories.first->createPort(*portTerritories.second);
-			portTerritories.first = nullptr;
-			portTerritories.second = nullptr;
-			state = TerritoryMakerState::none;
+			createPort(*navalTerritory);
 		}
 	}
 }
@@ -230,11 +302,7 @@ void TerritoryMaker::handleInputForTerritorySelection(const sf::RenderWindow &wi
 	if(inputUtility.getButtonDown(sf::Mouse::Right))
 	{
 		// Select territory for modification.
-		selectedTerritory = territoryManager.getLandTerritory(worldPos);
-		if(selectedTerritory == nullptr)
-		{
-			selectedTerritory = territoryManager.getNavalTerritory(worldPos);
-		}
+		selectedTerritory = getTerritory(worldPos);
 		if(selectedTerritory != nullptr)
 		{
 			state = TerritoryMakerState::editTerritoryGrid;
@@ -255,8 +323,8 @@ void TerritoryMaker::handleInputForTerritoryCreation()
 	if(inputUtility.getKeyPressed(sf::Keyboard::L))
 	{
 		// Create a new territory.
-		territoryManager.removeEmptyTerritories();
-		selectedTerritory = territoryManager.createLandTerritory();
+		removeEmptyTerritories();
+		selectedTerritory = &createTerritory(TerritoryType::land);
 		state = TerritoryMakerState::editTerritoryGrid;
 		updateFixedTerritoriesVertices();
 	}
@@ -264,8 +332,8 @@ void TerritoryMaker::handleInputForTerritoryCreation()
 	// Create naval territory.
 	if(inputUtility.getKeyPressed(sf::Keyboard::N))
 	{
-		territoryManager.removeEmptyTerritories();
-		selectedTerritory = territoryManager.createNavalTerritory();
+		removeEmptyTerritories();
+		selectedTerritory = &createTerritory(TerritoryType::naval);
 		state = TerritoryMakerState::editTerritoryGrid;
 		updateFixedTerritoriesVertices();
 	}
@@ -296,12 +364,38 @@ void TerritoryMaker::handleInputForTerritoryGridEdits(const sf::RenderWindow &wi
 	}
 }
 
+void TerritoryMaker::drawPorts(sf::RenderWindow &window) const
+{
+	for (const EditorTerritory& territory : territories)
+	{
+		territory.drawPort(window);
+	}
+}
+
+void TerritoryMaker::setDrawMode(TerritoryDrawMode mode)
+{
+	for (EditorTerritory& territory : territories)
+	{
+		territory.setDrawMode(mode);
+	}
+}
+
+EditorTerritory* TerritoryMaker::getTerritory(int id)
+{
+	for (EditorTerritory& territory : territories)
+	{
+		if (territory.getID() == id)
+		{
+			return &territory;
+		}
+	}
+}
+
 void TerritoryMaker::initClaimedPositions()
 {
-	const std::vector<const Territory*> territories = territoryManager.getTerritories();
-	for(const Territory *territory : territories)
+	for(const EditorTerritory &territory : territories)
 	{
-		std::unordered_set<sf::Vector2i, Vector2iHash> positions = territory->getGrid().getPositions();
+		std::unordered_set<sf::Vector2i, Vector2iHash> positions = territory.getGrid().getPositions();
 		claimedPositions.insert(positions.begin(), positions.end());
 	}
 }
@@ -310,12 +404,12 @@ void TerritoryMaker::updateFixedTerritoriesVertices()
 {
 	fixedTerritoryVertices.clear();
 	fixedTerritoryVertices.setPrimitiveType(sf::Triangles);
-	for(const Territory* territory : territoryManager.getTerritories())
+	for(const EditorTerritory& territory : territories)
 	{
 		// Add vertices to fixed vertices if territory not currently chosen for modification.
-		if(territory != selectedTerritory)
+		if(&territory != selectedTerritory)
 		{
-			const sf::VertexArray &territoryVertices = territory->getGrid().getVertexArray();
+			const sf::VertexArray &territoryVertices = territory.getGrid().getVertexArray();
 			for(size_t i = 0; i < territoryVertices.getVertexCount(); ++i)
 			{
 				fixedTerritoryVertices.append(territoryVertices[i]);
@@ -340,7 +434,7 @@ void TerritoryMaker::progressBrushSize()
 	}
 	else if(brushSize == 9)
 	{
-		brushSize = 20;
+		brushSize = 21;
 	}
 	else
 	{
@@ -409,12 +503,86 @@ void TerritoryMaker::removePosition(const sf::RenderWindow &window)
 
 	selectedTerritory->getGrid().update();
 
-	//// Remove square if any and update claimed positions if square is removed.
-	//if(selectedTerritory->getGrid().removeSquare(worldPos))
-	//{
-	//	sf::Vector2i position = calculateGridCoordinates(worldPos);
-	//	claimedPositions.erase(position);
-	//}
+	// Remove square if any and update claimed positions if square is removed.
+	if(selectedTerritory->getGrid().removeSquare(worldPos))
+	{
+		sf::Vector2i position = calculateGridCoordinates(worldPos);
+		claimedPositions.erase(position);
+	}
 }
 
+void TerritoryMaker::removeEmptyTerritories()
+{
+	for (auto territory = territories.begin(); territory != territories.end();)
+	{
+		if (territory->getGrid().isEmpty())
+		{
 
+		}
+		else
+		{
+			++territory;
+		}
+	}
+}
+
+void TerritoryMaker::removeTerritory(EditorTerritory& territory)
+{
+	for (auto iter = territories.begin(); iter != territories.end(); ++iter)
+	{
+		if (&(*iter) == &territory)
+		{
+			territories.erase(iter);
+			return;
+		}
+	}
+
+	throw std::logic_error("Territory does not exist.");
+}
+
+EditorTerritory& TerritoryMaker::createTerritory(TerritoryType type)
+{
+	territories.push_back(EditorTerritory(type, nextID++));
+	return territories.back();
+}
+
+void TerritoryMaker::createPort(EditorTerritory& navalTerritory)
+{
+	assert(navalTerritory.getType() == TerritoryType::naval);
+
+	if (selectedTerritory->isAdjacent(navalTerritory))
+	{
+		selectedTerritory->createPort(navalTerritory);
+	}
+}
+
+EditorTerritory* TerritoryMaker::getTerritory(TerritoryType type, sf::Vector2f position)
+{
+	for (EditorTerritory& territory : territories)
+	{
+		if (territory.getType() != type)
+		{
+			continue;
+		}
+
+		if (territory.getGrid().containsPosition(position))
+		{
+			return &territory;
+		}
+	}
+
+	return nullptr;
+}
+
+EditorTerritory* TerritoryMaker::getTerritory(sf::Vector2f position)
+{
+	for (EditorTerritory& territory : territories)
+	{
+		if (territory.getGrid().containsPosition(position))
+		{
+			return &territory;
+		}
+	}
+
+	return nullptr;
+}

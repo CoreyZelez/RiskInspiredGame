@@ -54,8 +54,6 @@ void TerritoryManager::load(std::string mapName, const GameplaySettings *gamepla
 		}
 	}
 
-	removeEmptyTerritories();
-
 	calculateAdjacencies();
 	calculateDistances();
 }
@@ -73,39 +71,6 @@ void TerritoryManager::setDrawMode(TerritoryDrawMode mode)
 	for(Territory *territory : territories)
 	{
 		territory->setDrawMode(mode);
-	}
-}
-
-void TerritoryManager::removeEmptyTerritories()
-{
-	// Remove empty land territories.
-	auto iterL = landTerritories.begin();
-	while(iterL != landTerritories.end())
-	{
-		if((*iterL)->getGrid().isEmpty())
-		{
-			removeTerritory(iterL->get());
-			iterL = landTerritories.erase(iterL);
-		}
-		else
-		{
-			++iterL;
-		}
-	}
-
-	// Remove empty naval territories.
-	auto iterN = navalTerritories.begin();
-	while(iterN != navalTerritories.end())
-	{
-		if((*iterN)->getGrid().isEmpty())
-		{
-			removeTerritory(iterL->get());
-			iterN = navalTerritories.erase(iterN);
-		}
-		else
-		{
-			++iterN;
-		}
 	}
 }
 
@@ -144,42 +109,6 @@ Territory* TerritoryManager::getTerritory(const sf::Vector2f &position)
 	return nullptr;
 }
 
-LandTerritory* TerritoryManager::createLandTerritory()
-{
-	std::unique_ptr<LandTerritory> territory = std::make_unique<LandTerritory>(nextID++);
-	LandTerritory *t = territory.get();
-	landTerritories.emplace_back(std::move(territory));
-	territories.emplace_back(t);
-	return t;
-}
-
-NavalTerritory* TerritoryManager::createNavalTerritory()
-{
-	std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>(nextID++);
-	NavalTerritory *t = territory.get();
-	navalTerritories.emplace_back(std::move(territory));
-	territories.emplace_back(t);
-	return t;
-}
-
-void TerritoryManager::removeLandTerritory(LandTerritory *territory)
-{
-	removeTerritory(territory);
-
-	auto iter = landTerritories.begin();
-	while(iter != landTerritories.end())
-	{
-		if(iter->get() == territory)
-		{
-			landTerritories.erase(iter);
-			territory = nullptr;  // Invalidate future usage of pointer.
-			return;
-		}
-		++iter;
-	}
-	assert(false);
-}
-
 LandTerritory* TerritoryManager::getLandTerritory(sf::Vector2f position)
 {
 	for(const auto &territory : landTerritories)
@@ -190,24 +119,6 @@ LandTerritory* TerritoryManager::getLandTerritory(sf::Vector2f position)
 		}
 	}
 	return nullptr;
-}
-
-void TerritoryManager::removeNavalTerritory(NavalTerritory *territory)
-{
-	removeTerritory(territory);
-
-	auto iter = navalTerritories.begin();
-	while(iter != navalTerritories.end())
-	{
-		if(iter->get() == territory)
-		{
-			navalTerritories.erase(iter);
-			territory = nullptr;  // Invalidate future usage of pointer.
-			return;
-		}
-		++iter;
-	}
-	assert(false);
 }
 
 NavalTerritory* TerritoryManager::getNavalTerritory(sf::Vector2f position)
@@ -262,7 +173,7 @@ void TerritoryManager::calculateDistances()
 	}
 }
 
-void TerritoryManager::loadLandTerritory(std::ifstream & file, const GameplaySettings *gameplaySettings)
+void TerritoryManager::loadLandTerritory(std::ifstream &file, const GameplaySettings *gameplaySettings)
 {
 	EditorGrid graphics = loadTerritoryGrid(file);
 
@@ -283,9 +194,6 @@ void TerritoryManager::loadLandTerritory(std::ifstream & file, const GameplaySet
 	
 	territories.emplace_back(territory.get());
 	landTerritories.emplace_back(std::move(territory));
-
-	// Ensure next id greater than all other territory ids.
-	nextID = std::max(nextID, id + 1); 
 }
 
 void TerritoryManager::loadNavalTerritory(std::ifstream & file)
@@ -295,22 +203,6 @@ void TerritoryManager::loadNavalTerritory(std::ifstream & file)
 	std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>(id, graphics);
 	territories.emplace_back(territory.get());
 	navalTerritories.emplace_back(std::move(territory));
-
-	// Ensure next id greater than all other territory ids.
-	nextID = std::max(nextID, id + 1);  
-}
-
-void TerritoryManager::removeTerritory(Territory *territory)
-{
-	for(auto iter = territories.begin(); iter != territories.end(); ++iter)
-	{
-		if(*iter == territory)
-		{
-			territories.erase(iter);
-			return;
-		}
-	}
-	assert(false);  // Should only ever be called on a territory that exists in territories.
 }
 
 NavalTerritory* TerritoryManager::getNavalTerritory(int id)

@@ -1,3 +1,4 @@
+
 #pragma once
 #include "Territory.h"
 
@@ -21,4 +22,3 @@ protected:
 private:
 
 };
-

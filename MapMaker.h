@@ -20,20 +20,19 @@ class MapMaker
 public:
 	MapMaker(std::string mapName);
 
-	~MapMaker();
-
 	void save();
 	void saveAs(std::string mapName);
-	void load(std::string mapName, const GameplaySettings &gameplaySettings);
 
 	void draw(sf::RenderWindow &window);
 
 	void handleInput(const sf::RenderWindow &window, sf::View &view);
 
 private:
-	Map map;
 	MapMakerState state = MapMakerState::TerritoryMode;
 	TerritoryMaker territoryMaker;
 	EstateMaker estateMaker;
+	const std::string mapName;
+
+	void load(std::string mapName);
 };
 

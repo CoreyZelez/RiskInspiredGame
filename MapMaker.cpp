@@ -1,34 +1,46 @@
 #include "MapMaker.h"
 #include "ChangeInstance.h"
-#include "ReconcileLandedEstates.h"
 #include "InputUtility.h"
 #include "GameplaySettings.h"
 #include <assert.h>
 #include <iostream>
+#include <filesystem>
 
 MapMaker::MapMaker(std::string mapName)
-	: map(mapName), territoryMaker(map.getTerritoryManager()), estateMaker(map.getEstateManager())
+	: mapName(mapName)
 {
-}
-
-MapMaker::~MapMaker()
-{
-	save();
+	load(mapName);
 }
 
 void MapMaker::save()
 {
-	map.save();
+	saveAs(mapName);
 }
 
 void MapMaker::saveAs(std::string mapName)
 {
-	map.saveAs(mapName);
+	namespace fs = std::filesystem;
+
+	const std::string folderPath = "res/maps/" + mapName;
+
+	// Create the folder
+	if (!fs::exists(folderPath))
+	{
+		if (!fs::create_directory(folderPath))
+		{
+			std::cerr << "Failed to create the folder." << std::endl;
+			exit(1);
+		}
+	}
+
+	territoryMaker.save(mapName);
+	estateMaker.save(mapName);
 }
 
-void MapMaker::load(std::string mapName, const GameplaySettings &gameplaySettings)
+void MapMaker::load(std::string mapName)
 {
-	map = Map("mapName");
+	territoryMaker.load(mapName);
+	estateMaker.load(mapName, territoryMaker.getTerritories());
 }
 
 void MapMaker::draw(sf::RenderWindow &window)
@@ -55,8 +67,8 @@ void MapMaker::handleInput(const sf::RenderWindow &window, sf::View &view)
 		{
 		case MapMakerState::TerritoryMode:
 			// Ensure all estates are reconciled with created and deleted territories.
-			map.getEstateManager().reconcileBaronies(map.getTerritoryManager().getLandTerritories());
-			map.getEstateManager().reconcileMaridoms(map.getTerritoryManager().getNavalTerritories());
+			estateMaker.reconcileBaronies(territoryMaker.getTerritories());
+			estateMaker.reconcileMaridoms(territoryMaker.getTerritories());
 			state = MapMakerState::EstateMode;
 			break;
 		case MapMakerState::EstateMode:

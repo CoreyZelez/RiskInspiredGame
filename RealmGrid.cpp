@@ -1,8 +1,8 @@
 #include "RealmGrid.h"
-#include "Utility.h"
+#include "ColorUtility.h"
 
 RealmGrid::RealmGrid()
-	: defaultGridColor(createRandomRealmColor()), grid(defaultGridColor)
+	: defaultGridColor(generateRandomRealmColor()), grid(defaultGridColor)
 {
 }
 

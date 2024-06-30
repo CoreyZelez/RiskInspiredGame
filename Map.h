@@ -14,9 +14,6 @@ class Map
 public:
 	Map(std::string name, const GameplaySettings *gameSettings = nullptr);
 
-	void save();
-	void saveAs(std::string name);  // Save map under different name.
-
 	TerritoryManager &getTerritoryManager();
 	const TerritoryManager &getTerritoryManager() const;
 	EstateManager &getEstateManager();

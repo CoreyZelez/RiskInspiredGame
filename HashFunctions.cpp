@@ -38,3 +38,8 @@ size_t GridHash::operator()(const Grid &grid) const
 {
 	return std::hash<int>{}(grid.getId());
 }
+
+std::size_t TerritoryTypeHash::operator()(TerritoryType& type) const
+{
+	return static_cast<std::size_t>(type);
+}

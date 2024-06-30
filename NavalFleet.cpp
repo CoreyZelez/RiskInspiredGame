@@ -83,7 +83,7 @@ void NavalFleet::moveClosest(Territory &target, unsigned int strength, int maxDi
 	assert(strength > 0);
 	
 	Territory& source = getTerritory();
-	Territory* nearest = nearestFriendlyAdjacentTerritoryDijkstra(source, target, maxDist, TerritoryType::naval);
+	Territory* nearest = nearestFriendlyAdjacentTerritoryDijkstra(source, target, maxDist);
 	if(nearest != nullptr)
 	{
 		move(*nearest, strength);

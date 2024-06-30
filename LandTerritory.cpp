@@ -1,17 +1,18 @@
 #include "LandTerritory.h"
 #include "LandArmy.h"
 #include "NavalFleet.h"
-#include "Utility.h"
+#include "ColorUtility.h"
 #include "LandTerritoryOccupancy.h"
 #include "NavalTerritory.h"
 #include "TerrainFactory.h"
 #include "CultureFactory.h"
+#include "EditorTerritory.h"
 #include <assert.h>
 #include <iostream>
 #include <fstream>
 
 LandTerritory::LandTerritory(int id, EditorGrid graphics, LandTerritoryFeatures features, NavalTerritory *navalTerritory)
-	: Territory(id, graphics, std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land), features(features)
+	: Territory(TerritoryType::land, id, graphics, std::make_unique<LandTerritoryOccupancy>(*this)), features(features)
 {
 	// Create the port.
 	if(navalTerritory != nullptr)
@@ -21,7 +22,7 @@ LandTerritory::LandTerritory(int id, EditorGrid graphics, LandTerritoryFeatures 
 }
 
 LandTerritory::LandTerritory(int id, EditorGrid graphics, NavalTerritory *navalTerritory)
-	: Territory(id, graphics, std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land), 
+	: Territory(TerritoryType::land, id, graphics, std::make_unique<LandTerritoryOccupancy>(*this)), 
 	features(nullptr)
 {
 	// Create the port.
@@ -39,7 +40,7 @@ LandTerritory::LandTerritory(int id, EditorGrid graphics)
 }
 
 LandTerritory::LandTerritory(int id)
-	: Territory(id, createRandomLandColor(), std::make_unique<LandTerritoryOccupancy>(*this), TerritoryType::land), 
+	: Territory(TerritoryType::land, id, generateRandomLandColor(), std::make_unique<LandTerritoryOccupancy>(*this)),
 	features(nullptr)
 {
 	initDefaultFeatures();
@@ -98,34 +99,6 @@ void LandTerritory::setDrawMode(TerritoryDrawMode mode)
 	}
 }
 
-void LandTerritory::setTerrain(Terrain terrain)
-{
-	features.terrain = terrain;
-	if(getDrawMode() == TerritoryDrawMode::terrain)
-	{
-		getGrid().setColor(terrain.color);
-	}
-}
-
-void LandTerritory::setCulture(Culture culture)
-{
-	features.culture = culture;
-	if(getDrawMode() == TerritoryDrawMode::culture)
-	{
-		getGrid().setColor(culture.color);
-	}
-}
-
-void LandTerritory::setProsperities(int prosperity)
-{
-	features.coreProsperity = prosperity;
-	features.prosperity = prosperity;
-	if(getDrawMode() == TerritoryDrawMode::prosperity)
-	{
-		getGrid().setColor(determineProsperityColor(prosperity));
-	}
-}
-
 const LandTerritoryFeatures& LandTerritory::getFeatures() const
 {
 	return features;
@@ -138,6 +111,7 @@ void LandTerritory::createPort(NavalTerritory &navalTerritory)
 	{
 		return;
 	}
+
 	port = std::make_unique<Port>(*this, navalTerritory);
 }
 
@@ -215,17 +189,3 @@ LandTerritoryFeatures loadLandTerritoryFeatures(std::ifstream & file, const Game
 	return features;
 }
 
-void adjustLandTerrain(LandTerritory &landTerritory, const Terrain &terrain)
-{
-	landTerritory.setTerrain(terrain);
-}
-
-void adjustLandCulture(LandTerritory &landTerritory, const Culture &culture)
-{
-	landTerritory.setCulture(culture);
-}
-
-void adjustLandProsperities(LandTerritory &landTerritory, const int &prosperity)
-{
-	landTerritory.setProsperities(prosperity);
-}

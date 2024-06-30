@@ -7,7 +7,8 @@ class NavalTerritory;
 class Maridom : public LandedEstate
 {
 public:
-	Maridom(NavalTerritory &territory);
+	Maridom(NavalTerritory& territory);
+	Maridom(NavalTerritory &territory, const sf::Color& color);
 
 	virtual std::unique_ptr<LandArmy> yieldLandArmy() override;
 	virtual std::unique_ptr<NavalFleet> yieldNavalFleet() override;

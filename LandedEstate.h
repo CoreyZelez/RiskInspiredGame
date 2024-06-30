@@ -12,8 +12,6 @@ public:
 
 	virtual ~LandedEstate() = default;
 
-	virtual void saveToFile(std::ofstream &file) const override;
-
 	// Handles changing of associated territory occupant.
 	virtual void update(Message message) override;
 

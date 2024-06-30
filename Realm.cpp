@@ -672,8 +672,8 @@ void Realm::yieldFleetReinforcements()
 	{
 		if(territory->getType() == TerritoryType::land)
 		{
-			LandTerritory* landTerritory = dynamic_cast<LandTerritory*>(territory);
-			assert(landTerritory != nullptr);
+			LandTerritory* landTerritory = dynamic_cast<LandTerritory*>(territory);\
+
 			if(landTerritory->hasPort())
 			{
 				portTerritories.push_back(landTerritory);

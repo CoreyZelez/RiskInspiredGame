@@ -19,10 +19,9 @@ public:
 
 	bool isAdjacent(const Territory *territory) const;
 
-	// Returns true if any adjacent territory of given type is hostile.
+	// Returns true if any adjacent territories of given type are hostile.
 	// Nullptr owner is considered hostile.
-	bool hasEnemyAdjacencies(TerritoryType type) const;
-
+	bool hasEnemyAdjacencies(TerritoryType territoryType) const;
 	// Returns true if any adjacent territory is hostile.
 	// Nullptr owner is considered hostile.
 	bool hasEnemyAdjacencies() const;

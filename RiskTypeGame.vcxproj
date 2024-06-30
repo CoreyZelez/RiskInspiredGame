@@ -167,11 +167,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ColorUtility.cpp" />
     <ClCompile Include="CompositeGrid.cpp" />
     <ClCompile Include="CompositeGridUnitTest.cpp" />
     <ClCompile Include="Culture.cpp" />
     <ClCompile Include="CultureFactory.cpp" />
     <ClCompile Include="Direction.cpp" />
+    <ClCompile Include="EditorEstate.cpp" />
+    <ClCompile Include="EditorPort.cpp" />
+    <ClCompile Include="EditorTerritory.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="GameplaySettings.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
@@ -235,7 +239,6 @@
     <ClCompile Include="TerrainFactory.cpp" />
     <ClCompile Include="TextDisplay.cpp" />
     <ClCompile Include="VassalManager.cpp" />
-    <ClCompile Include="ReconcileLandedEstates.cpp" />
     <ClCompile Include="RichText.cpp" />
     <ClCompile Include="RiskTypeGame.cpp" />
     <ClCompile Include="SimplePlayerAI.cpp" />
@@ -257,11 +260,15 @@
     <ClCompile Include="VassalPolicy.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ColorUtility.h" />
     <ClInclude Include="CompositeGrid.h" />
     <ClInclude Include="CompositeGridUnitTest.h" />
     <ClInclude Include="Culture.h" />
     <ClInclude Include="CultureFactory.h" />
     <ClInclude Include="Direction.h" />
+    <ClInclude Include="EditorEstate.h" />
+    <ClInclude Include="EditorPort.h" />
+    <ClInclude Include="EditorTerritory.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="GameplaySettings.h" />
     <ClInclude Include="GraphicsComponent.h" />
@@ -319,7 +326,6 @@
     <ClInclude Include="TerrainFactory.h" />
     <ClInclude Include="TextDisplay.h" />
     <ClInclude Include="VassalManager.h" />
-    <ClInclude Include="ReconcileLandedEstates.h" />
     <ClInclude Include="RichText.h" />
     <ClInclude Include="SimplePlayerAI.h" />
     <ClInclude Include="SpriteGraphicsComponent.h" />

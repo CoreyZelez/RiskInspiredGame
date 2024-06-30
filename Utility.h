@@ -1,16 +1,5 @@
 #include "Title.h"
-#include <SFML/Graphics.hpp>
-#include <random>
-#include <random>
-#include <ctime>
-
-sf::Color createRandomColor();
-
-sf::Color createRandomLandColor();
-
-sf::Color createRandomNavalColor();
-
-sf::Color createRandomRealmColor();
+#include <string>
 
 std::string doubleToStringWithDecimals(double value, int decimals);
 

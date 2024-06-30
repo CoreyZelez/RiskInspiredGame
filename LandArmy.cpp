@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "GameplaySettings.h"
 #include "Terrain.h"
+#include "LandTerritory.h"
 #include <assert.h>
 #include <random>
 #include <iostream>

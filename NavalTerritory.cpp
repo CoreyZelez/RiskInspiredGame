@@ -1,5 +1,5 @@
 #include "NavalTerritory.h"
-#include "Utility.h"
+#include "ColorUtility.h"
 #include "NavalTerritoryOccupancy.h"
 #include <assert.h>
 #include <fstream>
@@ -7,12 +7,12 @@
 
 
 NavalTerritory::NavalTerritory(int id, EditorGrid grid)
-	: Territory(id, grid, std::make_unique<NavalTerritoryOccupancy>(*this),  TerritoryType::naval)
+	: Territory(TerritoryType::naval, id, grid, std::make_unique<NavalTerritoryOccupancy>(*this))
 {
 }
 
 NavalTerritory::NavalTerritory(int id)
-	: Territory(id, createRandomNavalColor(), std::make_unique<NavalTerritoryOccupancy>(*this), TerritoryType::naval)
+	: Territory(TerritoryType::naval, id, generateRandomNavalColor(), std::make_unique<NavalTerritoryOccupancy>(*this))
 {
 }
 
@@ -37,4 +37,3 @@ void NavalTerritory::setDrawMode(TerritoryDrawMode mode)
 	
 	getGrid().setColor(color);
 }
-

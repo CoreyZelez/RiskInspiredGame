@@ -10,17 +10,6 @@
 #include <iostream>
 #include <fstream>
 
-Estate::Estate(Title title)
-	: title(title)
-{
-	if(title == Title::maridom)
-	{
-		this->grid.setBorderMode(BorderMode::feintBorders);
-		this->grid.setAllPositionsDark();
-	}
-	initColor();
-}
-
 Estate::Estate(Title title, sf::Color color)
 	: title(title), defaultColor(color)
 {
@@ -33,7 +22,7 @@ Estate::Estate(Title title, sf::Color color)
 	this->grid.setColor(color);
 }
 
-Estate::Estate(Title title, const EditorGrid & grid, sf::Color color)
+Estate::Estate(Title title, const EditorGrid &grid, sf::Color color)
 	: title(title), defaultColor(color)
 {
 	this->grid.addGrid(grid);
@@ -46,50 +35,10 @@ Estate::Estate(Title title, const EditorGrid & grid, sf::Color color)
 	this->grid.setColor(color);
 }
 
-Estate::Estate(Title title, const EditorGrid &grid)
-	: title(title)
-{
-	this->grid.addGrid(grid);
-	if(title == Title::maridom)
-	{
-		this->grid.setBorderMode(BorderMode::feintBorders);
-		this->grid.setAllPositionsDark();
-	}
-	initColor();
-}
-
-Estate::Estate(Title title, const EditorGrid &grid, std::string name)
-	: title(title), name(name)
-{
-	this->grid.addGrid(grid);
-	if(title == Title::maridom)
-	{
-		this->grid.setBorderMode(BorderMode::feintBorders);
-		this->grid.setAllPositionsDark();
-	}
-	initColor();
-}
-
 void Estate::initName(std::string name)
 {
 	assert(this->name.length() == 0);
 	this->name = name;
-}
-
-void Estate::saveToFile(std::ofstream &file) const
-{
-	assert(file.is_open());
-
-	// Append data to the file.
-	file << getSaveLabel() << std::endl;
-	file << "# title" << std::endl;
-	file << static_cast<int>(title) << std::endl;
-	file << "# name" << std::endl;
-	file << name << std::endl;
-	file << "# color" << std::endl;
-	file << (int)defaultColor.r << " " << (int)defaultColor.g << " " << (int)defaultColor.b << std::endl;
-	file << "# subfiefs" << std::endl;
-	saveSubfiefs(file);
 }
 
 void Estate::draw(sf::RenderWindow &window) const
@@ -176,14 +125,6 @@ std::unique_ptr<UIEntity> Estate::createUI(UIType type) const
 	}
 
 	return nullptr;
-}
-
-void Estate::saveSubfiefs(std::ofstream &file) const
-{
-	for(auto subfief : subfiefs)
-	{
-		file << subfief->name << std::endl;
-	}
 }
 
 void Estate::provideSubfiefBonusYields()
@@ -406,43 +347,6 @@ int Estate::calculateNumberOfSubfiefs(Title title, bool allowIndirect) const
 	return count;
 }
 
-void Estate::initColor()
-{
-	const int randComponent1 = rand() % 61;
-	const int randComponent2 = rand() % 41;
-	const int randComponent3 = rand() % 41;
-	const int randComponent4 = rand() % 21;
-
-	const sf::Color maridomColor(120, 120, 120);
-	const sf::Color baronyColor(190 + randComponent1, randComponent2, 0);
-	const sf::Color countyColor(50, 170 + randComponent1, 160 + randComponent2);
-	const sf::Color dukedomColor(30, 190 + randComponent1, 0);
-	const sf::Color kingdomColor(210 + randComponent2, 210 + randComponent3, randComponent4);
-	const sf::Color empireColor(190 + randComponent1, randComponent2, 100 + randComponent3);
-
-	switch(title)
-	{
-	case Title::maridom:
-		this->grid.setColor(maridomColor);
-		break;
-	case Title::barony:
-		this->grid.setColor(baronyColor);
-		break;
-	case Title::county:
-		this->grid.setColor(countyColor);
-		break;
-	case Title::duchy:
-		this->grid.setColor(dukedomColor);
-		break;
-	case Title::kingdom:
-		this->grid.setColor(kingdomColor);
-		break;
-	case Title::empire:
-		this->grid.setColor(empireColor);
-		break;
-	}
-}
-
 void Estate::receiveBonusYield(const float &bonus)
 {
 	for(auto &subfief : subfiefs)
@@ -612,10 +516,5 @@ void Estate::handleLowerEstateChange(const Estate &subfief)
 	{
 		setOwnership(nullptr);
 	}
-}
-
-std::string generateRandomEstateName(Title title)
-{
-	return std::string();
 }
 

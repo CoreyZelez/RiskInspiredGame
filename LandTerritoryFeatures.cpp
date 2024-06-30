@@ -27,9 +27,6 @@ void LandTerritoryFeatures::saveToFile(std::ofstream &file) const
 
 double LandTerritoryFeatures::calculateArmyYield() const
 {
-	// Gameplay settings must be known.
-	assert(gameplaySettings != nullptr);
-
 	double yield = 0;
 
 	if(prosperity < 100)

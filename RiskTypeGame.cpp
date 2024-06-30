@@ -12,75 +12,6 @@
 
 int main()
 {
-	sf::RenderWindow testingWindow(sf::VideoMode(2560, 1440), "TESTING", sf::Style::Default);
-
-	std::unordered_set<sf::Vector2i, Vector2iHash> positions;
-
-	// Polygon 1. Intersecting line strips.
-	for (int i = 32; i <= 44; ++i)
-	{
-		positions.insert({ i, 5 });
-		positions.insert({ i, 6 });
-		positions.insert({ i, 7 });
-	}
-	for (int i = 3; i <= 8; ++i)
-	{
-		positions.insert({ 35, i });
-		positions.insert({ 36, i });
-		positions.insert({ 37, i });
-	}
-	for (int i = 3; i <= 20; ++i)
-	{
-		positions.insert({ 44, i });
-		positions.insert({ 45, i });
-		positions.insert({ 46, i });
-	}
-	for (int i = 40; i <= 60; ++i)
-	{
-		positions.insert({ i, 15 });
-		positions.insert({ i, 16 });
-		positions.insert({ i, 17 });
-		positions.insert({ i, 18 });
-	}
-
-	// Polygon 2. Rectangle.
-	for (int x = 33; x <= 50; ++x)
-	{
-		for (int y = 38; y <= 42; ++y)
-		{
-			positions.insert({ x, y });
-		}
-	}
-	
-	// Polygon 3. Rigid edges.
-	for (int x = 15; x <= 30; ++x)
-	{
-		for (int y = 8; y <= x - 1; ++y)
-		{
-			positions.insert({ x, y });
-		}
-	}
-
-	Grid grid(positions);
-	grid.setBorderColor(sf::Color::Red);
-	grid.setInteriorColor(sf::Color::Black);
-	grid.update();
-
-	while (testingWindow.isOpen())
-	{	
-		// Clear window.
-		testingWindow.clear(sf::Color(255, 255, 255));
-
-		grid.draw(testingWindow);
-
-		// Display game.
-		testingWindow.display();
-	}
-
-	// TESTS
-	UnitTestRunner unitTestRunner;
-	unitTestRunner.runTests();
-
 	bool mapEditorMode = false;
 
 	sf::RenderWindow window(sf::VideoMode(2560, 1440), "Sovereign Chaos", sf::Style::Fullscreen);
@@ -93,7 +24,7 @@ int main()
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS.
 
 	MapMaker mapMaker("empty");
-	Game game("The Grand Continent");
+	Game game("Elder Isles");
 
 	GameDisplay gameDisplay = game.createView();
 	GameUI gameUI(UIView);
@@ -158,6 +89,10 @@ int main()
 	}
 
 	mapMaker.save();
+
+	// TESTS
+	UnitTestRunner unitTestRunner;
+	unitTestRunner.runTests();
 
 	return 0;
 }

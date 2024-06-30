@@ -5,6 +5,7 @@
 
 class Territory;
 class Grid;
+enum class TerritoryType;
 
 struct Vector2iHash 
 {
@@ -24,5 +25,10 @@ struct PairTerritoryIntHash
 struct GridHash
 {
 	size_t operator()(const Grid& grid) const;
+};
+
+struct TerritoryTypeHash
+{
+	size_t operator()(TerritoryType& type) const;
 };
 

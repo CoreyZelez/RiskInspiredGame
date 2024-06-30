@@ -16,12 +16,6 @@ class LandedEstate;
 const std::string landSaveLabel = "# land";
 const std::string navalSaveLabel = "# naval";
 
-enum class TerritoryType
-{
-	land,
-	naval
-};
-
 enum class TerritoryDrawMode
 {
 	terrain,
@@ -29,13 +23,19 @@ enum class TerritoryDrawMode
 	prosperity
 };
 
+enum class TerritoryType
+{
+	land,
+	naval
+};
+
 class Territory : public Subject
 {
 public:
-	Territory(int id, EditorGrid grid, TerritoryType type);  // Temporary for testing.
-	Territory(int id, sf::Color color, TerritoryType type);  // Temporary for testing.
-	Territory(int id, EditorGrid grid, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type);
-	Territory(int id, sf::Color color, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type);
+	Territory(TerritoryType type, int id, EditorGrid grid);
+	Territory(TerritoryType type, int id, sf::Color color);
+	Territory(TerritoryType type, int id, EditorGrid grid, std::unique_ptr<IOccupiable> occupancyHandler);
+	Territory(TerritoryType type, int id, sf::Color color, std::unique_ptr<IOccupiable> occupancyHandler);
 	virtual ~Territory() = default;
 
 	virtual void saveToFile(std::ofstream &file) const;
@@ -58,9 +58,9 @@ public:
 	EditorGrid& getGrid();
 	const EditorGrid& getGrid() const;
 
-	TerritoryType getType() const;
-
 	int getID() const;
+
+	TerritoryType getType() const;
 
 	// Save label is identifier in txt file for territory type.
 	virtual std::string getSaveLabel() const = 0; 	
@@ -72,13 +72,14 @@ public:
 
 private:
 	int id;  // ID representing territory in text file.
+	TerritoryType type;
 	EditorGrid grid;
 	TerritoryDrawMode drawMode;
-	TerritoryType type;
 	LandedEstate *landedEstate = nullptr; 
 	std::unique_ptr<IOccupiable> occupancyHandler;  // Handles military occupancy of territory.
 	TerritoryDistanceMap distanceMap;  // Stores information about distances to any territory.
 };
 
 int loadTerritoryID(std::ifstream &file);
+
 

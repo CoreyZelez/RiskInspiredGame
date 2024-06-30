@@ -3,10 +3,8 @@
 #include "NavalTerritory.h"
 #include "Maridom.h"
 #include "Barony.h"
-#include "NameGenerator.h"
 #include "Estate.h"
 #include <fstream>
-#include <random>
 #include <assert.h>
 #include <iostream>
 #include <string>
@@ -14,7 +12,6 @@
 #include <random>
 
 EstateManager::EstateManager()
-	: nameGenerator("estates")
 {
 }
 
@@ -71,31 +68,6 @@ void EstateManager::drawUnownedMaridoms(sf::RenderWindow &window) const
 		if(!maridom.get()->hasRuler())
 		{
 			maridom->draw(window);
-		}
-	}
-}
-
-void EstateManager::save(std::string mapName) const
-{
-	std::ofstream file("res/maps/" + mapName + "/" + mapName + "_estates.txt");
-
-	// Saves estates in order of title prestige.
-	std::vector<Title> titles = getOrderedTitles();
-	for(Title title : titles)
-	{
-		for(auto iter = estates.cbegin(); iter != estates.cend(); ++iter)
-		{
-			// Check that the key matches the title.
-			if(iter->first != title)
-			{
-				continue;
-			}
-			// Save the estate.
-			for(const auto &estate : iter->second)
-			{
-				estate.get()->saveToFile(file);
-				file << std::endl;  // Gap in file signifys end of individual estate info.
-			}
 		}
 	}
 }
@@ -318,88 +290,10 @@ sf::Color EstateManager::loadColor(std::ifstream & file)
 	return sf::Color(r, g, b);
 }
 
-void EstateManager::reconcileBaronies(const std::vector<std::unique_ptr<LandTerritory>> &landTerritories)
-{
-	for(auto &territory : landTerritories)
-	{
-		// Territory already allocated to a landed estate.
-		if(allocatedTerritoryIDs.count(territory.get()->getID()) == 1)
-		{
-			continue;
-		}
-
-		std::unique_ptr<Estate> barony = std::make_unique<Barony>(*territory.get());
-
-		// Generate name for barony.
-		barony.get()->initName(generateName());
-
-		allocatedTerritoryIDs.insert(territory.get()->getID());  // Ensures ID cannot be reused for other landed estate.
-		estates[Title::barony].emplace_back(std::move(barony));
-	}
-
-	// Remove baronies with empty territory grids.
-	std::vector<std::unique_ptr<Estate>> newBaronies;
-	for(auto &estate : estates[Title::barony])
-	{
-		Barony *barony = dynamic_cast<Barony*>(estate.get());
-		assert(barony != nullptr);
-		if(!barony->getTerritory().getGrid().isEmpty())
-		{
-			newBaronies.emplace_back(std::move(estate));
-		}
-	}
-	estates[Title::barony] = std::move(newBaronies);
-}
-
-void EstateManager::reconcileMaridoms(const std::vector<std::unique_ptr<NavalTerritory>>& navalTerritories)
-{
-	for(auto &territory : navalTerritories)
-	{
-		// Territory already allocated to a landed estate.
-		if(allocatedTerritoryIDs.count(territory.get()->getID()) == 1)
-		{
-			continue;
-		}
-
-		std::unique_ptr<Estate> maridom = std::make_unique<Maridom>(*territory.get());
-
-		// Generate name for maridom.
-		maridom.get()->initName(generateName());
-
-		allocatedTerritoryIDs.insert(territory.get()->getID());  // Ensures ID cannot be reused for other landed estate.
-		estates[Title::maridom].emplace_back(std::move(maridom));
-	}
-
-	// Remove maridoms with empty territory grids.
-	std::vector<std::unique_ptr<Estate>> newMaridoms;
-	for(auto &estate : estates[Title::maridom])
-	{
-		Maridom *maridom = dynamic_cast<Maridom*>(estate.get());
-		assert(maridom != nullptr);
-		if(!maridom->getTerritory().getGrid().isEmpty())
-		{
-			newMaridoms.emplace_back(std::move(estate));
-		}
-	}
-	estates[Title::maridom] = std::move(newMaridoms);
-}
-
 std::vector<std::unique_ptr<Estate>>& EstateManager::getBaronies()
 {
 	// assert(estates.count(Title::barony) != 0);  // THIS ASSERT IS NOT VALID FOR UNIT TESTS!
 	return estates[Title::barony];
-}
-
-Estate* EstateManager::createEstate(Title title)
-{
-	assert(title != Title::barony);
-
-	std::unique_ptr<Estate> estate = std::make_unique<Estate>(title, generateRandomEstateColor(title));
-	estate.get()->initName(generateName());
-
-	Estate *e = estate.get();
-	estates[title].emplace_back(std::move(estate));
-	return e;
 }
 
 Estate* EstateManager::getEstate(sf::Vector2f position, Title title, bool allowParent)
@@ -433,73 +327,6 @@ const Estate* EstateManager::getEstate(sf::Vector2f position, Title title)  cons
 	return nullptr;
 }
 
-Estate* EstateManager::getLowerEstate(sf::Vector2f position, Title title, bool allowParent)
-{
-	// Following code problematic if more titles equal in prominence to Title::barony are added.
-	assert(static_cast<int>(Title::barony) == 1);
-	Title underTitle = title - 1;  // Title directly under parameter title.
-	for(Title currTitle = underTitle; currTitle >= Title::barony; currTitle--)
-	{
-		for(auto &estate : estates[currTitle])
-		{
-			if((allowParent || !estate.get()->hasParent()) && estate.get()->getGrid().containsPosition(position))
-			{
-				return estate.get();
-			}
-		}
-	}
-	return nullptr;
-}
-
-void EstateManager::makeColored(Title title, bool setLower)
-{
-	setTitleGreyColor(Title::barony);
-	setTitleGreyColor(Title::county);
-	setTitleGreyColor(Title::duchy);
-	setTitleGreyColor(Title::kingdom);
-	setTitleGreyColor(Title::empire);
-
-	if(title == Title::barony || (Title::barony < title && setLower))
-	{
-		setTitleDefaultColor(Title::barony);
-	}
-	if(title == Title::county || (Title::county < title && setLower))
-	{
-		setTitleDefaultColor(Title::county);
-
-	}
-	if(title == Title::duchy || (Title::duchy < title && setLower))
-	{
-		setTitleDefaultColor(Title::duchy);
-
-	}
-	if(title == Title::kingdom || (Title::kingdom < title && setLower))
-	{
-		setTitleDefaultColor(Title::kingdom);
-
-	}
-	if(title == Title::empire || (Title::empire < title && setLower))
-	{
-		setTitleDefaultColor(Title::empire);
-	}
-}
-
-std::string EstateManager::generateName()
-{
-	std::string name;
-	// LOOP POTENTIALLY NEVER TERMINATES IN PARTICULAR IF THERE IS NOT ENOUGH POSSIBLE NAMES.
-	while(true)
-	{
-		name = nameGenerator.generateRandomName();
-		if(allocatedEstateNames.count(name) == 0)
-		{
-			break;
-		}
-	}
-	allocatedEstateNames.insert(name);
-	return name;
-}
-
 Estate* EstateManager::getFief(std::string name)
 {
 	for(auto title : getOrderedTitles())
@@ -531,159 +358,4 @@ std::vector<std::string> EstateManager::loadSubfiefNames(std::ifstream &file)
 	}
 
 	return names;
-}
-
-void EstateManager::setTitleDefaultColor(Title title)
-{
-	for(auto &estate : estates[title])
-	{
-		estate.get()->setGridColorDefault();
-	}
-}
-
-void EstateManager::setTitleGreyColor(Title title)
-{
-	for(auto &estate : estates[title])
-	{
-		estate.get()->setGridColorGrey();
-	}
-}
-
-void EstateManager::randomiseTitleColor(Title title)
-{
-	for(auto &estate : estates[title])
-	{
-		estate.get()->setDefaultColor(generateRandomEstateColor(title));
-	}
-}
-
-sf::Color generateRandomEstateColor(Title title)
-{
-	std::random_device rd;
-	std::mt19937 gen(rd()); 
-
-	if(title == Title::maridom)
-	{
-		return sf::Color(120, 120, 120);
-	}
-	if(title == Title::barony)
-	{
-		std::uniform_int_distribution<int> redDist(20, 50);
-		std::uniform_int_distribution<int> blueDist(200, 230);
-		std::uniform_int_distribution<int> greenDist(0, 40);
-		return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
-	}
-	else if(title == Title::county)
-	{
-		if(rand() % 3 == 0)
-		{
-			std::uniform_int_distribution<int> redDist(20, 50);
-			std::uniform_int_distribution<int> blueDist(180, 220);
-			std::uniform_int_distribution<int> greenDist(100, 180);
-			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
-		}
-		else if(rand() % 2 == 0)
-		{
-			std::uniform_int_distribution<int> redDist(20, 50);
-			std::uniform_int_distribution<int> blueDist(150, 200);
-			std::uniform_int_distribution<int> greenDist(180, 230);
-			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
-		}
-		else
-		{
-			std::uniform_int_distribution<int> redDist(20, 50);
-			std::uniform_int_distribution<int> blueDist(120, 160);
-			std::uniform_int_distribution<int> greenDist(110, 140);
-			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
-		}
-	}
-	else if(title == Title::duchy)
-	{
-		if(rand() % 4 == 0)
-		{
-			std::uniform_int_distribution<int> redDist(20, 50);
-			std::uniform_int_distribution<int> blueDist(110, 170);
-			std::uniform_int_distribution<int> greenDist(180, 240);
-			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
-		}
-		else if(rand() % 3 == 0)
-		{
-			std::uniform_int_distribution<int> redDist(20, 40);
-			std::uniform_int_distribution<int> blueDist(20, 80);
-			std::uniform_int_distribution<int> greenDist(150, 180);
-			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
-		}
-		else if(rand() % 2 == 0)
-		{
-			std::uniform_int_distribution<int> redDist(90, 130);
-			std::uniform_int_distribution<int> blueDist(20, 80);
-			std::uniform_int_distribution<int> greenDist(110, 140);
-			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
-		}
-		else
-		{
-			std::uniform_int_distribution<int> redDist(20, 50);
-			std::uniform_int_distribution<int> blueDist(20, 40);
-			std::uniform_int_distribution<int> greenDist(190, 250);
-			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
-		}
-	}
-	else if(title == Title::kingdom)
-	{
-		if(rand() % 4 == 0)
-		{
-			std::uniform_int_distribution<int> redDist(200, 240);
-			std::uniform_int_distribution<int> blueDist(20, 50);
-			std::uniform_int_distribution<int> greenDist(110, 150);
-			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
-		}
-		else if(rand() % 3 == 0)
-		{
-			std::uniform_int_distribution<int> redDist(220, 240);
-			std::uniform_int_distribution<int> blueDist(20, 50);
-			std::uniform_int_distribution<int> greenDist(180, 230);
-			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
-		}
-		else if(rand() % 2 == 0)
-		{
-			std::uniform_int_distribution<int> redDist(160, 180);
-			std::uniform_int_distribution<int> blueDist(20, 50);
-			std::uniform_int_distribution<int> greenDist(0, 110);
-			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
-		}
-		else
-		{
-			std::uniform_int_distribution<int> redDist(210, 250);
-			std::uniform_int_distribution<int> blueDist(20, 40);
-			std::uniform_int_distribution<int> greenDist(20, 50);
-			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
-		}
-	}
-	else if(title == Title::empire)
-	{
-		if(rand() % 3 == 0)
-		{
-			std::uniform_int_distribution<int> redDist(180, 240);
-			std::uniform_int_distribution<int> blueDist(80, 140);
-			std::uniform_int_distribution<int> greenDist(10, 50);
-			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
-		}
-		else if(rand() % 3 == 0)
-		{
-			std::uniform_int_distribution<int> redDist(170, 240);
-			std::uniform_int_distribution<int> blueDist(10, 50);
-			std::uniform_int_distribution<int> greenDist(60, 140);
-			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
-		}
-		else
-		{
-			std::uniform_int_distribution<int> redDist(90, 130);
-			std::uniform_int_distribution<int> blueDist(200, 255);
-			std::uniform_int_distribution<int> greenDist(10, 50);
-			return sf::Color(redDist(gen), greenDist(gen), blueDist(gen));
-		}
-	}
-	
-	assert(false);
-	return sf::Color(255, 255, 255);
 }

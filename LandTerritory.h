@@ -9,6 +9,7 @@
 class NavalFleet;
 class LandArmy;
 class NavalTerritory;
+class EditorTerritory;
 
 class LandTerritory : public Territory 
 {
@@ -27,10 +28,6 @@ public:
 
 	virtual void setDrawMode(TerritoryDrawMode mode) override;
 
-	void setTerrain(Terrain terrain);
-	void setCulture(Culture culture);
-	// Sets prosperity and core prosperity value to the same.
-	void setProsperities(int prosperity);
 	const LandTerritoryFeatures &getFeatures() const;
 
 	std::unique_ptr<Port> &getPort();
@@ -52,11 +49,4 @@ int loadPortNavalID(std::ifstream &file);
 
 LandTerritoryFeatures loadLandTerritoryFeatures(std::ifstream &file, const GameplaySettings *gameplaySettings);
 
-
-void adjustLandTerrain(LandTerritory &landTerritory, const Terrain& terrain);
-
-void adjustLandCulture(LandTerritory &landTerritory, const Culture& culture);
-
-// Adjusts both prosperity and core prosperity.
-void adjustLandProsperities(LandTerritory &landTerritory, const int &prosperity);
 

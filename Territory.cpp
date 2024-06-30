@@ -5,24 +5,24 @@
 #include <fstream>
 #include <queue>
 
-Territory::Territory(int id, EditorGrid grid, TerritoryType type)
-	: Territory(id, grid, nullptr, type)
+Territory::Territory(TerritoryType type, int id, EditorGrid grid)
+	: Territory(type, id, grid, nullptr)
 {
 }
 
-Territory::Territory(int id, sf::Color color, TerritoryType type)
-	: Territory(id, color, nullptr, type)
+Territory::Territory(TerritoryType type, int id, sf::Color color)
+	: Territory(type, id, color, nullptr)
 {
 }
 
-Territory::Territory(int id, EditorGrid grid, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type)
-	: id(id), grid(grid), occupancyHandler(std::move(occupancyHandler)), distanceMap(*this), type(type)
+Territory::Territory(TerritoryType type, int id, EditorGrid grid, std::unique_ptr<IOccupiable> occupancyHandler)
+	: type(type), id(id), grid(grid), occupancyHandler(std::move(occupancyHandler)), distanceMap(*this)
 {
 	this->grid.setBorderMode(BorderMode::feintBorders);
 }
 
-Territory::Territory(int id, sf::Color color, std::unique_ptr<IOccupiable> occupancyHandler, TerritoryType type)
-	: id(id), grid(color), occupancyHandler(std::move(occupancyHandler)), distanceMap(*this), type(type)
+Territory::Territory(TerritoryType type, int id, sf::Color color, std::unique_ptr<IOccupiable> occupancyHandler)
+	: type(type), id(id), grid(color), occupancyHandler(std::move(occupancyHandler)), distanceMap(*this)
 {
 	this->grid.setBorderMode(BorderMode::feintBorders);
 }
@@ -112,14 +112,14 @@ const EditorGrid& Territory::getGrid() const
 	return grid;
 }
 
-TerritoryType Territory::getType() const
-{
-	return type;
-}
-
 int Territory::getID() const
 {
 	return id;
+}
+
+TerritoryType Territory::getType() const
+{
+	return type;
 }
 
 int loadTerritoryID(std::ifstream & file)

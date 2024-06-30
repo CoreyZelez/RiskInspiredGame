@@ -1,0 +1,1135 @@
+# maridom
+# title
+-1
+# name
+Tharmia
+# color
+120 120 120
+# subfiefs
+# territory id
+18
+
+# maridom
+# title
+-1
+# name
+Thartaria
+# color
+120 120 120
+# subfiefs
+# territory id
+19
+
+# maridom
+# title
+-1
+# name
+Feigheigha
+# color
+120 120 120
+# subfiefs
+# territory id
+20
+
+# maridom
+# title
+-1
+# name
+Topivithisia
+# color
+120 120 120
+# subfiefs
+# territory id
+21
+
+# maridom
+# title
+-1
+# name
+Drethdrenfreyia
+# color
+120 120 120
+# subfiefs
+# territory id
+22
+
+# maridom
+# title
+-1
+# name
+ol
+# color
+120 120 120
+# subfiefs
+# territory id
+23
+
+# maridom
+# title
+-1
+# name
+vintopia
+# color
+120 120 120
+# subfiefs
+# territory id
+24
+
+# maridom
+# title
+-1
+# name
+Methdrenisia
+# color
+120 120 120
+# subfiefs
+# territory id
+25
+
+# maridom
+# title
+-1
+# name
+Nothivineigha
+# color
+120 120 120
+# subfiefs
+# territory id
+26
+
+# maridom
+# title
+-1
+# name
+Panlideth
+# color
+120 120 120
+# subfiefs
+# territory id
+30
+
+# maridom
+# title
+-1
+# name
+Vostaria
+# color
+120 120 120
+# subfiefs
+# territory id
+32
+
+# maridom
+# title
+-1
+# name
+topia
+# color
+120 120 120
+# subfiefs
+# territory id
+33
+
+# maridom
+# title
+-1
+# name
+Trisar
+# color
+120 120 120
+# subfiefs
+# territory id
+37
+
+# maridom
+# title
+-1
+# name
+Daytvithapinia
+# color
+120 120 120
+# subfiefs
+# territory id
+40
+
+# maridom
+# title
+-1
+# name
+Daytvia
+# color
+120 120 120
+# subfiefs
+# territory id
+41
+
+# maridom
+# title
+-1
+# name
+Kervithdethia
+# color
+120 120 120
+# subfiefs
+# territory id
+42
+
+# maridom
+# title
+-1
+# name
+Perclithia
+# color
+120 120 120
+# subfiefs
+# territory id
+43
+
+# maridom
+# title
+-1
+# name
+drenvaynia
+# color
+120 120 120
+# subfiefs
+# territory id
+52
+
+# maridom
+# title
+-1
+# name
+Tarthales
+# color
+120 120 120
+# subfiefs
+# territory id
+59
+
+# maridom
+# title
+-1
+# name
+Ventriol
+# color
+120 120 120
+# subfiefs
+# territory id
+60
+
+# maridom
+# title
+-1
+# name
+Hethiatricth
+# color
+120 120 120
+# subfiefs
+# territory id
+61
+
+# maridom
+# title
+-1
+# name
+Nilaflinisia
+# color
+120 120 120
+# subfiefs
+# territory id
+62
+
+# maridom
+# title
+-1
+# name
+Sthenvithmar
+# color
+120 120 120
+# subfiefs
+# territory id
+63
+
+# maridom
+# title
+-1
+# name
+Sthenaxia
+# color
+120 120 120
+# subfiefs
+# territory id
+64
+
+# maridom
+# title
+-1
+# name
+Folnildriax
+# color
+120 120 120
+# subfiefs
+# territory id
+67
+
+# maridom
+# title
+-1
+# name
+Lermia
+# color
+120 120 120
+# subfiefs
+# territory id
+68
+
+# maridom
+# title
+-1
+# name
+Nilaisia
+# color
+120 120 120
+# subfiefs
+# territory id
+69
+
+# maridom
+# title
+-1
+# name
+Sthenol
+# color
+120 120 120
+# subfiefs
+# territory id
+70
+
+# maridom
+# title
+-1
+# name
+Kerillithia
+# color
+120 120 120
+# subfiefs
+# territory id
+71
+
+# maridom
+# title
+-1
+# name
+Trosdrenar
+# color
+120 120 120
+# subfiefs
+# territory id
+72
+
+# maridom
+# title
+-1
+# name
+Percfrey
+# color
+120 120 120
+# subfiefs
+# territory id
+73
+
+# maridom
+# title
+-1
+# name
+Niladeth
+# color
+120 120 120
+# subfiefs
+# territory id
+74
+
+# maridom
+# title
+-1
+# name
+Neththales
+# color
+120 120 120
+# subfiefs
+# territory id
+75
+
+# maridom
+# title
+-1
+# name
+Morethdethia
+# color
+120 120 120
+# subfiefs
+# territory id
+76
+
+# barony
+# title
+1
+# name
+Drethhenia
+# color
+32 32 213
+# subfiefs
+# territory id
+0
+
+# barony
+# title
+1
+# name
+Tarvintaria
+# color
+25 40 207
+# subfiefs
+# territory id
+1
+
+# barony
+# title
+1
+# name
+Sarisia
+# color
+44 39 214
+# subfiefs
+# territory id
+2
+
+# barony
+# title
+1
+# name
+Daytaxia
+# color
+37 0 211
+# subfiefs
+# territory id
+3
+
+# barony
+# title
+1
+# name
+Nethtrethtopia
+# color
+46 21 230
+# subfiefs
+# territory id
+4
+
+# barony
+# title
+1
+# name
+mar
+# color
+23 17 215
+# subfiefs
+# territory id
+5
+
+# barony
+# title
+1
+# name
+Feylihenia
+# color
+21 25 221
+# subfiefs
+# territory id
+6
+
+# barony
+# title
+1
+# name
+Daytvaynia
+# color
+48 30 215
+# subfiefs
+# territory id
+7
+
+# barony
+# title
+1
+# name
+Renexvinaxia
+# color
+44 10 204
+# subfiefs
+# territory id
+8
+
+# barony
+# title
+1
+# name
+Mozthlifreyia
+# color
+29 4 213
+# subfiefs
+# territory id
+9
+
+# barony
+# title
+1
+# name
+Lueghtrethdethia
+# color
+47 36 222
+# subfiefs
+# territory id
+10
+
+# barony
+# title
+1
+# name
+Perctopia
+# color
+20 11 226
+# subfiefs
+# territory id
+11
+
+# barony
+# title
+1
+# name
+Lueghfreyia
+# color
+35 24 216
+# subfiefs
+# territory id
+12
+
+# barony
+# title
+1
+# name
+Methmor
+# color
+27 27 222
+# subfiefs
+# territory id
+13
+
+# barony
+# title
+1
+# name
+Carmor
+# color
+21 29 205
+# subfiefs
+# territory id
+14
+
+# barony
+# title
+1
+# name
+Finithtricth
+# color
+21 32 228
+# subfiefs
+# territory id
+15
+
+# barony
+# title
+1
+# name
+Sthehenia
+# color
+21 27 215
+# subfiefs
+# territory id
+16
+
+# barony
+# title
+1
+# name
+Sthethales
+# color
+20 24 207
+# subfiefs
+# territory id
+17
+
+# barony
+# title
+1
+# name
+Renextricth
+# color
+49 19 217
+# subfiefs
+# territory id
+27
+
+# barony
+# title
+1
+# name
+Ferenrofrey
+# color
+39 10 224
+# subfiefs
+# territory id
+28
+
+# barony
+# title
+1
+# name
+flinthales
+# color
+27 17 206
+# subfiefs
+# territory id
+29
+
+# barony
+# title
+1
+# name
+Tarvanfrey
+# color
+20 30 213
+# subfiefs
+# territory id
+31
+
+# barony
+# title
+1
+# name
+Renexiniol
+# color
+37 36 208
+# subfiefs
+# territory id
+34
+
+# barony
+# title
+1
+# name
+Feyvendriax
+# color
+22 7 208
+# subfiefs
+# territory id
+35
+
+# barony
+# title
+1
+# name
+Perinifrey
+# color
+37 33 221
+# subfiefs
+# territory id
+36
+
+# barony
+# title
+1
+# name
+Trosthales
+# color
+37 25 203
+# subfiefs
+# territory id
+38
+
+# barony
+# title
+1
+# name
+Anrodriax
+# color
+27 38 218
+# subfiefs
+# territory id
+39
+
+# barony
+# title
+1
+# name
+Stheilol
+# color
+48 13 228
+# subfiefs
+# territory id
+44
+
+# barony
+# title
+1
+# name
+Percaxia
+# color
+35 32 228
+# subfiefs
+# territory id
+45
+
+# barony
+# title
+1
+# name
+Lueghisia
+# color
+29 19 221
+# subfiefs
+# territory id
+46
+
+# barony
+# title
+1
+# name
+Trismia
+# color
+30 25 204
+# subfiefs
+# territory id
+47
+
+# barony
+# title
+1
+# name
+Nothilivaynia
+# color
+21 12 209
+# subfiefs
+# territory id
+48
+
+# barony
+# title
+1
+# name
+Morethviththales
+# color
+41 13 229
+# subfiefs
+# territory id
+49
+
+# barony
+# title
+1
+# name
+Topihenia
+# color
+47 30 213
+# subfiefs
+# territory id
+50
+
+# barony
+# title
+1
+# name
+Topitreththales
+# color
+30 23 203
+# subfiefs
+# territory id
+51
+
+# barony
+# title
+1
+# name
+Mozthfreyia
+# color
+24 5 215
+# subfiefs
+# territory id
+53
+
+# barony
+# title
+1
+# name
+Folnaxia
+# color
+34 13 217
+# subfiefs
+# territory id
+54
+
+# barony
+# title
+1
+# name
+Nothiinieigha
+# color
+30 3 209
+# subfiefs
+# territory id
+55
+
+# barony
+# title
+1
+# name
+Ferenroar
+# color
+43 11 211
+# subfiefs
+# territory id
+56
+
+# barony
+# title
+1
+# name
+Methdrenol
+# color
+27 11 201
+# subfiefs
+# territory id
+57
+
+# barony
+# title
+1
+# name
+Sartaria
+# color
+45 9 204
+# subfiefs
+# territory id
+58
+
+# barony
+# title
+1
+# name
+Hethiadrenhenia
+# color
+40 25 200
+# subfiefs
+# territory id
+65
+
+# barony
+# title
+1
+# name
+Lueghilaxia
+# color
+50 11 221
+# subfiefs
+# territory id
+66
+
+# estate
+# title
+2
+# name
+Folnapinia
+# color
+46 136 155
+# subfiefs
+Nethtrethtopia
+Methmor
+
+# estate
+# title
+2
+# name
+Daytmor
+# color
+36 217 168
+# subfiefs
+Feylihenia
+Lueghfreyia
+
+# estate
+# title
+2
+# name
+Finithsaaxia
+# color
+20 110 133
+# subfiefs
+Daytvaynia
+Perctopia
+
+# estate
+# title
+2
+# name
+Lueghsia
+# color
+32 208 184
+# subfiefs
+Tarvintaria
+Drethhenia
+
+# estate
+# title
+2
+# name
+Sardeth
+# color
+28 202 199
+# subfiefs
+Mozthlifreyia
+Lueghtrethdethia
+
+# estate
+# title
+2
+# name
+Percohthdeth
+# color
+21 141 208
+# subfiefs
+Finithtricth
+Sthethales
+
+# estate
+# title
+2
+# name
+Tuntrethtricth
+# color
+29 148 204
+# subfiefs
+Trismia
+Lueghisia
+
+# estate
+# title
+2
+# name
+Morethilol
+# color
+31 222 172
+# subfiefs
+Stheilol
+Percaxia
+
+# estate
+# title
+2
+# name
+Ventilvaynia
+# color
+35 133 160
+# subfiefs
+Mozthfreyia
+Methdrenol
+
+# estate
+# title
+2
+# name
+Panmia
+# color
+25 192 188
+# subfiefs
+Ferenroar
+Folnaxia
+
+# estate
+# title
+2
+# name
+Nilavithdeth
+# color
+23 128 207
+# subfiefs
+Feyvendriax
+Renexiniol
+
+# estate
+# title
+2
+# name
+Panvaynia
+# color
+28 155 202
+# subfiefs
+Perinifrey
+Trosthales
+
+# estate
+# title
+2
+# name
+Finithlitaria
+# color
+34 141 215
+# subfiefs
+Anrodriax
+Nothiinieigha
+
+# estate
+# title
+3
+# name
+Perriisia
+# color
+20 213 132
+# subfiefs
+Folnapinia
+Daytmor
+
+# estate
+# title
+3
+# name
+Thartopia
+# color
+112 137 60
+# subfiefs
+Renexvinaxia
+Finithsaaxia
+
+# estate
+# title
+3
+# name
+Finithvithtopia
+# color
+36 240 28
+# subfiefs
+Sthehenia
+Percohthdeth
+
+# estate
+# title
+3
+# name
+Ansathales
+# color
+128 130 64
+# subfiefs
+flinthales
+Tarvanfrey
+
+# estate
+# title
+3
+# name
+Careigha
+# color
+124 112 23
+# subfiefs
+Nilavithdeth
+Panvaynia
+Finithlitaria
+
+# estate
+# title
+4
+# name
+Trosvaynia
+# color
+174 76 32
+# subfiefs
+Sardeth
+Lueghsia
+
+# estate
+# title
+4
+# name
+Finithtaria
+# color
+224 190 34
+# subfiefs
+Sartaria
+Panmia
+Ventilvaynia
+Careigha
+
+# estate
+# title
+5
+# name
+Topidethia
+# color
+213 99 45
+# subfiefs
+Sarisia
+mar
+Daytaxia
+Thartopia
+Perriisia
+
+# estate
+# title
+5
+# name
+Morethvithdriax
+# color
+189 27 87
+# subfiefs
+Carmor
+Trosvaynia
+Finithvithtopia
+
+# estate
+# title
+5
+# name
+Feylimar
+# color
+185 23 115
+# subfiefs
+Ferenrofrey
+Renextricth
+Ansathales
+
+# estate
+# title
+5
+# name
+Methvendethia
+# color
+95 34 230
+# subfiefs
+Topihenia
+Topitreththales
+Morethviththales
+Hethiadrenhenia
+Lueghilaxia
+Nothilivaynia
+Tuntrethtricth
+Morethilol
+
+# estate
+# title
+5
+# name
+Lerol
+# color
+109 45 204
+# subfiefs
+Finithtaria
+

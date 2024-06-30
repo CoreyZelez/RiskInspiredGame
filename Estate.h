@@ -19,17 +19,18 @@ const std::string maridomSaveLabel = "# maridom";  // Save label for maridom.
 class Estate : public HasUI  
 {
 public:
-	Estate(Title title);
 	Estate(Title title, sf::Color color);
-	Estate(Title title, const EditorGrid &grid);
 	Estate(Title title, const EditorGrid &grid, sf::Color color);
-	Estate(Title title, const EditorGrid &grid, std::string name);
 
 	virtual ~Estate() = default;
 	
+	// THIS SHOULD BE DONE IN CONSTRUCTOR!!!!
+	// THIS SHOULD BE DONE IN CONSTRUCTOR!!!!
+	// THIS SHOULD BE DONE IN CONSTRUCTOR!!!!
 	void initName(std::string name);
-
-	virtual void saveToFile(std::ofstream &file) const;
+	// THIS SHOULD BE DONE IN CONSTRUCTOR!!!!
+	// THIS SHOULD BE DONE IN CONSTRUCTOR!!!!
+	// THIS SHOULD BE DONE IN CONSTRUCTOR!!!!
 
 	void draw(sf::RenderWindow &window) const;
 
@@ -102,8 +103,6 @@ public:
 	int calculateNumberOfSubfiefs(Title title, bool allowIndirect) const;
 	
 protected:
-	void initColor();
-
 	// Military generating subfiefs receive specified bonus yield.
 	virtual void receiveBonusYield(const float &bonus);
 	// Estate attempts to create military units on map.
@@ -131,8 +130,4 @@ private:
 	std::map<Title, int> getLowerEstateTitleCounts() const;
 	// Recursively determines the counts of all lower estates of estate.
 	void recursiveGetLowerEstateTitleCounts(std::map<Title, int> &subfiefTitleCounts) const;
-
-	void saveSubfiefs(std::ofstream &file) const;
 };
-
-std::string generateRandomEstateName(Title title);
