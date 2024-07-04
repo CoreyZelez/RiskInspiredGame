@@ -5,14 +5,25 @@
 
 int Grid::currId = 1;
 
-const std::vector<sf::Vector2i> adjacencyOffsets = {
+const std::vector<sf::Vector2i> lateralAdjacencyOffsets = {
 		sf::Vector2i(1,0),
 		sf::Vector2i(-1, 0),
 		sf::Vector2i(0,1),
 		sf::Vector2i(0,-1) };
 
+const std::vector<sf::Vector2i> adjacencyOffsets = {
+		sf::Vector2i(1,0),
+		sf::Vector2i(-1, 0),
+		sf::Vector2i(0,1),
+		sf::Vector2i(0,-1),
+		sf::Vector2i(1,-1),
+		sf::Vector2i(1, 1),
+		sf::Vector2i(-1,-1),
+		sf::Vector2i(-1,1)
+};
+
 Grid::Grid(const std::unordered_set<sf::Vector2i, Vector2iHash>& positions)
-	: id(currId++), borderPositions(determineBorderPositions(positions))
+	: id(currId++), positions(positions), borderPositions(determineBorderPositions(positions))
 {
 	vertices.setPrimitiveType(sf::Triangles);
 	initBorderVertices(borderPositions);
@@ -37,6 +48,11 @@ void Grid::draw(sf::RenderWindow& window) const
 void Grid::setBorderColor(const sf::Color &color)
 {
 	borderColor = color;
+}
+
+const std::unordered_set<sf::Vector2i, Vector2iHash>& Grid::getBorderPositions() const
+{
+	return borderPositions;
 }
 
 // Does not actually change the color of the vertices. This operation is postponed until update call.
@@ -65,8 +81,41 @@ const sf::VertexArray & Grid::getVertices() const
 	return vertices;
 }
 
-bool Grid::isAdjacent(const Grid & grid) const
+bool Grid::containsBorderPosition(const sf::Vector2i& position) const
 {
+	return borderPositions.count(position) == 1;
+}
+
+bool Grid::containsPosition(const sf::Vector2i &position) const
+{
+	return positions.count(position);
+}
+
+bool Grid::isAdjacent(const Grid &grid) const
+{
+	for (const sf::Vector2i& position : borderPositions)
+	{
+		if (grid.positionAdjacentToBorder(position))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Grid::positionAdjacentToBorder(const sf::Vector2i& position) const
+{
+	assert(borderPositions.count(position) == 0);
+
+	for (const sf::Vector2i& adjacencyOffset : adjacencyOffsets)
+	{
+		if (borderPositions.count(position + adjacencyOffset) == 1)
+		{
+			return true;
+		}
+	}
+
 	return false;
 }
 
@@ -201,7 +250,7 @@ bool isIsolated(const sf::Vector2i &position, const std::unordered_set<sf::Vecto
 
 	// Check if non-border position is surrounded by border positions.
 	bool singular = true;
-	for(const sf::Vector2i &borderOffset : adjacencyOffsets)
+	for(const sf::Vector2i &borderOffset : lateralAdjacencyOffsets)
 	{
 		if(borderPositions.count(position + borderOffset) == 0)
 		{
@@ -335,7 +384,7 @@ std::vector<std::vector<sf::Vector2i>> extractInteriorPolygons(const std::unorde
 	// Upon finding such an interior point, traverse interior along border clockwise, forming vector of vertices of interior polygon.
 	for(const sf::Vector2i &border : borderPositions)
 	{
-		for(const sf::Vector2i& offsetFromBorder : adjacencyOffsets)
+		for(const sf::Vector2i& offsetFromBorder : lateralAdjacencyOffsets)
 		{
 			// Start is an adjacent point to the border position.
 			const sf::Vector2i start = border + offsetFromBorder;

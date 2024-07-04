@@ -5,14 +5,16 @@
 #include "TextureManager.h"
 #include "GameController.h"
 #include "FontManager.h"
-#include "Grid.h"
+#include "CompositeGrid.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <iostream>
 
 int main()
 {
-	bool mapEditorMode = false;
+	sf::RenderWindow windowTesting(sf::VideoMode(2560, 1440), "Sovereign Chaos", sf::Style::Fullscreen);
+
+	bool mapEditorMode = true;
 
 	sf::RenderWindow window(sf::VideoMode(2560, 1440), "Sovereign Chaos", sf::Style::Fullscreen);
 	sf::View gameView = window.getDefaultView(); 
@@ -23,8 +25,8 @@ int main()
 	FontManager::getInstance(); 
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS.
 
-	MapMaker mapMaker("empty");
-	Game game("Elder Isles");
+	MapMaker mapMaker("testingNEW");
+	Game game("");
 
 	GameDisplay gameDisplay = game.createView();
 	GameUI gameUI(UIView);

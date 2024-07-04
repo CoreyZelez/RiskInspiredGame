@@ -19,6 +19,7 @@ public:
 	void draw(sf::RenderWindow& window) const;
 
 	void setBorderColor(const sf::Color &color);
+	const std::unordered_set<sf::Vector2i, Vector2iHash>& getBorderPositions() const;
 	void setInteriorColor(const sf::Color &color);
 	const sf::Color &getInteriorColor() const;
 
@@ -27,7 +28,10 @@ public:
 
 	const sf::VertexArray& getVertices() const;
 
+	bool containsBorderPosition(const sf::Vector2i& position) const;
+	bool containsPosition(const sf::Vector2i& position) const;
 	bool isAdjacent(const Grid &grid) const;
+	bool positionAdjacentToBorder(const sf::Vector2i &position) const;
 
 private:
 	static int currId;
@@ -38,6 +42,13 @@ private:
 	sf::Color interiorColor = sf::Color::White;
 
 	const std::unordered_set<sf::Vector2i, Vector2iHash> borderPositions;  // Grid coordinates of border positions.
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// INSTEAD HOLD REFERENCE TO A "POSITION STORAGE" CLASS. IT MAPS ID TO POSITIONS. THAT WAY DONT HAVE TO COPY.
+	const std::unordered_set<sf::Vector2i, Vector2iHash> positions;  // All grid coordinates.
+	///////////////////////////////////////////////////////////////////
 
 	sf::VertexArray vertices;  // Aggregation of interior and border vertices.
 	sf::VertexArray borderVertices;

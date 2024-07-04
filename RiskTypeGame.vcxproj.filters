@@ -375,17 +375,17 @@
     <ClCompile Include="Direction.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="EditorEstate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EditorTerritory.cpp">
+    <ClCompile Include="ColorUtility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EditorPort.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game\Map\MapMaker</Filter>
     </ClCompile>
-    <ClCompile Include="ColorUtility.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="EditorEstate.cpp">
+      <Filter>Source Files\Game\Map\MapMaker</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorTerritory.cpp">
+      <Filter>Source Files\Game\Map\MapMaker</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -659,17 +659,17 @@
     <ClInclude Include="Direction.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="EditorEstate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorTerritory.h">
+    <ClInclude Include="ColorUtility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EditorPort.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game\Map\MapMaker</Filter>
     </ClInclude>
-    <ClInclude Include="ColorUtility.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="EditorEstate.h">
+      <Filter>Header Files\Game\Map\MapMaker</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorTerritory.h">
+      <Filter>Header Files\Game\Map\MapMaker</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

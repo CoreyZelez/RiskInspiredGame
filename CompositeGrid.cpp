@@ -3,6 +3,17 @@
 #include "UtilitySFML.h"
 #include <assert.h>
 
+const std::vector<sf::Vector2i> adjacencyOffsets = {
+		sf::Vector2i(1,0),
+		sf::Vector2i(-1, 0),
+		sf::Vector2i(0,1),
+		sf::Vector2i(0,-1),
+		sf::Vector2i(1,-1),
+		sf::Vector2i(1, 1),
+		sf::Vector2i(-1,-1),
+		sf::Vector2i(-1,1)
+};
+
 void CompositeGrid::draw(sf::RenderWindow &window)
 {
 	window.draw(vertices);
@@ -20,8 +31,6 @@ void CompositeGrid::update()
 		grid.update();
 	}
 
-	outdated = false;
-
 	vertices.clear();
 	vertices.setPrimitiveType(sf::Triangles);
 
@@ -31,12 +40,23 @@ void CompositeGrid::update()
 		appendVertexArray(vertices, grid.getVertices());
 	}
 
-	/***********************************************************************************************
-	POTENTIALLY GOOD OPTIMISATION IDEA.
-	FOR EACH GRID TRACK ITS START POINT IN THE VERTEX ARRAY.
-	THEN WHEN A GRID COLOR BECOMES OUTDATED, CAN SIMPLY ITERATE THROUGH GRIDS SPECIFIC VERTICES
-	AND CHANGE THE COLORS OF THOSE. AVOIDS HAVING TO REBUILD ENTIRE ARRAY.
-	************************************************************************************************/
+	// Batch border vertices.
+	for (const sf::Vector2i& position : borderPositions)
+	{
+		const float left = position.x * GRID_SQUARE_SIZE;
+		const float right = (position.x * GRID_SQUARE_SIZE) + GRID_SQUARE_SIZE;
+		const float top = (position.y * GRID_SQUARE_SIZE);
+		const float bottom = (position.y * GRID_SQUARE_SIZE) + GRID_SQUARE_SIZE;
+
+		vertices.append(sf::Vertex(sf::Vector2f(left, top), borderColor));
+		vertices.append(sf::Vertex(sf::Vector2f(left, bottom), borderColor));
+		vertices.append(sf::Vertex(sf::Vector2f(right, top), borderColor));
+		vertices.append(sf::Vertex(sf::Vector2f(right, top), borderColor));
+		vertices.append(sf::Vertex(sf::Vector2f(right, bottom), borderColor));
+		vertices.append(sf::Vertex(sf::Vector2f(left, bottom), borderColor));
+	}
+
+	outdated = false;
 }
 
 void CompositeGrid::setColor(int gridId, const sf::Color &color)
@@ -86,7 +106,7 @@ void CompositeGrid::addGrid(const Grid &grid, const sf::Color &color)
 	grids[id].setBorderColor(subBorderColor);
 
 	addAdjacencies(id);
-	updateBorders(id, true);
+	updateBordersForAddedGrid(id);
 
 	outdated = true;
 }
@@ -102,7 +122,7 @@ void CompositeGrid::removeGrid(int id)
 	outdated = true;
 
 	// Update borders based on adjacencies
-	updateBorders(id, false);
+	updateBordersForRemovedGrid(id);
 	removeAdjacencies(id);
 	grids.erase(id);
 }
@@ -135,16 +155,116 @@ void CompositeGrid::removeAdjacencies(int id)
 	gridAdjacencies.erase(id);
 }
 
-void CompositeGrid::updateBorders(int id, bool added)
+bool CompositeGrid::isBorderPosition(int gridId, const sf::Vector2i& position)
 {
-	if(added)
+	const Grid& grid = grids[gridId];
+	auto& adjacentGridIds = gridAdjacencies[gridId];
+
+	assert(grid.containsBorderPosition(position));
+
+	const std::vector<sf::Vector2i> adjacentPositions = {
+		sf::Vector2i(position.x + 1, position.y),
+		sf::Vector2i(position.x + 1, position.y),
+		sf::Vector2i(position.x + 1, position.y + 1),
+		sf::Vector2i(position.x + 1, position.y - 1),
+		sf::Vector2i(position.x - 1, position.y + 1),
+		sf::Vector2i(position.x - 1, position.y - 1),
+		sf::Vector2i(position.x, position.y + 1),
+		sf::Vector2i(position.x, position.y - 1)
+	};
+
+	for (const sf::Vector2i& adjacencyOffset : adjacencyOffsets)
 	{
-		// check border positions of adjacent grids to be removed from composite grid border.
-		// check border position of newly added grid to be added to composite grid border.
+		const sf::Vector2i adjacentPosition = position + adjacencyOffset;
+
+		if (grid.containsPosition(adjacentPosition) || adjacentGridsContainBorderPosition(gridId, adjacentPosition))
+		{
+			continue;
+		}
+		else
+		{
+			// Adjacent position not apart of composite grid so position is a border position.
+			return true;
+		}
 	}
-	else
+
+	return false;
+}
+
+bool CompositeGrid::adjacentGridsContainBorderPosition(int gridId, const sf::Vector2i& position)
+{
+	for (int adjacentGridId : gridAdjacencies[gridId])
 	{
-		// check border positions of adjacent grids to be added to composite grid border.
-		// check border position of newly added grid to be removed from composite grid border.
+		const Grid& adjacentGrid = grids[adjacentGridId];
+
+		if (adjacentGrid.containsBorderPosition(position))
+		{
+			return true;
+		}
 	}
+
+	return false;
+}
+
+void CompositeGrid::updateBordersForAddedGrid(int id)
+{
+	const Grid& addedGrid = grids[id];
+
+	// Check each border position of adjacent grids to determine if still border position.
+	for (int adjacentGridId : gridAdjacencies[id])
+	{
+		const Grid& adjacentGrid = grids[adjacentGridId];
+
+		for (const sf::Vector2i& position : adjacentGrid.getBorderPositions())
+		{
+			if (borderPositions.count(position) == 0)
+			{
+				continue;
+			}
+			else if(addedGrid.positionAdjacentToBorder(position) && !isBorderPosition(adjacentGridId, position))
+			{
+				// Position is no longer on composite grid border.
+				borderPositions.erase(position);
+			}
+		}
+	}
+
+	// Determine positions of added grid which are border positions of composite grid.
+	for (const sf::Vector2i& position : addedGrid.getBorderPositions())
+	{
+		if (isBorderPosition(id, position))
+		{
+			borderPositions.insert(position);
+		}
+	}
+
+	outdated = true;
+}
+
+void CompositeGrid::updateBordersForRemovedGrid(int id)
+{
+	const Grid& removedGrid = grids[id];
+
+	// Add border positions from adjacent grids to removed grid.
+	for (int adjacentGridId : gridAdjacencies[id])
+	{
+		const Grid& adjacentGrid = grids[adjacentGridId];
+
+		// Any border position in adjacent grid that is adjacent to removed grid becomes part of composite grid border.
+		for (const sf::Vector2i& borderPosition : adjacentGrid.getBorderPositions())
+		{
+			if (removedGrid.positionAdjacentToBorder(borderPosition))
+			{
+				borderPositions.insert(borderPosition);
+			}
+		}
+	}
+
+	// Erase border positions from removed grid.
+	for (const sf::Vector2i& borderPosition : removedGrid.getBorderPositions())
+	{
+		borderPositions.erase(borderPosition);
+	}
+	
+	outdated = true;
 }
