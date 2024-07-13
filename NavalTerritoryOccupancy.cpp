@@ -14,7 +14,7 @@ void NavalTerritoryOccupancy::update(Message message)
 {
 	switch(message)
 	{
-	case deadMilitary:
+	case vacatedMilitary:
 		if(army != nullptr && army->isDead())
 		{
 			army = nullptr;
@@ -26,23 +26,10 @@ void NavalTerritoryOccupancy::update(Message message)
 	}
 }
 
-void NavalTerritoryOccupancy::determineOccupation()
-{
-
-	if(fleet != nullptr)
-	{
-		const Player& fleetOwner = fleet->getOwner();
-		if(!sameUpperRealm(mostRecentOccupant, &fleetOwner))
-		{
-			territory.notifyObservers(newOccupant);
-		}
-	}
-}
-
 void NavalTerritoryOccupancy::occupy(LandArmy *army)
 {
 	// Can successfully occupy with army if army owner is the most recent controller of territory by navy.
-	if(this->mostRecentOccupant == &army->getOwner())
+	if(controller == &army->getOwner())
 	{
 		if(this->army == nullptr)
 		{
@@ -120,10 +107,10 @@ void NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 
 	// Set the controller of this territory as the owner of the occupying naval army.
 	// Notify observers if owner changed.
-	if(this->fleet != nullptr && mostRecentOccupant != &this->fleet->getOwner())
+	if(this->fleet != nullptr && controller != &this->fleet->getOwner())
 	{
-		mostRecentOccupant = &this->fleet->getOwner();
-		territory.notifyObservers(newOccupant);
+		controller = &this->fleet->getOwner();
+		territory.notifyObservers(newController);
 	}
 
 	// Remove pointer to army if army is dead.
@@ -134,7 +121,7 @@ void NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 	}
 
 	// Kill enemy land armies occupying this territory.
-	if((army != nullptr) && (&army->getOwner() != mostRecentOccupant))
+	if((army != nullptr) && (&army->getOwner() != controller))
 	{
 		assert(!army->isDead());
 		// Kill the army occupying this territory.
@@ -151,22 +138,33 @@ void NavalTerritoryOccupancy::forceOccupy(LandArmy *army)
 	// Intentionally empty.
 }
 
-void NavalTerritoryOccupancy::forceOccupy(NavalFleet * fleet)
+void NavalTerritoryOccupancy::forceOccupy(NavalFleet *fleet)
 {
 	// Attempt occupancy.
 	territory.getOccupancyHandler()->occupy(fleet);
+
 	// Repeatedly reattempy occupancy of naval territory until success or death of fleet.
 	// This is necessary since first attempt to occupy may fail whilst fleet still alive thus has no where to return to.
-	while(!fleet->isDead() && !sameUpperRealm(territory.getOccupancyHandler()->getOccupant(), &fleet->getOwner()))
+	while(!fleet->isDead() && controller != &fleet->getOwner())
 	{
 		occupy(fleet);
 	}
 }
 
-Player * NavalTerritoryOccupancy::getOccupant()
+void NavalTerritoryOccupancy::transferControl(Player& player)
 {
-	return mostRecentOccupant;
+	assert(!player.hasLiege());
+	assert(fleet == nullptr || controller == &fleet->getOwner());
 
+	controller = &player;
+	territory.notifyObservers(newController);
+
+	// Change the controller back if army present.
+	if(fleet != nullptr)
+	{
+		controller = &fleet->getOwner();
+		territory.notifyObservers(newController);
+	}
 }
 
 const LandArmy* NavalTerritoryOccupancy::getArmy() const
@@ -174,31 +172,14 @@ const LandArmy* NavalTerritoryOccupancy::getArmy() const
 	return army;
 }
 
+LandArmy* NavalTerritoryOccupancy::getArmy()
+{
+	return army;
+}
+
 const NavalFleet* NavalTerritoryOccupancy::getFleet() const
 {
 	return fleet;
-}
-
-void NavalTerritoryOccupancy::removeArmy(const LandArmy *army)
-{
-	assert(this->army == army);
-	this->army = nullptr;
-	reevaluateOccupancy();
-}
-
-void NavalTerritoryOccupancy::removeFleet(const NavalFleet *fleet)
-{
-	assert(this->fleet == fleet);
-	this->fleet = nullptr;
-	reevaluateOccupancy();
-}
-
-void NavalTerritoryOccupancy::reevaluateOccupancy()
-{
-	if(army == nullptr && fleet == nullptr)
-	{
-		mostRecentOccupant = nullptr;
-	}
 }
 
 void NavalTerritoryOccupancy::updateMilitaryPosition()

@@ -22,19 +22,19 @@ NavalTerritory& Port::getNavalTerritory()
 	return navalTerritory;
 }
 
-int Port::getNavalTerritoryID() const
+int Port::getNavalTerritoryId() const
 {
-	return navalTerritory.getID();
+	return navalTerritory.getId();
 }
 
 sf::Vector2f Port::determineSpritePosition(const LandTerritory &landTerritory, const NavalTerritory &navalTerritory)
 {
 	// Territories must border each other.
-	assert(landTerritory.getGrid().sharesBorder(navalTerritory.getGrid()));
+	assert(landTerritory.getGrid().isAdjacent(navalTerritory.getGrid()));
 
 	// Positions within land territory that border naval territory.
 	// The sprite of the port will lie on one of these positions.
-	std::unordered_set<sf::Vector2f, Vector2fHash> borderingPositions = landTerritory.getGrid().getNeighbouringBorderPositions(navalTerritory.getGrid());
+	std::unordered_set<sf::Vector2f, Vector2fHash> borderingPositions = landTerritory.getGrid().getAdjacentBorderPositions(navalTerritory.getGrid());
 
 	// Calculate average position of border positions.
 	sf::Vector2f averagePosition;

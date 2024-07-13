@@ -2,7 +2,6 @@
 #include "Estate.h"
 #include "Utility.h"
 #include "LandedEstate.h"
-#include "RealmGrid.h"
 #include "MilitaryManager.h"
 #include "Player.h"
 #include "Barony.h"
@@ -45,41 +44,20 @@ void PlayerEstateManager::handleMilitaryYields()
 void PlayerEstateManager::addEstate(Estate &estate)
 {
 	estates.insert(&estate);
-
-	LandedEstate *landedEstate = dynamic_cast<LandedEstate*>(&estate);
-	// Add territory to realm territories if estate is landed estate.
-	if(landedEstate != nullptr)
-	{
-		territories.insert(&landedEstate->getTerritory());
-	}
 }
 
-void PlayerEstateManager::removeEstate(Estate &estate)
+void PlayerEstateManager::removeEstate(const Estate &estate)
 {
 	for(auto iter = estates.begin(); iter != estates.end(); ++iter)
 	{
 		if(*iter == &estate)
 		{
-			// Remove territory from realm territories if estate is landed estate.
-			LandedEstate *landedEstate = dynamic_cast<LandedEstate*>(*iter);
-			if(landedEstate != nullptr)
-			{
-				assert(territories.count(&landedEstate->getTerritory()) == 1);
-				territories.erase(&landedEstate->getTerritory());
-			}
-
 			estates.erase(iter);
-
 			return;
 		}
 	}
 
 	assert(false);  // Functions should only be called when the estate owner is this player.
-}
-
-const std::unordered_set<Territory*>& PlayerEstateManager::getTerritories()
-{
-	return territories;
 }
 
 std::unordered_set<const Estate*> PlayerEstateManager::getEstates() const

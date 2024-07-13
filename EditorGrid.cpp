@@ -89,31 +89,31 @@ bool EditorGrid::sharesBorder(const EditorGrid &grid) const
 	return false;
 }
 
-std::unordered_set<sf::Vector2f, Vector2fHash> EditorGrid::getNeighbouringBorderPositions(const EditorGrid &grid) const
+std::unordered_set<sf::Vector2f, Vector2fHash> EditorGrid::getAdjacentBorderPositions(const EditorGrid &grid) const
 {
 	std::unordered_set<sf::Vector2i, Vector2iHash> neighbouringBorderPositions = {};
-	for(auto position = borderPositions.cbegin(); position != borderPositions.cend(); ++position)
+	for (auto position = borderPositions.cbegin(); position != borderPositions.cend(); ++position)
 	{
-		std::vector<sf::Vector2i> adjacentPositions = calculateAdjacentPositions(*position);
-
-		for(sf::Vector2i position : adjacentPositions)
+		for (const sf::Vector2i& offset : adjacencyOffsets)
 		{
-			if(grid.borderPositions.count(position) == 1)
+			sf::Vector2i adjacentPosition = *position + offset;
+
+			if (grid.borderPositions.count(adjacentPosition) == 1)
 			{
-				neighbouringBorderPositions.insert(position);
+				neighbouringBorderPositions.insert(*position);
 				break;
 			}
 			else
 			{
 				// Verifies that position does not exist at all in grid since otherwise it would be a border position.
-				assert(grid.positions.count(position) == 0);
+				assert(grid.positions.count(*position) == 0);
 			}
 		}
 	}
 
 	// Convert positions to global coordinates.
 	std::unordered_set<sf::Vector2f, Vector2fHash> neighbouringBorderCoordinates = {};
-	for(const sf::Vector2i &position : neighbouringBorderPositions)
+	for (const sf::Vector2i& position : neighbouringBorderPositions)
 	{
 		neighbouringBorderCoordinates.insert(calculateWorldCoordinates(position));
 	}
@@ -632,7 +632,7 @@ sf::Color EditorGrid::calculateAdjustedColor(const sf::Vector2i &position)
 	return adjustedColor;
 }
 
-EditorGrid loadTerritoryGrid(std::ifstream &file)
+EditorGrid loadEditorTerritoryGrid(std::ifstream &file)
 {
 	std::unordered_set<sf::Vector2i, Vector2iHash> positions;
 
@@ -667,20 +667,6 @@ EditorGrid loadTerritoryGrid(std::ifstream &file)
 	grid.calculateCenter();
 
 	return grid;
-}
-
-sf::Vector2i calculateGridCoordinates(const sf::Vector2f & position)
-{
-	const int x = std::floor(position.x / GRID_SQUARE_SIZE);
-	const int y = std::floor(position.y / GRID_SQUARE_SIZE);
-	return sf::Vector2i(x, y);
-}
-
-sf::Vector2f calculateWorldCoordinates(const sf::Vector2i & position)
-{
-	const float x = position.x * GRID_SQUARE_SIZE + (GRID_SQUARE_SIZE / 2);
-	const float y = position.y * GRID_SQUARE_SIZE + (GRID_SQUARE_SIZE / 2);
-	return sf::Vector2f(x, y);
 }
 
 std::vector<sf::Vector2i> calculateAdjacentPositions(const sf::Vector2i &position)

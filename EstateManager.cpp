@@ -127,7 +127,7 @@ void EstateManager::loadBarony(std::ifstream &file, std::vector<std::unique_ptr<
 	for(auto &landTerritory : landTerritories)
 	{
 		// Territory already allocated to a landed estate.
-		if(landTerritory.get()->getID() == territoryID)
+		if(landTerritory.get()->getId() == territoryID)
 		{
 			assert(allocatedTerritoryIDs.count(territoryID) == 0);
 			allocatedTerritoryIDs.insert(territoryID);  // Track territory id so reconcileBaronies does not create new barony with same territory.
@@ -151,11 +151,16 @@ void EstateManager::loadBarony(std::ifstream &file, std::vector<std::unique_ptr<
 	// Create the barony.
 	std::unique_ptr<Estate> barony = std::make_unique<Barony>(*territory, color);
 	barony.get()->initName(name);
+
 	// Add the subfiefs.
 	for(std::string &subfiefName : subfiefNames)
 	{
 		barony->addSubfief(getFief(subfiefName));
 	}
+
+	// Update grid otherwise won't have color.
+	barony.get()->getGrid().update();
+
 	// Add the barony to estates.
 	estates[Title::barony].emplace_back(std::move(barony));
 }
@@ -188,7 +193,7 @@ void EstateManager::loadMaridom(std::ifstream & file, std::vector<std::unique_pt
 	for(auto &navalTerritory : navalTerritories)
 	{
 		// Territory already allocated to a landed estate.
-		if(navalTerritory.get()->getID() == territoryID)
+		if(navalTerritory.get()->getId() == territoryID)
 		{
 			assert(allocatedTerritoryIDs.count(territoryID) == 0);
 			allocatedTerritoryIDs.insert(territoryID);  // Track territory id so reconcileBaronies does not create new barony with same territory.
@@ -206,12 +211,16 @@ void EstateManager::loadMaridom(std::ifstream & file, std::vector<std::unique_pt
 	// Create the maridom.
 	std::unique_ptr<Estate> maridom = std::make_unique<Maridom>(*territory);
 	maridom.get()->initName(name);
+
 	// Add the subfiefs.
 	for(std::string &subfiefName : subfiefNames)
 	{
 		maridom->addSubfief(getFief(subfiefName));
 	}
-	// Add the barony to estates.
+
+	// Update grid otherwise won't have color.
+	maridom.get()->getGrid().update();
+
 	estates[Title::maridom].emplace_back(std::move(maridom));
 }
 
@@ -236,8 +245,11 @@ void EstateManager::loadEstate(std::ifstream &file)
 	std::vector<std::string> subfiefNames = loadSubfiefNames(file);
 
 	// Create the estate.
-	std::unique_ptr<Estate> estate = std::make_unique<Estate>(title, color);
-	estate.get()->initName(name);
+	estates[title].emplace_back(std::make_unique<Estate>(title, color));
+	Estate& estate = *estates[title].back().get();
+
+	estate.initName(name);
+
 	// Add the subfiefs.
 	bool hasSubfief = false;
 	for(std::string &subfiefName : subfiefNames)
@@ -250,14 +262,19 @@ void EstateManager::loadEstate(std::ifstream &file)
 			continue;
 		}
 
-		estate->addSubfief(subfief);
+		estate.addSubfief(subfief);
 		hasSubfief = true;
 	}
+
 	// Only adds the estate to estates if it has a subfief.
-	if(hasSubfief)
+	if(!hasSubfief)
 	{
-		estates[title].emplace_back(std::move(estate));
+		estates[title].pop_back();
+		return;
 	}
+
+	// Update grid otherwise won't have color.
+	estate.getGrid().update();
 }
 
 std::string EstateManager::loadName(std::ifstream & file)

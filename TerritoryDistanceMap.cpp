@@ -18,8 +18,8 @@ void TerritoryDistanceMap::calculateDistances(const std::vector<Territory*>& ter
 
 int TerritoryDistanceMap::getDistance(const Territory &territory) const
 {
-	// No connecting path exists.
-	if(distances.count(&territory) == 0)
+	// No connecting path exists or distance greater than max depth.
+	if(distances.count(&territory) == 0 || distances[&territory] == -1)
 	{
 		return INT_MAX;
 	}
@@ -31,7 +31,7 @@ void TerritoryDistanceMap::addAdjacencies(std::vector<Territory*> &territories)
 {
 	for(Territory* territory : territories)
 	{
-		if(sharesBorder(*territory))
+		if(territory != &this->territory && sharesBorder(*territory))
 		{
 			adjacencies.insert(territory);
 		}
@@ -41,35 +41,6 @@ void TerritoryDistanceMap::addAdjacencies(std::vector<Territory*> &territories)
 bool TerritoryDistanceMap::isAdjacent(const Territory *territory) const
 {
 	return adjacencies.count(const_cast<Territory*>(territory)) == 1;
-}
-
-bool TerritoryDistanceMap::hasEnemyAdjacencies(TerritoryType territoryType) const
-{
-	assert(territory.getEstateOwner() != nullptr);
-	for(const auto &adjacency : adjacencies)
-	{
-		const Player* estateOwner = adjacency->getEstateOwner();
-
-		if(adjacency->getType() == territoryType && !sameUpperRealm(territory.getEstateOwner(), adjacency->getEstateOwner()))
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-bool TerritoryDistanceMap::hasEnemyAdjacencies() const
-{
-	assert(territory.getEstateOwner() != nullptr);
-	for(const auto &adjacency : adjacencies)
-	{
-		const Player* estateOwner = adjacency->getEstateOwner();
-		if(!sameUpperRealm(territory.getEstateOwner(), adjacency->getEstateOwner()))
-		{
-			return true;
-		}
-	}
-	return false;
 }
 
 const std::set<Territory*>& TerritoryDistanceMap::getAdjacencies() const
@@ -133,5 +104,6 @@ std::map<const Territory*, int> TerritoryDistanceMap::calculateDistancesBFS(cons
 
 bool TerritoryDistanceMap::sharesBorder(const Territory &territory) const
 {
-	return this->territory.getGrid().sharesBorder(territory.getGrid());
+	/// SUS. LATERAL ADJACENT OR NORMAL ADJACENT. FIND OUT.
+	return this->territory.getGrid().isAdjacent(territory.getGrid());
 }

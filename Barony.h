@@ -1,6 +1,8 @@
 #pragma once
+#include "Observer.h"
 #include "LandedEstate.h"
 #include "LandTerritory.h"
+#include "SiegeManager.h"
 #include <memory>
 #include <SFML/Graphics.hpp>
 
@@ -8,12 +10,16 @@ class CoastalTerritory;
 class LandTerritory;
 
 
-class Barony : public LandedEstate
+class Barony : public LandedEstate, public Observer
 {
 public:
 	Barony(LandTerritory &landTerritory, sf::Color color);
 
 	virtual ~Barony() = default;
+
+	virtual void update(Message message) override;
+
+	void updateSiege();
 
 	virtual std::unique_ptr<LandArmy> yieldLandArmy() override;
 	virtual std::unique_ptr<NavalFleet> yieldNavalFleet() override;
@@ -29,6 +35,7 @@ protected:
 
 private:
 	LandTerritory &landTerritory;
+	SiegeManager siegeManager;
 
 	double cumulativeLandArmy = 0;  // Cumulation of land army yields.
 	double cumulativeNavalFleet = 0;  // Cumulation of naval fleet yields.

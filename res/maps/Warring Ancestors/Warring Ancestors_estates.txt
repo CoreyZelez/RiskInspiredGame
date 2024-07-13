@@ -3,6 +3,8 @@
 -1
 # name
 Westmar
+# color
+255 255 255
 # subfiefs
 # territory id
 617
@@ -12,6 +14,8 @@ Westmar
 -1
 # name
 Westfrey
+# color
+255 255 255
 # subfiefs
 # territory id
 618
@@ -21,6 +25,8 @@ Westfrey
 -1
 # name
 Tharinithales
+# color
+255 255 255
 # subfiefs
 # territory id
 619
@@ -30,6 +36,8 @@ Tharinithales
 -1
 # name
 Sartaria
+# color
+255 255 255
 # subfiefs
 # territory id
 621
@@ -39,6 +47,8 @@ Sartaria
 -1
 # name
 Topiinidriax
+# color
+255 255 255
 # subfiefs
 # territory id
 622
@@ -48,6 +58,8 @@ Topiinidriax
 -1
 # name
 Tunisia
+# color
+255 255 255
 # subfiefs
 # territory id
 623
@@ -57,6 +69,8 @@ Tunisia
 -1
 # name
 Renexdrenhenia
+# color
+255 255 255
 # subfiefs
 # territory id
 624
@@ -66,6 +80,8 @@ Renexdrenhenia
 -1
 # name
 Nothiflindethia
+# color
+255 255 255
 # subfiefs
 # territory id
 625
@@ -75,6 +91,8 @@ Nothiflindethia
 -1
 # name
 Tharaxia
+# color
+255 255 255
 # subfiefs
 # territory id
 626
@@ -84,6 +102,8 @@ Tharaxia
 -1
 # name
 Finithdethia
+# color
+255 255 255
 # subfiefs
 # territory id
 627
@@ -93,6 +113,8 @@ Finithdethia
 -1
 # name
 Morethohthsia
+# color
+255 255 255
 # subfiefs
 # territory id
 628
@@ -102,6 +124,8 @@ Morethohthsia
 -1
 # name
 Tuninimar
+# color
+255 255 255
 # subfiefs
 # territory id
 629
@@ -111,6 +135,8 @@ Tuninimar
 -1
 # name
 Hethiaol
+# color
+255 255 255
 # subfiefs
 # territory id
 630
@@ -120,6 +146,8 @@ Hethiaol
 -1
 # name
 Ferohthol
+# color
+255 255 255
 # subfiefs
 # territory id
 631
@@ -129,6 +157,8 @@ Ferohthol
 -1
 # name
 Westeigha
+# color
+255 255 255
 # subfiefs
 # territory id
 632
@@ -138,6 +168,8 @@ Westeigha
 -1
 # name
 Tunvinsia
+# color
+255 255 255
 # subfiefs
 # territory id
 633
@@ -147,6 +179,8 @@ Tunvinsia
 -1
 # name
 Anvinmia
+# color
+255 255 255
 # subfiefs
 # territory id
 634
@@ -156,6 +190,8 @@ Anvinmia
 -1
 # name
 Percinifreyia
+# color
+255 255 255
 # subfiefs
 # territory id
 635
@@ -165,6 +201,8 @@ Percinifreyia
 -1
 # name
 Sthenilmar
+# color
+255 255 255
 # subfiefs
 # territory id
 636
@@ -174,6 +212,8 @@ Sthenilmar
 -1
 # name
 Drethhenia
+# color
+255 255 255
 # subfiefs
 # territory id
 637
@@ -183,6 +223,8 @@ Drethhenia
 -1
 # name
 Trisdriax
+# color
+255 255 255
 # subfiefs
 # territory id
 638
@@ -192,6 +234,8 @@ Trisdriax
 -1
 # name
 Westapinia
+# color
+255 255 255
 # subfiefs
 # territory id
 639
@@ -201,6 +245,8 @@ Westapinia
 -1
 # name
 Kersaar
+# color
+255 255 255
 # subfiefs
 # territory id
 640
@@ -210,6 +256,8 @@ Kersaar
 -1
 # name
 Ferroaxia
+# color
+255 255 255
 # subfiefs
 # territory id
 641
@@ -219,6 +267,8 @@ Ferroaxia
 -1
 # name
 Feighlithia
+# color
+255 255 255
 # subfiefs
 # territory id
 642
@@ -228,6 +278,8 @@ Feighlithia
 -1
 # name
 Renexrodriax
+# color
+255 255 255
 # subfiefs
 # territory id
 643
@@ -237,6 +289,8 @@ Renexrodriax
 -1
 # name
 Trisapinia
+# color
+255 255 255
 # subfiefs
 # territory id
 644
@@ -246,6 +300,8 @@ Trisapinia
 -1
 # name
 Tunvanmia
+# color
+255 255 255
 # subfiefs
 # territory id
 645
@@ -255,6 +311,8 @@ Tunvanmia
 -1
 # name
 Perctricth
+# color
+255 255 255
 # subfiefs
 # territory id
 646
@@ -264,6 +322,8 @@ Perctricth
 -1
 # name
 Ferendriax
+# color
+255 255 255
 # subfiefs
 # territory id
 647
@@ -273,6 +333,8 @@ Ferendriax
 -1
 # name
 Topivantopia
+# color
+255 255 255
 # subfiefs
 # territory id
 648
@@ -282,6 +344,8 @@ Topivantopia
 -1
 # name
 Vosriheughough
+# color
+255 255 255
 # subfiefs
 # territory id
 649
@@ -291,6 +355,8 @@ Vosriheughough
 -1
 # name
 Kersaisia
+# color
+255 255 255
 # subfiefs
 # territory id
 650
@@ -300,6 +366,8 @@ Kersaisia
 -1
 # name
 Troslifreyia
+# color
+255 255 255
 # subfiefs
 # territory id
 651
@@ -309,6 +377,8 @@ Troslifreyia
 -1
 # name
 Folndeth
+# color
+255 255 255
 # subfiefs
 # territory id
 652
@@ -318,6 +388,8 @@ Folndeth
 -1
 # name
 Drethiniheughough
+# color
+255 255 255
 # subfiefs
 # territory id
 653
@@ -327,6 +399,8 @@ Drethiniheughough
 -1
 # name
 Kerrodethia
+# color
+255 255 255
 # subfiefs
 # territory id
 654
@@ -336,6 +410,8 @@ Kerrodethia
 -1
 # name
 Methvanol
+# color
+255 255 255
 # subfiefs
 # territory id
 655
@@ -345,6 +421,8 @@ Methvanol
 -1
 # name
 Ferrosia
+# color
+255 255 255
 # subfiefs
 # territory id
 656
@@ -354,6 +432,8 @@ Ferrosia
 -1
 # name
 Sarrotricth
+# color
+255 255 255
 # subfiefs
 # territory id
 657
@@ -363,6 +443,8 @@ Sarrotricth
 -1
 # name
 Feighhenia
+# color
+255 255 255
 # subfiefs
 # territory id
 658
@@ -372,6 +454,8 @@ Feighhenia
 -1
 # name
 Feighflineigha
+# color
+255 255 255
 # subfiefs
 # territory id
 659
@@ -381,6 +465,8 @@ Feighflineigha
 -1
 # name
 Carvia
+# color
+255 255 255
 # subfiefs
 # territory id
 660
@@ -390,6 +476,8 @@ Carvia
 -1
 # name
 Nothiflindriax
+# color
+255 255 255
 # subfiefs
 # territory id
 661
@@ -399,6 +487,8 @@ Nothiflindriax
 -1
 # name
 Percliaxia
+# color
+255 255 255
 # subfiefs
 # territory id
 662
@@ -408,6 +498,8 @@ Percliaxia
 -1
 # name
 Renexfreyia
+# color
+255 255 255
 # subfiefs
 # territory id
 663
@@ -417,6 +509,8 @@ Renexfreyia
 -1
 # name
 Fustrethdriax
+# color
+255 255 255
 # subfiefs
 # territory id
 664
@@ -426,6 +520,8 @@ Fustrethdriax
 -1
 # name
 Pantreththales
+# color
+255 255 255
 # subfiefs
 # territory id
 665
@@ -435,6 +531,8 @@ Pantreththales
 -1
 # name
 Feymar
+# color
+255 255 255
 # subfiefs
 # territory id
 666
@@ -444,6 +542,8 @@ Feymar
 -1
 # name
 Tharheughough
+# color
+255 255 255
 # subfiefs
 # territory id
 667
@@ -453,6 +553,8 @@ Tharheughough
 -1
 # name
 Lueghsataria
+# color
+255 255 255
 # subfiefs
 # territory id
 668
@@ -462,6 +564,8 @@ Lueghsataria
 -1
 # name
 Nothithales
+# color
+255 255 255
 # subfiefs
 # territory id
 669
@@ -471,6 +575,8 @@ Nothithales
 -1
 # name
 Mozthinimor
+# color
+255 255 255
 # subfiefs
 # territory id
 670
@@ -480,6 +586,8 @@ Mozthinimor
 -1
 # name
 Finithar
+# color
+255 255 255
 # subfiefs
 # territory id
 671
@@ -489,6 +597,8 @@ Finithar
 -1
 # name
 Trosvensia
+# color
+255 255 255
 # subfiefs
 # territory id
 672
@@ -498,6 +608,8 @@ Trosvensia
 -1
 # name
 Nothivanmia
+# color
+255 255 255
 # subfiefs
 # territory id
 673
@@ -507,6 +619,8 @@ Nothivanmia
 -1
 # name
 Ferenlithia
+# color
+255 255 255
 # subfiefs
 # territory id
 674
@@ -516,6 +630,8 @@ Ferenlithia
 -1
 # name
 Tarar
+# color
+255 255 255
 # subfiefs
 # territory id
 675
@@ -525,6 +641,8 @@ Tarar
 -1
 # name
 Morethohthol
+# color
+255 255 255
 # subfiefs
 # territory id
 676
@@ -534,6 +652,8 @@ Morethohthol
 -1
 # name
 Lueghtrethar
+# color
+255 255 255
 # subfiefs
 # territory id
 677
@@ -543,6 +663,8 @@ Lueghtrethar
 -1
 # name
 Morethiniar
+# color
+255 255 255
 # subfiefs
 # territory id
 678
@@ -552,6 +674,8 @@ Morethiniar
 -1
 # name
 Sarinithales
+# color
+255 255 255
 # subfiefs
 # territory id
 679
@@ -561,6 +685,8 @@ Sarinithales
 -1
 # name
 Leraxia
+# color
+255 255 255
 # subfiefs
 # territory id
 680
@@ -570,6 +696,8 @@ Leraxia
 -1
 # name
 Trosrimor
+# color
+255 255 255
 # subfiefs
 # territory id
 681
@@ -579,6 +707,8 @@ Trosrimor
 -1
 # name
 Folntrethtaria
+# color
+255 255 255
 # subfiefs
 # territory id
 682
@@ -588,6 +718,8 @@ Folntrethtaria
 -1
 # name
 Perhenia
+# color
+255 255 255
 # subfiefs
 # territory id
 683
@@ -597,6 +729,8 @@ Perhenia
 -1
 # name
 Topisaheughough
+# color
+255 255 255
 # subfiefs
 # territory id
 684
@@ -606,6 +740,8 @@ Topisaheughough
 -1
 # name
 Topiflintricth
+# color
+255 255 255
 # subfiefs
 # territory id
 685
@@ -615,6 +751,8 @@ Topiflintricth
 -1
 # name
 Mozthdethia
+# color
+255 255 255
 # subfiefs
 # territory id
 686
@@ -624,6 +762,8 @@ Mozthdethia
 -1
 # name
 Carinivia
+# color
+255 255 255
 # subfiefs
 # territory id
 687
@@ -633,6 +773,8 @@ Carinivia
 -1
 # name
 Panlithia
+# color
+255 255 255
 # subfiefs
 # territory id
 688
@@ -642,6 +784,8 @@ Panlithia
 -1
 # name
 Lerilhenia
+# color
+255 255 255
 # subfiefs
 # territory id
 689
@@ -651,6 +795,8 @@ Lerilhenia
 -1
 # name
 Mozthvintaria
+# color
+255 255 255
 # subfiefs
 # territory id
 690
@@ -660,6 +806,8 @@ Mozthvintaria
 -1
 # name
 Nilaisia
+# color
+255 255 255
 # subfiefs
 # territory id
 691
@@ -669,6 +817,8 @@ Nilaisia
 -1
 # name
 Drethiniisia
+# color
+255 255 255
 # subfiefs
 # territory id
 692
@@ -678,6 +828,8 @@ Drethiniisia
 -1
 # name
 Pandrenheughough
+# color
+255 255 255
 # subfiefs
 # territory id
 693
@@ -687,6 +839,8 @@ Pandrenheughough
 -1
 # name
 Topiapinia
+# color
+255 255 255
 # subfiefs
 # territory id
 694
@@ -696,6 +850,8 @@ Topiapinia
 -1
 # name
 Carvithsia
+# color
+255 255 255
 # subfiefs
 # territory id
 695
@@ -705,6 +861,8 @@ Carvithsia
 -1
 # name
 ohththales
+# color
+255 255 255
 # subfiefs
 # territory id
 696
@@ -714,6 +872,8 @@ ohththales
 -1
 # name
 Nothivinhenia
+# color
+255 255 255
 # subfiefs
 # territory id
 697
@@ -723,6 +883,8 @@ Nothivinhenia
 -1
 # name
 Folntrethmia
+# color
+255 255 255
 # subfiefs
 # territory id
 698
@@ -732,6 +894,8 @@ Folntrethmia
 -1
 # name
 Drethroapinia
+# color
+255 255 255
 # subfiefs
 # territory id
 699
@@ -741,6 +905,8 @@ Drethroapinia
 -1
 # name
 Drethohtheigha
+# color
+255 255 255
 # subfiefs
 # territory id
 700
@@ -750,6 +916,8 @@ Drethohtheigha
 -1
 # name
 Morethilmor
+# color
+255 255 255
 # subfiefs
 # territory id
 701
@@ -759,6 +927,8 @@ Morethilmor
 -1
 # name
 Methinifreyia
+# color
+255 255 255
 # subfiefs
 # territory id
 702
@@ -768,6 +938,8 @@ Methinifreyia
 -1
 # name
 Kervithtaria
+# color
+255 255 255
 # subfiefs
 # territory id
 703
@@ -777,6 +949,8 @@ Kervithtaria
 -1
 # name
 Renexmar
+# color
+255 255 255
 # subfiefs
 # territory id
 704
@@ -786,6 +960,8 @@ Renexmar
 -1
 # name
 Lueghol
+# color
+255 255 255
 # subfiefs
 # territory id
 705
@@ -795,6 +971,8 @@ Lueghol
 -1
 # name
 Kervinvia
+# color
+255 255 255
 # subfiefs
 # territory id
 706
@@ -804,6 +982,8 @@ Kervinvia
 -1
 # name
 Tardriax
+# color
+255 255 255
 # subfiefs
 # territory id
 707
@@ -813,6 +993,8 @@ Tardriax
 -1
 # name
 Kerventaria
+# color
+255 255 255
 # subfiefs
 # territory id
 708
@@ -822,6 +1004,8 @@ Kerventaria
 -1
 # name
 Perrideth
+# color
+255 255 255
 # subfiefs
 # territory id
 709
@@ -831,6 +1015,8 @@ Perrideth
 -1
 # name
 Lerilmar
+# color
+255 255 255
 # subfiefs
 # territory id
 710
@@ -840,6 +1026,8 @@ Lerilmar
 -1
 # name
 Perinivia
+# color
+255 255 255
 # subfiefs
 # territory id
 711
@@ -849,6 +1037,8 @@ Perinivia
 -1
 # name
 Westohththales
+# color
+255 255 255
 # subfiefs
 # territory id
 712
@@ -858,6 +1048,8 @@ Westohththales
 -1
 # name
 Methvinfrey
+# color
+255 255 255
 # subfiefs
 # territory id
 713
@@ -867,6 +1059,8 @@ Methvinfrey
 -1
 # name
 Lueghdeth
+# color
+255 255 255
 # subfiefs
 # territory id
 714
@@ -876,6 +1070,8 @@ Lueghdeth
 -1
 # name
 Tunvithvaynia
+# color
+255 255 255
 # subfiefs
 # territory id
 715
@@ -885,6 +1081,8 @@ Tunvithvaynia
 -1
 # name
 Folniniheughough
+# color
+255 255 255
 # subfiefs
 # territory id
 716
@@ -894,6 +1092,8 @@ Folniniheughough
 -1
 # name
 Percol
+# color
+255 255 255
 # subfiefs
 # territory id
 717
@@ -903,6 +1103,8 @@ Percol
 -1
 # name
 Vosdrenvaynia
+# color
+255 255 255
 # subfiefs
 # territory id
 718
@@ -912,6 +1114,8 @@ Vosdrenvaynia
 -1
 # name
 Lertricth
+# color
+255 255 255
 # subfiefs
 # territory id
 719
@@ -921,6 +1125,8 @@ Lertricth
 -1
 # name
 Hethiamar
+# color
+255 255 255
 # subfiefs
 # territory id
 720
@@ -930,6 +1136,8 @@ Hethiamar
 -1
 # name
 Ferenriaxia
+# color
+255 255 255
 # subfiefs
 # territory id
 721
@@ -939,6 +1147,8 @@ Ferenriaxia
 -1
 # name
 Ferisia
+# color
+255 255 255
 # subfiefs
 # territory id
 722
@@ -948,6 +1158,8 @@ Ferisia
 -1
 # name
 Westvaynia
+# color
+255 255 255
 # subfiefs
 # territory id
 723
@@ -957,6 +1169,8 @@ Westvaynia
 -1
 # name
 Lueghheughough
+# color
+255 255 255
 # subfiefs
 # territory id
 724
@@ -966,6 +1180,8 @@ Lueghheughough
 -1
 # name
 Lerventaria
+# color
+255 255 255
 # subfiefs
 # territory id
 725
@@ -975,6 +1191,8 @@ Lerventaria
 -1
 # name
 Lereigha
+# color
+255 255 255
 # subfiefs
 # territory id
 726
@@ -984,6 +1202,8 @@ Lereigha
 -1
 # name
 Stheilvaynia
+# color
+255 255 255
 # subfiefs
 # territory id
 727
@@ -993,6 +1213,8 @@ Stheilvaynia
 -1
 # name
 Ferenvia
+# color
+255 255 255
 # subfiefs
 # territory id
 728
@@ -1002,6 +1224,8 @@ Ferenvia
 -1
 # name
 Fusiltricth
+# color
+255 255 255
 # subfiefs
 # territory id
 729
@@ -1011,6 +1235,8 @@ Fusiltricth
 -1
 # name
 Carol
+# color
+255 255 255
 # subfiefs
 # territory id
 730
@@ -1020,6 +1246,8 @@ Carol
 -1
 # name
 Eashohthfrey
+# color
+255 255 255
 # subfiefs
 # territory id
 731
@@ -1029,6 +1257,8 @@ Eashohthfrey
 -1
 # name
 Drethvintaria
+# color
+255 255 255
 # subfiefs
 # territory id
 732
@@ -1038,6 +1268,8 @@ Drethvintaria
 -1
 # name
 Feighiltopia
+# color
+255 255 255
 # subfiefs
 # territory id
 733
@@ -1047,6 +1279,8 @@ Feighiltopia
 -1
 # name
 Mozthileigha
+# color
+255 255 255
 # subfiefs
 # territory id
 734
@@ -1056,6 +1290,8 @@ Mozthileigha
 -1
 # name
 Thartricth
+# color
+255 255 255
 # subfiefs
 # territory id
 735
@@ -1065,6 +1301,8 @@ Thartricth
 -1
 # name
 Morethflinapinia
+# color
+255 255 255
 # subfiefs
 # territory id
 736
@@ -1074,6 +1312,8 @@ Morethflinapinia
 -1
 # name
 Methvia
+# color
+255 255 255
 # subfiefs
 # territory id
 737
@@ -1083,6 +1323,8 @@ Methvia
 -1
 # name
 Tharvintopia
+# color
+255 255 255
 # subfiefs
 # territory id
 738
@@ -1092,6 +1334,8 @@ Tharvintopia
 -1
 # name
 mar
+# color
+255 255 255
 # subfiefs
 # territory id
 739
@@ -1101,6 +1345,8 @@ mar
 -1
 # name
 Folnriisia
+# color
+255 255 255
 # subfiefs
 # territory id
 740
@@ -1110,6 +1356,8 @@ Folnriisia
 -1
 # name
 Nethvia
+# color
+255 255 255
 # subfiefs
 # territory id
 741
@@ -1119,6 +1367,8 @@ Nethvia
 -1
 # name
 Panmia
+# color
+255 255 255
 # subfiefs
 # territory id
 742
@@ -1128,6 +1378,8 @@ Panmia
 -1
 # name
 Fussatopia
+# color
+255 255 255
 # subfiefs
 # territory id
 743
@@ -1137,6 +1389,8 @@ Fussatopia
 -1
 # name
 Ferenilhenia
+# color
+255 255 255
 # subfiefs
 # territory id
 744
@@ -1146,6 +1400,8 @@ Ferenilhenia
 -1
 # name
 Lerhenia
+# color
+255 255 255
 # subfiefs
 # territory id
 745
@@ -1155,6 +1411,8 @@ Lerhenia
 -1
 # name
 Percvendriax
+# color
+255 255 255
 # subfiefs
 # territory id
 746
@@ -1164,6 +1422,8 @@ Percvendriax
 -1
 # name
 Nethtricth
+# color
+255 255 255
 # subfiefs
 # territory id
 747
@@ -1173,6 +1433,8 @@ Nethtricth
 -1
 # name
 Pandriax
+# color
+255 255 255
 # subfiefs
 # territory id
 748
@@ -1182,6 +1444,8 @@ Pandriax
 -1
 # name
 Lertopia
+# color
+255 255 255
 # subfiefs
 # territory id
 749
@@ -1191,6 +1455,8 @@ Lertopia
 -1
 # name
 Dayttrethtopia
+# color
+255 255 255
 # subfiefs
 # territory id
 750
@@ -1200,6 +1466,8 @@ Dayttrethtopia
 -1
 # name
 Ferrofrey
+# color
+255 255 255
 # subfiefs
 # territory id
 751
@@ -1209,6 +1477,8 @@ Ferrofrey
 1
 # name
 Feighol
+# color
+32 30 211
 # subfiefs
 # territory id
 0
@@ -1218,6 +1488,8 @@ Feighol
 1
 # name
 Ventvinaxia
+# color
+45 8 215
 # subfiefs
 # territory id
 1
@@ -1227,6 +1499,8 @@ Ventvinaxia
 1
 # name
 Feighsia
+# color
+26 39 223
 # subfiefs
 # territory id
 2
@@ -1236,6 +1510,8 @@ Feighsia
 1
 # name
 Daytvia
+# color
+42 28 217
 # subfiefs
 # territory id
 3
@@ -1245,6 +1521,8 @@ Daytvia
 1
 # name
 Folnmor
+# color
+21 26 202
 # subfiefs
 # territory id
 4
@@ -1254,6 +1532,8 @@ Folnmor
 1
 # name
 Percohthdeth
+# color
+31 7 218
 # subfiefs
 # territory id
 6
@@ -1263,6 +1543,8 @@ Percohthdeth
 1
 # name
 Mozthsia
+# color
+32 1 204
 # subfiefs
 # territory id
 7
@@ -1272,6 +1554,8 @@ Mozthsia
 1
 # name
 Nilainihenia
+# color
+21 7 223
 # subfiefs
 # territory id
 8
@@ -1281,6 +1565,8 @@ Nilainihenia
 1
 # name
 Nothidethia
+# color
+45 23 209
 # subfiefs
 # territory id
 9
@@ -1290,6 +1576,8 @@ Nothidethia
 1
 # name
 Methmia
+# color
+44 8 223
 # subfiefs
 # territory id
 10
@@ -1299,6 +1587,8 @@ Methmia
 1
 # name
 Thareigha
+# color
+49 17 227
 # subfiefs
 # territory id
 12
@@ -1308,6 +1598,8 @@ Thareigha
 1
 # name
 Ventohthheughough
+# color
+32 10 204
 # subfiefs
 # territory id
 13
@@ -1317,6 +1609,8 @@ Ventohthheughough
 1
 # name
 Fertricth
+# color
+45 36 219
 # subfiefs
 # territory id
 14
@@ -1326,6 +1620,8 @@ Fertricth
 1
 # name
 Feighdriax
+# color
+36 28 203
 # subfiefs
 # territory id
 15
@@ -1335,6 +1631,8 @@ Feighdriax
 1
 # name
 Panfreyia
+# color
+29 9 229
 # subfiefs
 # territory id
 16
@@ -1344,6 +1642,8 @@ Panfreyia
 1
 # name
 Vosvindriax
+# color
+22 0 201
 # subfiefs
 # territory id
 17
@@ -1353,6 +1653,8 @@ Vosvindriax
 1
 # name
 Niladriax
+# color
+27 3 229
 # subfiefs
 # territory id
 18
@@ -1362,6 +1664,8 @@ Niladriax
 1
 # name
 Nethsavia
+# color
+26 3 211
 # subfiefs
 # territory id
 19
@@ -1371,6 +1675,8 @@ Nethsavia
 1
 # name
 Percilhenia
+# color
+37 35 224
 # subfiefs
 # territory id
 20
@@ -1380,6 +1686,8 @@ Percilhenia
 1
 # name
 Ventdriax
+# color
+21 31 228
 # subfiefs
 # territory id
 21
@@ -1389,6 +1697,8 @@ Ventdriax
 1
 # name
 Feyheughough
+# color
+20 35 211
 # subfiefs
 # territory id
 22
@@ -1398,6 +1708,8 @@ Feyheughough
 1
 # name
 Lerdethia
+# color
+36 11 223
 # subfiefs
 # territory id
 23
@@ -1407,6 +1719,8 @@ Lerdethia
 1
 # name
 Tunohthtaria
+# color
+44 3 205
 # subfiefs
 # territory id
 24
@@ -1416,6 +1730,8 @@ Tunohthtaria
 1
 # name
 Daytol
+# color
+22 20 212
 # subfiefs
 # territory id
 25
@@ -1425,6 +1741,8 @@ Daytol
 1
 # name
 Topiohthdeth
+# color
+31 37 215
 # subfiefs
 # territory id
 26
@@ -1434,6 +1752,8 @@ Topiohthdeth
 1
 # name
 Perisia
+# color
+34 1 225
 # subfiefs
 # territory id
 27
@@ -1443,6 +1763,8 @@ Perisia
 1
 # name
 Fusisia
+# color
+36 35 221
 # subfiefs
 # territory id
 28
@@ -1452,6 +1774,8 @@ Fusisia
 1
 # name
 Trosrotricth
+# color
+41 25 216
 # subfiefs
 # territory id
 29
@@ -1461,6 +1785,8 @@ Trosrotricth
 1
 # name
 Daytisia
+# color
+28 7 225
 # subfiefs
 # territory id
 30
@@ -1470,6 +1796,8 @@ Daytisia
 1
 # name
 Eashmia
+# color
+33 34 215
 # subfiefs
 # territory id
 31
@@ -1479,6 +1807,8 @@ Eashmia
 1
 # name
 Kerfrey
+# color
+47 16 207
 # subfiefs
 # territory id
 32
@@ -1488,6 +1818,8 @@ Kerfrey
 1
 # name
 Nothidriax
+# color
+38 2 211
 # subfiefs
 # territory id
 33
@@ -1497,6 +1829,8 @@ Nothidriax
 1
 # name
 Tunlithia
+# color
+34 13 212
 # subfiefs
 # territory id
 34
@@ -1506,6 +1840,8 @@ Tunlithia
 1
 # name
 Trosvanol
+# color
+23 21 217
 # subfiefs
 # territory id
 35
@@ -1515,6 +1851,8 @@ Trosvanol
 1
 # name
 Nothivandethia
+# color
+35 22 202
 # subfiefs
 # territory id
 36
@@ -1524,6 +1862,8 @@ Nothivandethia
 1
 # name
 Morethtricth
+# color
+24 19 223
 # subfiefs
 # territory id
 37
@@ -1533,6 +1873,8 @@ Morethtricth
 1
 # name
 Folnvanvia
+# color
+37 8 221
 # subfiefs
 # territory id
 38
@@ -1542,6 +1884,8 @@ Folnvanvia
 1
 # name
 Percmar
+# color
+48 27 203
 # subfiefs
 # territory id
 39
@@ -1551,6 +1895,8 @@ Percmar
 1
 # name
 Careigha
+# color
+28 33 201
 # subfiefs
 # territory id
 40
@@ -1560,6 +1906,8 @@ Careigha
 1
 # name
 Trosliisia
+# color
+20 11 204
 # subfiefs
 # territory id
 41
@@ -1569,6 +1917,8 @@ Trosliisia
 1
 # name
 Nothifreyia
+# color
+42 22 228
 # subfiefs
 # territory id
 42
@@ -1578,6 +1928,8 @@ Nothifreyia
 1
 # name
 Eashar
+# color
+44 8 209
 # subfiefs
 # territory id
 43
@@ -1587,6 +1939,8 @@ Eashar
 1
 # name
 Eashinieigha
+# color
+25 16 223
 # subfiefs
 # territory id
 45
@@ -1596,6 +1950,8 @@ Eashinieigha
 1
 # name
 Tarapinia
+# color
+28 11 201
 # subfiefs
 # territory id
 46
@@ -1605,6 +1961,8 @@ Tarapinia
 1
 # name
 Topiol
+# color
+33 12 210
 # subfiefs
 # territory id
 47
@@ -1614,6 +1972,8 @@ Topiol
 1
 # name
 Sthenventaria
+# color
+26 6 219
 # subfiefs
 # territory id
 48
@@ -1623,6 +1983,8 @@ Sthenventaria
 1
 # name
 Hethiaflinlithia
+# color
+38 11 219
 # subfiefs
 # territory id
 50
@@ -1632,6 +1994,8 @@ Hethiaflinlithia
 1
 # name
 Tunroaxia
+# color
+39 7 230
 # subfiefs
 # territory id
 51
@@ -1641,6 +2005,8 @@ Tunroaxia
 1
 # name
 Trisdeth
+# color
+36 38 217
 # subfiefs
 # territory id
 52
@@ -1650,6 +2016,8 @@ Trisdeth
 1
 # name
 Sthendethia
+# color
+38 6 211
 # subfiefs
 # territory id
 53
@@ -1659,6 +2027,8 @@ Sthendethia
 1
 # name
 Lervithlithia
+# color
+41 0 226
 # subfiefs
 # territory id
 56
@@ -1668,6 +2038,8 @@ Lervithlithia
 1
 # name
 Tunflinol
+# color
+36 0 209
 # subfiefs
 # territory id
 57
@@ -1677,6 +2049,8 @@ Tunflinol
 1
 # name
 Topisia
+# color
+40 13 230
 # subfiefs
 # territory id
 58
@@ -1686,6 +2060,8 @@ Topisia
 1
 # name
 Renexilisia
+# color
+37 4 204
 # subfiefs
 # territory id
 59
@@ -1695,6 +2071,8 @@ Renexilisia
 1
 # name
 Trosilheughough
+# color
+31 33 215
 # subfiefs
 # territory id
 60
@@ -1704,6 +2082,8 @@ Trosilheughough
 1
 # name
 Ventthales
+# color
+41 1 207
 # subfiefs
 # territory id
 62
@@ -1713,6 +2093,8 @@ Ventthales
 1
 # name
 Sarroar
+# color
+50 21 201
 # subfiefs
 # territory id
 63
@@ -1722,6 +2104,8 @@ Sarroar
 1
 # name
 Vossafrey
+# color
+44 2 216
 # subfiefs
 # territory id
 64
@@ -1731,6 +2115,8 @@ Vossafrey
 1
 # name
 Vosliheughough
+# color
+41 24 222
 # subfiefs
 # territory id
 65
@@ -1740,6 +2126,8 @@ Vosliheughough
 1
 # name
 Sthenliar
+# color
+34 35 212
 # subfiefs
 # territory id
 66
@@ -1749,6 +2137,8 @@ Sthenliar
 1
 # name
 Kerflinthales
+# color
+44 21 208
 # subfiefs
 # territory id
 67
@@ -1758,6 +2148,8 @@ Kerflinthales
 1
 # name
 Fusmar
+# color
+46 28 217
 # subfiefs
 # territory id
 68
@@ -1767,6 +2159,8 @@ Fusmar
 1
 # name
 Ferohthtopia
+# color
+27 22 221
 # subfiefs
 # territory id
 69
@@ -1776,6 +2170,8 @@ Ferohthtopia
 1
 # name
 Topiheughough
+# color
+32 5 213
 # subfiefs
 # territory id
 70
@@ -1785,6 +2181,8 @@ Topiheughough
 1
 # name
 Folnvaynia
+# color
+47 1 216
 # subfiefs
 # territory id
 71
@@ -1794,6 +2192,8 @@ Folnvaynia
 1
 # name
 Tunhenia
+# color
+46 31 216
 # subfiefs
 # territory id
 72
@@ -1803,6 +2203,8 @@ Tunhenia
 1
 # name
 Ferdriax
+# color
+22 3 212
 # subfiefs
 # territory id
 73
@@ -1812,6 +2214,8 @@ Ferdriax
 1
 # name
 Tharfreyia
+# color
+47 29 209
 # subfiefs
 # territory id
 74
@@ -1821,6 +2225,8 @@ Tharfreyia
 1
 # name
 Eashohthmar
+# color
+33 32 222
 # subfiefs
 # territory id
 75
@@ -1830,6 +2236,8 @@ Eashohthmar
 1
 # name
 Daytiniar
+# color
+36 34 201
 # subfiefs
 # territory id
 76
@@ -1839,6 +2247,8 @@ Daytiniar
 1
 # name
 Nilatrethmor
+# color
+26 9 213
 # subfiefs
 # territory id
 77
@@ -1848,6 +2258,8 @@ Nilatrethmor
 1
 # name
 Trismar
+# color
+24 15 204
 # subfiefs
 # territory id
 78
@@ -1857,6 +2269,8 @@ Trismar
 1
 # name
 Eashroapinia
+# color
+36 36 227
 # subfiefs
 # territory id
 79
@@ -1866,6 +2280,8 @@ Eashroapinia
 1
 # name
 Feighfreyia
+# color
+44 14 224
 # subfiefs
 # territory id
 80
@@ -1875,6 +2291,8 @@ Feighfreyia
 1
 # name
 Pervenvaynia
+# color
+20 37 210
 # subfiefs
 # territory id
 81
@@ -1884,6 +2302,8 @@ Pervenvaynia
 1
 # name
 Renexar
+# color
+44 4 213
 # subfiefs
 # territory id
 82
@@ -1893,6 +2313,8 @@ Renexar
 1
 # name
 Fusflinaxia
+# color
+44 27 224
 # subfiefs
 # territory id
 83
@@ -1902,6 +2324,8 @@ Fusflinaxia
 1
 # name
 Sarsamor
+# color
+47 3 206
 # subfiefs
 # territory id
 84
@@ -1911,6 +2335,8 @@ Sarsamor
 1
 # name
 Permar
+# color
+21 20 230
 # subfiefs
 # territory id
 85
@@ -1920,6 +2346,8 @@ Permar
 1
 # name
 Trosar
+# color
+24 9 223
 # subfiefs
 # territory id
 87
@@ -1929,6 +2357,8 @@ Trosar
 1
 # name
 Lerlithia
+# color
+46 26 200
 # subfiefs
 # territory id
 89
@@ -1938,6 +2368,8 @@ Lerlithia
 1
 # name
 Panapinia
+# color
+44 4 206
 # subfiefs
 # territory id
 91
@@ -1947,6 +2379,8 @@ Panapinia
 1
 # name
 Hethiarodeth
+# color
+21 20 217
 # subfiefs
 # territory id
 92
@@ -1956,6 +2390,8 @@ Hethiarodeth
 1
 # name
 Sarheughough
+# color
+35 5 218
 # subfiefs
 # territory id
 93
@@ -1965,6 +2401,8 @@ Sarheughough
 1
 # name
 Daytsia
+# color
+42 26 227
 # subfiefs
 # territory id
 94
@@ -1974,6 +2412,8 @@ Daytsia
 1
 # name
 Perceigha
+# color
+32 17 227
 # subfiefs
 # territory id
 95
@@ -1983,6 +2423,8 @@ Perceigha
 1
 # name
 Panilfreyia
+# color
+44 34 230
 # subfiefs
 # territory id
 97
@@ -1992,6 +2434,8 @@ Panilfreyia
 1
 # name
 Kersia
+# color
+48 19 211
 # subfiefs
 # territory id
 98
@@ -2001,6 +2445,8 @@ Kersia
 1
 # name
 Renexlitopia
+# color
+23 8 207
 # subfiefs
 # territory id
 99
@@ -2010,6 +2456,8 @@ Renexlitopia
 1
 # name
 Folntaria
+# color
+31 7 223
 # subfiefs
 # territory id
 100
@@ -2019,6 +2467,8 @@ Folntaria
 1
 # name
 Anvanol
+# color
+30 30 200
 # subfiefs
 # territory id
 101
@@ -2028,6 +2478,8 @@ Anvanol
 1
 # name
 Anvenmia
+# color
+24 1 203
 # subfiefs
 # territory id
 102
@@ -2037,6 +2489,8 @@ Anvenmia
 1
 # name
 Trossavaynia
+# color
+26 37 228
 # subfiefs
 # territory id
 103
@@ -2046,6 +2500,8 @@ Trossavaynia
 1
 # name
 Ventfreyia
+# color
+48 27 228
 # subfiefs
 # territory id
 104
@@ -2055,6 +2511,8 @@ Ventfreyia
 1
 # name
 Sartopia
+# color
+40 27 209
 # subfiefs
 # territory id
 105
@@ -2064,6 +2522,8 @@ Sartopia
 1
 # name
 Nothiapinia
+# color
+21 10 229
 # subfiefs
 # territory id
 106
@@ -2073,6 +2533,8 @@ Nothiapinia
 1
 # name
 Methdethia
+# color
+25 40 200
 # subfiefs
 # territory id
 107
@@ -2082,6 +2544,8 @@ Methdethia
 1
 # name
 Kerriheughough
+# color
+50 27 230
 # subfiefs
 # territory id
 108
@@ -2091,6 +2555,8 @@ Kerriheughough
 1
 # name
 Folnviththales
+# color
+45 38 202
 # subfiefs
 # territory id
 109
@@ -2100,6 +2566,8 @@ Folnviththales
 1
 # name
 Finithsaaxia
+# color
+40 35 217
 # subfiefs
 # territory id
 110
@@ -2109,6 +2577,8 @@ Finithsaaxia
 1
 # name
 Methapinia
+# color
+46 3 212
 # subfiefs
 # territory id
 111
@@ -2118,6 +2588,8 @@ Methapinia
 1
 # name
 Nothiaxia
+# color
+39 0 224
 # subfiefs
 # territory id
 112
@@ -2127,6 +2599,8 @@ Nothiaxia
 1
 # name
 Ansaheughough
+# color
+34 14 200
 # subfiefs
 # territory id
 113
@@ -2136,6 +2610,8 @@ Ansaheughough
 1
 # name
 Sartricth
+# color
+37 9 223
 # subfiefs
 # territory id
 114
@@ -2145,6 +2621,8 @@ Sartricth
 1
 # name
 Methriaxia
+# color
+38 20 204
 # subfiefs
 # territory id
 115
@@ -2154,6 +2632,8 @@ Methriaxia
 1
 # name
 Trisiniol
+# color
+50 8 204
 # subfiefs
 # territory id
 116
@@ -2163,6 +2643,8 @@ Trisiniol
 1
 # name
 Nilaventricth
+# color
+43 27 201
 # subfiefs
 # territory id
 117
@@ -2172,6 +2654,8 @@ Nilaventricth
 1
 # name
 Lueghtricth
+# color
+45 12 207
 # subfiefs
 # territory id
 119
@@ -2181,6 +2665,8 @@ Lueghtricth
 1
 # name
 Kereigha
+# color
+47 22 204
 # subfiefs
 # territory id
 120
@@ -2190,6 +2676,8 @@ Kereigha
 1
 # name
 Anvinaxia
+# color
+43 23 229
 # subfiefs
 # territory id
 121
@@ -2199,6 +2687,8 @@ Anvinaxia
 1
 # name
 Panisia
+# color
+29 22 214
 # subfiefs
 # territory id
 122
@@ -2208,6 +2698,8 @@ Panisia
 1
 # name
 Methiltaria
+# color
+46 18 228
 # subfiefs
 # territory id
 124
@@ -2217,6 +2709,8 @@ Methiltaria
 1
 # name
 Feytricth
+# color
+27 12 227
 # subfiefs
 # territory id
 125
@@ -2226,6 +2720,8 @@ Feytricth
 1
 # name
 Ferflinmor
+# color
+32 37 228
 # subfiefs
 # territory id
 126
@@ -2235,6 +2731,8 @@ Ferflinmor
 1
 # name
 Ferenohthlithia
+# color
+41 3 212
 # subfiefs
 # territory id
 127
@@ -2244,6 +2742,8 @@ Ferenohthlithia
 1
 # name
 Mozthdriax
+# color
+29 9 205
 # subfiefs
 # territory id
 128
@@ -2253,6 +2753,8 @@ Mozthdriax
 1
 # name
 Drethmor
+# color
+29 23 223
 # subfiefs
 # territory id
 129
@@ -2262,6 +2764,8 @@ Drethmor
 1
 # name
 Morethilvaynia
+# color
+29 28 205
 # subfiefs
 # territory id
 130
@@ -2271,6 +2775,8 @@ Morethilvaynia
 1
 # name
 Westsavaynia
+# color
+33 27 220
 # subfiefs
 # territory id
 131
@@ -2280,6 +2786,8 @@ Westsavaynia
 1
 # name
 Vosol
+# color
+23 3 207
 # subfiefs
 # territory id
 132
@@ -2289,6 +2797,8 @@ Vosol
 1
 # name
 Eashriol
+# color
+46 29 203
 # subfiefs
 # territory id
 133
@@ -2298,6 +2808,8 @@ Eashriol
 1
 # name
 Ventvia
+# color
+34 33 208
 # subfiefs
 # territory id
 135
@@ -2307,6 +2819,8 @@ Ventvia
 1
 # name
 Ferenthales
+# color
+32 15 230
 # subfiefs
 # territory id
 136
@@ -2316,6 +2830,8 @@ Ferenthales
 1
 # name
 Sthenol
+# color
+26 35 218
 # subfiefs
 # territory id
 137
@@ -2325,6 +2841,8 @@ Sthenol
 1
 # name
 Carvanmia
+# color
+29 11 213
 # subfiefs
 # territory id
 138
@@ -2334,6 +2852,8 @@ Carvanmia
 1
 # name
 Lueghinidriax
+# color
+30 18 208
 # subfiefs
 # territory id
 139
@@ -2343,6 +2863,8 @@ Lueghinidriax
 1
 # name
 Mozthrihenia
+# color
+36 3 212
 # subfiefs
 # territory id
 140
@@ -2352,6 +2874,8 @@ Mozthrihenia
 1
 # name
 Anflineigha
+# color
+26 34 223
 # subfiefs
 # territory id
 141
@@ -2361,6 +2885,8 @@ Anflineigha
 1
 # name
 Percinithales
+# color
+44 20 213
 # subfiefs
 # territory id
 142
@@ -2370,6 +2896,8 @@ Percinithales
 1
 # name
 Tharlideth
+# color
+23 16 226
 # subfiefs
 # territory id
 143
@@ -2379,6 +2907,8 @@ Tharlideth
 1
 # name
 Troseigha
+# color
+46 14 229
 # subfiefs
 # territory id
 144
@@ -2388,6 +2918,8 @@ Troseigha
 1
 # name
 Mozthohthfrey
+# color
+32 6 209
 # subfiefs
 # territory id
 145
@@ -2397,6 +2929,8 @@ Mozthohthfrey
 1
 # name
 Trosdeth
+# color
+39 36 228
 # subfiefs
 # territory id
 146
@@ -2406,6 +2940,8 @@ Trosdeth
 1
 # name
 Fusohtheigha
+# color
+23 2 206
 # subfiefs
 # territory id
 147
@@ -2415,6 +2951,8 @@ Fusohtheigha
 1
 # name
 Daytflindeth
+# color
+39 10 227
 # subfiefs
 # territory id
 148
@@ -2424,6 +2962,8 @@ Daytflindeth
 1
 # name
 Carlivia
+# color
+39 9 202
 # subfiefs
 # territory id
 149
@@ -2433,6 +2973,8 @@ Carlivia
 1
 # name
 Folndethia
+# color
+41 14 203
 # subfiefs
 # territory id
 150
@@ -2442,6 +2984,8 @@ Folndethia
 1
 # name
 Lueghvandriax
+# color
+29 22 220
 # subfiefs
 # territory id
 151
@@ -2451,6 +2995,8 @@ Lueghvandriax
 1
 # name
 Tunmar
+# color
+42 38 220
 # subfiefs
 # territory id
 152
@@ -2460,6 +3006,8 @@ Tunmar
 1
 # name
 Anmor
+# color
+32 2 210
 # subfiefs
 # territory id
 153
@@ -2469,6 +3017,8 @@ Anmor
 1
 # name
 Panvia
+# color
+37 8 217
 # subfiefs
 # territory id
 154
@@ -2478,6 +3028,8 @@ Panvia
 1
 # name
 Perclithia
+# color
+30 29 213
 # subfiefs
 # territory id
 155
@@ -2487,6 +3039,8 @@ Perclithia
 1
 # name
 Trosvinol
+# color
+37 36 210
 # subfiefs
 # territory id
 156
@@ -2496,6 +3050,8 @@ Trosvinol
 1
 # name
 Renexisia
+# color
+37 37 211
 # subfiefs
 # territory id
 157
@@ -2505,6 +3061,8 @@ Renexisia
 1
 # name
 Feyvandeth
+# color
+28 34 225
 # subfiefs
 # territory id
 158
@@ -2514,6 +3072,8 @@ Feyvandeth
 1
 # name
 Keraxia
+# color
+41 9 230
 # subfiefs
 # territory id
 160
@@ -2523,6 +3083,8 @@ Keraxia
 1
 # name
 Methheughough
+# color
+39 36 226
 # subfiefs
 # territory id
 162
@@ -2532,6 +3094,8 @@ Methheughough
 1
 # name
 Fervithdethia
+# color
+29 4 224
 # subfiefs
 # territory id
 163
@@ -2541,6 +3105,8 @@ Fervithdethia
 1
 # name
 Nilavanmor
+# color
+22 36 226
 # subfiefs
 # territory id
 164
@@ -2550,6 +3116,8 @@ Nilavanmor
 1
 # name
 Trostaria
+# color
+45 31 207
 # subfiefs
 # territory id
 168
@@ -2559,6 +3127,8 @@ Trostaria
 1
 # name
 Fersadethia
+# color
+40 34 230
 # subfiefs
 # territory id
 170
@@ -2568,6 +3138,8 @@ Fersadethia
 1
 # name
 vaynia
+# color
+27 7 225
 # subfiefs
 # territory id
 171
@@ -2577,6 +3149,8 @@ vaynia
 1
 # name
 Pantricth
+# color
+31 11 220
 # subfiefs
 # territory id
 172
@@ -2586,6 +3160,8 @@ Pantricth
 1
 # name
 Lueghinideth
+# color
+20 26 205
 # subfiefs
 # territory id
 173
@@ -2595,6 +3171,8 @@ Lueghinideth
 1
 # name
 Anflinvia
+# color
+20 37 208
 # subfiefs
 # territory id
 174
@@ -2604,6 +3182,8 @@ Anflinvia
 1
 # name
 Pantrethapinia
+# color
+30 29 204
 # subfiefs
 # territory id
 175
@@ -2613,6 +3193,8 @@ Pantrethapinia
 1
 # name
 Renexol
+# color
+29 16 206
 # subfiefs
 # territory id
 176
@@ -2622,6 +3204,8 @@ Renexol
 1
 # name
 Feyinifreyia
+# color
+32 17 209
 # subfiefs
 # territory id
 177
@@ -2631,6 +3215,8 @@ Feyinifreyia
 1
 # name
 Trisflinfrey
+# color
+48 5 218
 # subfiefs
 # territory id
 178
@@ -2640,6 +3226,8 @@ Trisflinfrey
 1
 # name
 Renextopia
+# color
+24 31 203
 # subfiefs
 # territory id
 179
@@ -2649,6 +3237,8 @@ Renextopia
 1
 # name
 Sthevanmia
+# color
+21 15 218
 # subfiefs
 # territory id
 180
@@ -2658,6 +3248,8 @@ Sthevanmia
 1
 # name
 Pandethia
+# color
+35 40 221
 # subfiefs
 # territory id
 181
@@ -2667,6 +3259,8 @@ Pandethia
 1
 # name
 Mozthfrey
+# color
+22 32 230
 # subfiefs
 # territory id
 182
@@ -2676,6 +3270,8 @@ Mozthfrey
 1
 # name
 Ferenlithales
+# color
+35 0 224
 # subfiefs
 # territory id
 183
@@ -2685,6 +3281,8 @@ Ferenlithales
 1
 # name
 Kermar
+# color
+30 8 209
 # subfiefs
 # territory id
 184
@@ -2694,6 +3292,8 @@ Kermar
 1
 # name
 Panol
+# color
+33 14 208
 # subfiefs
 # territory id
 185
@@ -2703,6 +3303,8 @@ Panol
 1
 # name
 Carrovia
+# color
+43 11 209
 # subfiefs
 # territory id
 186
@@ -2712,6 +3314,8 @@ Carrovia
 1
 # name
 Methvinlithia
+# color
+30 2 211
 # subfiefs
 # territory id
 188
@@ -2721,6 +3325,8 @@ Methvinlithia
 1
 # name
 Lersadethia
+# color
+32 17 209
 # subfiefs
 # territory id
 189
@@ -2730,6 +3336,8 @@ Lersadethia
 1
 # name
 Hethiadethia
+# color
+36 40 226
 # subfiefs
 # territory id
 190
@@ -2739,6 +3347,8 @@ Hethiadethia
 1
 # name
 Tharvanvaynia
+# color
+42 5 222
 # subfiefs
 # territory id
 191
@@ -2748,6 +3358,8 @@ Tharvanvaynia
 1
 # name
 Sthenliapinia
+# color
+22 12 219
 # subfiefs
 # territory id
 192
@@ -2757,6 +3369,8 @@ Sthenliapinia
 1
 # name
 Finithrideth
+# color
+32 7 227
 # subfiefs
 # territory id
 193
@@ -2766,6 +3380,8 @@ Finithrideth
 1
 # name
 Morethlivaynia
+# color
+27 31 200
 # subfiefs
 # territory id
 194
@@ -2775,6 +3391,8 @@ Morethlivaynia
 1
 # name
 Eashmar
+# color
+34 25 224
 # subfiefs
 # territory id
 195
@@ -2784,6 +3402,8 @@ Eashmar
 1
 # name
 Folnfreyia
+# color
+20 27 208
 # subfiefs
 # territory id
 196
@@ -2793,6 +3413,8 @@ Folnfreyia
 1
 # name
 Sthear
+# color
+50 3 227
 # subfiefs
 # territory id
 198
@@ -2802,6 +3424,8 @@ Sthear
 1
 # name
 Tarsia
+# color
+46 35 202
 # subfiefs
 # territory id
 200
@@ -2811,6 +3435,8 @@ Tarsia
 1
 # name
 saisia
+# color
+27 23 208
 # subfiefs
 # territory id
 201
@@ -2820,6 +3446,8 @@ saisia
 1
 # name
 Daytdeth
+# color
+50 13 215
 # subfiefs
 # territory id
 203
@@ -2829,6 +3457,8 @@ Daytdeth
 1
 # name
 Eashtaria
+# color
+44 36 227
 # subfiefs
 # territory id
 204
@@ -2838,6 +3468,8 @@ Eashtaria
 1
 # name
 Sarflinfreyia
+# color
+25 1 201
 # subfiefs
 # territory id
 205
@@ -2847,6 +3479,8 @@ Sarflinfreyia
 1
 # name
 Ferenfreyia
+# color
+23 21 211
 # subfiefs
 # territory id
 206
@@ -2856,6 +3490,8 @@ Ferenfreyia
 1
 # name
 Fersaeigha
+# color
+45 23 212
 # subfiefs
 # territory id
 207
@@ -2865,6 +3501,8 @@ Fersaeigha
 1
 # name
 Nothitopia
+# color
+38 7 213
 # subfiefs
 # territory id
 208
@@ -2874,6 +3512,8 @@ Nothitopia
 1
 # name
 Fusmia
+# color
+40 9 207
 # subfiefs
 # territory id
 209
@@ -2883,6 +3523,8 @@ Fusmia
 1
 # name
 Percmor
+# color
+48 6 203
 # subfiefs
 # territory id
 210
@@ -2892,6 +3534,8 @@ Percmor
 1
 # name
 Pansia
+# color
+48 39 230
 # subfiefs
 # territory id
 212
@@ -2901,6 +3545,8 @@ Pansia
 1
 # name
 Lueghdethia
+# color
+49 34 224
 # subfiefs
 # territory id
 213
@@ -2910,6 +3556,8 @@ Lueghdethia
 1
 # name
 Feyhenia
+# color
+33 6 220
 # subfiefs
 # territory id
 214
@@ -2919,6 +3567,8 @@ Feyhenia
 1
 # name
 Fervithtopia
+# color
+34 8 229
 # subfiefs
 # territory id
 215
@@ -2928,6 +3578,8 @@ Fervithtopia
 1
 # name
 Mozthvaynia
+# color
+26 31 213
 # subfiefs
 # territory id
 217
@@ -2937,6 +3589,8 @@ Mozthvaynia
 1
 # name
 Morethiniisia
+# color
+50 21 210
 # subfiefs
 # territory id
 218
@@ -2946,6 +3600,8 @@ Morethiniisia
 1
 # name
 Feigheigha
+# color
+28 28 201
 # subfiefs
 # territory id
 219
@@ -2955,6 +3611,8 @@ Feigheigha
 1
 # name
 Trostrethtaria
+# color
+45 2 212
 # subfiefs
 # territory id
 220
@@ -2964,6 +3622,8 @@ Trostrethtaria
 1
 # name
 Venttrethvia
+# color
+22 33 219
 # subfiefs
 # territory id
 222
@@ -2973,6 +3633,8 @@ Venttrethvia
 1
 # name
 Pertricth
+# color
+29 18 208
 # subfiefs
 # territory id
 223
@@ -2982,6 +3644,8 @@ Pertricth
 1
 # name
 Tunrotaria
+# color
+36 3 223
 # subfiefs
 # territory id
 224
@@ -2991,6 +3655,8 @@ Tunrotaria
 1
 # name
 Fervenvaynia
+# color
+42 2 227
 # subfiefs
 # territory id
 225
@@ -3000,6 +3666,8 @@ Fervenvaynia
 1
 # name
 Morethinidethia
+# color
+50 9 220
 # subfiefs
 # territory id
 226
@@ -3009,6 +3677,8 @@ Morethinidethia
 1
 # name
 Finithdrentopia
+# color
+48 22 200
 # subfiefs
 # territory id
 227
@@ -3018,6 +3688,8 @@ Finithdrentopia
 1
 # name
 Topifreyia
+# color
+37 36 223
 # subfiefs
 # territory id
 228
@@ -3027,6 +3699,8 @@ Topifreyia
 1
 # name
 Trosrimar
+# color
+28 0 207
 # subfiefs
 # territory id
 229
@@ -3036,6 +3710,8 @@ Trosrimar
 1
 # name
 Renexlisia
+# color
+48 18 225
 # subfiefs
 # territory id
 230
@@ -3045,6 +3721,8 @@ Renexlisia
 1
 # name
 Hethiaisia
+# color
+20 39 224
 # subfiefs
 # territory id
 231
@@ -3054,6 +3732,8 @@ Hethiaisia
 1
 # name
 Fusilapinia
+# color
+29 10 208
 # subfiefs
 # territory id
 232
@@ -3063,6 +3743,8 @@ Fusilapinia
 1
 # name
 Sardrenmar
+# color
+38 9 217
 # subfiefs
 # territory id
 233
@@ -3072,6 +3754,8 @@ Sardrenmar
 1
 # name
 Folnlithales
+# color
+25 32 209
 # subfiefs
 # territory id
 234
@@ -3081,6 +3765,8 @@ Folnlithales
 1
 # name
 Renexdrendethia
+# color
+36 19 218
 # subfiefs
 # territory id
 235
@@ -3090,6 +3776,8 @@ Renexdrendethia
 1
 # name
 Drethfreyia
+# color
+23 1 226
 # subfiefs
 # territory id
 236
@@ -3099,6 +3787,8 @@ Drethfreyia
 1
 # name
 Lueghvineigha
+# color
+22 24 213
 # subfiefs
 # territory id
 237
@@ -3108,6 +3798,8 @@ Lueghvineigha
 1
 # name
 Nethmia
+# color
+27 0 216
 # subfiefs
 # territory id
 238
@@ -3117,6 +3809,8 @@ Nethmia
 1
 # name
 Finithliol
+# color
+48 23 216
 # subfiefs
 # territory id
 239
@@ -3126,6 +3820,8 @@ Finithliol
 1
 # name
 Kerheughough
+# color
+50 0 210
 # subfiefs
 # territory id
 240
@@ -3135,6 +3831,8 @@ Kerheughough
 1
 # name
 Folnhenia
+# color
+30 37 201
 # subfiefs
 # territory id
 242
@@ -3144,6 +3842,8 @@ Folnhenia
 1
 # name
 Tartaria
+# color
+48 4 210
 # subfiefs
 # territory id
 243
@@ -3153,6 +3853,8 @@ Tartaria
 1
 # name
 Pertrethhenia
+# color
+24 18 211
 # subfiefs
 # territory id
 244
@@ -3162,6 +3864,8 @@ Pertrethhenia
 1
 # name
 Eashvithdriax
+# color
+46 9 229
 # subfiefs
 # territory id
 245
@@ -3171,6 +3875,8 @@ Eashvithdriax
 1
 # name
 Thartrethdethia
+# color
+46 5 208
 # subfiefs
 # territory id
 246
@@ -3180,6 +3886,8 @@ Thartrethdethia
 1
 # name
 Nilavithaxia
+# color
+50 36 216
 # subfiefs
 # territory id
 247
@@ -3189,6 +3897,8 @@ Nilavithaxia
 1
 # name
 Tristopia
+# color
+47 30 215
 # subfiefs
 # territory id
 248
@@ -3198,6 +3908,8 @@ Tristopia
 1
 # name
 Mozthilaxia
+# color
+39 6 227
 # subfiefs
 # territory id
 249
@@ -3207,6 +3919,8 @@ Mozthilaxia
 1
 # name
 Stheohthtaria
+# color
+26 3 217
 # subfiefs
 # territory id
 251
@@ -3216,6 +3930,8 @@ Stheohthtaria
 1
 # name
 Feyar
+# color
+26 14 219
 # subfiefs
 # territory id
 252
@@ -3225,6 +3941,8 @@ Feyar
 1
 # name
 Kerol
+# color
+22 32 212
 # subfiefs
 # territory id
 253
@@ -3234,6 +3952,8 @@ Kerol
 1
 # name
 Ferendeth
+# color
+44 20 227
 # subfiefs
 # territory id
 254
@@ -3243,6 +3963,8 @@ Ferendeth
 1
 # name
 Cardeth
+# color
+45 30 227
 # subfiefs
 # territory id
 255
@@ -3252,6 +3974,8 @@ Cardeth
 1
 # name
 Panmar
+# color
+45 15 205
 # subfiefs
 # territory id
 256
@@ -3261,6 +3985,8 @@ Panmar
 1
 # name
 Tharflinheughough
+# color
+26 38 221
 # subfiefs
 # territory id
 257
@@ -3270,6 +3996,8 @@ Tharflinheughough
 1
 # name
 Stheeigha
+# color
+36 35 220
 # subfiefs
 # territory id
 258
@@ -3279,6 +4007,8 @@ Stheeigha
 1
 # name
 Pertrethlithia
+# color
+42 6 208
 # subfiefs
 # territory id
 259
@@ -3288,6 +4018,8 @@ Pertrethlithia
 1
 # name
 Topitrethvaynia
+# color
+45 7 203
 # subfiefs
 # territory id
 260
@@ -3297,6 +4029,8 @@ Topitrethvaynia
 1
 # name
 Trosriol
+# color
+37 26 201
 # subfiefs
 # territory id
 261
@@ -3306,6 +4040,8 @@ Trosriol
 1
 # name
 Sthetopia
+# color
+32 34 226
 # subfiefs
 # territory id
 262
@@ -3315,6 +4051,8 @@ Sthetopia
 1
 # name
 Hethiasadethia
+# color
+32 14 210
 # subfiefs
 # territory id
 263
@@ -3324,6 +4062,8 @@ Hethiasadethia
 1
 # name
 Trisvia
+# color
+21 22 210
 # subfiefs
 # territory id
 264
@@ -3333,6 +4073,8 @@ Trisvia
 1
 # name
 Lueghtretheigha
+# color
+32 8 223
 # subfiefs
 # territory id
 265
@@ -3342,6 +4084,8 @@ Lueghtretheigha
 1
 # name
 Finithfrey
+# color
+45 17 220
 # subfiefs
 # territory id
 266
@@ -3351,6 +4095,8 @@ Finithfrey
 1
 # name
 Renexvandeth
+# color
+50 22 218
 # subfiefs
 # territory id
 267
@@ -3360,6 +4106,8 @@ Renexvandeth
 1
 # name
 drendriax
+# color
+35 19 220
 # subfiefs
 # territory id
 268
@@ -3369,6 +4117,8 @@ drendriax
 1
 # name
 Nilamor
+# color
+21 34 218
 # subfiefs
 # territory id
 269
@@ -3378,6 +4128,8 @@ Nilamor
 1
 # name
 Methisia
+# color
+35 31 207
 # subfiefs
 # territory id
 270
@@ -3387,6 +4139,8 @@ Methisia
 1
 # name
 Fermar
+# color
+25 27 200
 # subfiefs
 # territory id
 271
@@ -3396,6 +4150,8 @@ Fermar
 1
 # name
 Methol
+# color
+42 25 213
 # subfiefs
 # territory id
 273
@@ -3405,6 +4161,8 @@ Methol
 1
 # name
 Lueghohthtaria
+# color
+25 12 207
 # subfiefs
 # territory id
 274
@@ -3414,6 +4172,8 @@ Lueghohthtaria
 1
 # name
 Nilasahenia
+# color
+42 22 220
 # subfiefs
 # territory id
 275
@@ -3423,6 +4183,8 @@ Nilasahenia
 1
 # name
 Nothivanfreyia
+# color
+39 30 204
 # subfiefs
 # territory id
 276
@@ -3432,6 +4194,8 @@ Nothivanfreyia
 1
 # name
 Renexdeth
+# color
+28 0 217
 # subfiefs
 # territory id
 277
@@ -3441,6 +4205,8 @@ Renexdeth
 1
 # name
 vithar
+# color
+45 29 205
 # subfiefs
 # territory id
 278
@@ -3450,6 +4216,8 @@ vithar
 1
 # name
 Renexroar
+# color
+29 35 221
 # subfiefs
 # territory id
 279
@@ -3459,6 +4227,8 @@ Renexroar
 1
 # name
 Stheniltaria
+# color
+45 20 202
 # subfiefs
 # territory id
 280
@@ -3468,6 +4238,8 @@ Stheniltaria
 1
 # name
 Trostopia
+# color
+48 21 216
 # subfiefs
 # territory id
 281
@@ -3477,6 +4249,8 @@ Trostopia
 1
 # name
 isia
+# color
+24 19 227
 # subfiefs
 # territory id
 282
@@ -3486,6 +4260,8 @@ isia
 1
 # name
 Anapinia
+# color
+37 23 210
 # subfiefs
 # territory id
 283
@@ -3495,6 +4271,8 @@ Anapinia
 1
 # name
 Lueghlithia
+# color
+33 26 216
 # subfiefs
 # territory id
 284
@@ -3504,6 +4282,8 @@ Lueghlithia
 1
 # name
 Dayttopia
+# color
+21 40 208
 # subfiefs
 # territory id
 286
@@ -3513,6 +4293,8 @@ Dayttopia
 1
 # name
 Mozthisia
+# color
+41 10 230
 # subfiefs
 # territory id
 287
@@ -3522,6 +4304,8 @@ Mozthisia
 1
 # name
 Nilavithheughough
+# color
+26 10 208
 # subfiefs
 # territory id
 289
@@ -3531,6 +4315,8 @@ Nilavithheughough
 1
 # name
 Folnflinfreyia
+# color
+28 3 203
 # subfiefs
 # territory id
 290
@@ -3540,6 +4326,8 @@ Folnflinfreyia
 1
 # name
 Feytaria
+# color
+30 34 224
 # subfiefs
 # territory id
 292
@@ -3549,6 +4337,8 @@ Feytaria
 1
 # name
 Feyvinfrey
+# color
+33 15 226
 # subfiefs
 # territory id
 293
@@ -3558,6 +4348,8 @@ Feyvinfrey
 1
 # name
 flineigha
+# color
+26 37 228
 # subfiefs
 # territory id
 294
@@ -3567,6 +4359,8 @@ flineigha
 1
 # name
 Ferentrethdeth
+# color
+28 20 210
 # subfiefs
 # territory id
 295
@@ -3576,6 +4370,8 @@ Ferentrethdeth
 1
 # name
 Ferritaria
+# color
+21 15 217
 # subfiefs
 # territory id
 296
@@ -3585,6 +4381,8 @@ Ferritaria
 1
 # name
 Feytrethdethia
+# color
+26 37 222
 # subfiefs
 # territory id
 298
@@ -3594,6 +4392,8 @@ Feytrethdethia
 1
 # name
 Feighvia
+# color
+41 3 200
 # subfiefs
 # territory id
 299
@@ -3603,6 +4403,8 @@ Feighvia
 1
 # name
 Stheohthtricth
+# color
+39 23 222
 # subfiefs
 # territory id
 300
@@ -3612,6 +4414,8 @@ Stheohthtricth
 1
 # name
 Nilasia
+# color
+28 5 206
 # subfiefs
 # territory id
 301
@@ -3621,6 +4425,8 @@ Nilasia
 1
 # name
 Trosvantopia
+# color
+27 8 225
 # subfiefs
 # territory id
 302
@@ -3630,6 +4436,8 @@ Trosvantopia
 1
 # name
 Morethroeigha
+# color
+33 21 217
 # subfiefs
 # territory id
 303
@@ -3639,6 +4447,8 @@ Morethroeigha
 1
 # name
 Ferenohthisia
+# color
+31 7 209
 # subfiefs
 # territory id
 304
@@ -3648,6 +4458,8 @@ Ferenohthisia
 1
 # name
 Ferenfrey
+# color
+26 40 211
 # subfiefs
 # territory id
 305
@@ -3657,6 +4469,8 @@ Ferenfrey
 1
 # name
 Trosflindethia
+# color
+28 30 220
 # subfiefs
 # territory id
 306
@@ -3666,6 +4480,8 @@ Trosflindethia
 1
 # name
 Vosvantaria
+# color
+34 27 229
 # subfiefs
 # territory id
 307
@@ -3675,6 +4491,8 @@ Vosvantaria
 1
 # name
 Hethiamor
+# color
+34 30 221
 # subfiefs
 # territory id
 308
@@ -3684,6 +4502,8 @@ Hethiamor
 1
 # name
 Tharsahenia
+# color
+45 28 209
 # subfiefs
 # territory id
 309
@@ -3693,6 +4513,8 @@ Tharsahenia
 1
 # name
 Nethvenmor
+# color
+27 25 213
 # subfiefs
 # territory id
 310
@@ -3702,6 +4524,8 @@ Nethvenmor
 1
 # name
 Ferlithia
+# color
+41 24 215
 # subfiefs
 # territory id
 311
@@ -3711,6 +4535,8 @@ Ferlithia
 1
 # name
 Westtaria
+# color
+32 17 229
 # subfiefs
 # territory id
 312
@@ -3720,6 +4546,8 @@ Westtaria
 1
 # name
 Feyisia
+# color
+27 35 209
 # subfiefs
 # territory id
 313
@@ -3729,6 +4557,8 @@ Feyisia
 1
 # name
 Fusdethia
+# color
+30 35 213
 # subfiefs
 # territory id
 314
@@ -3738,6 +4568,8 @@ Fusdethia
 1
 # name
 Kerfreyia
+# color
+30 31 219
 # subfiefs
 # territory id
 315
@@ -3747,6 +4579,8 @@ Kerfreyia
 1
 # name
 Kervanapinia
+# color
+45 23 230
 # subfiefs
 # territory id
 316
@@ -3756,6 +4590,8 @@ Kervanapinia
 1
 # name
 Nothifrey
+# color
+44 10 208
 # subfiefs
 # territory id
 317
@@ -3765,6 +4601,8 @@ Nothifrey
 1
 # name
 Panromor
+# color
+23 5 220
 # subfiefs
 # territory id
 318
@@ -3774,6 +4612,8 @@ Panromor
 1
 # name
 Finithsathales
+# color
+43 17 211
 # subfiefs
 # territory id
 319
@@ -3783,6 +4623,8 @@ Finithsathales
 1
 # name
 Renexflinthales
+# color
+44 14 221
 # subfiefs
 # territory id
 320
@@ -3792,6 +4634,8 @@ Renexflinthales
 1
 # name
 Trisar
+# color
+39 27 200
 # subfiefs
 # territory id
 321
@@ -3801,6 +4645,8 @@ Trisar
 1
 # name
 Dayttricth
+# color
+20 24 214
 # subfiefs
 # territory id
 322
@@ -3810,6 +4656,8 @@ Dayttricth
 1
 # name
 Methdriax
+# color
+21 18 208
 # subfiefs
 # territory id
 323
@@ -3819,6 +4667,8 @@ Methdriax
 1
 # name
 Westvanvaynia
+# color
+40 25 222
 # subfiefs
 # territory id
 324
@@ -3828,6 +4678,8 @@ Westvanvaynia
 1
 # name
 Nilaflinaxia
+# color
+48 37 201
 # subfiefs
 # territory id
 325
@@ -3837,6 +4689,8 @@ Nilaflinaxia
 1
 # name
 Ferenilheughough
+# color
+40 40 200
 # subfiefs
 # territory id
 326
@@ -3846,6 +4700,8 @@ Ferenilheughough
 1
 # name
 Tuntopia
+# color
+28 26 207
 # subfiefs
 # territory id
 327
@@ -3855,6 +4711,8 @@ Tuntopia
 1
 # name
 Trosmar
+# color
+21 2 216
 # subfiefs
 # territory id
 328
@@ -3864,6 +4722,8 @@ Trosmar
 1
 # name
 Sthenvantaria
+# color
+47 1 215
 # subfiefs
 # territory id
 329
@@ -3873,6 +4733,8 @@ Sthenvantaria
 1
 # name
 Sthetrethmor
+# color
+47 29 201
 # subfiefs
 # territory id
 330
@@ -3882,6 +4744,8 @@ Sthetrethmor
 1
 # name
 vithisia
+# color
+44 30 216
 # subfiefs
 # territory id
 331
@@ -3891,6 +4755,8 @@ vithisia
 1
 # name
 Percfreyia
+# color
+26 19 213
 # subfiefs
 # territory id
 332
@@ -3900,6 +4766,8 @@ Percfreyia
 1
 # name
 Drethtaria
+# color
+21 8 209
 # subfiefs
 # territory id
 333
@@ -3909,6 +4777,8 @@ Drethtaria
 1
 # name
 Tarvithfrey
+# color
+36 18 230
 # subfiefs
 # territory id
 334
@@ -3918,6 +4788,8 @@ Tarvithfrey
 1
 # name
 Renexvaynia
+# color
+39 8 221
 # subfiefs
 # territory id
 335
@@ -3927,6 +4799,8 @@ Renexvaynia
 1
 # name
 Mozthtricth
+# color
+39 3 228
 # subfiefs
 # territory id
 336
@@ -3936,6 +4810,8 @@ Mozthtricth
 1
 # name
 Lueghmor
+# color
+46 37 204
 # subfiefs
 # territory id
 337
@@ -3945,6 +4821,8 @@ Lueghmor
 1
 # name
 Trisvaynia
+# color
+31 5 202
 # subfiefs
 # territory id
 338
@@ -3954,6 +4832,8 @@ Trisvaynia
 1
 # name
 Sarinilithia
+# color
+50 26 212
 # subfiefs
 # territory id
 339
@@ -3963,6 +4843,8 @@ Sarinilithia
 1
 # name
 Ferentricth
+# color
+21 7 220
 # subfiefs
 # territory id
 340
@@ -3972,6 +4854,8 @@ Ferentricth
 1
 # name
 Sthemar
+# color
+39 27 224
 # subfiefs
 # territory id
 341
@@ -3981,6 +4865,8 @@ Sthemar
 1
 # name
 Renexflinmor
+# color
+47 17 210
 # subfiefs
 # territory id
 342
@@ -3990,6 +4876,8 @@ Renexflinmor
 1
 # name
 Anvia
+# color
+36 19 203
 # subfiefs
 # territory id
 343
@@ -3999,6 +4887,8 @@ Anvia
 1
 # name
 Lermia
+# color
+24 24 204
 # subfiefs
 # territory id
 344
@@ -4008,6 +4898,8 @@ Lermia
 1
 # name
 Finiththales
+# color
+22 32 201
 # subfiefs
 # territory id
 345
@@ -4017,6 +4909,8 @@ Finiththales
 1
 # name
 Fusfreyia
+# color
+42 12 211
 # subfiefs
 # territory id
 346
@@ -4026,6 +4920,8 @@ Fusfreyia
 1
 # name
 Stheheughough
+# color
+47 24 201
 # subfiefs
 # territory id
 347
@@ -4035,6 +4931,8 @@ Stheheughough
 1
 # name
 Feighilsia
+# color
+34 23 221
 # subfiefs
 # territory id
 348
@@ -4044,6 +4942,8 @@ Feighilsia
 1
 # name
 trethisia
+# color
+28 12 205
 # subfiefs
 # territory id
 349
@@ -4053,6 +4953,8 @@ trethisia
 1
 # name
 Vosilapinia
+# color
+24 23 224
 # subfiefs
 # territory id
 350
@@ -4062,6 +4964,8 @@ Vosilapinia
 1
 # name
 Sthenlithia
+# color
+45 9 229
 # subfiefs
 # territory id
 352
@@ -4071,6 +4975,8 @@ Sthenlithia
 1
 # name
 Folnvaneigha
+# color
+46 8 219
 # subfiefs
 # territory id
 353
@@ -4080,6 +4986,8 @@ Folnvaneigha
 1
 # name
 Lueghohthdethia
+# color
+32 21 204
 # subfiefs
 # territory id
 354
@@ -4089,6 +4997,8 @@ Lueghohthdethia
 1
 # name
 Morethmar
+# color
+30 17 224
 # subfiefs
 # territory id
 355
@@ -4098,6 +5008,8 @@ Morethmar
 1
 # name
 Nothiinivaynia
+# color
+44 22 218
 # subfiefs
 # territory id
 356
@@ -4107,6 +5019,8 @@ Nothiinivaynia
 1
 # name
 Renexohthtricth
+# color
+42 19 217
 # subfiefs
 # territory id
 357
@@ -4116,6 +5030,8 @@ Renexohthtricth
 1
 # name
 Sthenvithmar
+# color
+49 16 210
 # subfiefs
 # territory id
 358
@@ -4125,6 +5041,8 @@ Sthenvithmar
 1
 # name
 Finithtopia
+# color
+39 12 223
 # subfiefs
 # territory id
 359
@@ -4134,6 +5052,8 @@ Finithtopia
 1
 # name
 Anmia
+# color
+47 13 218
 # subfiefs
 # territory id
 360
@@ -4143,6 +5063,8 @@ Anmia
 1
 # name
 Vosthales
+# color
+23 29 214
 # subfiefs
 # territory id
 361
@@ -4152,6 +5074,8 @@ Vosthales
 1
 # name
 Hethiadeth
+# color
+41 0 204
 # subfiefs
 # territory id
 362
@@ -4161,6 +5085,8 @@ Hethiadeth
 1
 # name
 Nethdriax
+# color
+37 24 209
 # subfiefs
 # territory id
 363
@@ -4170,6 +5096,8 @@ Nethdriax
 1
 # name
 Morethheughough
+# color
+21 40 222
 # subfiefs
 # territory id
 364
@@ -4179,6 +5107,8 @@ Morethheughough
 1
 # name
 Daytdriax
+# color
+35 26 218
 # subfiefs
 # territory id
 365
@@ -4188,6 +5118,8 @@ Daytdriax
 1
 # name
 Ventvenar
+# color
+33 2 221
 # subfiefs
 # territory id
 366
@@ -4197,6 +5129,8 @@ Ventvenar
 1
 # name
 Vosheughough
+# color
+42 15 200
 # subfiefs
 # territory id
 367
@@ -4206,6 +5140,8 @@ Vosheughough
 1
 # name
 Tarohthapinia
+# color
+41 24 225
 # subfiefs
 # territory id
 369
@@ -4215,6 +5151,8 @@ Tarohthapinia
 1
 # name
 Methtricth
+# color
+39 29 208
 # subfiefs
 # territory id
 370
@@ -4224,6 +5162,8 @@ Methtricth
 1
 # name
 Feysadriax
+# color
+45 27 221
 # subfiefs
 # territory id
 371
@@ -4233,6 +5173,8 @@ Feysadriax
 1
 # name
 Lervanisia
+# color
+32 32 219
 # subfiefs
 # territory id
 372
@@ -4242,6 +5184,8 @@ Lervanisia
 1
 # name
 Nothiheughough
+# color
+39 27 224
 # subfiefs
 # territory id
 373
@@ -4251,6 +5195,8 @@ Nothiheughough
 1
 # name
 Nethrivaynia
+# color
+44 6 200
 # subfiefs
 # territory id
 374
@@ -4260,6 +5206,8 @@ Nethrivaynia
 1
 # name
 Ferenapinia
+# color
+42 0 221
 # subfiefs
 # territory id
 375
@@ -4269,6 +5217,8 @@ Ferenapinia
 1
 # name
 Sthedriax
+# color
+27 27 219
 # subfiefs
 # territory id
 376
@@ -4278,6 +5228,8 @@ Sthedriax
 1
 # name
 Trosol
+# color
+23 11 223
 # subfiefs
 # territory id
 377
@@ -4287,6 +5239,8 @@ Trosol
 1
 # name
 Feighildeth
+# color
+43 22 225
 # subfiefs
 # territory id
 378
@@ -4296,6 +5250,8 @@ Feighildeth
 1
 # name
 Kerroisia
+# color
+20 5 213
 # subfiefs
 # territory id
 379
@@ -4305,6 +5261,8 @@ Kerroisia
 1
 # name
 Daytvendethia
+# color
+50 5 217
 # subfiefs
 # territory id
 380
@@ -4314,6 +5272,8 @@ Daytvendethia
 1
 # name
 Westilapinia
+# color
+20 34 208
 # subfiefs
 # territory id
 381
@@ -4323,6 +5283,8 @@ Westilapinia
 1
 # name
 Tharthales
+# color
+39 10 208
 # subfiefs
 # territory id
 383
@@ -4332,6 +5294,8 @@ Tharthales
 1
 # name
 Mozthrodethia
+# color
+27 23 221
 # subfiefs
 # territory id
 384
@@ -4341,6 +5305,8 @@ Mozthrodethia
 1
 # name
 Perapinia
+# color
+48 32 210
 # subfiefs
 # territory id
 386
@@ -4350,6 +5316,8 @@ Perapinia
 1
 # name
 Panildriax
+# color
+44 40 218
 # subfiefs
 # territory id
 387
@@ -4359,6 +5327,8 @@ Panildriax
 1
 # name
 Drethvia
+# color
+22 0 209
 # subfiefs
 # territory id
 388
@@ -4368,6 +5338,8 @@ Drethvia
 1
 # name
 Morethvithapinia
+# color
+25 24 206
 # subfiefs
 # territory id
 389
@@ -4377,6 +5349,8 @@ Morethvithapinia
 1
 # name
 Finithflinheughough
+# color
+49 10 217
 # subfiefs
 # territory id
 390
@@ -4386,6 +5360,8 @@ Finithflinheughough
 1
 # name
 drentopia
+# color
+38 8 207
 # subfiefs
 # territory id
 391
@@ -4395,6 +5371,8 @@ drentopia
 1
 # name
 Renextaria
+# color
+22 5 227
 # subfiefs
 # territory id
 392
@@ -4404,6 +5382,8 @@ Renextaria
 1
 # name
 Westrideth
+# color
+48 18 212
 # subfiefs
 # territory id
 393
@@ -4413,6 +5393,8 @@ Westrideth
 1
 # name
 Feymia
+# color
+34 34 207
 # subfiefs
 # territory id
 394
@@ -4422,6 +5404,8 @@ Feymia
 1
 # name
 Renexflintricth
+# color
+33 22 211
 # subfiefs
 # territory id
 395
@@ -4431,6 +5415,8 @@ Renexflintricth
 1
 # name
 Lerrool
+# color
+38 0 229
 # subfiefs
 # territory id
 396
@@ -4440,6 +5426,8 @@ Lerrool
 1
 # name
 Sthelifrey
+# color
+42 38 215
 # subfiefs
 # territory id
 397
@@ -4449,6 +5437,8 @@ Sthelifrey
 1
 # name
 Nothivia
+# color
+49 37 230
 # subfiefs
 # territory id
 398
@@ -4458,6 +5448,8 @@ Nothivia
 1
 # name
 Tuneigha
+# color
+31 32 202
 # subfiefs
 # territory id
 399
@@ -4467,6 +5459,8 @@ Tuneigha
 1
 # name
 Lueghfreyia
+# color
+25 32 212
 # subfiefs
 # territory id
 400
@@ -4476,6 +5470,8 @@ Lueghfreyia
 1
 # name
 Vostricth
+# color
+23 29 213
 # subfiefs
 # territory id
 401
@@ -4485,6 +5481,8 @@ Vostricth
 1
 # name
 Anar
+# color
+48 33 221
 # subfiefs
 # territory id
 402
@@ -4494,6 +5492,8 @@ Anar
 1
 # name
 Trosilfrey
+# color
+36 25 216
 # subfiefs
 # territory id
 403
@@ -4503,6 +5503,8 @@ Trosilfrey
 1
 # name
 Daytroaxia
+# color
+31 1 211
 # subfiefs
 # territory id
 404
@@ -4512,6 +5514,8 @@ Daytroaxia
 1
 # name
 Westflinthales
+# color
+20 35 210
 # subfiefs
 # territory id
 405
@@ -4521,6 +5525,8 @@ Westflinthales
 1
 # name
 Folnflinvaynia
+# color
+38 11 223
 # subfiefs
 # territory id
 406
@@ -4530,6 +5536,8 @@ Folnflinvaynia
 1
 # name
 Nothidrentricth
+# color
+49 17 210
 # subfiefs
 # territory id
 407
@@ -4539,6 +5547,8 @@ Nothidrentricth
 1
 # name
 Tundrenol
+# color
+20 5 209
 # subfiefs
 # territory id
 408
@@ -4548,6 +5558,8 @@ Tundrenol
 1
 # name
 Perilmia
+# color
+47 6 223
 # subfiefs
 # territory id
 409
@@ -4557,6 +5569,8 @@ Perilmia
 1
 # name
 Moztheigha
+# color
+43 27 211
 # subfiefs
 # territory id
 410
@@ -4566,6 +5580,8 @@ Moztheigha
 1
 # name
 Lersadriax
+# color
+24 3 215
 # subfiefs
 # territory id
 411
@@ -4575,6 +5591,8 @@ Lersadriax
 1
 # name
 Sthenapinia
+# color
+50 14 209
 # subfiefs
 # territory id
 412
@@ -4584,6 +5602,8 @@ Sthenapinia
 1
 # name
 Mozthol
+# color
+41 38 213
 # subfiefs
 # territory id
 413
@@ -4593,6 +5613,8 @@ Mozthol
 1
 # name
 Tharisia
+# color
+47 38 219
 # subfiefs
 # territory id
 414
@@ -4602,6 +5624,8 @@ Tharisia
 1
 # name
 Mozthtopia
+# color
+21 33 223
 # subfiefs
 # territory id
 415
@@ -4611,6 +5635,8 @@ Mozthtopia
 1
 # name
 Kertrethlithia
+# color
+45 9 227
 # subfiefs
 # territory id
 416
@@ -4620,6 +5646,8 @@ Kertrethlithia
 1
 # name
 Kerdeth
+# color
+37 20 211
 # subfiefs
 # territory id
 417
@@ -4629,6 +5657,8 @@ Kerdeth
 1
 # name
 Westtopia
+# color
+45 18 207
 # subfiefs
 # territory id
 418
@@ -4638,6 +5668,8 @@ Westtopia
 1
 # name
 Andrenisia
+# color
+45 12 214
 # subfiefs
 # territory id
 420
@@ -4647,6 +5679,8 @@ Andrenisia
 1
 # name
 Morethroisia
+# color
+41 9 215
 # subfiefs
 # territory id
 421
@@ -4656,6 +5690,8 @@ Morethroisia
 1
 # name
 Drethohthtaria
+# color
+29 34 215
 # subfiefs
 # territory id
 422
@@ -4665,6 +5701,8 @@ Drethohthtaria
 1
 # name
 Drethaxia
+# color
+32 20 205
 # subfiefs
 # territory id
 423
@@ -4674,6 +5712,8 @@ Drethaxia
 1
 # name
 Fertrethheughough
+# color
+41 25 221
 # subfiefs
 # territory id
 424
@@ -4683,6 +5723,8 @@ Fertrethheughough
 1
 # name
 Sarvaynia
+# color
+34 13 212
 # subfiefs
 # territory id
 425
@@ -4692,6 +5734,8 @@ Sarvaynia
 1
 # name
 Feighliaxia
+# color
+38 37 221
 # subfiefs
 # territory id
 428
@@ -4701,6 +5745,8 @@ Feighliaxia
 1
 # name
 Nilarolithia
+# color
+31 19 204
 # subfiefs
 # territory id
 430
@@ -4710,6 +5756,8 @@ Nilarolithia
 1
 # name
 Hethiataria
+# color
+48 33 210
 # subfiefs
 # territory id
 431
@@ -4719,6 +5767,8 @@ Hethiataria
 1
 # name
 Renextrethvaynia
+# color
+23 12 222
 # subfiefs
 # territory id
 432
@@ -4728,6 +5778,8 @@ Renextrethvaynia
 1
 # name
 Lersia
+# color
+42 1 228
 # subfiefs
 # territory id
 433
@@ -4737,6 +5789,8 @@ Lersia
 1
 # name
 Nilalithia
+# color
+34 27 217
 # subfiefs
 # territory id
 434
@@ -4746,6 +5800,8 @@ Nilalithia
 1
 # name
 Morethol
+# color
+36 28 204
 # subfiefs
 # territory id
 435
@@ -4755,6 +5811,8 @@ Morethol
 1
 # name
 Fusaxia
+# color
+21 29 209
 # subfiefs
 # territory id
 436
@@ -4764,6 +5822,8 @@ Fusaxia
 1
 # name
 Tartrethmia
+# color
+26 19 229
 # subfiefs
 # territory id
 437
@@ -4773,6 +5833,8 @@ Tartrethmia
 1
 # name
 Sthentopia
+# color
+36 21 227
 # subfiefs
 # territory id
 438
@@ -4782,6 +5844,8 @@ Sthentopia
 1
 # name
 Daytinitricth
+# color
+47 13 206
 # subfiefs
 # territory id
 439
@@ -4791,6 +5855,8 @@ Daytinitricth
 1
 # name
 Panlideth
+# color
+28 24 210
 # subfiefs
 # territory id
 440
@@ -4800,6 +5866,8 @@ Panlideth
 1
 # name
 Cardriax
+# color
+47 16 230
 # subfiefs
 # territory id
 441
@@ -4809,6 +5877,8 @@ Cardriax
 1
 # name
 Trishenia
+# color
+49 18 222
 # subfiefs
 # territory id
 443
@@ -4818,6 +5888,8 @@ Trishenia
 1
 # name
 Trisdethia
+# color
+45 21 201
 # subfiefs
 # territory id
 444
@@ -4827,6 +5899,8 @@ Trisdethia
 1
 # name
 Renexdrensia
+# color
+35 38 218
 # subfiefs
 # territory id
 445
@@ -4836,6 +5910,8 @@ Renexdrensia
 1
 # name
 Nilasaaxia
+# color
+47 1 213
 # subfiefs
 # territory id
 446
@@ -4845,6 +5921,8 @@ Nilasaaxia
 1
 # name
 Trismia
+# color
+26 11 200
 # subfiefs
 # territory id
 447
@@ -4854,6 +5932,8 @@ Trismia
 1
 # name
 Ferrieigha
+# color
+31 22 224
 # subfiefs
 # territory id
 448
@@ -4863,6 +5943,8 @@ Ferrieigha
 1
 # name
 Eashmor
+# color
+23 39 230
 # subfiefs
 # territory id
 449
@@ -4872,6 +5954,8 @@ Eashmor
 1
 # name
 Feyapinia
+# color
+36 19 213
 # subfiefs
 # territory id
 450
@@ -4881,6 +5965,8 @@ Feyapinia
 1
 # name
 Ferenilthales
+# color
+23 29 201
 # subfiefs
 # territory id
 451
@@ -4890,6 +5976,8 @@ Ferenilthales
 1
 # name
 Panohththales
+# color
+29 4 211
 # subfiefs
 # territory id
 452
@@ -4899,6 +5987,8 @@ Panohththales
 1
 # name
 Sthetaria
+# color
+28 17 212
 # subfiefs
 # territory id
 453
@@ -4908,6 +5998,8 @@ Sthetaria
 1
 # name
 Vosilhenia
+# color
+50 26 212
 # subfiefs
 # territory id
 454
@@ -4917,6 +6009,8 @@ Vosilhenia
 1
 # name
 Folntopia
+# color
+23 17 203
 # subfiefs
 # territory id
 455
@@ -4926,6 +6020,8 @@ Folntopia
 1
 # name
 Neththales
+# color
+44 10 223
 # subfiefs
 # territory id
 456
@@ -4935,6 +6031,8 @@ Neththales
 1
 # name
 Daytvaynia
+# color
+49 12 208
 # subfiefs
 # territory id
 457
@@ -4944,6 +6042,8 @@ Daytvaynia
 1
 # name
 Ferdrenmar
+# color
+24 13 227
 # subfiefs
 # territory id
 458
@@ -4953,6 +6053,8 @@ Ferdrenmar
 1
 # name
 Trisisia
+# color
+44 2 219
 # subfiefs
 # territory id
 459
@@ -4962,6 +6064,8 @@ Trisisia
 1
 # name
 Drethtrethisia
+# color
+41 3 230
 # subfiefs
 # territory id
 460
@@ -4971,6 +6075,8 @@ Drethtrethisia
 1
 # name
 Tuntrethdethia
+# color
+25 39 228
 # subfiefs
 # territory id
 461
@@ -4980,6 +6086,8 @@ Tuntrethdethia
 1
 # name
 Kervenlithia
+# color
+27 36 219
 # subfiefs
 # territory id
 462
@@ -4989,6 +6097,8 @@ Kervenlithia
 1
 # name
 Mozthflinmia
+# color
+45 35 226
 # subfiefs
 # territory id
 463
@@ -4998,6 +6108,8 @@ Mozthflinmia
 1
 # name
 Morethlimor
+# color
+42 12 212
 # subfiefs
 # territory id
 464
@@ -5007,6 +6119,8 @@ Morethlimor
 1
 # name
 Nothihenia
+# color
+28 0 203
 # subfiefs
 # territory id
 465
@@ -5016,6 +6130,8 @@ Nothihenia
 1
 # name
 Mozthmar
+# color
+42 6 220
 # subfiefs
 # territory id
 466
@@ -5025,6 +6141,8 @@ Mozthmar
 1
 # name
 Daytheughough
+# color
+48 20 200
 # subfiefs
 # territory id
 469
@@ -5034,6 +6152,8 @@ Daytheughough
 1
 # name
 Daytflinvaynia
+# color
+38 36 209
 # subfiefs
 # territory id
 470
@@ -5043,6 +6163,8 @@ Daytflinvaynia
 1
 # name
 Drethvinmor
+# color
+20 11 221
 # subfiefs
 # territory id
 471
@@ -5052,6 +6174,8 @@ Drethvinmor
 1
 # name
 Methilheughough
+# color
+28 6 206
 # subfiefs
 # territory id
 472
@@ -5061,6 +6185,8 @@ Methilheughough
 1
 # name
 Nothitaria
+# color
+31 35 211
 # subfiefs
 # territory id
 473
@@ -5070,6 +6196,8 @@ Nothitaria
 1
 # name
 Trisvindeth
+# color
+26 10 226
 # subfiefs
 # territory id
 474
@@ -5079,6 +6207,8 @@ Trisvindeth
 1
 # name
 Finithheughough
+# color
+23 40 206
 # subfiefs
 # territory id
 475
@@ -5088,6 +6218,8 @@ Finithheughough
 1
 # name
 Ferenflintopia
+# color
+41 8 224
 # subfiefs
 # territory id
 476
@@ -5097,6 +6229,8 @@ Ferenflintopia
 1
 # name
 Nethtopia
+# color
+22 28 205
 # subfiefs
 # territory id
 478
@@ -5106,6 +6240,8 @@ Nethtopia
 1
 # name
 Percheughough
+# color
+39 33 207
 # subfiefs
 # territory id
 479
@@ -5115,6 +6251,8 @@ Percheughough
 1
 # name
 Nilahenia
+# color
+45 9 230
 # subfiefs
 # territory id
 480
@@ -5124,6 +6262,8 @@ Nilahenia
 1
 # name
 Vostaria
+# color
+47 25 209
 # subfiefs
 # territory id
 481
@@ -5133,6 +6273,8 @@ Vostaria
 1
 # name
 Fusvaynia
+# color
+38 23 221
 # subfiefs
 # territory id
 482
@@ -5142,6 +6284,8 @@ Fusvaynia
 1
 # name
 Lueghhenia
+# color
+44 5 205
 # subfiefs
 # territory id
 483
@@ -5151,6 +6295,8 @@ Lueghhenia
 1
 # name
 Tarheughough
+# color
+27 0 213
 # subfiefs
 # territory id
 484
@@ -5160,6 +6306,8 @@ Tarheughough
 1
 # name
 Vosohthmar
+# color
+37 36 227
 # subfiefs
 # territory id
 485
@@ -5169,6 +6317,8 @@ Vosohthmar
 1
 # name
 Nilaohthmar
+# color
+49 14 206
 # subfiefs
 # territory id
 486
@@ -5178,6 +6328,8 @@ Nilaohthmar
 1
 # name
 Methmar
+# color
+20 8 224
 # subfiefs
 # territory id
 487
@@ -5187,6 +6339,8 @@ Methmar
 1
 # name
 Hethiafreyia
+# color
+28 5 221
 # subfiefs
 # territory id
 488
@@ -5196,6 +6350,8 @@ Hethiafreyia
 1
 # name
 Pervanfreyia
+# color
+34 23 214
 # subfiefs
 # territory id
 489
@@ -5205,6 +6361,8 @@ Pervanfreyia
 1
 # name
 Kerinimar
+# color
+31 0 221
 # subfiefs
 # territory id
 491
@@ -5214,6 +6372,8 @@ Kerinimar
 1
 # name
 Drethvinfrey
+# color
+28 23 216
 # subfiefs
 # territory id
 493
@@ -5223,6 +6383,8 @@ Drethvinfrey
 1
 # name
 Tunar
+# color
+25 17 206
 # subfiefs
 # territory id
 494
@@ -5232,6 +6394,8 @@ Tunar
 1
 # name
 Vosridriax
+# color
+24 38 210
 # subfiefs
 # territory id
 495
@@ -5241,6 +6405,8 @@ Vosridriax
 1
 # name
 Feighmia
+# color
+35 0 204
 # subfiefs
 # territory id
 496
@@ -5250,6 +6416,8 @@ Feighmia
 1
 # name
 Nothiar
+# color
+24 7 219
 # subfiefs
 # territory id
 497
@@ -5259,6 +6427,8 @@ Nothiar
 1
 # name
 Lueghvenlithia
+# color
+33 22 207
 # subfiefs
 # territory id
 498
@@ -5268,6 +6438,8 @@ Lueghvenlithia
 1
 # name
 Lerdrendethia
+# color
+44 9 214
 # subfiefs
 # territory id
 500
@@ -5277,6 +6449,8 @@ Lerdrendethia
 1
 # name
 Ventohthlithia
+# color
+39 40 228
 # subfiefs
 # territory id
 501
@@ -5286,6 +6460,8 @@ Ventohthlithia
 1
 # name
 Lueghviththales
+# color
+22 21 212
 # subfiefs
 # territory id
 502
@@ -5295,6 +6471,8 @@ Lueghviththales
 1
 # name
 Mozthvia
+# color
+34 11 200
 # subfiefs
 # territory id
 503
@@ -5304,6 +6482,8 @@ Mozthvia
 1
 # name
 Antrethsia
+# color
+35 33 215
 # subfiefs
 # territory id
 504
@@ -5313,6 +6493,8 @@ Antrethsia
 1
 # name
 Hethiahenia
+# color
+46 19 213
 # subfiefs
 # territory id
 505
@@ -5322,6 +6504,8 @@ Hethiahenia
 1
 # name
 Netheigha
+# color
+40 37 211
 # subfiefs
 # territory id
 506
@@ -5331,6 +6515,8 @@ Netheigha
 1
 # name
 Mozthar
+# color
+49 34 227
 # subfiefs
 # territory id
 507
@@ -5340,6 +6526,8 @@ Mozthar
 1
 # name
 Feighflindeth
+# color
+46 30 214
 # subfiefs
 # territory id
 508
@@ -5349,6 +6537,8 @@ Feighflindeth
 1
 # name
 Tarvaynia
+# color
+29 32 218
 # subfiefs
 # territory id
 509
@@ -5358,6 +6548,8 @@ Tarvaynia
 1
 # name
 Sthemia
+# color
+49 29 229
 # subfiefs
 # territory id
 510
@@ -5367,6 +6559,8 @@ Sthemia
 1
 # name
 Nethaxia
+# color
+34 28 225
 # subfiefs
 # territory id
 511
@@ -5376,6 +6570,8 @@ Nethaxia
 1
 # name
 Westfreyia
+# color
+37 21 207
 # subfiefs
 # territory id
 512
@@ -5385,6 +6581,8 @@ Westfreyia
 1
 # name
 Feighdethia
+# color
+32 11 208
 # subfiefs
 # territory id
 513
@@ -5394,6 +6592,8 @@ Feighdethia
 1
 # name
 Ferdeth
+# color
+44 4 204
 # subfiefs
 # territory id
 514
@@ -5403,6 +6603,8 @@ Ferdeth
 1
 # name
 Ventmor
+# color
+21 38 222
 # subfiefs
 # territory id
 515
@@ -5412,6 +6614,8 @@ Ventmor
 1
 # name
 Sarmor
+# color
+39 29 201
 # subfiefs
 # territory id
 516
@@ -5421,6 +6625,8 @@ Sarmor
 1
 # name
 Drethar
+# color
+28 18 214
 # subfiefs
 # territory id
 517
@@ -5430,6 +6636,8 @@ Drethar
 1
 # name
 Ferenheughough
+# color
+47 6 223
 # subfiefs
 # territory id
 518
@@ -5439,6 +6647,8 @@ Ferenheughough
 1
 # name
 Trosriapinia
+# color
+24 28 202
 # subfiefs
 # territory id
 519
@@ -5448,6 +6658,8 @@ Trosriapinia
 1
 # name
 Ferrodethia
+# color
+20 35 216
 # subfiefs
 # territory id
 520
@@ -5457,6 +6669,8 @@ Ferrodethia
 1
 # name
 Methvithvaynia
+# color
+45 5 215
 # subfiefs
 # territory id
 521
@@ -5466,6 +6680,8 @@ Methvithvaynia
 1
 # name
 Sthevia
+# color
+41 3 211
 # subfiefs
 # territory id
 522
@@ -5475,6 +6691,8 @@ Sthevia
 1
 # name
 Sarrohenia
+# color
+29 17 214
 # subfiefs
 # territory id
 523
@@ -5484,6 +6702,8 @@ Sarrohenia
 1
 # name
 Panridethia
+# color
+33 36 220
 # subfiefs
 # territory id
 524
@@ -5493,6 +6713,8 @@ Panridethia
 1
 # name
 Finithmor
+# color
+32 32 206
 # subfiefs
 # territory id
 525
@@ -5502,6 +6724,8 @@ Finithmor
 1
 # name
 Topiohthhenia
+# color
+22 22 220
 # subfiefs
 # territory id
 527
@@ -5511,6 +6735,8 @@ Topiohthhenia
 1
 # name
 Hethialithia
+# color
+41 11 208
 # subfiefs
 # territory id
 528
@@ -5520,6 +6746,8 @@ Hethialithia
 1
 # name
 Panar
+# color
+48 31 221
 # subfiefs
 # territory id
 529
@@ -5529,6 +6757,8 @@ Panar
 1
 # name
 rovaynia
+# color
+27 30 223
 # subfiefs
 # territory id
 530
@@ -5538,6 +6768,8 @@ rovaynia
 1
 # name
 Kervindethia
+# color
+38 5 213
 # subfiefs
 # territory id
 531
@@ -5547,6 +6779,8 @@ Kervindethia
 1
 # name
 Tunfrey
+# color
+29 31 227
 # subfiefs
 # territory id
 532
@@ -5556,6 +6790,8 @@ Tunfrey
 1
 # name
 Eashohthtaria
+# color
+31 11 211
 # subfiefs
 # territory id
 533
@@ -5565,6 +6801,8 @@ Eashohthtaria
 1
 # name
 Feyvaynia
+# color
+35 8 228
 # subfiefs
 # territory id
 534
@@ -5574,6 +6812,8 @@ Feyvaynia
 1
 # name
 Carlithia
+# color
+42 38 224
 # subfiefs
 # territory id
 535
@@ -5583,6 +6823,8 @@ Carlithia
 1
 # name
 Ferenhenia
+# color
+45 5 222
 # subfiefs
 # territory id
 536
@@ -5592,6 +6834,8 @@ Ferenhenia
 1
 # name
 Feighdrenthales
+# color
+38 9 221
 # subfiefs
 # territory id
 537
@@ -5601,6 +6845,8 @@ Feighdrenthales
 1
 # name
 Finithvithfreyia
+# color
+34 28 227
 # subfiefs
 # territory id
 538
@@ -5610,6 +6856,8 @@ Finithvithfreyia
 1
 # name
 Drethmar
+# color
+43 14 209
 # subfiefs
 # territory id
 539
@@ -5619,6 +6867,8 @@ Drethmar
 1
 # name
 Nilatrethmar
+# color
+22 6 221
 # subfiefs
 # territory id
 540
@@ -5628,6 +6878,8 @@ Nilatrethmar
 1
 # name
 Tarlithia
+# color
+43 33 223
 # subfiefs
 # territory id
 541
@@ -5637,6 +6889,8 @@ Tarlithia
 1
 # name
 Morethvaynia
+# color
+36 25 210
 # subfiefs
 # territory id
 542
@@ -5646,6 +6900,8 @@ Morethvaynia
 1
 # name
 Feyeigha
+# color
+39 7 218
 # subfiefs
 # territory id
 543
@@ -5655,6 +6911,8 @@ Feyeigha
 1
 # name
 Folnfrey
+# color
+49 40 226
 # subfiefs
 # territory id
 544
@@ -5664,6 +6922,8 @@ Folnfrey
 1
 # name
 Panohthol
+# color
+26 14 213
 # subfiefs
 # territory id
 545
@@ -5673,6 +6933,8 @@ Panohthol
 1
 # name
 Ventar
+# color
+36 9 220
 # subfiefs
 # territory id
 546
@@ -5682,6 +6944,8 @@ Ventar
 1
 # name
 Sthevinaxia
+# color
+21 11 225
 # subfiefs
 # territory id
 547
@@ -5691,6 +6955,8 @@ Sthevinaxia
 1
 # name
 Tunaxia
+# color
+23 12 225
 # subfiefs
 # territory id
 548
@@ -5700,6 +6966,8 @@ Tunaxia
 1
 # name
 Nilavanmia
+# color
+49 26 226
 # subfiefs
 # territory id
 549
@@ -5709,6 +6977,8 @@ Nilavanmia
 1
 # name
 Tariltricth
+# color
+33 31 200
 # subfiefs
 # territory id
 550
@@ -5718,6 +6988,8 @@ Tariltricth
 1
 # name
 Fusilmar
+# color
+26 5 204
 # subfiefs
 # territory id
 551
@@ -5727,6 +6999,8 @@ Fusilmar
 1
 # name
 Nethohthvaynia
+# color
+33 19 230
 # subfiefs
 # territory id
 552
@@ -5736,6 +7010,8 @@ Nethohthvaynia
 1
 # name
 Tharvinthales
+# color
+40 16 215
 # subfiefs
 # territory id
 553
@@ -5745,6 +7021,8 @@ Tharvinthales
 1
 # name
 Vosohthol
+# color
+41 40 210
 # subfiefs
 # territory id
 554
@@ -5754,6 +7032,8 @@ Vosohthol
 1
 # name
 Drethapinia
+# color
+41 30 213
 # subfiefs
 # territory id
 555
@@ -5763,6 +7043,8 @@ Drethapinia
 1
 # name
 Trisinivaynia
+# color
+31 11 230
 # subfiefs
 # territory id
 556
@@ -5772,6 +7054,8 @@ Trisinivaynia
 1
 # name
 Mozthlithales
+# color
+28 8 209
 # subfiefs
 # territory id
 557
@@ -5781,6 +7065,8 @@ Mozthlithales
 1
 # name
 Fusthales
+# color
+48 33 207
 # subfiefs
 # territory id
 558
@@ -5790,6 +7076,8 @@ Fusthales
 1
 # name
 Nothitrethdethia
+# color
+33 34 211
 # subfiefs
 # territory id
 559
@@ -5799,6 +7087,8 @@ Nothitrethdethia
 1
 # name
 Nethhenia
+# color
+40 30 207
 # subfiefs
 # territory id
 560
@@ -5808,6 +7098,8 @@ Nethhenia
 1
 # name
 Hethiaritaria
+# color
+40 37 204
 # subfiefs
 # territory id
 561
@@ -5817,6 +7109,8 @@ Hethiaritaria
 1
 # name
 Tunthales
+# color
+22 8 216
 # subfiefs
 # territory id
 562
@@ -5826,6 +7120,8 @@ Tunthales
 1
 # name
 Topitricth
+# color
+36 15 211
 # subfiefs
 # territory id
 563
@@ -5835,6 +7131,8 @@ Topitricth
 1
 # name
 Tundriax
+# color
+26 1 208
 # subfiefs
 # territory id
 564
@@ -5844,6 +7142,8 @@ Tundriax
 1
 # name
 Sardeth
+# color
+46 37 223
 # subfiefs
 # territory id
 565
@@ -5853,6 +7153,8 @@ Sardeth
 1
 # name
 Ferflindriax
+# color
+44 34 223
 # subfiefs
 # territory id
 566
@@ -5862,6 +7164,8 @@ Ferflindriax
 1
 # name
 Feightopia
+# color
+34 32 206
 # subfiefs
 # territory id
 567
@@ -5871,6 +7175,8 @@ Feightopia
 1
 # name
 Panrohenia
+# color
+40 28 209
 # subfiefs
 # territory id
 568
@@ -5880,6 +7186,8 @@ Panrohenia
 1
 # name
 Mozthlilithia
+# color
+34 39 203
 # subfiefs
 # territory id
 569
@@ -5889,6 +7197,8 @@ Mozthlilithia
 1
 # name
 Tarmia
+# color
+20 14 223
 # subfiefs
 # territory id
 570
@@ -5898,6 +7208,8 @@ Tarmia
 1
 # name
 Sthenvenisia
+# color
+37 14 208
 # subfiefs
 # territory id
 571
@@ -5907,6 +7219,8 @@ Sthenvenisia
 1
 # name
 Eashliol
+# color
+50 36 215
 # subfiefs
 # territory id
 572
@@ -5916,6 +7230,8 @@ Eashliol
 1
 # name
 Panfrey
+# color
+44 11 210
 # subfiefs
 # territory id
 573
@@ -5925,6 +7241,8 @@ Panfrey
 1
 # name
 Nethtrethmar
+# color
+24 1 211
 # subfiefs
 # territory id
 574
@@ -5934,6 +7252,8 @@ Nethtrethmar
 1
 # name
 Ventsatopia
+# color
+43 30 203
 # subfiefs
 # territory id
 575
@@ -5943,6 +7263,8 @@ Ventsatopia
 1
 # name
 Meththales
+# color
+25 4 200
 # subfiefs
 # territory id
 577
@@ -5952,6 +7274,8 @@ Meththales
 1
 # name
 Trosrothales
+# color
+41 21 207
 # subfiefs
 # territory id
 578
@@ -5961,6 +7285,8 @@ Trosrothales
 1
 # name
 Pereigha
+# color
+41 8 227
 # subfiefs
 # territory id
 579
@@ -5970,6 +7296,8 @@ Pereigha
 1
 # name
 Morethiltaria
+# color
+41 6 209
 # subfiefs
 # territory id
 580
@@ -5979,6 +7307,8 @@ Morethiltaria
 1
 # name
 Sthenar
+# color
+36 6 208
 # subfiefs
 # territory id
 581
@@ -5988,6 +7318,8 @@ Sthenar
 1
 # name
 Sarmia
+# color
+30 19 208
 # subfiefs
 # territory id
 582
@@ -5997,6 +7329,8 @@ Sarmia
 1
 # name
 Westvanhenia
+# color
+29 15 224
 # subfiefs
 # territory id
 583
@@ -6006,6 +7340,8 @@ Westvanhenia
 1
 # name
 Percrimor
+# color
+39 13 216
 # subfiefs
 # territory id
 584
@@ -6015,6 +7351,8 @@ Percrimor
 1
 # name
 Fusdeth
+# color
+25 27 218
 # subfiefs
 # territory id
 585
@@ -6024,6 +7362,8 @@ Fusdeth
 1
 # name
 Westlifrey
+# color
+35 15 216
 # subfiefs
 # territory id
 586
@@ -6033,6 +7373,8 @@ Westlifrey
 1
 # name
 Feyohthdriax
+# color
+47 40 223
 # subfiefs
 # territory id
 587
@@ -6042,6 +7384,8 @@ Feyohthdriax
 1
 # name
 Renexeigha
+# color
+49 31 213
 # subfiefs
 # territory id
 588
@@ -6051,6 +7395,8 @@ Renexeigha
 1
 # name
 dethia
+# color
+49 27 211
 # subfiefs
 # territory id
 589
@@ -6060,6 +7406,8 @@ dethia
 1
 # name
 Antaria
+# color
+43 24 213
 # subfiefs
 # territory id
 591
@@ -6069,6 +7417,8 @@ Antaria
 1
 # name
 Paneigha
+# color
+27 0 209
 # subfiefs
 # territory id
 592
@@ -6078,6 +7428,8 @@ Paneigha
 1
 # name
 Kertrethtopia
+# color
+32 17 230
 # subfiefs
 # territory id
 593
@@ -6087,6 +7439,8 @@ Kertrethtopia
 1
 # name
 Perilsia
+# color
+36 13 217
 # subfiefs
 # territory id
 594
@@ -6096,6 +7450,8 @@ Perilsia
 1
 # name
 Kerinifreyia
+# color
+31 1 214
 # subfiefs
 # territory id
 595
@@ -6105,6 +7461,8 @@ Kerinifreyia
 1
 # name
 Folnlithia
+# color
+45 35 221
 # subfiefs
 # territory id
 596
@@ -6114,6 +7472,8 @@ Folnlithia
 1
 # name
 Westar
+# color
+41 1 216
 # subfiefs
 # territory id
 597
@@ -6123,6 +7483,8 @@ Westar
 1
 # name
 Finithvanfreyia
+# color
+38 24 208
 # subfiefs
 # territory id
 598
@@ -6132,6 +7494,8 @@ Finithvanfreyia
 1
 # name
 Nothimor
+# color
+50 30 222
 # subfiefs
 # territory id
 599
@@ -6141,6 +7505,8 @@ Nothimor
 1
 # name
 Morethvia
+# color
+23 27 216
 # subfiefs
 # territory id
 600
@@ -6150,6 +7516,8 @@ Morethvia
 1
 # name
 Fuslifreyia
+# color
+39 19 221
 # subfiefs
 # territory id
 601
@@ -6159,6 +7527,8 @@ Fuslifreyia
 1
 # name
 Drethheughough
+# color
+28 23 208
 # subfiefs
 # territory id
 602
@@ -6168,6 +7538,8 @@ Drethheughough
 1
 # name
 Drethflindeth
+# color
+33 36 215
 # subfiefs
 # territory id
 603
@@ -6177,6 +7549,8 @@ Drethflindeth
 1
 # name
 Nilaflintopia
+# color
+27 15 209
 # subfiefs
 # territory id
 604
@@ -6186,6 +7560,8 @@ Nilaflintopia
 1
 # name
 Nethinimar
+# color
+37 21 216
 # subfiefs
 # territory id
 605
@@ -6195,6 +7571,8 @@ Nethinimar
 1
 # name
 Renexsia
+# color
+32 7 210
 # subfiefs
 # territory id
 606
@@ -6204,6 +7582,8 @@ Renexsia
 1
 # name
 Sthentrethdeth
+# color
+40 3 221
 # subfiefs
 # territory id
 607
@@ -6213,6 +7593,8 @@ Sthentrethdeth
 1
 # name
 Fertrethlithia
+# color
+37 28 223
 # subfiefs
 # territory id
 608
@@ -6222,6 +7604,8 @@ Fertrethlithia
 1
 # name
 Stheildriax
+# color
+48 38 208
 # subfiefs
 # territory id
 609
@@ -6231,6 +7615,8 @@ Stheildriax
 1
 # name
 Ventohthisia
+# color
+25 9 216
 # subfiefs
 # territory id
 610
@@ -6240,6 +7626,8 @@ Ventohthisia
 1
 # name
 Sarar
+# color
+37 12 200
 # subfiefs
 # territory id
 611
@@ -6249,6 +7637,8 @@ Sarar
 1
 # name
 Westaxia
+# color
+20 3 220
 # subfiefs
 # territory id
 612
@@ -6258,6 +7648,8 @@ Westaxia
 1
 # name
 Ferar
+# color
+26 38 220
 # subfiefs
 # territory id
 613
@@ -6267,6 +7659,8 @@ Ferar
 1
 # name
 Percrotricth
+# color
+45 13 221
 # subfiefs
 # territory id
 614
@@ -6276,6 +7670,8 @@ Percrotricth
 1
 # name
 Feighinilithia
+# color
+37 7 230
 # subfiefs
 # territory id
 615
@@ -6285,6 +7681,8 @@ Feighinilithia
 1
 # name
 Trosiniaxia
+# color
+47 13 229
 # subfiefs
 # territory id
 616
@@ -6293,295 +7691,70 @@ Trosiniaxia
 # title
 2
 # name
-deth
-# subfiefs
-Trismia
-Ferrieigha
-
-# estate
-# title
-2
-# name
-Sarfreyia
-# subfiefs
-Eashmor
-Ferenilthales
-
-# estate
-# title
-2
-# name
 Trosrotaria
+# color
+0 0 48
 # subfiefs
-Renexdrensia
-Nilasaaxia
 Ferar
 
 # estate
 # title
 2
 # name
-Ferthales
-# subfiefs
-Trisdethia
-Cardriax
-
-# estate
-# title
-2
-# name
-Finithapinia
-# subfiefs
-Feyapinia
-Panohththales
-
-# estate
-# title
-2
-# name
-Eashdethia
-# subfiefs
-Folntopia
-Neththales
-
-# estate
-# title
-2
-# name
-Morethapinia
-# subfiefs
-Sthetaria
-Vosilhenia
-
-# estate
-# title
-2
-# name
-Lueghmar
-# subfiefs
-Trishenia
-Panlideth
-
-# estate
-# title
-2
-# name
-Lerrivaynia
-# subfiefs
-Morethmar
-Sthenlithia
-
-# estate
-# title
-2
-# name
-Nothimia
-# subfiefs
-Nothiinivaynia
-Sthenvithmar
-
-# estate
-# title
-2
-# name
-Mozthlithia
-# subfiefs
-Renexohthtricth
-Feighinilithia
-
-# estate
-# title
-2
-# name
 Vosrisia
+# color
+0 0 48
 # subfiefs
-trethisia
-Lueghohthdethia
 Folnvaneigha
 
 # estate
 # title
 2
 # name
-Mozthohthol
-# subfiefs
-Stheheughough
-Feighilsia
-
-# estate
-# title
-2
-# name
-Kerdriax
-# subfiefs
-Nilaohthmar
-Pervanfreyia
-
-# estate
-# title
-2
-# name
-Vossia
-# subfiefs
-Methmar
-Hethiafreyia
-
-# estate
-# title
-2
-# name
-Nilainimia
-# subfiefs
-Mozthflinmia
-Daytflinvaynia
-
-# estate
-# title
-2
-# name
 Nothiohthar
+# color
+0 0 48
 # subfiefs
-Tuntrethdethia
-Drethtrethisia
 Trisisia
 
 # estate
 # title
 2
 # name
-Topilithia
-# subfiefs
-Daytvaynia
-Ferdrenmar
-
-# estate
-# title
-2
-# name
-Nothiohthvaynia
-# subfiefs
-Lueghvenlithia
-Nothiar
-
-# estate
-# title
-2
-# name
-Ventol
-# subfiefs
-Kerinimar
-Drethvinfrey
-
-# estate
-# title
-2
-# name
-Kermor
-# subfiefs
-Daytinitricth
-Percrotricth
-
-# estate
-# title
-2
-# name
 Sthenfrey
+# color
+0 0 48
 # subfiefs
-Tartrethmia
-Fusaxia
 Sthentopia
 
 # estate
 # title
 2
 # name
-Daytvithmar
-# subfiefs
-Kerdeth
-Fertrethheughough
-
-# estate
-# title
-2
-# name
-Methohthfrey
-# subfiefs
-Westtopia
-Kertrethlithia
-
-# estate
-# title
-2
-# name
 Feighheughough
+# color
+0 0 48
 # subfiefs
-Drethaxia
-Sarvaynia
 Morethroisia
 
 # estate
 # title
 2
 # name
-Renexrivaynia
-# subfiefs
-Andrenisia
-Lersadriax
-
-# estate
-# title
-2
-# name
-Trosfrey
-# subfiefs
-Drethohthtaria
-Feighliaxia
-
-# estate
-# title
-2
-# name
-Hethiavinisia
-# subfiefs
-Moztheigha
-Sthenapinia
-
-# estate
-# title
-2
-# name
-Lueghvanapinia
-# subfiefs
-Hethiataria
-Nilarolithia
-
-# estate
-# title
-2
-# name
 Feyaxia
+# color
+0 0 48
 # subfiefs
-Perilmia
-Mozthol
 Mozthtopia
 
 # estate
 # title
 2
 # name
-Folneigha
-# subfiefs
-Renextrethvaynia
-Panildriax
-
-# estate
-# title
-2
-# name
 Nilaar
+# color
+0 0 48
 # subfiefs
-Vosridriax
-Sarrohenia
 Panridethia
 
 # estate
@@ -6589,93 +7762,39 @@ Panridethia
 2
 # name
 rihenia
+# color
+0 0 48
 # subfiefs
-Tunar
-Mozthvia
 Antrethsia
 
 # estate
 # title
 2
 # name
-Percdrenthales
-# subfiefs
-Finithmor
-Tunfrey
-
-# estate
-# title
-2
-# name
 Nilaileigha
+# color
+0 0 48
 # subfiefs
-Morethol
-Methvithvaynia
 Ferenheughough
 
 # estate
 # title
 2
 # name
-Mozthvintricth
-# subfiefs
-Lersia
-Hethiahenia
-
-# estate
-# title
-2
-# name
 Feyrihenia
+# color
+0 0 48
 # subfiefs
-Tharisia
-Nilalithia
 Nothidrentricth
 
 # estate
 # title
 2
 # name
-Ventapinia
-# subfiefs
-Westflinthales
-Tundrenol
-
-# estate
-# title
-2
-# name
-Westilmor
-# subfiefs
-Daytvendethia
-Trosilfrey
-
-# estate
-# title
-2
-# name
-Finithfreyia
-# subfiefs
-Folnflinvaynia
-Netheigha
-
-# estate
-# title
-2
-# name
-Tundrenhenia
-# subfiefs
-Ferrodethia
-Drethar
-
-# estate
-# title
-2
-# name
 Folnthales
+# color
+0 0 48
 # subfiefs
-Sthevia
-Panar
 Topiohthhenia
 
 # estate
@@ -6683,83 +7802,29 @@ Topiohthhenia
 2
 # name
 Nethvaynia
+# color
+0 0 48
 # subfiefs
-Feyvaynia
-Hethialithia
 Eashohthtaria
 
 # estate
 # title
 2
 # name
-Nilavinvaynia
-# subfiefs
-Lerdrendethia
-Lueghviththales
-
-# estate
-# title
-2
-# name
-Nilatopia
-# subfiefs
-Kervenlithia
-Feighmia
-
-# estate
-# title
-2
-# name
-Ventilaxia
-# subfiefs
-Nothihenia
-Mozthmar
-
-# estate
-# title
-2
-# name
 Eashtopia
+# color
+0 0 48
 # subfiefs
-Daytheughough
-Morethlimor
 Methilheughough
 
 # estate
 # title
 2
 # name
-Westsamar
-# subfiefs
-Drethvinmor
-Ventohthlithia
-
-# estate
-# title
-2
-# name
-Renexthales
-# subfiefs
-Nethtopia
-Carlithia
-
-# estate
-# title
-2
-# name
-Percvithmia
-# subfiefs
-Ferenhenia
-Morethvaynia
-
-# estate
-# title
-2
-# name
 Ferflindeth
+# color
+0 0 48
 # subfiefs
-Tarlithia
-Drethmar
 Nilatrethmar
 
 # estate
@@ -6767,46 +7832,19 @@ Nilatrethmar
 2
 # name
 Nothisamar
+# color
+0 0 48
 # subfiefs
-Panohthol
-Folnfrey
 Feyeigha
 
 # estate
 # title
 2
 # name
-Feyvinsia
-# subfiefs
-Trosriapinia
-Sarmor
-
-# estate
-# title
-2
-# name
-Fervithar
-# subfiefs
-Ferdeth
-Ventmor
-
-# estate
-# title
-2
-# name
-Folnmia
-# subfiefs
-Kerroisia
-rovaynia
-
-# estate
-# title
-2
-# name
 Sthendrenvia
+# color
+0 0 48
 # subfiefs
-Daytroaxia
-Westfreyia
 Feighdethia
 
 # estate
@@ -6814,55 +7852,19 @@ Feighdethia
 2
 # name
 Tarvenol
+# color
+0 0 48
 # subfiefs
-Tarvaynia
-Sthemia
 Nethaxia
 
 # estate
 # title
 2
 # name
-Anflinlithia
-# subfiefs
-Mozthrodethia
-Sthelifrey
-
-# estate
-# title
-2
-# name
-Hethiarolithia
-# subfiefs
-Anar
-Lueghfreyia
-
-# estate
-# title
-2
-# name
-Percvithsia
-# subfiefs
-Nothivia
-Vostricth
-
-# estate
-# title
-2
-# name
-Nilatrethfrey
-# subfiefs
-Renexflintricth
-Tuneigha
-
-# estate
-# title
-2
-# name
 Sthenmar
+# color
+0 0 48
 # subfiefs
-Finithflinheughough
-Westrideth
 Morethvithapinia
 
 # estate
@@ -6870,28 +7872,19 @@ Morethvithapinia
 2
 # name
 Westflinvaynia
+# color
+0 0 48
 # subfiefs
-Anmia
-Vosthales
 Hethiadeth
 
 # estate
 # title
 2
 # name
-Topisadeth
-# subfiefs
-Daytdriax
-Drethvia
-
-# estate
-# title
-2
-# name
 Vosvanar
+# color
+0 0 48
 # subfiefs
-Nethdriax
-Morethheughough
 Meththales
 
 # estate
@@ -6899,9 +7892,9 @@ Meththales
 2
 # name
 Drethinitopia
+# color
+0 0 48
 # subfiefs
-Westvanhenia
-Sarar
 Fertrethlithia
 
 # estate
@@ -6909,9 +7902,9 @@ Fertrethlithia
 2
 # name
 Pantaria
+# color
+0 0 48
 # subfiefs
-Stheildriax
-Ventohthisia
 Westaxia
 
 # estate
@@ -6919,9 +7912,9 @@ Westaxia
 2
 # name
 Tarvenmor
+# color
+0 0 48
 # subfiefs
-dethia
-Paneigha
 Nilaflintopia
 
 # estate
@@ -6929,9 +7922,9 @@ Nilaflintopia
 2
 # name
 Eashvinaxia
+# color
+0 0 48
 # subfiefs
-Vosohthmar
-Tarheughough
 Westlifrey
 
 # estate
@@ -6939,46 +7932,19 @@ Westlifrey
 2
 # name
 Morethdrenapinia
+# color
+0 0 48
 # subfiefs
-Renexeigha
-Feyohthdriax
 Antaria
 
 # estate
 # title
 2
 # name
-frey
-# subfiefs
-Fusvaynia
-Sthenar
-
-# estate
-# title
-2
-# name
-Folnaxia
-# subfiefs
-Trisvindeth
-Nothitaria
-
-# estate
-# title
-2
-# name
-Kervia
-# subfiefs
-Feighdrenthales
-Finithvithfreyia
-
-# estate
-# title
-2
-# name
 Percar
+# color
+0 0 48
 # subfiefs
-Finithheughough
-Fusilmar
 Tunaxia
 
 # estate
@@ -6986,37 +7952,19 @@ Tunaxia
 2
 # name
 Tunol
+# color
+0 0 48
 # subfiefs
-Percheughough
-Ferenflintopia
 Tharvinthales
 
 # estate
 # title
 2
 # name
-Drethvanfrey
-# subfiefs
-Nilahenia
-Vosohthol
-
-# estate
-# title
-2
-# name
-Renexohthmia
-# subfiefs
-Nethhenia
-Drethapinia
-
-# estate
-# title
-2
-# name
 Tuntrethol
+# color
+0 0 48
 # subfiefs
-Tariltricth
-Ventar
 Sthevinaxia
 
 # estate
@@ -7024,92 +7972,29 @@ Sthevinaxia
 2
 # name
 Percfrey
+# color
+0 0 48
 # subfiefs
-Trosol
-Feighildeth
 Kervindethia
 
 # estate
 # title
 2
 # name
-Carvaneigha
-# subfiefs
-Fusthales
-Nilavanmia
-
-# estate
-# title
-2
-# name
 Ferenohthfreyia
+# color
+0 0 48
 # subfiefs
-Mozthlithales
-Trisinivaynia
 Nethohthvaynia
 
 # estate
 # title
 2
 # name
-Feighmar
-# subfiefs
-Mozthar
-Feighflindeth
-
-# estate
-# title
-2
-# name
-Nethflinaxia
-# subfiefs
-Sthedriax
-Perapinia
-
-# estate
-# title
-2
-# name
-Sthefreyia
-# subfiefs
-Tharthales
-Westilapinia
-
-# estate
-# title
-2
-# name
-Kerinimor
-# subfiefs
-Lerrool
-Feymia
-
-# estate
-# title
-2
-# name
-Trosrodriax
-# subfiefs
-Vosheughough
-drentopia
-
-# estate
-# title
-2
-# name
-Hethiatricth
-# subfiefs
-Ventvenar
-Nethtrethmar
-
-# estate
-# title
-2
-# name
 Hethiavithtaria
+# color
+0 0 48
 # subfiefs
-Tarohthapinia
-Methtricth
 Renextaria
 
 # estate
@@ -7117,37 +8002,19 @@ Renextaria
 2
 # name
 Renexvanheughough
+# color
+0 0 48
 # subfiefs
-Trosrothales
-Percrimor
 Renexsia
 
 # estate
 # title
 2
 # name
-Anmar
-# subfiefs
-Pereigha
-Ventsatopia
-
-# estate
-# title
-2
-# name
-Nothiilapinia
-# subfiefs
-Fusdeth
-Finithvanfreyia
-
-# estate
-# title
-2
-# name
 Methiniol
+# color
+0 0 48
 # subfiefs
-Drethflindeth
-Nethinimar
 Sthentrethdeth
 
 # estate
@@ -7155,9 +8022,9 @@ Sthentrethdeth
 2
 # name
 Finithdrenmor
+# color
+0 0 48
 # subfiefs
-Kertrethtopia
-Morethvia
 Kerinifreyia
 
 # estate
@@ -7165,9 +8032,9 @@ Kerinifreyia
 2
 # name
 Trisinidethia
+# color
+0 0 48
 # subfiefs
-Vostaria
-Lueghhenia
 Sarmia
 
 # estate
@@ -7175,9 +8042,9 @@ Sarmia
 2
 # name
 Nethmar
+# color
+0 0 48
 # subfiefs
-Feightopia
-Perilsia
 Folnlithia
 
 # estate
@@ -7185,28 +8052,19 @@ Folnlithia
 2
 # name
 Perdethia
+# color
+0 0 48
 # subfiefs
-Hethiaritaria
-Tundriax
 Sardeth
 
 # estate
 # title
 2
 # name
-Lueghmia
-# subfiefs
-Nothitrethdethia
-Topitricth
-
-# estate
-# title
-2
-# name
 Drethtopia
+# color
+0 0 48
 # subfiefs
-Ferflindriax
-Tarmia
 Tunthales
 
 # estate
@@ -7214,1364 +8072,239 @@ Tunthales
 2
 # name
 Tunmor
+# color
+0 0 48
 # subfiefs
-Drethheughough
-Fuslifreyia
 Nothimor
 
 # estate
 # title
 2
 # name
-Feighar
-# subfiefs
-Morethiltaria
-Westar
-
-# estate
-# title
-2
-# name
-Perfreyia
-# subfiefs
-Lervanisia
-Panfrey
-
-# estate
-# title
-2
-# name
-Drethdethia
-# subfiefs
-Feysadriax
-Nothiheughough
-
-# estate
-# title
-2
-# name
-Ventrithales
-# subfiefs
-Nethrivaynia
-Eashliol
-
-# estate
-# title
-2
-# name
-Methhenia
-# subfiefs
-Panrohenia
-Sthenvenisia
-
-# estate
-# title
-2
-# name
-Lueghohtheigha
-# subfiefs
-Ferenapinia
-Mozthlilithia
-
-# estate
-# title
-2
-# name
-Carvaynia
-# subfiefs
-Panfreyia
-Vosvindriax
-
-# estate
-# title
-2
-# name
-Folnvenmia
-# subfiefs
-Eashmia
-Fusisia
-
-# estate
-# title
-2
-# name
-Sthenisia
-# subfiefs
-Trosrotricth
-Kerfrey
-
-# estate
-# title
-2
-# name
-Fustopia
-# subfiefs
-Niladriax
-Daytisia
-
-# estate
-# title
-2
-# name
-Westvandethia
-# subfiefs
-Nothidriax
-Tunlithia
-
-# estate
-# title
-2
-# name
 Westtrethtopia
+# color
+0 0 48
 # subfiefs
-Percilhenia
-Nethsavia
 Nothivandethia
 
 # estate
 # title
 2
 # name
-Finithliaxia
-# subfiefs
-Trosvanol
-Morethtricth
-
-# estate
-# title
-2
-# name
-Renextricth
-# subfiefs
-Lervithlithia
-Tunflinol
-
-# estate
-# title
-2
-# name
-Topiinitricth
-# subfiefs
-Ventdriax
-Vossafrey
-
-# estate
-# title
-2
-# name
-Feighiniisia
-# subfiefs
-Sthenliar
-Kerriheughough
-
-# estate
-# title
-2
-# name
-Morethilthales
-# subfiefs
-Methapinia
-Tarsia
-
-# estate
-# title
-2
-# name
-Tharsia
-# subfiefs
-Nothiapinia
-Methdethia
-
-# estate
-# title
-2
-# name
-Sthenohthar
-# subfiefs
-Finithsaaxia
-Ansaheughough
-
-# estate
-# title
-2
-# name
 tricth
+# color
+0 0 48
 # subfiefs
-Daytvia
-Folnmor
 Feighol
 
 # estate
 # title
 2
 # name
-Ansia
-# subfiefs
-Mozthsia
-Fertricth
-
-# estate
-# title
-2
-# name
 ildriax
+# color
+0 0 48
 # subfiefs
-Percohthdeth
-Feighsia
 Ventvinaxia
 
 # estate
 # title
 2
 # name
-Tuntaria
-# subfiefs
-Nothidethia
-Nilainihenia
-
-# estate
-# title
-2
-# name
-Pervithfreyia
-# subfiefs
-Vosliheughough
-Sarroar
-
-# estate
-# title
-2
-# name
-Stheilthales
-# subfiefs
-Lerdethia
-Feyheughough
-
-# estate
-# title
-2
-# name
-Tharmor
-# subfiefs
-Kerflinthales
-Folnviththales
-
-# estate
-# title
-2
-# name
-Feylitricth
-# subfiefs
-Fusohtheigha
-Nothiaxia
-
-# estate
-# title
-2
-# name
-Nilavia
-# subfiefs
-Westsavaynia
-Folndethia
-
-# estate
-# title
-2
-# name
-Finithdeth
-# subfiefs
-Tunohthtaria
-Fusmar
-
-# estate
-# title
-2
-# name
-ol
-# subfiefs
-Sthendethia
-Renexar
-
-# estate
-# title
-2
-# name
-Sthenrotopia
-# subfiefs
-Tunroaxia
-Trisdeth
-
-# estate
-# title
-2
-# name
 Trossia
+# color
+0 0 48
 # subfiefs
-Pervenvaynia
-Fusflinaxia
 Sarsamor
 
 # estate
 # title
 2
 # name
-Hethiaridethia
-# subfiefs
-Hethiaflinlithia
-Feighfreyia
-
-# estate
-# title
-2
-# name
-Tarvia
-# subfiefs
-Kersia
-Eashroapinia
-
-# estate
-# title
-2
-# name
-Daytrotopia
-# subfiefs
-Panilfreyia
-Renexlitopia
-
-# estate
-# title
-2
-# name
-Nilainimor
-# subfiefs
-Finithdrentopia
-Renexflinmor
-
-# estate
-# title
-2
-# name
 Daytrodriax
+# color
+0 0 48
 # subfiefs
-Sthenventaria
-Topiol
 Trismar
 
 # estate
 # title
 2
 # name
-Lueghridethia
-# subfiefs
-Trossavaynia
-Anvenmia
-
-# estate
-# title
-2
-# name
-Drethroaxia
-# subfiefs
-Tharvanvaynia
-Morethinidethia
-
-# estate
-# title
-2
-# name
-Fersafrey
-# subfiefs
-Anvanol
-Folntaria
-
-# estate
-# title
-2
-# name
 Feyroeigha
+# color
+0 0 48
 # subfiefs
-Ferflinmor
-Lersadethia
 Hethiadethia
 
 # estate
 # title
 2
 # name
-Stheflineigha
-# subfiefs
-Methmia
-Folnvanvia
-
-# estate
-# title
-2
-# name
 Trosrimia
+# color
+0 0 48
 # subfiefs
-Feighdriax
-Ventohthheughough
 Perisia
 
 # estate
 # title
 2
 # name
-Sarrovaynia
-# subfiefs
-Thareigha
-Trosliisia
-
-# estate
-# title
-2
-# name
 Tartopia
+# color
+0 0 48
 # subfiefs
-Percmar
-Careigha
 Nothifreyia
 
 # estate
 # title
 2
 # name
-Nothivanvaynia
-# subfiefs
-Eashar
-Topisia
-
-# estate
-# title
-2
-# name
 Thardrentricth
+# color
+0 0 48
 # subfiefs
-Tharfreyia
-Folnvaynia
 Tunhenia
 
 # estate
 # title
 2
 # name
-Hethiatrethtricth
-# subfiefs
-Sarheughough
-Perceigha
-
-# estate
-# title
-2
-# name
 Ventsia
+# color
+0 0 48
 # subfiefs
-Trosilheughough
-Renexilisia
 Eashinieigha
 
 # estate
 # title
 2
 # name
-Renexflinfreyia
-# subfiefs
-Eashohthmar
-Hethiarodeth
-
-# estate
-# title
-2
-# name
-Morethrimor
-# subfiefs
-Ferdriax
-Panapinia
-
-# estate
-# title
-2
-# name
 Ventohtheigha
+# color
+0 0 48
 # subfiefs
-Feytricth
-Daytsia
 Sartopia
 
 # estate
 # title
 2
 # name
-Perctaria
-# subfiefs
-Lueghtricth
-Ventfreyia
-
-# estate
-# title
-2
-# name
-Lervia
-# subfiefs
-Methriaxia
-Panisia
-
-# estate
-# title
-2
-# name
 Percvindeth
+# color
+0 0 48
 # subfiefs
-Kereigha
-Methiltaria
 Anvinaxia
 
 # estate
 # title
 2
 # name
-Tharinimar
-# subfiefs
-Methvinlithia
-Feyhenia
-
-# estate
-# title
-2
-# name
-Eashdrenar
-# subfiefs
-Ventthales
-Tarapinia
-
-# estate
-# title
-2
-# name
-Fushenia
-# subfiefs
-Daytiniar
-Nilatrethmor
-
-# estate
-# title
-2
-# name
-Topitopia
-# subfiefs
-Trosar
-Permar
-
-# estate
-# title
-2
-# name
-Carvithaxia
-# subfiefs
-Daytol
-Topiohthdeth
-
-# estate
-# title
-2
-# name
-Ventlithia
-# subfiefs
-Topiheughough
-Finiththales
-
-# estate
-# title
-2
-# name
-Tharinitricth
-# subfiefs
-Ferenohthlithia
-Ferohthtopia
-
-# estate
-# title
-2
-# name
 Lueghrideth
+# color
+0 0 48
 # subfiefs
-Mozthdriax
-Nilaventricth
 Mozthrihenia
 
 # estate
 # title
 2
 # name
-Drethvinfreyia
-# subfiefs
-Trisflinfrey
-Renextopia
-
-# estate
-# title
-2
-# name
-Fervithvaynia
-# subfiefs
-Panol
-Anvia
-
-# estate
-# title
-2
-# name
-Topivithfrey
-# subfiefs
-Eashriol
-Trosdeth
-
-# estate
-# title
-2
-# name
-Mozthvenaxia
-# subfiefs
-Ventvia
-Troseigha
-
-# estate
-# title
-2
-# name
-Vostrethtopia
-# subfiefs
-Fusmia
-Sthemar
-
-# estate
-# title
-2
-# name
 Ferdethia
+# color
+0 0 48
 # subfiefs
-Tharlideth
-Carvanmia
 Percmor
 
 # estate
 # title
 2
 # name
-Methmor
-# subfiefs
-Venttrethvia
-Eashvithdriax
-
-# estate
-# title
-2
-# name
-Westvia
-# subfiefs
-Morethiniisia
-Mozthvaynia
-
-# estate
-# title
-2
-# name
-Nilafrey
-# subfiefs
-Thartrethdethia
-Mozthilaxia
-
-# estate
-# title
-2
-# name
-Feighvenol
-# subfiefs
-Pansia
-Nilavithaxia
-
-# estate
-# title
-2
-# name
-Morethaxia
-# subfiefs
-Sthenol
-Ferenthales
-
-# estate
-# title
-2
-# name
-Anvantopia
-# subfiefs
-Lueghdethia
-Dayttopia
-
-# estate
-# title
-2
-# name
-Topidrenfreyia
-# subfiefs
-Stheohthtaria
-Trostopia
-
-# estate
-# title
-2
-# name
-Trosohththales
-# subfiefs
-Tristopia
-Lueghlithia
-
-# estate
-# title
-2
-# name
-Panriar
-# subfiefs
-Mozthisia
-Nilavithheughough
-
-# estate
-# title
-2
-# name
-Triseigha
-# subfiefs
-Anapinia
-Folnflinfreyia
-
-# estate
-# title
-2
-# name
 Fusapinia
+# color
+0 0 48
 # subfiefs
-Feytrethdethia
-Feighvia
 Feyvinfrey
 
 # estate
 # title
 2
 # name
-Panrilithia
-# subfiefs
-Ferritaria
-Lueghmor
-
-# estate
-# title
-2
-# name
-Finithvenaxia
-# subfiefs
-Nilasia
-Stheohthtricth
-
-# estate
-# title
-2
-# name
 Pertaria
+# color
+0 0 48
 # subfiefs
-Trosvantopia
-Ferentrethdeth
 flineigha
 
 # estate
 # title
 2
 # name
-Carriisia
-# subfiefs
-isia
-Feytaria
-
-# estate
-# title
-2
-# name
-Tunroisia
-# subfiefs
-Westtaria
-Trisvaynia
-
-# estate
-# title
-2
-# name
-Eashvinhenia
-# subfiefs
-Feyisia
-Percfreyia
-
-# estate
-# title
-2
-# name
-axia
-# subfiefs
-Morethroeigha
-Vosvantaria
-
-# estate
-# title
-2
-# name
-Tartricth
-# subfiefs
-Trosflindethia
-Trisar
-
-# estate
-# title
-2
-# name
-Vosrifreyia
-# subfiefs
-Mozthtricth
-Drethtaria
-
-# estate
-# title
-2
-# name
 Topilitopia
+# color
+0 0 48
 # subfiefs
-Sthenvantaria
-Trosmar
 Tarvithfrey
 
 # estate
 # title
 2
 # name
-Folnileigha
-# subfiefs
-vithisia
-Finithsathales
-
-# estate
-# title
-2
-# name
-Percvintaria
-# subfiefs
-Renexroar
-Stheniltaria
-
-# estate
-# title
-2
-# name
-Perrifrey
-# subfiefs
-Renexvaynia
-Sthetrethmor
-
-# estate
-# title
-2
-# name
 Sarvithvaynia
+# color
+0 0 48
 # subfiefs
-Methdriax
-Ferenilheughough
 Westvanvaynia
 
 # estate
 # title
 2
 # name
-Topivenar
-# subfiefs
-Nilaflinaxia
-Tuntopia
-
-# estate
-# title
-2
-# name
-Renexdethia
-# subfiefs
-Renexflinthales
-Dayttricth
-
-# estate
-# title
-2
-# name
-Renexlithia
-# subfiefs
-Renexdeth
-vithar
-
-# estate
-# title
-2
-# name
-Feriltricth
-# subfiefs
-Nothivanfreyia
-Kervanapinia
-
-# estate
-# title
-2
-# name
-Ferenliapinia
-# subfiefs
-Panromor
-Lermia
-
-# estate
-# title
-2
-# name
-Tarrivaynia
-# subfiefs
-Ferenfrey
-Ferlithia
-
-# estate
-# title
-2
-# name
-Lueghtaria
-# subfiefs
-Hethiasadethia
-Ferenohthisia
-
-# estate
-# title
-2
-# name
-Lerheughough
-# subfiefs
-Nethvenmor
-Nothifrey
-
-# estate
-# title
-2
-# name
-Anvanfreyia
-# subfiefs
-Kerfreyia
-Fusdethia
-
-# estate
-# title
-2
-# name
 Trosdriax
+# color
+0 0 48
 # subfiefs
-Lueghohthtaria
-Nilasahenia
 Ferentricth
 
 # estate
 # title
 2
 # name
-Eashriapinia
-# subfiefs
-Hethiamor
-Tharsahenia
-
-# estate
-# title
-2
-# name
-Tarol
-# subfiefs
-Methisia
-Methol
-
-# estate
-# title
-2
-# name
-Nothiol
-# subfiefs
-drendriax
-Nilamor
-
-# estate
-# title
-2
-# name
-Westdrenfrey
-# subfiefs
-Renexvandeth
-Fermar
-
-# estate
-# title
-2
-# name
-Ferensia
-# subfiefs
-Trosriol
-Sthetopia
-
-# estate
-# title
-2
-# name
-Finithohthvia
-# subfiefs
-Pertricth
-Feigheigha
-
-# estate
-# title
-2
-# name
 Morethar
+# color
+0 0 48
 # subfiefs
-Fersaeigha
-Fervithtopia
 Trostrethtaria
 
 # estate
 # title
 2
 # name
-Lueghaxia
-# subfiefs
-Renexdrendethia
-Nethmia
-
-# estate
-# title
-2
-# name
-Lueghtopia
-# subfiefs
-Sardrenmar
-Drethfreyia
-
-# estate
-# title
-2
-# name
-Panvenapinia
-# subfiefs
-Lueghvineigha
-Finithliol
-
-# estate
-# title
-2
-# name
-Lermor
-# subfiefs
-Kerheughough
-Pertrethhenia
-
-# estate
-# title
-2
-# name
-Kerohthmor
-# subfiefs
-Folnlithales
-Nothitopia
-
-# estate
-# title
-2
-# name
-Trisohthfrey
-# subfiefs
-Pertrethlithia
-Topitrethvaynia
-
-# estate
-# title
-2
-# name
-Kerar
-# subfiefs
-Trisvia
-Lueghtretheigha
-
-# estate
-# title
-2
-# name
-Hethiainitricth
-# subfiefs
-Tartaria
-Finithfrey
-
-# estate
-# title
-2
-# name
-Venttrethmia
-# subfiefs
-Stheeigha
-Tharflinheughough
-
-# estate
-# title
-2
-# name
-Tarileigha
-# subfiefs
-Cardeth
-Panmar
-
-# estate
-# title
-2
-# name
-Ferenohththales
-# subfiefs
-Kerol
-Ferendeth
-
-# estate
-# title
-2
-# name
-Nethinieigha
-# subfiefs
-Fersadethia
-vaynia
-
-# estate
-# title
-2
-# name
 Peraxia
+# color
+0 0 48
 # subfiefs
-Eashmar
-Sthear
 Folnfreyia
 
 # estate
 # title
 2
 # name
-Ferensadriax
-# subfiefs
-Morethlivaynia
-Sthenliapinia
-
-# estate
-# title
-2
-# name
-Folnisia
-# subfiefs
-Daytdeth
-Topifreyia
-
-# estate
-# title
-2
-# name
-Fusfrey
-# subfiefs
-Trosrimar
-Feyar
-
-# estate
-# title
-2
-# name
-Trisfreyia
-# subfiefs
-Fusilapinia
-Trosiniaxia
-
-# estate
-# title
-2
-# name
-Feytrethapinia
-# subfiefs
-Folnhenia
-Renexlisia
-
-# estate
-# title
-2
-# name
-Nethisia
-# subfiefs
-Fervenvaynia
-Hethiaisia
-
-# estate
-# title
-2
-# name
-Nothidrendethia
-# subfiefs
-Finithrideth
-Tunrotaria
-
-# estate
-# title
-2
-# name
-Ventvenisia
-# subfiefs
-Kermar
-Eashtaria
-
-# estate
-# title
-2
-# name
-Sthemor
-# subfiefs
-Carrovia
-Ferenfreyia
-
-# estate
-# title
-2
-# name
-Anvenisia
-# subfiefs
-Ferenlithales
-Sarflinfreyia
-
-# estate
-# title
-2
-# name
-Sardethia
-# subfiefs
-Mozthfrey
-Renexol
-
-# estate
-# title
-2
-# name
-Sthenlifrey
-# subfiefs
-Trostaria
-Pantricth
-
-# estate
-# title
-2
-# name
-Percrieigha
-# subfiefs
-Sthevanmia
-Pandethia
-
-# estate
-# title
-2
-# name
 Percdriax
+# color
+0 0 48
 # subfiefs
-Trisiniol
-Lerlithia
 Sartricth
 
 # estate
 # title
 2
 # name
-Perar
-# subfiefs
-Vosol
-Mozthohthfrey
-
-# estate
-# title
-2
-# name
-Eashvandeth
-# subfiefs
-Percinithales
-Lueghinidriax
-
-# estate
-# title
-2
-# name
-Hethiamia
-# subfiefs
-Methheughough
-Keraxia
-
-# estate
-# title
-2
-# name
-venvaynia
-# subfiefs
-Morethilvaynia
-Drethmor
-
-# estate
-# title
-2
-# name
-Mozthflinlithia
-# subfiefs
-Anflineigha
-Pantrethapinia
-
-# estate
-# title
-2
-# name
-ilfreyia
-# subfiefs
-Feyinifreyia
-Sarinilithia
-
-# estate
-# title
-2
-# name
-Fuslivaynia
-# subfiefs
-Nilavanmor
-Lueghinideth
-
-# estate
-# title
-2
-# name
-Lerthales
-# subfiefs
-Tunmar
-saisia
-
-# estate
-# title
-2
-# name
-Lerohthhenia
-# subfiefs
-Daytflindeth
-Carlivia
-
-# estate
-# title
-2
-# name
 Vosdreneigha
+# color
+0 0 48
 # subfiefs
-Anmor
-Lueghvandriax
 Panvia
 
 # estate
@@ -8579,9 +8312,9 @@ Panvia
 2
 # name
 Feytopia
+# color
+0 0 48
 # subfiefs
-Perclithia
-Trosvinol
 Fervithdethia
 
 # estate
@@ -8589,9 +8322,9 @@ Fervithdethia
 2
 # name
 Topitrethar
+# color
+0 0 48
 # subfiefs
-Feyvandeth
-Renexisia
 Anflinvia
 
 # estate
@@ -8599,56 +8332,29 @@ Anflinvia
 3
 # name
 Hethiasia
+# color
+0 0 48
 # subfiefs
-deth
-Sarfreyia
 Trosrotaria
-Finithapinia
-
-# estate
-# title
-3
-# name
-Eashohthol
-# subfiefs
-Ferthales
-Lueghmar
-Ventol
-Kermor
-
-# estate
-# title
-3
-# name
-Nothieigha
-# subfiefs
-Eashdethia
-Vossia
-Morethapinia
-Kerdriax
-Nothiohthvaynia
 
 # estate
 # title
 3
 # name
 Trosvanmar
+# color
+0 0 48
 # subfiefs
-Nothiohthar
-Nilainimia
-Nilatopia
-Ventilaxia
 Eashtopia
-Topilithia
 
 # estate
 # title
 3
 # name
 Carthales
+# color
+0 0 48
 # subfiefs
-Nilaar
-Percdrenthales
 rihenia
 Sthenfrey
 
@@ -8656,42 +8362,10 @@ Sthenfrey
 # title
 3
 # name
-Kerhenia
-# subfiefs
-Westsamar
-Renexthales
-Nilavinvaynia
-
-# estate
-# title
-3
-# name
-Ferenromia
-# subfiefs
-Daytvithmar
-Renexrivaynia
-Methohthfrey
-
-# estate
-# title
-3
-# name
-Tharrolithia
-# subfiefs
-Feighheughough
-Lueghvanapinia
-Trosfrey
-Folneigha
-
-# estate
-# title
-3
-# name
 Feighrimor
+# color
+0 0 48
 # subfiefs
-Feyrihenia
-Ventapinia
-Hethiavinisia
 Feyaxia
 
 # estate
@@ -8699,9 +8373,9 @@ Feyaxia
 3
 # name
 Pandrenvaynia
+# color
+0 0 48
 # subfiefs
-Mozthvintricth
-Tundrenhenia
 Folnthales
 Nilaileigha
 
@@ -8710,53 +8384,39 @@ Nilaileigha
 3
 # name
 Tarvinlithia
+# color
+0 0 48
 # subfiefs
-Feyvinsia
-Finithfreyia
-Westilmor
 Sthendrenvia
-Fervithar
 
 # estate
 # title
 3
 # name
 Nethdethia
+# color
+0 0 48
 # subfiefs
-Percvithsia
-Nilatrethfrey
 Sthenmar
-Hethiarolithia
 
 # estate
 # title
 3
 # name
 Tuniltaria
+# color
+0 0 48
 # subfiefs
-Nethflinaxia
-Feighmar
 Tarvenol
 
 # estate
 # title
 3
 # name
-Feighvithlithia
-# subfiefs
-Percvithmia
-Ferflindeth
-Kervia
-Folnaxia
-
-# estate
-# title
-3
-# name
 Ferenilapinia
+# color
+0 0 48
 # subfiefs
-Nothisamar
-Nethvaynia
 Tuntrethol
 
 # estate
@@ -8764,9 +8424,9 @@ Tuntrethol
 3
 # name
 Trosapinia
+# color
+0 0 48
 # subfiefs
-Drethvanfrey
-Ferenohthfreyia
 Percar
 Tunol
 
@@ -8775,55 +8435,41 @@ Tunol
 3
 # name
 Tardrenlithia
+# color
+0 0 48
 # subfiefs
-Sthefreyia
-Kerinimor
 Hethiavithtaria
-Trosrodriax
-Anflinlithia
 
 # estate
 # title
 3
 # name
 Panhenia
+# color
+0 0 48
 # subfiefs
-Hethiatricth
-Topisadeth
-Westflinvaynia
 Vosvanar
-
-# estate
-# title
-3
-# name
-Morethsaaxia
-# subfiefs
-Renexvanheughough
-Drethinitopia
-Anmar
-Nothiilapinia
+Westflinvaynia
 
 # estate
 # title
 3
 # name
 Folnventhales
+# color
+0 0 48
 # subfiefs
-Pantaria
-Tarvenmor
-Finithdrenmor
 Methiniol
+Finithdrenmor
 
 # estate
 # title
 3
 # name
 Westmia
+# color
+0 0 48
 # subfiefs
-Eashvinaxia
-Morethdrenapinia
-frey
 Trisinidethia
 Nethmar
 
@@ -8831,251 +8477,113 @@ Nethmar
 # title
 3
 # name
-Tharohthsia
-# subfiefs
-Feighar
-Drethdethia
-Lueghohtheigha
-Perfreyia
-Ventrithales
-
-# estate
-# title
-3
-# name
 Mozthheughough
+# color
+0 0 48
 # subfiefs
-Renexohthmia
-Lueghmia
 Perdethia
 Drethtopia
-Methhenia
-
-# estate
-# title
-3
-# name
-Tunflinmia
-# subfiefs
-Tunmor
-
-# estate
-# title
-3
-# name
-Trosmia
-# subfiefs
-Percfrey
-Carvaneigha
-Folnmia
-
-# estate
-# title
-3
-# name
-Trosheughough
-# subfiefs
-Carvaynia
-Folnvenmia
-Fustopia
-Westvandethia
-Sthenisia
 
 # estate
 # title
 3
 # name
 Sthentaria
+# color
+0 0 48
 # subfiefs
-Finithliaxia
-Pervithfreyia
 Westtrethtopia
-Renextricth
 
 # estate
 # title
 3
 # name
 Dretheigha
+# color
+0 0 48
 # subfiefs
-tricth
-Ansia
 ildriax
-Tuntaria
-
-# estate
-# title
-3
-# name
-Sarfrey
-# subfiefs
-Tharmor
-Finithdeth
-Topiinitricth
-Stheilthales
-
-# estate
-# title
-3
-# name
-Morethtopia
-# subfiefs
-Morethilthales
-Tharsia
-Feylitricth
-Nilavia
-Feighiniisia
-Sthenohthar
-Lerthales
-
-# estate
-# title
-3
-# name
-Lueghfrey
-# subfiefs
-Trossia
-Sthenrotopia
-Hethiaridethia
-ol
 
 # estate
 # title
 3
 # name
 Renexiniar
+# color
+0 0 48
 # subfiefs
-Tarvia
-Daytrotopia
-Nilainimor
 Daytrodriax
-Lueghridethia
-Fushenia
-Eashdrenar
 
 # estate
 # title
 3
 # name
 Tunvia
+# color
+0 0 48
 # subfiefs
-Drethroaxia
-Fersafrey
 Feyroeigha
-Hethiatrethtricth
 
 # estate
 # title
 3
 # name
 Nilavenvia
+# color
+0 0 48
 # subfiefs
-Renexflinfreyia
-Morethrimor
-Thardrentricth
 Ventsia
-Topitopia
-
-# estate
-# title
-3
-# name
-Tunrotopia
-# subfiefs
-Trosrimia
-Tartopia
-Sarrovaynia
-Stheflineigha
-Nothivanvaynia
+Thardrentricth
 
 # estate
 # title
 3
 # name
 Finithvindethia
+# color
+0 0 48
 # subfiefs
-Tharinimar
-Ventohtheigha
-Perctaria
-Lervia
 Percvindeth
-Morethaxia
 
 # estate
 # title
 3
 # name
 Lerdeth
+# color
+0 0 48
 # subfiefs
-Ventlithia
-Tharinitricth
 Lueghrideth
-Carvithaxia
 
 # estate
 # title
 3
 # name
 Vosaxia
+# color
+0 0 48
 # subfiefs
-Fervithvaynia
-Topivithfrey
 Ferdethia
-Drethvinfreyia
-Mozthvenaxia
-Vostrethtopia
-
-# estate
-# title
-3
-# name
-Feylithia
-# subfiefs
-Methmor
-Westvia
-Nilafrey
-Feighvenol
-Anvantopia
-Topidrenfreyia
-Trosohththales
 
 # estate
 # title
 3
 # name
 Drethfrey
+# color
+0 0 48
 # subfiefs
-Panriar
-Triseigha
 Fusapinia
-Panrilithia
-Finithvenaxia
 Pertaria
-Eashvinhenia
-
-# estate
-# title
-3
-# name
-Sarlithia
-# subfiefs
-Percvintaria
-Vosrifreyia
-Carriisia
-Tunroisia
-Topivenar
-Folnileigha
-Perrifrey
 
 # estate
 # title
 3
 # name
 Eashviththales
+# color
+0 0 48
 # subfiefs
-Sarvithvaynia
-axia
-Tartricth
 Topilitopia
 
 # estate
@@ -9083,261 +8591,82 @@ Topilitopia
 3
 # name
 Perheughough
+# color
+0 0 48
 # subfiefs
-Renexdethia
-Feriltricth
-Ferenliapinia
 Trosdriax
-Anvanfreyia
-Renexlithia
-
-# estate
-# title
-3
-# name
-Folnmar
-# subfiefs
-Lerheughough
-Tarol
-Lueghtaria
-Tarrivaynia
-Eashriapinia
-Westdrenfrey
-Nothiol
-Ferensia
 
 # estate
 # title
 3
 # name
 Percflinvaynia
+# color
+0 0 48
 # subfiefs
-Lueghaxia
-Lueghtopia
-Panvenapinia
 Morethar
-Kerohthmor
-Finithohthvia
-
-# estate
-# title
-3
-# name
-Fusriapinia
-# subfiefs
-Lermor
-Trisohthfrey
-Kerar
-Hethiainitricth
-Tarileigha
-Ferenohththales
-Venttrethmia
 
 # estate
 # title
 3
 # name
 Sthevaynia
+# color
+0 0 48
 # subfiefs
-Fuslivaynia
-Lerohthhenia
 Vosdreneigha
 Topitrethar
 Feytopia
-Sthenlifrey
-venvaynia
-
-# estate
-# title
-3
-# name
-Hethiavantaria
-# subfiefs
-Ferensadriax
-Peraxia
-Nethinieigha
-
-# estate
-# title
-3
-# name
-Tharmar
-# subfiefs
-Feytrethapinia
-Fusfrey
-Trisfreyia
-Folnisia
-
-# estate
-# title
-3
-# name
-Ferriheughough
-# subfiefs
-Nethisia
-Nothidrendethia
-Ventvenisia
-Sthemor
-Anvenisia
-
-# estate
-# title
-3
-# name
-Drethileigha
-# subfiefs
-Eashvandeth
-ilfreyia
-Sardethia
-Percrieigha
-Hethiamia
-Mozthflinlithia
-
-# estate
-# title
-3
-# name
-Nilamia
-# subfiefs
-Mozthlithia
-Vosrisia
-Lerrivaynia
-Nothimia
-
-# estate
-# title
-3
-# name
-Tunsia
-# subfiefs
-Percdriax
-Perar
-
-# estate
-# title
-4
-# name
-Fervenmor
-# subfiefs
-Feighvithlithia
-Trosvanmar
-Kerhenia
 
 # estate
 # title
 4
 # name
 Niladeth
+# color
+0 0 48
 # subfiefs
-Nothieigha
-Hethiasia
-Eashohthol
 Carthales
 
 # estate
 # title
 4
 # name
-Hethiaheughough
-# subfiefs
-Feighrimor
-Pandrenvaynia
-Ferenromia
-Tharrolithia
-
-# estate
-# title
-4
-# name
 Feighflinsia
+# color
+0 0 48
 # subfiefs
-Tardrenlithia
-Tuniltaria
-Tarvinlithia
 Nethdethia
-
-# estate
-# title
-4
-# name
-Folntrethol
-# subfiefs
-Folnventhales
-Westmia
-Tunflinmia
-
-# estate
-# title
-4
-# name
-Nethdrenisia
-# subfiefs
-Morethsaaxia
-Panhenia
-Tharohthsia
+Tarvinlithia
 
 # estate
 # title
 4
 # name
 Drethvaneigha
+# color
+0 0 48
 # subfiefs
-Ferenilapinia
-Trosapinia
 Mozthheughough
-Trosmia
 
 # estate
 # title
 4
 # name
 Tunvenmor
+# color
+0 0 48
 # subfiefs
-Sthentaria
-Sarfrey
-Morethtopia
 Dretheigha
-Trosheughough
-
-# estate
-# title
-4
-# name
-Feighdrenfreyia
-# subfiefs
-Lerdeth
-Nilavenvia
-Tunrotopia
-
-# estate
-# title
-4
-# name
-Daytmar
-# subfiefs
-Renexiniar
-Tunvia
-Lueghfrey
-
-# estate
-# title
-4
-# name
-Trosthales
-# subfiefs
-Finithvindethia
-Vosaxia
-Tunsia
-Feylithia
 
 # estate
 # title
 4
 # name
 Westilaxia
+# color
+0 0 48
 # subfiefs
-Eashviththales
-Sarlithia
 Drethfrey
 
 # estate
@@ -9345,29 +8674,19 @@ Drethfrey
 4
 # name
 Ventdethia
+# color
+0 0 48
 # subfiefs
-Fusriapinia
-Folnmar
 Perheughough
 
 # estate
 # title
 4
 # name
-Methvaynia
-# subfiefs
-Drethileigha
-Sthevaynia
-
-# estate
-# title
-4
-# name
 Feyilol
+# color
+0 0 48
 # subfiefs
-Hethiavantaria
-Tharmar
-Ferriheughough
 Percflinvaynia
 
 # estate
@@ -9375,66 +8694,19 @@ Percflinvaynia
 4
 # name
 Tarilapinia
+# color
+0 0 48
 # subfiefs
-Mozthohthol
-Finithtopia
-Vosilapinia
 Fusfreyia
-Nilamia
-
-# estate
-# title
-5
-# name
-Renexrotaria
-# subfiefs
-Niladeth
-Hethiaheughough
-
-# estate
-# title
-5
-# name
-Finithilapinia
-# subfiefs
-Nethdrenisia
-Feighflinsia
-
-# estate
-# title
-5
-# name
-Finithmar
-# subfiefs
-Fervenmor
-Drethvaneigha
+Vosilapinia
 
 # estate
 # title
 5
 # name
 Fusvithheughough
+# color
+0 0 48
 # subfiefs
-Ventdethia
-Westilaxia
 Feyilol
-
-# estate
-# title
-5
-# name
-Tharflinfreyia
-# subfiefs
-Trosthales
-Feighdrenfreyia
-Daytmar
-
-# estate
-# title
-5
-# name
-Sareigha
-# subfiefs
-Tunvenmor
-Methvaynia
 

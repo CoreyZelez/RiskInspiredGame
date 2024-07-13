@@ -1,11 +1,12 @@
 #include "LandArmy.h"
 #include "Territory.h"
-#include "IOccupiable.h"
+#include "ITerritoryOccupancy.h"
 #include "TextureManager.h"
 #include "Player.h"
 #include "GameplaySettings.h"
 #include "Terrain.h"
 #include "LandTerritory.h"
+#include "Barony.h"
 #include <assert.h>
 #include <random>
 #include <iostream>
@@ -22,17 +23,9 @@ LandArmy::LandArmy(Player & owner, Territory * location, StaminaArray staminaStr
 	assert(location != nullptr);
 }
 
-void LandArmy::removeFromTerritory()
-{
-	// Remove the army from territory and updates the occupancy.
-	getTerritory().getOccupancyHandler()->removeArmy(this);
-}
-
 void LandArmy::attack(LandArmy &defendingArmy, const Terrain &terrain)
 {
 	const GameplaySettings &gameplaySettings = getOwner().getGameplaySettings();
-
-	assert(getTotalStrength() >= gameplaySettings.landHostileOccupancyCost);
 
 	// Strength multipliers.
 	double defenceMultiplier = terrain.defenceMultiplier;
@@ -87,6 +80,22 @@ void LandArmy::attack(LandArmy &defendingArmy, const Terrain &terrain)
 	reduceStrength(attackerStrengthAdjustment);
 }
 
+void LandArmy::setSiegeBarony(Barony* barony)
+{
+	// Siege barony should be made nullptr before being changed to new barony.
+	assert(barony == nullptr || siegeBarony == nullptr);
+
+	siegeBarony = barony;
+}
+
+void LandArmy::updateSiege()
+{
+	if(siegeBarony != nullptr)
+	{
+		siegeBarony->updateSiege();
+	}
+}
+
 int LandArmy::getLandMoveStaminaCost() 
 {
 	return MAX_STAMINA;
@@ -120,12 +129,6 @@ void LandArmy::move(Territory &location, unsigned int strength)
 		return;
 	}
 
-	// Strength must exceed min hostile occupancy cost when moving to enemy or unowned location.
-	if(!sameUpperRealm(&getOwner(), location.getEstateOwner()) && strength < gameplaySettings.landHostileOccupancyCost)
-	{
-		return;
-	}
-
 	// Attempt to move to current location.
 	if(&location == &getTerritory())
 	{
@@ -150,8 +153,11 @@ void LandArmy::move(Territory &location, unsigned int strength)
 		return;
 	}
 
-	// Update diplomacy of involved players.
-	updatePlayerDiplomacy(location.getEstateOwner());
+	// Update diplomacy if movement is hostile.
+	if(location.getController() != nullptr && !getOwner().getRealm().getTerritories().controlsTerritory(location))
+	{
+		updateDiplomacyForAttack(*location.getController());
+	}
 
 	// Attempt occupation of location by new army.
 	location.getOccupancyHandler()->occupy(newArmy.get());
@@ -191,7 +197,7 @@ void LandArmy::moveClosest(Territory &target, unsigned int strength, int maxDist
 	// }
 
 	Territory& source = getTerritory();
-	Territory* nearest = nearestFriendlyAdjacentTerritoryDijkstra(source, target, maxDist);
+	Territory* nearest = nearestAdjacentControlledTerritoryDijkstra(source, target, maxDist);
 	if(nearest != nullptr)
 	{
 		move(*nearest, strength);

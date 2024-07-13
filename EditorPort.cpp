@@ -36,7 +36,7 @@ sf::Vector2f EditorPort::determineSpritePosition(const EditorTerritory& landTerr
 
 	// Positions within land territory that border naval territory.
 	// The sprite of the port will lie on one of these positions.
-	std::unordered_set<sf::Vector2f, Vector2fHash> borderingPositions = landTerritory.getGrid().getNeighbouringBorderPositions(navalTerritory.getGrid());
+	std::unordered_set<sf::Vector2f, Vector2fHash> borderingPositions = landTerritory.getGrid().getAdjacentBorderPositions(navalTerritory.getGrid());
 
 	// Calculate average position of border positions.
 	sf::Vector2f averagePosition;

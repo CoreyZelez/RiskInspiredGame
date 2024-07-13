@@ -12,13 +12,12 @@ MilitaryManager::MilitaryManager(Player &player)
 
 void MilitaryManager::handleGameOver()
 {
+	// REWRITE SO THAT FUNCTION IS CALLED INSIDE ASSERT TO AVOID UNNECESSARY COMPUTATION IN RELEASE MODE.
 	for(MilitaryForce *military : militaries)
 	{
-		if(!military->isDead())
-		{
-			military->removeFromTerritory();
-		}
+		assert(military->isDead());
 	}
+
 	armies.clear();
 	fleets.clear();
 }
@@ -36,8 +35,11 @@ void MilitaryManager::draw(sf::RenderWindow & window) const
 
 void MilitaryManager::update()
 {
+	updateSieges();
+
 	removeDeadMilitaries();
 	resetStaminas();
+
 	distributeArmyReinforcements();
 	distributeFleetReinforcements();
 	applyReservesReduction();
@@ -214,12 +216,21 @@ int MilitaryManager::getTotalFleetStrength(int minStamina) const
 	return totalStrength;
 }
 
+void MilitaryManager::updateSieges()
+{
+	for (auto& landArmy : armies)
+	{
+		landArmy.get()->updateSiege();
+	}
+}
+
 void MilitaryManager::removeDeadMilitaries()
 {
 	// Remove dead land armies.
 	auto iterL = armies.begin();
 	while(iterL != armies.end())
 	{
+
 		if(!iterL->get()->isDead())
 		{
 			++iterL;

@@ -56,8 +56,8 @@ public:
 
 	bool sharesBorder(const EditorGrid &grid) const;
 
-	// Returns world coordinates of positions that lie on border with specified grid.
-	std::unordered_set<sf::Vector2f, Vector2fHash> getNeighbouringBorderPositions(const EditorGrid &grid) const;
+	// Returns world coordinates of border positions adjacent to specified grid.
+	std::unordered_set<sf::Vector2f, Vector2fHash> getAdjacentBorderPositions(const EditorGrid &grid) const;
 
 	// Returns grid positions.
 	std::unordered_set<sf::Vector2i, Vector2iHash> getPositions() const;
@@ -102,11 +102,7 @@ private:
 	sf::Color calculateAdjustedColor(const sf::Vector2i &position);
 };
 
-EditorGrid loadTerritoryGrid(std::ifstream &file);
-
-sf::Vector2i calculateGridCoordinates(const sf::Vector2f &position);
-// Converts vector world position to grid position.
-sf::Vector2f calculateWorldCoordinates(const sf::Vector2i &position);  
+EditorGrid loadEditorTerritoryGrid(std::ifstream &file);
 
 std::vector<sf::Vector2i> calculateAdjacentPositions(const sf::Vector2i &position);
 

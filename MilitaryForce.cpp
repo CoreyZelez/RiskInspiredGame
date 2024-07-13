@@ -31,7 +31,7 @@ void MilitaryForce::draw(sf::RenderWindow &window) const
 
 void MilitaryForce::resetStamina()
 {
-	assert(staminaStrength.size() == 4);
+	assert(staminaStrength.size() == 3);
 	assert(!isDead());
 	assert(getTotalStrength() > 0);
 	staminaStrength = { 0, 0, getTotalStrength() };
@@ -53,7 +53,9 @@ void MilitaryForce::reduceStrength(unsigned int amount)
 			break;
 		}
 	}
+
 	checkDeath();
+
 	// Update graphics sprite of military.
 	graphics.update();
 }
@@ -64,7 +66,8 @@ void MilitaryForce::clearStrength()
 	{
 		staminaStrength[stamina] = 0;
 	}
-	notifyObservers(deadMilitary);
+
+	notifyObservers(vacatedMilitary);
 }
 
 std::array<unsigned int, 3> MilitaryForce::getStaminaStrength() const
@@ -143,7 +146,7 @@ void MilitaryForce::checkDeath()
 {
 	if(isDead())
 	{
-		notifyObservers(deadMilitary);
+		notifyObservers(vacatedMilitary);
 	}
 }
 
@@ -152,7 +155,7 @@ Territory& MilitaryForce::getTerritory()
 	return *territory;
 }
 
-const Territory & MilitaryForce::getTerritory() const
+const Territory& MilitaryForce::getTerritory() const
 {
 	return *territory;
 }
@@ -162,22 +165,17 @@ void MilitaryForce::setTerritory(Territory* territory)
 	this->territory = territory;
 }
 
-void MilitaryForce::updatePlayerDiplomacy(Player *locationEstateOwner)
+void MilitaryForce::updateDiplomacyForAttack(Player &enemyPlayer)
 {
-	if(locationEstateOwner == nullptr)
+	if(!sameUpperRealm(&enemyPlayer, &player))
 	{
-		return;
-	}
-	
-	if(!sameUpperRealm(locationEstateOwner, &player))
-	{
-		if(locationEstateOwner == nullptr)
+		if(&enemyPlayer == nullptr)
 		{
 			return;
 		}
 		// Only handle diplomacy for upper most liege.
 		// In future may want to handle diplomacy for all lieges in hierarchy of given location estate ownership.
-		Player &upperLiege = locationEstateOwner->getUpperLiege();
+		Player &upperLiege = enemyPlayer.getUpperLiege();
 		upperLiege.addAttackHistory(player);
 		player.addAttackHistory(upperLiege);
 	}
@@ -198,12 +196,12 @@ void MilitaryForce::setSpritePosition(sf::Vector2f position)
 	graphics.setPosition(position);
 }
 
-Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory& sourceTerritory, Territory& targetTerritory, int maxDist)
+Territory* nearestAdjacentControlledTerritoryDijkstra(Territory& sourceTerritory, Territory& targetTerritory, int maxDist)
 {
 	// Ensure territories have the same owner
-	assert(sameUpperRealm(sourceTerritory.getEstateOwner(), targetTerritory.getEstateOwner()));
+	assert(sameUpperRealm(sourceTerritory.getController(), targetTerritory.getController()));
 
-	const Player* player = sourceTerritory.getEstateOwner();
+	const Player* player = sourceTerritory.getController();
 
 	// Create a priority queue (min-heap) to select territories with the smallest tentative distance
 	std::priority_queue<std::pair<int, Territory*>, std::vector<std::pair<int, Territory*>>, std::greater<>> pq;
@@ -243,22 +241,21 @@ Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory& sourceTerritory, 
 			return adjacentToSource;
 		}
 
-		// Explore neighbors
-		for(Territory* neighbor : currentTerritory->getDistanceMap().getAdjacencies())
+		// Explore adjacencies.
+		for(Territory* adjacency : currentTerritory->getDistanceMap().getAdjacencies())
 		{
 			// Check if the neighbor is friendly.
-			if(sameUpperRealm(player, neighbor->getEstateOwner()))
+			if(player == adjacency->getController())
 			{
-				// Calculate the tentative distance to the neighbor
+				// Calculate the tentative distance to the adjacency.
 				int tentativeDistance = currentDistance + 1;
 
-				// Update the tentative distance if it's shorter
-				if(distanceMap.find(neighbor) == distanceMap.end() || tentativeDistance < distanceMap[neighbor])
+				// Update the tentative distance if it's shorter.
+				if(distanceMap.find(adjacency) == distanceMap.end() || tentativeDistance < distanceMap[adjacency])
 				{
-					distanceMap[neighbor] = tentativeDistance;
-					pq.push({ tentativeDistance, neighbor });
-					// Store the path information
-					pathMap[neighbor] = currentTerritory;
+					distanceMap[adjacency] = tentativeDistance;
+					pq.push({ tentativeDistance, adjacency });
+					pathMap[adjacency] = currentTerritory;
 				}
 			}
 		}
@@ -274,15 +271,15 @@ Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory& sourceTerritory, 
 	return nullptr;
 }
 
-Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory &sourceTerritory, Territory &targetTerritory, int maxDist, TerritoryType territoryType)
+Territory* nearestAdjacentControlledTerritoryDijkstra(Territory &sourceTerritory, Territory &targetTerritory, int maxDist, TerritoryType territoryType)
 {
 
 	// Ensure territories have the same owner.
-	assert(sourceTerritory.getEstateOwner() == targetTerritory.getEstateOwner());
+	assert(sourceTerritory.getController() == targetTerritory.getController());
 	// Ensure territories of correct type.
 	assert(sourceTerritory.getType() == territoryType && targetTerritory.getType() == territoryType);
 
-	const Player* player = sourceTerritory.getEstateOwner();
+	const Player* player = sourceTerritory.getController();
 
 	// Create a priority queue (min-heap) to select territories with the smallest tentative distance.
 	std::priority_queue<std::pair<int, Territory*>, std::vector<std::pair<int, Territory*>>, std::greater<>> pq;
@@ -324,25 +321,24 @@ Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory &sourceTerritory, 
 		}
 
 		// Explore neighbors.
-		for(Territory* neighbor : currentTerritory->getDistanceMap().getAdjacencies())
+		for(Territory* adjacency : currentTerritory->getDistanceMap().getAdjacencies())
 		{
-			if(neighbor->getType() != territoryType)
+			if(adjacency->getType() != territoryType)
 			{
 				continue;
 			}
-			// Check if the neighbor has the same owner as sourceTerritory and targetTerritory.
-			if(neighbor->getEstateOwner() == player)
+			// Check if the adjacency has the same owner as sourceTerritory and targetTerritory.
+			if(adjacency->getController() == player)
 			{
-				// Calculate the tentative distance to the neighbor.
+				// Calculate the tentative distance to the adjacency.
 				int tentativeDistance = currentDistance + 1;
 
 				// Update the tentative distance if it's shorter.
-				if(distanceMap.find(neighbor) == distanceMap.end() || tentativeDistance < distanceMap[neighbor])
+				if(distanceMap.find(adjacency) == distanceMap.end() || tentativeDistance < distanceMap[adjacency])
 				{
-					distanceMap[neighbor] = tentativeDistance;
-					pq.push({ tentativeDistance, neighbor });
-					// Store the path information.
-					pathMap[neighbor] = currentTerritory;
+					distanceMap[adjacency] = tentativeDistance;
+					pq.push({ tentativeDistance, adjacency });
+					pathMap[adjacency] = currentTerritory;
 				}
 			}
 		}

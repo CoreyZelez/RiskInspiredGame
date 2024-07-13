@@ -132,7 +132,7 @@ std::deque<EditorTerritory>& TerritoryMaker::getTerritories()
 
 void TerritoryMaker::loadLandTerritory(std::ifstream& file)
 {
-	EditorGrid grid = loadTerritoryGrid(file);
+	EditorGrid grid = loadEditorTerritoryGrid(file);
 
 	int id = loadTerritoryID(file);
 	nextID = std::max(id + 1, nextID);
@@ -157,7 +157,7 @@ void TerritoryMaker::loadLandTerritory(std::ifstream& file)
 
 void TerritoryMaker::loadNavalTerritory(std::ifstream& file)
 {
-	EditorGrid grid = loadTerritoryGrid(file);
+	EditorGrid grid = loadEditorTerritoryGrid(file);
 
 	int id = loadTerritoryID(file);
 	nextID = std::max(id + 1, nextID);

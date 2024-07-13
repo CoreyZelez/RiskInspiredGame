@@ -1,35 +1,17 @@
 #include "TerritoryManager.h"
 #include "Territory.h"
 #include "GameplaySettings.h"
+#include "EditorGrid.h"
 #include <assert.h>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 void TerritoryManager::drawPorts(sf::RenderWindow & window) const
 {
 	for(const auto &territory : landTerritories)
 	{
 		territory.get()->drawPort(window);
-	}
-}
-
-void TerritoryManager::save(std::string mapName) const
-{
-	std::ofstream file("res/maps/" + mapName + "/" + mapName + "_territories.txt");
-
-	// Save naval territories before land territories since when loading land territories, require naval 
-	// territories to already be loaded such that ports can be successfully loaded for the land territories.
-	for(const auto& territory : navalTerritories)
-	{
-		territory.get()->saveToFile(file);
-		file << std::endl; // Seperates territory save information.
-	}
-
-	// Save land territories.
-	for(const auto& territory : landTerritories)
-	{
-		territory.get()->saveToFile(file);
-		file << std::endl;  // Seperates territory save information.
 	}
 }
 
@@ -175,7 +157,7 @@ void TerritoryManager::calculateDistances()
 
 void TerritoryManager::loadLandTerritory(std::ifstream &file, const GameplaySettings *gameplaySettings)
 {
-	EditorGrid graphics = loadTerritoryGrid(file);
+	Grid grid = loadTerritoryGrid(file);
 
 	int id = loadTerritoryID(file);
 
@@ -190,7 +172,7 @@ void TerritoryManager::loadLandTerritory(std::ifstream &file, const GameplaySett
 	}
 
 	std::unique_ptr<LandTerritory> territory = 
-	 	std::make_unique<LandTerritory>(id, graphics, features, portNavalTerritory);
+	 	std::make_unique<LandTerritory>(id, grid, features, portNavalTerritory);
 	
 	territories.emplace_back(territory.get());
 	landTerritories.emplace_back(std::move(territory));
@@ -198,9 +180,9 @@ void TerritoryManager::loadLandTerritory(std::ifstream &file, const GameplaySett
 
 void TerritoryManager::loadNavalTerritory(std::ifstream & file)
 {
-	EditorGrid graphics = loadTerritoryGrid(file);
+	Grid grid = loadTerritoryGrid(file);
 	int id = loadTerritoryID(file);
-	std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>(id, graphics);
+	std::unique_ptr<NavalTerritory> territory = std::make_unique<NavalTerritory>(id, grid);
 	territories.emplace_back(territory.get());
 	navalTerritories.emplace_back(std::move(territory));
 }
@@ -209,10 +191,49 @@ NavalTerritory* TerritoryManager::getNavalTerritory(int id)
 {
 	for(auto &territory : navalTerritories)
 	{
-		if(territory.get()->getID() == id)
+		if(territory.get()->getId() == id)
 		{
 			return territory.get();
 		}
 	}
 	return nullptr;
+}
+
+Grid loadTerritoryGrid(std::ifstream& file)
+{
+	std::unordered_set<sf::Vector2i, Vector2iHash> positions;
+
+	std::string line;
+	int num1;
+	int num2;
+
+	std::getline(file, line);
+	assert(line.compare(gridSaveLabel) == 0);
+	while (std::getline(file, line) && line.size() > 0 && line[0] != '#')
+	{
+		std::istringstream iss(line);
+		if (iss >> num1 >> num2)
+		{
+			positions.insert(sf::Vector2i(num1, num2));
+		}
+		else
+		{
+			// Error with file format.
+			exit(1);
+		}
+	}
+
+	// Determine default color from file.
+	std::getline(file, line);
+	std::istringstream iss(line);
+	int r, g, b;
+	iss >> r >> g >> b;
+	sf::Color defaultColor(r, g, b);
+
+	Grid grid(positions);
+	// TEMP. GRID SHOULD STORE DEFAULT COLOR. PASS TO CONSTRUCTOR.
+	grid.setInteriorColor(defaultColor);
+	////////////
+
+	return grid;
 }

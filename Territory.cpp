@@ -5,26 +5,14 @@
 #include <fstream>
 #include <queue>
 
-Territory::Territory(TerritoryType type, int id, EditorGrid grid)
+Territory::Territory(TerritoryType type, int id, Grid grid)
 	: Territory(type, id, grid, nullptr)
 {
 }
 
-Territory::Territory(TerritoryType type, int id, sf::Color color)
-	: Territory(type, id, color, nullptr)
-{
-}
-
-Territory::Territory(TerritoryType type, int id, EditorGrid grid, std::unique_ptr<IOccupiable> occupancyHandler)
+Territory::Territory(TerritoryType type, int id, Grid grid, std::unique_ptr<ITerritoryOccupancy> occupancyHandler)
 	: type(type), id(id), grid(grid), occupancyHandler(std::move(occupancyHandler)), distanceMap(*this)
 {
-	this->grid.setBorderMode(BorderMode::feintBorders);
-}
-
-Territory::Territory(TerritoryType type, int id, sf::Color color, std::unique_ptr<IOccupiable> occupancyHandler)
-	: type(type), id(id), grid(color), occupancyHandler(std::move(occupancyHandler)), distanceMap(*this)
-{
-	this->grid.setBorderMode(BorderMode::feintBorders);
 }
 
 void Territory::assignLandedEstate(LandedEstate *estate)
@@ -48,28 +36,17 @@ TerritoryDrawMode Territory::getDrawMode() const
 	return drawMode;
 }
 
-void Territory::saveToFile(std::ofstream &file) const
-{
-	assert(file.is_open());
-
-	// Append data to the file.
-	file << getSaveLabel() << std::endl;
-	grid.saveToFile(file);
-	file << "# id" << std::endl;
-	file << id << std::endl;
-}
-
 void Territory::draw(sf::RenderWindow &window) const
 {
 	grid.draw(window);
 }
 
-IOccupiable* Territory::getOccupancyHandler()
+ITerritoryOccupancy* Territory::getOccupancyHandler()
 {
 	return occupancyHandler.get();
 }
 
-const IOccupiable * Territory::getOccupancyHandler() const
+const ITerritoryOccupancy* Territory::getOccupancyHandler() const
 {
 	return occupancyHandler.get();
 }
@@ -84,35 +61,27 @@ const TerritoryDistanceMap & Territory::getDistanceMap() const
 	return distanceMap;
 }
 
-Player* Territory::getEstateOwner() 
+Player* Territory::getController()
 {
-	if(landedEstate == nullptr)
-	{
-		return nullptr;
-	}
-	return landedEstate->getRuler();
+	return occupancyHandler.get()->getController();
 }
 
-const Player * Territory::getEstateOwner() const
+const Player* Territory::getController() const
 {
-	if(landedEstate == nullptr)
-	{
-		return nullptr;
-	}
-	return landedEstate->getRuler();
+	return occupancyHandler.get()->getController();
 }
 
-EditorGrid& Territory::getGrid()
+Grid& Territory::getGrid()
 {
 	return grid;
 }
 
-const EditorGrid& Territory::getGrid() const
+const Grid& Territory::getGrid() const
 {
 	return grid;
 }
 
-int Territory::getID() const
+int Territory::getId() const
 {
 	return id;
 }

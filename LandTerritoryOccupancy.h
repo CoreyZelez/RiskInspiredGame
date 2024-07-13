@@ -1,20 +1,18 @@
 #pragma once
-#include "IOccupiable.h"
+#include "ITerritoryOccupancy.h"
 #include "Observer.h"
 
 class LandTerritory;
 class NavalFleet;
 class LandArmy;
 
-class LandTerritoryOccupancy : public IOccupiable, public Observer
+class LandTerritoryOccupancy : public ITerritoryOccupancy, public Observer
 {
 public:
 	explicit LandTerritoryOccupancy(LandTerritory &territory);
 
 	virtual void update(Message message) override;
 
-	// Determine occupyer.
-	virtual void determineOccupation() override;
 	// Handles land army occupation attempt. Returns true if successful.
 	virtual void occupy(LandArmy *army) override;
 	// Handles navy fleet occupation attempt. Returns true if successful.
@@ -23,33 +21,23 @@ public:
 	virtual void forceOccupy(LandArmy *army) override;
 	// Attempt to occupy until fleet dies or successfully occupies.
 	virtual void forceOccupy(NavalFleet *fleet) override;
-	// Returns occupant of territory.
-	virtual Player* getOccupant() override;
+	// Transfers control of the territory. Will then transfer back if previous controller military present.
+	virtual void transferControl(Player& player) override;
 	// Returns land army occupying territory.
 	virtual const LandArmy* getArmy() const override;
+	// Returns land army occupying territory.
+	virtual LandArmy* getArmy() override;
 	// Returns naval fleet occupying territory.
 	virtual const NavalFleet* getFleet() const override;
-	// Removes army and updates occupancy accordingly.
-	virtual void removeArmy(const LandArmy* army) override;
-	// Removes fleet and updates occupancy accordingly.
-	virtual void removeFleet(const NavalFleet* fleet) override;
-
-protected:
-	// Reevaluates the occupant. Does nothing.
-	virtual void reevaluateOccupancy();
 
 private:
 	LandTerritory &territory;
 	LandArmy *army;  // Army occupying territory. 
-	NavalFleet *fleet;  // Fleet occupying territory coast. 
 
 	// Sets positions of military unit sprites.
 	void updateMilitaryPosition();
 
 	// Sets new occupying army.
-	void updateOccupyingArmy(LandArmy *army);
-
-	// Applys occupation cost to the occupying army.
-	void applyArmyOccupationCost();
+	void changeOccupyingArmy(LandArmy *army);
 };
 

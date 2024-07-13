@@ -10,7 +10,7 @@
 class CompositeGrid
 {
 public:
-	void draw(sf::RenderWindow &window);
+	void draw(sf::RenderWindow &window) const;
 
 	// Updates grids and reconstructs vertex array.
 	void update();
@@ -18,12 +18,23 @@ public:
 	// Set interior color of grid with specific id.
 	void setColor(int gridId, const sf::Color &color);
 
+	void setInteriorColors(const sf::Color& color);
 	void setBorderColor(const sf::Color &color);
-	void setSubBorderColor(const sf::Color &color);
+	void setSubBorderColor(sf::Color color, double darkeningFactor = 1);
 
+	// Adds a grid and specify its interior color.
+	void addGrid(const CompositeGrid& compositeGrid, const sf::Color& color);
 	// Adds a grid and specify its interior color.
 	void addGrid(const Grid &grid, const sf::Color &color);
 	void removeGrid(int gridId);
+	void removeGrid(const Grid& grid);
+	void removeGrid(const CompositeGrid &grid);
+
+	bool containsPosition(const sf::Vector2f position) const;
+	bool isOutdated() const;
+
+	std::vector<int> getGridIds() const;
+	const Grid& getGrid(int id) const;
 
 private:
 	std::unordered_map<int, Grid> grids;
@@ -31,7 +42,7 @@ private:
 	std::unordered_set<sf::Vector2i, Vector2iHash> borderPositions;
 	sf::VertexArray vertices;
 	sf::Color subBorderColor;
-	sf::Color borderColor;
+	sf::Color borderColor = sf::Color::Black;
 
 	bool outdated = false;  // Indicates whether vertices need to be recalculated.
 

@@ -12,9 +12,7 @@
 
 int main()
 {
-	sf::RenderWindow windowTesting(sf::VideoMode(2560, 1440), "Sovereign Chaos", sf::Style::Fullscreen);
-
-	bool mapEditorMode = true;
+	bool mapEditorMode = false;
 
 	sf::RenderWindow window(sf::VideoMode(2560, 1440), "Sovereign Chaos", sf::Style::Fullscreen);
 	sf::View gameView = window.getDefaultView(); 
@@ -25,8 +23,8 @@ int main()
 	FontManager::getInstance(); 
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS.
 
-	MapMaker mapMaker("testingNEW");
-	Game game("");
+	MapMaker mapMaker("empty");
+	Game game("The Grand Continent");
 
 	GameDisplay gameDisplay = game.createView();
 	GameUI gameUI(UIView);
@@ -94,7 +92,7 @@ int main()
 
 	// TESTS
 	UnitTestRunner unitTestRunner;
-	unitTestRunner.runTests();
+	//unitTestRunner.runTests();
 
 	return 0;
 }

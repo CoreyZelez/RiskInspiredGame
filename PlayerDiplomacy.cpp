@@ -25,7 +25,7 @@ void PlayerDiplomacy::update()
 	// Remove rebelling vassals at end of attack history.
 	for(Player *player : attackHistory[maxHistory])
 	{
-		rebellingVassals.erase(player);
+		rebelledVassals.erase(player);
 	}
 
 	// Shift attack history keys right.
@@ -40,7 +40,7 @@ void PlayerDiplomacy::setColors(const std::vector<std::unique_ptr<Player>> &play
 {
 	std::unordered_set<const Player*> playerColorsSet;
 
-	player.getRealm().setGridColor(sf::Color(0, 94, 255));
+	player.getRealm().getGrid().setColor(sf::Color(0, 94, 255));
 	playerColorsSet.insert(&player);
 
 	// Color of realms recently attacked. Closer to yellow implies longer time since attack.
@@ -56,13 +56,13 @@ void PlayerDiplomacy::setColors(const std::vector<std::unique_ptr<Player>> &play
 		}
 		for(Player *player : attackHistory[i])
 		{
-			if(rebellingVassals.count(player) == 1)
+			if(rebelledVassals.count(player) == 1)
 			{
-				player->getRealm().setGridColor(rebelColor);
+				player->getRealm().getGrid().setColor(rebelColor);
 			}
 			else
 			{
-				player->getRealm().setGridColor(warColor);
+				player->getRealm().getGrid().setColor(warColor);
 			}
 			playerColorsSet.insert(player);
 		}
@@ -74,7 +74,7 @@ void PlayerDiplomacy::setColors(const std::vector<std::unique_ptr<Player>> &play
 	{
 		if(playerColorsSet.count(player.get()) == 0)
 		{
-			player.get()->getRealm().setGridColor(grey);
+			player.get()->getRealm().getGrid().setColor(grey);
 			playerColorsSet.insert(player.get());
 		}
 	}
@@ -95,19 +95,21 @@ void PlayerDiplomacy::addAttackHistory(Player &enemy)
 	attackHistory[0].insert(&enemy);
 }
 
-void PlayerDiplomacy::addRebellingVassal(Player &rebellingVassal)
+void PlayerDiplomacy::addRebelledVassal(Player &rebellingVassal)
 {
 	rebellingVassal.addAttackHistory(player);
 	addAttackHistory(rebellingVassal);
-	rebellingVassals.insert(&rebellingVassal);
+	rebelledVassals.insert(&rebellingVassal);
 }
 
 void PlayerDiplomacy::removeDiplomacyWithPlayer(Player &player)
 {
 	assert(&player != &this->player);
+
 	for(int i = 0; i <= maxHistory; ++i)
 	{
 		attackHistory[i].erase(&player);
 	}
-	rebellingVassals.erase(&player);
+
+	rebelledVassals.erase(&player);
 }

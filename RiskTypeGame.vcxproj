@@ -182,6 +182,7 @@
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridUnitTest.cpp" />
     <ClCompile Include="HashFunctions.cpp" />
+    <ClCompile Include="ITerritoryOccupancy.cpp" />
     <ClCompile Include="LandTerritoryFeatureEditor.cpp" />
     <ClCompile Include="LandTerritoryFeatures.cpp" />
     <ClCompile Include="LandTerritoryOccupancy.cpp" />
@@ -230,9 +231,11 @@
     <ClCompile Include="ProsperityFactory.cpp" />
     <ClCompile Include="Realm.cpp" />
     <ClCompile Include="PlayerEstateManager.cpp" />
-    <ClCompile Include="RealmGrid.cpp" />
     <ClCompile Include="NumericTextDisplay.cpp" />
+    <ClCompile Include="RealmGrid.cpp" />
+    <ClCompile Include="RealmTerritories.cpp" />
     <ClCompile Include="RealmUnitTest.cpp" />
+    <ClCompile Include="SiegeManager.cpp" />
     <ClCompile Include="UtilitySFML.cpp" />
     <ClCompile Include="VassalResistance.cpp" />
     <ClCompile Include="Terrain.cpp" />
@@ -275,7 +278,7 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridUnitTest.h" />
     <ClInclude Include="HashFunctions.h" />
-    <ClInclude Include="IOccupiable.h" />
+    <ClInclude Include="ITerritoryOccupancy.h" />
     <ClInclude Include="LandTerritoryFeatureEditor.h" />
     <ClInclude Include="LandTerritoryFeatures.h" />
     <ClInclude Include="LandTerritoryOccupancy.h" />
@@ -317,9 +320,11 @@
     <ClInclude Include="ProsperityFactory.h" />
     <ClInclude Include="Realm.h" />
     <ClInclude Include="PlayerEstateManager.h" />
-    <ClInclude Include="RealmGrid.h" />
     <ClInclude Include="NumericTextDisplay.h" />
+    <ClInclude Include="RealmGrid.h" />
+    <ClInclude Include="RealmTerritories.h" />
     <ClInclude Include="RealmUnitTest.h" />
+    <ClInclude Include="SiegeManager.h" />
     <ClInclude Include="UtilitySFML.h" />
     <ClInclude Include="VassalResistance.h" />
     <ClInclude Include="Terrain.h" />

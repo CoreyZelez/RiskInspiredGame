@@ -14,14 +14,11 @@ class EditorTerritory;
 class LandTerritory : public Territory 
 {
 public:
-	LandTerritory(int id, EditorGrid graphics, LandTerritoryFeatures features, NavalTerritory *navalTerritory = nullptr);
-	LandTerritory(int id, EditorGrid graphics, NavalTerritory *navalTerritory);
-	LandTerritory(int id, EditorGrid graphics);
-	explicit LandTerritory(int id);
+	LandTerritory(int id, Grid graphics, LandTerritoryFeatures features, NavalTerritory *navalTerritory = nullptr);
+	LandTerritory(int id, Grid graphics, NavalTerritory *navalTerritory);
+	LandTerritory(int id, Grid graphics);
 
 	virtual ~LandTerritory() = default;
-
-	virtual void saveToFile(std::ofstream &file) const override;
 
 	// Save label is identifier in txt file for territory type.
 	virtual std::string getSaveLabel() const override;

@@ -38,7 +38,6 @@ public:
 	void addFleetReinforcements(double amount);
 	void addFleetReserves(double amount);
 
-
 	// Returns army at territory.
 	LandArmy *getArmy(const Territory *territory);
 	// Returns fleet at territory.
@@ -85,8 +84,11 @@ private:
 	// Fleet strength held in reserve for various possible actions.
 	double fleetReserves = 0;
 
+	void updateSieges();
+
 	void removeDeadMilitaries();
 	void resetStaminas();
+
 	// Distributes army reinforcements to preexisting armies proportionate to strength.
 	void distributeArmyReinforcements();
 	// Distributes fleet reinforcements to preexisting fleets proportionate to strength.

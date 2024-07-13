@@ -22,9 +22,8 @@ public:
 	void handleMilitaryYields();
 
 	void addEstate(Estate &estate);
-	void removeEstate(Estate &estate);
+	void removeEstate(const Estate &estate);
 
-	const std::unordered_set<Territory*> &getTerritories();
 	std::unordered_set<const Estate*> getEstates() const;
 	bool containsEstate(const Estate& estate) const;
 
@@ -46,6 +45,5 @@ public:
 
 private:
 	std::unordered_set<Estate*> estates;  // Player owned non-vassal estates.
-	std::unordered_set<Territory*> territories;  // Territories spanned by all ruler owned (non-vassal) estates.
 };
 

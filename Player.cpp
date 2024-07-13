@@ -210,8 +210,10 @@ bool Player::checkGameOver()
 		return false;
 	}
 
-	// Game is over when liegeless player has no remaining estates on LandTerritory and has no land armies.
-	if(getMilitaryManager().getTotalArmyStrength(0) == 0 && getRealm().hasNoBaronies())
+	// Game is over when liegeless player has no remaining estates or militaries.
+	if(getMilitaryManager().getTotalFleetStrength(0) == 0 && 
+		getMilitaryManager().getTotalArmyStrength(0) == 0 && 
+		getRealm().getEstates().size() == 0)
 	{
 		gameOver = true;
 	}
@@ -242,7 +244,7 @@ void Player::handleTurn()
 
 	militaryManager.update();
 
-	realm.handleMilitaryYields();
+	realm.update();
 
 	diplomacy.update();
 
@@ -274,12 +276,14 @@ void Player::rebel()
 	// Some armies may be yielded to pre-rebelion liege occupied territories. 
 	yieldArmyReserves();
 
-	// Check ownership changes of territories due to pre-rebellion liege armies.
-	std::unordered_set<Territory*> territories = realm.getTerritories();
-	for(Territory *territory : territories)
-	{
-		territory->getOccupancyHandler()->determineOccupation();
-	}
+	// Rebelling player cannot control any territories which they do not have the corresponding estate of.
+	assert(realm.getTerritories().getControlledEstateTerritories().size() == realm.getTerritories().getControlledTerritories().size());
+
+	// IS THIS NEEDED? IDK
+	////////////////////////////////////////////////////////for(Territory *territory : territories)
+	////////////////////////////////////////////////////////{
+	////////////////////////////////////////////////////////	territory->getOccupancyHandler()->determineOccupation();
+	////////////////////////////////////////////////////////}
 }
 
 void Player::handleReinforcementArmyYield(double amount)
@@ -440,7 +444,7 @@ void Player::handleVassalRebellion(Player &vassal)
 	liegePolicy.adjustResistanceThreshold(vassal);
 
 	realm.removeRebellingVassal(vassal);
-	diplomacy.addRebellingVassal(vassal);
+	diplomacy.addRebelledVassal(vassal);
 
 	// We ammend the ownership of unlanded estates since the rebelling vassal take with them baronies which may have formed
 	// estates held by their old liege and the old liege's realm may hold baronies which form estates held by the rebelling vassal.

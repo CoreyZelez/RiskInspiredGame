@@ -1,12 +1,10 @@
-
 #pragma once
 #include "Territory.h"
 
 class NavalTerritory : public Territory
 {
 public:
-	NavalTerritory(int id, EditorGrid grid);
-	explicit NavalTerritory(int id);
+	NavalTerritory(int id, Grid grid);
 
 	virtual ~NavalTerritory() = default;
 

@@ -6,6 +6,7 @@
 #include "PlayerEstateManager.h"
 #include "VassalManager.h"
 #include "RealmGrid.h"
+#include "RealmTerritories.h"
 #include <vector>
 #include <unordered_map>
 
@@ -26,6 +27,8 @@ public:
 
 	virtual std::unique_ptr<UIEntity> createUI(UIType type) const override;
 
+	void update();
+
 	// Returns the soft cap on the associated player armies.
 	int calculateArmySoftCap() const;
 	// Returns the soft cap on the associated player fleets.
@@ -39,6 +42,11 @@ public:
 	// Yields all army reserves to realm land territories.
 	void yieldArmyReserves();
 
+	// Handles the start of a siege of some barony by updating realm territories and grid..
+	void handleBaronySiegeBegin(Barony &barony, bool aggressor);
+	// Handles the lifting of a barony siege (ownership remains unchanged).
+	void handleBaronySiegeLifted(Barony& barony, bool aggressor);
+
 	// Removes rebelling vassal from realm.
 	void removeRebellingVassal(Player &vassal);
 	// Redetermines and updates the ownership of rulers and vassals unlanded estates.
@@ -48,15 +56,14 @@ public:
 	// Returns the player which estate is conferred to for territory to.
 	Player& addEstate(Estate &estate);
 	// Removes estate from realm, revoking from either ruler or a vassal depending on who owns it.
-	void removeEstate(Estate &estate);
+	void removeEstate(const Estate &estate);
 	// Returns highest ruler title of any estate's title of ruler's personally held estates.
 	Title getHighestRulerTitle() const;
 	// Returns combined title counts of ruler estates and vassal estates.
 	std::map<Title, int> getTitleCounts() const;
 
-	// CONSIDER HOLDING SETS FOR THE BELOW TWO FUNCTIONS IN REALM CLASS SO CAN RETURN REFERENCE. FOR OPTIMISAT5ION REASONS!!!
-	// Returns unordered set of all territories in realm, including those associated with both ruler owned and vassal estates.
-	std::unordered_set<Territory*> getTerritories();
+	const RealmTerritories& getTerritories() const;
+
 	// Returns unordered set of all estates in realm, including both ruler and vassal owned estates.
 	std::unordered_set<const Estate*> getEstates() const;
 
@@ -69,10 +76,12 @@ public:
 
 	std::string getName() const;
 
+	const Player& getRuler() const;
+
 	// Returns sum of all vassal's army reserves.
 	int getTotalVassalArmyReserves() const;
 
-	void updateGrid();
+	RealmGrid& getGrid();
 
 	// Returns true if realm contains specified world position. Can choose whether to consider vassalView boolean
 	// which in the case that vassalView is true, the function will only return true if the position to the landed 
@@ -81,18 +90,15 @@ public:
 
 	void setVassalView(bool vassalView);
 
-	// Changes color of realms grid.
-	void setGridColor(const sf::Color &color);
-	// Sets color of realm grid to default color.
-	void setGridColorDefault();
-
 private:
 	const std::string name;
 	Player &ruler;  // Ruler of this realm.
 	const LiegePolicy &liegePolicy;
 	PlayerEstateManager rulerEstateManager;  // Manages estates directly controlled by ruler.
 	VassalManager vassalManager;  // Manages vassals and their estates.
-	RealmGrid realmGrid;  // EditorGrid of entire realm estates.
+	RealmGrid grid;  // Grid of entire realm estates.
+	RealmTerritories realmTerritories;
+
 	bool vassalView = false;  // Specifies to draw realms of vassals over entire realm grid.
 	double effectiveArmyYieldRatio;
 	double effectiveFleetYieldRatio;
@@ -121,7 +127,6 @@ private:
 
 	// Yields all fleet reinforcements at realm ports.
 	void yieldFleetReinforcements();
-
 };
 
 // Returns the player with the greatest influence over the specified barony from a parameter vector of players.
@@ -134,3 +139,10 @@ Player &getGreatestUnlandedEstateInfluence(const Estate &estate, const std::vect
 
 // Computes the number of unlanded estates from an estate count map.
 int countUnlandedEstates(std::map<Title, int> &estateCounts);
+
+// Returns true if for a given territory there is an adjacent territory of a given type which belongs to a different realm than the 
+// parameter realm. The territory must be under control of the parameter realm.
+bool hasHostileControlledAdjacentTerritory(const Realm& realm, const Territory& territory, TerritoryType territoryType);
+// Returns true if for a given territory there is an adjacent territory which belongs to a different realm than the parameter realm.
+// The territory must be under control of the parameter realm.
+bool hasHostileControlledAdjacentTerritory(const Realm& realm, const Territory& territory);

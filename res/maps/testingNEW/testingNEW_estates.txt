@@ -853,8 +853,8 @@ Folnapinia
 # color
 46 136 155
 # subfiefs
-Nethtrethtopia
 Methmor
+Nethtrethtopia
 
 # estate
 # title
@@ -875,8 +875,8 @@ Finithsaaxia
 # color
 20 110 133
 # subfiefs
-Daytvaynia
 Perctopia
+Daytvaynia
 
 # estate
 # title
@@ -886,8 +886,8 @@ Lueghsia
 # color
 32 208 184
 # subfiefs
-Tarvintaria
 Drethhenia
+Tarvintaria
 
 # estate
 # title
@@ -897,8 +897,8 @@ Sardeth
 # color
 28 202 199
 # subfiefs
-Mozthlifreyia
 Lueghtrethdethia
+Mozthlifreyia
 
 # estate
 # title
@@ -952,8 +952,8 @@ Panmia
 # color
 25 192 188
 # subfiefs
-Ferenroar
 Folnaxia
+Ferenroar
 
 # estate
 # title
@@ -974,8 +974,8 @@ Panvaynia
 # color
 28 155 202
 # subfiefs
-Perinifrey
 Trosthales
+Perinifrey
 
 # estate
 # title
@@ -1040,9 +1040,9 @@ Careigha
 # color
 124 112 23
 # subfiefs
+Finithlitaria
 Nilavithdeth
 Panvaynia
-Finithlitaria
 
 # estate
 # title
@@ -1064,8 +1064,8 @@ Finithtaria
 224 190 34
 # subfiefs
 Sartaria
-Panmia
 Ventilvaynia
+Panmia
 Careigha
 
 # estate
@@ -1077,10 +1077,10 @@ Topidethia
 213 99 45
 # subfiefs
 Sarisia
-mar
 Daytaxia
-Thartopia
+mar
 Perriisia
+Thartopia
 
 # estate
 # title
@@ -1091,8 +1091,8 @@ Morethvithdriax
 189 27 87
 # subfiefs
 Carmor
-Trosvaynia
 Finithvithtopia
+Trosvaynia
 
 # estate
 # title
@@ -1102,8 +1102,8 @@ Feylimar
 # color
 185 23 115
 # subfiefs
-Ferenrofrey
 Renextricth
+Ferenrofrey
 Ansathales
 
 # estate
@@ -1114,12 +1114,12 @@ Methvendethia
 # color
 95 34 230
 # subfiefs
-Topihenia
-Topitreththales
 Morethviththales
+Topihenia
 Hethiadrenhenia
-Lueghilaxia
+Topitreththales
 Nothilivaynia
+Lueghilaxia
 Tuntrethtricth
 Morethilol
 

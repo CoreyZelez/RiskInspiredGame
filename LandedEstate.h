@@ -13,7 +13,7 @@ public:
 	virtual ~LandedEstate() = default;
 
 	// Handles changing of associated territory occupant.
-	virtual void update(Message message) override;
+	virtual void update(Message message) = 0;
 
 	// Yields any resources directly associated with estate. This does not include subfief resources.
 	virtual void yield() override;
@@ -28,7 +28,10 @@ public:
 
 	virtual bool containsPosition(const sf::Vector2f &position) const override;
 
+	int getGridId() const;
+
 	Territory &getTerritory();
+	const Territory& getTerritory() const;
 
 protected:
 	// Yields military units at territory if possible.

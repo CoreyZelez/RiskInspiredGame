@@ -10,13 +10,39 @@
 #include <iostream>
 #include <fstream>
 
-Barony::Barony(LandTerritory & landTerritory, sf::Color color)
-	: LandedEstate(Title::barony, landTerritory, color), landTerritory(landTerritory)
+Barony::Barony(LandTerritory& landTerritory, sf::Color color)
+	: LandedEstate(Title::barony, landTerritory, color), landTerritory(landTerritory), siegeManager(*this)
 {
+}
+
+void Barony::update(Message message)
+{
+	// Observed territory occupant changed.
+	if (message == Message::newController)
+	{
+		assert(getTerritory().getController() != nullptr);
+
+		Player& territoryController = *getTerritory().getController();
+
+		if(!sameUpperRealm(&territoryController, getRuler()))
+		{
+			siegeManager.initSiege(*getTerritory().getOccupancyHandler()->getArmy());
+		}
+	}
+}
+
+void Barony::updateSiege()
+{
+	siegeManager.update();
 }
 
 std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 {
+	if(siegeManager.activeSiege())
+	{
+		return nullptr;
+	}
+
 	const double landArmyYield = landTerritory.getFeatures().calculateArmyYield();
 
 	if(!getRuler()->hasLiege())
@@ -62,7 +88,7 @@ std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 
 std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
 {	
-	if(!landTerritory.hasPort())
+	if(!landTerritory.hasPort() || siegeManager.activeSiege())
 	{
 		return nullptr;
 	}
@@ -115,10 +141,10 @@ std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 	assert(getRuler() != nullptr); 
 	assert(!getRuler()->hasLiege());  // Ruler should not have a liege.
 
-	// Should not be hostile army residing on this territory.
-	// There may however be a hostile army on the naval territory associated with the port.
-	assert(getTerritory().getOccupancyHandler()->getOccupant() == nullptr
-		|| sameUpperRealm(getRuler(), getTerritory().getOccupancyHandler()->getOccupant()));
+	// Territory must be controlled by player putting fleet.
+	assert(getTerritory().getController() == nullptr || getTerritory().getController() == getRuler());
+	assert(getTerritory().getOccupancyHandler()->getArmy() == nullptr || &getTerritory().getOccupancyHandler()->getArmy()->getOwner() == getRuler());
+
 
 	// Estate does not generate naval units if no port.
 	if(landTerritory.getPort() == nullptr)
@@ -137,7 +163,7 @@ std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 	navalTerritory.getOccupancyHandler()->occupy(fleet.get());
 	// Repeatedly reattempy occupancy of naval territory until success or death of fleet.
 	// This is necessary since first attempt to occupy may fail whilst fleet still alive thus has no where to return to.
-	while(!fleet.get()->isDead() && !sameUpperRealm(navalTerritory.getOccupancyHandler()->getOccupant(), &player))
+	while(!fleet.get()->isDead() && navalTerritory.getController() != &player)
 	{
 		navalTerritory.getOccupancyHandler()->occupy(fleet.get());
 	}

@@ -1,26 +1,11 @@
 #include "Grid.h"
 #include "Direction.h"
-#include <assert.h>
 #include "UtilitySFML.h"
+#include <assert.h>
+#include <unordered_map>
+#include <iostream>
 
 int Grid::currId = 1;
-
-const std::vector<sf::Vector2i> lateralAdjacencyOffsets = {
-		sf::Vector2i(1,0),
-		sf::Vector2i(-1, 0),
-		sf::Vector2i(0,1),
-		sf::Vector2i(0,-1) };
-
-const std::vector<sf::Vector2i> adjacencyOffsets = {
-		sf::Vector2i(1,0),
-		sf::Vector2i(-1, 0),
-		sf::Vector2i(0,1),
-		sf::Vector2i(0,-1),
-		sf::Vector2i(1,-1),
-		sf::Vector2i(1, 1),
-		sf::Vector2i(-1,-1),
-		sf::Vector2i(-1,1)
-};
 
 Grid::Grid(const std::unordered_set<sf::Vector2i, Vector2iHash>& positions)
 	: id(currId++), positions(positions), borderPositions(determineBorderPositions(positions))
@@ -29,6 +14,7 @@ Grid::Grid(const std::unordered_set<sf::Vector2i, Vector2iHash>& positions)
 	initBorderVertices(borderPositions);
 	initInteriorVertices(positions, borderPositions);
 	aggregateVertices();
+	calculateCenter();
 }
 
 void Grid::update()
@@ -76,6 +62,42 @@ bool Grid::sameId(const Grid &grid) const
 	return id == grid.id;
 }
 
+sf::Vector2f Grid::getCenter() const
+{
+	return calculateWorldCoordinates(center);
+}
+
+std::unordered_set<sf::Vector2f, Vector2fHash> Grid::getAdjacentBorderPositions(const Grid& grid) const
+{
+	std::unordered_set<sf::Vector2i, Vector2iHash> neighbouringBorderPositions = {};
+	for (auto position = borderPositions.cbegin(); position != borderPositions.cend(); ++position)
+	{
+		for (const sf::Vector2i &offset : adjacencyOffsets)
+		{
+			sf::Vector2i adjacentPosition = *position + offset;
+
+			if (grid.borderPositions.count(adjacentPosition) == 1)
+			{
+				neighbouringBorderPositions.insert(*position);
+				break;
+			}
+			else
+			{
+				// Verifies that position does not exist at all in grid since otherwise it would be a border position.
+				assert(grid.positions.count(*position) == 0);
+			}
+		}
+	}
+
+	// Convert positions to global coordinates.
+	std::unordered_set<sf::Vector2f, Vector2fHash> neighbouringBorderCoordinates = {};
+	for (const sf::Vector2i& position : neighbouringBorderPositions)
+	{
+		neighbouringBorderCoordinates.insert(calculateWorldCoordinates(position));
+	}
+	return neighbouringBorderCoordinates;
+}
+
 const sf::VertexArray & Grid::getVertices() const
 {
 	return vertices;
@@ -90,6 +112,26 @@ bool Grid::containsPosition(const sf::Vector2i &position) const
 {
 	return positions.count(position);
 }
+
+bool Grid::containsPosition(const sf::Vector2f& position) const
+{
+	sf::Vector2i gridPosition = calculateGridCoordinates(position);
+	return positions.find(gridPosition) != positions.end();
+}
+
+bool Grid::isLateralAdjacent(const Grid& grid) const
+{
+	for (const sf::Vector2i& position : borderPositions)
+	{
+		if (grid.positionLateralAdjacentToBorder(position))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 
 bool Grid::isAdjacent(const Grid &grid) const
 {
@@ -109,6 +151,21 @@ bool Grid::positionAdjacentToBorder(const sf::Vector2i& position) const
 	assert(borderPositions.count(position) == 0);
 
 	for (const sf::Vector2i& adjacencyOffset : adjacencyOffsets)
+	{
+		if (borderPositions.count(position + adjacencyOffset) == 1)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Grid::positionLateralAdjacentToBorder(const sf::Vector2i& position) const
+{
+	assert(borderPositions.count(position) == 0);
+
+	for (const sf::Vector2i& adjacencyOffset : lateralAdjacencyOffsets)
 	{
 		if (borderPositions.count(position + adjacencyOffset) == 1)
 		{
@@ -159,6 +216,111 @@ void Grid::initInteriorVertices(const std::unordered_set<sf::Vector2i, Vector2iH
 	for (const std::vector<sf::Vector2i>& polygon : interiorPolygons)
 	{
 		triangulatePolygon(interiorVertices, convertPolygon(polygon), interiorColor);
+	}
+}
+
+void Grid::calculateCenter()
+{
+	if (positions.size() == 0)
+	{
+		return;
+	}
+
+	// Manhattan distances of positions from border.
+	std::unordered_map<sf::Vector2i, int, Vector2iHash> distances;
+
+	// Determines which positions lie on grid edge/border.
+	for (auto position = positions.cbegin(); position != positions.cend(); ++position)
+	{
+		if (borderPositions.count(*position) == 1)
+		{
+			distances[*position] = 0;
+		}
+	}
+
+	// Determines all other distances progressively i.e. distances 1 then 2 then 3 etc.
+	bool distancesAltered = true;
+	while (distancesAltered)
+	{
+		// Use a stored copy of distances before iteration since otherwise distance calculation won't be progressive.
+		std::unordered_map<sf::Vector2i, int, Vector2iHash> prevDistances = distances;
+		distancesAltered = false;
+		// Determines distance of a given position only when an adjacent position has had its distance determined.
+		for (auto position = positions.cbegin(); position != positions.cend(); ++position)
+		{
+			// Distance is already determined.
+			if (prevDistances.count(*position) == 1)
+			{
+				continue;
+			}
+
+			sf::Vector2i left(position->x - 1, position->y);
+			sf::Vector2i right(position->x + 1, position->y);
+			sf::Vector2i up(position->x, position->y - 1);
+			sf::Vector2i down(position->x, position->y + 1);
+			std::vector<sf::Vector2i> adjacencies = { left, right, up, down };
+			// Determine minimum distance value of adjacent points.
+			int min = INT_MAX;  // min distance of adjacent positions.
+			for (const sf::Vector2i& adjacency : adjacencies)
+			{
+				if (prevDistances.count(adjacency) == 1)
+				{
+					assert(prevDistances[adjacency] < INT_MAX);
+					min = std::min(min, prevDistances[adjacency]);
+				}
+			}
+			if (min != INT_MAX)
+			{
+				const int distance = min + 1;
+				distances[*position] = distance;
+				distancesAltered = true;
+			}
+		}
+	}
+
+	// Collects positions with greatest manhattan distance from edge.
+	std::vector<sf::Vector2i> candidatePositions;
+	int maxDist = 0;
+	const int distLenience = 1;
+	for (auto position = positions.cbegin(); position != positions.cend(); ++position)
+	{
+		assert(distances.count(*position) == 1);
+		if (distances[*position] > maxDist)
+		{
+			maxDist = distances[*position];
+			candidatePositions.clear();
+			candidatePositions.push_back(*position);
+		}
+		else if (distances[*position] == maxDist)
+		{
+			candidatePositions.push_back(*position);
+		}
+	}
+
+	assert(candidatePositions.size() > 0);
+	// Determine average position of candidate position.
+	float xSum = 0;
+	float ySum = 0;
+	for (const sf::Vector2i& position : candidatePositions)
+	{
+		xSum += position.x;
+		ySum += position.y;
+	}
+	const float xAvg = xSum / candidatePositions.size();
+	const float yAvg = ySum / candidatePositions.size();
+	sf::Vector2f candidateAverage(xAvg, yAvg);
+
+
+	// Determines candidate position closest to candidate average position. This will be the center.
+	float minDist = FLT_MAX;
+	for (const sf::Vector2i& position : candidatePositions)
+	{
+		const float dist = abs(position.x - candidateAverage.x) + abs(position.y - candidateAverage.y);
+		if (dist < minDist)
+		{
+			center = position;
+			minDist = dist;
+		}
 	}
 }
 
@@ -288,6 +450,7 @@ void extractInteriorPolygon(const sf::Vector2i &start, const sf::Vector2i &offse
 	Direction currDirection = initialClockwiseDirection(offsetFromBorder);  // Direction of next point to traverse.
 	std::vector<sf::Vector2i> polygon;
 	sf::Vector2i currPosition = start;
+	bool directionAdjusted = false;
 
 	// Traverse clockwise to determine interior polygon.
 	while(true)
@@ -296,7 +459,14 @@ void extractInteriorPolygon(const sf::Vector2i &start, const sf::Vector2i &offse
 		Direction nextDirection = currDirection;
 
 		// We check for the direction left of the current direction first.
-		--nextDirection;
+		if (!directionAdjusted)
+		{
+			--nextDirection;
+		}
+		else
+		{
+			directionAdjusted = false;
+		}
 
 		// Check all four direction for next valid move.
 		// Priority is given to 90 degree left turn, then 90 degree right turn, then 180 degree turn.
@@ -334,6 +504,9 @@ void extractInteriorPolygon(const sf::Vector2i &start, const sf::Vector2i &offse
 		{
 			bool terminateTraversal = true;
 
+			// We check for the direction left of the current direction first.
+			--nextDirection;
+
 			// Check each direction at start position for possible traversal.
 			for(int i = 1; i <= 4; ++i)
 			{
@@ -343,6 +516,8 @@ void extractInteriorPolygon(const sf::Vector2i &start, const sf::Vector2i &offse
 				{
 					// Algorithm will traverse in this untraversed direction from the start position.
 					terminateTraversal = false;
+
+					directionAdjusted = true;
 
 					if(nextDirection != currDirection)
 					{
@@ -596,4 +771,18 @@ bool sameLateralLineOrdered(const sf::Vector2i& p1, const sf::Vector2i& p2, cons
 	bool xDifferent = (p1.x != p2.x) || (p2.x != p3.x);
 	bool yDifferent = (p1.y != p2.y) || (p2.y != p3.y);
 	return (xOrdered && !yDifferent) || (yOrdered && !xDifferent);
+}
+
+sf::Vector2i calculateGridCoordinates(const sf::Vector2f& position)
+{
+	const int x = std::floor(position.x / GRID_SQUARE_SIZE);
+	const int y = std::floor(position.y / GRID_SQUARE_SIZE);
+	return sf::Vector2i(x, y);
+}
+
+sf::Vector2f calculateWorldCoordinates(const sf::Vector2i& position)
+{
+	const float x = position.x * GRID_SQUARE_SIZE + (GRID_SQUARE_SIZE / 2);
+	const float y = position.y * GRID_SQUARE_SIZE + (GRID_SQUARE_SIZE / 2);
+	return sf::Vector2f(x, y);
 }

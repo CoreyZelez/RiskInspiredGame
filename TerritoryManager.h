@@ -11,8 +11,6 @@ class TerritoryManager
 public:
 	void drawPorts(sf::RenderWindow &window) const;
 
-	void save(std::string mapName) const;
-
 	// Load territories. Specify gameplay settings when loaded for a game.
 	void load(std::string mapName, const GameplaySettings *gameplaySettings = nullptr);
 
@@ -43,4 +41,4 @@ private:
 	std::vector<std::unique_ptr<LandTerritory>> landTerritories;
 };
 
-
+Grid loadTerritoryGrid(std::ifstream& file);

@@ -1,20 +1,10 @@
 #include "CompositeGrid.h"
 #include "Grid.h"
 #include "UtilitySFML.h"
+#include "ColorUtility.h"
 #include <assert.h>
 
-const std::vector<sf::Vector2i> adjacencyOffsets = {
-		sf::Vector2i(1,0),
-		sf::Vector2i(-1, 0),
-		sf::Vector2i(0,1),
-		sf::Vector2i(0,-1),
-		sf::Vector2i(1,-1),
-		sf::Vector2i(1, 1),
-		sf::Vector2i(-1,-1),
-		sf::Vector2i(-1,1)
-};
-
-void CompositeGrid::draw(sf::RenderWindow &window)
+void CompositeGrid::draw(sf::RenderWindow &window) const
 {
 	window.draw(vertices);
 }
@@ -68,29 +58,51 @@ void CompositeGrid::setColor(int gridId, const sf::Color &color)
 	}
 }
 
-void CompositeGrid::setBorderColor(const sf::Color & color)
+void CompositeGrid::setInteriorColors(const sf::Color& color)
+{
+	for (auto& [gridId, grid] : grids)
+	{
+		grid.setInteriorColor(color);
+	}
+
+	outdated = true;
+}
+
+void CompositeGrid::setBorderColor(const sf::Color &color)
 {
 	if(borderColor != color)
 	{
-		outdated = true;
 		borderColor = color;
+		outdated = true;
 	}
 }
 
 // Sets the border color of each grid to the desired sub-border color as the grid borders will make up
 // the sub-borders of the composite grid.
-void CompositeGrid::setSubBorderColor(const sf::Color & color)
+void CompositeGrid::setSubBorderColor(sf::Color color, double darkeningFactor)
 {
+	color = getDarkenedColor(color, darkeningFactor);
+
 	if(subBorderColor == color)
 	{
 		return;
 	}
 
-	outdated = true;
-	borderColor = color;
+	subBorderColor = color;
+
 	for(auto &[id, grid] : grids)
 	{
-		grid.setBorderColor(color);
+		grid.setBorderColor(subBorderColor);
+	}
+
+	outdated = true;
+}
+
+void CompositeGrid::addGrid(const CompositeGrid& compositeGrid, const sf::Color& color)
+{
+	for (const auto& [gridId, grid] : compositeGrid.grids)
+	{
+		addGrid(grid, color);
 	}
 }
 
@@ -98,7 +110,10 @@ void CompositeGrid::addGrid(const Grid &grid, const sf::Color &color)
 {
 	const int id = grid.getId();
 
-	assert(grids.count(id) == 0);
+	if(grids.count(id) != 0)
+	{
+		return;
+	}
 
 	grids.insert(std::make_pair(id, grid));
 
@@ -125,6 +140,54 @@ void CompositeGrid::removeGrid(int id)
 	updateBordersForRemovedGrid(id);
 	removeAdjacencies(id);
 	grids.erase(id);
+}
+
+void CompositeGrid::removeGrid(const Grid& grid)
+{
+	removeGrid(grid.getId());
+}
+
+void CompositeGrid::removeGrid(const CompositeGrid& compositeGrid)
+{
+	for (const auto& [gridId, grid] : compositeGrid.grids)
+	{
+		removeGrid(gridId);
+	}
+}
+
+bool CompositeGrid::containsPosition(const sf::Vector2f position) const
+{
+	for (auto& [gridId, grid] : grids)
+	{
+		if (grid.containsPosition(position))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool CompositeGrid::isOutdated() const
+{
+	return outdated;
+}
+
+std::vector<int> CompositeGrid::getGridIds() const
+{
+	std::vector<int> ids;
+
+	for (auto& [id, grid] : grids)
+	{
+		ids.push_back(id);
+	}
+
+	return ids;
+}
+
+const Grid& CompositeGrid::getGrid(int id) const
+{
+	return grids.at(id);
 }
 
 // Adds the adjacencies to the grid with the specified id.

@@ -71,9 +71,9 @@ void Game::deselectDiplomacyPlayer()
 	{
 		for(auto &player : players)
 		{
-			player.get()->getRealm().setGridColorDefault();
+			player.get()->getRealm().getGrid().setColorDefault();
 		}
-		selectedDiplomacyPlayer->getRealm().setGridColorDefault();
+		selectedDiplomacyPlayer->getRealm().getGrid().setColorDefault();
 	}
 	selectedDiplomacyPlayer = nullptr;
 }
@@ -132,7 +132,7 @@ void Game::update()
 	{
 		if(*iter != nullptr)
 		{
-			iter->get()->getRealm().updateGrid();
+			iter->get()->getRealm().getGrid().update();
 			++iter;
 		}
 	}
@@ -188,6 +188,7 @@ void Game::update()
 	}
 
 	updateGrids();
+
 }
 
 void Game::updateGrids()
@@ -210,7 +211,7 @@ void Game::updateGrids()
 		bool gridDraw = player.getLiege() == nullptr || !player.getLiege()->getRealm().getVassalView();
 		if(gridDraw && gridOutdated) 
 		{
-			threads.emplace_back([&player]() { player.getRealm().updateGrid(); });
+			threads.emplace_back([&player]() { player.getRealm().getGrid().update(); });
 		}
 
 		iter++;

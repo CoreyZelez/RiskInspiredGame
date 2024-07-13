@@ -6,13 +6,8 @@
 
 
 
-NavalTerritory::NavalTerritory(int id, EditorGrid grid)
+NavalTerritory::NavalTerritory(int id, Grid grid)
 	: Territory(TerritoryType::naval, id, grid, std::make_unique<NavalTerritoryOccupancy>(*this))
-{
-}
-
-NavalTerritory::NavalTerritory(int id)
-	: Territory(TerritoryType::naval, id, generateRandomNavalColor(), std::make_unique<NavalTerritoryOccupancy>(*this))
 {
 }
 
@@ -30,10 +25,9 @@ void NavalTerritory::setDrawMode(TerritoryDrawMode mode)
 	switch(mode)
 	{
 	case TerritoryDrawMode::terrain:
-		color = sf::Color(70, 70, 200);
-		getGrid().setAllPositionsDark();
+		// MAYBE HAVE TO DO SOMETHING HERE WITH BORDERS OR SOME SHIT.
 		break;
 	}
 	
-	getGrid().setColor(color);
+	getGrid().setInteriorColor(color);
 }

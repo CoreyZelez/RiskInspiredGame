@@ -101,7 +101,7 @@ int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
 		strategicValue *= navalStategicValueAdjustmentFactor;
 
 		// No reason to station land army on naval territory with no adjacent enemy land territories.
-		if(!territory.getDistanceMap().hasEnemyAdjacencies(TerritoryType::land))
+		if(!hasHostileControlledAdjacentTerritory(player.getRealm(), territory, TerritoryType::land))
 		{
 			strategicValue = 0;
 		}
@@ -111,7 +111,7 @@ int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
 		const int minFleetStrength = 4;
 		// No enemy naval adjacencies of friendly naval territory then we allow land troop occupancy.
 		// In future require a specific distance
-		bool hasEnemyNavalAdjacency = territory.getDistanceMap().hasEnemyAdjacencies(TerritoryType::naval);
+		bool hasEnemyNavalAdjacency = hasHostileControlledAdjacentTerritory(player.getRealm(), territory, TerritoryType::naval);
 		// Dont station army troops if naval territory under threat i.e. there is an adjacent enemy naval territory.
 		// Override this if min fleet strength is met. In future also must consider enemy adjacent port land territories.
 		if(hasEnemyNavalAdjacency && (territory.getOccupancyHandler()->getFleet() == nullptr ||
@@ -128,8 +128,10 @@ int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
 		bool allAdjacentLandIsFriendly = true;
 		for(const Territory* adjacency : adjacencies)
 		{
-			const bool isFriendly = sameUpperRealm(&player, adjacency->getEstateOwner());
-			if(adjacency->getType() == TerritoryType::land && !isFriendly)
+			const bool isControlled = &player == adjacency->getController();
+			assert(isControlled == player.getRealm().getTerritories().controlsTerritory(*adjacency));
+
+			if(adjacency->getType() == TerritoryType::land && !isControlled)
 			{
 				allAdjacentLandIsFriendly = false;
 				break;
@@ -158,13 +160,11 @@ int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
 	const std::set<Territory*> adjacencies = territory.getDistanceMap().getAdjacencies();
 	std::set<const Territory*> enemyTerritories;
 	// Determine enemy territories from adjacencies.
-	for(std::set<Territory*>::iterator iter = adjacencies.begin();
-		iter != adjacencies.end(); ++iter)
+	for(std::set<Territory*>::iterator adjacency = adjacencies.begin(); adjacency != adjacencies.end(); ++adjacency)
 	{
-		const Player *estateOwner = (*iter)->getEstateOwner();
-		if(sameUpperRealm(&player, estateOwner))
+		if(&player != (*adjacency)->getController())
 		{
-			enemyTerritories.insert(*iter);
+			enemyTerritories.insert(*adjacency);
 		}
 	}
 	////////////////////////
@@ -178,6 +178,8 @@ int SimplePlayerAI::calculateFleetStrategicValue(const Territory &territory)
 {
 	Player &player = getPlayer();
 	Game &game = getGame();
+
+	assert(player.getRealm().getTerritories().controlsTerritory(territory));
 
 	int strategicValue = 0;
 
@@ -203,7 +205,7 @@ int SimplePlayerAI::calculateFleetStrategicValue(const Territory &territory)
 	for(std::set<Territory*>::iterator iter = adjacencies.begin();
 		iter != adjacencies.end(); ++iter)
 	{
-		const Player *estateOwner = (*iter)->getEstateOwner();
+		const Player *estateOwner = (*iter)->getController();
 		if(sameUpperRealm(&player, estateOwner))
 		{
 			enemyTerritories.insert(*iter);
@@ -225,7 +227,7 @@ void SimplePlayerAI::executeArmyAttacks(const std::vector<Territory*> &borderTer
 	{
 		// Only players without a liege can execute army attacks.
 		assert(!player.hasLiege());
-		assert(sameUpperRealm(&player, territory->getEstateOwner()));
+		assert(&player == territory->getController());
 
 		LandArmy *army = player.getMilitaryManager().getArmy(territory);
 		if(army != nullptr)
@@ -244,7 +246,7 @@ void SimplePlayerAI::executeArmyAttack(LandArmy &army)
 	Territory &territory = army.getTerritory();
 
 	// Don't attack if available strength less than occupancy cost with excess.
-	const int minStrengthThreshold = gameplaySettings.landHostileOccupancyCost + 2;
+	const int minStrengthThreshold = 2;                               
 	if(availableAttackStrength <= minStrengthThreshold)
 	{
 		return;
@@ -472,7 +474,7 @@ void SimplePlayerAI::executeFleetAttacks(const std::vector<Territory*>& borderTe
 	{
 		// Only players without a liege can execute army attacks.
 		assert(!player.hasLiege());
-		assert(sameUpperRealm(territory->getEstateOwner(), &player));
+		assert(player.getRealm().getTerritories().controlsTerritory(*territory));
 
 		NavalFleet *fleet = player.getMilitaryManager().getFleet(territory);
 		if(fleet != nullptr)
@@ -484,11 +486,24 @@ void SimplePlayerAI::executeFleetAttacks(const std::vector<Territory*>& borderTe
 
 void SimplePlayerAI::executeFleetAttack(NavalFleet &fleet)
 {
+	if(fleet.isDead())
+	{
+		return;
+	}
+
 	const int attackStamina = NavalFleet::getAttackStaminaCost();
 	int availableStrength = fleet.getStrength(attackStamina);
+
+	if(availableStrength == 0)
+	{
+		return;
+	}
+
 	Territory &territory = fleet.getTerritory();
+
 	// Enemy adjacencies include neutral/unowned territories.
 	const std::set<Territory*> enemyTerritories = context.getEnemyAdjacencies(territory); 
+
 	for(std::set<Territory*>::iterator iter = enemyTerritories.begin();
 		iter != enemyTerritories.end(); ++iter)
 	{

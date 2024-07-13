@@ -37,7 +37,7 @@ public:
 	
 	// Removes estate from estates and updates territories if necessary.
 	// Assumes estate already removed from vassal's realms.
-	void removeEstate(Estate& estate);
+	void removeEstate(const Estate& estate);
 
 	// Ammends ownership of vassals unlanded estates.
 	void ammendUnlandedEstateOwnership();
@@ -52,8 +52,6 @@ public:
 
 	const std::vector<Player*> &getVassals() const;
 
-	const std::unordered_set<Territory*> &getTerritories();
-
 	std::unordered_set<const Estate*> getEstates() const;
 	bool containsEstate(const Estate& estate) const;
 
@@ -65,7 +63,6 @@ private:
 	Player &ruler;
 	std::vector<Player*> vassals;  // Direct vassals of ruler.
 	std::unordered_set<Estate*> estates;  // All estates held by both direct vassals and indirect vassals.
-	std::unordered_set<Territory*> territories;  // Territories spanned by all vassal estates.
 
 	void addEstate(Estate *estate); 
 };

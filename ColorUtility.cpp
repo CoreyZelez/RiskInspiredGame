@@ -121,3 +121,8 @@ sf::Color generateRandomRealmColor()
 
 	return sf::Color(red, green, blue);
 }
+
+sf::Color getDarkenedColor(const sf::Color& color, double darkeningFactor)
+{
+	return sf::Color(color.r * darkeningFactor, color.g * darkeningFactor, color.b * darkeningFactor);
+}

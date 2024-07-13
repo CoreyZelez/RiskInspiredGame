@@ -3,6 +3,23 @@
 #include <unordered_set>
 #include <SFML/Graphics.hpp>
 
+const std::vector<sf::Vector2i> lateralAdjacencyOffsets = {
+		sf::Vector2i(1,0),
+		sf::Vector2i(-1, 0),
+		sf::Vector2i(0,1),
+		sf::Vector2i(0,-1) };
+
+const std::vector<sf::Vector2i> adjacencyOffsets = {
+		sf::Vector2i(1,0),
+		sf::Vector2i(-1, 0),
+		sf::Vector2i(0,1),
+		sf::Vector2i(0,-1),
+		sf::Vector2i(1,-1),
+		sf::Vector2i(1, 1),
+		sf::Vector2i(-1,-1),
+		sf::Vector2i(-1,1)
+};
+
 const float GRID_SQUARE_SIZE = 30.0f;  // Width of each grid square.
 
 enum class Direction;
@@ -26,12 +43,20 @@ public:
 	int getId() const;
 	bool sameId(const Grid &grid) const;
 
+	// Returns center position in game world of territory.
+	sf::Vector2f getCenter() const;  
+	// Returns world coordinates of border positions adjacent to specified grid.
+	std::unordered_set<sf::Vector2f, Vector2fHash> getAdjacentBorderPositions(const Grid& grid) const;
+
 	const sf::VertexArray& getVertices() const;
 
 	bool containsBorderPosition(const sf::Vector2i& position) const;
 	bool containsPosition(const sf::Vector2i& position) const;
+	bool containsPosition(const sf::Vector2f& position) const;
+	bool isLateralAdjacent(const Grid& grid) const;
 	bool isAdjacent(const Grid &grid) const;
 	bool positionAdjacentToBorder(const sf::Vector2i &position) const;
+	bool positionLateralAdjacentToBorder(const sf::Vector2i& position) const;
 
 private:
 	static int currId;
@@ -59,6 +84,7 @@ private:
 	void initBorderVertices(const std::unordered_set<sf::Vector2i, Vector2iHash>& borderPositions); 
 	void initInteriorVertices(const std::unordered_set<sf::Vector2i, Vector2iHash>& positions,
 			const std::unordered_set<sf::Vector2i, Vector2iHash>& borderPositions);
+	void calculateCenter();
 
 	// Updates colors of border vertices.
 	void updateBorderVertices();
@@ -112,6 +138,8 @@ bool areLateral(const sf::Vector2i &p1, const sf::Vector2i &p2);
 // Returns true if the three points lie on the same vertical or horizontal line in the specified order.
 bool sameLateralLineOrdered(const sf::Vector2i& p1, const sf::Vector2i& p2, const sf::Vector2i& p3);
 
-
+sf::Vector2i calculateGridCoordinates(const sf::Vector2f& position);
+// Converts vector world position to grid position.
+sf::Vector2f calculateWorldCoordinates(const sf::Vector2i& position);
 
 

@@ -15,16 +15,6 @@ LandedEstate::LandedEstate(Title title, Territory &territory, sf::Color color)
 	this->territory.assignLandedEstate(this);
 }
 
-void LandedEstate::update(Message message)
-{
-	// Observed territory occupant changed.
-	if(message == Message::newOccupant)
-	{
-		assert(territory.getOccupancyHandler()->getOccupant() != nullptr);
-		setOwnership(territory.getOccupancyHandler()->getOccupant());
-	}
-}
-
 void LandedEstate::yield()
 {
 	// Yields army if able to territory associated with estate.
@@ -56,7 +46,19 @@ bool LandedEstate::containsPosition(const sf::Vector2f &position) const
 	return territory.getGrid().containsPosition(position);
 }
 
+int LandedEstate::getGridId() const
+{
+	// Landed estates have only a single subgrid in the associated composite grid.
+	assert(getGrid().getGridIds().size() == 1);
+	return getGrid().getGridIds()[0];
+}
+
 Territory& LandedEstate::getTerritory()
+{
+	return territory;
+}
+
+const Territory& LandedEstate::getTerritory() const
 {
 	return territory;
 }
@@ -67,9 +69,9 @@ void LandedEstate::generateMilitary(MilitaryManager &militaryManager)
 
 std::unique_ptr<LandArmy> LandedEstate::putArmy(int strength)
 {
-	// Should not be hostile army residing on territory.
-	assert(territory.getOccupancyHandler()->getOccupant() == nullptr 
-		|| territory.getOccupancyHandler()->getOccupant() == getRuler());
+	// Territory must be controlled by player putting army.
+	assert(territory.getController() == nullptr || territory.getController() == getRuler());
+	assert(territory.getOccupancyHandler()->getArmy() == nullptr || &territory.getOccupancyHandler()->getArmy()->getOwner() == getRuler());
 
 	// Yield army to upper liege.
 	Player &upperLiege = getRuler()->getUpperLiege();

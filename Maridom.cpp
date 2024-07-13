@@ -13,6 +13,15 @@ Maridom::Maridom(NavalTerritory& territory, const sf::Color &color)
 {
 }
 
+void Maridom::update(Message message)
+{
+	// Observed territory occupant changed.
+	if (message == Message::newController)
+	{
+		setOwnership(getTerritory().getController());
+	}
+}
+
 std::unique_ptr<LandArmy> Maridom::yieldLandArmy()
 {
 	return nullptr;

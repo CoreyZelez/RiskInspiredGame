@@ -18,8 +18,6 @@ public:
 	MilitaryForce(Player &owner, Territory *territory, unsigned int strength, const std::string &shape);
 	MilitaryForce(Player &owner, Territory *territory, StaminaArray staminaStrength, const std::string &shape);
 
-	virtual void removeFromTerritory() = 0;
-
 	// Draws sprite at position of game world.
 	virtual void draw(sf::RenderWindow &window) const;
 
@@ -52,8 +50,8 @@ public:
 	void setTerritory(Territory *territory);
 
 protected:
-	// Updates diplomacy of players involved in troop movement.
-	void updatePlayerDiplomacy(Player *locationEstateOwner);
+	// Updates diplomacy of players involved in attack by military force.
+	void updateDiplomacyForAttack(Player &enemyPlayer);
 
 	virtual std::pair<int, int> calculateMinMaxStaminaCost(const Territory &territory) const = 0;
 
@@ -66,6 +64,6 @@ private:
 	MilitaryForceGraphics graphics;
 };
 
-Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory &sourceTerritory, Territory &targetTerritory, int maxDist);
+Territory* nearestAdjacentControlledTerritoryDijkstra(Territory &sourceTerritory, Territory &targetTerritory, int maxDist);
 
-Territory* nearestFriendlyAdjacentTerritoryDijkstra(Territory &sourceTerritory, Territory &targetTerritory, int maxDist, TerritoryType territoryType);
+Territory* nearestAdjacentControlledTerritoryDijkstra(Territory &sourceTerritory, Territory &targetTerritory, int maxDist, TerritoryType territoryType);

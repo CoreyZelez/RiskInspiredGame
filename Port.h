@@ -15,7 +15,7 @@ public:
 
 	NavalTerritory &getNavalTerritory();
 
-	int getNavalTerritoryID() const;
+	int getNavalTerritoryId() const;
 
 private:
 	SpriteGraphicsComponent graphics;

@@ -20,12 +20,6 @@ NavalFleet::NavalFleet(Player & owner, Territory * location, std::array<unsigned
 	assert(location != nullptr);
 }
 
-void NavalFleet::removeFromTerritory()
-{
-	// Remove the fleet from territory and update the occupancy.
-	getTerritory().getOccupancyHandler()->removeFleet(this);
-}
-
 void NavalFleet::move(Territory &location, unsigned int strength)
 {
 	assert(strength > 0);
@@ -55,8 +49,11 @@ void NavalFleet::move(Territory &location, unsigned int strength)
 		return;
 	}
 
-	// Update diplomacy of involved players.
-	updatePlayerDiplomacy(location.getEstateOwner());
+	// Update diplomacy if movement is hostile.
+	if(location.getController() != nullptr && !getOwner().getRealm().getTerritories().controlsTerritory(location))
+	{
+		updateDiplomacyForAttack(*location.getController());
+	}
 
 	// Attempt occupation of location by new fleet.
 	location.getOccupancyHandler()->occupy(newFleet.get());
@@ -83,7 +80,7 @@ void NavalFleet::moveClosest(Territory &target, unsigned int strength, int maxDi
 	assert(strength > 0);
 	
 	Territory& source = getTerritory();
-	Territory* nearest = nearestFriendlyAdjacentTerritoryDijkstra(source, target, maxDist);
+	Territory* nearest = nearestAdjacentControlledTerritoryDijkstra(source, target, maxDist);
 	if(nearest != nullptr)
 	{
 		move(*nearest, strength);

@@ -2,7 +2,6 @@
 #include "Player.h"
 #include "Estate.h"
 #include "Barony.h"
-#include "RealmGrid.h"
 #include "Game.h"
 #include <iostream>
 
@@ -51,6 +50,7 @@ void VassalManager::removeEstatelessVassal(const Player &vassal)
 
 void VassalManager::removeRebellingVassal(Player &vassal)
 {
+	assert(!vassal.hasLiege());
 	// Vassal should not have an empty realm.
 	assert(!vassal.getRealm().getEstates().empty());
 	// Vassal should indeed be in vassals.
@@ -61,16 +61,9 @@ void VassalManager::removeRebellingVassal(Player &vassal)
 	for(const Estate* estate : vassalEstates)
 	{
 		assert(estates.count(const_cast<Estate*>(estate)) == 1);
-		assert(const_cast<Estate*>(estate) != nullptr);
-		estates.erase(const_cast<Estate*>(estate));
-	}
+		assert(estate != nullptr);
 
-	// Remove vassal's territories from territories.
-	std::unordered_set<Territory*> vassalTerritories = vassal.getRealm().getTerritories();
-	for(Territory* territory : vassalTerritories)
-	{
-		assert(vassalTerritories.count(territory) != 0);
-		territories.erase(territory);
+		ruler.getRealm().removeEstate(*estate);
 	}
 
 	// Remove the vassal.
@@ -87,28 +80,14 @@ Player& VassalManager::conferEstate(Player& vassal, Estate &estate)
 
 	estates.insert(&estate);
 
-	LandedEstate *landedEstate = dynamic_cast<LandedEstate*>(&estate);
-	// Insert the estates associated territory assuming it is landed.
-	if(landedEstate != nullptr)
-	{
-		territories.insert(&landedEstate->getTerritory());
-	}
-
 	// Add estate to vassals realm. Returns the direct owner of estate.
 	return vassal.getRealm().addEstate(estate);
 }
 
-void VassalManager::removeEstate(Estate &estate)
+void VassalManager::removeEstate(const Estate &estate)
 {
-	assert(estates.count(&estate) == 1);
-	estates.erase(&estate);
-
-	LandedEstate *landedEstate = dynamic_cast<LandedEstate*>(&estate);
-	// Handle case where estate is landed.
-	if(landedEstate != nullptr)
-	{
-		territories.erase(&landedEstate->getTerritory());
-	}
+	assert(estates.count(const_cast<Estate*>(&estate)) == 1);
+	estates.erase(const_cast<Estate*>(&estate));
 }
 
 void VassalManager::ammendUnlandedEstateOwnership()
@@ -154,11 +133,6 @@ const std::vector<Player*>& VassalManager::getVassals() const
 	return vassals;
 }
 
-const std::unordered_set<Territory*>& VassalManager::getTerritories()
-{
-	return territories;
-}
-
 std::unordered_set<const Estate*> VassalManager::getEstates() const
 {
 	std::unordered_set<const Estate*> estates;
@@ -187,12 +161,5 @@ std::map<Title, int> VassalManager::getTitleCounts() const
 void VassalManager::addEstate(Estate *estate)
 {
 	estates.insert(estate);
-
-	LandedEstate *landedEstate = dynamic_cast<LandedEstate*>(estate);
-	// Handle case where estate is landed.
-	if(landedEstate != nullptr)
-	{
-		territories.insert(&landedEstate->getTerritory());
-	}
 }
 

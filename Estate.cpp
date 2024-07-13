@@ -6,33 +6,22 @@
 #include "FontManager.h"
 #include "Barony.h"
 #include "Realm.h"
+#include "ColorUtility.h"
 #include <assert.h>
 #include <iostream>
 #include <fstream>
 
 Estate::Estate(Title title, sf::Color color)
-	: title(title), defaultColor(color)
+	: title(title), defaultInteriorColor(color), defaultSubBorderColor(getDarkenedColor(color, darkeningFactor))
 {
-	if(title == Title::maridom)
-	{
-		this->grid.setBorderMode(BorderMode::feintBorders);
-		this->grid.setAllPositionsDark();
-	}
-
-	this->grid.setColor(color);
+	setGridColorDefault();
 }
 
-Estate::Estate(Title title, const EditorGrid &grid, sf::Color color)
-	: title(title), defaultColor(color)
+Estate::Estate(Title title, const Grid& grid, sf::Color color)
+	: title(title), defaultInteriorColor(color), defaultSubBorderColor(getDarkenedColor(color, darkeningFactor))
 {
-	this->grid.addGrid(grid);
-	if(title == Title::maridom)
-	{
-		this->grid.setBorderMode(BorderMode::feintBorders);
-		this->grid.setAllPositionsDark();
-	}
-
-	this->grid.setColor(color);
+	this->grid.addGrid(grid, defaultInteriorColor);
+	setGridColorDefault();
 }
 
 void Estate::initName(std::string name)
@@ -51,6 +40,10 @@ void Estate::draw(sf::RenderWindow &window) const
 	{
 		grid.draw(window);
 	}
+}
+
+void Estate::update()
+{
 }
 
 std::unique_ptr<UIEntity> Estate::createUI(UIType type) const
@@ -196,7 +189,7 @@ void Estate::addSubfief(Estate *subfief)
 	/// IN FUTURE THIS MAY BE INCORRECT TO DO. SHOULD ONLY DO WHEN ADDING BARONIES PROBABLY.
 	//
 	//
-	grid.addGrid(subfief->grid);
+	grid.addGrid(subfief->grid, defaultInteriorColor);
 }
 
 void Estate::removeSubfief(Estate *subfief)
@@ -276,27 +269,32 @@ std::string Estate::getName() const
 
 void Estate::setDefaultColor(sf::Color color)
 {
-	this->defaultColor = color;
-	this->grid.setColor(color);
+	defaultInteriorColor = color;
+	defaultSubBorderColor = getDarkenedColor(color, darkeningFactor);
+	setGridColorDefault();
 }
 
 void Estate::setGridColorDefault()
 {
-	this->grid.setColor(defaultColor);
+	grid.setSubBorderColor(defaultSubBorderColor);
+	grid.setInteriorColors(defaultInteriorColor);
+	grid.update();
 }
 
 void Estate::setGridColorGrey()
 {
 	sf::Color greyColor(90, 90, 90);
-	this->grid.setColor(greyColor);
+	grid.setInteriorColors(greyColor);
+	grid.setSubBorderColor(greyColor);
+	grid.update();
 }
 
-EditorGrid& Estate::getGrid()
+CompositeGrid& Estate::getGrid()
 {
 	return grid;
 }
 
-const EditorGrid& Estate::getGrid() const
+const CompositeGrid& Estate::getGrid() const
 {
 	return grid;
 }
@@ -394,8 +392,7 @@ void Estate::setOwnership(Player *ruler, bool recurseOnParents)
 	// Add estate to new ruler's realm and set the ruler of the realm.
 	if(ruler != nullptr)
 	{
-		// newRuler is the player which ruler confers this estate to, possibly themselves.
-		Player *newRuler = &ruler->getRealm().addEstate(*this);
+		Player *newRuler = &ruler->getRealm().addEstate(*this);  // Player which ruler confers this estate to, possibly themselves.
 		assert(newRuler != nullptr);
 		this->ruler = newRuler;
 	}

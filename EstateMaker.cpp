@@ -286,8 +286,10 @@ void EstateMaker::loadEstate(std::ifstream& file)
 	std::vector<std::string> subfiefNames = loadSubfiefNames(file);
 
 	// Create the estate.
-	EditorEstate estate(title, color);
+	estates[title].emplace_back(EditorEstate(title, color));
+	EditorEstate &estate = estates[title].back();
 	estate.initName(name);
+
 	// Add the subfiefs.
 	bool hasSubfief = false;
 	for (std::string& subfiefName : subfiefNames)
@@ -304,10 +306,10 @@ void EstateMaker::loadEstate(std::ifstream& file)
 		hasSubfief = true;
 	}
 
-	// Only adds the estate to estates if it has a subfief.
-	if (hasSubfief)
+	// Remove estate if has no subfiefs.
+	if (!hasSubfief)
 	{
-		estates[title].emplace_back(std::move(estate));
+		estates[title].pop_back();
 	}
 }
 
@@ -448,7 +450,9 @@ EditorEstate* EstateMaker::getFief(std::string name)
 		}
 	}
 
-	throw std::logic_error("Fief does not exist.");
+	return nullptr;
+	// MAYBE THIS SHOULD BE DONE IN FUTURE
+	//throw std::logic_error("Fief does not exist.");
 }
 
 void EstateMaker::drawEstates(sf::RenderWindow& window, Title title) const

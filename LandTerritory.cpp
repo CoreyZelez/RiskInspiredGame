@@ -11,8 +11,8 @@
 #include <iostream>
 #include <fstream>
 
-LandTerritory::LandTerritory(int id, EditorGrid graphics, LandTerritoryFeatures features, NavalTerritory *navalTerritory)
-	: Territory(TerritoryType::land, id, graphics, std::make_unique<LandTerritoryOccupancy>(*this)), features(features)
+LandTerritory::LandTerritory(int id, Grid grid, LandTerritoryFeatures features, NavalTerritory *navalTerritory)
+	: Territory(TerritoryType::land, id, grid, std::make_unique<LandTerritoryOccupancy>(*this)), features(features)
 {
 	// Create the port.
 	if(navalTerritory != nullptr)
@@ -21,8 +21,8 @@ LandTerritory::LandTerritory(int id, EditorGrid graphics, LandTerritoryFeatures 
 	}
 }
 
-LandTerritory::LandTerritory(int id, EditorGrid graphics, NavalTerritory *navalTerritory)
-	: Territory(TerritoryType::land, id, graphics, std::make_unique<LandTerritoryOccupancy>(*this)), 
+LandTerritory::LandTerritory(int id, Grid grid, NavalTerritory *navalTerritory)
+	: Territory(TerritoryType::land, id, grid, std::make_unique<LandTerritoryOccupancy>(*this)),
 	features(nullptr)
 {
 	// Create the port.
@@ -34,32 +34,9 @@ LandTerritory::LandTerritory(int id, EditorGrid graphics, NavalTerritory *navalT
 	initDefaultFeatures();
 }
 
-LandTerritory::LandTerritory(int id, EditorGrid graphics)
-	: LandTerritory(id, graphics, nullptr)
+LandTerritory::LandTerritory(int id, Grid grid)
+	: LandTerritory(id, grid, nullptr)
 {
-}
-
-LandTerritory::LandTerritory(int id)
-	: Territory(TerritoryType::land, id, generateRandomLandColor(), std::make_unique<LandTerritoryOccupancy>(*this)),
-	features(nullptr)
-{
-	initDefaultFeatures();
-}
-
-void LandTerritory::saveToFile(std::ofstream &file) const
-{
-	Territory::saveToFile(file);
-
-	// Save features.
-	features.saveToFile(file);
-
-	// Save port.
-	if(port != nullptr)
-	{
-		// Save the territory ID of the associated naval territory with the port.
-		file << "# port naval id" << std::endl;
-		file << port.get()->getNavalTerritoryID() << std::endl;
-	}
 }
 
 std::unique_ptr<Port>& LandTerritory::getPort()
@@ -87,14 +64,14 @@ void LandTerritory::setDrawMode(TerritoryDrawMode mode)
 	switch(mode)
 	{
 	case TerritoryDrawMode::terrain:
-		getGrid().setColor(features.terrain.color);
+		getGrid().setInteriorColor(features.terrain.color);
 		break;
 	case TerritoryDrawMode::culture:
-		getGrid().setColor(features.culture.color);
+		getGrid().setInteriorColor(features.culture.color);
 		break;
 	case TerritoryDrawMode::prosperity:
 		// IMPLEMENT: SET COLOR BASED ON LEVEL OF PROSPERITY. 
-		getGrid().setColor(determineProsperityColor(features.prosperity));
+		getGrid().setInteriorColor(determineProsperityColor(features.prosperity));
 		break;
 	}
 }
@@ -106,8 +83,8 @@ const LandTerritoryFeatures& LandTerritory::getFeatures() const
 
 void LandTerritory::createPort(NavalTerritory &navalTerritory)
 {
-	// Return if grids do not share border.
-	if(!getGrid().sharesBorder(navalTerritory.getGrid()))
+	// Return if grids are not laterally adjacent.
+	if(!getGrid().isLateralAdjacent(navalTerritory.getGrid()))
 	{
 		return;
 	}

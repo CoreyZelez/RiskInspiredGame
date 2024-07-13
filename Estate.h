@@ -1,7 +1,8 @@
 #pragma once
 #include "Title.h"
-#include "EditorGrid.h"
+#include "CompositeGrid.h"
 #include "HasUI.h"
+#include "RealmGrid.h"
 #include <set>
 #include <memory>
 #include <unordered_set>
@@ -20,19 +21,17 @@ class Estate : public HasUI
 {
 public:
 	Estate(Title title, sf::Color color);
-	Estate(Title title, const EditorGrid &grid, sf::Color color);
+	Estate(Title title, const Grid& grid, sf::Color color);
 
 	virtual ~Estate() = default;
-	
-	// THIS SHOULD BE DONE IN CONSTRUCTOR!!!!
-	// THIS SHOULD BE DONE IN CONSTRUCTOR!!!!
+
 	// THIS SHOULD BE DONE IN CONSTRUCTOR!!!!
 	void initName(std::string name);
 	// THIS SHOULD BE DONE IN CONSTRUCTOR!!!!
-	// THIS SHOULD BE DONE IN CONSTRUCTOR!!!!
-	// THIS SHOULD BE DONE IN CONSTRUCTOR!!!!
 
 	void draw(sf::RenderWindow &window) const;
+
+	void update();
 
 	virtual std::unique_ptr<UIEntity> createUI(UIType type) const override;
 
@@ -92,9 +91,9 @@ public:
 	void setGridColorGrey();
 
 	// Returns the associated graphical grid of this estate.
-	EditorGrid& getGrid();
+	CompositeGrid& getGrid();
 	// Returns the associated graphical grid of this estate.
-	const EditorGrid& getGrid() const;
+	const CompositeGrid& getGrid() const;
 
 	// Returns the number of barony subfiefs of this estate apart of specified players realm. 
 	// Optionally specify directly controlled by player.
@@ -115,9 +114,11 @@ private:
 	Estate *parent;
 	std::set<Estate*> subfiefs;
 	std::string name = "";
-	EditorGrid grid;
-	sf::Color defaultColor;  // Default color of estate.
+	CompositeGrid grid;
+	sf::Color defaultInteriorColor;  // Default color of estate.
+	sf::Color defaultSubBorderColor;  // Default color of estate.
 	bool drawSubfiefs = false;
+	const double darkeningFactor = 0.72;
 
 	// Alocates estate to ruler who's realm owns every lower estate entirely.
 	void handleAllocation();
