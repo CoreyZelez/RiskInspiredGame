@@ -11,7 +11,8 @@
 #include <sstream>
 #include <random>
 
-EstateManager::EstateManager()
+EstateManager::EstateManager(const GameplaySettings &gameplaySettings)
+	: gameplaySettings(gameplaySettings)
 {
 }
 
@@ -149,7 +150,7 @@ void EstateManager::loadBarony(std::ifstream &file, std::vector<std::unique_ptr<
 	const double navalFleetYield = territory->getFeatures().calculateFleetYield();
 
 	// Create the barony.
-	std::unique_ptr<Estate> barony = std::make_unique<Barony>(*territory, color);
+	std::unique_ptr<Estate> barony = std::make_unique<Barony>(gameplaySettings, *territory, color);
 	barony.get()->initName(name);
 
 	// Add the subfiefs.

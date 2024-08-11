@@ -31,7 +31,7 @@ public:
 
 	void draw(sf::RenderWindow &window) const;
 
-	void update();
+	virtual void update();
 
 	virtual std::unique_ptr<UIEntity> createUI(UIType type) const override;
 
@@ -46,7 +46,7 @@ public:
 	void clearOwnership();
 	// Changes the ownership of the estate by adding the estate to ruler's realm and setting the new owner
 	// as the player which ruler grants the estate to (possibly the ruler themself).
-	void setOwnership(Player *ruler, bool recurseOnParents = true);
+	virtual void setOwnership(Player *ruler, bool recurseOnParents = true);
 	// Revokes ownership if owner's upper liege's realm does not completely control lower estates and sets
 	// ownership to rightful player if applicable.
 	void ammendOwnership();
@@ -58,6 +58,9 @@ public:
 
 	// Returns unordered set of all lower estates contained within this estate.
 	std::unordered_set<const Estate*> getLowerEstates() const;
+
+	virtual std::vector<const Territory*> getTerritories() const;
+	virtual std::vector<Territory*> getTerritories();
 
 	// Changes the parent estate.
 	void setParent(Estate *parent);
@@ -75,6 +78,8 @@ public:
 
 	// Returns true if estate has a ruler.
 	bool hasRuler() const;
+
+	virtual bool isLanded() const;
 
 	// Returns title of estate.
 	Title getTitle() const;
@@ -115,10 +120,9 @@ private:
 	std::set<Estate*> subfiefs;
 	std::string name = "";
 	CompositeGrid grid;
-	sf::Color defaultInteriorColor;  // Default color of estate.
-	sf::Color defaultSubBorderColor;  // Default color of estate.
+	sf::Color defaultColor;  // Default color of estate.
 	bool drawSubfiefs = false;
-	const double darkeningFactor = 0.72;
+	const double subBorderDarkeningFactor = 0.72;
 
 	// Alocates estate to ruler who's realm owns every lower estate entirely.
 	void handleAllocation();

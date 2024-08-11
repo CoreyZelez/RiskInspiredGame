@@ -3,16 +3,16 @@
 #include <fstream>
 #include <iostream>
 
-Map::Map(std::string name, const GameplaySettings *gameSettings)
-	: name(name)
+Map::Map(const GameplaySettings& gameSettings, std::string name)
+	: name(name), estateManager(gameSettings)
 {
 	// Attempts to load map from file. If not in files then map is empty.
-	load(name, gameSettings);
+	load(gameSettings, name);
 }
 
-void Map::load(std::string name, const GameplaySettings *gameSettings)
+void Map::load(const GameplaySettings& gameSettings, std::string name)
 {
-	territoryManager.load(name, gameSettings);
+	territoryManager.load(gameSettings, name);
 	estateManager.load(name, territoryManager.getLandTerritories(), territoryManager.getNavalTerritories());
 }
 

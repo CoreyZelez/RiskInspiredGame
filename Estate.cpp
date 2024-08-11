@@ -12,15 +12,15 @@
 #include <fstream>
 
 Estate::Estate(Title title, sf::Color color)
-	: title(title), defaultInteriorColor(color), defaultSubBorderColor(getDarkenedColor(color, darkeningFactor))
+	: title(title), defaultColor(color)
 {
 	setGridColorDefault();
 }
 
 Estate::Estate(Title title, const Grid& grid, sf::Color color)
-	: title(title), defaultInteriorColor(color), defaultSubBorderColor(getDarkenedColor(color, darkeningFactor))
+	: title(title), defaultColor(color)
 {
-	this->grid.addGrid(grid, defaultInteriorColor);
+	this->grid.addGrid(grid, defaultColor);
 	setGridColorDefault();
 }
 
@@ -189,7 +189,7 @@ void Estate::addSubfief(Estate *subfief)
 	/// IN FUTURE THIS MAY BE INCORRECT TO DO. SHOULD ONLY DO WHEN ADDING BARONIES PROBABLY.
 	//
 	//
-	grid.addGrid(subfief->grid, defaultInteriorColor);
+	grid.addGrid(subfief->grid, defaultColor);
 }
 
 void Estate::removeSubfief(Estate *subfief)
@@ -227,6 +227,32 @@ std::unordered_set<const Estate*> Estate::getLowerEstates() const
 
 }
 
+std::vector<const Territory*> Estate::getTerritories() const
+{
+	std::vector<const Territory*> territories;
+
+	for(const Estate* estate : subfiefs)
+	{
+		std::vector<const Territory*> subfiefTerritories = estate->getTerritories();
+		territories.insert(territories.end(), subfiefTerritories.begin(), subfiefTerritories.end());
+	}
+
+	return territories;
+}
+
+std::vector<Territory*> Estate::getTerritories()
+{
+	std::vector<Territory*> territories;
+
+	for(Estate* estate : subfiefs)
+	{
+		std::vector<Territory*> subfiefTerritories = estate->getTerritories();
+		territories.insert(territories.end(), subfiefTerritories.begin(), subfiefTerritories.end());
+	}
+
+	return territories;
+}
+
 void Estate::setParent(Estate *parent)
 {
 	this->parent = parent;
@@ -257,6 +283,11 @@ bool Estate::hasRuler() const
 	return ruler != nullptr;
 }
 
+bool Estate::isLanded() const
+{
+	return false;
+}
+
 Title Estate::getTitle() const
 {
 	return title;
@@ -269,15 +300,14 @@ std::string Estate::getName() const
 
 void Estate::setDefaultColor(sf::Color color)
 {
-	defaultInteriorColor = color;
-	defaultSubBorderColor = getDarkenedColor(color, darkeningFactor);
+	defaultColor = color;
 	setGridColorDefault();
 }
 
 void Estate::setGridColorDefault()
 {
-	grid.setSubBorderColor(defaultSubBorderColor);
-	grid.setInteriorColors(defaultInteriorColor);
+	grid.setSubBorderColor(getDarkenedColor(defaultColor, subBorderDarkeningFactor));
+	grid.setInteriorColors(defaultColor);
 	grid.update();
 }
 
@@ -409,10 +439,8 @@ void Estate::setOwnership(Player *ruler, bool recurseOnParents)
 	}
 }
 
-/* 
- * Changes the ownership of the estate should not belong to the current ruler's upper most liege's realm.
- * We do not want to change the owner when the estate does belong to the current ruler's upper most liege's realm.
- */
+// Changes the ownership of the estate should not belong to the current ruler's upper most liege's realm.
+// We do not want to change the owner when the estate does belong to the current ruler's upper most liege's realm.
 void Estate::ammendOwnership()
 {
 	Player* upperRealmRuler = getLowerEstatesUpperRealmRuler();

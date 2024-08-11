@@ -199,9 +199,10 @@ void MilitaryForce::setSpritePosition(sf::Vector2f position)
 Territory* nearestAdjacentControlledTerritoryDijkstra(Territory& sourceTerritory, Territory& targetTerritory, int maxDist)
 {
 	// Ensure territories have the same owner
-	assert(sameUpperRealm(sourceTerritory.getController(), targetTerritory.getController()));
+	assert(sourceTerritory.getUpperController() == targetTerritory.getUpperController());
 
-	const Player* player = sourceTerritory.getController();
+	// Consider upper realm ruler.
+	const Player* player = sourceTerritory.getUpperController();
 
 	// Create a priority queue (min-heap) to select territories with the smallest tentative distance
 	std::priority_queue<std::pair<int, Territory*>, std::vector<std::pair<int, Territory*>>, std::greater<>> pq;
@@ -245,7 +246,7 @@ Territory* nearestAdjacentControlledTerritoryDijkstra(Territory& sourceTerritory
 		for(Territory* adjacency : currentTerritory->getDistanceMap().getAdjacencies())
 		{
 			// Check if the neighbor is friendly.
-			if(player == adjacency->getController())
+			if(adjacency->getUpperController() == player)
 			{
 				// Calculate the tentative distance to the adjacency.
 				int tentativeDistance = currentDistance + 1;
@@ -273,13 +274,13 @@ Territory* nearestAdjacentControlledTerritoryDijkstra(Territory& sourceTerritory
 
 Territory* nearestAdjacentControlledTerritoryDijkstra(Territory &sourceTerritory, Territory &targetTerritory, int maxDist, TerritoryType territoryType)
 {
-
 	// Ensure territories have the same owner.
-	assert(sourceTerritory.getController() == targetTerritory.getController());
+	assert(sourceTerritory.getUpperController() == targetTerritory.getUpperController());
 	// Ensure territories of correct type.
 	assert(sourceTerritory.getType() == territoryType && targetTerritory.getType() == territoryType);
 
-	const Player* player = sourceTerritory.getController();
+	// Consider upper realm ruler.
+	const Player* player = sourceTerritory.getUpperController();
 
 	// Create a priority queue (min-heap) to select territories with the smallest tentative distance.
 	std::priority_queue<std::pair<int, Territory*>, std::vector<std::pair<int, Territory*>>, std::greater<>> pq;
@@ -328,7 +329,7 @@ Territory* nearestAdjacentControlledTerritoryDijkstra(Territory &sourceTerritory
 				continue;
 			}
 			// Check if the adjacency has the same owner as sourceTerritory and targetTerritory.
-			if(adjacency->getController() == player)
+			if(adjacency->getUpperController() == player)
 			{
 				// Calculate the tentative distance to the adjacency.
 				int tentativeDistance = currentDistance + 1;

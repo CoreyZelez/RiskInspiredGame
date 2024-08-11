@@ -1,6 +1,7 @@
 #pragma once
 #include "Observer.h"
 #include "LandedEstate.h"
+#include "LandedEstate.cpp"
 #include "LandTerritory.h"
 #include "SiegeManager.h"
 #include <memory>
@@ -10,16 +11,18 @@ class CoastalTerritory;
 class LandTerritory;
 
 
-class Barony : public LandedEstate, public Observer
+class Barony : public LandedEstate<LandTerritory>
 {
 public:
-	Barony(LandTerritory &landTerritory, sf::Color color);
+	Barony(const GameplaySettings& gameplaySettings, LandTerritory &landTerritory, sf::Color color);
 
 	virtual ~Barony() = default;
 
-	virtual void update(Message message) override;
+	void update();
 
 	void updateSiege();
+
+	virtual void setOwnership(Player* ruler, bool recurseOnParents = true) override;
 
 	virtual std::unique_ptr<LandArmy> yieldLandArmy() override;
 	virtual std::unique_ptr<NavalFleet> yieldNavalFleet() override;
@@ -34,7 +37,6 @@ protected:
 	virtual std::string getSaveLabel() const override;
 
 private:
-	LandTerritory &landTerritory;
 	SiegeManager siegeManager;
 
 	double cumulativeLandArmy = 0;  // Cumulation of land army yields.

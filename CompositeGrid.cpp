@@ -110,10 +110,7 @@ void CompositeGrid::addGrid(const Grid &grid, const sf::Color &color)
 {
 	const int id = grid.getId();
 
-	if(grids.count(id) != 0)
-	{
-		return;
-	}
+	assert(grids.count(id) == 0);
 
 	grids.insert(std::make_pair(id, grid));
 
@@ -153,6 +150,11 @@ void CompositeGrid::removeGrid(const CompositeGrid& compositeGrid)
 	{
 		removeGrid(gridId);
 	}
+}
+
+bool CompositeGrid::containsGrid(int id) const
+{
+	return grids.count(id) == 1;
 }
 
 bool CompositeGrid::containsPosition(const sf::Vector2f position) const

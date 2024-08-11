@@ -677,14 +677,14 @@
     <ClInclude Include="RealmGrid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SiegeManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RealmTerritories.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ITerritoryOccupancy.h">
       <Filter>Header Files\Game\Territory</Filter>
+    </ClInclude>
+    <ClInclude Include="SiegeManager.h">
+      <Filter>Header Files\Game\Estate</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

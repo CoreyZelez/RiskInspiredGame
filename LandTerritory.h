@@ -44,6 +44,6 @@ private:
 
 int loadPortNavalID(std::ifstream &file);
 
-LandTerritoryFeatures loadLandTerritoryFeatures(std::ifstream &file, const GameplaySettings *gameplaySettings);
+LandTerritoryFeatures loadLandTerritoryFeatures(const GameplaySettings* gameplaySettings, std::ifstream& file);
 
 

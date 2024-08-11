@@ -2,7 +2,6 @@
 
 enum Message
 {
-	newController,  // Signifys occupant changed.
 	vacatedMilitary,  // Signifys military unit vacated its location, either due to movement or death.
 
 	lostBarony, 

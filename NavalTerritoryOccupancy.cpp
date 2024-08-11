@@ -2,12 +2,18 @@
 #include "NavalFleet.h"
 #include "LandArmy.h"
 #include "Player.h"
+#include "Maridom.h"
 #include <assert.h>
 #include <iostream>
 
-NavalTerritoryOccupancy::NavalTerritoryOccupancy(NavalTerritory &territory)
+NavalTerritoryOccupancy::NavalTerritoryOccupancy(NavalTerritory& territory)
 	: territory(territory)
 {
+}
+
+void NavalTerritoryOccupancy::initMaridom(Maridom& maridom)
+{
+	this->maridom = &maridom;
 }
 
 void NavalTerritoryOccupancy::update(Message message)
@@ -24,6 +30,12 @@ void NavalTerritoryOccupancy::update(Message message)
 			fleet = nullptr;
 		}
 	}
+}
+
+void NavalTerritoryOccupancy::determineController()
+{
+	// Implementation not required.
+	assert(false);
 }
 
 void NavalTerritoryOccupancy::occupy(LandArmy *army)
@@ -70,38 +82,34 @@ void NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 
 	if(this->fleet == nullptr)
 	{
-		this->fleet = fleet;
-		this->fleet->setTerritory(&territory);
-
-		// Observer methods.
-		this->fleet->addObserver(this);  // Observe army so it can be set to nullptr when it dies.
+		changeOccupyingFleet(fleet);
 	}
-	// Case fleets have same owner.
 	else if(&(fleet->getOwner()) == &(this->fleet->getOwner()))
 	{
+		// Case fleets have same owner.
+
 		assert(fleet != this->fleet);
+
 		const int initialStrengthSum = fleet->getTotalStrength() + this->fleet->getTotalStrength();
-		// Absorb strength of army into this->fleet.
-		assert(fleet->getTotalStrength() > 0);
+
 		this->fleet->increaseStrength(fleet->getStaminaStrength());
-		fleet->clearStrength();  // Sets strength to 0.
+		fleet->clearStrength(); 
+
 		const int finalStrengthSum = fleet->getTotalStrength() + this->fleet->getTotalStrength();
 		assert(initialStrengthSum == finalStrengthSum);  // Strength sum should remain unchanged.
 	}
-	// Case fleets have different owner.
 	else
 	{
-		// Temporarily implemented as always attack. In future potentially not as there may be friendly sharing of troop territory.
+		// Case fleets have different owner.
+
+		// Temporarily implemented as always attack. 
         fleet->attack(*this->fleet, defenceMultiplier);
+
 		// Attacking fleet occupys territory if defending fleet killed.
 		// this->fleet nullptr implies dead since it's pointer was nulled by territory in response to its death.
 		if(this->fleet == nullptr && !fleet->isDead())
 		{
-			this->fleet = fleet;
-			this->fleet->setTerritory(&territory);
-
-			// Observer methods.
-			this->fleet->addObserver(this);  // Observe army so it can be set to nullptr when it dies.
+			changeOccupyingFleet(fleet);
 		}
 	}
 
@@ -110,7 +118,6 @@ void NavalTerritoryOccupancy::occupy(NavalFleet *fleet)
 	if(this->fleet != nullptr && controller != &this->fleet->getOwner())
 	{
 		controller = &this->fleet->getOwner();
-		territory.notifyObservers(newController);
 	}
 
 	// Remove pointer to army if army is dead.
@@ -151,22 +158,6 @@ void NavalTerritoryOccupancy::forceOccupy(NavalFleet *fleet)
 	}
 }
 
-void NavalTerritoryOccupancy::transferControl(Player& player)
-{
-	assert(!player.hasLiege());
-	assert(fleet == nullptr || controller == &fleet->getOwner());
-
-	controller = &player;
-	territory.notifyObservers(newController);
-
-	// Change the controller back if army present.
-	if(fleet != nullptr)
-	{
-		controller = &fleet->getOwner();
-		territory.notifyObservers(newController);
-	}
-}
-
 const LandArmy* NavalTerritoryOccupancy::getArmy() const
 {
 	return army;
@@ -180,6 +171,61 @@ LandArmy* NavalTerritoryOccupancy::getArmy()
 const NavalFleet* NavalTerritoryOccupancy::getFleet() const
 {
 	return fleet;
+}
+
+void NavalTerritoryOccupancy::changeOccupyingFleet(NavalFleet* fleet)
+{
+	assert(this->fleet == nullptr);
+
+	this->fleet = fleet;
+	fleet->setTerritory(&territory);
+
+	handleControllerChange(fleet->getOwner());
+
+	// Observer methods.
+	this->fleet->addObserver(this);  // Observe army so it can be set to nullptr when it dies.
+
+	maridom->setOwnership(&fleet->getOwner());
+}
+
+bool NavalTerritoryOccupancy::handleControllerChange(Player& player)
+{
+	if(&player == controller)
+	{
+		assert(player.getRealm().getTerritories().controlsTerritory(territory));
+		return false;
+	}
+	else if(!sameUpperRealm(controller, &player))
+	{
+		if(controller != nullptr)
+		{
+			controller->getRealm().removeControl(territory);
+		}
+		player.getRealm().addControl(territory);
+		controller = &player;
+
+		return true;
+	}
+	else
+	{
+		if(!player.isVassal(*controller, false))
+		{
+			// Controller is apart of same realm as player but is not player's liege. Thus controller loses control
+			// of the territory.
+			controller->getRealm().removeControl(territory);
+		}
+
+		if(!player.getRealm().getTerritories().controlsTerritory(territory))
+		{
+			player.getRealm().addControl(territory);
+		}
+
+		controller = &player;
+
+		return true;
+	}
+
+	return false;
 }
 
 void NavalTerritoryOccupancy::updateMilitaryPosition()

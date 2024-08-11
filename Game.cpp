@@ -10,14 +10,13 @@ Game::Game(std::string mapName)
 }
 
 Game::Game(GameplaySettings gameplaySettings, std::string mapName)
-	: gameplaySettings(gameplaySettings), map(mapName, &this->gameplaySettings), nameGenerator("realms")
+	: gameplaySettings(gameplaySettings), map(this->gameplaySettings, mapName), nameGenerator("realms")
 {
 	generatePlayers();
 }
 
 void Game::generatePlayers()
 {
-
 	const int numHumans = 0;
 	int humanCnt = 0; 
 	for(auto &barony : map.getEstateManager().getBaronies())
@@ -71,10 +70,12 @@ void Game::deselectDiplomacyPlayer()
 	{
 		for(auto &player : players)
 		{
-			player.get()->getRealm().getGrid().setColorDefault();
+			player.get()->getRealm().setGridColorDefault();
 		}
-		selectedDiplomacyPlayer->getRealm().getGrid().setColorDefault();
+
+		selectedDiplomacyPlayer->getRealm().setGridColorDefault();
 	}
+
 	selectedDiplomacyPlayer = nullptr;
 }
 
@@ -132,7 +133,7 @@ void Game::update()
 	{
 		if(*iter != nullptr)
 		{
-			iter->get()->getRealm().getGrid().update();
+			iter->get()->getRealm().updateGrid();
 			++iter;
 		}
 	}
@@ -188,7 +189,6 @@ void Game::update()
 	}
 
 	updateGrids();
-
 }
 
 void Game::updateGrids()
@@ -211,7 +211,7 @@ void Game::updateGrids()
 		bool gridDraw = player.getLiege() == nullptr || !player.getLiege()->getRealm().getVassalView();
 		if(gridDraw && gridOutdated) 
 		{
-			threads.emplace_back([&player]() { player.getRealm().getGrid().update(); });
+			threads.emplace_back([&player]() { player.getRealm().updateGrid(); });
 		}
 
 		iter++;

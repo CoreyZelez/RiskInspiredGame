@@ -11,8 +11,8 @@ class TerritoryManager
 public:
 	void drawPorts(sf::RenderWindow &window) const;
 
-	// Load territories. Specify gameplay settings when loaded for a game.
-	void load(std::string mapName, const GameplaySettings *gameplaySettings = nullptr);
+	// Load territories.
+	void load(const GameplaySettings& gameplaySettings, std::string mapName);
 
 	void draw(sf::RenderWindow &window) const;
 	void setDrawMode(TerritoryDrawMode mode);
@@ -31,7 +31,7 @@ private:
 	void calculateAdjacencies();
 	void calculateDistances();
 
-	void loadLandTerritory(std::ifstream &file, const GameplaySettings *gameplaySettings);
+	void loadLandTerritory(const GameplaySettings& gameplaySettings, std::ifstream& file);
 	void loadNavalTerritory(std::ifstream &file);
 
 	NavalTerritory *getNavalTerritory(int id);

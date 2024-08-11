@@ -2,6 +2,7 @@
 #include "NavalTerritory.h"
 #include "NavalFleet.h"
 #include "LandArmy.h"
+#include "NavalTerritoryOccupancy.h"
 
 Maridom::Maridom(NavalTerritory& territory)
 	: Maridom(territory, sf::Color(220, 220, 220))
@@ -11,16 +12,17 @@ Maridom::Maridom(NavalTerritory& territory)
 Maridom::Maridom(NavalTerritory& territory, const sf::Color &color)
 	: LandedEstate(Title::maridom, territory, color)
 {
+	dynamic_cast<NavalTerritoryOccupancy*>(territory.getOccupancyHandler())->initMaridom(*this);
 }
-
-void Maridom::update(Message message)
-{
-	// Observed territory occupant changed.
-	if (message == Message::newController)
-	{
-		setOwnership(getTerritory().getController());
-	}
-}
+////
+////void Maridom::update(Message message)
+////{
+////	// Observed territory occupant changed.
+////	if (message == Message::newController)
+////	{
+////		setOwnership(getTerritory().getController());
+////	}
+////}
 
 std::unique_ptr<LandArmy> Maridom::yieldLandArmy()
 {

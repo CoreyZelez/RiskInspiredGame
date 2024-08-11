@@ -41,8 +41,8 @@ void LandArmy::attack(LandArmy &defendingArmy, const Terrain &terrain)
 
 	// Max and min percent of total strength armies lose.
 	const double adjustedStrengthsRatio = attackerAdjustedStrength / defenderAdjustedStrength;
-	const double maxMultiplierFactor = 0.4 * gameplaySettings.lossMultiplier;
-	const double minMultiplierFactor = 0.2 * gameplaySettings.lossMultiplier;
+	const double maxMultiplierFactor = 0.4 * gameplaySettings.siegeStrengthLossMultiplier;
+	const double minMultiplierFactor = 0.2 * gameplaySettings.siegeStrengthLossMultiplier;
 	const double maxDefenderLossMultiplier = maxMultiplierFactor * adjustedStrengthsRatio;
 	const double minDefenderLossMultiplier = minMultiplierFactor * adjustedStrengthsRatio;
 	const double maxAttackerLossMultiplier = maxMultiplierFactor / adjustedStrengthsRatio;
@@ -94,6 +94,13 @@ void LandArmy::updateSiege()
 	{
 		siegeBarony->updateSiege();
 	}
+}
+
+bool LandArmy::isSieging() const
+{
+	assert(!isDead());
+
+	return siegeBarony != nullptr;
 }
 
 int LandArmy::getLandMoveStaminaCost() 

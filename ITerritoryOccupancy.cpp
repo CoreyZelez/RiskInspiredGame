@@ -9,8 +9,5 @@ const Player* ITerritoryOccupancy::getController() const
 
 Player* ITerritoryOccupancy::getController()
 {
-    // Only liegless players can be considered the controller of a territory.
-    assert(controller == nullptr || !controller->hasLiege());
-
     return controller;
 }

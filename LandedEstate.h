@@ -1,25 +1,20 @@
 #pragma once
 #include "Estate.h"
 #include "Observer.h"
+#include "LandTerritory.h"
+#include "NavalTerritory.h"
 
 class Territory;
 
-class LandedEstate : public Estate, public Observer
+template<typename T> class LandedEstate : public Estate
 {
 public:
-	LandedEstate(Title title, Territory &territory);
-	LandedEstate(Title title, Territory &territory, sf::Color color);
+	LandedEstate(Title title, T& territory, sf::Color color);
 
 	virtual ~LandedEstate() = default;
 
-	// Handles changing of associated territory occupant.
-	virtual void update(Message message) = 0;
-
 	// Yields any resources directly associated with estate. This does not include subfief resources.
 	virtual void yield() override;
-
-	// Returns true if associated land territory has a port.
-	bool hasPort() const;
 
 	// Creates land army on some territory and returns handle to army.
 	virtual std::unique_ptr<LandArmy> yieldLandArmy() = 0;
@@ -27,13 +22,19 @@ public:
 	virtual std::unique_ptr<NavalFleet> yieldNavalFleet() = 0;
 
 	virtual bool containsPosition(const sf::Vector2f &position) const override;
+	virtual bool isLanded() const override;
+
+	virtual std::vector<const Territory*> getTerritories() const override;
+	virtual std::vector<Territory*> getTerritories() override;
 
 	int getGridId() const;
 
-	Territory &getTerritory();
-	const Territory& getTerritory() const;
+	T& getTerritory();
+	const T& getTerritory() const;
 
 protected:
+	T& territory;
+
 	// Yields military units at territory if possible.
 	virtual void generateMilitary(MilitaryManager &militaryManager) override;
 	// Provides bonus yield to this estate.
@@ -45,8 +46,7 @@ protected:
 	virtual std::unique_ptr<LandArmy> putArmy(int strength);
 	// Puts new naval fleet owned by ruler onto territory. Returns handle.
 	virtual std::unique_ptr<NavalFleet> putFleet(int strength);
-
-private:
-	Territory &territory;
 };
+
+
 

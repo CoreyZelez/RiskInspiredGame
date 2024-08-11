@@ -30,6 +30,7 @@ public:
 	void removeGrid(const Grid& grid);
 	void removeGrid(const CompositeGrid &grid);
 
+	bool containsGrid(int id) const;
 	bool containsPosition(const sf::Vector2f position) const;
 	bool isOutdated() const;
 

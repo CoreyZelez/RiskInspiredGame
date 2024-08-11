@@ -137,7 +137,7 @@ void TerritoryMaker::loadLandTerritory(std::ifstream& file)
 	int id = loadTerritoryID(file);
 	nextID = std::max(id + 1, nextID);
 
-	LandTerritoryFeatures features = loadLandTerritoryFeatures(file, nullptr);
+	LandTerritoryFeatures features = loadLandTerritoryFeatures(nullptr, file);
 
 	// Load naval territory associated with port if exists.
 	EditorTerritory *portNavalTerritory = nullptr;

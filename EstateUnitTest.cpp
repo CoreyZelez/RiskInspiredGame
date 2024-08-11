@@ -24,7 +24,7 @@ void EstateUnitTest::testBaronyOwnership()
 	landTerritoryFeatures.coreProsperity = getHighProsperityThreshold();
 	landTerritoryFeatures.prosperity = getHighProsperityThreshold();
 	LandTerritory territory(0, Grid());
-	Barony barony(territory, sf::Color(0, 0, 0));
+	Barony barony(game.getGameplaySettings(), territory, sf::Color(0, 0, 0));
 
 	// Operation being tested.
 	barony.setOwnership(&player);
@@ -83,7 +83,7 @@ void EstateUnitTest::testBaronyYield()
 	landTerritory.getDistanceMap().addAdjacencies(territories);
 	// Create the barony.
 	landTerritory.createPort(navalTerritory);
-	Barony barony(landTerritory, sf::Color(0, 0, 0));
+	Barony barony(game.getGameplaySettings(), landTerritory, sf::Color(0, 0, 0));
 	barony.setOwnership(&player);
 
 	// Operation being tested.

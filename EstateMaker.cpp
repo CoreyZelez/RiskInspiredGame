@@ -419,7 +419,7 @@ void EstateMaker::loadMaridom(std::ifstream& file, std::deque<EditorTerritory>& 
 		}
 	}
 
-	// Territory was removed so barony no longer exists.
+	// Territory was removed so maridom no longer exists.
 	if (territory == nullptr)
 	{
 		return;

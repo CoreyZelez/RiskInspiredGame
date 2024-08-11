@@ -1,5 +1,7 @@
 #include "Territory.h"
-#include "LandedEstate.h"
+#include "LandTerritory.h"
+#include "NavalTerritory.h"
+#include "Player.h"
 #include <assert.h>
 #include <iostream>
 #include <fstream>
@@ -13,12 +15,6 @@ Territory::Territory(TerritoryType type, int id, Grid grid)
 Territory::Territory(TerritoryType type, int id, Grid grid, std::unique_ptr<ITerritoryOccupancy> occupancyHandler)
 	: type(type), id(id), grid(grid), occupancyHandler(std::move(occupancyHandler)), distanceMap(*this)
 {
-}
-
-void Territory::assignLandedEstate(LandedEstate *estate)
-{
-	assert(this->landedEstate == nullptr);
-	landedEstate = estate;
 }
 
 void Territory::calculateDistances(const std::vector<Territory*>& territories)
@@ -59,6 +55,26 @@ TerritoryDistanceMap& Territory::getDistanceMap()
 const TerritoryDistanceMap & Territory::getDistanceMap() const
 {
 	return distanceMap;
+}
+
+Player* Territory::getUpperController()
+{
+	if(getController() != nullptr)
+	{
+		return &getController()->getUpperLiege();
+	}
+
+	return nullptr;
+}
+
+const Player* Territory::getUpperController() const
+{
+	if(getController() != nullptr)
+	{
+		return &getController()->getUpperLiege();
+	}
+
+	return nullptr;
 }
 
 Player* Territory::getController()

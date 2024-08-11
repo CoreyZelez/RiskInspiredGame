@@ -6,6 +6,8 @@ struct GameplaySettings
 	double fleetYieldMultiplier = 0.5;
 
 	// Multiplies losses from combat. 
-	double lossMultiplier = 1;
+	double combatLossMultiplier = 1;
+
+	double siegeStrengthLossMultiplier = 1;
 };
 

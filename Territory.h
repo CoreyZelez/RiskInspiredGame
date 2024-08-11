@@ -11,7 +11,6 @@
 class Player;
 class LandArmy;
 class NavalFleet;
-class LandedEstate;
 
 const std::string landSaveLabel = "# land";
 const std::string navalSaveLabel = "# naval";
@@ -38,8 +37,6 @@ public:
 
 	virtual void draw(sf::RenderWindow &window) const; 
 
-	void assignLandedEstate(LandedEstate *estate);
-
 	virtual void calculateDistances(const std::vector<Territory*> &territories);
 
 	virtual void setDrawMode(TerritoryDrawMode mode);
@@ -51,6 +48,10 @@ public:
 	TerritoryDistanceMap &getDistanceMap();
 	const TerritoryDistanceMap &getDistanceMap() const;
 
+	// Returns the upper liege of the controller.
+	Player* getUpperController();
+	// Returns the upper liege of the controller.
+	const Player* getUpperController() const;
 	Player* getController();
 	const Player* getController() const;
 
@@ -69,11 +70,10 @@ private:
 	TerritoryType type;
 	Grid grid;
 	TerritoryDrawMode drawMode;
-	LandedEstate *landedEstate = nullptr; 
 	std::unique_ptr<ITerritoryOccupancy> occupancyHandler;  // Handles military occupancy of territory.
 	TerritoryDistanceMap distanceMap;  // Stores information about distances to any territory.
 };
-
+ 
 int loadTerritoryID(std::ifstream &file);
 
 

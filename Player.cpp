@@ -256,10 +256,8 @@ void Player::handleTurn()
 
 void Player::rebel()
 {
-	// Player must have a liege.
-	assert(liege != nullptr);
-	// Players liege must not have a liege.
-	assert(liege->liege == nullptr);
+	assert(realm.getTerritories().testInvariants());
+	assert(liege != nullptr && liege->liege == nullptr);
 	// Resistance must have passed liege threshold.
 	assert(vassalPolicy.vassalResistance.canRebel());
 
@@ -273,17 +271,11 @@ void Player::rebel()
 	militaryManager.removeArmyReserves(reserveRemovalRatio);
 
 	// Yield military reserves.
-	// Some armies may be yielded to pre-rebelion liege occupied territories. 
 	yieldArmyReserves();
 
 	// Rebelling player cannot control any territories which they do not have the corresponding estate of.
 	assert(realm.getTerritories().getControlledEstateTerritories().size() == realm.getTerritories().getControlledTerritories().size());
-
-	// IS THIS NEEDED? IDK
-	////////////////////////////////////////////////////////for(Territory *territory : territories)
-	////////////////////////////////////////////////////////{
-	////////////////////////////////////////////////////////	territory->getOccupancyHandler()->determineOccupation();
-	////////////////////////////////////////////////////////}
+	assert(realm.getTerritories().testInvariants());
 }
 
 void Player::handleReinforcementArmyYield(double amount)
@@ -441,6 +433,8 @@ const VassalPolicy& Player::getVassalPolicy() const
 
 void Player::handleVassalRebellion(Player &vassal)
 {
+	assert(realm.getTerritories().testInvariants());
+
 	liegePolicy.adjustResistanceThreshold(vassal);
 
 	realm.removeRebellingVassal(vassal);
@@ -450,6 +444,8 @@ void Player::handleVassalRebellion(Player &vassal)
 	// estates held by their old liege and the old liege's realm may hold baronies which form estates held by the rebelling vassal.
 	vassal.getRealm().ammendUnlandedEstateOwnership();
 	realm.ammendUnlandedEstateOwnership();
+
+	assert(realm.getTerritories().testInvariants());
 }
 
 void Player::yieldArmyReserves()

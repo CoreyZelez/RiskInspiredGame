@@ -8,6 +8,7 @@
 #include "InformationPanel.h"
 #include "LiegePolicy.h"
 #include "LandTerritory.h"
+#include "NavalTerritory.h"
 #include "NameGenerator.h"
 #include "Game.h"
 #include "Barony.h"
@@ -21,7 +22,7 @@
 #include <random>
 
 Realm::Realm(Game &game, Player &ruler, const LiegePolicy &liegePolicy, const std::string &name)
-	: ruler(ruler), vassalManager(game, ruler), liegePolicy(liegePolicy), name(name)
+	: ruler(ruler), vassalManager(game, ruler), liegePolicy(liegePolicy), name(name), realmTerritories(grid)
 {
 	grid.setColorDefault();
 }
@@ -122,11 +123,14 @@ std::unique_ptr<UIEntity> Realm::createUI(UIType type) const
 
 void Realm::update()
 {
+	rulerEstateManager.update();
 	handleMilitaryYields();
 }
 
 void Realm::handleMilitaryYields()
 {
+	assert(realmTerritories.testInvariants());
+
 	// Set yield ratios as outdated so they are recalculated once at beginning of military yield process.
 	effectiveArmyYieldRatioOutdated = true;
 	effectiveFleetYieldRatioOutdated = true;
@@ -142,10 +146,14 @@ void Realm::handleMilitaryYields()
 	{
 		yieldFleetReinforcements();
 	}
+
+	assert(realmTerritories.testInvariants());
 }
 
 void Realm::yieldArmyReserves()
 {
+	assert(realmTerritories.testInvariants());
+
 	MilitaryManager &militaryManager = ruler.getMilitaryManager();
 	std::unordered_set<Territory*> territories = realmTerritories.getControlledEstateTerritories();
 	std::vector<Territory*> landTerritories;
@@ -205,26 +213,38 @@ void Realm::yieldArmyReserves()
 			army.get()->getOwner().getMilitaryManager().addLandArmy(std::move(army));
 		}
 	}
+
+	assert(realmTerritories.testInvariants());
+}
+
+void Realm::handleBaronyAggressorSiegeVictory(Barony& barony)
+{
+	assert(!barony.getTerritory().getOccupancyHandler()->getArmy()->isDead());
+	assert(&barony.getTerritory().getOccupancyHandler()->getArmy()->getOwner() == &ruler);
+
+	realmTerritories.removeSiegingTerritory(barony.getTerritory());
+	barony.setOwnership(&ruler);
 }
 
 void Realm::handleBaronySiegeBegin(Barony& barony, bool aggressor)
 {
 	if(aggressor)
 	{
-		assert(!ruler.hasLiege());
-		assert(&ruler != barony.getRuler());
+		assert(realmTerritories.controlsTerritory(barony.getTerritory()));
+		assert(!sameUpperRealm(&ruler, barony.getRuler()));
 
 		realmTerritories.addSiegingTerritory(barony.getTerritory());
-		grid.addGrid(barony.getGrid(), GridType::landSiege);
 	}
 	else
 	{
+		assert(!realmTerritories.controlsTerritory(barony.getTerritory()));
+		assert(grid.containsGrid(barony.getGridId()) == 0);
+
 		realmTerritories.addSiegedTerritory(barony.getTerritory());
-		grid.removeGrid(barony.getGrid());
 
 		if(ruler.hasLiege())
 		{
-			ruler.getLiege()->getRealm().handleBaronySiegeBegin(barony, aggressor);
+			ruler.getLiege()->getRealm().handleBaronySiegeBegin(barony, false);
 		}
 	}
 }
@@ -233,17 +253,18 @@ void Realm::handleBaronySiegeLifted(Barony& barony, bool aggressor)
 {
 	if(aggressor)
 	{
-		realmTerritories.removeTerritory(barony.getTerritory());
-		grid.removeGrid(barony.getGrid());
+		assert(barony.getTerritory().getController() != &ruler);
+		assert(!realmTerritories.controlsTerritory(barony.getTerritory()));
+		assert(!grid.containsGrid(barony.getGridId()));
 	}
 	else
 	{
-		realmTerritories.addControlledEstateTerritory(barony.getTerritory());
-		grid.addGrid(barony.getGrid(), GridType::land);
+		assert(sameUpperRealm(barony.getTerritory().getController(), &ruler));
+		assert(realmTerritories.controlsTerritory(barony.getTerritory()));
 
 		if(ruler.hasLiege())
 		{
-			ruler.getLiege()->getRealm().handleBaronySiegeLifted(barony, aggressor);
+			ruler.getLiege()->getRealm().handleBaronySiegeLifted(barony, false);
 		}
 	}
 }
@@ -255,13 +276,16 @@ void Realm::removeRebellingVassal(Player &vassal)
 	vassalManager.removeRebellingVassal(vassal);
 
 	// Create copy since some territories may be removed due to control transfer.
-	auto territories = vassal.getRealm().realmTerritories.getControlledEstateTerritories();
+	auto territories = vassal.getRealm().realmTerritories.getEstateTerritories();
 
 	for(Territory *territory : territories)
 	{
-		// Changes controller of territory to rebelling vassal. If liege has any military on the terrritory
-		// then control will be immediately transferred back to liege.
-		territory->getOccupancyHandler()->transferControl(vassal);
+		const bool controlled = vassal.getRealm().realmTerritories.controlsTerritory(*territory);
+		realmTerritories.eraseTerritory(*territory);
+		if(controlled)
+		{
+			territory->getOccupancyHandler()->determineController();
+		}
 	}
 
 	assert(territoriesDisjoint(realmTerritories, vassal.getRealm().realmTerritories));
@@ -294,15 +318,12 @@ Player& Realm::addEstate(Estate &estate)
 		break;
 	}
 
-	LandedEstate* landedEstate = dynamic_cast<LandedEstate*>(&estate);
-
-	// Update realm grid if estate is landed.
-	if(landedEstate != nullptr)
+	if(estate.isLanded())
 	{
-		realmTerritories.addControlledEstateTerritory(landedEstate->getTerritory());
+		assert(estate.getTerritories().size() == 1);
 
-		GridType gridType = landedEstate->getTitle() == Title::barony ? GridType::land : GridType::naval;
-		grid.addGrid(landedEstate->getGrid(), gridType);
+		// Ensure territory is not sieged and is added as an estate terriory.
+		realmTerritories.addEstateTerritory(*estate.getTerritories()[0]);
 	}
 
 	// Confer the estate to vassal or ruler and return the recipient.
@@ -333,12 +354,14 @@ void Realm::removeEstate(const Estate &estate)
 	if(rulerEstateManager.containsEstate(estate))
 	{
 		assert(estate.compareRuler(&ruler));
+
 		rulerEstateManager.removeEstate(estate);
 	}
 	else
 	{
 		assert(!estate.compareRuler(&ruler));
 		assert(vassalManager.containsEstate(estate));
+
 		vassalManager.removeEstate(estate);
 	}
 
@@ -349,12 +372,11 @@ void Realm::removeEstate(const Estate &estate)
 		ruler.getLiege()->getRealm().removeEstate(estate);
 	}
 
-	const LandedEstate *landedEstate = dynamic_cast<const LandedEstate*>(&estate);
-
-	if(landedEstate != nullptr)
+	if(estate.isLanded())
 	{
-		realmTerritories.removeTerritory(landedEstate->getTerritory());
-		grid.removeGrid(landedEstate->getGrid());
+		assert(estate.getTerritories().size() == 1);
+
+		realmTerritories.removeEstateTerritory(*estate.getTerritories()[0]);
 	}
 
 	// Remove ruler as vassal of liege if no estates remaining in realm.
@@ -363,11 +385,6 @@ void Realm::removeEstate(const Estate &estate)
 		ruler.getLiege()->getRealm().vassalManager.removeEstatelessVassal(ruler);
 		ruler.setLiege(nullptr);
 	}
-}
-
-const RealmTerritories& Realm::getTerritories() const
-{
-	return realmTerritories;
 }
 
 std::unordered_set<const Estate*> Realm::getEstates() const
@@ -418,11 +435,6 @@ int Realm::getTotalVassalArmyReserves() const
 	return vassalManager.getTotalArmyReserves();
 }
 
-RealmGrid& Realm::getGrid()
-{
-	return grid;
-}
-
 bool Realm::containsPosition(const sf::Vector2f &position, bool considerVassalView) const
 {
 	if(considerVassalView && vassalView)
@@ -443,6 +455,46 @@ void Realm::setVassalView(bool vassalView)
 Title Realm::getHighestRulerTitle() const
 {
 	return rulerEstateManager.getHighestTitle();
+}
+
+void Realm::addControl(Territory& territory)
+{
+	realmTerritories.addControl(territory);
+
+	if(ruler.hasLiege())
+	{
+		ruler.getLiege()->getRealm().addControl(territory);
+	}
+}
+
+void Realm::removeControl(const Territory& territory)
+{
+	realmTerritories.removeControl(territory);
+
+	if(ruler.hasLiege())
+	{
+		ruler.getLiege()->getRealm().removeControl(territory);
+	}
+}
+
+const RealmTerritories& Realm::getTerritories() const
+{
+	return realmTerritories;
+}
+
+void Realm::updateGrid()
+{
+	grid.update();
+}
+
+void Realm::setGridColor(const sf::Color& color)
+{
+	grid.setColor(color);
+}
+
+void Realm::setGridColorDefault()
+{
+	grid.setColorDefault();
 }
 
 Player& Realm::allocate(Estate &estate)
@@ -487,7 +539,7 @@ Player& Realm::allocate(Estate &estate)
 	else
 	{
 		// Estate should not be landed.
-		assert(dynamic_cast<LandedEstate*>(&estate) == nullptr);
+		assert(!estate.isLanded());
 
 		const Title highestRulerTitle = ruler.getRealm().getHighestRulerTitle();
 
@@ -942,7 +994,7 @@ int calculateBaronyInfluence(const Barony & barony, const Player & player, std::
 Player& getGreatestUnlandedEstateInfluence(const Estate &estate, const std::vector<Player*>& players)
 {
 	// Ensure that estate is unlanded.
-	assert(dynamic_cast<const LandedEstate*>(&estate) == nullptr);
+	assert(!estate.isLanded());
 	assert(players.size() > 0);
 
 	std::unordered_map<const Player*, int> influenceScores;
@@ -1036,20 +1088,62 @@ bool hasHostileControlledAdjacentTerritory(const Realm& realm, const Territory& 
 bool hasHostileControlledAdjacentTerritory(const Realm& realm, const Territory& territory)
 {
 	assert(realm.getTerritories().controlsTerritory(territory));
-	assert(territory.getController() == &realm.getRuler());
+	assert(sameUpperRealm(territory.getController(), &realm.getRuler()));
 
 	const std::unordered_set<Territory*>& territories = realm.getTerritories().getControlledTerritories();
 
-	for(const auto& adjacency : territory.getDistanceMap().getAdjacencies())
+	for(const Territory* adjacency : territory.getDistanceMap().getAdjacencies())
 	{
 		if(territories.count(const_cast<Territory*>(adjacency)) == 0)
 		{
 			return true;
 		}
 	}
+
 	return false;
 }
 
+#include "LandedEstate.h"
+#include "LandedEstate.cpp"
+
+Territory& getLandedEstateTerritory(Estate& estate)
+{
+	assert(estate.isLanded());
+
+	if(dynamic_cast<const LandedEstate<LandTerritory>*>(&estate) != nullptr)
+	{
+		return dynamic_cast<LandedEstate<LandTerritory>*>(&estate)->getTerritory();
+	}
+	else
+	{
+		return dynamic_cast<LandedEstate<NavalTerritory>*>(&estate)->getTerritory();
+	}
+}
+
+const Territory& getConstLandedEstateTerritory(const Estate& estate)
+{
+	assert(estate.isLanded());
+
+	if(dynamic_cast<const LandedEstate<LandTerritory>*>(&estate) != nullptr)
+	{
+		return dynamic_cast<const LandedEstate<LandTerritory>*>(&estate)->getTerritory();
+	}
+	else
+	{
+		return dynamic_cast<const LandedEstate<NavalTerritory>*>(&estate)->getTerritory();
+	}
+}
+
+bool isSiegeTerritory(const Territory& territory)
+{
+	const LandArmy* army = territory.getOccupancyHandler()->getArmy();
+	if(army != nullptr && army->isSieging())
+	{
+		return true;
+	}
+
+	return false;
+}
 
 
 

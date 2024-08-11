@@ -2,6 +2,7 @@
 #include "Estate.h"
 #include "Utility.h"
 #include "LandedEstate.h"
+#include "LandedEstate.cpp"
 #include "MilitaryManager.h"
 #include "Player.h"
 #include "Barony.h"
@@ -10,6 +11,14 @@
 
 PlayerEstateManager::~PlayerEstateManager()
 {
+}
+
+void PlayerEstateManager::update()
+{
+	for(auto& estate : estates)
+	{
+		estate->update();
+	}
 }
 
 void PlayerEstateManager::clearAllMaridomOwnership()
@@ -130,7 +139,7 @@ int PlayerEstateManager::calculateFleetSoftCapContribution() const
 			// Add contribution if barony associated territory contains port.
 			const Barony *barony = dynamic_cast<const Barony*>(estate);
 			assert(barony != nullptr);
-			if(barony->hasPort())
+			if(barony->getTerritory().hasPort())
 			{
 				softCapContribution += portContribution;
 			}
@@ -153,7 +162,7 @@ void PlayerEstateManager::ammendUnlandedEstateOwnership()
 	// Use estates copy due to potential resizing.
 	for(Estate* estate : estatesCopy)
 	{
-		if(dynamic_cast<LandedEstate*>(estate) != nullptr)
+		if(estate->isLanded())
 		{
 			continue;
 		}
@@ -166,8 +175,7 @@ bool PlayerEstateManager::landedEstatesContainsPosition(const sf::Vector2f &posi
 {
 	for(const Estate* estate : estates)
 	{
-		const LandedEstate *landedEstate = dynamic_cast<const LandedEstate*>(estate);
-		if(landedEstate != nullptr && landedEstate->containsPosition(position))
+		if(estate->isLanded() && estate->containsPosition(position))
 		{
 			return true;
 		}

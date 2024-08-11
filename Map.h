@@ -12,7 +12,7 @@ class GameplaySettings;
 class Map
 {
 public:
-	Map(std::string name, const GameplaySettings *gameSettings = nullptr);
+	Map(const GameplaySettings& gameSettings, std::string name);
 
 	TerritoryManager &getTerritoryManager();
 	const TerritoryManager &getTerritoryManager() const;
@@ -20,7 +20,7 @@ public:
 	const EstateManager &getEstateManager()const ;
 
 private:
-	void load(std::string name, const GameplaySettings *gameSettings);
+	void load(const GameplaySettings& gameSettings, std::string name);
 
 	std::string name;
 	TerritoryManager territoryManager;

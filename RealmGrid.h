@@ -26,10 +26,12 @@ public:
 	void addGrid(const CompositeGrid& grid, GridType type);
 	void removeGrid(int id);
 	void removeGrid(const CompositeGrid& grid);
+	void removeGrid(const Grid& grid);
 	void removeGrid(const RealmGrid& grid);
 	// Removes grid with given id and adds to target grid.
 	void transferGrid(RealmGrid& target, int gridId, GridType type);
 
+	bool containsGrid(int id) const;
 	bool containsPosition(const sf::Vector2f position) const;
 	bool isOutdated() const;
 

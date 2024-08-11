@@ -79,6 +79,11 @@ void RealmGrid::removeGrid(const CompositeGrid& grid)
 	this->grid.removeGrid(grid);
 }
 
+void RealmGrid::removeGrid(const Grid& grid)
+{
+	removeGrid(grid.getId());
+}
+
 void RealmGrid::removeGrid(const RealmGrid& realmGrid)
 {
 	for (int id : realmGrid.grid.getGridIds())
@@ -93,6 +98,11 @@ void RealmGrid::transferGrid(RealmGrid& target, int gridId, GridType type)
 {
 	target.addGrid(grid.getGrid(gridId), type);
 	removeGrid(gridId);
+}
+
+bool RealmGrid::containsGrid(int id) const
+{
+	return grid.containsGrid(id);
 }
 
 bool RealmGrid::containsPosition(const sf::Vector2f position) const

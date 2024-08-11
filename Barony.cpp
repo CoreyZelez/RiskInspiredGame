@@ -6,44 +6,46 @@
 #include "NavalTerritory.h"
 #include "Player.h"
 #include "Realm.h"
+#include "LandTerritoryOccupancy.h"
 #include <assert.h>
 #include <iostream>
 #include <fstream>
 
-Barony::Barony(LandTerritory& landTerritory, sf::Color color)
-	: LandedEstate(Title::barony, landTerritory, color), landTerritory(landTerritory), siegeManager(*this)
+Barony::Barony(const GameplaySettings &gameplaySettings, LandTerritory& landTerritory, sf::Color color)
+	: LandedEstate(Title::barony, landTerritory, color), siegeManager(gameplaySettings, *this)
 {
+	dynamic_cast<LandTerritoryOccupancy*>(territory.getOccupancyHandler())->initSiegeManager(siegeManager);
 }
 
-void Barony::update(Message message)
-{
-	// Observed territory occupant changed.
-	if (message == Message::newController)
-	{
-		assert(getTerritory().getController() != nullptr);
-
-		Player& territoryController = *getTerritory().getController();
-
-		if(!sameUpperRealm(&territoryController, getRuler()))
-		{
-			siegeManager.initSiege(*getTerritory().getOccupancyHandler()->getArmy());
-		}
-	}
-}
-
-void Barony::updateSiege()
+void Barony::update()
 {
 	siegeManager.update();
 }
 
+void Barony::updateSiege()
+{
+	siegeManager.updateSiege();
+}
+
+void Barony::setOwnership(Player* ruler, bool recurseOnParents)
+{
+	assert(!ruler->hasLiege());
+
+	LandedEstate::setOwnership(ruler, recurseOnParents);
+	// Determine controller since may change if territory unoccupied.
+	territory.getOccupancyHandler()->determineController();
+}
+
 std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 {
+	assert(siegeManager.activeSiege() || sameUpperRealm(getTerritory().getController(), getRuler()));
+
 	if(siegeManager.activeSiege())
 	{
 		return nullptr;
 	}
 
-	const double landArmyYield = landTerritory.getFeatures().calculateArmyYield();
+	const double landArmyYield = territory.getFeatures().calculateArmyYield();
 
 	if(!getRuler()->hasLiege())
 	{
@@ -88,12 +90,12 @@ std::unique_ptr<LandArmy> Barony::yieldLandArmy()
 
 std::unique_ptr<NavalFleet> Barony::yieldNavalFleet()
 {	
-	if(!landTerritory.hasPort() || siegeManager.activeSiege())
+	if(!territory.hasPort() || siegeManager.activeSiege())
 	{
 		return nullptr;
 	}
 
-	const double navalFleetYield = landTerritory.getFeatures().calculateFleetYield();
+	const double navalFleetYield = territory.getFeatures().calculateFleetYield();
 
 	if(!getRuler()->hasLiege())
 	{
@@ -147,13 +149,13 @@ std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 
 
 	// Estate does not generate naval units if no port.
-	if(landTerritory.getPort() == nullptr)
+	if(territory.getPort() == nullptr)
 	{
 		return nullptr;
 	}
 
 	// Territory we place the fleet on.
-	NavalTerritory &navalTerritory = landTerritory.getPort().get()->getNavalTerritory();
+	NavalTerritory &navalTerritory = territory.getPort().get()->getNavalTerritory();
 
 	// Yield fleet.
 	Player &player = *getRuler();
@@ -181,8 +183,8 @@ std::unique_ptr<NavalFleet> Barony::putFleet(int strength)
 
 void Barony::receiveBonusYield(const float &bonus)
 {
-	const double landArmyYield = landTerritory.getFeatures().calculateArmyYield();
-	const double navalFleetYield = landTerritory.getFeatures().calculateFleetYield();
+	const double landArmyYield = territory.getFeatures().calculateArmyYield();
+	const double navalFleetYield = territory.getFeatures().calculateFleetYield();
 
 	if(!getRuler()->hasLiege())
 	{

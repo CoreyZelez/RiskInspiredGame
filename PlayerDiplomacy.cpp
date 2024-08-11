@@ -40,7 +40,7 @@ void PlayerDiplomacy::setColors(const std::vector<std::unique_ptr<Player>> &play
 {
 	std::unordered_set<const Player*> playerColorsSet;
 
-	player.getRealm().getGrid().setColor(sf::Color(0, 94, 255));
+	player.getRealm().setGridColor(sf::Color(0, 94, 255));
 	playerColorsSet.insert(&player);
 
 	// Color of realms recently attacked. Closer to yellow implies longer time since attack.
@@ -58,11 +58,11 @@ void PlayerDiplomacy::setColors(const std::vector<std::unique_ptr<Player>> &play
 		{
 			if(rebelledVassals.count(player) == 1)
 			{
-				player->getRealm().getGrid().setColor(rebelColor);
+				player->getRealm().setGridColor(rebelColor);
 			}
 			else
 			{
-				player->getRealm().getGrid().setColor(warColor);
+				player->getRealm().setGridColor(warColor);
 			}
 			playerColorsSet.insert(player);
 		}
@@ -74,7 +74,7 @@ void PlayerDiplomacy::setColors(const std::vector<std::unique_ptr<Player>> &play
 	{
 		if(playerColorsSet.count(player.get()) == 0)
 		{
-			player.get()->getRealm().getGrid().setColor(grey);
+			player.get()->getRealm().setGridColor(grey);
 			playerColorsSet.insert(player.get());
 		}
 	}

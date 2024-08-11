@@ -1,3 +1,4 @@
-﻿  EstateManager.cpp
-D:\Projects\RiskTypeGame\RiskTypeGame\Barony.h(13,23): warning C4584: 'Barony': base-class 'Observer' is already a base-class of 'LandedEstate'
+﻿  MilitaryForce.cpp
+D:\Projects\RiskTypeGame\RiskTypeGame\LiegePolicy.h(5,8): warning C4099: 'LiegePolicy': type name first seen using 'class' now seen using 'struct'
+D:\Projects\RiskTypeGame\RiskTypeGame\MilitaryForce.cpp(186,29): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   RiskTypeGame.vcxproj -> D:\Projects\RiskTypeGame\x64\Debug\RiskTypeGame.exe

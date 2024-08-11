@@ -17,6 +17,7 @@ public:
 
 	void setSiegeBarony(Barony* barony);
 	void updateSiege();
+	bool isSieging() const;
 
 	static int getLandMoveStaminaCost();
 	static int getAttackStaminaCost();

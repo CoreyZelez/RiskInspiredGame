@@ -128,10 +128,9 @@ int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
 		bool allAdjacentLandIsFriendly = true;
 		for(const Territory* adjacency : adjacencies)
 		{
-			const bool isControlled = &player == adjacency->getController();
-			assert(isControlled == player.getRealm().getTerritories().controlsTerritory(*adjacency));
+			const bool isController = player.getRealm().getTerritories().controlsTerritory(*adjacency);
 
-			if(adjacency->getType() == TerritoryType::land && !isControlled)
+			if(adjacency->getType() == TerritoryType::land && !isController)
 			{
 				allAdjacentLandIsFriendly = false;
 				break;
@@ -162,7 +161,7 @@ int SimplePlayerAI::calculateArmyStrategicValue(const Territory &territory)
 	// Determine enemy territories from adjacencies.
 	for(std::set<Territory*>::iterator adjacency = adjacencies.begin(); adjacency != adjacencies.end(); ++adjacency)
 	{
-		if(&player != (*adjacency)->getController())
+		if(&player != (*adjacency)->getUpperController())
 		{
 			enemyTerritories.insert(*adjacency);
 		}
@@ -205,7 +204,7 @@ int SimplePlayerAI::calculateFleetStrategicValue(const Territory &territory)
 	for(std::set<Territory*>::iterator iter = adjacencies.begin();
 		iter != adjacencies.end(); ++iter)
 	{
-		const Player *estateOwner = (*iter)->getController();
+		const Player *estateOwner = (*iter)->getUpperController();
 		if(sameUpperRealm(&player, estateOwner))
 		{
 			enemyTerritories.insert(*iter);
@@ -227,7 +226,7 @@ void SimplePlayerAI::executeArmyAttacks(const std::vector<Territory*> &borderTer
 	{
 		// Only players without a liege can execute army attacks.
 		assert(!player.hasLiege());
-		assert(&player == territory->getController());
+		assert(&player == territory->getUpperController());
 
 		LandArmy *army = player.getMilitaryManager().getArmy(territory);
 		if(army != nullptr)
@@ -396,7 +395,8 @@ void SimplePlayerAI::executeArmyMoveOrders(const std::map<Territory*, int> &stra
 
 	// Distances of each friendly army to borders of own territory with movement inside own territory.
 	const int maxDist = 13;
-	std::unordered_map<const Territory*, std::unordered_map<int, std::vector<LandArmy*>>> armyBorderDistances = context.getArmyBorderDistances(maxDist);
+	std::unordered_map<const Territory*, std::unordered_map<int, std::vector<LandArmy*>>> 
+		armyBorderDistances = context.getArmyBorderDistances(maxDist);
 
 	// Partially allocates armies prioritising closest first. Closer armies provide greater allocation.
 	for(int distance = 0; distance <= maxDist; ++distance)

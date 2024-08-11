@@ -16,6 +16,8 @@ class PlayerEstateManager
 public:
 	~PlayerEstateManager();
 
+	void update();
+
 	// Clears ownership of maridoms for when ruler game over. Cannot own non maridom estates.
 	void clearAllMaridomOwnership();
 

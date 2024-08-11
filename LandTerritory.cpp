@@ -127,7 +127,7 @@ int loadPortNavalID(std::ifstream & file)
 	return id;
 }
 
-LandTerritoryFeatures loadLandTerritoryFeatures(std::ifstream & file, const GameplaySettings *gameplaySettings)
+LandTerritoryFeatures loadLandTerritoryFeatures(const GameplaySettings* gameplaySettings, std::ifstream & file)
 {
 	LandTerritoryFeatures features(gameplaySettings);
 

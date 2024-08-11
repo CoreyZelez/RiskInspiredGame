@@ -83,12 +83,11 @@ std::map<const Player*, int> PlayerAIContext::getArmyWeightedThreats(const Terri
 	// Determines enemy players holding adjacent territories.
 	for(std::set<Territory*>::iterator adjacency = adjacencies.begin(); adjacency != adjacencies.end(); ++adjacency)
 	{
-		const Player *owner = (*adjacency)->getController();
-		assert(owner == nullptr || !owner->hasLiege());
+		const Player *upperController = (*adjacency)->getUpperController();
 
-		if(owner != nullptr && &player != owner)
+		if(upperController != nullptr && &player != upperController)
 		{
-			enemyPlayers.insert(owner);
+			enemyPlayers.insert(upperController);
 		}
 	}
 
@@ -113,7 +112,7 @@ std::map<const Player*, int> PlayerAIContext::getFleetWeightedThreats(const Terr
 	for(std::set<Territory*>::iterator iter = adjacencies.begin();
 		iter != adjacencies.end(); ++iter)
 	{
-		const Player *owner = (*iter)->getController();
+		const Player *owner = (*iter)->getUpperController();
 		assert(owner == nullptr || !owner->hasLiege());
 
 		if(owner != nullptr && &player != owner)
@@ -156,38 +155,6 @@ std::unordered_map<const Territory*, std::unordered_map<int, std::vector<LandArm
 	}
 	
 	return armyBorderDistances;
-
-	//// Create twice as many threads compared to cpu limit.
-	//// Do this to promote more time spent with maximum thread number usage.
-	//size_t numThreads = 2 * std::thread::hardware_concurrency();
-	//std::vector<std::thread> threads;
-	//std::mutex mutex;
-	//
-	//const size_t minBuckets = 50;
-	//std::unordered_map<const Territory*, std::unordered_map<int, std::vector<LandArmy*>>> armyBorderDistances(minBuckets);
-	//const std::vector<Territory*> borderTerritories = getBorderTerritories();
-	//
-    //size_t currentIndex = 0;
-    //while (currentIndex < borderTerritories.size()) 
-	//{
-	//	const Territory *territory = borderTerritories[currentIndex];
-	//
-	//	// Create threads for calculation of territory army distances.
-    //    for (size_t i = threads.size(); i < numThreads && currentIndex < borderTerritories.size(); ++i, ++currentIndex) 
-	//	{
-	//		threads.emplace_back(&PlayerAIContext::determineTerritoryArmyDistances, this, std::ref(*territory), 
-	//			std::ref(armyBorderDistances), maxDist, std::ref(mutex));
-	//	}
-	//
-	//	// Join threads.
-	//	for(auto& thread : threads)
-	//	{
-	//		thread.join();
-	//	}
-	//	threads.clear();  
-    //}
-	//
-    //return armyBorderDistances;
 }
 
 void PlayerAIContext::determineTerritoryArmyDistances(const Territory &territory, 
@@ -285,10 +252,10 @@ std::unordered_map<const Territory*, std::unordered_map<int, std::vector<NavalFl
 int calculateFriendlyDistanceBFS(const Territory &territory1, const Territory &territory2, int maxDist) 
 {
 	// Ensure territories are controlled by same liegeless player.
-	assert(territory1.getController() == territory2.getController());
+	assert(territory1.getUpperController() == territory2.getUpperController());
 
 	// Player whos territories we traverse.
-	const Player *player1 = territory1.getController();
+	const Player *player1 = territory1.getUpperController();
 
 	// Create a queue for BFS.
 	std::queue<const Territory*> bfsQueue;
@@ -319,7 +286,7 @@ int calculateFriendlyDistanceBFS(const Territory &territory1, const Territory &t
 			// Enqueue adjacent territories controlled by same player.
 			for(const Territory* adjacency : currentTerritory->getDistanceMap().getAdjacencies()) 
 			{
-				const Player *adjacentPlayer = adjacency->getController();
+				const Player *adjacentPlayer = adjacency->getUpperController();
 				if(visited.find(adjacency) == visited.end() && player1, adjacentPlayer)
 				{
 					bfsQueue.push(adjacency);
@@ -342,7 +309,7 @@ int calculateFriendlyDistanceBFS(const Territory &territory1, const Territory &t
 
 std::unordered_map<const Territory*, int> calculateFriendlyDistancesBFS(const Territory &sourceTerritory, const std::unordered_set<const Territory*>& territories, int maxDist)
 {
-	const Player *player = sourceTerritory.getController();
+	const Player *player = sourceTerritory.getUpperController();
 	std::unordered_map<const Territory*, int> distances;
 
 	// Create a queue for BFS.
@@ -374,7 +341,7 @@ std::unordered_map<const Territory*, int> calculateFriendlyDistancesBFS(const Te
 			// Enqueue adjacent territories controlled by same player.
 			for(const Territory* adjacency : currentTerritory->getDistanceMap().getAdjacencies())
 			{
-				const Player *adjacentPlayer = adjacency->getController();
+				const Player *adjacentPlayer = adjacency->getUpperController();
 				if(visited.find(adjacency) == visited.end() && player == adjacentPlayer)
 				{
 					bfsQueue.push(adjacency);

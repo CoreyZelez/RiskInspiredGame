@@ -7,6 +7,8 @@ class Player;
 class ITerritoryOccupancy
 {
 public:
+	// Determines and updates the controller of the territory.
+	virtual void determineController() = 0;
 	// Handles land army occupation attempt. Returns true if successful.
 	virtual void occupy(LandArmy *army) = 0;
 	// Handles navy fleet occupation attempt. Returns true if successful.
@@ -23,8 +25,6 @@ public:
 	// through military, or the player who owns the associated land estate of the territory. The controller 
 	// must not have a liege.
 	virtual Player* getController();
-	// Transfers control of the territory. Will then transfer back if previous controller military present.
-	virtual void transferControl(Player& player) = 0;
 	// Returns land army occupying territory.
 	virtual const LandArmy* getArmy() const = 0;
 	// Returns land army occupying territory.
@@ -34,6 +34,5 @@ public:
 
 protected:
 	Player* controller = nullptr;
-
 };
 

@@ -24,7 +24,7 @@ int main()
 	TextureManager::getInstance();  // IF NOT PUT HERE WE GET ERRORS.
 
 	MapMaker mapMaker("empty");
-	Game game("The Grand Continent");
+	Game game("Executioner's Ring");
 
 	GameDisplay gameDisplay = game.createView();
 	GameUI gameUI(UIView);

@@ -1,5 +1,8 @@
+#pragma once
 #include "LandedEstate.h"
 #include "Territory.h"
+#include "LandTerritory.h"
+#include "NavalTerritory.h"
 #include "NavalFleet.h"
 #include "LandArmy.h"
 #include "MilitaryManager.h"
@@ -8,14 +11,14 @@
 #include <fstream>
 #include <iostream>
 
-LandedEstate::LandedEstate(Title title, Territory &territory, sf::Color color)
+template<typename T>
+LandedEstate<T>::LandedEstate(Title title, T& territory, sf::Color color)
 	: Estate(title, territory.getGrid(), color), territory(territory)
 {
-	this->territory.addObserver(this);
-	this->territory.assignLandedEstate(this);
 }
 
-void LandedEstate::yield()
+template<typename T>
+void LandedEstate<T>::yield()
 {
 	// Yields army if able to territory associated with estate.
 	std::unique_ptr<LandArmy> landArmy = yieldLandArmy();
@@ -31,46 +34,61 @@ void LandedEstate::yield()
 	}
 }
 
-bool LandedEstate::hasPort() const
-{
-	const LandTerritory *landTerritory = dynamic_cast<LandTerritory*>(&territory);
-	if(landTerritory != nullptr && landTerritory->hasPort())
-	{
-		return true;
-	}
-	return false;
-}
-
-bool LandedEstate::containsPosition(const sf::Vector2f &position) const
+template<typename T>
+bool LandedEstate<T>::containsPosition(const sf::Vector2f &position) const
 {
 	return territory.getGrid().containsPosition(position);
 }
 
-int LandedEstate::getGridId() const
+template<typename T>
+bool LandedEstate<T>::isLanded() const
+{
+	return true;
+}
+
+template<typename T>
+std::vector<const Territory*> LandedEstate<T>::getTerritories() const
+{
+	return { &territory };
+}
+
+template<typename T>
+std::vector<Territory*> LandedEstate<T>::getTerritories()
+{
+	return { &territory };
+}
+
+template<typename T>
+int LandedEstate<T>::getGridId() const
 {
 	// Landed estates have only a single subgrid in the associated composite grid.
 	assert(getGrid().getGridIds().size() == 1);
 	return getGrid().getGridIds()[0];
 }
 
-Territory& LandedEstate::getTerritory()
+template<typename T>
+T& LandedEstate<T>::getTerritory()
 {
 	return territory;
 }
 
-const Territory& LandedEstate::getTerritory() const
+template<typename T>
+const T& LandedEstate<T>::getTerritory() const
 {
 	return territory;
 }
 
-void LandedEstate::generateMilitary(MilitaryManager &militaryManager)
+template<typename T>
+void LandedEstate<T>::generateMilitary(MilitaryManager &militaryManager)
 {
 }
 
-std::unique_ptr<LandArmy> LandedEstate::putArmy(int strength)
+template<typename T>
+std::unique_ptr<LandArmy> LandedEstate<T>::putArmy(int strength)
 {
 	// Territory must be controlled by player putting army.
-	assert(territory.getController() == nullptr || territory.getController() == getRuler());
+	assert(territory.getUpperController() != nullptr);
+	assert(territory.getUpperController() == getRuler());
 	assert(territory.getOccupancyHandler()->getArmy() == nullptr || &territory.getOccupancyHandler()->getArmy()->getOwner() == getRuler());
 
 	// Yield army to upper liege.
@@ -89,8 +107,10 @@ std::unique_ptr<LandArmy> LandedEstate::putArmy(int strength)
 	return army;
 }
 
-std::unique_ptr<NavalFleet> LandedEstate::putFleet(int strength)
+template<typename T>
+std::unique_ptr<NavalFleet> LandedEstate<T>::putFleet(int strength)
 {
 	// Intentionally does nothing.
 	return nullptr;
 }
+

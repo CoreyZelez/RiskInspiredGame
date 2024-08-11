@@ -15,7 +15,7 @@ void TerritoryManager::drawPorts(sf::RenderWindow & window) const
 	}
 }
 
-void TerritoryManager::load(std::string mapName, const GameplaySettings *gameplaySettings)
+void TerritoryManager::load(const GameplaySettings& gameplaySettings, std::string mapName)
 {
 	std::ifstream file("res/maps/" + mapName + "/" + mapName + "_territories.txt");
 	std::string line;
@@ -28,7 +28,7 @@ void TerritoryManager::load(std::string mapName, const GameplaySettings *gamepla
 		}
 		else if(line.compare(landSaveLabel) == 0)
 		{
-			loadLandTerritory(file, gameplaySettings);
+			loadLandTerritory(gameplaySettings, file);
 		}
 		else if(line.compare(navalSaveLabel) == 0)
 		{
@@ -155,13 +155,13 @@ void TerritoryManager::calculateDistances()
 	}
 }
 
-void TerritoryManager::loadLandTerritory(std::ifstream &file, const GameplaySettings *gameplaySettings)
+void TerritoryManager::loadLandTerritory(const GameplaySettings& gameplaySettings, std::ifstream &file)
 {
 	Grid grid = loadTerritoryGrid(file);
 
 	int id = loadTerritoryID(file);
 
-	LandTerritoryFeatures features = loadLandTerritoryFeatures(file, gameplaySettings);
+	LandTerritoryFeatures features = loadLandTerritoryFeatures(&gameplaySettings, file);
 
 	// Load naval territory associated with port if exists.
 	NavalTerritory* portNavalTerritory = nullptr;

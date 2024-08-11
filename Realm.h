@@ -41,7 +41,9 @@ public:
 	void handleMilitaryYields();
 	// Yields all army reserves to realm land territories.
 	void yieldArmyReserves();
-
+	
+	// Handles a victory of siege for the aggressor.
+	void handleBaronyAggressorSiegeVictory(Barony& barony);
 	// Handles the start of a siege of some barony by updating realm territories and grid..
 	void handleBaronySiegeBegin(Barony &barony, bool aggressor);
 	// Handles the lifting of a barony siege (ownership remains unchanged).
@@ -59,10 +61,20 @@ public:
 	void removeEstate(const Estate &estate);
 	// Returns highest ruler title of any estate's title of ruler's personally held estates.
 	Title getHighestRulerTitle() const;
+
+	// Adds control of territory and recurses on lieges if any to do same. Additionally updates realm grid based
+	// on whether control is due to landed estate ownership or siege.
+	void addControl(Territory& territory);
+	// Removes control of territory and recurses on lieges if any to do same.
+	void removeControl(const Territory& territory);
+	const RealmTerritories& getTerritories() const;
+
+	void updateGrid();
+	void setGridColor(const sf::Color& color);
+	void setGridColorDefault();
+
 	// Returns combined title counts of ruler estates and vassal estates.
 	std::map<Title, int> getTitleCounts() const;
-
-	const RealmTerritories& getTerritories() const;
 
 	// Returns unordered set of all estates in realm, including both ruler and vassal owned estates.
 	std::unordered_set<const Estate*> getEstates() const;
@@ -80,8 +92,6 @@ public:
 
 	// Returns sum of all vassal's army reserves.
 	int getTotalVassalArmyReserves() const;
-
-	RealmGrid& getGrid();
 
 	// Returns true if realm contains specified world position. Can choose whether to consider vassalView boolean
 	// which in the case that vassalView is true, the function will only return true if the position to the landed 
@@ -146,3 +156,6 @@ bool hasHostileControlledAdjacentTerritory(const Realm& realm, const Territory& 
 // Returns true if for a given territory there is an adjacent territory which belongs to a different realm than the parameter realm.
 // The territory must be under control of the parameter realm.
 bool hasHostileControlledAdjacentTerritory(const Realm& realm, const Territory& territory);
+
+Territory& getLandedEstateTerritory(Estate& estate);
+const Territory& getConstLandedEstateTerritory(const Estate& estate);

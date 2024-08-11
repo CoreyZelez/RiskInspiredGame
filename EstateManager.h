@@ -2,6 +2,7 @@
 #include "Title.h"
 #include "Estate.h"
 #include "LandedEstate.h"
+#include "LandedEstate.cpp"
 #include <memory>
 #include <vector>
 #include <string>
@@ -13,11 +14,12 @@ class LandTerritory;
 class NavalTerritory;
 class CoastalTerritory;
 class TerritoryManager;
+class GameplaySettings;
 
 class EstateManager
 {
 public:
-	EstateManager();
+	EstateManager(const GameplaySettings& gameplaySettings);
 
 	// Draws all estates with estates of title drawn over all other titles.
 	void draw(sf::RenderWindow &window, Title title) const;  
@@ -40,6 +42,7 @@ private:
 	std::map<Title, std::vector<std::unique_ptr<Estate>>, TitleComparer> estates;
 	std::unordered_set<int> allocatedTerritoryIDs;
 	std::unordered_set<std::string> allocatedEstateNames;
+	const GameplaySettings& gameplaySettings;
 
 	Estate *getFief(std::string name);
 
