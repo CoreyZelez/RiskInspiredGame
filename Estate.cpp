@@ -149,9 +149,8 @@ void Estate::provideSubfiefBonusYields()
 	this->receiveBonusYield(bonus);
 }
 
-/*
- * Sets the ruler to nullptr for when the ruler's game is over. 
- */
+
+// Sets the ruler to nullptr for when the ruler's game is over. 
 void Estate::clearOwnership()
 {
 	assert(ruler->checkGameOver());
@@ -165,9 +164,7 @@ void Estate::yield()
 	// Intentionally empty.
 }
 
-/* 
- *Function empty as non landed estates do not generate military directly. 
- */
+// Function empty as non landed estates do not generate military directly. 
 void Estate::generateMilitary(MilitaryManager &militaryManager)
 {
 	// Intentionally empty.
@@ -224,7 +221,6 @@ std::unordered_set<const Estate*> Estate::getLowerEstates() const
 	}
 
 	return lowerEstates;
-
 }
 
 std::vector<const Territory*> Estate::getTerritories() const
